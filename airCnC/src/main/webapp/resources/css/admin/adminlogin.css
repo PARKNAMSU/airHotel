@@ -1,0 +1,21 @@
+body {
+  font-family: "Jua", sans-serif;
+}
+label {
+  font-size: 50px;
+  font-weight: bold;
+  color: black;
+}
+.button {
+  border-radius: 100px;
+  border: 1px solid;
+  height: 55px;
+  width: 200px;
+  background-color: #f24463;
+  color: white;
+  cursor: pointer;
+}
+.adminm {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}

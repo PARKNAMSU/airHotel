@@ -1,0 +1,138 @@
+body {
+  font-family: "Jua", sans-serif;
+}
+.form {
+  margin: 30px;
+  padding: 30px;
+  align-content: center;
+}
+.form .title {
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+  border-bottom: 1px solid gray;
+  border-width: 70%;
+}
+.form .newhost {
+  display: inline-flex;
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 70%;
+  height: auto;
+  text-align: left;
+  font-weight: bold;
+  border-width: 70%;
+  border-bottom: 1px solid gray;
+}
+.form .newhost img {
+  width: 100px;
+  height: 100px;
+}
+.form .newhost label {
+  align-content: center;
+}
+.newhost {
+  position: relative;
+  display: flex;
+  align-content: center;
+}
+.newhost input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  margin: 0;
+  padding: 0em;
+  display: inline-block;
+}
+.newhost input[type="radio"]:checked {
+  background-position: 0 0;
+}
+
+.form .hosting {
+  display: inline-flex;
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 70%;
+  height: auto;
+  text-align: left;
+  font-weight: bold;
+  border-width: 70%;
+  border-bottom: 1px solid gray;
+}
+.form .hosting img {
+  width: 100px;
+  height: 100px;
+}
+.form .hosting label {
+  align-content: center;
+}
+.hosting {
+  position: relative;
+  display: flex;
+  align-content: center;
+}
+.hosting input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  margin: 0;
+  padding: 0em;
+  display: inline-block;
+}
+.hostinginput[type="radio"]:checked {
+  background-position: 0 0;
+}
+
+.form .hosted {
+  display: inline-flex;
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 70%;
+  height: auto;
+  text-align: left;
+  font-weight: bold;
+  border-width: 70%;
+  border-bottom: 1px solid gray;
+}
+.form .hosted img {
+  width: 100px;
+  height: 100px;
+}
+.form .hosted label {
+  align-content: center;
+}
+.hosted {
+  position: relative;
+  display: flex;
+  align-content: center;
+}
+.hosted input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  margin: 0;
+  padding: 0em;
+  display: inline-block;
+}
+.hosted input[type="radio"]:checked {
+  background-position: 0 0;
+}
+
+.button {
+  color: white;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #ff5a5f;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  padding: 8px;
+  border: none;
+  margin-top: 18px;
+  margin-bottom: 25px;
+}
+.form label {
+  color: white;
+}

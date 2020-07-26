@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.first#bottom{
+	background: #d2d2d2;
+	padding-left: 16%;
+	padding-right:16%;
+	padding-top:3.5%;
+	font-size: 0.9em;
+	line-height:1.9em;
+	border-top-style: solid;
+	border-top-width: 1px;
+	float: none;
+	margin-top: 10px;
+}
+#bottom.second{
+	width:63%;
+	align-self:center;
+	
+}
+#bline{
+	margin-top:2%
+}
+#blogo{
+	display:inline-block;
+	width:40px;
+	margin-right: 4%;
+	margin-top: 2%;
+	margin-bottom:3%
+}
+#mdiv2{
+	font-size: 30px;
+}

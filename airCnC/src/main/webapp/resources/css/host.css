@@ -1,0 +1,114 @@
+@charset "UTF-8";
+.menudiv1 {
+  background: white;
+  height: 120px;
+  width: 100%;
+  position: sticky;
+  z-index: 100;
+  top: 0em;
+  box-shadow: 2px 2px 2px 2px gray;
+  display: flex;
+}
+.menudiv2-1 {
+  margin-top: 2%;
+  margin-left: 2%;
+}
+.menudiv2-2 {
+  overflow: hidden;
+  margin-left: 65%;
+  padding-top: 20px;
+}
+.menudiv3-1 {
+  float: none;
+}
+#menuItems {
+  float: left;
+  list-style: none;
+}
+.item {
+  font-size: 20px;
+  margin-left: 40px;
+  margin-top: 23px;
+}
+.menudiv3-2 {
+  margin-left: 100px;
+}
+
+#menubar {
+  height: 20px;
+  width: 20px;
+}
+
+.title {
+  padding-top: 20px;
+  padding-left: 30px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: left;
+}
+.form {
+}
+.hh {
+  display: flex;
+}
+.ho {
+  display: inline-block;
+  margin: 30px;
+  border: 1px solid gray;
+  padding: 30px;
+  width: 65%;
+  height: 120px;
+  text-align: left;
+  font-weight: bold;
+  border-radius: 40px;
+}
+.hostalt1_1_1 {
+}
+.hostalt label {
+  font-size: 45px;
+  color: black;
+  font-weight: bold;
+}
+.hostalt1 label {
+  font-size: 20px;
+}
+.ho1 {
+  display: inline-block;
+  margin: 30px;
+  border: 1px solid gray;
+  padding: 30px;
+  width: 25%;
+  height: 120px;
+  text-align: left;
+  font-size: 45px;
+  font-weight: bold;
+  border-radius: 40px;
+}
+.form .hostalt2_2_2 {
+}
+.hostalt2 label {
+  color: black;
+  font-weight: bold;
+}
+.form .hostalt2_1 label {
+  font-size: 20px;
+}
+.ho2 {
+  display: inline-block;
+  margin: 30px;
+  border: 1px solid gray;
+  padding: 30px;
+  width: 65%;
+  height: 120px;
+  text-align: left;
+  font-size: 45px;
+  font-weight: bold;
+  border-radius: 40px;
+}
+.hostalt3 label {
+  color: black;
+  font-weight: bold;
+}
+.hostalt3_1 {
+  font-size: 20px;
+}

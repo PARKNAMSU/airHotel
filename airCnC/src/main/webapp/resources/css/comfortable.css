@@ -1,0 +1,30 @@
+input[type="checkbox"]:checked + label {
+  color: #ff5a5f;
+}
+body {
+  font-family: "Jua", sans-serif;
+}
+.check1 {
+  margin-top: 20px;
+}
+.check1 h3 {
+  margin-bottom: 20px;
+}
+.check7 {
+  margin-top: 20px;
+}
+button {
+  color: white;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #ff5a5f;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  padding: 8px;
+  border: none;
+  margin-top: 18px;
+  margin-bottom: 25px;
+}

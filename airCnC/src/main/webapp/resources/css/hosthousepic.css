@@ -1,0 +1,24 @@
+body {
+  font-family: "Jua", sans-serif;
+}
+button {
+  color: white;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #ff5a5f;
+  border-radius: 5px;
+  font-size: 17px;
+  text-decoration: none;
+  padding: 8px;
+  border: none;
+  font-size: 30px;
+}
+.filebox {
+  border-style: dotted 1px;
+  border-color: #ff5a5f;
+  text-align: center;
+}
+.hostpic1 {
+  padding-top: 35px;
+}
