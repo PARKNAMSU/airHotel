@@ -45,6 +45,8 @@
 							<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
 							</div>
 						<div id="namediv">
+						
+							<c:if test="${toId eq 'admin'}"><p>admin</p></c:if>
 							<p>${messageList.get(i).message_from_name}</p><!-- db에서 받아온 이름 -->
 							<p style="color:gray;">${messageList.get(i).message_time}</p><!-- db에서 받아온 최신 메세지 날짜 -->
 						</div>
