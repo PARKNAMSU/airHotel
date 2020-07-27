@@ -16,5 +16,9 @@
 	<property name="prefix" value="/WEB-INF/views/customer/" />
 	<property name="suffix" value=".jsp" />
 </bean>
-<context:component-scan base-package="kg.air"></context:component-scan>
+<context:component-scan base-package="kg.air" use-default-filters="false">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
 </beans>
