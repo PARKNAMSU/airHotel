@@ -1,0 +1,157 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_salesChart.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sideMenu.css?version=123">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jQuery Excel -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/admin/javascript/jquery.table2excel.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<%@ include file="../html/menu.jsp" %>
+	</header>
+	<div style="clear:both;"></div>
+	    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_2">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Sales Chart</h3>
+                                <p>Pixel perfect design with awesome contents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <!-- slider_area_end -->
+	<div id="sidediv">
+		<ul id="sidemenu">
+			<li class="menu"><a href="../project/admin_salesChart.jsp">매출현황</a></li>
+			<li class="menu"><a href="../project/admin_useChart.jsp">숙소이용 현황</a></li>
+			<li class="menu"><a href="../project/admin_signupChart.jsp">회원가입 현황</a></li>
+			<li class="menu"><a href="../project/admin_hostChart.jsp">호스트 신청 현황</a></li>
+		</ul>
+	</div>
+	<div class="top_first">
+		<div class="maindiv" ><a class="maintext" id="searchYears"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchYear"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchMonth"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">월별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchCondition"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">사용자 정의 검색</a></div>
+	</div>
+	<div class="top_second">
+		<div class="subdiv" id="years">
+			<form >
+				from year<input type="number" min="2000" max="2020" name="startyear"  class="form-control"><br><br>
+				to year<input type="number" min="2000" max="2020" name="endyear"  class="form-control">
+				<br>
+				<input type="submit" value="검색" class="btn btn-outline-danger">
+			</form>
+		</div>
+		<div id="years_temp" class="day_temp"><br><br></div>
+		<div class="subdiv" id="year">
+			<form action="" >
+				year
+				<select name="year" class="form-control">
+					<c:forEach var="i" begin="2000" end="2020">
+						<option value="${i}year">${i}</option>
+					</c:forEach>
+				</select><br><br>
+				<input type="submit" value="검색" class="btn btn-outline-danger">
+			</form>
+		</div>
+		<div id="year_temp" class="day_temp"><br><br></div>
+		<div class="subdiv" id="month">
+			<form action="">
+				month
+				<input type="month" name="month"  class="form-control"><br><br>
+				<input type="submit" value="검색" class="btn btn-outline-danger">
+			</form>
+		</div>
+		<div id="month_temp" class="day_temp"><br><br></div>
+		<div class="subdiv" id="condition">
+			<form action="">
+				from <br><input type="date" class="form-control"><br><br>
+				to <input type="date" class="form-control"><br><br>
+				<input type="submit" value="검색" class="btn btn-outline-danger">
+			</form>
+		</div>
+	</div>
+	<div style="clear:both;"></div>
+	<div class="temp" ></div>
+	<div class="sales">
+		<p style="font-size:30px;color:black;">매출 현황</p>
+		<div id="salesArea">
+			<table class="table table-striped" id="salesTable">
+				<tr>
+					<th></th>
+					<th>매출액</th>
+					<th>전월/일 대비 증감</th>
+					<th>수입비율</th>
+					<th>전년/월 대비 증감</th>
+					<th>총매출</th>
+				</tr>
+				<tr>
+					<th>1월</th>
+					<th>1100</th>
+					<th>100</th>
+					<th>10%</th>
+					<th>10000</th>
+					<th>20000</th>
+				</tr>
+			</table>
+			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>
+		</div>
+	</div>
+	
+	<div class="chart" style="margin-bottom:5%;">
+		<p style="font-size:30px;color:black;">매출 그래프</p>
+		<div id="salesChart"></div>
+	</div>
+	<div style="clear: both;"></div>
+	<footer>
+		<%@ include file="../html/footer.jsp" %>
+	</footer>
+</body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="../javascript/admin_salesChart.js"></script>
+<script type="text/javascript">
+	function ReportToExcel(){
+		fname = prompt("파일 이름을 입력해주세요")
+		$("#salesTable").table2excel({
+			exclude: ".noExl",
+			name: "Excel sales",
+			filename:fname+'.xls',
+			fileext:"xls",
+			exclude_img: true,
+			exclued_links: true,
+			exclude_inputs:true
+		})
+
+	}
+</script>
+</html>
