@@ -1,0 +1,22 @@
+@import "admin_singo_complete.css";
+
+.warning_message{
+    border: #bd2130 1px solid;
+    padding: 20px;
+}
+.account_susspend{
+    border: #bd2130 1px solid;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.account_susspend #susspend_btn {
+    margin-left: 78%;
+}
+
+
+
+.black_list {
+    margin-left: 85%;
+    margin-top: 40px;
+}
