@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -65,17 +66,19 @@
         <div class="singo_history">
             <table class="table">
                 <c:set var="blame" value="${blameinfo}"/>
+                <c:set var="blamejudgeinfo" value="${blamejudgeinfo}"/>
                 <tr>
-                    <td>신고당한 아이디 ${blame.get(0).target_member_id}</td>
-                    <td>누적경고횟수 : 4</td>
-                    <td>정지여부 : 2</td>
+                    <td>신고당한 아이디 ${sessionScope.target_member_id}</td>
+                    <td>누적경고횟수 : ${blamejudgeinfo.customer_blame_warn}</td>
+                    <td>정지여부 : ${blamejudgeinfo.customer_blame_stop}</td>
                 </tr>
             </table>
         </div>
 
         <div class="warning_message">
-            <form>
-                <input type="text" name="" value="경고 메세지 입력란" size="100">
+
+            <form method="post" action="/blameWarnMessage.mdo">
+                <input type="text" name="warn_message" value="경고 메세지 입력란" size="100">
                 <input type="submit" value="전송">
             </form>
         </div>

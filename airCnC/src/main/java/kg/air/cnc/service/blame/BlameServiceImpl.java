@@ -1,6 +1,7 @@
 package kg.air.cnc.service.blame;
 
 import kg.air.cnc.dao.blame.BlameDAO;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.blame.BlameVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,15 @@ public class BlameServiceImpl implements BlameService {
 
     public ArrayList<BlameVO> getBlameInfo(String target_member_id) { // 신고당한 아이디의 신고내역 상세 보기
         return blameDAO.getBlameInfo(target_member_id);
+    }
+
+    @Override
+    public CustomerVO getBlameJudgeInfo(String target_member_id) {
+        return blameDAO.getCustomerBlameInfo(target_member_id);
+    }
+
+    @Override
+    public void insertBlameWarnMessage(Map<String, String> warnMessageMap) {
+        blameDAO.insertBlameWarnMessage(warnMessageMap);
     }
 }

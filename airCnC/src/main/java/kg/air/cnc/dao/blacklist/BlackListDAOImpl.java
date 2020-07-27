@@ -29,7 +29,7 @@ public class BlackListDAOImpl implements BlackListDAO{
     }
 
     public void deleteBlackList(String blackId) {
-        sqlSession.delete("kg.air.hotel.dao.blacklist.BlackListDAO.deleteBlackList", blackId);
+        sqlSession.delete("kg.air.cnc.dao.blacklist.BlackListDAO.deleteBlackList", blackId);
     }
 
     /*public BlackUserVO getSearchBlackUser(){

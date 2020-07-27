@@ -10,4 +10,12 @@
     <select id="getBlameInfo" resultType="kg.air.cnc.vo.blame.BlameVO">
         SELECT * FROM blame WHERE target_member_id = #{target_member_id}
     </select>
+
+    <select id="getCustomerBlameInfo" resultType="kg.air.cnc.vo.CustomerVO">
+        SELECT customer_blame_warn, customer_blame_stop FROM customer WHERE customer_id = #{target_member_id}
+    </select>
+
+    <insert id="insertBlameWarnMessage">
+        INSERT INTO message VALUES(message_seq.nextval, 'admin', #{to_id}, 'nomal', #{message_content}, sysdate)
+    </insert>
 </mapper>
