@@ -1,0 +1,41 @@
+package kg.air.cnc.common;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
+
+import kg.air.cnc.log.dao.LogDAO;
+import kg.air.cnc.vo.LogVO;
+import kg.air.cnc.vo.MessageVO;
+
+@EnableAspectJAutoProxy
+@Component
+@Aspect
+public class LogAdvice {
+	
+	@Autowired
+	private LogDAO logDAO;
+	
+	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..))")
+	private void logTarget() {}
+	
+	@After("logTarget()")
+	public void trace(JoinPoint joinPoint)throws Throwable{
+		String methodName = joinPoint.getSignature().getName();
+		Object [] arguments = joinPoint.getArgs();
+		LogVO logVO = new LogVO();
+		System.out.println(methodName);
+		if(methodName.equals("insertMessageController")) {
+			MessageVO messageVO =(MessageVO)arguments[0];
+			logVO.setLog_id(messageVO.getMessage_from_id());
+			logVO.setLog_content(messageVO.getMessage_content());
+			logVO.setLog_type("sendMessage");
+			logDAO.addLog(logVO);
+		}
+		System.out.println("로그 완료");
+	}
+}
