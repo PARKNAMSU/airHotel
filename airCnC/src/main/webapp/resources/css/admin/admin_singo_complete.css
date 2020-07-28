@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import "../reset.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css";
+
+.admin_footer{
+    width: 100%;
+    height: 100px;
+    vertical-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4rem;
+}
+.admin_image_container {
+    padding-top: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.admin_image_container img{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:100%;
+}
+
+.admin_phone_num_container {
+    width: 400px;
+    padding-top: 30px;
+}
+
+.total_container{
+    display: flex;
+    margin-top: 10%;
+}
+.total_container .table-responsive{
+    margin-left: 5%;
+}
+.table-responsive .blacklist-id-search-form{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+
+#sidediv{
+    width:300px;
+    margin-left:5%;
+    float : left;
+    height: 600px;
+}
+#sidemenu{
+    list-style: none;
+}
+.menu{
+    margin-bottom: 40px;
+    font-size: 30px;
+}
+#topmenu{
+    color: red;
+}
+
+a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;}
+
+.content{
+    margin-top: 10%;
+    margin-left:8%;
+    text-align : center;
+}
+
+.littleImg{
+    width : 120px;
+    height : 120px;
+    float : left;
+    margin-right: 3%;
+}
+
+
+div hr{
+    float: left;
+    width: 73%;
+}
+
+footer {
+    clear : both;
+}
+
+
+.hostList {
+    margin-top: 3%;
+    text-align: center;
+    padding-right: 4%;
+}
+
+.hostList li {
+    margin-bottom: 1%;
+}
+
+.removeBtn {
+    right : 5%;
+}

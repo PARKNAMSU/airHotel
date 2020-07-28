@@ -1,0 +1,30 @@
+@import "../reset.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css";
+
+.admin_footer{
+    width: 100%;
+    height: 200px;
+    vertical-align: center;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4rem;
+}
+.admin_image_container {
+    padding-top: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.admin_image_container img{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:100%;
+}
+
+.admin_phone_num_container {
+    width: 400px;
+    padding-top: 30px;
+}
