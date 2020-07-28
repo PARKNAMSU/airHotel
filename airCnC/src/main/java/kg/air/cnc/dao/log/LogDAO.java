@@ -1,4 +1,4 @@
-package kg.air.cnc.log.dao;
+package kg.air.cnc.dao.log;
 
 import java.util.List;
 

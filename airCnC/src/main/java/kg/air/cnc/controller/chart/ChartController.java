@@ -1,11 +1,11 @@
-package kg.air.cnc.chart.controller;
+package kg.air.cnc.controller.chart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kg.air.cnc.chart.service.Admin_salesService;
+import kg.air.cnc.service.chart.Admin_salesService;
 import kg.air.cnc.vo.Admin_salesVO;
 
 @Controller

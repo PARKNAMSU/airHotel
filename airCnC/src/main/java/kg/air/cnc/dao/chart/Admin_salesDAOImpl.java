@@ -1,4 +1,4 @@
-package kg.air.cnc.chart.dao;
+package kg.air.cnc.dao.chart;
 
 import java.util.List;
 

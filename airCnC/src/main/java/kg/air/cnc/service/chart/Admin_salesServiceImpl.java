@@ -1,4 +1,4 @@
-package kg.air.cnc.chart.service;
+package kg.air.cnc.service.chart;
 
 import java.util.List;
 

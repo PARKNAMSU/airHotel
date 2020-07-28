@@ -1,4 +1,4 @@
-package kg.air.cnc.log.Controller;
+package kg.air.cnc.controller.log;
 
 import java.util.List;
 

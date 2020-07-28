@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kg.air.cnc.log.dao.LogDAO;
+import kg.air.cnc.dao.log.LogDAO;
 import kg.air.cnc.vo.LogVO;
 
 @Service

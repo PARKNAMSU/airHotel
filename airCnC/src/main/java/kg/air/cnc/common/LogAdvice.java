@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-import kg.air.cnc.log.dao.LogDAO;
+import kg.air.cnc.dao.log.LogDAO;
 import kg.air.cnc.vo.LogVO;
 import kg.air.cnc.vo.MessageVO;
 

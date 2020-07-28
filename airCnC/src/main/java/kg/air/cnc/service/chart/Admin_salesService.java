@@ -1,4 +1,4 @@
-package kg.air.cnc.chart.service;
+package kg.air.cnc.service.chart;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kg.air.cnc.chart.dao.Admin_salesDAO;
+import kg.air.cnc.dao.chart.Admin_salesDAO;
 import kg.air.cnc.vo.Admin_salesVO;
 
 @Service
