@@ -1,4 +1,4 @@
-package kg.air.cnc.message.service;
+package kg.air.cnc.service.message;
 
 import java.util.List;
 import java.util.Map;

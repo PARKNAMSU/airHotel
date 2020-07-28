@@ -1,4 +1,4 @@
-package kg.air.cnc.message.dao;
+package kg.air.cnc.dao.message;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kg.air.cnc.message.service.MessageDAO;
+import kg.air.cnc.service.message.MessageDAO;
 import kg.air.cnc.vo.MessageVO;
 
 @Service

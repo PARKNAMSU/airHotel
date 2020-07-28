@@ -1,4 +1,4 @@
-package kg.air.cnc.message.controller;
+package kg.air.cnc.controller.message;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kg.air.cnc.message.dao.MessageService;
+import kg.air.cnc.dao.message.MessageService;
 import kg.air.cnc.vo.MessageVO;
 
 @Controller
