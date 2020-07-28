@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin_salesDAO">
+
+	<select id="getSalesForYears" resultType="kg.air.cnc.vo.Admin_salesVO" parameterType="kg.air.cnc.vo.Admin_salesVO">
+		<![CDATA[SELECT to_date(to_char(admin_sales_regdate,'YYYY'),'YYYY') as admin_sales_regdate,sum(admin_sales) as admin_sales FROM admin_sales WHERE to_char(admin_sales_regdate, 'yyyy') >= #{searchConditionFirst}
+		and to_char(admin_sales_regdate,'yyyy') <= #{searchConditionSecond} GROUP BY to_date(to_char(admin_sales_regdate,'YYYY'),'YYYY') ORDER BY to_date(to_char(admin_sales_regdate,'YYYY'),'YYYY') ASC]]>
+	</select>
+	<select id="getSalesForYear" resultType="kg.air.cnc.vo.Admin_salesVO" parameterType="kg.air.cnc.vo.Admin_salesVO">
+		<![CDATA[SELECT to_date(to_char(admin_sales_regdate,'MM'),'MM') as admin_sales_regdate,sum(admin_sales) as admin_sales FROM admin_sales WHERE to_char(admin_sales_regdate, 'yyyy') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(admin_sales_regdate,'MM'),'MM') ORDER BY to_date(to_char(admin_sales_regdate,'MM'),'MM') ASC]]>
+	</select>
+	<select id="getSalesForMonth" resultType="kg.air.cnc.vo.Admin_salesVO" parameterType="kg.air.cnc.vo.Admin_salesVO">
+		<![CDATA[SELECT to_date(to_char(admin_sales_regdate,'MM/dd'),'MM/dd') as admin_sales_regdate,sum(admin_sales) as admin_sales FROM admin_sales WHERE to_char(admin_sales_regdate, 'YYYY-MM') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(admin_sales_regdate,'MM/dd'),'MM/dd') ORDER BY to_date(to_char(admin_sales_regdate,'MM/dd'),'MM/dd') ASC]]>
+	</select>
+	<select id="getSalesForDays" resultType="kg.air.cnc.vo.Admin_salesVO" parameterType="kg.air.cnc.vo.Admin_salesVO">
+		<![CDATA[SELECT to_date(to_char(admin_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') as admin_sales_regdate,sum(admin_sales) as admin_sales FROM admin_sales WHERE to_char(admin_sales_regdate, 'YYYY-MM-DD') >= #{searchConditionFirst} and to_char(admin_sales_regdate, 'YYYY-MM-DD') <= #{searchConditionSecond} 
+		 GROUP BY to_date(to_char(admin_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(admin_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
+	</select>
+</mapper>

@@ -12,7 +12,7 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jQuery Excel -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/admin/javascript/jquery.table2excel.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
@@ -65,38 +65,42 @@
 	</div>
 	<div class="top_second">
 		<div class="subdiv" id="years">
-			<form >
-				from year<input type="number" min="2000" max="2020" name="startyear"  class="form-control"><br><br>
-				to year<input type="number" min="2000" max="2020" name="endyear"  class="form-control">
+			<form action="salesChartSearch.mdo">
+				from year<input type="number" min="2000" max="2020" name="searchConditionFirst"  class="form-control"><br><br>
+				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  class="form-control">
 				<br>
+				<input type="hidden" name="searchType" value="years">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
 		<div id="years_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="year">
-			<form action="" >
+			<form action="salesChartSearch.mdo" >
 				year
-				<select name="year" class="form-control">
+				<select name="searchConditionFirst" class="form-control">
 					<c:forEach var="i" begin="2000" end="2020">
-						<option value="${i}year">${i}</option>
+						<option value="${i}">${i}년</option>
 					</c:forEach>
 				</select><br><br>
+				<input type="hidden" name="searchType" value="year">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
 		<div id="year_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="month">
-			<form action="">
+			<form action="salesChartSearch.mdo">
 				month
-				<input type="month" name="month"  class="form-control"><br><br>
+				<input type="month" name="searchConditionFirst"  class="form-control" ><br><br>
+				<input type="hidden" name="searchType" value="month">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
 		<div id="month_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="condition">
-			<form action="">
-				from <br><input type="date" class="form-control"><br><br>
-				to <input type="date" class="form-control"><br><br>
+			<form action="salesChartSearch.mdo">
+				from <br><input type="date" class="form-control" name="searchConditionFirst"><br><br>
+				to <input type="date" class="form-control" name="searchConditionSecond"><br><br>
+				<input type="hidden" name="searchType" value="days">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
@@ -108,23 +112,36 @@
 		<div id="salesArea">
 			<table class="table table-striped" id="salesTable">
 				<tr>
-					<th></th>
+					<th>년도</th>
 					<th>매출액</th>
-					<th>전월/일 대비 증감</th>
+					<th>전 년/월/일 대비 증감</th>
 					<th>수입비율</th>
-					<th>전년/월 대비 증감</th>
 					<th>총매출</th>
 				</tr>
-				<tr>
-					<th>1월</th>
-					<th>1100</th>
-					<th>100</th>
-					<th>10%</th>
-					<th>10000</th>
-					<th>20000</th>
-				</tr>
+				<c:if test="${salesList != null}">
+					<c:forEach begin="0" end="${salesList.size()-1}" var="i">
+					<c:if test="${i == 0}">
+					<tr>
+						<th>${salesList.get(i).admin_sales_date }</th>
+						<th>${salesList.get(i).admin_sales}￦</th>
+						<th></th>
+						<th>${salesList.get(i).admin_sales_persant }%</th>
+						<th>${salesList.get(i).sumSales }￦</th>
+					</tr>
+					</c:if>
+					<c:if test="${i > 0 }">
+					<tr>
+						<th>${salesList.get(i).admin_sales_date }</th>
+						<th>${salesList.get(i).admin_sales}￦</th>
+						<th>${salesList.get(i).admin_sales_compare_before}￦</th>
+						<th colspan="2">${salesList.get(i).admin_sales_persant }%</th>	
+					</tr>
+					</c:if>
+					</c:forEach>
+				</c:if>
 			</table>
-			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>
+			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
+			<button onclick="" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
 		</div>
 	</div>
 	
@@ -138,7 +155,7 @@
 	</footer>
 </body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="../javascript/admin_salesChart.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js"></script>
 <script type="text/javascript">
 	function ReportToExcel(){
 		fname = prompt("파일 이름을 입력해주세요")
