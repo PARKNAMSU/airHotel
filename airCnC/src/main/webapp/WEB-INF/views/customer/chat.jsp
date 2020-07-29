@@ -27,7 +27,7 @@
 <%@include file="../html/sideMenu.jsp" %>
 	
 	<div class="headdiv">
-		<h1 style="font-size:40px;">나의 채팅</h1>
+		<h1 style="font-size:40px;margin-left:3%;">나의 채팅</h1>
 	</div>
 	<div class="chatdiv">
 		<div id="chatbox">

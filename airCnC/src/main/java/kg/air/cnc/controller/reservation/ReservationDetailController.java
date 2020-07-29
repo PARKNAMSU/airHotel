@@ -15,8 +15,13 @@ public class ReservationDetailController {
 	
 	@Autowired
 	CommentsService commentsService;
+	@RequestMapping("myreservation.do")
+	public ModelAndView myReservationController(ModelAndView mav) {
+		mav.setViewName("myreservation");
+		return mav;
+	}
 	@RequestMapping("reservationHouse.do")
-	public ModelAndView myReservationController(CommentsVO vo,HttpSession session,ModelAndView mav) {
+	public ModelAndView reservationDetailController(CommentsVO vo,HttpSession session,ModelAndView mav) {
 		session.setAttribute("session_login", "skatn");
 		mav.addObject("commentsList",commentsService.getComments(vo));
 		mav.addObject("comments_house_seq",vo.getComments_house_seq());

@@ -42,7 +42,7 @@ public class MessageController {
 	@RequestMapping(value="/message.do")
 	public ModelAndView messageController(HttpSession session,@RequestParam(value="message_to_id", required=false) String message_to_id, ModelAndView mav) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("fromId", (String)session.getAttribute("id"));
+		map.put("fromId", (String)session.getAttribute("login_session"));
 		map.put("toId", message_to_id);
 		List<MessageVO> messageList = messageService.getMessageList(map);
 		mav.addObject("messageList",messageList);
