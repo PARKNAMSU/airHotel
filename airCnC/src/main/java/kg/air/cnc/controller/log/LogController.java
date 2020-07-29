@@ -25,7 +25,6 @@ public class LogController {
 		List<LogVO> list = logService.getLogList(vo);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping(value="/logPage.mdo")

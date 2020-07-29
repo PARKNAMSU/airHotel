@@ -65,7 +65,7 @@
 	</div>
 	<div class="top_second">
 		<div class="subdiv" id="years">
-			<form action="salesChartSearch.mdo">
+			<form action="salesChartSearch.mdo" id="yearsForm">
 				from year<input type="number" min="2000" max="2020" name="searchConditionFirst"  class="form-control"><br><br>
 				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  class="form-control">
 				<br>
@@ -122,34 +122,37 @@
 					<c:forEach begin="0" end="${salesList.size()-1}" var="i">
 					<c:if test="${i == 0}">
 					<tr>
-						<th>${salesList.get(i).admin_sales_date }</th>
-						<th>${salesList.get(i).admin_sales}￦</th>
-						<th></th>
-						<th>${salesList.get(i).admin_sales_persant }%</th>
-						<th>${salesList.get(i).sumSales }￦</th>
+						<td>${salesList.get(i).admin_sales_date }</td>
+						<td>${salesList.get(i).admin_sales}￦</td>
+						<td></td>
+						<td>${salesList.get(i).admin_sales_persant }%</td>
+						<td>${salesList.get(i).sumSales }￦</td>
 					</tr>
 					</c:if>
 					<c:if test="${i > 0 }">
 					<tr>
-						<th>${salesList.get(i).admin_sales_date }</th>
-						<th>${salesList.get(i).admin_sales}￦</th>
-						<th>${salesList.get(i).admin_sales_compare_before}￦</th>
-						<th colspan="2">${salesList.get(i).admin_sales_persant }%</th>	
+						<td>${salesList.get(i).admin_sales_date }</td>
+						<td>${salesList.get(i).admin_sales}￦</td>
+						<td>${salesList.get(i).admin_sales_compare_before}￦</td>
+						<td colspan="2">${salesList.get(i).admin_sales_persant }%</td>	
 					</tr>
 					</c:if>
 					</c:forEach>
 				</c:if>
 			</table>
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
-			<button onclick="" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
+			<button onclick="openDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
 		</div>
 	</div>
 	
 	<div class="chart" style="margin-bottom:5%;">
 		<p style="font-size:30px;color:black;">매출 그래프</p>
 		<div id="salesChart"></div>
+		<button onclick="getChart()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">매출 보기</button>&nbsp;&nbsp;
+		<button onclick="getPieChart()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">수입비율 보기</button>
 	</div>
 	<div style="clear: both;"></div>
+	
 	<footer>
 		<%@ include file="../html/footer.jsp" %>
 	</footer>
@@ -170,5 +173,52 @@
 		})
 
 	}
+		function getChart(){
+		    google.charts.load('current', {'packages':['bar']});
+		    google.charts.setOnLoadCallback(drawChart);
+		    function drawChart() {
+		      var data = google.visualization.arrayToDataTable([
+		        ['chart', 'Sales'],
+		        <c:forEach items="${salesList}" var="list">
+		        	['${list.admin_sales_date}',${list.admin_sales}],
+		        </c:forEach>
+		      ]);
+	
+		      var options = {
+		        chart: {
+		          title: 'Company Performance',
+		          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+		        }
+		      };
+	
+		      var chart = new google.charts.Bar(document.getElementById('salesChart'));
+	
+		      chart.draw(data, google.charts.Bar.convertOptions(options));
+		    }
+		}
+		function getPieChart(){
+		      google.charts.load('current', {'packages':['corechart']});
+		      google.charts.setOnLoadCallback(drawChart);
+
+		      function drawChart() {
+
+		        var data = google.visualization.arrayToDataTable([
+		          ['Task', 'Hours per Day'],
+			        <c:forEach items="${salesList}" var="list">
+		        		['${list.admin_sales_date}',${list.admin_sales}],
+		        	</c:forEach>
+		        ]);
+
+		        var options = {
+		          title: '수입비율',
+		          pieSliceText: 'label'
+		        };
+
+		        var chart = new google.visualization.PieChart(document.getElementById('salesChart'));
+
+		        chart.draw(data, options);
+		      }
+		}
+	
 </script>
 </html>

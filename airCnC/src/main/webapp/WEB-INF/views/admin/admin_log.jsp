@@ -81,6 +81,7 @@
 			<div class="maindiv">
 				<table class="table table-striped" id="logtable">
 					<tr class="table-danger">
+						<th>번호</th>
 						<th>아이디</th>
 						<th>내용</th>
 						<th>타입</th>
@@ -88,6 +89,7 @@
 					</tr>
 					<c:forEach begin="1" end="10" var="i">
 					<tr>
+						<td id="seq${i}"></td>
 						<td id="name${i}"></td>
 						<td id="state${i}"></td>
 						<td id="type${i}"></td>
@@ -138,11 +140,11 @@ var areaToPageNum = 5;//한에어리어의 페이지 수
 			   
 			           success : function(data) {
 							getData = data;
-							alert(getData.length)
 							$("allElement").val(getData.length)
 							allElement = Number($("allElement").val(getData.length))
 							for(var i=0;i<instanceNum;i++){
 								if(getData[i] != null){
+									$("#seq"+(i+1)).html(getData[i].log_seq)
 									$("#name"+(i+1)).html(getData[i].log_id)
 									$("#state"+(i+1)).html(getData[i].log_content)
 									$("#type"+(i+1)).html(getData[i].log_type)
@@ -230,6 +232,7 @@ var loadLog = function(pageNum){
 	a = 1;
 	for(var i = num ; i<num+instanceNum;i++){
 		if(getData[i-1] != null){
+			$("#seq"+(a)).html(getData[i-1].log_seq)
 			$("#name"+(a)).html(getData[i-1].log_id)
 			$("#state"+(a)).html(getData[i-1].log_content)
 			$("#type"+(a)).html(getData[i-1].log_type)
