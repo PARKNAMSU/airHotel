@@ -18,4 +18,16 @@
     <insert id="insertBlameWarnMessage">
         INSERT INTO message VALUES(message_seq.nextval, 'admin', #{to_id}, 'nomal', #{message_content}, sysdate)
     </insert>
+    
+    <delete id="deleteBlame">
+        DELETE FROM blame WHERE target_member_id = #{target_member_id}
+    </delete>
+    
+    <insert id="increaseCustomerBlameWarn">
+        UPDATE customer SET customer_blame_warn = customer_blame_warn+1 WHERE customer_id = #{target_member_id}
+    </insert>
+
+    <insert id="addBlackList">
+        INSERT INTO blacklist VALUES (#{id}, sysdate)
+    </insert>
 </mapper>

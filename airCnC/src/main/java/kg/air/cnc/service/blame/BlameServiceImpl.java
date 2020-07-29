@@ -50,4 +50,19 @@ public class BlameServiceImpl implements BlameService {
     public void insertBlameWarnMessage(Map<String, String> warnMessageMap) {
         blameDAO.insertBlameWarnMessage(warnMessageMap);
     }
+
+    @Override
+    public void deleteBlame(String target_member_id) {
+        blameDAO.deleteBlame(target_member_id);
+    }
+
+    @Override
+    public void increaseCustomerBlameWarn(String target_member_id) {
+        blameDAO.increaseCustomerBlameWarn(target_member_id);
+    }
+
+    @Override
+    public void addBlackList(String id) {
+        blameDAO.addBlackList(id);
+    }
 }

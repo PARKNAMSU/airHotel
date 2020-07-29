@@ -35,4 +35,19 @@ public class BlameDAOImpl implements BlameDAO{
     public void insertBlameWarnMessage(Map<String, String> map) {
         sqlSession.insert("kg.air.cnc.dao.blame.BlameDAO.insertBlameWarnMessage", map);
     }
+
+    @Override
+    public void deleteBlame(String target_member_id) {
+        sqlSession.delete("kg.air.cnc.dao.blame.BlameDAO.deleteBlame", target_member_id);
+    }
+
+    @Override
+    public void increaseCustomerBlameWarn(String target_member_id) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.increaseCustomerBlameWarn", target_member_id);
+    }
+
+    @Override
+    public void addBlackList(String id) {
+        sqlSession.insert("kg.air.cnc.dao.blame.BlameDAO.addBlackList", id);
+    }
 }

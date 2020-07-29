@@ -25,10 +25,6 @@ public class BlackListServiceImpl implements BlackListService {
 
     public void deleteBlackList(String blackId) {
         blackListDAO.deleteBlackList(blackId);
-
     }
 
-    public void insertBlackList(BlackUserVO blackUser) {
-
-    }
 }

@@ -12,4 +12,8 @@ public interface BlameService  {
     ArrayList<BlameVO> getBlameInfo(String target_member_id);
     CustomerVO getBlameJudgeInfo(String target_member_id);
     void insertBlameWarnMessage(Map<String, String>warnMessageMap);
+    void deleteBlame(String target_member_id);
+    void increaseCustomerBlameWarn(String target_member_id);
+    void addBlackList(String id);
+
 }

@@ -86,13 +86,13 @@
         <div class="account_susspend">
             <form>
                 <input type="text" name="" value="3"  size="10"> 일
-                <input id="susspend_btn" type="submit" value="정지부여">
+                <input id="suspend_btn" type="submit" value="정지부여">
             </form>
         </div>
 
         <div class="black_list">
-            <form>
-                <input type="button" name="" value="블랙리스트 추가하기">
+            <form action="/addBlacklist.mdo" method="get">
+                <input type="submit" value="블랙리스트 추가하기">
             </form>
         </div>
     </div>
