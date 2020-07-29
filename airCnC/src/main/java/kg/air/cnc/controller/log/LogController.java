@@ -18,6 +18,7 @@ public class LogController {
 	@Autowired
 	LogService logService;
 	
+	/*해당 조건의 로그 json형태로 변환후 검색*/
 	@RequestMapping(value="/getLog.mdo", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String getLogListController(LogVO vo) throws JsonProcessingException{
