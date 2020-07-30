@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MessageDAO">
+
+
+	<insert id="insertMessage" parameterType="kg.air.cnc.vo.MessageVO">
+		<selectKey keyProperty="message_seq" resultType="int" order="BEFORE">
+			SELECT message_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO message(message_seq, message_from_id,message_to_id,message_content,message_type)
+		values(#{message_seq},#{message_from_id},#{message_to_id},#{message_content},#{message_type})
+	</insert>
+	<select id="getChatList" resultType="kg.air.cnc.vo.MessageVO" parameterType="String">
+		<![CDATA[SELECT message_to_id, c.customer_name as message_to_name, c.customer_image as message_to_img from message m JOIN customer c 
+		ON m.message_to_id = customer_id WHERE message_from_id =#{value} GROUP BY m.message_to_id, c.customer_image, c.customer_name]]>
+	</select>
+	<select id="getMessageList" resultType="kg.air.cnc.vo.MessageVO" parameterType="hashmap">
+		select message_seq,message_from_id,message_to_id,message_type,message_content,message_regdate,c1.customer_name as message_from_name, c2.customer_name as message_to_name
+		,c1.customer_image as message_from_img, c2.customer_image as message_to_img, to_char(message_regdate,'yyyy/MM/dd') as message_date, to_char(message_regdate,'hh24:mi') as message_time
+		from message m join customer c1 on m.message_from_id = c1.customer_id join customer c2 on m.message_to_id = c2.customer_id 
+		where (message_from_id = #{fromId} and message_to_id = #{toId}) or (message_from_id = #{toId} and message_to_id = #{fromId}) ORDER BY to_char(message_regdate, 'yyyyMMddhh24miss') asc
+	</select>
+	<select id="getMessageListTOAdmin" resultType="kg.air.cnc.vo.MessageVO" parameterType="hashmap">
+		select message_seq,message_from_id,message_to_id,message_type,message_content,message_regdate, 
+		to_char(message_regdate,'yyyy/MM/dd') as message_date, to_char(message_regdate,'hh24:mi') as message_time
+		from message where message_from_id = #{toId} and message_to_id = #{fromId} ORDER BY to_char(message_regdate, 'yyyyMMddhh24miss') asc
+	</select>
+</mapper>

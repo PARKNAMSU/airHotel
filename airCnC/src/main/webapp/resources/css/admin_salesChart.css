@@ -1,0 +1,94 @@
+@charset "UTF-8";
+ a:link { color: red; text-decoration: none;}
+ a:visited { color: black; text-decoration: none;}
+ a:hover { color: blue; text-decoration: underline;}
+.top_first{
+	margin-top:10%;
+	width: 65%;
+	float: left;
+}
+.maindiv{
+	float:left;
+	font-size: 22px;
+	width: 20%;
+	margin-right: 3%;
+}
+.maintext{
+
+	
+}
+.top_second{
+	width: 65%;
+	margin-top:3%;
+	float: left;
+}
+.subdiv{
+	align-content:center;
+	align-items:center;
+	width: 20%;
+	margin-right: 3%;
+	float:left;
+	font-size:22px;
+	display: none;
+}
+.day_temp{
+	width: 20%;
+	margin-right: 3%;
+	float:left;
+}
+.sales,.chart{
+	float:left;
+	margin-top:5%;
+	width: 65%;
+}
+#salesArea,#salesChart{
+	width:1200px;
+	height:800px;
+	margin-top:3%;
+	overflow:scroll; 
+	overflow-x:hidden;
+	align-self:center;
+	box-shadow: 2px 2px 2px 2px gray;
+}
+#salesArea::-webkit-scrollbar {
+  width: 15px;
+}
+#salesArea::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#salesArea::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #bebebe;
+}
+#salesArea::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+#salesChart::-webkit-scrollbar {
+  width: 15px;
+}
+#salesChart::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#salesChart::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #bebebe;
+}
+#salesChart::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+.chart{
+	
+}
+#chartArea{
+	
+}
+.temp{
+	float:left;width:505px;height:1000px;
+}
+@media(max-width:700px){
+	.temp{
+		height:0px;
+	}
+}
