@@ -2,6 +2,7 @@ package kg.air.cnc.service.blame;
 
 import kg.air.cnc.dao.blame.BlameDAO;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 import kg.air.cnc.vo.blame.BlameVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,15 @@ public class BlameServiceImpl implements BlameService {
     BlameDAO blameDAO;
 
     public List<Map.Entry<String, Integer>> getBlameList() {  // target_member_id 별로 신고를 count 하여 정렬 한 list.
-        ArrayList<BlameVO> blameList = blameDAO.getBlameList();
 
+        ArrayList<BlameVO> blameList = blameDAO.getBlameList();
         HashMap<String, Integer> blameCount = new HashMap<String, Integer>();
 
         for(int i = 0; i < blameList.size(); i++){ // target_member_id 별로 신고 횟수 count
-            if(blameCount.containsKey(blameList.get(i).getTarget_member_id())){
-                blameCount.put(blameList.get(i).getTarget_member_id(), blameCount.get(blameList.get(i).getTarget_member_id()) + 1);
+            if(blameCount.containsKey(blameList.get(i).getBlame_target_member_id())){
+                blameCount.put(blameList.get(i).getBlame_target_member_id(), blameCount.get(blameList.get(i).getBlame_target_member_id()) + 1);
             } else {
-                blameCount.put(blameList.get(i).getTarget_member_id(), 1);
+                blameCount.put(blameList.get(i).getBlame_target_member_id(), 1);
             }
         }
 
@@ -42,8 +43,13 @@ public class BlameServiceImpl implements BlameService {
     }
 
     @Override
-    public CustomerVO getBlameJudgeInfo(String target_member_id) {
+    public CustomerVO getCustomerBlameJudgeInfo(String target_member_id) {
         return blameDAO.getCustomerBlameInfo(target_member_id);
+    }
+
+    @Override
+    public HostVO getHostBlameInfo(String target_member_id) {
+        return blameDAO.getHostBlameInfo(target_member_id);
     }
 
     @Override
@@ -52,13 +58,18 @@ public class BlameServiceImpl implements BlameService {
     }
 
     @Override
-    public void deleteBlame(String target_member_id) {
-        blameDAO.deleteBlame(target_member_id);
+    public void deleteBlame(Map<String,String> deleteBlameMap) {
+        blameDAO.deleteBlame(deleteBlameMap);
     }
 
     @Override
     public void increaseCustomerBlameWarn(String target_member_id) {
         blameDAO.increaseCustomerBlameWarn(target_member_id);
+    }
+
+    @Override
+    public void increaseHostBlameWarn(String target_member_id) {
+        blameDAO.increaseHostBlameWarn(target_member_id);
     }
 
     @Override

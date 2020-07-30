@@ -8,11 +8,15 @@
     </select>
 
     <select id="getBlameInfo" resultType="kg.air.cnc.vo.blame.BlameVO">
-        SELECT * FROM blame WHERE target_member_id = #{target_member_id}
+        SELECT * FROM blame WHERE blame_target_member_id = #{target_member_id}
     </select>
 
     <select id="getCustomerBlameInfo" resultType="kg.air.cnc.vo.CustomerVO">
         SELECT customer_blame_warn, customer_blame_stop FROM customer WHERE customer_id = #{target_member_id}
+    </select>
+
+    <select id="getHostBlameInfo" resultType="kg.air.cnc.vo.HostVO">
+        SELECT host_blame_warn, host_blame_stop FROM host WHERE host_id = #{target_member_id}
     </select>
 
     <insert id="insertBlameWarnMessage">
@@ -20,11 +24,15 @@
     </insert>
     
     <delete id="deleteBlame">
-        DELETE FROM blame WHERE target_member_id = #{target_member_id}
+        DELETE FROM blame WHERE blame_target_member_id = #{target_member_id} AND blame_type = #{blame_type}
     </delete>
     
     <insert id="increaseCustomerBlameWarn">
         UPDATE customer SET customer_blame_warn = customer_blame_warn+1 WHERE customer_id = #{target_member_id}
+    </insert>
+
+    <insert id="increaseHostBlameWarn">
+        UPDATE host SET host_blame_warn = host_blame_warn+1 WHERE host_id = #{target_meber_id}
     </insert>
 
     <insert id="addBlackList">

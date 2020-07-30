@@ -65,12 +65,27 @@
     <div id="admin_singo_main">
         <div class="singo_history">
             <table class="table">
-                <c:set var="blame" value="${blameinfo}"/>
-                <c:set var="blamejudgeinfo" value="${blamejudgeinfo}"/>
+                <c:set var="blameHostJudgeInfo" value="${blameHostJudgeInfo}"/>
+                <c:set var="blameCustomerJudgeInfo" value="${blameCustomerJudgeInfo}"/>
+                <c:set var="blame_type" value="${sessionScope.blame_type}"/>
                 <tr>
                     <td>신고당한 아이디 ${sessionScope.target_member_id}</td>
-                    <td>누적경고횟수 : ${blamejudgeinfo.customer_blame_warn}</td>
-                    <td>정지여부 : ${blamejudgeinfo.customer_blame_stop}</td>
+                    <td>누적경고횟수 :
+                    <c:if test="${blameHostJudgeInfo eq null}" >
+                        <c:out value="${blameCustomerJudgeInfo.customer_blame_warn}"/>
+                    </c:if>
+                    <c:if test="${blameCustomerJudgeInfo eq null}" >
+                        <c:out value="${blameHostJudgeInfo.host_blame_warn}"/>
+                    </c:if>
+                    </td>
+                    <td>정지여부 :
+                        <c:if test="${blameHostJudgeInfo eq null}">
+                            <c:out value="${blameCustomerJudgeInfo.customer_blame_stop}"/>
+                        </c:if>
+                        <c:if test="${blameCustomerJudgeInfo eq null}">
+                            <c:out value="${blameHostJudgeInfo.host_blame_stop}"/>
+                        </c:if>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -78,6 +93,7 @@
         <div class="warning_message">
 
             <form method="post" action="/blameWarnMessage.mdo">
+                <input type="hidden" name="isHost" value="${blame_type}">
                 <input type="text" name="warn_message" value="경고 메세지 입력란" size="100">
                 <input type="submit" value="전송">
             </form>
