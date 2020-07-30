@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Travelo</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png" />
+
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="../css/hostregister.css" />
+    <script type="text/javascript" src="../js/hostregister.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  </head>
+
+  <body>
+    <!-- header-start -->
+    <header class="menudiv1">
+      <div class="menudiv2-1">
+        <img alt="" src="../images/logo2.png" />
+      </div>
+      <div class="menudiv2-2">
+        <div class="menudiv3-1" id="div1">
+          <ul id="menuItems">
+            <li class="item">호스트</li>
+            <li class="item">회원가입</li>
+            <li class="item" id="contents">로그인</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- header-end -->
+
+    <form action="/html/index.html" accept-charset="utf-8" name="hostregister" method="POST">
+    <div class="container">   
+      <div class="my__join__create">
+        <h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">프로필 사진 추가</h3></br>
+        <h4>프로필 사진을 요청하는 호스트도 있지만, 이 경우에도 예약이 확정된 후에만 게스트의 사진을 볼수 있습니다.</h4>
+        <div id="image_container" style="text-align: center;"></div>
+        <div class="filebox">
+          <label id="addpictuer" for="image">첨부할 사진을 선택하세요</label>
+          <input
+            type="file"
+            class="multi"
+            id="image"
+            accept="image/*"
+            maxlength="1"
+            onchange="setThumbnail(event);"/>
+        <div>
+            <font size="5em" color="#64dd17"><a href="https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com">네이버</a></font> 또는<font size="5em" color="#ffab00">카카오톡</font>으로 회원 가입하세요.
+        </div>
+        <div style="margin-top: 30px;">
+            <div class="my__join__line1">
+                또는
+            </div>
+        </div>
+        <div class="input_email">
+            <span>
+                <input class="iemail" type="email" name="e-mail" placeholder="&nbsp;&nbsp;이메일 주소" required>
+            </span>
+        </div>
+        <div class="input_password">
+            <span>
+                <input class="ipassword" type="password" name="pw" placeholder="&nbsp;&nbsp;비밀번호 설정" required>
+            </span>
+        </div>
+        <div class="input_confirm_password">
+            <span>
+                <input class="icpassword" type="password" name="cpw" placeholder="&nbsp;&nbsp;비밀번호 확인" required>
+            </span>
+        </div>
+        <div class="input_name">
+            <span>
+                <input class="iname" type="text" name="name" placeholder="&nbsp;&nbsp;이름(예:홍길동)" required>
+            </span>
+        </div>
+        <div class="input_tel">
+            <span>
+              <h3 style="padding-top: 35px; font-size: 15px; font-weight: bold;">전화번호 인증하기</h3></br>
+              <label for="">010</label> - 
+             <input type="text" placeholder="전화 번호 입력" maxlength="8">
+             <label for="" style="font-size: 10px;">8자리 까지만 입력하세요</label>
+            </span>
+        </div>
+        <div class="input_tel">
+          <span>
+            <h3 style="padding-top: 35px; font-size: 15px; font-weight: bold;">계좌번호 입력</h3></br>
+            <select style="text-align: center;">
+              <option selected>계좌번호</option>
+              <option>기업은행</option>
+              <option>농협</option>
+              <option>신한은행</option>
+          </select> - 
+           <input type="text" placeholder="계좌번호 입력">
+           <label for="" style="font-size: 10px;"> - 을 빼고 입력하세요</label>
+          </span>
+      </div>
+        <div>
+            <div><a href="../html/addregister.html"><input class="my__join__email" type="submit" value="가입 하기" /></a></div>
+            <div class="loginMove" style="text-align:center">이미 에어비앤비 계정이 있나요?
+              <a class="my__login__link"
+                    onclick="myjoin_close(); mylogin_open();" href="../html/Login.html" >로그인</a></div>
+        </div>
+    </div>
+    </div>
+  </div>
+</form>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    function setThumbnail(event) {
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+</html>

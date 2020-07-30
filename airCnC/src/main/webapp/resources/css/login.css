@@ -113,15 +113,13 @@ svg {
 
 .bb9 {
   color: #008489;
-  text-decoration: none;
   font-size: 13px;
   font-weight: bold;
   height: 20px;
+  text-align: center;
 }
 
 .a5 {
-  display: grid;
-  grid-template-columns: auto auto auto;
   text-align: center;
   margin-left: 31px;
   margin-top: 20px;
