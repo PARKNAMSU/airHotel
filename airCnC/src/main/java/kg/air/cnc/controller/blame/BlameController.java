@@ -42,17 +42,17 @@ public class BlameController {
         return mav;
     }
 
-    @RequestMapping(value = "/blameWarnMessage.mdo", method = RequestMethod.POST)
+
+    // todo customer 에 대한 신고와 host 에 대한 신고의 분기가 필요할까? (blame 에 type 을 지정하는 방법 고려해보기 )
+
+    @RequestMapping(value = "/blameWarnMessage.mdo", method = RequestMethod.POST) // 신고당한 아이디 경고메세지 보내기
     public ModelAndView sendWarnMessage(HttpServletRequest request, ModelAndView mav){
         HttpSession session = request.getSession();
         HashMap<String, String> warnMessageMap = new HashMap<>();
         String target_member_id = (String)session.getAttribute("target_member_id");
         warnMessageMap.put("to_id", target_member_id);
         warnMessageMap.put("message_content", request.getParameter("warn_message"));
-        /*
-        todo customer 에 대한 신고와 host 에 대한 신고의 분기가 필요할까? (blame 에 type 을 지정하는 방법 고려해보기 )
-        todo customer 에 대한 정지와 host 에 대한 정지를 어떻게 처리할 것인지 생각해보기.
-         */
+
         //admin 계정으로 target_member_id 에게 message 전송
         blameService.insertBlameWarnMessage(warnMessageMap);
         //customer_blame_warn 1증가
@@ -65,6 +65,7 @@ public class BlameController {
     }
 
     //todo : 아이디 정지 먹이기
+    //todo : customer 에 대한 정지와 host 에 대한 정지를 어떻게 처리할 것인지 생각해보기.
 
     //todo : 아이디 블랙리스트 추가하기
     @RequestMapping(value = "/addBlacklist.mdo", method = RequestMethod.GET)
