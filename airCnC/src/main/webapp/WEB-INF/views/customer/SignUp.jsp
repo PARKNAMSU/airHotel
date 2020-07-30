@@ -132,9 +132,12 @@ function fn_idCheck() {
 						maxlength="2" onchange="setThumbnail(event);" name="customerImage" />
 				</div>
 				<div class="input_phone">
-						<span><input class="itel" type="text" placeholder="&nbsp;&nbsp;-없이 번호만 입력해주세요"
+						<span>
+						<input class="itel" type="text" placeholder="&nbsp;&nbsp;-없이 번호만 입력해주세요"
 						name="customerPhone" maxlength="11"
-						style="width: 250px; text-align: left;" required></span><br>
+						style="width: 250px; text-align: left;" required>
+						</span>
+						<br>
 					<button type="button" class=""
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 250px;">전화번호
 						인증하기</button>
