@@ -48,9 +48,7 @@ public class Admin_salesDAO implements Admin_salesDAOImpl{
 		list.get(0).setSumSales(sum);
 		for(int i=0;i<list.size();i++) {
 			float per = (((float)list.get(i).getAdmin_sales()*100)/sum);
-			System.out.println(sum);
 			list.get(i).setAdmin_sales_persant(per);
-			System.out.println(list.get(i).getAdmin_sales_persant());
 		}
 		return list;
 	}

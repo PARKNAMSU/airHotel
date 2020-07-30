@@ -22,15 +22,14 @@
 	</div>
 	<div id="chatdiv">
 
-		<div id="infoline">
-			<b>예약이 완료되었습니다.</b>
-		</div>
+
 		<c:forEach begin="0" end="${messageList.size() -1}" step="1" var="i">
 			<c:if test="${i == 0}">
 			<div id="dateline">
 				<b style="color:gray;">${messageList.get(i).message_date}</b>
 			</div>
 			</c:if>
+			
 			<c:if test="${i > 0 }">
 				<c:if test="${messageList.get(i).message_date != messageList.get(i-1).message_date}">
 					<div id="dateline">
@@ -38,6 +37,13 @@
 					</div>
 				</c:if>
 			</c:if>
+			
+			<c:if test="${messageList.get(i).message_type eq 'info' }">
+				<div id="infoline">
+					<b >${messageList.get(i).message_content}</b>
+				</div>
+			</c:if>
+			<c:if test="${messageList.get(i).message_type eq 'nomal' }">
 			<c:choose>
 				<c:when test="${i == messageList.size() -1}">
 					<div class="chatline" id="firstChat">
@@ -70,6 +76,7 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
+			</c:if>
 		</c:forEach>
 	</div>
 	<div style="clear:both;"></div>
@@ -77,7 +84,7 @@
 		<form action="insertMessage.do" method="post" class="form-inline">
 			<input type="text" name="message_content" style="width:570px;height:50px;"class="form-control" id="message_content">
 			<input type="hidden" name="message_type" value="nomal">
-			<input type="hidden" name="message_from_id" value="${id}">
+			<input type="hidden" name="message_from_id" value="${login_session}">
 			<input type="hidden" name="message_to_id" value="${toId}">
 			<c:if test="${toId eq 'admin'}"><input type="submit" value="전송" class="btn btn-danger" style="font-size:30px;" disabled="disabled"></c:if>
 			<c:if test="${toId != 'admin'}"><input type="submit" value="전송" class="btn btn-danger" style="font-size:30px;"></c:if>

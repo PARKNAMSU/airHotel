@@ -28,5 +28,10 @@ public class CommentsService implements CommentsServiceImpl{
 		}
 		return list;
 	}
+	@Override
+	public void deleteComments(CommentsVO vo) {
+		commentsDAO.deleteComments(vo);
+		
+	}
 
 }

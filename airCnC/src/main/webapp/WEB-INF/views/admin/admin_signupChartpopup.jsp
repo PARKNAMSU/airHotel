@@ -45,29 +45,31 @@
 </head>
 <body>
 	<div style="margin-left: 50px;">
-		<h1 style="margin-top: 20px;">매출 상세검색</h1><br>
+		<h1 style="margin-top: 20px;">회원가입 상세검색</h1><br>
 		<div style="width:400px;">
-		<form action="salesChartDetail.mdo" >
-			<input type="date" name="admin_sales_date" class="form-control"><br>
+		<form action="" >
+			<input type="date" name="signupchart_date" class="form-control"><br>
 			<input type="submit" value="검색" class="btn btn-outline-danger"> 
 		</form><br>
 		</div>
 		<div id="salesArea">
-			<h1>${salesList.get(0).admin_sales_regdate } 매출</h1>
+			<h1>${signupList.get(0).customer_image } 회원가입</h1>
 			<table class="table table-striped" id="salesTable">
 				<tr>
 					<th>날짜</th>
-					<th>번호</th>
-					<th>매출</th>
-					<th>숙소번호</th>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>전화번호</th>
 				</tr>
-				<c:if test="${salesList != null}">
-					<c:forEach begin="0" end="${salesList.size()-1}" var="i">
+				<c:if test="${signupList != null}">
+					<c:forEach begin="0" end="${signupList.size()-1}" var="i">
 					<tr>
-						<th>${salesList.get(i).admin_sales_date }</th>
-						<th>no.${salesList.get(i).admin_sales_seq}</th>
-						<th>${salesList.get(i).admin_sales }￦</th>
-						<th>no.${salesList.get(i).admin_sales_house_seq }</th>
+						<td>${signupList.get(i).customer_image }</td>
+						<td>${signupList.get(i).customer_id }</td>
+						<td>${signupList.get(i).customer_name }</td>
+						<td>${signupList.get(i).customer_email }</td>
+						<td>${signupList.get(i).customer_phone }</td>
 					</tr>
 					</c:forEach>
 				</c:if>

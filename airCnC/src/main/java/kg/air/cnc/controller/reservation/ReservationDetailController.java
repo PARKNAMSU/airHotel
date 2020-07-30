@@ -35,8 +35,14 @@ public class ReservationDetailController {
 	}
 	@RequestMapping("insertComments.do")
 	public ModelAndView insertCommentsController(CommentsVO vo,ModelAndView mav) {
-		System.out.println(vo.getComments_content()+"\n"+vo.getComments_rate()+"\n"+vo.getComments_house_seq()+"\n");
 		commentsService.insertComments(vo);
+		mav.setViewName("redirect:reservationHouse.do");
+		mav.addObject("comments_house_seq",vo.getComments_house_seq());
+		return mav;
+	}
+	@RequestMapping("deleteComments.do")
+	public ModelAndView deleteCommentsController(CommentsVO vo,ModelAndView mav) {
+		commentsService.deleteComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
 		mav.addObject("comments_house_seq",vo.getComments_house_seq());
 		return mav;

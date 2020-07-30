@@ -11,6 +11,9 @@
 		INSERT INTO comments(comments_seq, comments_id, comments_house_seq, comments_content, comments_rate)
 		values(#{comments_seq}, #{comments_id}, #{comments_house_seq}, #{comments_content}, #{comments_rate})
 	</insert>
+	<delete id="deleteComments" parameterType="kg.air.cnc.vo.CommentsVO">
+		DELETE FROM comments WHERE comments_seq = #{comments_seq}
+	</delete>
 	<select id="getComments" parameterType="kg.air.cnc.vo.CommentsVO" resultType="kg.air.cnc.vo.CommentsVO">
 		SELECT comments_seq, comments_id, comments_content, c.customer_name as comments_name, comments_rate, comments_regdate FROM comments
 		JOIN customer c ON comments_id = customer_id WHERE comments_house_seq = #{comments_house_seq}  ORDER BY comments_seq DESC

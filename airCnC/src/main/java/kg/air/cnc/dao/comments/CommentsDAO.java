@@ -20,5 +20,10 @@ public class CommentsDAO implements CommentsDAOImpl{
 	public List<CommentsVO> getComments(CommentsVO vo) {
 		return sqlSessionTemplate.selectList("CommentsDAO.getComments",vo);
 	}
+	@Override
+	public void deleteComments(CommentsVO vo) {
+		sqlSessionTemplate.delete("CommentsDAO.deleteComments",vo);
+		
+	}
 
 }
