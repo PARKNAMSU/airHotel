@@ -15,7 +15,8 @@
 	</delete>
 	
 	<select id="checkReservation" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.ReservationVO">
-		SELECT * FROM reservation
+		SELECT * 
+		FROM reservation
 		WHERE reservation_host_id=#{host_id}
 	</select>
 	
@@ -29,5 +30,10 @@
 		SET reservation_status=1
 		WHERE reservation_seq=#{reservation_seq}
 	</update>
+	
+	<insert id="sendMessageHost" parameterType="kg.air.cnc.vo.HostVO">
+		INSERT INTO message
+		VALUES (message_seq.nextval,'admin',#{host_id},'nomal','관리자가 호스트 자격을 박탈하였습니다.',sysdate)
+	</insert>
 
 </mapper>

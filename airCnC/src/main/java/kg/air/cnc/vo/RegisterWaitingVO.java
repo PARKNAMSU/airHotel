@@ -9,5 +9,11 @@ public class RegisterWaitingVO {
 
 	public void setHouse_seq(int house_seq) {
 		this.house_seq = house_seq;
+	}
+
+	@Override
+	public String toString() {
+		return "RegisterWaitingVO [house_seq=" + house_seq + "]";
 	}	
+	
 }

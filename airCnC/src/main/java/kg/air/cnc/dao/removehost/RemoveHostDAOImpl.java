@@ -29,18 +29,28 @@ public class RemoveHostDAOImpl implements RemoveHostDAO {
 
 	@Override
 	public void sendMessage(List<ReservationVO> vo) {
-		System.out.println(vo.size());
-		mybatis.insert("RemoveHostDAO.sendMessage", vo);
+		System.out.println(vo.toString());
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.insert("RemoveHostDAO.sendMessage", vo.get(i));
+		}
 	}
 
 	@Override
 	public void refund(List<ReservationVO> vo) {
-		mybatis.insert("RemoveHostDAO.refund", vo);
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.insert("RemoveHostDAO.refund", vo.get(i));
+		}
 	}
 	
 	@Override
 	public void deleteHost(HostVO vo) {
 		mybatis.delete("RemoveHostDAO.deleteHost", vo);
+	}
+
+
+	@Override
+	public void sendMessageHost(HostVO vo) {
+		mybatis.insert("RemoveHostDAO.sendMessageHost", vo);
 	}
 
 }

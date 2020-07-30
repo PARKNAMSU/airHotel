@@ -9,26 +9,29 @@ import kg.air.cnc.dao.waiting.RemoveWaitingDAOImpl;
 import kg.air.cnc.vo.HouseVO;
 
 @Service
-public class RemoveWaitingServiceImpl implements WaitingService{
+public class RemoveWaitingServiceImpl {
 	
 	@Autowired
 	RemoveWaitingDAOImpl removeWaitingDAO;
 
-	@Override
 	public HouseVO getHouse(HouseVO vo) {
 		return removeWaitingDAO.getHouse(vo);
 	}
 
-	@Override
-	public List<HouseVO> getWaitingList(HouseVO vo) {
-		return removeWaitingDAO.getRemoveWaitingList(vo);
+	public List<HouseVO> getWaitingList() {
+		return removeWaitingDAO.getRemoveWaitingList();
 	}
 	
-	public List<HouseVO> checkReservation(HouseVO vo) {
-		return removeWaitingDAO.checkReservation(vo);
+	public void updateDate(HouseVO vo) {
+		removeWaitingDAO.updateDate(vo);
+	}
+	
+	public void cancelRemove(HouseVO vo) {
+		removeWaitingDAO.cancelRemove(vo);
+		removeWaitingDAO.deleteRemoveWaiting(vo);
 	}
 	
 	public void deleteHouse(HouseVO vo) {
-		List<HouseVO> list = this.checkReservation(vo);
+		
 	}
 }

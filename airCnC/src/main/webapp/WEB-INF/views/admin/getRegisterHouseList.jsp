@@ -12,13 +12,13 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-    <title>관리자 삭제 파일</title>
+    <title>관리자 대기 파일</title>
 </head>
 <body>
-    <!-- header-start -->
-    <header class="menudiv1" style="position : static">
+     <!-- header-start -->
+     <header class="menudiv1" style="position : static">
 		<div class="menudiv2-1" >
-		<img alt="" src="../images/logo2.png">
+		<img alt="" src="">
 		</div>
 		<div class="menudiv2-2" style="overflow : hidden">
 			<div class="menudiv3-1" id="div1">
@@ -34,8 +34,8 @@
     </header>
     <!-- header-end -->
 
-     <!-- slider_area_start -->
-     <div class="slider_area">
+    <!-- slider_area_start -->
+    <div class="slider_area">
         <div class="slider_active owl-carousel">
             <div class="single_slider  d-flex align-items-center slider_bg_2">
                 <div class="container">
@@ -53,27 +53,30 @@
     <br>
     <div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a href="getRegisterWaitingList.mdo">호스트 등록 관리</a></li>
+			<li class="menu"><a id="topmenu" href="getRegisterWaitingList.mdo">호스트 등록 관리</a></li>
 			<li class="menu"><a href="getRemoveWaitingList.mdo">호스트 삭제 관리</a></li>
-			<li class="menu"><a id="topmenu" href="getRemoveHostList.mdo">호스트 삭제</a></li>
+			<li class="menu"><a href="getRemoveHostList.mdo">호스트 삭제</a></li>
 		</ul>
     </div>
-    <!-- <form action="deleteHost.mdo"> -->
-    <div class="hostList">
-        <ul>
-        	<c:forEach items="${hostList}" var="host">
-            	<li><a href="deleteHost.mdo?host_id=${host.host_id}">${host.host_id}</a></li>
-        	</c:forEach>
-        </ul>
+    <div class="container" style="margin-top : 3%">
+        <h3>호스트 등록 관리</h3>
+        <br>
+        <c:forEach items="${waitingList}" var="house">
+        <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}">
+        <div class="houseList">
+            <img src="../images/face.png" alt="숙소 이미지" class="littleImg">
+		    ${house.house_name }<br>
+		         숙소 소개<br>
+		    ${house.house_address}<br>
+		    ${house.house_star }<br>					
+		    ${house.house_price }<br>
+        </div>
+        </a>
+        <hr>
+        </c:forEach>
     </div>
-    <!-- 
-        <div style="text-align: center;">
-        <input type="submit" class="btn btn" value="삭제">
-    </div>
-    </form>
-	-->
     <footer>
-        <hr style="width:100%">
+        <hr>
         <div class="admin_footer">
             <div class="admin_image_container">
                 <img alt="logo" src="../images/admin_logo.jpeg.jpg" style="margin-top: 10px;">

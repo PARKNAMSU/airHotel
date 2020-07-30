@@ -3,28 +3,58 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="waitingDAO">
-	<!-- 
-	private final String GET_WAITING_LIST = 
-			"select h.seq, h.house_name, h.address, h.house_star, h.house_info, h.house_price, h.popular, h.waiting_status "
-			+ "from house_waiting hw inner join house h on hw.house_seq = h.seq";
-			
-	private final String GET_WAITING_LIST = 
-			"select h.seq, h.house_name, h.address, h.house_star, h.house_info, h.house_price, h.popular, h.waiting_status "
-			+ "from remove_waiting rw inner join house h on rw.house_seq = h.seq";
-			
-	private final String GET_HOUSE = "select * from house where seq=?";
-	
-	private final String GET_RESERVATION_LIST = "select r.check_out from remove_waiting rw inner join reservation r on r.house_seq = ?";
-	-->
+	<!-- 등록 대기 house 목록 가지고 오기 -->
+	<select id="getRegisterWaitingList" resultType="kg.air.cnc.vo.HouseVO">
+		SELECT h.house_seq as house_seq, h.house_name as house_name, h.house_address as house_address, h.house_price as house_price, h.house_status as house_status, h.house_star as house_star
+		FROM register_waiting rw JOIN house h
+		ON rw.house_seq = h.house_seq
+		WHERE h.house_status=3
+	</select>
+	<!-- 삭제 대기 house 목록 가지고 오기 -->
+	<select id="getRemoveWaitingList" resultType="kg.air.cnc.vo.HouseVO">
+		SELECT h.house_seq as house_seq, h.house_name as house_name, h.house_address as house_address, h.house_price as house_price, h.house_status as house_status, h.house_star as house_star
+		FROM remove_waiting rw JOIN house h
+		ON rw.house_seq = h.house_seq
+		WHERE h.house_status=2 AND rw.remove_status=0
+	</select>
+	<!-- house 등록 허가, house 삭제 불허 -->
 	<update id="registerHouse" parameterType="kg.air.cnc.vo.HouseVO">
 		UPDATE house
 		SET house_status=0
 		WHERE house_seq=#{house_seq}
 	</update>
+	
+	<!-- house 등록 불허 -->
+	<delete id="cancelRegister" parameterType="kg.air.cnc.vo.HouseVO">
+		DELETE FROM house
+		WHERE house_seq=#{house_seq}
+	</delete>
+	
+	<!-- 처리 후 house_waiting* 테이블에서 삭제 -->
+	<delete id="deleteRegisterWaiting" parameterType="kg.air.cnc.vo.HouseVO">
+		DELETE FROM register_waiting
+		WHERE house_seq=#{house_seq}
+	</delete>
+	<delete id="deleteRemoveWaiting" parameterType="kg.air.cnc.vo.HouseVO">
+		DELETE FROM remove_waiting
+		WHERE house_seq=#{house_seq}
+	</delete>
+	
 	<!-- resultmap을 사용해야해서 어떤 파라미터 타입이 올지 모르겠음  -->
+	<!-- 해당 house 정보 가지고 오기 -->
 	<select id="getHouse" parameterType="kg.air.cnc.vo.HouseVO" resultType="kg.air.cnc.vo.HouseVO">
 		SELECT *
 		FROM house
-		WHERE seq=#{house_seq}
+		WHERE house_seq=#{house_seq}
 	</select>
+	
+	<!-- 삭제 대기 테이블 삭제 가능 날짜 업데이트 -->
+	<update id="updateDate" parameterType="kg.air.cnc.vo.HouseVO">
+		UPDATE remove_waiting
+		SET house_remove_date=(select max(reservation_regdate) from reservation), remove_status=1
+		WHERE house_seq = #{house_seq}
+	</update>
+	
+	<!-- 삭제 가능 날짜인 삭제대기 자동 삭제 후 삭제대기 테이블에서 삭제 -->
+	
 </mapper>

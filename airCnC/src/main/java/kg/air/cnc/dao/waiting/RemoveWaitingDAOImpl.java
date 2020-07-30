@@ -17,16 +17,19 @@ public class RemoveWaitingDAOImpl {
 		return mybatis.selectOne("waitingDAO.getHouse", vo);
 	}
 	
-	public List<HouseVO> getRemoveWaitingList(HouseVO vo) {
-		return mybatis.selectList("waitingDAO.getRemoveWaitingList",vo);
+	public List<HouseVO> getRemoveWaitingList() {
+		return mybatis.selectList("waitingDAO.getRemoveWaitingList");
 	}
 	
-	public List<HouseVO> checkReservation(HouseVO vo){
-		return mybatis.selectList("waitingDAO.checkReservaion",vo);
+	public void updateDate (HouseVO vo){
+		mybatis.update("waitingDAO.updateDate",vo);
 	}
 	
-	public void stopReservation(HouseVO vo){
-		mybatis.update("waitingDAO.stopReservation",vo);
+	public void cancelRemove(HouseVO vo){
+		mybatis.update("waitingDAO.registerHouse",vo);
 	}
 	
+	public void deleteRemoveWaiting(HouseVO vo) {
+		mybatis.delete("waitingDAO.deleteRemoveWaiting", vo);
+	}
 }

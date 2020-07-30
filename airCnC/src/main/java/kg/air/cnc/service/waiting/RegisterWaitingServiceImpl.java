@@ -9,23 +9,31 @@ import kg.air.cnc.dao.waiting.RegisterWaitingDAOImpl;
 import kg.air.cnc.vo.HouseVO;
 
 @Service
-public class RegisterWaitingServiceImpl implements WaitingService{
+public class RegisterWaitingServiceImpl {
 
 	@Autowired
 	RegisterWaitingDAOImpl houseWaitingDAO;
 	
-	@Override
 	public HouseVO getHouse(HouseVO vo) {
 		return houseWaitingDAO.getHouse(vo);
 	}
 
-	@Override
-	public List<HouseVO> getWaitingList(HouseVO vo) {
-		return houseWaitingDAO.getHouseWaitingList(vo);
+	public List<HouseVO> getWaitingList() {
+		return houseWaitingDAO.getRegisterWaitingList();
+	}
+	
+	public void deleteWaiting(HouseVO vo) {
+		houseWaitingDAO.deleteWaiting(vo);
 	}
 	
 	public void registerHouse(HouseVO vo) {
 		houseWaitingDAO.registerHouse(vo);
+		deleteWaiting(vo);
+	}
+	
+	public void cancelRegister(HouseVO vo) {
+		deleteWaiting(vo);
+		houseWaitingDAO.cancelRegister(vo);
 	}
 
 }

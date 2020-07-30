@@ -17,11 +17,19 @@ public class RegisterWaitingDAOImpl {
 		return mybatis.selectOne("waitingDAO.getHouse",vo);
 	}
 	
-	public List<HouseVO> getHouseWaitingList(HouseVO vo) {
-		return mybatis.selectList("waitingDAO.getRegisterWaitingList",vo);
+	public List<HouseVO> getRegisterWaitingList() {
+		return mybatis.selectList("waitingDAO.getRegisterWaitingList");
+	}
+	
+	public void deleteWaiting(HouseVO vo) {
+		mybatis.delete("waitingDAO.deleteRegisterWaiting",vo);
 	}
 	
 	public void registerHouse(HouseVO vo) {
 		mybatis.update("waitingDAO.registerHouse",vo);
+	}
+	
+	public void cancelRegister(HouseVO vo) {
+		mybatis.delete("waitingDAO.cancelRegister",vo);
 	}
 }
