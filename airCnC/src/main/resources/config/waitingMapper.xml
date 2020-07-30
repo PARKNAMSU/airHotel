@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="waitingDAO">
+	<!-- 
+	private final String GET_WAITING_LIST = 
+			"select h.seq, h.house_name, h.address, h.house_star, h.house_info, h.house_price, h.popular, h.waiting_status "
+			+ "from house_waiting hw inner join house h on hw.house_seq = h.seq";
+			
+	private final String GET_WAITING_LIST = 
+			"select h.seq, h.house_name, h.address, h.house_star, h.house_info, h.house_price, h.popular, h.waiting_status "
+			+ "from remove_waiting rw inner join house h on rw.house_seq = h.seq";
+			
+	private final String GET_HOUSE = "select * from house where seq=?";
+	
+	private final String GET_RESERVATION_LIST = "select r.check_out from remove_waiting rw inner join reservation r on r.house_seq = ?";
+	-->
+	<update id="registerHouse" parameterType="kg.air.cnc.vo.HouseVO">
+		UPDATE house
+		SET house_status=0
+		WHERE house_seq=#{house_seq}
+	</update>
+	<!-- resultmap을 사용해야해서 어떤 파라미터 타입이 올지 모르겠음  -->
+	<select id="getHouse" parameterType="kg.air.cnc.vo.HouseVO" resultType="kg.air.cnc.vo.HouseVO">
+		SELECT *
+		FROM house
+		WHERE seq=#{house_seq}
+	</select>
+</mapper>

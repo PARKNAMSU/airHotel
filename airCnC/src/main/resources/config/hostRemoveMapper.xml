@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RemoveHostDAO">
+
+	<select id="getRemoveHostList" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.HostVO">
+		SELECT * 
+		FROM host
+	</select>
+	
+	<delete id="deleteHost" parameterType="kg.air.cnc.vo.HostVO">
+		DELETE FROM host
+		WHERE host_id=#{host_id}
+	</delete>
+	
+	<select id="checkReservation" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.ReservationVO">
+		SELECT * FROM reservation
+		WHERE reservation_host_id=#{host_id}
+	</select>
+	
+	<insert id="sendMessage" parameterType="kg.air.cnc.vo.ReservationVO">
+		INSERT INTO message
+		VALUES (message_seq.nextval,'admin',#{reservation_customer_id},'nomal','예약하신 집이 취소되었습니다.',sysdate)
+	</insert>
+	
+	<update id="refund" parameterType="kg.air.cnc.vo.ReservationVO">
+		UPDATE reservation 
+		SET reservation_status=1
+		WHERE reservation_seq=#{reservation_seq}
+	</update>
+
+</mapper>
