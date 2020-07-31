@@ -43,7 +43,6 @@
 				<div class="host">
 					<div class="newhost">
 						<form:radiobutton path="newhouse" value="new1" />
-
 						<span class="up">새로운 숙소</span> 
 						<img src="${pageContext.request.contextPath}/resources/images/host/house1.png" />
 					</div>

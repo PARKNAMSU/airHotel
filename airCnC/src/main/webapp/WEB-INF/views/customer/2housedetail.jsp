@@ -21,11 +21,12 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostdetail1.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+	
 	<script type="text/javascript">
-	function newHouseSubmit() {
-		var f = document.hostchoose;
-		f.submit();
-	}
+		function newHouseSubmit() {
+			var f = document.hostchoose;
+			f.submit();
+		}
 	</script>
 </head>
 <body>
@@ -70,9 +71,56 @@
 		        	<option value="">12개</option>
         		</select>
         		</div>
+        		
+        		<div class="guestbadcount">
+			        <div class="guestbadcount1">
+			          <label for="guestbadcount2">침대</label>        
+			        <button type="button" onclick="javascript:this.form.amount1.value++;">+</button>  
+			        <input type="text" name="amount1" value="0" readonly="readonly" />     
+			        <button type="button" onclick="javascript:this.form.amount1.value--;">-</button>
+			        </div>
+			    </div>
+			    
+			    <div class="bad">
+			    	<div class="title2" style="margin-bottom: 5px;">침대유형</div><br>
+			    	<label for="bad" style="margin-bottom: 15px;">각 침실에 놓인 침대 유형을 명시하면 숙소에 침대가 어떻게 구비되어  있는지 게스트가 잘 파악할 수 있습니다.</label>
+			    	<div class="badcount">
+			    		<div class="bad1">
+			    			<label for="guestcount">싱글</label>
+					        <button type="button" onclick="javascript:this.form.amount2.value++;">+</button>  
+					        <input type="text" name="amount2" value="0" readonly="readonly" />     
+					        <button type="button" onclick="javascript:this.form.amount2.value--;">-</button>
+			    		</div><br>
+			    		<div class="bad2">
+			    			<label for="guestcount">더블</label>
+					        <button type="button" onclick="javascript:this.form.amount3.value++;">+</button>  
+					        <input type="text" name="amount3" value="0" readonly="readonly" />     
+					        <button type="button" onclick="javascript:this.form.amount3.value--;">-</button>
+			    		</div><br>
+			    		<div class="bad3">
+			    			<label for="guestcount">퀸</label>
+					        <button type="button" onclick="javascript:this.form.amount4.value++;">+</button>  
+					        <input type="text" name="amount4" value="0" readonly="readonly" />     
+					        <button type="button" onclick="javascript:this.form.amount4.value--;">-</button>
+					        <div class="badfix"><br>
+					          <a href="#"><button>침대 수정하기</button></a>
+					        </div>
+			    		</div>
+			    	</div>
+			    </div>
+			    </div>
+			    <div class="control">
+				    <div class="control2">
+				    <a href="" style="float : left;"><button>뒤로가기</button></a>
+				    <a href="" style="float: right;"><button>다음</button></a>
+			    </div>
+			    <div class="bor1" style="height: 3px;"></div>
 			</div>
 		</div>
 	</form:form>
 
 </body>
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
 </html>
