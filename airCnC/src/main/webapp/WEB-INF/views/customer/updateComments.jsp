@@ -48,11 +48,11 @@
 	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star5">
 	</div><br><br>
 	<form action="updateComment.do">
-		<textarea name="comments_content">${comments.comments_content }</textarea>
+		<textarea name="comments_content" class="form-control">${comments.comments_content }</textarea>
 		<input type="hidden" value="0" id="comments_rate" name="comments_rate">
 		<input type="hidden" name="comments_seq" value="${comments.comments_seq }">
-		<input type="hidden" name="comments_house_seq" value="${comments.comments_house_seq }">
-		<input type="submit" value="수정">
+		<input type="hidden" name="comments_house_seq" value="${comments.comments_house_seq }"><br>
+		<input type="submit" value="수정" class="btn btn-outline-danger">
 	</form>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js" ></script>

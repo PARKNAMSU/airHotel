@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.comments.CommentsDAO;
 import kg.air.cnc.vo.CommentsVO;
+import kg.air.cnc.vo.HouseVO;
 
 @Service
 public class CommentsService implements CommentsServiceImpl{
@@ -19,7 +20,7 @@ public class CommentsService implements CommentsServiceImpl{
 		commentsDAO.insertComments(vo);
 	}
 	@Override
-	public List<CommentsVO> getComments(CommentsVO vo) {
+	public List<CommentsVO> getComments(HouseVO vo) {
 		List<CommentsVO> list = commentsDAO.getComments(vo);
 		DateFormat format = new SimpleDateFormat("YYYY/MM/dd");
 		for(int i=0;i<list.size();i++) {

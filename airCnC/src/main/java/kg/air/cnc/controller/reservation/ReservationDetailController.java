@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.comments.CommentsService;
 import kg.air.cnc.vo.CommentsVO;
+import kg.air.cnc.vo.HouseVO;
 
 @Controller
 public class ReservationDetailController {
@@ -21,11 +22,11 @@ public class ReservationDetailController {
 		return mav;
 	}
 	@RequestMapping("reservationHouse.do")
-	public ModelAndView reservationDetailController(CommentsVO vo,HttpSession session,ModelAndView mav) {
+	public ModelAndView reservationDetailController(HouseVO vo,HttpSession session,ModelAndView mav) {
 		session.setAttribute("session_login", "skatn");
 		mav.addObject("commentsList",commentsService.getComments(vo));
-		mav.addObject("comments_house_seq",vo.getComments_house_seq());
-		System.out.println(vo.getComments_house_seq());
+		mav.addObject("house_seq",vo.getHouse_seq());
+		System.out.println(vo.getHouse_seq());
 		mav.setViewName("reservationhouse");
 		return mav;
 	}
@@ -38,17 +39,14 @@ public class ReservationDetailController {
 		System.out.println(vo.getComments_content()+"\n"+vo.getComments_rate()+"\n"+vo.getComments_house_seq()+"\n");
 		commentsService.insertComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
-		mav.addObject("comments_house_seq",vo.getComments_house_seq());
-		commentsService.insertComments(vo);
-		mav.setViewName("redirect:reservationHouse.do");
-		mav.addObject("comments_house_seq",vo.getComments_house_seq());
+		mav.addObject("house_seq",vo.getComments_house_seq());
 		return mav;
 	}
 	@RequestMapping("deleteComments.do")
 	public ModelAndView deleteCommentsController(CommentsVO vo,ModelAndView mav) {
 		commentsService.deleteComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
-		mav.addObject("comments_house_seq",vo.getComments_house_seq());
+		mav.addObject("house_seq",vo.getComments_house_seq());
 		return mav;
 	}
 	@RequestMapping("updateCommentsPage.do")
