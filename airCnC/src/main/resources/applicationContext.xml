@@ -23,7 +23,6 @@
 
    <context:property-placeholder location="classpath:db.properties"/>
    <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
-   <task:annotation-driven />
    
    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
       destroy-method="close">
@@ -63,6 +62,7 @@
 		</property>
 	</bean>
 	
-<mvc:annotation-driven></mvc:annotation-driven>
-<context:component-scan base-package="kg.air"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="kg.air"></context:component-scan>
+	<task:annotation-driven></task:annotation-driven>
 </beans>

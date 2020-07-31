@@ -252,13 +252,6 @@
 			<artifactId>quartz-jobs</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
-		<!-- 스프링 Quartz 도우미 라이브러리 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.3.4.RELEASE</version>
-		</dependency>      
 	</dependencies>
     <build>
         <plugins>
