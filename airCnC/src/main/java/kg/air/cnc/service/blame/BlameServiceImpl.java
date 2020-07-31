@@ -3,8 +3,6 @@ package kg.air.cnc.service.blame;
 import kg.air.cnc.dao.blame.BlameDAO;
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.HouseVO;
-import kg.air.cnc.vo.ReservationVO;
 import kg.air.cnc.vo.BlameVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

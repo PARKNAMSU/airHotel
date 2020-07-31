@@ -3,7 +3,6 @@ package kg.air.cnc.dao.removehost;
 import java.util.List;
 
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.ReservationVO;
 
 public interface RemoveHostDAO {
 	public List<HostVO> getRemoveHostList();

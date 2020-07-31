@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.removehost.RemoveHostDAOImpl;
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.ReservationVO;
 
 @Service
 public class RemoveHostServiceImpl implements RemoveHostService {

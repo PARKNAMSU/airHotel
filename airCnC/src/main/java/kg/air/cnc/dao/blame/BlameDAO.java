@@ -2,8 +2,6 @@ package kg.air.cnc.dao.blame;
 
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.HouseVO;
-import kg.air.cnc.vo.ReservationVO;
 import kg.air.cnc.vo.BlameVO;
 
 import java.util.ArrayList;

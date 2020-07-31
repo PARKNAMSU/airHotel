@@ -2,13 +2,11 @@ package kg.air.cnc.controller.waiting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.waiting.RegisterWaitingServiceImpl;
 import kg.air.cnc.service.waiting.RemoveWaitingServiceImpl;
-import kg.air.cnc.vo.HouseVO;
 
 @Controller
 public class WaitingController {
@@ -18,23 +16,23 @@ public class WaitingController {
 	@Autowired
 	RemoveWaitingServiceImpl removeWaiting;
 
-	// ¼÷¼Ò µî·Ï ´ë±â ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/getRegisterWaitingList.mdo")
 	public ModelAndView getHouseWaitingList(ModelAndView mav) {
 		mav.addObject("waitingList", registerWaiting.getWaitingList());
-		mav.setViewName("getRegisterHouseList"); // ³ªÁß¿¡ ÆäÀÌÁö »óÀÇ ÈÄ¿¡ Á¶Á¤ ÇÒ ¼ö ÀÖÀ½
+		mav.setViewName("getRegisterHouseList"); // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return mav;
 	}
 
-	// ¼÷¼Ò µî·Ï »ó¼¼ ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/getRegisterHouse.mdo")
 	public ModelAndView getRegisterHouse(HouseVO vo, ModelAndView mav) {
 		mav.addObject("registerHouse", registerWaiting.getHouse(vo));
-		mav.setViewName("waiting"); // ³ªÁß¿¡ ÆäÀÌÁö »óÀÇ ÈÄ¿¡ Á¶Á¤ ÇÒ ¼ö ÀÖÀ½
+		mav.setViewName("waiting"); // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return mav;
 	}
 	
-	// ¼÷¼Ò µî·Ï ´ë±â È®ÀÎ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	@RequestMapping(value = "/registerHouse.mdo")
 	public ModelAndView registerHouse(HouseVO vo, ModelAndView mav) {
 		registerWaiting.registerHouse(vo);
@@ -42,7 +40,7 @@ public class WaitingController {
 		return mav;
 	}
 	
-	// ¼÷¼Ò µî·Ï ´ë±â Ãë¼Ò
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@RequestMapping(value="/cancelRegister.mdo")
 	public ModelAndView cancelRegister(HouseVO vo, ModelAndView mav) {
 		registerWaiting.cancelRegister(vo);
@@ -50,23 +48,23 @@ public class WaitingController {
 		return mav;
 	}
 	
-	// ¼÷¼Ò »èÁ¦ ´ë±â ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/getRemoveWaitingList.mdo")
 	public ModelAndView getRemoveWaitingList(ModelAndView mav) {
 		mav.addObject("waitingList", removeWaiting.getWaitingList());
-		mav.setViewName("getRemoveHouseList"); // ³ªÁß¿¡ ÆäÀÌÁö »óÀÇ ÈÄ¿¡ Á¶Á¤ ÇÒ ¼ö ÀÖÀ½
+		mav.setViewName("getRemoveHouseList"); // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return mav;
 	}
 
-	// ¼÷¼Ò »èÁ¦ »ó¼¼ ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/getRemoveHouse.mdo")
 	public ModelAndView getRemoveHouse(HouseVO vo, ModelAndView mav) {
 		mav.addObject("removeHouse", removeWaiting.getHouse(vo));
-		mav.setViewName("removeWaiting"); // ³ªÁß¿¡ ÆäÀÌÁö »óÀÇ ÈÄ¿¡ Á¶Á¤ ÇÒ ¼ö ÀÖÀ½
+		mav.setViewName("removeWaiting"); // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return mav;
 	}
 	
-	// ¼÷¼Ò »èÁ¦ Çã¶ô(»èÁ¦)
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping(value = "/updateDate.mdo")
 	public ModelAndView updateDate(HouseVO vo, ModelAndView mav) {
 		removeWaiting.updateDate(vo);
@@ -74,7 +72,7 @@ public class WaitingController {
 		return mav;
 	}
 	
-	// ¼÷¼Ò »èÁ¦ ºÒÇã(»èÁ¦ ºÒ°¡)
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½)
 	@RequestMapping(value = "/cancelRemove.mdo")
 	public ModelAndView cancelRemove(HouseVO vo, ModelAndView mav) {
 		removeWaiting.cancelRemove(vo);
@@ -82,6 +80,6 @@ public class WaitingController {
 		return mav;
 	}
 	
-	//spring quartz¸¦ ÀÌ¿ëÇÑ ½ÇÇà ¸Þ¼­µå
+	//spring quartzï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	
 }

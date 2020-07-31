@@ -6,8 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kg.air.cnc.vo.HouseVO;
-
 @Repository
 public class RegisterWaitingDAOImpl {
 	@Autowired
