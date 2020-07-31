@@ -10,7 +10,7 @@
   display: flex;
 }
 .menudiv2-1 {
-  margin-top: 2%;
+  margin-top: 1%;
   margin-left: 2%;
 }
 .menudiv2-2 {
@@ -62,9 +62,7 @@
   font-weight: bold;
   border-radius: 40px;
 }
-.hostalt1_1_1 {
-}
-.hostalt label {
+stalt label {
   font-size: 45px;
   color: black;
   font-weight: bold;

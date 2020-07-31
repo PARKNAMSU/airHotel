@@ -98,8 +98,8 @@ svg {
 .a4 {
   display: grid;
   grid-template-columns: auto;
-  text-align: center;
-  margin-left: 31px;
+  text-align: left;
+  margin-left: 5px;
 }
 
 .bb8 {
@@ -113,17 +113,15 @@ svg {
 
 .bb9 {
   color: #008489;
-  text-decoration: none;
   font-size: 13px;
   font-weight: bold;
   height: 20px;
+  text-align: center;
 }
 
 .a5 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  text-align: center;
-  margin-left: 31px;
+  text-align: right;
+  margin-left: 50px;
   margin-top: 20px;
 }
 
@@ -326,6 +324,7 @@ svg {
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
 .checks input[type="checkbox"] + label:before {
   /* 가짜 체크박스 */
   content: " ";
@@ -358,7 +357,9 @@ svg {
     inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
     inset 15px 10px -12px rgba(255, 255, 255, 0.1);
 }
-
+input[type="checkbox"]:checked + label {
+  color: #ff5a5f;
+}
 .my__join__email {
   color: white;
   display: inline-block;
