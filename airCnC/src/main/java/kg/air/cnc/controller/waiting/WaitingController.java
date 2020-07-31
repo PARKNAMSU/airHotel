@@ -83,4 +83,5 @@ public class WaitingController {
 	}
 	
 	//spring quartz를 이용한 실행 메서드
+	
 }

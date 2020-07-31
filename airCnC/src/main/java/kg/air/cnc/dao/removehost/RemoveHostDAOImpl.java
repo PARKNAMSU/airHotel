@@ -52,5 +52,12 @@ public class RemoveHostDAOImpl implements RemoveHostDAO {
 	public void sendMessageHost(HostVO vo) {
 		mybatis.insert("RemoveHostDAO.sendMessageHost", vo);
 	}
+	
+	@Override
+	public void deleteReservation(List<ReservationVO> vo) {
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.delete("RemoveHostDAO.deleteReservation", vo.get(i));
+		}
+	}
 
 }

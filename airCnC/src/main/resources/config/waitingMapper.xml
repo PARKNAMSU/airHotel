@@ -55,6 +55,21 @@
 		WHERE house_seq = #{house_seq}
 	</update>
 	
-	<!-- 삭제 가능 날짜인 삭제대기 자동 삭제 후 삭제대기 테이블에서 삭제 -->
+	<select id="canDeleteList" resultType="kg.air.cnc.vo.RemoveWaitingVO">
+		<![CDATA[
+		SELECT *
+		FROM remove_waiting
+		WHERE house_remove_date<sysdate AND remove_status=1
+		]]>
+	</select>
 	
+	<!-- 삭제 가능 날짜인 삭제대기 자동 삭제 후 삭제대기 테이블에서 삭제 -->
+	<delete id="deleteHouse" parameterType="kg.air.cnc.vo.RemoveWaitingVO">
+		DELETE FROM house
+		WHERE house_seq=#{house_seq}
+	</delete>
+	<delete id="deleteWaitingHouse" parameterType="kg.air.cnc.vo.RemoveWaitingVO">
+		DELETE FROM remove_waiting
+		WHERE house_seq=#{house_seq}
+	</delete>
 </mapper>

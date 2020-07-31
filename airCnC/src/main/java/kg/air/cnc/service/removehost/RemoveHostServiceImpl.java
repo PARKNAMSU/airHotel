@@ -43,14 +43,20 @@ public class RemoveHostServiceImpl implements RemoveHostService {
 	}
 	
 	@Override
+	public void deleteReservation(List<ReservationVO> vo) {
+		removeHostDAO.deleteReservation(vo);
+	}
+	
+	@Override
 	public void deleteHost(HostVO vo) {
 		List<ReservationVO> reservation = checkReservation(vo);
-		System.out.println("여기까지 완료");
 		sendMessage(reservation);
 		refund(reservation);
+		deleteReservation(reservation);
 		sendMessageHost(vo);
 		removeHostDAO.deleteHost(vo);
 		return;
 	}
+
 
 }

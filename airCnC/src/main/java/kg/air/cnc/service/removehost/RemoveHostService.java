@@ -12,4 +12,5 @@ public interface RemoveHostService {
 	public void sendMessage(List<ReservationVO> vo);
 	public void refund(List<ReservationVO> vo);
 	public void sendMessageHost(HostVO vo);
+	public void deleteReservation(List<ReservationVO> vo);
 }

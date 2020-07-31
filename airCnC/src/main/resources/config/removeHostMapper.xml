@@ -14,6 +14,11 @@
 		WHERE host_id=#{host_id}
 	</delete>
 	
+	<delete id="deleteReservation" parameterType="kg.air.cnc.vo.ReservationVO">
+		DELETE FROM reservation
+		WHERE reservation_seq=#{reservation_seq}
+	</delete>
+	
 	<select id="checkReservation" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.ReservationVO">
 		SELECT * 
 		FROM reservation
