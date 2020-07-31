@@ -3,6 +3,8 @@ package kg.air.cnc.service.blame;
 import kg.air.cnc.dao.blame.BlameDAO;
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
+import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.ReservationVO;
 import kg.air.cnc.vo.blame.BlameVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,5 +77,33 @@ public class BlameServiceImpl implements BlameService {
     @Override
     public void addBlackList(String id) {
         blameDAO.addBlackList(id);
+    }
+
+    @Override // 호스트 정지
+    public void suspendHost(String host_id) {
+        blameDAO.getHostHouses(host_id);
+        // host 가 가지고 있는 house list
+        List<HouseVO> houseList = blameDAO.getHostHouses(host_id);
+
+        //house_status -> 1 (정지상태)
+        for(int i = 0; i < houseList.size(); i++){
+            blameDAO.setHouseStatusStop(houseList.get(i));
+        }
+
+        // host_id 를 통해 해당 호스트의 하우스의 reservation list 가져옴
+        List<ReservationVO> reservationList = blameDAO.getReservationList(host_id);
+        System.out.println(reservationList.size());
+
+        for(int i = 0 ; i < reservationList.size(); i++){
+            // reservation 리스트에 걸려있는 모든 customer 에게 메세지 전송 (admin 으로부터)
+            blameDAO.sendCustomerReservationCancelMessage(reservationList.get(i).getReservation_customer_id());
+            // reservation 리스트에 있는 reservation_status 를 1(환불대기상태)로 변경
+            blameDAO.setReservationStatusRefund(reservationList.get(i).getReservation_host_id());
+        }
+        HashMap<String, String> deleteBlameMap = new HashMap<>();
+        deleteBlameMap.put("target_member_id", host_id);
+        deleteBlameMap.put("blame_type", "0");
+        blameDAO.deleteBlame(deleteBlameMap);
+
     }
 }

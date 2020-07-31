@@ -93,14 +93,13 @@
         <div class="warning_message">
 
             <form method="post" action="/blameWarnMessage.mdo">
-                <input type="hidden" name="isHost" value="${blame_type}">
                 <input type="text" name="warn_message" value="경고 메세지 입력란" size="100">
                 <input type="submit" value="전송">
             </form>
         </div>
 
         <div class="account_susspend">
-            <form>
+            <form method="post" action="/blameSuspend.mdo">
                 <input type="text" name="" value="3"  size="10"> 일
                 <input id="suspend_btn" type="submit" value="정지부여">
             </form>

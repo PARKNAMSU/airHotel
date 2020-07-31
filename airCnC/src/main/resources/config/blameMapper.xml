@@ -38,4 +38,24 @@
     <insert id="addBlackList">
         INSERT INTO blacklist VALUES (#{id}, sysdate)
     </insert>
+
+    <select id="getHostHouses" resultType="kg.air.cnc.vo.HouseVO">
+        SELECT house_seq FROM housetemp WHERE host_id = #{host_id}
+    </select>
+
+    <update id="setHouseStatusStop">
+        UPDATE housetemp SET house_status = 1 WHERE house_seq = #{house_seq}
+    </update>
+
+    <select id="getReservation" resultType="kg.air.cnc.vo.ReservationVO" parameterType="String">
+        SELECT * FROM reservation WHERE reservation_host_id = #{value}
+    </select>
+
+    <insert id="sendCustomerReservationCancelMessage">
+        INSERT INTO message VALUES (message_seq.nextval, 'admin', #{to_id}, 'nomal', '해당 객실을 사용할 수 없게되어 환불처리되었습니다', sysdate)
+    </insert>
+
+    <update id="setReservationStatusRefund">
+        UPDATE reservation SET reservation_status = 1 WHERE reservation_host_id = #{host_id}
+    </update>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class BlameController {
@@ -18,14 +19,14 @@ public class BlameController {
     @Autowired
     BlameService blameService;
 
-    @RequestMapping(value = "/blamelist.mdo", method = RequestMethod.GET)  // 신고당한 아이디 - 신고당한횟수 리스트
+    @RequestMapping(value = "/blamelist.mdo", method = RequestMethod.GET)  // 신고당한 아이디 - 신고당한횟수
     public ModelAndView getBlameList(ModelAndView mav){
         mav.addObject("blamelist", blameService.getBlameList());
         mav.setViewName("blamelist");
         return mav;
     }
 
-    @RequestMapping(value = "/blameinfo.mdo", method = RequestMethod.GET) // 신고당한 아이디의 신고내역 상세 보기
+    @RequestMapping(value = "/blameinfo.mdo", method = RequestMethod.GET) // 신고당한 아이디 - 신고사유 - host/customer
     public ModelAndView getBlameInfo(HttpServletRequest request, ModelAndView mav){
         String target_member_id = request.getParameter("target_member_id");
         mav.addObject("blameinfo", blameService.getBlameInfo(target_member_id));
@@ -54,10 +55,6 @@ public class BlameController {
         } else {
             return null;
         }
-
-
-        // todo customer 인지, host 인지 찾아와야함.
-
     }
 
     @RequestMapping(value = "/blameWarnMessage.mdo", method = RequestMethod.POST) // 신고당한 아이디 경고메세지 보내기
@@ -78,10 +75,11 @@ public class BlameController {
             blameService.insertBlameWarnMessage(warnMessageMap);
             //host_blame_warn 1 증가
             blameService.increaseHostBlameWarn(target_member_id);
+            //blame 에서 삭제
             blameService.deleteBlame(deleteBlameMap);
-
-
-
+            session.removeAttribute("target_member_id");
+            session.removeAttribute("blame_type");
+            mav.setViewName("redirect:/blamelist.mdo");
 
         } else if ((int)session.getAttribute("blame_type")==1){
             // admin 계정으로 target_member_id 아이디를 가진 customer 에게 message 전송
@@ -90,36 +88,40 @@ public class BlameController {
             String target_member_id = (String)session.getAttribute("target_member_id");
             warnMessageMap.put("to_id", target_member_id);
             warnMessageMap.put("message_content", request.getParameter("warn_message"));
-
             deleteBlameMap.put("target_member_id", target_member_id);
             deleteBlameMap.put("blame_type", blame_type);
-
             //admin 계정으로 target_member_id 에게 message 전송
             blameService.insertBlameWarnMessage(warnMessageMap);
             //customer_blame_warn 1증가
             blameService.increaseCustomerBlameWarn(target_member_id);
             // blame 에서 삭제
             blameService.deleteBlame(deleteBlameMap);
+            session.removeAttribute("target_member_id");
+            session.removeAttribute("blame_type");
             mav.setViewName("redirect:/blamelist.mdo");
         }
-        /*
-        HashMap<String, String> warnMessageMap = new HashMap<>();
-        String target_member_id = (String)session.getAttribute("target_member_id");
-        warnMessageMap.put("to_id", target_member_id);
-        warnMessageMap.put("message_content", request.getParameter("warn_message"));
-
-        //admin 계정으로 target_member_id 에게 message 전송
-        blameService.insertBlameWarnMessage(warnMessageMap);
-        //customer_blame_warn 1증가
-        blameService.increaseCustomerBlameWarn(target_member_id);
-        // blame 에서 삭제
-        blameService.deleteBlame(target_member_id);
-        */
         return mav;
     }
 
-    //todo : 아이디 정지 먹이기
-    //todo : customer 에 대한 정지와 host 에 대한 정지를 어떻게 처리할 것인지 생각해보기.
+    @RequestMapping(value = "/blameSuspend.mdo", method = RequestMethod.POST) // 신고당한 아이디 정지시키기
+    public ModelAndView suspendMember(HttpServletRequest request, ModelAndView mav){
+        HttpSession session = request.getSession();
+        int blame_type = (int)session.getAttribute("blame_type");
+        String target_member_id = (String)session.getAttribute("target_member_id");
+        if(blame_type == 0){
+            //호스트인경우
+            blameService.suspendHost(target_member_id);
+            mav.setViewName("redirect:/blamelist.mdo");
+
+        } else if (blame_type == 1){
+            //customer 인 경우
+        }
+
+
+
+        return mav;
+    }
+
 
     //todo : 아이디 블랙리스트 추가하기
     @RequestMapping(value = "/addBlacklist.mdo", method = RequestMethod.GET)
