@@ -23,4 +23,8 @@
 		SELECT COUNT(*) FROM customer WHERE customer_id = #{customerId}
 	</select>
 	
+	<select id="login" resultType="kg.air.cnc.customer.vo.CustomerVO">
+		SELECT * FROM customer WHERE customer_id = #{customerId}
+	</select>
+	
 </mapper>
