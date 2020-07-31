@@ -5,6 +5,15 @@ public class HouseVO {
 	private String houseName;
 	private int housePrice;
 	private String houseDesc;
+	
+	private String newhouse;
+	
+	public String getNewhouse() {
+		return newhouse;
+	}
+	public void setNewhouse(String newhouse) {
+		this.newhouse = newhouse;
+	}
 	public String getHouseId() {
 		return houseId;
 	}
@@ -32,7 +41,8 @@ public class HouseVO {
 	@Override
 	public String toString() {
 		return "HouseVO [houseId=" + houseId + ", houseName=" + houseName + ", housePrice=" + housePrice
-				+ ", houseDesc=" + houseDesc + "]";
+				+ ", houseDesc=" + houseDesc + ", newhouse=" + newhouse + "]";
 	}
+	
 	
 }
