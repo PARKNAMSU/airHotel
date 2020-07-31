@@ -47,4 +47,17 @@ public class ReservationDetailController {
 		mav.addObject("comments_house_seq",vo.getComments_house_seq());
 		return mav;
 	}
+	@RequestMapping("updateCommentsPage.do")
+	public ModelAndView openUpdateComments(CommentsVO vo,ModelAndView mav) {
+		mav.addObject("comments",vo);
+		System.out.println(vo.getComments_content());
+		mav.setViewName("updateComments");
+		return mav;
+	}
+	@RequestMapping("updateComment.do")
+	public ModelAndView updateCommentsController(CommentsVO vo, ModelAndView mav) {
+		commentsService.updateComments(vo);
+		mav.setViewName("updateComments");
+		return mav;
+	}
 }

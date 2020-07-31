@@ -62,8 +62,8 @@
 	<div class="top_second">
 		<div class="subdiv" id="years">
 			<form action="signupChartSearch.mdo" id="yearsForm">
-				from year<input type="number" min="2000" max="2020" name="searchConditionFirst"  class="form-control"><br><br>
-				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  class="form-control">
+				from year<input type="number" min="2000" max="2020" name="searchConditionFirst"  class="form-control" id="yearsCondition1"><br><br>
+				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  class="form-control" id="yearsCondition2">
 				<br>
 				<input type="hidden" name="searchType" value="years">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
@@ -94,8 +94,8 @@
 		<div id="month_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="condition">
 			<form action="signupChartSearch.mdo">
-				from <br><input type="date" class="form-control" name="searchConditionFirst"><br><br>
-				to <input type="date" class="form-control" name="searchConditionSecond"><br><br>
+				from <br><input type="date" class="form-control" name="searchConditionFirst" id="dayCondition1"><br><br>
+				to <input type="date" class="form-control" name="searchConditionSecond" id="dayCondition2"><br><br>
 				<input type="hidden" name="searchType" value="days">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
@@ -115,6 +115,7 @@
 					<th>총 가입수</th>
 				</tr>
 			<c:if test="${sign_upList != null }">
+			<c:if test="${sign_upList.size() >0 }">
 			<c:forEach begin="0" end="${sign_upList.size()-1 }" var="i">
 				<c:if test="${i == 0 }">
 					<tr>
@@ -136,6 +137,7 @@
 				</c:if>
 			</c:forEach>
 			</c:if>
+			</c:if>
 			</table>
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
 			<button onclick="openSignupDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
@@ -155,6 +157,21 @@
 </body>
 
 <script type="text/javascript">
+$(function(){
+	$("#yearsCondition1").change(function() {
+		$("#yearsCondition2").attr("min", $("#yearsCondition1").val())
+	}), 
+	$("#yearsCondition2").change(function() {
+		$("#yearsCondition1").attr("max", $("#yearsCondition2").val())
+	}),
+	$("#dayCondition1").change(function() {
+		$("#dayCondition2").attr("min", $("#dayCondition1").val())
+	}), 
+	$("#dayCondition2").change(function() {
+		$("#dayCondition1").attr("max", $("#dayCondition2").val())
+	})
+})
+
 function ReportToExcel(){
 	fname = prompt("파일 이름을 입력해주세요")
 	$("#salesTable").table2excel({

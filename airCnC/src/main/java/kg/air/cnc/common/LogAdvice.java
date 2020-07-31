@@ -21,7 +21,7 @@ public class LogAdvice {
 	@Autowired
 	private LogDAO logDAO;
 	
-	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..))")
+	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..)) || execution(public * kg.air.cnc..*Controller.update*(..))")
 	private void logTarget() {}
 	/*메서드 실행 시 로그 저장*/
 	@After("logTarget()")
@@ -36,6 +36,7 @@ public class LogAdvice {
 			logVO.setLog_content(messageVO.getMessage_content());
 			logVO.setLog_type("sendMessage");
 			logDAO.addLog(logVO);
+			System.out.println("sendMessage 완료");
 		}
 		if(methodName.equals("insertCommentsController")) {
 			CommentsVO commentsVO = (CommentsVO)arguments[0];
@@ -43,7 +44,15 @@ public class LogAdvice {
 			logVO.setLog_content(commentsVO.getComments_content());
 			logVO.setLog_type("insertCommnets");
 			logDAO.addLog(logVO);
+			System.out.println("insertComments완료");
 		}
-		System.out.println("로그 완료");
+		if(methodName.equals("updateCommentsController")){
+			CommentsVO commentsVO = (CommentsVO)arguments[0];
+			logVO.setLog_id(String.valueOf(commentsVO.getComments_seq()));
+			logVO.setLog_content(commentsVO.getComments_content());
+			logVO.setLog_type("updateComments");
+			logDAO.addLog(logVO);
+			System.out.println("updateComments 완료");
+		}
 	}
 }

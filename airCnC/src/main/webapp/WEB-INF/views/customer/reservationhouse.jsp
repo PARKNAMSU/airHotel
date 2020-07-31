@@ -132,16 +132,20 @@ div {
 				<input type="hidden" value="0" id="comments_rate" name="comments_rate">
 				<input type="hidden" name="comments_house_seq" value="${comments_house_seq}">
 				<input type="hidden" name="comments_id" value="${session_login}">
-				<input type="button" onclick="openSetRate()" class="btn btn-outline-danger" value="입력" style="width:150px;height:75px;'Jua', sans-serif;" >
+				<input type="button" onclick="openSetRate()" class="btn btn-outline-danger" value="입력" style="width:150px;height:75px;font-family:'Jua', sans-serif;" >
+				<input type="button" onclick="openSetRateUpdate()" class="btn btn-outline-danger" value="수정" style="width:150px;height:75px;font-family:'Jua', sans-serif;display: none;" >
 				<input type="reset" value="취소" class="btn btn-outline-danger" style="width:150px;height:75px; 'Jua', sans-serif;" >
 			</form>
 		</div>
 		<div id="commantdiv">
-			<c:forEach items="${commentsList}" var="item">
+			<c:forEach items="${commentsList}" var="item" varStatus="i">
 			<div class="commantform">
 				<img alt="64x64" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">${item.comments_name }</b>&nbsp;&nbsp;<c:forEach begin="1" end="${item.comments_rate}" step="1"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg"></c:forEach>
 				<c:if test="${item.comments_id eq session_login }">
-				<p><a style="margin-left:94%;" href="updateComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${comments_house_seq}" style="font-family: 'Jua', sans-serif;" >수정</a> | <a href="deleteComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${comments_house_seq}" style="font-family: 'Jua', sans-serif;">삭제</a></p>
+				<input type="hidden" id="hidseq${i.index}" value="${item.comments_seq }">
+				<input type="hidden" id="hidhouse${i.index}" value="${comments_house_seq }">
+				<input type="hidden" id="hidcontent${i.index}" value="${item.comments_content }">
+				<p><a style="margin-left:94%;" onclick="openSetRateUpdate(document.getElementById('hidseq${i.index}').value,document.getElementById('hidhouse${i.index}).value'),document.getElementById('hidcontent${i.index}').value)" style="font-family: 'Jua', sans-serif;" >수정</a> | <a href="deleteComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${comments_house_seq}" style="font-family: 'Jua', sans-serif;">삭제</a></p>
 				</c:if>
 				<br>
 				<p style="font-family: 'Jua', sans-serif;">${item.comments_date}</p>

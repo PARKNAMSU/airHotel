@@ -25,5 +25,10 @@ public class CommentsDAO implements CommentsDAOImpl{
 		sqlSessionTemplate.delete("CommentsDAO.deleteComments",vo);
 		
 	}
+	@Override
+	public void updateComments(CommentsVO vo) {
+		sqlSessionTemplate.update("CommentsDAO.updateComments",vo);
+		
+	}
 
 }

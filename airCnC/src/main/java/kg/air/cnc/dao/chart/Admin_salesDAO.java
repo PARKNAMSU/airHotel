@@ -37,18 +37,20 @@ public class Admin_salesDAO implements Admin_salesDAOImpl{
 	}
 	public List<Admin_salesVO> admin_salesSetting(List<Admin_salesVO> list,DateFormat format){
 		int sum = 0;
-		for(int i=0;i<list.size();i++) {
-			if(i>0) {
-				list.get(i).setAdmin_sales_compare_before(list.get(i).getAdmin_sales() - list.get(i-1).getAdmin_sales());
-				
+		if(list.size() >0) {
+			for(int i=0;i<list.size();i++) {
+				if(i>0) {
+					list.get(i).setAdmin_sales_compare_before(list.get(i).getAdmin_sales() - list.get(i-1).getAdmin_sales());
+					
+				}
+				list.get(i).setAdmin_sales_date(format.format(list.get(i).getAdmin_sales_regdate()));
+				sum += list.get(i).getAdmin_sales();
 			}
-			list.get(i).setAdmin_sales_date(format.format(list.get(i).getAdmin_sales_regdate()));
-			sum += list.get(i).getAdmin_sales();
-		}
-		list.get(0).setSumSales(sum);
-		for(int i=0;i<list.size();i++) {
-			float per = (((float)list.get(i).getAdmin_sales()*100)/sum);
-			list.get(i).setAdmin_sales_persant(per);
+			list.get(0).setSumSales(sum);
+			for(int i=0;i<list.size();i++) {
+				float per = (((float)list.get(i).getAdmin_sales()*100)/sum);
+				list.get(i).setAdmin_sales_persant(per);
+			}
 		}
 		return list;
 	}

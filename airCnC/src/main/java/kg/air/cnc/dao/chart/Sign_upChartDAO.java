@@ -18,20 +18,21 @@ public class Sign_upChartDAO implements Sign_upChartDAOImpl{
 
 	public List<Sign_upChartVO> admin_salesSetting(List<Sign_upChartVO> list,DateFormat format){
 		int sum = 0;
-		System.out.println(list.size());
-		for(int i=0;i<list.size();i++) {
-			if(i>0) {
-				list.get(i).setSignupchart_compare_before(list.get(i).getSignupchart_num() - list.get(i-1).getSignupchart_num());
-				
+		if(list.size() >0) {
+			for(int i=0;i<list.size();i++) {
+				if(i>0) {
+					list.get(i).setSignupchart_compare_before(list.get(i).getSignupchart_num() - list.get(i-1).getSignupchart_num());
+					
+				}
+				list.get(i).setSignupchart_date(format.format(list.get(i).getSignupchart_regdate()));
+				sum += list.get(i).getSignupchart_num();
 			}
-			list.get(i).setSignupchart_date(format.format(list.get(i).getSignupchart_regdate()));
-			sum += list.get(i).getSignupchart_num();
-		}
-		list.get(0).setSignupchart_sum(sum);
-		for(int i=0;i<list.size();i++) {
-			float per = (((float)list.get(i).getSignupchart_num()*100)/sum);
-			list.get(i).setSignupchart_persant(per);
-			System.out.println(per);
+			list.get(0).setSignupchart_sum(sum);
+			for(int i=0;i<list.size();i++) {
+				float per = (((float)list.get(i).getSignupchart_num()*100)/sum);
+				list.get(i).setSignupchart_persant(per);
+				System.out.println(per);
+			}
 		}
 		return list;
 	}
