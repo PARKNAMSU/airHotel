@@ -4,7 +4,7 @@ import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.ReservationVO;
-import kg.air.cnc.vo.blame.BlameVO;
+import kg.air.cnc.vo.BlameVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

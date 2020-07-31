@@ -1,4 +1,4 @@
-package kg.air.cnc.vo.blame;
+package kg.air.cnc.vo;
 
 import java.util.Date;
 

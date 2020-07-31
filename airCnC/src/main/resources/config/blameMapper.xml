@@ -3,11 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kg.air.cnc.dao.blame.BlameDAO">
-    <select id="getBlameList" resultType="kg.air.cnc.vo.blame.BlameVO">
+    <select id="getBlameList" resultType="kg.air.cnc.vo.BlameVO">
         SELECT * FROM blame
     </select>
 
-    <select id="getBlameInfo" resultType="kg.air.cnc.vo.blame.BlameVO">
+    <select id="getBlameInfo" resultType="kg.air.cnc.vo.BlameVO">
         SELECT * FROM blame WHERE blame_target_member_id = #{target_member_id}
     </select>
 

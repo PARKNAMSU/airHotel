@@ -2,7 +2,7 @@ package kg.air.cnc.service.blame;
 
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.blame.BlameVO;
+import kg.air.cnc.vo.BlameVO;
 
 import java.util.ArrayList;
 import java.util.List;

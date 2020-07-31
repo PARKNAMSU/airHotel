@@ -1,7 +1,7 @@
 package kg.air.cnc.service.blacklist;
 
 import kg.air.cnc.dao.blacklist.BlackListDAO;
-import kg.air.cnc.vo.blacklist.BlackUserVO;
+import kg.air.cnc.vo.BlackUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
