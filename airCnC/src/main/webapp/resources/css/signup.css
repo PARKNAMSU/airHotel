@@ -59,7 +59,7 @@ label {
 button {
   color: white;
   display: inline-block;
-  width: 500px;
+  width: 89%;
   height: auto;
   background-color: #ff5a5f;
   border-radius: 5px;
@@ -80,4 +80,16 @@ button {
   width: 65%;
   height: 45px;
   font-size: 18px;
+}
+.itel{
+  width: 65%;
+  height: 45px;
+  font-size: 18px;	
+}
+.iauth{
+  margin-top: 18px;
+  width: 89%;
+  height: 45px;
+  font-size: 18px;
+  padding: 8px;
 }

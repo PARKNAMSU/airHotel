@@ -55,6 +55,44 @@ function fn_idCheck() {
 		});	
 	}
 }
+
+function emailSend() {
+	if ($("#customerEmail").val() == "") {
+		alert("아이디를 입력하세요.");
+		$("#customerEmail").focus();
+	}else{
+		$.ajax({
+			url:"emailSend.do",
+			type:"post",
+			dataType:"html",
+			data:{"customerEmail" : $('#customerEmail').val()},
+			success:function(data){
+				if (data) {
+					alert("해당 이메일로 인증번호를 발송하였습니다.");
+				}
+			}
+		});	
+	}
+}
+
+function emailAuth() {
+	if ($("#customerKey").val() == "") {
+		alert("인증번호를 입력하세요.");
+		$("#customerKey").focus();
+	}else{
+		$.ajax({
+			url:"emailAuth.do",
+			type:"post",
+			dataType:"html",
+			data:{"customerKey" : $('#customerKey').val()},
+			success:function(data){
+				if (data) {
+					alert("이메일 인증이 완료되었습니다.");
+				}
+			}
+		});	
+	}
+}
 </script>
 </head>
 <body>
@@ -102,9 +140,9 @@ function fn_idCheck() {
 						name="customerPassword" placeholder="&nbsp;&nbsp;비밀번호 설정" required>
 					</span>
 				</div>
-				<div class="input_email">
-					<span> <input class="iemail" type="email"
-						name="customerEmail" placeholder="&nbsp;&nbsp;이메일 주소" required>
+				<div class="input_phone">
+					<span><input class="itel" type="tel" placeholder="&nbsp;&nbsp;-없이 번호만 입력해주세요"
+						name="customerPhone" maxlength="11" required>
 					</span>
 				</div>
 				<div class="input_name">
@@ -131,16 +169,19 @@ function fn_idCheck() {
 						type="file" class="multi" id="image" accept="image/*"
 						maxlength="2" onchange="setThumbnail(event);" name="customerImage" />
 				</div>
-				<div class="input_phone">
-						<span>
-						<input class="itel" type="text" placeholder="&nbsp;&nbsp;-없이 번호만 입력해주세요"
-						name="customerPhone" maxlength="11"
-						style="width: 250px; text-align: left;" required>
-						</span>
-						<br>
-					<button type="button" class=""
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 250px;">전화번호
-						인증하기</button>
+				<div class="input_email">
+					<span> <input class="iemail" type="email" id="customerEmail"
+						name="customerEmail" placeholder="&nbsp;&nbsp;이메일 주소" required>
+					</span>
+					<br>
+					<button id="emailCheckBtn" onclick="fn_emailSend();" style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호 발송</button>
+					<br>
+					<span> 
+						<input class="iauth" type="text" id="customerKey" name="customerKey" placeholder="&nbsp;&nbsp;인증번호" required>
+					</span>
+					<br>
+					<button id="emailAuthBtn" onclick="fn_emailAuth();" style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">이메일 인증</button>
+					<input type="hidden" id="YN" value="false" />
 				</div>
 				<br>
 			</div>

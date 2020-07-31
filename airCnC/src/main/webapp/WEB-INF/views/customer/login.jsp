@@ -28,6 +28,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>로그인</title>
+<script type="text/javascript">
+$('#loginBtn').click(function() {
+	var id = $('#customerId').val();
+	var pw = $('#customerPassword').val();
+	var remember_id = $('#remember_ud').is(':checked');
+		$.ajax({
+		type : 'post',
+		url : 'loginCheck.do',
+		data : {
+			customerId : id,
+			customerPassword : pw,
+			rememberCustomerId : remember_id
+			},
+			success : function(data) {
+				if (data == 0) { // 로그인 실패시.
+					console.log(data);
+					alert('로그인 정보를 정확히 입력해주세요.');
+				} else if (data == -2) { // 인증하지 않았다면?
+					console.log(data);
+					alert('이메일 인증을 해주셔야 합니다!');						
+				} else if (data == -3) { // 아이디가 사용중이라면?
+					console.log(data);
+					location.href = 'loginSuccess.do?customerId=' + id + '&customerPassword=' + pw + '&rememberCustomerId=' + remember_id;						
+				} else { //로그인 성공시.
+					console.log(data);
+					location.href = 'indexView.do';
+				}
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<!-- Cookie가 비어있지 않을 때 checked 속성을 줌 -->
@@ -80,8 +111,8 @@
 									</a>
 								</div>
 								<div class="a3">
-									<input class="bb6" type="email" id="customerId"
-										name="customerId" placeholder="&nbsp;&nbsp;아이디" required>
+									<input class="bb6" type="email" id="customerId" value="${cookie.customer_check.value}" 
+									name="customerId" placeholder="&nbsp;&nbsp;아이디" required>
 								</div>
 								<div class="a3">
 									<input class="bb6" type="password" id="customerPassword"
@@ -89,7 +120,7 @@
 										required>
 								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
-									<input type="checkbox"> <label for="idsave">아이디저장</label>
+									<input type="checkbox"id="remember_id" name="remember_customerId" ${checked}><label for="idsave">아이디저장</label>
 								</div>
 
 								<div class="a5">

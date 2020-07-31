@@ -42,7 +42,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public CustomerVO login(String customer_id)throws Exception {
-		
-		return null;
+		CustomerVO customerVO = session.selectOne("customer.login", customer_id);
+		return customerVO;
 	}
 }
