@@ -28,6 +28,6 @@
 		from message where message_from_id = #{toId} and message_to_id = #{fromId} ORDER BY to_char(message_regdate, 'yyyyMMddhh24miss') asc
 	</select>
 	<delete id="deleteMessage" parameterType="String" >
-		DELETE FROM message WHER message_from_id = #{value} or message_to_id = #{value}
+		DELETE FROM message WHERE message_from_id = #{value} or message_to_id = #{value}
 	</delete>
 </mapper>

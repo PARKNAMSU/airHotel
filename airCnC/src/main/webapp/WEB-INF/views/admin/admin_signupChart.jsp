@@ -21,7 +21,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 
+<!-- pdf,excel -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
 <meta charset="UTF-8">
@@ -140,6 +146,7 @@
 			</c:if>
 			</table>
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
+			<button onclick="" id="reportPDF"class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>
 			<button onclick="openSignupDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
 		</div>
 
@@ -185,6 +192,25 @@ function ReportToExcel(){
 	})
 
 }
+$(function(){
+	$('#reportPDF').click(function(){
+
+			html2canvas(document.getElementById("salesTable"), {
+				 onrendered : function(canvas){
+				  var imgData = canvas.toDataURL('image/png');
+		            var pageWidth = 210;
+		            var pageHeight = pageWidth * 1.414;
+		            var imgWidth = pageWidth - 20;
+		            var imgHeight = $('#salesTable').height() * imgWidth / $('#salesTable').width();
+				  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+
+				  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
+				  doc.save('개인지출내역서.pdf');
+				  } 
+			});
+	     
+	})
+})
 	function getCharts(){
 	    google.charts.load('current', {'packages':['bar']});
 	    google.charts.setOnLoadCallback(drawChart);

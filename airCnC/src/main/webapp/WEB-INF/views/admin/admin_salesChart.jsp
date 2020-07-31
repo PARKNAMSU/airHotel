@@ -16,6 +16,12 @@
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -143,6 +149,8 @@
 				</c:if>
 			</table>
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
+			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>&nbsp;&nbsp;
+			
 			<button onclick="openDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
 		</div>
 	</div>
@@ -189,6 +197,25 @@
 		})
 
 	}
+	$(function(){
+		$('#reportPDF').click(function(){
+
+				html2canvas(document.getElementById("salesTable"), {
+					 onrendered : function(canvas){
+					  var imgData = canvas.toDataURL('image/png');
+			            var pageWidth = 210;
+			            var pageHeight = pageWidth * 1.414;
+			            var imgWidth = pageWidth - 20;
+			            var imgHeight = $('#salesTable').height() * imgWidth / $('#salesTable').width();
+					  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+
+					  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
+					  doc.save('매출보고서.pdf');
+					  } 
+				});
+		     
+		})
+	})
 		function getChart(){
 		    google.charts.load('current', {'packages':['bar']});
 		    google.charts.setOnLoadCallback(drawChart);
