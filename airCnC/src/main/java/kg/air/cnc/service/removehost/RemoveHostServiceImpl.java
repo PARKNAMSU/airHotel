@@ -52,7 +52,7 @@ public class RemoveHostServiceImpl implements RemoveHostService {
 		List<ReservationVO> reservation = checkReservation(vo);
 		sendMessage(reservation);
 		refund(reservation);
-		deleteReservation(reservation);
+		//deleteReservation(reservation);
 		sendMessageHost(vo);
 		removeHostDAO.deleteHost(vo);
 		return;
