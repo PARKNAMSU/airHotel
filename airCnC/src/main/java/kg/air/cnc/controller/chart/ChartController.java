@@ -54,7 +54,7 @@ public class ChartController {
 		if(vo.getAdmin_sales_date() != null) {
 			System.out.println(vo.getAdmin_sales_date());
 			List<Admin_salesVO> list = admin_salesService.getAdmin_salesDetail(vo);
-			if(list != null) {
+			if(list.size()>0) {
 				mav.addObject("salesList",list);
 			}
 		}
