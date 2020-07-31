@@ -28,3 +28,7 @@ h4 {
 input[type="checkbox"]:checked + label {
   color: #ff5a5f;
 }
+textarea {
+  resize: none;
+  border-color: #ff5a5f;
+}

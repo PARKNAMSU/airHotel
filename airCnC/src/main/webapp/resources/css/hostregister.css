@@ -178,6 +178,13 @@ svg {
   font-size: 18px;
   padding: 8px;
 }
+.iauth{
+  margin-top: 18px;
+  width: 89%;
+  height: 45px;
+  font-size: 18px;
+  padding: 8px;	
+}
 .checks {
   position: relative;
   margin: 30px 0px 10px 0px;
@@ -512,4 +519,10 @@ svg {
 }
 .addphone {
   text-align: center;
+}
+.slider_area {
+  position: relative;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

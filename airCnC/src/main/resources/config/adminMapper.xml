@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	<select id="login_check" parameterType="kg.air.cnc.admin.vo.AdminVO" resultType="String">
+		SELECT admin_id FROM admin WHERE admin_id = #{adminId} AND admin_password = #{adminPassword}
+	</select>
+</mapper>
