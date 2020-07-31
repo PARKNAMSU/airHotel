@@ -2,6 +2,7 @@ package kg.air.cnc.dao.waiting;
 
 import java.util.List;
 
+import kg.air.cnc.vo.HouseVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

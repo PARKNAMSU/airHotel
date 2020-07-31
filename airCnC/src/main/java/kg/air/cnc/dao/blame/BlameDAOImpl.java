@@ -1,8 +1,6 @@
 package kg.air.cnc.dao.blame;
 
-import kg.air.cnc.vo.CustomerVO;
-import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.BlameVO;
+import kg.air.cnc.vo.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

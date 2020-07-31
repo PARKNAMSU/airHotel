@@ -2,6 +2,7 @@ package kg.air.cnc.dao.removehost;
 
 import java.util.List;
 
+import kg.air.cnc.vo.ReservationVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

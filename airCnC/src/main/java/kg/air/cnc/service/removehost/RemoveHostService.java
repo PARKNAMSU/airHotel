@@ -3,6 +3,7 @@ package kg.air.cnc.service.removehost;
 import java.util.List;
 
 import kg.air.cnc.vo.HostVO;
+import kg.air.cnc.vo.ReservationVO;
 
 public interface RemoveHostService {
 	public List<HostVO> getRemoveHostList();
