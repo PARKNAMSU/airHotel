@@ -10,8 +10,10 @@
 		</selectKey>
 		INSERT INTO loginfo(log_seq, log_id, log_content, log_type) values(#{log_seq}, #{log_id}, #{log_content}, #{log_type})
 	</insert>
-	<select id="getLogList" parameterType="kg.air.cnc.vo.LogVO" resultType="kg.air.cnc.vo.LogVO">
-		<![CDATA[SELECT * from loginfo WHERE to_char(log_regdate,'YYYY-MM-DD') >= #{startDate} AND to_char(log_regdate,'YYYY-MM-DD') <= #{endDate} AND log_type = #{log_type}]]>
+	<select id="getLogListForId" parameterType="kg.air.cnc.vo.LogVO" resultType="kg.air.cnc.vo.LogVO">
+		<![CDATA[SELECT * from loginfo WHERE to_char(log_regdate,'YYYY-MM-DD') >= #{startDate} AND to_char(log_regdate,'YYYY-MM-DD') <= #{endDate} AND log_type = #{log_type} AND log_id = #{log_id} ORDER BY log_seq]]>
 	</select>
-
+	<select id="getLogList" parameterType="kg.air.cnc.vo.LogVO" resultType="kg.air.cnc.vo.LogVO">
+	<![CDATA[SELECT * from loginfo WHERE to_char(log_regdate,'YYYY-MM-DD') >= #{startDate} AND to_char(log_regdate,'YYYY-MM-DD') <= #{endDate} AND log_type = #{log_type} ORDER BY log_seq]]>
+	</select>
 </mapper>

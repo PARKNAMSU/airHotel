@@ -7,4 +7,6 @@ import kg.air.cnc.vo.CommentsVO;
 public interface CommentsServiceImpl {
 	public void insertComments(CommentsVO vo);
 	public List<CommentsVO> getComments(CommentsVO vo);
+	public void deleteComments(CommentsVO vo);
+	public void updateComments(CommentsVO vo);
 }

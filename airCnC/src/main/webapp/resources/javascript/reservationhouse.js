@@ -30,3 +30,11 @@ var openMessage  = function(){
 }
 
 
+var openSetRateUpdate = function(seq,house_seq,content){
+	var left_center = Math.ceil(( window.screen.width/2) - (570/2));
+	var top_center = Math.ceil(( window.screen.width/2) - (700/2));
+	console.log(content)
+	openWin = window.open("updateCommentsPage.do?comments_seq="+seq+"&comments_house_seq="+house_seq+"&comments_content="+content,"rankpopup","width=570, height=350, resizable = no, scrollbars = no left ="+left_center+" top="+top_center);
+	
+}
+
