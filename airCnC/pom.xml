@@ -24,7 +24,7 @@
 	-->
 	<dependencies>
 	
-	<!-- javaSDK -->
+		<!-- javaSDK -->
 		<dependency>
 		    <groupId>net.nurigo</groupId>
 		    <artifactId>javaSDK</artifactId>
