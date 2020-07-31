@@ -23,17 +23,6 @@
 	<dependencies>
 	-->
 	<dependencies>
-<<<<<<< HEAD
-	
-		<!-- javaSDK -->
-		<dependency>
-		    <groupId>net.nurigo</groupId>
-		    <artifactId>javaSDK</artifactId>
-		    <version>2.2</version>
-		</dependency>
-=======
->>>>>>> refs/heads/master
-		
 		<!-- javax.mail/mail -->
 		<dependency>
 		    <groupId>javax.mail</groupId>

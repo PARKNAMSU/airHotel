@@ -1,19 +1,11 @@
 package kg.air.cnc.customer.controller;
 
 import java.util.Random;
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/master
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/heads/master
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,14 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-<<<<<<< HEAD
-
-import com.sun.mail.handlers.message_rfc822;
-
-=======
-import com.sun.mail.handlers.message_rfc822;
->>>>>>> refs/heads/master
 import kg.air.cnc.customer.service.CustomerService;
 import kg.air.cnc.customer.vo.CustomerVO;
 
@@ -84,9 +68,6 @@ public class CustomerController {
 //			e.printStackTrace();
 //		}
 //	}
-	
-	
-	
 	
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
