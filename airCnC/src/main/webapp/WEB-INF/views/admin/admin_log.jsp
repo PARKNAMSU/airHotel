@@ -61,18 +61,19 @@
 	<div class="container-xl"> 
 		<div class="all">
 			<div class="headdiv">
-				<form action="getLog.do" class="form-inline" id="logForm">
+				<form action="getLog.mdo" class="form-inline" id="logForm">
 					<select name="log_type" class="form-control form-control-lg" style="margin-right:30px;margin-left:0%;">
 						<option value="login">로그인</option>
 						<option value="logout">로그아웃</option>
 						<option value="logout">회원가입</option>
-						<option value="logout">회원탈퇴</option>
 						<option value="reservation">예약</option>
 						<option value="sendMessage">메세지전송</option>
+						<option value="insertCommnets">후기등록</option>
+						<option value="updateComments">후기수정</option>
 					</select>
 					<input type="date" class="form-control form-control-lg" id="startDate" name="startDate" style="margin-right:30px">~<b style="margin-right:30px;"></b>
 					<input type="date" class="form-control form-control-lg" id="endDate" name="endDate" style="margin-right: 30px;">
-					<input type="text" name="id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
+					<input type="text" name="log_id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
 					<input type="button" value="검색" class="btn btn-outline-danger" id="formBtn" style="font-size:20px">
 				</form>
 			</div>
@@ -80,15 +81,15 @@
 			<input type="hidden" value="" id="allElement">
 			<div class="maindiv">
 				<table class="table table-striped" id="logtable">
-					<tr class="table-danger">
+					<tr class="table-danger" id="tr0">
 						<th>번호</th>
 						<th>아이디</th>
 						<th>내용</th>
 						<th>타입</th>
 						<th>날짜</th>
 					</tr>
-					<c:forEach begin="1" end="10" var="i">
-					<tr>
+					<c:forEach begin="1" end="5" var="i">
+					<tr id="tr${i}">
 						<td id="seq${i}"></td>
 						<td id="name${i}"></td>
 						<td id="state${i}"></td>
@@ -104,7 +105,14 @@
 					<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;">${i}</a>
 				</c:forEach>		
 			<a onclick="clickNext()" id="next" class="page" style="font-size:20px;">next</a>
+			<select id="instanceNum" style="width:200px;margin-left:90%;"onchange="" class="form-control form-control-lg">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+			</select>
 			</div>
+
 		</div>
 	</div>
 
@@ -112,23 +120,39 @@
 		<%@include file="../html/footer.jsp" %>
 	</footer>
 </body>
-
 <script type="text/javascript">
+var getData;
+var page = 1;
+var area = 1;
+var allElement = Number(document.getElementById("allElement").value)
+var allArea = 0;
+var allPage = 0;
+var instanceNum = 5;//한페이지당 인스턴스 수
+var areaToPageNum = 5;//한에어리어의 페이지 수
 $(document).ready(function() {
 	$("#startDate").change(function() {
 		$("#endDate").attr("min", $("#startDate").val())
 	}), 
 	$("#endDate").change(function() {
 		$("#startDate").attr("max", $("#endDate").val())
+	}),
+	$("#instanceNum").change(function(){
+		for(var i=1; i<=instanceNum; i++){
+			$("#tr"+i).remove()
+		}
+		instanceNum = this.value
+		
+		for(var i=1;i<=instanceNum; i++){
+			var innerHtml = "";
+			innerHtml += '<tr id="tr'+i+'"><td id="seq'+i+'"></td><td id="name'+i+'"></td><td id="state'+i+'"></td><td id="type'+i+'"></td><td id="date'+i+'"></td></tr>'
+			$("#logtable > tbody:last").append(innerHtml);
+		}
+		loadLog(page);
+		alert(instanceNum)
 	})
 })
-var getData;
-var page = 1;
-var area = 1;
-var allElement = Number(document.getElementById("allElement").value)
-var allPage = 0;
-var instanceNum = 10;//한페이지당 인스턴스 수
-var areaToPageNum = 5;//한에어리어의 페이지 수
+
+
 		$(function(){
 			$("#formBtn").click(function(){
 			     $.ajax({
@@ -150,6 +174,7 @@ var areaToPageNum = 5;//한에어리어의 페이지 수
 									$("#type"+(i+1)).html(getData[i].log_type)
 									$("#date"+(i+1)).html(getData[i].log_regdate)
 								}else{
+									$("#seq"+(i+1)).html("")
 									$("#name"+(i+1)).html("")
 									$("#state"+(i+1)).html("")
 									$("#type"+(i+1)).html("")
@@ -167,11 +192,11 @@ var areaToPageNum = 5;//한에어리어의 페이지 수
 //페이징 처리
 
 if(allElement%10 == 0){
-	allPage = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
+	allArea = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
 }else{
-	allPage = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
+	allArea = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
 }
-if(allPage <= 1){
+if(allArea <= 1){
 	$("#next").css('display','none');
 }
 var clickNext = function(){
@@ -179,7 +204,7 @@ var clickNext = function(){
 	if(area > 1){
 		$("#prev").css('display','initial')
 	}
-	if(area == allPage){
+	if(area == allArea){
 		$("#next").css('display','none');
 		if(area !=Math.floor(allElement/(instanceNum*areaToPageNum))){
 
@@ -228,6 +253,7 @@ var clickPrev = function(){
 } 
 
 var loadLog = function(pageNum){
+	page = pageNum;
 	var num = ((area-1)*areaToPageNum + pageNum) * instanceNum - (instanceNum-1)
 	a = 1;
 	for(var i = num ; i<num+instanceNum;i++){
@@ -238,6 +264,7 @@ var loadLog = function(pageNum){
 			$("#type"+(a)).html(getData[i-1].log_type)
 			$("#date"+(a)).html(getData[i-1].log_regdate)
 		}else{
+			$("#seq"+(a)).html("")
 			$("#name"+(a)).html("")
 			$("#state"+(a)).html("")
 			$("#type"+(a)).html("")
@@ -246,6 +273,6 @@ var loadLog = function(pageNum){
 		a = a+1;
 	}
 }
-
 </script>
+
 </html>

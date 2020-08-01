@@ -24,3 +24,6 @@ $(function(){
 function openDetail(){
 	window.open("salesChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
 }
+function openSignupDetail(){
+	window.open("signupChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+}

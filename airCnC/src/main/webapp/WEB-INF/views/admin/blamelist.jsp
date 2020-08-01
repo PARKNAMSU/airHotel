@@ -65,9 +65,21 @@
 
     <div class="table-responsive">
         <table class="table">
+            
             <c:forEach var="bl" items="${blamelist}" begin="0" end="${blamelist.size()}" step="1">
                 <tr>
-                    <td><a href="/blameinfo.mdo?target_member_id=${bl.key}">${bl.key}</a></td> <td>신규 신고 합 : ${bl.value}</td>
+                    <td><a href="/blameinfo.mdo?target_member_id=${bl.key}">${bl.key}</a></td>
+                    <td>신규 신고 합 : ${bl.value}</td>
+
+                    <%--<td>
+                        <c:set var = "blame_type" value="${bl.key}"/>
+                        <c:if test="${blame_type eq 0}">
+                            <c:out value="HOST"/>
+                        </c:if>
+                        <c:if test="${blame_type eq 1}">
+                            <c:out value="CUSTOMER"/>
+                        </c:if>
+                    </td>--%>
                 </tr>
             </c:forEach>
         </table>

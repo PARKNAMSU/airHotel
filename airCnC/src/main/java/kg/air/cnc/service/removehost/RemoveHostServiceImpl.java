@@ -2,12 +2,12 @@ package kg.air.cnc.service.removehost;
 
 import java.util.List;
 
+import kg.air.cnc.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import kg.air.cnc.vo.ReservationVO;
 import kg.air.cnc.dao.removehost.RemoveHostDAOImpl;
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.ReservationVO;
 
 @Service
 public class RemoveHostServiceImpl implements RemoveHostService {

@@ -2,12 +2,12 @@ package kg.air.cnc.service.waiting;
 
 import java.util.List;
 
+import kg.air.cnc.vo.HouseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.waiting.RemoveWaitingDAOImpl;
-import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.RemoveWaitingVO;
 
 @Service

@@ -2,12 +2,12 @@ package kg.air.cnc.dao.removehost;
 
 import java.util.List;
 
+import kg.air.cnc.vo.ReservationVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.ReservationVO;
 
 @Repository
 public class RemoveHostDAOImpl implements RemoveHostDAO {
