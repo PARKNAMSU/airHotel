@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommentsDAO">
+
+	<insert id="insertComments" parameterType="kg.air.cnc.vo.CommentsVO">
+		<selectKey keyProperty="comments_seq" resultType="int" order="BEFORE">
+			SELECT comments_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO comments(comments_seq, comments_id, comments_house_seq, comments_content, comments_rate)
+		values(#{comments_seq}, #{comments_id}, #{comments_house_seq}, #{comments_content}, #{comments_rate})
+	</insert>
+
+	<select id="getComments" parameterType="kg.air.cnc.vo.HouseVO" resultType="kg.air.cnc.vo.CommentsVO">
+		SELECT comments_seq, comments_id, comments_content, c.customer_name as comments_name, comments_rate, comments_regdate FROM comments
+		JOIN customer c ON comments_id = customer_id WHERE comments_house_seq = #{house_seq}  ORDER BY comments_seq DESC
+	</select>
+
+	<update id="updateComments" parameterType="kg.air.cnc.vo.CommentsVO">
+		UPDATE comments SET comments_content = #{comments_content}, comments_rate = #{comments_rate} WHERE comments_seq = #{comments_seq}
+	</update>
+	<delete id="deleteComments" parameterType="kg.air.cnc.vo.CommentsVO">
+		DELETE FROM comments WHERE comments_seq = #{comments_seq}
+	</delete>
+
+	
+
+</mapper>

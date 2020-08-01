@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin_signupChartDAO">
+
+	<select id="getSignupForYears" resultType="kg.air.cnc.vo.Sign_upChartVO" parameterType="kg.air.cnc.vo.Sign_upChartVO">
+		<![CDATA[SELECT to_date(to_char(customer_regdate,'yyyy'),'yyyy') AS signupchart_regdate, COUNT(customer_id) AS signupchart_num  FROM customer WHERE to_char(customer_regdate, 'yyyy') >= #{searchConditionFirst}
+		and to_char(customer_regdate,'yyyy') <= #{searchConditionSecond} GROUP BY to_date(to_char(customer_regdate,'yyyy'),'yyyy') ORDER BY to_date(to_char(customer_regdate,'yyyy'),'yyyy') ASC]]>
+	</select>
+	<select id="getSignupForYear" resultType="kg.air.cnc.vo.Sign_upChartVO" parameterType="kg.air.cnc.vo.Sign_upChartVO">
+		<![CDATA[SELECT to_date(to_char(customer_regdate,'MM'),'MM') as signupchart_regdate,COUNT(customer_id) as signupchart_num FROM customer WHERE to_char(customer_regdate, 'yyyy') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(customer_regdate,'MM'),'MM') ORDER BY to_date(to_char(customer_regdate,'MM'),'MM') ASC]]>
+	</select>
+	<select id="getSignupForMonth" resultType="kg.air.cnc.vo.Sign_upChartVO" parameterType="kg.air.cnc.vo.Sign_upChartVO">
+		<![CDATA[SELECT to_date(to_char(customer_regdate,'MM/dd'),'MM/dd') as signupchart_regdate,COUNT(customer_id) as signupchart_num FROM customer WHERE to_char(customer_regdate, 'YYYY-MM') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(customer_regdate,'MM/dd'),'MM/dd') ORDER BY to_date(to_char(customer_regdate,'MM/dd'),'MM/dd') ASC]]>
+	</select>
+	<select id="getSignupForDays" resultType="kg.air.cnc.vo.Sign_upChartVO" parameterType="kg.air.cnc.vo.Sign_upChartVO">
+		<![CDATA[SELECT to_date(to_char(customer_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') as signupchart_regdate,COUNT(customer_id) as signupchart_num FROM customer WHERE to_char(customer_regdate, 'YYYY-MM-DD') >= #{searchConditionFirst} and to_char(customer_regdate, 'YYYY-MM-DD') <= #{searchConditionSecond} 
+		 GROUP BY to_date(to_char(customer_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(customer_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
+	</select>
+	<select id="getSignupDetail" resultType="kg.air.cnc.vo.CustomerVO" parameterType="kg.air.cnc.vo.Sign_upChartVO">
+		SELECT customer_id, customer_name, customer_email, customer_phone, customer_regdate FROM customer WHERE to_char(customer_regdate,'YYYY-MM-dd') = #{signupchart_date}
+	</select>
+</mapper>
