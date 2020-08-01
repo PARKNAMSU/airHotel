@@ -1,18 +1,16 @@
 @charset "UTF-8";
 .menudiv1 {
-  background: white;
-  height: 130px;
+  background: rgb(025, 025, 025);
+  height: 100px;
   width: 100%;
   position: sticky;
   z-index: 100;
-  top: 0em;
-  box-shadow: 2px 2px 2px 2px gray;
   text-align: center;
 }
 .menudiv2-1 {
   float: left;
-  margin-top: 2%;
-  margin-left: 2%;
+  margin-top: 1%;
+  margin-left: 1%;
 }
 .menudiv2-1 label {
   font-size: 15px;
@@ -21,7 +19,7 @@
 }
 .menudiv2-2 {
   overflow: hidden;
-  margin-left: 65%;
+  margin-left: 75%;
   padding-top: 20px;
 }
 .menudiv3-1 {
