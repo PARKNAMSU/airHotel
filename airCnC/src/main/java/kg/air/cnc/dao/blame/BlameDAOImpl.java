@@ -57,6 +57,17 @@ public class BlameDAOImpl implements BlameDAO{
         sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.increaseHostBlameWarn", target_member_id);
     }
 
+    @Override // host_blame_stop 증가
+    public void increaseHostBlameStop(String host_id) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.increaseHostBlameStop", host_id);
+    }
+
+    @Override // customer_blame_stop 증가
+    public void increaseCustomerBlameStop(String customer_id) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.increaseCustomerBlameStop", customer_id);
+
+    }
+
     @Override
     public void addBlackList(String id) {
         sqlSession.insert("kg.air.cnc.dao.blame.BlameDAO.addBlackList", id);
@@ -75,8 +86,14 @@ public class BlameDAOImpl implements BlameDAO{
     }
 
     @Override
-    public List<ReservationVO> getReservationList(String host_id) {
-        List<ReservationVO> reservationList =  sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getReservation", host_id);
+    public List<ReservationVO> getReservationByHostId(String host_id) {
+        List<ReservationVO> reservationList =  sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getReservationByHostId", host_id);
+        return reservationList;
+    }
+
+    @Override
+    public List<ReservationVO> getReservationByCustomerId(String customer_id) {
+        List<ReservationVO> reservationList = sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getReservationByCustomerId", customer_id);
         return reservationList;
     }
 
@@ -85,7 +102,37 @@ public class BlameDAOImpl implements BlameDAO{
     }
 
     @Override
+    public void sendHostReservationCacelMessage(String to_id) {
+        sqlSession.insert("kg.air.cnc.dao.blame.BlameDAO.sendHostReservationCacelMessage", to_id);
+    }
+
+    @Override
     public void setReservationStatusRefund(String host_id) {
         sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setReservationStatusRefund", host_id);
+    }
+
+    @Override
+    public void setReservationStatusRefundByCustomer(String customer_id) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setReservationStatusRefundByCustomer", customer_id);
+    }
+
+    @Override
+    public HostVO checkHost(String id) {
+        return sqlSession.selectOne("kg.air.cnc.dao.blame.BlameDAO.checkHost", id);
+    }
+
+    @Override
+    public void deleteHouse(String host_id) {
+        sqlSession.delete("kg.air.cnc.dao.blame.BlameDAO.deleteHouse", host_id);
+    }
+
+    @Override
+    public void deleteHost(String host_id) {
+        sqlSession.delete("kg.air.cnc.dao.blame.BlameDAO.deleteHost", host_id);
+    }
+
+    @Override
+    public void deleteCustomer(String customer_id) {
+        sqlSession.delete("kg.air.cnc.dao.blame.BlameDAO.deleteCustomer", customer_id);
     }
 }
