@@ -70,13 +70,33 @@ public class HouseController {
 		return "1newhouse";
 	}
 	@RequestMapping(value = "/1newhouse.do")
-	public String newhouse(HouseVO house, Model model) {
-		logger.info(house.toString());
+	public String newhouse(@ModelAttribute("house") HouseVO house, Model model) {
 		System.out.println("newhouse : " + house.getNewhouse());
 		if(house.getNewhouse().equals("new1")) {
+			logger.info(house.toString());
 			return "2housedetail";
 		}
-		
+		//숙소 등록중, 등록했던 숙소는 new2, new3로 조건부여
 		return null;
+	}
+	@RequestMapping(value = "/2housedetail.do")
+	public String housedetail(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
+		return "3bathcount";
+	}
+	
+	@RequestMapping(value = "/3bathcount.do")
+	public String bathcount(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("bathcount : " + house.getHouse_bathroom_type());
+		return "4location";
+	}
+	
+	@RequestMapping(value = "/4location.do")
+	public String location(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("location : " + house.getHouse_loaction_sido());
+		return "5reservationmap";
 	}
 }

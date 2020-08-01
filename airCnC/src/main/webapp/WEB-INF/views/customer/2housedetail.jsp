@@ -23,10 +23,18 @@
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	
 	<script type="text/javascript">
-		function newHouseSubmit() {
-			var f = document.hostchoose;
+		function houseDetailSubmit() {
+			var f = document.hostchoose1;
 			f.submit();
 		}
+		
+		
+		function PrevSubmit() {
+			var f = document.hostchoose1;
+			f.action = "<c:url value='/index.do' />";
+			f.submit();
+		}
+
 	</script>
 </head>
 <body>
@@ -46,8 +54,7 @@
     </header>
     <!-- header-end -->
     <c:url value="/2housedetail.do" var="actionUrl" />
-
-	<form:form id="2housedetail" name="hostchoose" modelAttribute="house" method="GET" action="${actionUrl}">
+	<form:form id="2housedetail" name="hostchoose1" modelAttribute="house" method="GET" action="${actionUrl}">
 		<div class="container">
 			<img src="${pageContext.request.contextPath}/resources/images/badroom.jpg"style="align-content: center; padding-top: 30px;">
 			<div class="title">숙소에 얼마나 많은 인원이 숙박 할수 있나요?</div>
@@ -56,27 +63,27 @@
 			<div class="form">
 				<label for="guestcount">최대 숙박 인원</label>
 				<button type="button" onclick="javascript:this.form.amount.value++;">+</button> 
-        		<input type="text" name="amount" value="0" readonly="readonly" />      
+        		<form:input type="text" id="amount" value="0" readonly="readonly" path="house_maxperson" />
         		<button type="button" onclick="javascript:this.form.amount.value--;">-</button>
 				
 				<div class="guestbad">
 				<label for="guestbad">게스트가 사용할수 있는 침실은 몇 개 인가요?</label>
-				<select name="guestbadcot">
-		        	<option value="">침실선택</option>
-		        	<option value="">2개</option>
-		       		<option value="">4개</option>
-		        	<option value="">6개</option>
-		        	<option value="">8개</option>
-		        	<option value="">10개</option>
-		        	<option value="">12개</option>
-        		</select>
+				<form:select name="guestbadcot" path="house_bedroom_amount">
+					<form:option value="0">침실선택</form:option>
+					<form:option value="2">2개</form:option>
+					<form:option value="4">4개</form:option>
+					<form:option value="6">6개</form:option>
+					<form:option value="6">8개</form:option>
+					<form:option value="10">10개</form:option>
+					<form:option value="12">12개</form:option>
+				</form:select>
         		</div>
         		
         		<div class="guestbadcount">
 			        <div class="guestbadcount1">
 			          <label for="guestbadcount2">침대</label>        
-			        <button type="button" onclick="javascript:this.form.amount1.value++;">+</button>  
-			        <input type="text" name="amount1" value="0" readonly="readonly" />     
+			        <button type="button" onclick="javascript:this.form.amount1.value++;">+</button>   
+			        <form:input type="text" id="amount1" value="0" readonly="readonly" path="house_bed_amount" />    
 			        <button type="button" onclick="javascript:this.form.amount1.value--;">-</button>
 			        </div>
 			    </div>
@@ -88,19 +95,19 @@
 			    		<div class="bad1">
 			    			<label for="guestcount">싱글</label>
 					        <button type="button" onclick="javascript:this.form.amount2.value++;">+</button>  
-					        <input type="text" name="amount2" value="0" readonly="readonly" />     
+					        <form:input type="text" id="amount2" value="0" readonly="readonly" path="house_bed_type_single" />
 					        <button type="button" onclick="javascript:this.form.amount2.value--;">-</button>
 			    		</div><br>
 			    		<div class="bad2">
 			    			<label for="guestcount">더블</label>
 					        <button type="button" onclick="javascript:this.form.amount3.value++;">+</button>  
-					        <input type="text" name="amount3" value="0" readonly="readonly" />     
+					        <form:input type="text" id="amount3" value="0" readonly="readonly" path="house_bed_type_double" />  
 					        <button type="button" onclick="javascript:this.form.amount3.value--;">-</button>
 			    		</div><br>
 			    		<div class="bad3">
 			    			<label for="guestcount">퀸</label>
 					        <button type="button" onclick="javascript:this.form.amount4.value++;">+</button>  
-					        <input type="text" name="amount4" value="0" readonly="readonly" />     
+					        <form:input type="text" id="amount4" value="0" readonly="readonly" path="house_bed_type_queen" />    
 					        <button type="button" onclick="javascript:this.form.amount4.value--;">-</button>
 					        <div class="badfix"><br>
 					          <a href="#"><button>침대 수정하기</button></a>
@@ -108,19 +115,23 @@
 			    		</div>
 			    	</div>
 			    </div>
-			    </div>
+			    
+			</div>
+			    
 			    <div class="control">
 				    <div class="control2">
-				    <a href="" style="float : left;"><button>뒤로가기</button></a>
-				    <a href="" style="float: right;"><button>다음</button></a>
-			    </div>
+				    <a href="#" onclick="PrevSubmit();" style="float : left;">
+				    <button>뒤로가기</button></a>
+				    <a href="#" onclick="houseDetailSubmit();" style="float: right;">
+				    <button>다음</button></a>
+			    	</div>
 			    <div class="bor1" style="height: 3px;"></div>
-			</div>
+				</div>
 		</div>
 	</form:form>
 
 </body>
- <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
 </html>
