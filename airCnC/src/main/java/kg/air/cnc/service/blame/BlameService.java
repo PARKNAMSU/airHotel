@@ -18,6 +18,7 @@ public interface BlameService  {
     void increaseCustomerBlameWarn(String target_member_id);
     void increaseHostBlameWarn(String target_member_id);
     void addBlackList(String id);
-    void suspendHost(String host_id);
+    void suspendHost(String host_id, String suspend_day);
+    void suspendCustomer(String customer_id, String suspend_day);
 
 }

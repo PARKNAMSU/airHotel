@@ -100,7 +100,7 @@
 
         <div class="account_susspend">
             <form method="post" action="/blameSuspend.mdo">
-                <input type="text" name="" value="3"  size="10"> 일
+                <input type="text" name="suspend_day" value="3"  size="10"> 일
                 <input id="suspend_btn" type="submit" value="정지부여">
             </form>
         </div>

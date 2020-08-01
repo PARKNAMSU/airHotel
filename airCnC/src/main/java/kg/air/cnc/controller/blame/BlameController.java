@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class BlameController {
@@ -108,17 +107,16 @@ public class BlameController {
         HttpSession session = request.getSession();
         int blame_type = (int)session.getAttribute("blame_type");
         String target_member_id = (String)session.getAttribute("target_member_id");
+        String suspend_day = request.getParameter("suspend_day");
+        System.out.println(suspend_day);
         if(blame_type == 0){
             //호스트인경우
-            blameService.suspendHost(target_member_id);
-            mav.setViewName("redirect:/blamelist.mdo");
-
+            blameService.suspendHost(target_member_id, suspend_day);
         } else if (blame_type == 1){
             //customer 인 경우
+            blameService.suspendCustomer(target_member_id, suspend_day);
         }
-
-
-
+        mav.setViewName("redirect:/blamelist.mdo");
         return mav;
     }
 
@@ -128,28 +126,8 @@ public class BlameController {
     public ModelAndView addBlackList(HttpServletRequest request, ModelAndView mav){
         HttpSession session = request.getSession();
         String id = (String)session.getAttribute("target_member_id");
-        System.out.println(id);
-        /*
-        todo : 블랙리스트 추가할 경우
-        선택된 신고의 타입을 확인해 host, customer 분기
-        1. host 일 경우
-        해당 host 가 가지고 있는 모든 숙소의 예약을 환불처리한다. (customer 에게 환불)
-        환불사유에 대한 메세지를 customer 에게 전송한다.
-        해당아이디로 접속할 경우 접속불가 메세지를 띄어준다.
-        host table 에서 해당 아이디 삭제.
-        message table 에서 host 아이디가 가지고 있던 메세지들 삭제
-
-        2. customer 인 경우
-        해당 customer 가 예약한 숙소를 환불처리한다 ( 본인에게 환불 )
-        환불사유에 대한 메세지를 customer 에게 전송한다.
-        예약취소 사유에 대한 메세지를 host 에게 전송한다.
-        해당숙소에 대한 예약처리를 취소한다.
-
-        todo : 호스트인경우, 해당 호스트가 가지고있던 숙소도 삭제 되어야한다? 메세지도 삭제되어야하고...
-         */
         blameService.addBlackList(id);
-
-
+        mav.setViewName("redirect:/blamelist.mdo");
         return mav;
     }
 

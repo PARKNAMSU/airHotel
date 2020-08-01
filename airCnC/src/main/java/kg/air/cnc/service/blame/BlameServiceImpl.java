@@ -71,26 +71,18 @@ public class BlameServiceImpl implements BlameService {
         blameDAO.increaseHostBlameWarn(target_member_id);
     }
 
-    @Override
-    public void addBlackList(String id) {
-        blameDAO.addBlackList(id);
-    }
-
     @Override // 호스트 정지
-    public void suspendHost(String host_id) {
+    public void suspendHost(String host_id, String suspend_day) {
         blameDAO.getHostHouses(host_id);
         // host 가 가지고 있는 house list
         List<HouseVO> houseList = blameDAO.getHostHouses(host_id);
-
         //house_status -> 1 (정지상태)
         for(int i = 0; i < houseList.size(); i++){
             blameDAO.setHouseStatusStop(houseList.get(i));
         }
-
         // host_id 를 통해 해당 호스트의 하우스의 reservation list 가져옴
-        List<ReservationVO> reservationList = blameDAO.getReservationList(host_id);
+        List<ReservationVO> reservationList = blameDAO.getReservationByHostId(host_id);
         System.out.println(reservationList.size());
-
         for(int i = 0 ; i < reservationList.size(); i++){
             // reservation 리스트에 걸려있는 모든 customer 에게 메세지 전송 (admin 으로부터)
             blameDAO.sendCustomerReservationCancelMessage(reservationList.get(i).getReservation_customer_id());
@@ -100,7 +92,87 @@ public class BlameServiceImpl implements BlameService {
         HashMap<String, String> deleteBlameMap = new HashMap<>();
         deleteBlameMap.put("target_member_id", host_id);
         deleteBlameMap.put("blame_type", "0");
+        //blame 테이블에서 처리한 blame 삭제
+        blameDAO.deleteBlame(deleteBlameMap);
+        //해당 host 의 host_blame_stop 증가
+        blameDAO.increaseHostBlameStop(host_id);
+
+        // todo 정지기간이 끝나면 어떻게 처리하지?
+
+    }
+
+    @Override // 커스터머 정지
+    public void suspendCustomer(String customer_id, String suspend_day) {
+        //customer 가 예약한 숙소 리스트
+        List<ReservationVO> reservationList = blameDAO.getReservationByCustomerId(customer_id);
+        //해당 예약을 환불대기 상태로 변경 및 호스트에게 메세지 전송
+        for(int i = 0; i < reservationList.size(); i++){
+            //해당 예약을 환불대기상태로 변경
+            blameDAO.setReservationStatusRefundByCustomer(reservationList.get(i).getReservation_customer_id());
+            //해당 호스트에게 예약취소 메세지 전송
+            blameDAO.sendHostReservationCacelMessage(reservationList.get(i).getReservation_host_id());
+        }
+        HashMap<String, String> deleteBlameMap = new HashMap<>();
+        deleteBlameMap.put("target_member_id", customer_id);
+        deleteBlameMap.put("blame_type", "1");
         blameDAO.deleteBlame(deleteBlameMap);
 
+        //해당 customer 의 customer_blame_stop 1 증가
+        blameDAO.increaseCustomerBlameStop(customer_id);
+
+    }
+
+    @Override // 블랙리스트 추가
+    public void addBlackList(String id) {
+        HostVO host = blameDAO.checkHost(id);
+        HashMap<String, String> deleteBlameMap = new HashMap<>();
+        if(host != null){
+            // host 인 경우
+            System.out.println(id + " is host");
+            List<ReservationVO>reservationList = blameDAO.getReservationByHostId(id);
+            for(int i = 0 ; i < reservationList.size(); i++){
+                blameDAO.setReservationStatusRefund(reservationList.get(i).getReservation_host_id());
+                blameDAO.sendCustomerReservationCancelMessage(reservationList.get(i).getReservation_customer_id());
+            }
+            /* 해당 host 가 가지고 있는 house 삭제처리
+            List<HouseVO>houseList = blameDAO.getHostHouses(id);
+            for(int i = 0 ; i < houseList.size(); i++){
+                 blameDAO.deleteHouse(houseList.get(i).getHouse_host_id);
+            }
+            */
+            blameDAO.deleteHost(id);
+
+            deleteBlameMap.put("target_member_id", id);
+            deleteBlameMap.put("blame_type", "0");
+
+        } else {
+            //customer 인 경우
+            System.out.println(id + " is not host");
+            List<ReservationVO> reservationList = blameDAO.getReservationByCustomerId(id);
+            // todo setReservationStatusRefundByCustomer 이랑 setReservationStatusRefund 랑 구분지을 필요가있나?
+            for(int i = 0 ; i < reservationList.size(); i++){
+                blameDAO.setReservationStatusRefundByCustomer(reservationList.get(i).getReservation_customer_id());
+                blameDAO.sendHostReservationCacelMessage(reservationList.get(i).getReservation_host_id());
+            }
+            deleteBlameMap.put("target_member_id", id);
+            deleteBlameMap.put("blame_type", "1");
+        }
+        blameDAO.deleteCustomer(id);
+        blameDAO.addBlackList(id);
+        blameDAO.deleteBlame(deleteBlameMap);
+
+
+        /*
+        1. 해당 아이디가 호스트 테이블에 존재하는지 확인한다.
+        존재한다면 해당 아이디로 등록된 모든 하우스의 예약 내역을 환불한다.
+                해당 아이디가 예약한 모든 예약테이블을 환불처리한다.
+                모든 하우스를 삭제한다.
+        호스트 테이블에서 삭제한다.
+                커스터머 테이블에서 삭제한다.
+        2. 해당 아이디가 호스트 테이블에 존재하지 않는다면
+        해당 아이디가 예약한 모든 예약테이블을 환불처리한다.
+        커스터머 테이블에서 삭제한다.
+        */
+        // blameDAO.addBlackList(id);
     }
 }
