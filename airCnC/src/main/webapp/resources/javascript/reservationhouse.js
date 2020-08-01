@@ -23,10 +23,10 @@ var openDeclaration  = function(){
 	var top_center = Math.ceil(( window.screen.width - 740 )/2);
 	openWin = window.open("declarationpopup.jsp","rankpopup","width=660, height=370, resizable = no, scrollbars = no")
 }
-var openMessage  = function(){
+var openMessage  = function(fromId,toId){
 	var left_center = Math.ceil(( window.screen.width - 660 )/2);
 	var top_center = Math.ceil(( window.screen.width - 740 )/2);
-	openWin = window.open("messagepopup.jsp","rankpopup","width=660, height=370, resizable = no, scrollbars = no left="+left_center+" top="+top_center)
+	openWin = window.open("openMessageFromDetail.do?message_from_id="+fromId+"&message_to_id="+toId,"rankpopup","width=660, height=370, resizable = no, scrollbars = no left="+left_center+" top="+top_center)
 }
 
 

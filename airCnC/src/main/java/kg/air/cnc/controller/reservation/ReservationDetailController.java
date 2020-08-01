@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.comments.CommentsService;
+import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.MessageVO;
 
 @Controller
 public class ReservationDetailController {
 	
 	@Autowired
 	CommentsService commentsService;
+	@Autowired
+	MessageService messageService;
+	
 	@RequestMapping("myreservation.do")
 	public ModelAndView myReservationController(ModelAndView mav) {
 		mav.setViewName("myreservation");
@@ -60,6 +65,19 @@ public class ReservationDetailController {
 	public ModelAndView updateCommentsController(CommentsVO vo, ModelAndView mav) {
 		commentsService.updateComments(vo);
 		mav.setViewName("updateComments");
+		return mav;
+	}
+	@RequestMapping("openMessageFromDetail.do")
+	public ModelAndView openMessagePopupController(MessageVO vo,ModelAndView mav) {
+		mav.addObject("messageVO", vo);
+		mav.setViewName("messagepopup");
+		return mav;
+	}
+	@RequestMapping("insertMessageFromDetail.do")
+	public ModelAndView insertMessageForDetailController(MessageVO vo,ModelAndView mav) {
+		messageService.insertMessage(vo);
+		mav.addObject("messageVO", null);
+		mav.setViewName("messagepopup");
 		return mav;
 	}
 }

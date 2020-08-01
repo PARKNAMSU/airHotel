@@ -72,7 +72,7 @@ div {
 			<p style="font-family: 'Jua', sans-serif;">산과 숲을 좋아해서 자연속으로 거쳐를 옮긴지 2년이 가까워 옵니다. 서울에서 오랜세월 만화웹툰기획.제작자로 일하면서 살아오다가 이곳 산골로 들어와서도 여전히 관련일을 하고자 했으나 산책로와 자연에 취해 까짓것 하던일을 멈추고 고양이처럼 게으르게 살아가고 있어요. 꼭 계획했던 대로 사는것만이 행복한 삶이 아니란걸 .... 여행자처럼 설레임을 안고 오늘을 행복하게 살아가고 있어요. 산책, 영화. 음악감상, 독서 사색, 고양이와 놀기, 요리하며 즐기는 삶에 언제나 숲과 산이 함께하죠.</p>
 		</div><br><br>
 		<div id="" style="float:left;width:50%;padding-top:5%;padding-left: 16%">
-			<button class="btn btn-outline-danger" onclick="openMessage(s)" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
+			<button class="btn btn-outline-danger" onclick="openMessage('${session_login}','gggg')" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
 		</div>
 	</div>
 	<div style="clear:both;"></div>
@@ -167,7 +167,7 @@ div {
 </body>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=123"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=124"></script>
 
 <script type="text/javascript">
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
