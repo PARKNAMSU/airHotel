@@ -1,4 +1,4 @@
-package kg.air.cnc.log.service;
+package kg.air.cnc.service.log;
 
 import java.util.List;
 
@@ -16,5 +16,10 @@ public class LogService implements LogServiceImpl{
 	
 	public List<LogVO> getLogList(LogVO vo){
 		return logDAO.getLogList(vo);
+	}
+
+	@Override
+	public List<LogVO> getLogListForId(LogVO vo) {
+		return logDAO.getLogListForId(vo);
 	}
 }

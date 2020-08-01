@@ -29,13 +29,13 @@ public class Admin_salesService implements Admin_salesServiceImpl{
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForMonth(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForMonth(vo);
-		DateFormat format = new SimpleDateFormat("YYYY년MM월DD일");
+		DateFormat format = new SimpleDateFormat("YYYY년MM월dd일");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForDays(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForDays(vo);
-		DateFormat format = new SimpleDateFormat("YYYY년MM월DD일");
+		DateFormat format = new SimpleDateFormat("YYYY년MM월dd일");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override

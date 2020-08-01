@@ -6,8 +6,14 @@
 <head>
 
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/chat.css?version=123">
+<style type="text/css">
+body {
+  font-family: "Jua", sans-serif;
+}
+</style>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -27,7 +33,7 @@
 <%@include file="../html/sideMenu.jsp" %>
 	
 	<div class="headdiv">
-		<h1 style="font-size:40px;">나의 채팅</h1>
+		<h1 style="font-size:40px;margin-left:3%;font-family: 'Jua', sans-serif;">나의 채팅</h1>
 	</div>
 	<div class="chatdiv">
 		<div id="chatbox">
@@ -36,12 +42,12 @@
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
 				</div>
 				<div id="namediv">
-					<p>admin</p><!-- db에서 받아온 이름 -->
+					<p style="font-family: 'Jua', sans-serif;">admin</p><!-- db에서 받아온 이름 -->
 					<br>
-					<p style="color:gray;"></p><!-- db에서 받아온 최신 메세지 날짜 -->
+					<p style="color:gray;font-family: 'Jua', sans-serif;"></p><!-- db에서 받아온 최신 메세지 날짜 -->
 				</div>
 				<div id="textdiv">
-					<p>관리자 알람 확인</p><!-- db에서받아온 최신 메세지 -->
+					<p style="font-family: 'Jua', sans-serif;">관리자 알람 확인</p><!-- db에서받아온 최신 메세지 -->
 				</div>
 			</div>
 			<hr>
@@ -51,12 +57,12 @@
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
 				</div>
 				<div id="namediv">
-					<p>${list.message_to_name}</p><!-- db에서 받아온 이름 -->
+					<p style="font-family: 'Jua', sans-serif;">${list.message_to_name}</p><!-- db에서 받아온 이름 -->
 					<br>
-					<p style="color:gray;">${list.message_regdate}</p><!-- db에서 받아온 최신 메세지 날짜 -->
+					<p style="color:gray;font-family: 'Jua', sans-serif;">${list.message_regdate}</p><!-- db에서 받아온 최신 메세지 날짜 -->
 				</div>
 				<div id="textdiv">
-					<p>안녕하세요 예약감사합니다</p><!-- db에서받아온 최신 메세지 -->
+					<p style="font-family: 'Jua', sans-serif;">상대방과 대화하기</p><!-- db에서받아온 최신 메세지 -->
 				</div>
 			</div>
 			<hr>
