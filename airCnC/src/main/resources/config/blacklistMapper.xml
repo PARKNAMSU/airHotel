@@ -4,11 +4,11 @@
 
 <mapper namespace="kg.air.cnc.dao.blacklist.BlackListDAO">
 
-    <select id="getBlackList" resultType="kg.air.cnc.vo.blacklist.BlackUserVO">
+    <select id="getBlackList" resultType="kg.air.cnc.vo.BlackUserVO">
         SELECT * FROM blacklist
     </select>
 
-    <select id="getBlackSearchId" resultType="kg.air.cnc.vo.blacklist.BlackUserVO">
+    <select id="getBlackSearchId" resultType="kg.air.cnc.vo.BlackUserVO">
         SELECT * FROM blacklist WHERE black_id = #{searchId}
     </select>
 

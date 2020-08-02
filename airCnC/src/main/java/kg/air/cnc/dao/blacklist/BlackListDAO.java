@@ -1,6 +1,6 @@
 package kg.air.cnc.dao.blacklist;
 
-import kg.air.cnc.vo.blacklist.BlackUserVO;
+import kg.air.cnc.vo.BlackUserVO;
 
 import java.util.ArrayList;
 

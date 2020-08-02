@@ -2,11 +2,11 @@ package kg.air.cnc.service.waiting;
 
 import java.util.List;
 
+import kg.air.cnc.vo.HouseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.waiting.RegisterWaitingDAOImpl;
-import kg.air.cnc.vo.HouseVO;
 
 @Service
 public class RegisterWaitingServiceImpl {

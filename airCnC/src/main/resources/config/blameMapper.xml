@@ -3,19 +3,96 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kg.air.cnc.dao.blame.BlameDAO">
-    <select id="getBlameList" resultType="kg.air.cnc.vo.blame.BlameVO">
+    <select id="getBlameList" resultType="kg.air.cnc.vo.BlameVO">
         SELECT * FROM blame
     </select>
 
-    <select id="getBlameInfo" resultType="kg.air.cnc.vo.blame.BlameVO">
-        SELECT * FROM blame WHERE target_member_id = #{target_member_id}
+    <select id="getBlameInfo" resultType="kg.air.cnc.vo.BlameVO">
+        SELECT * FROM blame WHERE blame_target_member_id = #{target_member_id}
     </select>
 
     <select id="getCustomerBlameInfo" resultType="kg.air.cnc.vo.CustomerVO">
         SELECT customer_blame_warn, customer_blame_stop FROM customer WHERE customer_id = #{target_member_id}
     </select>
 
+    <select id="getHostBlameInfo" resultType="kg.air.cnc.vo.HostVO">
+        SELECT host_blame_warn, host_blame_stop FROM host WHERE host_id = #{target_member_id}
+    </select>
+
     <insert id="insertBlameWarnMessage">
         INSERT INTO message VALUES(message_seq.nextval, 'admin', #{to_id}, 'nomal', #{message_content}, sysdate)
     </insert>
+    
+    <delete id="deleteBlame">
+        DELETE FROM blame WHERE blame_target_member_id = #{target_member_id} AND blame_type = #{blame_type}
+    </delete>
+    
+    <insert id="increaseCustomerBlameWarn">
+        UPDATE customer SET customer_blame_warn = customer_blame_warn+1 WHERE customer_id = #{target_member_id}
+    </insert>
+
+    <insert id="increaseHostBlameWarn">
+        UPDATE host SET host_blame_warn = host_blame_warn+1 WHERE host_id = #{target_meber_id}
+    </insert>
+
+    <insert id="addBlackList">
+        INSERT INTO blacklist VALUES (#{id}, sysdate)
+    </insert>
+
+    <select id="getHostHouses" resultType="kg.air.cnc.vo.HouseVO">
+        SELECT house_seq FROM housetemp WHERE host_id = #{host_id}
+    </select>
+
+    <update id="setHouseStatusStop">
+        UPDATE housetemp SET house_status = 1 WHERE house_seq = #{house_seq}
+    </update>
+
+    <select id="getReservationByHostId" resultType="kg.air.cnc.vo.ReservationVO" parameterType="String">
+        SELECT * FROM reservation WHERE reservation_host_id = #{value}
+    </select>
+
+    <select id="getReservationByCustomerId" resultType="kg.air.cnc.vo.ReservationVO">
+        SELECT * FROM reservation WHERE reservation_customer_id = #{customer_id}
+    </select>
+
+    <insert id="sendCustomerReservationCancelMessage">
+        INSERT INTO message VALUES (message_seq.nextval, 'admin', #{to_id}, 'nomal', '해당 객실을 사용할 수 없게되어 환불처리되었습니다', sysdate)
+    </insert>
+
+    <insert id="sendHostReservationCacelMessage">
+        INSERT INTO message VALUES (message_seq.nextval, 'admin', #{to_id}, 'nomal', '해당 예약자에 대한 사용정지 처분으로 인해 예약이 취소되고 환불처리되었습니다.', sysdate)
+    </insert>
+
+    <update id="setReservationStatusRefund">
+        UPDATE reservation SET reservation_status = 1 WHERE reservation_host_id = #{host_id}
+    </update>
+
+    <update id="setReservationStatusRefundByCustomer">
+        UPDATE reservation SET reservation_status = 1 WHERE reservation_customer_id = #{customer_id}
+    </update>
+
+    <update id="increaseHostBlameStop">
+        UPDATE host SET host_blame_stop = host_blame_stop + 1 WHERE host_id = #{host_id}
+    </update>
+
+    <update id="increaseCustomerBlameStop">
+        UPDATE customer SET customer_blame_stop = customer_blame_stop +1 WHERE customer_id = #{customer_id}
+    </update>
+
+    <select id="checkHost" resultType="kg.air.cnc.vo.HostVO">
+        SELECT * FROM HOST WHERE host_id = #{id}
+    </select>
+
+    <delete id="deleteHouse">
+        DELETE FROM housetemp WHERE host_id = #{host_id}
+    </delete>
+
+    <delete id="deleteHost">
+        DELETE FROM host WHERE host_id = #{host_id}
+    </delete>
+
+    <delete id="deleteCustomer">
+        DELETE FROM customer WHERE customer_id = #{customer_id}
+    </delete>
+
 </mapper>

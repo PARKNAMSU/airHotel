@@ -21,6 +21,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 		int result = session.selectOne("customer.idCheck", vo);
 		return result;
 	}
+	
+	@Override
+	public int createEmailCheck(String customerEmail) throws Exception {
+		return session.selectOne("customer.createEmailCheck", customerEmail);
+	}
 
 	@Override
 	public int getKey(String customer_id, String customer_key) throws Exception{
@@ -42,7 +47,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public CustomerVO login(String customer_id)throws Exception {
-		
-		return null;
+		CustomerVO customerVO = session.selectOne("customer.login", customer_id);
+		return customerVO;
 	}
 }

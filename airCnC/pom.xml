@@ -23,14 +23,14 @@
 	<dependencies>
 	-->
 	<dependencies>
-		
 		<!-- javax.mail/mail -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
-		    <version>1.4.7</version>
+		    <version>1.5.0-b01</version>
 		</dependency>
-		
+
 		<!--com.sun.mail/javax.mail -->
 		<dependency>
 		    <groupId>com.sun.mail</groupId>

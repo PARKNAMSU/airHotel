@@ -47,7 +47,7 @@
 	<div style="margin-left: 50px;">
 		<h1 style="margin-top: 20px;">매출 상세검색</h1><br>
 		<div style="width:400px;">
-		<form action="" >
+		<form action="salesChartDetail.mdo" >
 			<input type="date" name="admin_sales_date" class="form-control"><br>
 			<input type="submit" value="검색" class="btn btn-outline-danger"> 
 		</form><br>

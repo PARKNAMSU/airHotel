@@ -65,10 +65,20 @@
 
     <div class="table-responsive">
         <table class="table">
-            <a href="/blamejudge.mdo?target_member_id=${blameinfo.get(0).target_member_id}">${blameinfo.get(0).target_member_id} </a>
+            <c:set var="blame_target_member_id" value="${blameinfo.get(0).blame_target_member_id}"/>
+            ${blame_target_member_id}
             <c:forEach var="item" items="${blameinfo}" begin="0" end="${blameinfo.size()}" step="1">
                 <tr>
-                    <td>${item.member_id}</td><td>${item.blame_content}</td>
+                    <td>${item.blame_member_id}</td>
+                    <td>${item.blame_content}</td>
+                    <td><c:set var="blame_type" value="${item.blame_type}"/>
+                        <c:if test="${blame_type eq 0}">
+                            <a href="/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="HOST"/></a>
+                        </c:if>
+                        <c:if test="${blame_type eq 1}">
+                            <a href="/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="CUSTOMER"/></a>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
