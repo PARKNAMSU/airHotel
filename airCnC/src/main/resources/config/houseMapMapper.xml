@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="houseMap">
+	<select id="getHouseList" parameterType="String">
+		SELECT *
+		FROM house_info
+		WHERE house_location=#{house_location}
+	</select>
+	
+	<select id="getHouse" parameterType="kg.air.cnc.vo.HouseVO">
+		SELECT *
+		FROM house_info
+		WHERE house_seq=#{house_seq}
+	</select>
+	
+	<select id="getHouseDetail" parameterType="Map">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoke} 
+		AND (house_bed_type_double>=#{doubleBed}*1 OR house_bed_type_queen>=#{queenBed}*1)
+		AND house_parking=#{parking}
+		AND house_laundry_washer=#{laundry}
+		AND house_gym=#{gym}
+		AND house_pool=#{pool}
+	]]>
+	</select>
+	
+</mapper>
