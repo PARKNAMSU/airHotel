@@ -43,8 +43,7 @@
 
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=124"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -105,7 +104,7 @@
 	</div>
 	<div class="top_second">
 		<div class="subdiv" id="years">
-			<form action="signupChartSearch.mdo" id="yearsForm">
+			<form action="hostChartSearch.mdo" id="yearsForm">
 				from year<input type="number" min="2000" max="2020"
 					name="searchConditionFirst" class="form-control"
 					id="yearsCondition1"><br> <br> to year<input
@@ -119,7 +118,7 @@
 			<br> <br>
 		</div>
 		<div class="subdiv" id="year">
-			<form action="signupChartSearch.mdo">
+			<form action="hostChartSearch.mdo">
 				year <select name="searchConditionFirst" class="form-control">
 					<c:forEach var="i" begin="2000" end="2020">
 						<option value="${i}">${i}년</option>
@@ -133,7 +132,7 @@
 			<br> <br>
 		</div>
 		<div class="subdiv" id="month">
-			<form action="signupChartSearch.mdo">
+			<form action="hostChartSearch.mdo">
 				month <input type="month" name="searchConditionFirst"
 					class="form-control"><br> <br> <input
 					type="hidden" name="searchType" value="month"> <input
@@ -144,7 +143,7 @@
 			<br> <br>
 		</div>
 		<div class="subdiv" id="condition">
-			<form action="signupChartSearch.mdo">
+			<form action="hostChartSearch.mdo">
 				from <br> <input type="date" class="form-control"
 					name="searchConditionFirst" id="dayCondition1"><br> <br>
 				to <input type="date" class="form-control"
@@ -157,34 +156,34 @@
 	<div style="clear: both;"></div>
 	<div class="temp"></div>
 	<div class="sales">
-		<p style="font-size: 30px; color: black;">회원가입 현황</p>
+		<p style="font-size: 30px; color: black;">호스트 신청 현황</p>
 		<div id="salesArea">
 			<table class="table table-striped" id="salesTable">
 				<tr>
 					<th>날짜</th>
-					<th>회원가입 수</th>
+					<th>호스트 신청 수</th>
 					<th>전년/월/일 대비 증감</th>
-					<th>가입비율</th>
+					<th>신청비율</th>
 					<th>총 가입수</th>
 				</tr>
-				<c:if test="${sign_upList != null }">
-					<c:if test="${sign_upList.size() >0 }">
-						<c:forEach begin="0" end="${sign_upList.size()-1 }" var="i">
+				<c:if test="${hostList != null }">
+					<c:if test="${hostList.size() >0 }">
+						<c:forEach begin="0" end="${hostList.size()-1 }" var="i">
 							<c:if test="${i == 0 }">
 								<tr>
-									<td>${sign_upList.get(i).signupchart_date }</td>
-									<td>${sign_upList.get(i).signupchart_num }명</td>
+									<td>${hostList.get(i).hostchart_date }</td>
+									<td>${hostList.get(i).hostchart_num }명</td>
 									<td></td>
-									<td>${sign_upList.get(i).signupchart_persant }%</td>
-									<td>${sign_upList.get(i).signupchart_sum }명</td>
+									<td>${hostList.get(i).hostchart_persant }%</td>
+									<td>${hostList.get(i).hostchart_sum }명</td>
 								</tr>
 							</c:if>
 							<c:if test="${i > 0 }">
 								<tr>
-									<td>${sign_upList.get(i).signupchart_date }</td>
-									<td>${sign_upList.get(i).signupchart_num }명</td>
-									<td>${sign_upList.get(i).signupchart_compare_before }명</td>
-									<td>${sign_upList.get(i).signupchart_persant }%</td>
+									<td>${hostList.get(i).hostchart_date }</td>
+									<td>${hostList.get(i).hostchart_num }명</td>
+									<td>${hostList.get(i).hostchart_compare_before }명</td>
+									<td>${hostList.get(i).hostchart_persant }%</td>
 									<td></td>
 								</tr>
 							</c:if>
@@ -198,7 +197,7 @@
 			<button onclick="ReportToPDF()" id="reportPDF"
 				class="btn btn-outline-danger"
 				style="font-size: 30px; margin-top: 10px;">보고서 다운로드(PDF)</button>
-			<button onclick="openSignupDetail()" class="btn btn-outline-danger"
+			<button onclick="openHostDetail()" class="btn btn-outline-danger"
 				style="font-size: 30px; margin-top: 10px;">상세검색</button>
 		</div>
 
@@ -268,9 +267,9 @@ function ReportToExcel(){
 	    google.charts.setOnLoadCallback(drawChart);
 	    function drawChart() {
 	      var data = google.visualization.arrayToDataTable([
-	        ['chart', 'Sales'],
-	        <c:forEach items="${sign_upList}" var="list">
-	        	['${list.signupchart_date}',${list.signupchart_num}],
+	        ['chart', 'Host'],
+	        <c:forEach items="${hostList}" var="list">
+	        	['${list.hostchart_date}',${list.hostchart_num}],
 	        </c:forEach>
 	      ]);
 
@@ -294,8 +293,8 @@ function ReportToExcel(){
 
 	        var data = google.visualization.arrayToDataTable([
 	          ['Task', 'Hours per Day'],
-		        <c:forEach items="${sign_upList}" var="list">
-	        		['${list.signupchart_date}',${list.signupchart_num }],
+		        <c:forEach items="${hostList}" var="list">
+	        		['${list.hostchart_date}',${list.hostchart_num }],
 	        	</c:forEach>
 	        ]);
 

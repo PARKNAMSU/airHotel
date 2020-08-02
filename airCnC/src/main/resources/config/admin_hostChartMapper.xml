@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="HostChartDAO">
+
+	<select id="getHostForYears" resultType="kg.air.cnc.vo.Host_ChartVO" parameterType="kg.air.cnc.vo.Host_ChartVO">
+		<![CDATA[SELECT to_date(to_char(host_regdate,'yyyy'),'yyyy') AS hostchart_regdate, COUNT(host_id) AS hostchart_num  FROM host WHERE to_char(host_regdate, 'yyyy') >= #{searchConditionFirst}
+		and to_char(host_regdate,'yyyy') <= #{searchConditionSecond} GROUP BY to_date(to_char(host_regdate,'yyyy'),'yyyy') ORDER BY to_date(to_char(host_regdate,'yyyy'),'yyyy') ASC]]>
+	</select>
+	<select id="getHostForYear" resultType="kg.air.cnc.vo.Host_ChartVO" parameterType="kg.air.cnc.vo.Host_ChartVO">
+		<![CDATA[SELECT to_date(to_char(host_regdate,'MM'),'MM') as hostchart_regdate,COUNT(host_id) as hostchart_num FROM host WHERE to_char(host_regdate, 'yyyy') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(host_regdate,'MM'),'MM') ORDER BY to_date(to_char(host_regdate,'MM'),'MM') ASC]]>
+	</select>
+	<select id="getHostForMonth" resultType="kg.air.cnc.vo.Host_ChartVO" parameterType="kg.air.cnc.vo.Host_ChartVO">
+		<![CDATA[SELECT to_date(to_char(host_regdate,'MM/dd'),'MM/dd') as hostchart_regdate,COUNT(host_id) as hostchart_num FROM host WHERE to_char(host_regdate, 'YYYY-MM') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(host_regdate,'MM/dd'),'MM/dd') ORDER BY to_date(to_char(host_regdate,'MM/dd'),'MM/dd') ASC]]>
+	</select>
+	<select id="getHostForDays" resultType="kg.air.cnc.vo.Host_ChartVO" parameterType="kg.air.cnc.vo.Host_ChartVO">
+		<![CDATA[SELECT to_date(to_char(host_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') as hostchart_regdate,COUNT(host_id) as hostchart_num FROM host WHERE to_char(host_regdate, 'YYYY-MM-DD') >= #{searchConditionFirst} and to_char(host_regdate, 'YYYY-MM-DD') <= #{searchConditionSecond} 
+		 GROUP BY to_date(to_char(host_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(host_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
+	</select>
+	<select id="getHostDetail" resultType="kg.air.cnc.vo.HostVO" parameterType="kg.air.cnc.vo.Host_ChartVO">
+		SELECT host_id, host_name, host_email, host_phone,host_account,host_blame_stop,host_blame_warn,host_regdate FROM host WHERE to_char(host_regdate,'YYYY-MM-dd') = #{hostchart_date}
+	</select>
+</mapper>
