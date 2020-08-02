@@ -27,7 +27,14 @@ public class CustomerServiceImpl implements CustomerService{
 	public int idCheck(CustomerVO vo) throws Exception {
 		return dao.idCheck(vo);
 	}
+	
+	// 이메일 중복 여부 검사.
+	@Override
+	public int createEmailCheck(String customerEmail) throws Exception {
+		return dao.createEmailCheck(customerEmail);
+	}
 
+	// 로그인.
 	@Override
 	public int login(CustomerVO vo, HttpSession session, String rememberId, HttpServletResponse response)throws Exception {
 		String customer_id = vo.getCustomerId();

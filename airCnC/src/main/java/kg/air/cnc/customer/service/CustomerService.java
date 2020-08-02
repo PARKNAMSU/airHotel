@@ -13,6 +13,9 @@ public interface CustomerService {
 	// 아이디 중복 여부 검사.
 	public int idCheck(CustomerVO vo) throws Exception;
 	
+	// 이메일 중복 여부 검사.
+	public int createEmailCheck(String customerEmail) throws Exception;
+	
 	// 로그인.
 	public int login(CustomerVO vo, HttpSession session, String rememberId, HttpServletResponse response)throws Exception;
 }
