@@ -97,6 +97,29 @@ public class HouseController {
 	public String location(@ModelAttribute("house") HouseVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("location : " + house.getHouse_loaction_sido());
-		return "5reservationmap";
+		System.out.println("location_x : " + house.getHouse_xlocation());
+		System.out.println("location_y : " + house.getHouse_ylocation() );
+		return "5defaultoption";
+	}
+	
+	@RequestMapping(value = "/5defaultoption.do")
+	public String defaultoption(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("defaultsetting : " + house.isHouse_defaultsetting());
+		return "6guestcomfortable";
+	}
+	
+	@RequestMapping(value = "/6guestcomfortable.do")
+	public String guestcomfortable(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("guestcomfortable : " + house.isHouse_default_livingroom_type());
+		return "7guesttextarea";
+	}
+	
+	@RequestMapping(value = "/7guesttextarea.do")
+	public String guesttextarea(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("guesttextarea : " + house.getHouse_desc1());
+		return "8hosthouseimg";
 	}
 }

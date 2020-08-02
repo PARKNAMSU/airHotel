@@ -24,7 +24,240 @@ public class HouseVO {
 	private String house_loaction_sido;
 	private String house_location_gugun;
 	private String house_location_postnum;
+	private String house_xlocation;
+	private String house_ylocation;
 	
+	
+	private boolean house_defaultsetting;
+	private boolean house_default_tv;
+	private boolean house_default_wifi;
+	private boolean house_default_heater;
+	private boolean house_default_cooler;
+	private boolean house_default_iron;
+	private boolean house_default_fireditecter;
+	private boolean house_default_coditecter;
+	private boolean house_default_aidkit;
+	private boolean house_default_firesofwa;
+	private boolean house_default_bedrock;
+	
+	
+	private boolean house_default_livingroom_type;
+	private boolean house_default_kitchen;
+	private boolean house_default_laundry_washer;
+	private boolean house_default_laundry_dryer;
+	private boolean house_default_parking;
+	private boolean house_default_gym;
+	private boolean house_default_pool;
+	
+	private String house_desc1;
+	private String house_desc2;
+	private String house_desc3;
+	private String house_desc4;
+	private String house_desc5;
+	
+	private String house_photourl;
+	private String house_name;
+	
+	private boolean house_conditiion_childok;
+	private boolean house_condition_babyok;
+	private boolean house_condition_petok;
+	private boolean house_condition_smokeok;
+	private boolean house_condition_partyok;
+	private boolean house_restrict_stairs;
+	private boolean house_restrict_noise;
+	private boolean house_restrict_pet;
+	private boolean house_restrict_cantpark;
+	private boolean house_restrict_commonspace;
+	private boolean house_restrict_facility;
+	private boolean house_restrict_cctv;
+	private boolean house_restrict_weapon;
+	private boolean house_restrict_beast;
+	
+	private int house_price_default;
+	private int house_price_max;
+	private float house_star;
+	private int house_status;
+	
+	private String house_host_id;
+
+	private Timestamp house_checkin_time;
+	private Timestamp house_checkout_time;
+	private Date house_regdate;
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public String getHouse_desc1() {
+		return house_desc1;
+	}
+	public void setHouse_desc1(String house_desc1) {
+		this.house_desc1 = house_desc1;
+	}
+	public String getHouse_desc2() {
+		return house_desc2;
+	}
+	public void setHouse_desc2(String house_desc2) {
+		this.house_desc2 = house_desc2;
+	}
+	public String getHouse_desc3() {
+		return house_desc3;
+	}
+	public void setHouse_desc3(String house_desc3) {
+		this.house_desc3 = house_desc3;
+	}
+	public String getHouse_desc4() {
+		return house_desc4;
+	}
+	public void setHouse_desc4(String house_desc4) {
+		this.house_desc4 = house_desc4;
+	}
+	public String getHouse_desc5() {
+		return house_desc5;
+	}
+	public void setHouse_desc5(String house_desc5) {
+		this.house_desc5 = house_desc5;
+	}
+	
+	
+	
+	
+
+	public boolean isHouse_default_livingroom_type() {
+		return house_default_livingroom_type;
+	}
+	public void setHouse_default_livingroom_type(boolean house_default_livingroom_type) {
+		this.house_default_livingroom_type = house_default_livingroom_type;
+	}
+	public boolean isHouse_default_kitchen() {
+		return house_default_kitchen;
+	}
+	public void setHouse_default_kitchen(boolean house_default_kitchen) {
+		this.house_default_kitchen = house_default_kitchen;
+	}
+	public boolean isHouse_default_laundry_washer() {
+		return house_default_laundry_washer;
+	}
+	public void setHouse_default_laundry_washer(boolean house_default_laundry_washer) {
+		this.house_default_laundry_washer = house_default_laundry_washer;
+	}
+	public boolean isHouse_default_laundry_dryer() {
+		return house_default_laundry_dryer;
+	}
+	public void setHouse_default_laundry_dryer(boolean house_default_laundry_dryer) {
+		this.house_default_laundry_dryer = house_default_laundry_dryer;
+	}
+	public boolean isHouse_default_parking() {
+		return house_default_parking;
+	}
+	public void setHouse_default_parking(boolean house_default_parking) {
+		this.house_default_parking = house_default_parking;
+	}
+	public boolean isHouse_default_gym() {
+		return house_default_gym;
+	}
+	public void setHouse_default_gym(boolean house_default_gym) {
+		this.house_default_gym = house_default_gym;
+	}
+	public boolean isHouse_default_pool() {
+		return house_default_pool;
+	}
+	public void setHouse_default_pool(boolean house_default_pool) {
+		this.house_default_pool = house_default_pool;
+	}
+	
+	
+	
+	
+	
+	
+	public boolean isHouse_defaultsetting() {
+		return house_defaultsetting;
+	}
+	public void setHouse_defaultsetting(boolean house_defaultsetting) {
+		this.house_defaultsetting = house_defaultsetting;
+	}
+	public boolean isHouse_default_tv() {
+		return house_default_tv;
+	}
+	public void setHouse_default_tv(boolean house_default_tv) {
+		this.house_default_tv = house_default_tv;
+	}
+	public boolean isHouse_default_wifi() {
+		return house_default_wifi;
+	}
+	public void setHouse_default_wifi(boolean house_default_wifi) {
+		this.house_default_wifi = house_default_wifi;
+	}
+	public boolean isHouse_default_heater() {
+		return house_default_heater;
+	}
+	public void setHouse_default_heater(boolean house_default_heater) {
+		this.house_default_heater = house_default_heater;
+	}
+	public boolean isHouse_default_cooler() {
+		return house_default_cooler;
+	}
+	public void setHouse_default_cooler(boolean house_default_cooler) {
+		this.house_default_cooler = house_default_cooler;
+	}
+	public boolean isHouse_default_iron() {
+		return house_default_iron;
+	}
+	public void setHouse_default_iron(boolean house_default_iron) {
+		this.house_default_iron = house_default_iron;
+	}
+	public boolean isHouse_default_fireditecter() {
+		return house_default_fireditecter;
+	}
+	public void setHouse_default_fireditecter(boolean house_default_fireditecter) {
+		this.house_default_fireditecter = house_default_fireditecter;
+	}
+	public boolean isHouse_default_coditecter() {
+		return house_default_coditecter;
+	}
+	public void setHouse_default_coditecter(boolean house_default_coditecter) {
+		this.house_default_coditecter = house_default_coditecter;
+	}
+	public boolean isHouse_default_aidkit() {
+		return house_default_aidkit;
+	}
+	public void setHouse_default_aidkit(boolean house_default_aidkit) {
+		this.house_default_aidkit = house_default_aidkit;
+	}
+	public boolean isHouse_default_firesofwa() {
+		return house_default_firesofwa;
+	}
+	public void setHouse_default_firesofwa(boolean house_default_firesofwa) {
+		this.house_default_firesofwa = house_default_firesofwa;
+	}
+	public boolean isHouse_default_bedrock() {
+		return house_default_bedrock;
+	}
+	public void setHouse_default_bedrock(boolean house_default_bedrock) {
+		this.house_default_bedrock = house_default_bedrock;
+	}
+	
+	
+	
+	
+	
+	public String getHouse_xlocation() {
+		return house_xlocation;
+	}
+	public void setHouse_xlocation(String house_xlocation) {
+		this.house_xlocation = house_xlocation;
+	}
+	public String getHouse_ylocation() {
+		return house_ylocation;
+	}
+	public void setHouse_ylocation(String house_ylocation) {
+		this.house_ylocation = house_ylocation;
+	}
 	public String getHouse_location() {
 		return house_location;
 	}
@@ -49,59 +282,12 @@ public class HouseVO {
 	public void setHouse_location_postnum(String house_location_postnum) {
 		this.house_location_postnum = house_location_postnum;
 	}
-	private int house_defaultsetting;
-	private int house_default_tv;
-	private int house_default_wifi;
-	private int house_default_heater;
-	private int house_default_cooler;
-	private int house_default_iron;
-	private int house_default_fireditecter;
-	private int house_default_coditecter;
-	private int house_default_aidkit;
-	private int house_default_firesofwa;
-	private int house_default_bedrock;
-	private int house_default_livingroom_type;
-	private int house_default_kitchen;
-	private int house_default_laundry_washer;
-	private int house_default_laundry_dryer;
-	private int house_default_parking;
-	private int house_default_gym;
-	private int house_default_pool;
 	
-	private String house_desc1;
-	private String house_desc2;
-	private String house_desc3;
-	private String house_desc4;
-	private String house_desc5;
-	private String house_photourl;
-	private String house_name;
 	
-	private int house_conditiion_childok;
-	private int house_condition_babyok;
-	private int house_condition_petok;
-	private int house_condition_smokeok;
-	private int house_condition_partyok;
-	private int house_restrict_stairs;
-	private int house_restrict_noise;
-	private int house_restrict_pet;
-	private int house_restrict_cantpark;
-	private int house_restrict_commonspace;
-	private int house_restrict_facility;
-	private int house_restrict_cctv;
-	private int house_restrict_weapon;
-	private int house_restrict_beast;
 	
-	private int house_price_default;
-	private int house_price_max;
-	private float house_star;
-	private int house_status;
 	
-	private String house_host_id;
-	private float house_xlocation;
-	private float house_ylocation;
-	private Timestamp house_checkin_time;
-	private Timestamp house_checkout_time;
-	private Date house_regdate;
+	
+	
 	
 	public int getHouse_bathroom_amount() {
 		return house_bathroom_amount;
