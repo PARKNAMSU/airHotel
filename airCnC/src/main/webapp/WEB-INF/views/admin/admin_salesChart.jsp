@@ -57,10 +57,10 @@
     <!-- slider_area_end -->
 	<div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a href="../project/admin_salesChart.jsp">매출현황</a></li>
-			<li class="menu"><a href="../project/admin_useChart.jsp">숙소이용 현황</a></li>
-			<li class="menu"><a href="../project/admin_signupChart.jsp">회원가입 현황</a></li>
-			<li class="menu"><a href="../project/admin_hostChart.jsp">호스트 신청 현황</a></li>
+			<li class="menu"><a href="salesChart.mdo">매출현황</a></li>
+			<li class="menu"><a href="">숙소이용 현황</a></li>
+			<li class="menu"><a href="signupChart.mdo">회원가입 현황</a></li>
+			<li class="menu"><a href="">호스트 신청 현황</a></li>
 		</ul>
 	</div>
 	<div class="top_first">

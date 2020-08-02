@@ -12,9 +12,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kg.air.cnc.dao.chart.Sign_upChartDAO;
 import kg.air.cnc.service.chart.Admin_salesService;
+import kg.air.cnc.service.chart.HostChartService;
 import kg.air.cnc.service.chart.Sign_upChartService;
 import kg.air.cnc.vo.Admin_salesVO;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
+import kg.air.cnc.vo.Host_ChartVO;
 import kg.air.cnc.vo.Sign_upChartVO;
 
 @Controller
@@ -23,6 +26,8 @@ public class ChartController {
 	private Admin_salesService admin_salesService;
 	@Autowired
 	private Sign_upChartService sign_upChartService;
+	@Autowired
+	private HostChartService hostChartService;
 	
 	/*매출 차트*/
 	
@@ -94,6 +99,40 @@ public class ChartController {
 			}
 		}
 		mav.setViewName("admin_signupChartpopup");
+		return mav;
+	}
+	/*호스트 신청 차트*/
+	@RequestMapping("hostChart.mdo")
+	public ModelAndView hostChartController(ModelAndView mav) {
+		mav.setViewName("admin_hostChart");
+		return mav;
+	}
+	@RequestMapping("hostChartSearch.mdo")
+	public ModelAndView hostChartController(Host_ChartVO vo,ModelAndView mav) {
+		System.out.println(vo.getSearchConditionFirst());
+		System.out.println(vo.getSearchType());
+		List<Host_ChartVO> list = null;
+		if(vo.getSearchType().equals("years"))list = hostChartService.getAdmin_HostForYears(vo);
+		if(vo.getSearchType().equals("year"))list = hostChartService.getAdmin_HostForYear(vo);
+		if(vo.getSearchType().equals("month"))list = hostChartService.getAdmin_HostForMonth(vo);
+		if(vo.getSearchType().equals("days"))list = hostChartService.getAdmin_HostForDays(vo);
+		if(list != null) {
+			mav.addObject("hostList",list);
+			mav.setViewName("admin_hostChart");
+		}else {
+			mav.setViewName("redirect:hostChart.mdo");
+		}
+		return mav;
+	}
+	@RequestMapping("hostChartDetail.mdo")
+	public ModelAndView hostChartDetaliController(Host_ChartVO vo,ModelAndView mav) {
+		if(vo.getHostchart_date() != null) {
+			List<HostVO> list = hostChartService.getAdmin_HostDetail(vo);
+			if(list.size() >0) {
+				mav.addObject("hostList",list);
+			}
+		}
+		mav.setViewName("admin_hostChartpopup");
 		return mav;
 	}
 
