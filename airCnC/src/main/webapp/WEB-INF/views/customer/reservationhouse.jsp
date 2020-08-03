@@ -31,12 +31,12 @@ div {
 	<div style="clear:both;"></div>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<div class="headdiv">
-		<span style="font-size:50px;font-family: 'Jua', sans-serif;">종로/3가/경복궁/통인시장</span>
+		<span style="font-size:50px;font-family: 'Jua', sans-serif;">${house.house_name }</span>
 		<div id="belike">
 			<div class="headimgdiv">
 				<a href="#rate" style="font-family: 'Jua', sans-serif;">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
-				4.83(24)</a><!-- 평점, 후기 개수 -->
+				${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
 			</div>
 			<div class="headimgdiv" style="margin-left:2%;">
 				<a href="" style="font-family: 'Jua', sans-serif;">
@@ -59,40 +59,72 @@ div {
 	</div>
 	<div style="clear:both;"></div><br><br>
 		<div id="introdiv">
-		<p style="font-size:40px;" style="font-family: 'Jua', sans-serif;">호스트 소개</p><br><br>
+		<p style="font-size:40px;" style="font-family: 'Jua', sans-serif;">${house.house_location } ${house.house_location_sido } ${house.house_location_gugun }<br>${house.house_location_postnum }</p><br><br>
 		<div id="hostname">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">홍길동</b><br><br>
-			<p style="font-family: 'Jua', sans-serif;">회원가입일: 2015/02/01</p>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">${house.host_name }</b><br><br>
+			<p style="font-family: 'Jua', sans-serif;">회원가입일: ${house.host_regdate }</p>
 		</div><br>
 		<div id="hostcondition">
-						<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" style="width:25px;height:25px;"><b>후기 24 개</b>&nbsp;
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" style="width:25px;height:25px;"><b>후기 ${commentsList.size() }개</b>&nbsp;
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/medal.png" style="width:25px;height:25px;"><b>슈퍼호스트</b><!-- 슈퍼호스트일 경우에만 -->
 		</div><br>
 		<div id="hostintro" style="	line-height: 23px;width:50%;float:left;"> 
-			<p style="font-family: 'Jua', sans-serif;">산과 숲을 좋아해서 자연속으로 거쳐를 옮긴지 2년이 가까워 옵니다. 서울에서 오랜세월 만화웹툰기획.제작자로 일하면서 살아오다가 이곳 산골로 들어와서도 여전히 관련일을 하고자 했으나 산책로와 자연에 취해 까짓것 하던일을 멈추고 고양이처럼 게으르게 살아가고 있어요. 꼭 계획했던 대로 사는것만이 행복한 삶이 아니란걸 .... 여행자처럼 설레임을 안고 오늘을 행복하게 살아가고 있어요. 산책, 영화. 음악감상, 독서 사색, 고양이와 놀기, 요리하며 즐기는 삶에 언제나 숲과 산이 함께하죠.</p>
+			<p style="font-family: 'Jua', sans-serif;">숙소소개<br>${house.house_desc1 }<br>${house.house_desc2}<br><br>주변 관광지<br>${house.house_desc4 }<br><br>숙소근처 교통<br>${house.house_desc5}</p>
 		</div><br><br>
 		<div id="" style="float:left;width:50%;padding-top:5%;padding-left: 16%">
-			<button class="btn btn-outline-danger" onclick="openMessage('${session_login}','gggg')" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
+			<button class="btn btn-outline-danger" onclick="openMessage('${session_login}',${house.host_id })" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
 		</div>
 	</div>
 	<div style="clear:both;"></div>
 	<div class="infodiv">
 		<div class="subinfodiv">
-			<span id="title" style="font-family: 'Jua', sans-serif;">홍길동 님의 숙소</span>
+			<span id="title" style="font-family: 'Jua', sans-serif;">${house.host_id } 님의 숙소</span>
 			<br><br><br><br>
-			<p style="font-family: 'Jua', sans-serif;">최대인원 10명, 방 5개, 욕실 5개, 침대 5개</p>
+			<p style="font-family: 'Jua', sans-serif;">최대인원 ${house.house_maxperson}명, 욕실 ${house_bathroom_amount}개<br>
+			싱글침대 ${house.house_bed_type_single }, 더블침대 ${house.house_bed_type_double }, 퀸사이즈 침대 ${house.house_bed_type_queen }</p>
 			
 		</div>
 		<hr>
 		<div class="subinfodiv">
-			<span id="title" style="font-family: 'Jua', sans-serif;">여행 테마</span><br><br><br><br>
-			<h3 style="font-family: 'Jua', sans-serif;">애완견과 함께, 유명 관광지와 가까운</h3>
+			<span id="title" style="font-family: 'Jua', sans-serif;">편의시설</span><br><br><br><br>
+			<h3 style="font-family: 'Jua', sans-serif;">
+			<c:forEach begin="1" end="${house.convinList.size() }" var="i">
+			<c:if test="${i <house.convinList.size() }">
+			${house.convinList.get(i-1) },&nbsp;
+			</c:if>
+			<c:if test="${i == house.convinList.size() }">
+			${house.convinList.get(i-1)}
+			</c:if>
+			</c:forEach>
+			</h3>
 			
 		</div>
 		<hr>
 		<div class="subinfodiv">
-			<span id="title" style="font-family: 'Jua', sans-serif;">편의 시설</span><br><br><br><br>
-			<p style="font-family: 'Jua', sans-serif;">흡연실, 와이파이, 냉장고</p>
+			<span id="title" style="font-family: 'Jua', sans-serif;">특이사항</span><br><br><br><br>
+			<p style="font-family: 'Jua', sans-serif;">
+			<c:forEach begin="1" end="${house.restricList.size() }" var="i">
+			<c:if test="${i < house.restricList.size()}">
+			${house.restricList.get(i-1) },&nbsp;
+			</c:if>
+			<c:if test="${i == house.restricList.size()}">
+			${house.restricList.get(i-1) }
+			</c:if>
+			</c:forEach>
+			</p>
+		</div>
+		<div class="subinfodiv">
+			<span id="title" style="font-family: 'Jua', sans-serif;">제약사항</span><br><br><br><br>
+			<p style="font-family: 'Jua', sans-serif;">
+			<c:forEach begin="1" end="${house.conditionList.size() }" var="i">
+			<c:if test="${i < house.conditionList.size()}">
+			${house.conditionList.get(i-1) },&nbsp;
+			</c:if>
+			<c:if test="${i == house.conditionList.size()}">
+			${house.conditionList.get(i-1) }
+			</c:if>
+			</c:forEach>
+			</p>
 		</div>
 		<hr>
 		<div class="subinfodiv">
@@ -100,12 +132,12 @@ div {
 			<div class="check">
 				<strong style="font-family: 'Jua', sans-serif;">체크인</strong><br><br>
 				<p style="font-family: 'Jua', sans-serif;">2020/07/21</p><br>
-				<p style="font-family: 'Jua', sans-serif;">11:00AM</p>
+				<p style="font-family: 'Jua', sans-serif;">${house.house_checkin_time }</p>
 			</div>
 			<div class="check" style="border: none;">
 				<strong style="font-family: 'Jua', sans-serif;">체크아웃</strong><br><br>
 				<p style="font-family: 'Jua', sans-serif;">2020/07/22</p><br>
-				<p style="font-family: 'Jua', sans-serif;">04:00PM</p>
+				<p style="font-family: 'Jua', sans-serif;">${house.house_checkout_time }</p>
 			</div>
 		</div>
 		<br><br><hr>
@@ -125,12 +157,12 @@ div {
 		<div id="rate">
 			<p style="font-size:40px" style="font-family: 'Jua', sans-serif;">후기</p><br><br>
 			<a id="star" style="font-family: 'Jua', sans-serif;"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
-			4.83(24)</a><!-- 평점, 후기 개수 -->
+			${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
 			<br><br>
 			<form action="insertComments.do" id="commentsForm">
 				<textarea rows="5" cols="100" id="commant" name="comments_content" class="form-control"></textarea><br>
 				<input type="hidden" value="0" id="comments_rate" name="comments_rate">
-				<input type="hidden" name="comments_house_seq" value="${house_seq}">
+				<input type="hidden" name="comments_house_seq" value="${house.house_seq}">
 				<input type="hidden" name="comments_id" value="${session_login}">
 				<input type="button" onclick="openSetRate()" class="btn btn-outline-danger" value="입력" style="width:150px;height:75px;font-family:'Jua', sans-serif;" >
 				<input type="button" onclick="openSetRateUpdate()" class="btn btn-outline-danger" value="수정" style="width:150px;height:75px;font-family:'Jua', sans-serif;display: none;" >
@@ -143,7 +175,7 @@ div {
 				<img alt="64x64" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">${item.comments_name }</b>&nbsp;&nbsp;<c:forEach begin="1" end="${item.comments_rate}" step="1"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg"></c:forEach>
 				<c:if test="${item.comments_id eq session_login }">
 				<input type="hidden" id="hidseq${i.index}" value="${item.comments_seq }">
-				<input type="hidden" id="hidhouse${i.index}" value="${house_seq }">
+				<input type="hidden" id="hidhouse${i.index}" value="${house.house_seq }">
 				<input type="hidden" id="hidcontent${i.index}" value="${item.comments_content }">
 				<p><a style="margin-left:94%;" onclick="openSetRateUpdate(document.getElementById('hidseq${i.index}').value,document.getElementById('hidhouse${i.index}).value'),document.getElementById('hidcontent${i.index}').value)" style="font-family: 'Jua', sans-serif;" >수정</a> | <a href="deleteComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${house_seq}" style="font-family: 'Jua', sans-serif;">삭제</a></p>
 				</c:if>

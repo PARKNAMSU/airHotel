@@ -12,6 +12,13 @@ public class CommentsVO {
 	private int comments_rate;
 	private Date comments_regdate;
 	private String comments_date;
+	private float comments_average;
+	public float getComments_average() {
+		return comments_average;
+	}
+	public void setComments_average(float comments_average) {
+		this.comments_average = comments_average;
+	}
 	public String getComments_date() {
 		return comments_date;
 	}

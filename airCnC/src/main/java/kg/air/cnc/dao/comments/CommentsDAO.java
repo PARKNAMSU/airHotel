@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Repository
 public class CommentsDAO implements CommentsDAOImpl{
@@ -18,7 +19,7 @@ public class CommentsDAO implements CommentsDAOImpl{
 		sqlSessionTemplate.insert("CommentsDAO.insertComments",vo);
 	}
 	@Override
-	public List<CommentsVO> getComments(HouseVO vo) {
+	public List<CommentsVO> getComments(ReservationHouseDetailVO vo) {
 		return sqlSessionTemplate.selectList("CommentsDAO.getComments",vo);
 	}
 

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kg.air.cnc.service.reservation.ReservationService;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Controller
 public class MyReservationController {
@@ -30,7 +31,7 @@ public class MyReservationController {
 	public String myReservationController(HttpSession session) throws JsonProcessingException {
 		session.setAttribute("login_session", "skatn");
 		String id = (String)session.getAttribute("login_session");
-		List<HouseVO> list = reservationService.getMyReservation(id);
+		List<ReservationHouseDetailVO> list = reservationService.getMyReservation(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
 		System.out.println(jsonStr);
@@ -40,7 +41,7 @@ public class MyReservationController {
 	@ResponseBody
 	public String myReservationBeforeController(HttpSession session) throws JsonProcessingException {
 		String id = (String)session.getAttribute("login_session");
-		List<HouseVO> list = reservationService.getMyReservationBefore(id);
+		List<ReservationHouseDetailVO> list = reservationService.getMyReservationBefore(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
 		System.out.println(jsonStr);

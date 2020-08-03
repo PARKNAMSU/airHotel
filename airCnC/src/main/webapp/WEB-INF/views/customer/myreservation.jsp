@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/myreservation.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -83,7 +81,7 @@
 	var getData = [];
 	var area = 1;
 	var instanceNum = 3;
-
+	var type = "nowres";
 	window.onload = function(){	
 	     $.ajax({
 	           type:"GET",
@@ -93,7 +91,7 @@
 					getData = data;
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"'")
+							$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"&reservation_seq="+getData[i-1].reservation_seq+"&accessType="+type+"'")
 							//$("img"+i).attr("src","") 나중에 추가
 							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
 						}else{
@@ -123,7 +121,7 @@
 			var b = 1;
 			for(var i=a;i<a+instanceNum;i++){
 				if(getData[i] != null){
-					$("#imgdiv"+b).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i].house_seq+"'")
+					$("#imgdiv"+b).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i].house_seq+"&reservation_seq="+getData[i].reservation_seq+"'")
 					//$("img"+b).attr("src","") 나중에 추가
 					$("#td"+b).html('<p>'+getData[i].house_name+'</p>')
 					console.log(i)
@@ -144,7 +142,7 @@
 			var b = 1;
 			for(var i=1; i<=3;i++){
 				$("#imgdiv"+i).css("display","initial");
-				$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[a].house_seq+"'")
+				$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[a].house_seq+"&reservation_seq="+getData[a].reservation_seq+"'")
 				//$("img"+b).attr("src","") 나중에 추가
 				$("#td"+i).html('<p>'+getData[a].house_name+'</p>')
 				a++;
@@ -156,6 +154,7 @@
 	})
 	var getRes = function(){
 		area = 1;
+		type = "nowres";
 		for(var i=1; i<=3;i++){
 			$("#imgdiv"+i).css("display","initial");
 		}
@@ -171,7 +170,7 @@
 					}
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"'")
+							$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"&reservation_seq="+getData[i-1].reservation_seq+"'")
 							//$("img"+i).attr("src","") 나중에 추가
 							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
 						}else{
@@ -190,6 +189,7 @@
 		
 		var getResBefore = function(){
 			area = 1;
+			type = "beforeres";
 			for(var i=1; i<= 3;i++){
 				$("#imgdiv"+i).css("display","initial");
 			}
@@ -204,7 +204,7 @@
 						}
 						for(var i=1;i<=instanceNum;i++){
 							if(getData[i-1] != null){
-								$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"'")
+								$("#imgdiv"+i).attr("onclick","location.href='reservationHouse.do?house_seq="+getData[i-1].house_seq+"&reservation_seq="+getData[i-1].reservation_seq+"'")
 								//$("img"+i).attr("src","") 나중에 추가
 								$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
 							}else{

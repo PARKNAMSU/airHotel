@@ -1,6 +1,8 @@
 package kg.air.cnc.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReservationHouseDetailVO {
 	private int house_seq;
@@ -43,6 +45,7 @@ public class ReservationHouseDetailVO {
 	private String house_condition_babyok;
 	private String house_condition_smokeok;
 	private String house_condition_partyok;
+	private String house_condition_petok;
 	private String house_restrict_stairs;
 	private String house_restrict_noise;
 	private String house_restrict_pet;
@@ -60,12 +63,48 @@ public class ReservationHouseDetailVO {
 	private int house_price_max;
 	private String house_checkin_time;
 	private String house_checkout_time;
-	private String host_Id;
+	private String host_id;
 	private String host_name;
     private String host_image;
     private String host_phone;
     private Date host_regdate;
-    private int reservation_seq;
+
+	private int reservation_seq;
+    private ArrayList<String> convinList;
+    private ArrayList<String> restricList;
+    private ArrayList<String> conditionList;
+    private String accessType;
+    public String getHost_id() {
+		return host_id;
+	}
+	public void setHost_id(String host_id) {
+		this.host_id = host_id;
+	}
+	public String getAccessType() {
+		return accessType;
+	}
+	public void setAccessType(String accessType) {
+		this.accessType = accessType;
+	}
+	public ArrayList<String> getConvinList() {
+		return convinList;
+	}
+	public void setConvinList(ArrayList<String> convinList) {
+		this.convinList = convinList;
+	}
+
+	public ArrayList<String> getRestricList() {
+		return restricList;
+	}
+	public void setRestricList(ArrayList<String> restricList) {
+		this.restricList = restricList;
+	}
+	public ArrayList<String> getConditionList() {
+		return conditionList;
+	}
+	public void setConditionList(ArrayList<String> conditionList) {
+		this.conditionList = conditionList;
+	}
 	public int getReservation_seq() {
 		return reservation_seq;
 	}
@@ -119,6 +158,13 @@ public class ReservationHouseDetailVO {
 	}
 	public void setHouse_bed_type_single(int house_bed_type_single) {
 		this.house_bed_type_single = house_bed_type_single;
+	}
+	
+	public String getHouse_condition_petok() {
+		return house_condition_petok;
+	}
+	public void setHouse_condition_petok(String house_condition_petok) {
+		this.house_condition_petok = house_condition_petok;
 	}
 	public int getHouse_bed_type_double() {
 		return house_bed_type_double;
@@ -413,12 +459,6 @@ public class ReservationHouseDetailVO {
 	}
 	public void setHouse_checkout_time(String house_checkout_time) {
 		this.house_checkout_time = house_checkout_time;
-	}
-	public String getHost_Id() {
-		return host_Id;
-	}
-	public void setHost_Id(String host_Id) {
-		this.host_Id = host_Id;
 	}
 	public String getHost_name() {
 		return host_name;

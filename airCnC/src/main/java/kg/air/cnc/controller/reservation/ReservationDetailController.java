@@ -1,5 +1,7 @@
 package kg.air.cnc.controller.reservation;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.comments.CommentsService;
 import kg.air.cnc.service.message.MessageService;
+import kg.air.cnc.service.reservation.ReservationService;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.MessageVO;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Controller
 public class ReservationDetailController {
@@ -20,6 +24,8 @@ public class ReservationDetailController {
 	CommentsService commentsService;
 	@Autowired
 	MessageService messageService;
+	@Autowired
+	ReservationService reservationService;
 	
 	@RequestMapping("myreservation.do")
 	public ModelAndView myReservationController(ModelAndView mav) {
@@ -27,11 +33,14 @@ public class ReservationDetailController {
 		return mav;
 	}
 	@RequestMapping("reservationHouse.do")
-	public ModelAndView reservationDetailController(HouseVO vo,HttpSession session,ModelAndView mav) {
+	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,ModelAndView mav) {
 		session.setAttribute("session_login", "skatn");
+		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
+		System.out.println(vo.getReservation_seq());
+		house.setReservation_seq(vo.getReservation_seq());
+		house.setAccessType(vo.getAccessType());
 		mav.addObject("commentsList",commentsService.getComments(vo));
-		mav.addObject("house_seq",vo.getHouse_seq());
-		System.out.println(vo.getHouse_seq());
+		mav.addObject("house",house);
 		mav.setViewName("reservationhouse");
 		return mav;
 	}
