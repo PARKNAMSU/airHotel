@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReservationDAO">
+
+	<select id="getMyReservaiton" parameterType="String" resultType="kg.air.cnc.vo.HouseVO">
+		<![CDATA[select h.house_seq as house_seq , h.house_photourl as house_photourl, h.house_name as house_name from reservation join house_info h on reservation_house_seq = house_seq where reservation_customer_id = #{value} and reservation_check_in > sysdate]]> 
+	</select>
+	<select id="getMyReservationBefore" parameterType="String" resultType="kg.air.cnc.vo.HouseVO">
+		<![CDATA[select h.house_seq as house_seq , h.house_photourl as house_photourl, h.house_name as house_name from reservation join house_info h on reservation_house_seq = house_seq where reservation_customer_id = #{value} and reservation_check_in < sysdate]]> 
+	</select>
+	<!--
+	<select id="getMyReservationHouse" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO">
+		 SELECT house_seq, house_maxperson,house_bed_type_single, house_bed_type_double, house_bed_type_queen, house_bathroom_amount, house_location, house_location_sido,house_location_gugun, house_location_postnum, house_default_tv, house_default_wifi
+	</select>
+	 -->
+</mapper>
