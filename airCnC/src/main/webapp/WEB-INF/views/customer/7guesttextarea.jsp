@@ -42,7 +42,7 @@
 	<!-- header-start -->
     <header class="menudiv1">
       <div class="menudiv2-1">
-        <label for="menudiv2-1">숙소 및 게스트</label>
+        <label for="menudiv2-1">편의시설</label>
         <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
       </div>
       <div class="menudiv2-2">

@@ -41,7 +41,7 @@
 	<!-- header-start -->
     <header class="menudiv1">
       <div class="menudiv2-1">
-        <label for="menudiv2-1">숙소 및 게스트</label>
+        <label for="menudiv2-1">편의시설</label>
         <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
       </div>
       <div class="menudiv2-2">
@@ -62,37 +62,37 @@
       <div class="form">
         <img src="${pageContext.request.contextPath}/resources/images/guestfacilities1.png" style="margin-top: 35px;">
         <div class="guestcomfor1" ><h3 style="font-size: 50px; font-weight: bold; padding-top: 35px;">게스트가 어떤 공간을 쓸수 있나요?</h3>
-            <form:checkbox id="cb1" path="house_default_livingroom_type" />
+            <form:checkbox id="cb1" path="house_default_livingroom_type_0or1" value="true"/>
         	<label for="guestcomfor1"style="font-size: 30px; font-weight: bold;   padding-top: 15px;">단독 사용하는 거실</label>
     	</div>
     	
 	    <div class="guestcomfor2">
-	    	<form:checkbox id="cb2" path="house_default_kitchen" />
+	    	<form:checkbox id="cb2" path="house_default_kitchen_0or1" value="true"/>
 	        <label for="guestcomfor2" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">주방</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor3">
-	        <form:checkbox id="cb3" path="house_default_laundry_washer" />
+	        <form:checkbox id="cb3" path="house_default_laundry_washer_0or1" value="true"/>
 	        <label for="guestcomfor3" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">세탁공간-세탁기</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor4">
-	        <form:checkbox id="cb4" path="house_default_laundry_dryer" />
+	        <form:checkbox id="cb4" path="house_default_laundry_dryer_0or1" value="true"/>
 	        <label for="guestcomfor4" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">세탁공간-건조기</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor5">
-	        <form:checkbox id="cb5" path="house_default_parking" />
+	        <form:checkbox id="cb5" path="house_default_parking_0or1" value="true"/>
 	        <label for="guestcomfor5" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">주차</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor6">
-	        <form:checkbox id="cb6" path="house_default_gym" />
+	        <form:checkbox id="cb6" path="house_default_gym_0or1" value="true" />
 	        <label for="guestcomfor6" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">헬스장</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor7">
-	        <form:checkbox id="cb6" path="house_default_pool" />
+	        <form:checkbox id="cb7" path="house_default_pool_0or1" value="true" />
 	        <label for="guestcomfor7" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">수영장</label></br>
 	    </div>
 	    

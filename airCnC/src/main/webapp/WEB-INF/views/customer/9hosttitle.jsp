@@ -19,21 +19,19 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hosthousepic.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hosttitle.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script type="text/javascript" src="../js/hostregister.js"></script>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
-		function hosthouseimgSubmit() {
-			var f = document.hostpic;
+		function hosttitleSubmit() {
+			var f = document.hosttitle;
 			f.submit();
 		}
 		
-		
 		function PrevSubmit() {
-			var f = document.hostpic;
-			f.action = "<c:url value='/6guestcomfortable.do' />";
-			f.submit();
+			var f = document.hosttitle;
+			f.action = "<c:url value='/7guesttextarea.do' />";
 		}
 	
 	</script>
@@ -56,32 +54,27 @@
     <!-- header-end -->
     
     
-    <form action="/hotel/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
-	<div class="container">
-	
-    <div class="hostpic1">
-    	<img src="${pageContext.request.contextPath}/resources/images/sleep1.jpg" alt="">
-        <div class="addregister"><h3 style="padding-top: 35px; font-size: 45px; font-weight: bold;">숙소 사진</h3></div><br>
-        
-        <h4 style="font-size: 25px; font-weight: bold;">멋진 사진으로 숙소가 돋보이게 해주세요.</h4></br>
-        <h4>휴대전화나 카메라를 사용하여 사진을 찍으세요. 숙소를 등록하려면 1장 이상의 사진이 필요합니다. 나중에 언제든 사진을 추가하거나 수정하실 수 있습니다.</h4>
-        
-        <div id="image_container" style="text-align: center;"></div>
-        <div class="filebox">
-        
-			<input type="file" name="house_photo"  /><br>
-            <label for="image" style="color: black;">첨부할 사진을 선택하세요</label>
+    <c:url value="/9hosttitle.do" var="actionUrl" />
+	<form:form id="9hosttitle" name="hosttitle" modelAttribute="house" method="GET" action="${actionUrl}">
+    <div class="container" style="align-content: center;">
+   
+   
+    	<div class="hosttitle" style="padding-top: 35px;">
+        <img src="${pageContext.request.contextPath}/resources/images/housecheck.jpg" alt="">
+        	<div class="addhosttitle"><h3 style="padding-top: 35px; font-size: 45px;">숙소의 제목을 만들어 주세요</h3></div><br>
+        	<h4>숙소의 특징과 장점을 강조하는 제목으로 게스트의 관심을 끌어보세요.</h4>
+        	<form:textarea name="guest" path="house_name" rows="2" cols="60" placeholder="50자 이내로 작성하세요." maxlength="50"/>          
         </div>
+              
+              
+    	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
+     		<a href="#" onclick="PrevSubmit();" style="padding-right: 26.5%;"><button>< 뒤로가기</button></a>
+			<a href="#" onclick="hosttitleSubmit();" style="float: right;"><button>다음</button></a>
+    	</div>
+      
+      
     </div>
-    
-	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
-		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>< 뒤로가기</button></a>
-		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>다음</button></a>
-    </div>
-    
-    
-    </div>
-	</form>
+  	</form:form>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

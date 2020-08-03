@@ -100,7 +100,7 @@
  <!-- header-start -->
     <header class="menudiv1">
       <div class="menudiv2-1">
-        <label for="menudiv2-1">위치</label>
+        <label for="menudiv2-1">위치 및 지도</label>
         <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
       </div>
       <div class="menudiv2-2">

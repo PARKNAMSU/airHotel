@@ -3,6 +3,8 @@ package kg.air.cnc.customer.vo.housereg;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class HouseVO {
 	private String houseId;//이건 내연습용
 	private String houseName;//이건 내연습용
@@ -27,27 +29,44 @@ public class HouseVO {
 	private String house_xlocation;
 	private String house_ylocation;
 	
+	private String house_defaultsetting_0or1;
+	private String house_defaultsetting;
+	private String house_default_tv_0or1;
+	private String house_default_tv;
+	private String house_default_wifi_0or1;
+	private String house_default_wifi;
+	private String house_default_heater_0or1;
+	private String house_default_heater;
+	private String house_default_cooler_0or1;
+	private String house_default_cooler;
+	private String house_default_iron_0or1;
+	private String house_default_iron;
+	private String house_default_fireditecter_0or1;
+	private String house_default_fireditecter;
+	private String house_default_coditecter_0or1;
+	private String house_default_coditecter;
+	private String house_default_aidkit_0or1;
+	private String house_default_aidkit;
+	private String house_default_firesofwa_0or1;
+	private String house_default_firesofwa;
+	private String house_default_bedrock_0or1;
+	private String house_default_bedrock;
 	
-	private boolean house_defaultsetting;
-	private boolean house_default_tv;
-	private boolean house_default_wifi;
-	private boolean house_default_heater;
-	private boolean house_default_cooler;
-	private boolean house_default_iron;
-	private boolean house_default_fireditecter;
-	private boolean house_default_coditecter;
-	private boolean house_default_aidkit;
-	private boolean house_default_firesofwa;
-	private boolean house_default_bedrock;
 	
-	
-	private boolean house_default_livingroom_type;
-	private boolean house_default_kitchen;
-	private boolean house_default_laundry_washer;
-	private boolean house_default_laundry_dryer;
-	private boolean house_default_parking;
-	private boolean house_default_gym;
-	private boolean house_default_pool;
+	private String house_default_livingroom_type_0or1;
+	private String house_default_livingroom_type;
+	private String house_default_kitchen_0or1;
+	private String house_default_kitchen;
+	private String house_default_laundry_washer_0or1;
+	private String house_default_laundry_washer;
+	private String house_default_laundry_dryer_0or1;
+	private String house_default_laundry_dryer;
+	private String house_default_parking_0or1;
+	private String house_default_parking;
+	private String house_default_gym_0or1;
+	private String house_default_gym;
+	private String house_default_pool_0or1;
+	private String house_default_pool;
 	
 	private String house_desc1;
 	private String house_desc2;
@@ -55,8 +74,17 @@ public class HouseVO {
 	private String house_desc4;
 	private String house_desc5;
 	
+	private MultipartFile house_photo; 
 	private String house_photourl;
+	
 	private String house_name;
+	
+	private String house_price_default_parInt;
+	private String house_price_max_parInt;
+	private int house_price_default;
+	private int house_price_max;
+	
+	
 	
 	private boolean house_conditiion_childok;
 	private boolean house_condition_babyok;
@@ -73,8 +101,6 @@ public class HouseVO {
 	private boolean house_restrict_weapon;
 	private boolean house_restrict_beast;
 	
-	private int house_price_default;
-	private int house_price_max;
 	private float house_star;
 	private int house_status;
 	
@@ -87,6 +113,67 @@ public class HouseVO {
 	
 	
 	
+	
+	
+	
+	
+	public int getHouse_price_default() {
+		return house_price_default;
+	}
+	public void setHouse_price_default(int house_price_default) {
+		this.house_price_default = house_price_default;
+	}
+	public int getHouse_price_max() {
+		return house_price_max;
+	}
+	public void setHouse_price_max(int house_price_max) {
+		this.house_price_max = house_price_max;
+	}
+	public String getHouse_price_default_parInt() {
+		return house_price_default_parInt;
+	}
+	public void setHouse_price_default_parInt(String house_price_default_parInt) {
+		this.house_price_default_parInt = house_price_default_parInt;
+	}
+	public String getHouse_price_max_parInt() {
+		return house_price_max_parInt;
+	}
+	public void setHouse_price_max_parInt(String house_price_max_parInt) {
+		this.house_price_max_parInt = house_price_max_parInt;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	public String getHouse_name() {
+		return house_name;
+	}
+	public void setHouse_name(String house_name) {
+		this.house_name = house_name;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public MultipartFile getHouse_photo() {
+		return house_photo;
+	}
+	public void setHouse_photo(MultipartFile house_photo) {
+		this.house_photo = house_photo;
+	}
+	public String getHouse_photourl() {
+		return house_photourl;
+	}
+	public void setHouse_photourl(String house_photourl) {
+		this.house_photourl = house_photourl;
+	}
 	
 	
 	
@@ -126,121 +213,236 @@ public class HouseVO {
 	
 	
 	
-
-	public boolean isHouse_default_livingroom_type() {
+	
+	
+	
+	
+	public String getHouse_defaultsetting_0or1() {
+		return house_defaultsetting_0or1;
+	}
+	public String getHouse_default_livingroom_type_0or1() {
+		return house_default_livingroom_type_0or1;
+	}
+	public void setHouse_default_livingroom_type_0or1(String house_default_livingroom_type_0or1) {
+		this.house_default_livingroom_type_0or1 = house_default_livingroom_type_0or1;
+	}
+	public String getHouse_default_livingroom_type() {
 		return house_default_livingroom_type;
 	}
-	public void setHouse_default_livingroom_type(boolean house_default_livingroom_type) {
+	public void setHouse_default_livingroom_type(String house_default_livingroom_type) {
 		this.house_default_livingroom_type = house_default_livingroom_type;
 	}
-	public boolean isHouse_default_kitchen() {
+	public String getHouse_default_kitchen_0or1() {
+		return house_default_kitchen_0or1;
+	}
+	public void setHouse_default_kitchen_0or1(String house_default_kitchen_0or1) {
+		this.house_default_kitchen_0or1 = house_default_kitchen_0or1;
+	}
+	public String getHouse_default_kitchen() {
 		return house_default_kitchen;
 	}
-	public void setHouse_default_kitchen(boolean house_default_kitchen) {
+	public void setHouse_default_kitchen(String house_default_kitchen) {
 		this.house_default_kitchen = house_default_kitchen;
 	}
-	public boolean isHouse_default_laundry_washer() {
+	public String getHouse_default_laundry_washer_0or1() {
+		return house_default_laundry_washer_0or1;
+	}
+	public void setHouse_default_laundry_washer_0or1(String house_default_laundry_washer_0or1) {
+		this.house_default_laundry_washer_0or1 = house_default_laundry_washer_0or1;
+	}
+	public String getHouse_default_laundry_washer() {
 		return house_default_laundry_washer;
 	}
-	public void setHouse_default_laundry_washer(boolean house_default_laundry_washer) {
+	public void setHouse_default_laundry_washer(String house_default_laundry_washer) {
 		this.house_default_laundry_washer = house_default_laundry_washer;
 	}
-	public boolean isHouse_default_laundry_dryer() {
+	public String getHouse_default_laundry_dryer_0or1() {
+		return house_default_laundry_dryer_0or1;
+	}
+	public void setHouse_default_laundry_dryer_0or1(String house_default_laundry_dryer_0or1) {
+		this.house_default_laundry_dryer_0or1 = house_default_laundry_dryer_0or1;
+	}
+	public String getHouse_default_laundry_dryer() {
 		return house_default_laundry_dryer;
 	}
-	public void setHouse_default_laundry_dryer(boolean house_default_laundry_dryer) {
+	public void setHouse_default_laundry_dryer(String house_default_laundry_dryer) {
 		this.house_default_laundry_dryer = house_default_laundry_dryer;
 	}
-	public boolean isHouse_default_parking() {
+	public String getHouse_default_parking_0or1() {
+		return house_default_parking_0or1;
+	}
+	public void setHouse_default_parking_0or1(String house_default_parking_0or1) {
+		this.house_default_parking_0or1 = house_default_parking_0or1;
+	}
+	public String getHouse_default_parking() {
 		return house_default_parking;
 	}
-	public void setHouse_default_parking(boolean house_default_parking) {
+	public void setHouse_default_parking(String house_default_parking) {
 		this.house_default_parking = house_default_parking;
 	}
-	public boolean isHouse_default_gym() {
+	public String getHouse_default_gym_0or1() {
+		return house_default_gym_0or1;
+	}
+	public void setHouse_default_gym_0or1(String house_default_gym_0or1) {
+		this.house_default_gym_0or1 = house_default_gym_0or1;
+	}
+	public String getHouse_default_gym() {
 		return house_default_gym;
 	}
-	public void setHouse_default_gym(boolean house_default_gym) {
+	public void setHouse_default_gym(String house_default_gym) {
 		this.house_default_gym = house_default_gym;
 	}
-	public boolean isHouse_default_pool() {
+	public String getHouse_default_pool_0or1() {
+		return house_default_pool_0or1;
+	}
+	public void setHouse_default_pool_0or1(String house_default_pool_0or1) {
+		this.house_default_pool_0or1 = house_default_pool_0or1;
+	}
+	public String getHouse_default_pool() {
 		return house_default_pool;
 	}
-	public void setHouse_default_pool(boolean house_default_pool) {
+	public void setHouse_default_pool(String house_default_pool) {
 		this.house_default_pool = house_default_pool;
 	}
+
 	
 	
 	
 	
 	
 	
-	public boolean isHouse_defaultsetting() {
+	
+	
+	public void setHouse_defaultsetting_0or1(String house_defaultsetting_0or1) {
+		this.house_defaultsetting_0or1 = house_defaultsetting_0or1;
+	}
+	public String getHouse_defaultsetting() {
 		return house_defaultsetting;
 	}
-	public void setHouse_defaultsetting(boolean house_defaultsetting) {
+	public void setHouse_defaultsetting(String house_defaultsetting) {
 		this.house_defaultsetting = house_defaultsetting;
 	}
-	public boolean isHouse_default_tv() {
+	public String getHouse_default_tv_0or1() {
+		return house_default_tv_0or1;
+	}
+	public void setHouse_default_tv_0or1(String house_default_tv_0or1) {
+		this.house_default_tv_0or1 = house_default_tv_0or1;
+	}
+	public String getHouse_default_tv() {
 		return house_default_tv;
 	}
-	public void setHouse_default_tv(boolean house_default_tv) {
+	public void setHouse_default_tv(String house_default_tv) {
 		this.house_default_tv = house_default_tv;
 	}
-	public boolean isHouse_default_wifi() {
+	public String getHouse_default_wifi_0or1() {
+		return house_default_wifi_0or1;
+	}
+	public void setHouse_default_wifi_0or1(String house_default_wifi_0or1) {
+		this.house_default_wifi_0or1 = house_default_wifi_0or1;
+	}
+	public String getHouse_default_wifi() {
 		return house_default_wifi;
 	}
-	public void setHouse_default_wifi(boolean house_default_wifi) {
+	public void setHouse_default_wifi(String house_default_wifi) {
 		this.house_default_wifi = house_default_wifi;
 	}
-	public boolean isHouse_default_heater() {
+	public String getHouse_default_heater_0or1() {
+		return house_default_heater_0or1;
+	}
+	public void setHouse_default_heater_0or1(String house_default_heater_0or1) {
+		this.house_default_heater_0or1 = house_default_heater_0or1;
+	}
+	public String getHouse_default_heater() {
 		return house_default_heater;
 	}
-	public void setHouse_default_heater(boolean house_default_heater) {
+	public void setHouse_default_heater(String house_default_heater) {
 		this.house_default_heater = house_default_heater;
 	}
-	public boolean isHouse_default_cooler() {
+	public String getHouse_default_cooler_0or1() {
+		return house_default_cooler_0or1;
+	}
+	public void setHouse_default_cooler_0or1(String house_default_cooler_0or1) {
+		this.house_default_cooler_0or1 = house_default_cooler_0or1;
+	}
+	public String getHouse_default_cooler() {
 		return house_default_cooler;
 	}
-	public void setHouse_default_cooler(boolean house_default_cooler) {
+	public void setHouse_default_cooler(String house_default_cooler) {
 		this.house_default_cooler = house_default_cooler;
 	}
-	public boolean isHouse_default_iron() {
+	public String getHouse_default_iron_0or1() {
+		return house_default_iron_0or1;
+	}
+	public void setHouse_default_iron_0or1(String house_default_iron_0or1) {
+		this.house_default_iron_0or1 = house_default_iron_0or1;
+	}
+	public String getHouse_default_iron() {
 		return house_default_iron;
 	}
-	public void setHouse_default_iron(boolean house_default_iron) {
+	public void setHouse_default_iron(String house_default_iron) {
 		this.house_default_iron = house_default_iron;
 	}
-	public boolean isHouse_default_fireditecter() {
+	public String getHouse_default_fireditecter_0or1() {
+		return house_default_fireditecter_0or1;
+	}
+	public void setHouse_default_fireditecter_0or1(String house_default_fireditecter_0or1) {
+		this.house_default_fireditecter_0or1 = house_default_fireditecter_0or1;
+	}
+	public String getHouse_default_fireditecter() {
 		return house_default_fireditecter;
 	}
-	public void setHouse_default_fireditecter(boolean house_default_fireditecter) {
+	public void setHouse_default_fireditecter(String house_default_fireditecter) {
 		this.house_default_fireditecter = house_default_fireditecter;
 	}
-	public boolean isHouse_default_coditecter() {
+	public String getHouse_default_coditecter_0or1() {
+		return house_default_coditecter_0or1;
+	}
+	public void setHouse_default_coditecter_0or1(String house_default_coditecter_0or1) {
+		this.house_default_coditecter_0or1 = house_default_coditecter_0or1;
+	}
+	public String getHouse_default_coditecter() {
 		return house_default_coditecter;
 	}
-	public void setHouse_default_coditecter(boolean house_default_coditecter) {
+	public void setHouse_default_coditecter(String house_default_coditecter) {
 		this.house_default_coditecter = house_default_coditecter;
 	}
-	public boolean isHouse_default_aidkit() {
+	public String getHouse_default_aidkit_0or1() {
+		return house_default_aidkit_0or1;
+	}
+	public void setHouse_default_aidkit_0or1(String house_default_aidkit_0or1) {
+		this.house_default_aidkit_0or1 = house_default_aidkit_0or1;
+	}
+	public String getHouse_default_aidkit() {
 		return house_default_aidkit;
 	}
-	public void setHouse_default_aidkit(boolean house_default_aidkit) {
+	public void setHouse_default_aidkit(String house_default_aidkit) {
 		this.house_default_aidkit = house_default_aidkit;
 	}
-	public boolean isHouse_default_firesofwa() {
+	public String getHouse_default_firesofwa_0or1() {
+		return house_default_firesofwa_0or1;
+	}
+	public void setHouse_default_firesofwa_0or1(String house_default_firesofwa_0or1) {
+		this.house_default_firesofwa_0or1 = house_default_firesofwa_0or1;
+	}
+	public String getHouse_default_firesofwa() {
 		return house_default_firesofwa;
 	}
-	public void setHouse_default_firesofwa(boolean house_default_firesofwa) {
+	public void setHouse_default_firesofwa(String house_default_firesofwa) {
 		this.house_default_firesofwa = house_default_firesofwa;
 	}
-	public boolean isHouse_default_bedrock() {
+	public String getHouse_default_bedrock_0or1() {
+		return house_default_bedrock_0or1;
+	}
+	public void setHouse_default_bedrock_0or1(String house_default_bedrock_0or1) {
+		this.house_default_bedrock_0or1 = house_default_bedrock_0or1;
+	}
+	public String getHouse_default_bedrock() {
 		return house_default_bedrock;
 	}
-	public void setHouse_default_bedrock(boolean house_default_bedrock) {
+	public void setHouse_default_bedrock(String house_default_bedrock) {
 		this.house_default_bedrock = house_default_bedrock;
 	}
+	
 	
 	
 	
