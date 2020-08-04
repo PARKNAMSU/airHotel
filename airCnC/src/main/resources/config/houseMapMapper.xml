@@ -16,7 +16,7 @@
 		WHERE house_location=#{location}
 	</select>
 	
-	<select id="getHouseDetail" parameterType="Map">
+	<select id="getDetail" parameterType="Map" resultType="kg.air.cnc.vo.House_InfoVO">
 	<![CDATA[
 		SELECT *
 		FROM house_info
@@ -24,12 +24,31 @@
 		AND house_condition_petok=#{pet}
 		AND house_price_default>=#{minPrice}
 		AND house_price_default<=#{maxPrice}
-		AND house_condition_smokeok=#{smoke} 
-		AND (house_bed_type_double>=#{doubleBed}*1 OR house_bed_type_queen>=#{queenBed}*1)
-		AND house_parking=#{parking}
-		AND house_laundry_washer=#{laundry}
-		AND house_gym=#{gym}
-		AND house_pool=#{pool}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+	]]>
+	</select>
+	
+	<select id="getDetailPrice" parameterType="Map" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
 	]]>
 	</select>
 	

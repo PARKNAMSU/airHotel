@@ -29,4 +29,24 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 		return mybatis.selectList("houseMap.getPrice", location);
 	}
 
+	@Override
+	public List<House_InfoVO> getDetailWithCheckOut(Map<String, String> info) {
+		return mybatis.selectList("houseMap.getDetailWithCheckOut", info);
+	}
+
+	@Override
+	public List<Map<String, Integer>> getPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.getDetailPrice", info);
+	}
+	
+	@Override
+	public List<House_InfoVO> getDetailWithDetail(Map<String, String> info){
+		return mybatis.selectList("houseMap.getDetailWithDetail", info);
+	}
+	
+	@Override
+	public List<House_InfoVO> getDetailWithBoth(Map<String, String> info){
+		return mybatis.selectList("houseMap.getDetailWithBoth", info);
+	}
+
 }

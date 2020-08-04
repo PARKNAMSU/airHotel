@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
@@ -35,15 +35,14 @@
 			class="fas fa-images"
 			style="font-size: 35px; padding-left: 20px; float: left; padding-top: 25px;"></i></span>
 		<label for="fas fa-question" style="font-size: 40px;">지도가
-			있는 숙소 페이지</label> <div id="test" style="color : black">test</div>
+			있는 숙소 페이지</label> <div id="ttest" style="color : black">test zone</div>
 	</header>
 	<!-- header-end -->
 	<main>
 		<div class="searchOptions">
 		<form action="getDetail.do">
 				<div class="srcachlocation">
-					<p class="searchConditions">지역 </p>
-					<select id="select_type">
+					<select id="select_type" name="location">
 						<option id="first">종류 선택</option>
 						<option id="seo">서울</option>
 						<option id="gye">경기</option>
@@ -54,50 +53,57 @@
 						<option id="gn">경남</option>
 						<option id="jb">전북</option>
 						<option id="jn">전남</option>
-					</select> <select id="select_menu">
+					</select> <select id="select_menu" name="detail">
 						<option>지역 선택</option>
 					</select> <label class="searchConditions">체크인 <input type="date"
-						id="checkIn" /></label> <label class="searchConditions">체크아웃
-						<input type="date" id="checkOut" />
-					</label> <label class="searchConditions">인원 <input
-						type="number" id="people" /></label>
+						id="checkIn" name="checkIn" value="" min="" max=""/></label> <label class="searchConditions">체크아웃
+						<input type="date" id="checkOut" name="checkOut" min="" max="" onclick="checkout()"/>
+					</label> <label class="searchConditions">최소 인원 <input
+						type="number" id="people" name="people" value="1"/></label>
+					<button class="btn1" type="submit" value="검색" onclick="nullCheck()">검색</button>
+					<button class="btn2" id="button">상세검색</button>
 				</div>
+				<br>
 				<!-- 팝업창 코드-->
-				<button class="btn1" type="submit" value="검색">검색</button>
-				<button class="btn2" id="button">상세검색</button>
 				<div id="divToggle" style="display: none; color: black;">
 					<div class="manu1">
-						<br>
 						<div class="menu2">
 							<label for="manu2" class="lab1">숙소에 반드시 필요한것 : <label
-								for="parking" style="cursor: pointer;"> <input
-									type="checkbox" id="parking" name="parking"/>주차장
-							</label> <label for="smoking" style="cursor: pointer;"> <input
-									type="checkbox" id="smoking" name="smoking"/>흡연실
-							</label> <label for="pet" style="cursor: pointer;"> <input
-									type="checkbox" id="pet" name="pet"/>반려동물
-							</label> <label for="wifi" style="cursor: pointer;"> <input
-									type="checkbox" id="wifi" name="wifi"/>WIFI
-							</label> <label for="pool" style="cursor: pointer;"> <input
-									type="checkbox" id="pool" name="pool"/>수영장
-							</label> <label for="laundry" style="cursor: pointer;"> <input
-									type="checkbox" id="laundry" name="laundry"/>세탁기
+								for="parkingc" style="cursor: pointer;">
+								<input type="hidden" name="parking" value="off"/>
+							<input type="checkbox" id="parkingc" name="parking"/>주차장
+							</label> <label for="smokingc" style="cursor: pointer;"> 
+								<input type="hidden" name="smoking" value="off"/>
+							<input type="checkbox" id="smokingc" name="smoking"/>흡연실
+							</label> <label for="petc" style="cursor: pointer;">
+								<input type="hidden" name="pet" value="off"/>
+							<input type="checkbox" id="petc" name="pet"/>반려동물
+							</label> <label for="wific" style="cursor: pointer;">
+								<input type="hidden" name="wifi" value="off"/>
+							<input type="checkbox" id="wific" name="wifi"/>WIFI
+							</label> <label for="poolc" style="cursor: pointer;"> 
+								<input type="hidden" name="pool" value="off"/>
+							<input type="checkbox" id="poolc" name="pool"/>수영장
+							</label> <label for="laundryc" style="cursor: pointer;">
+								<input type="hidden" name="laundry" value="off"/> 
+							<input type="checkbox" id="laundryc" name="laundry"/>세탁기
 							</label>
 							</label></br>
 						</div>
 						<br>
 						<div class="menu3">
-							<label for="manu3" class="lab2">별점 : <label for="one"
-								style="cursor: pointer;"> <input type="checkbox"
-									id="one" name="star1">1
+							<label for="manu3" class="lab2">
+							<input type="hidden" name="star" value="1"/>
+							별점 : <label for="one" style="cursor: pointer;"> 
+								<input type="checkbox" id="one">1
 							</label> <label for="two" style="cursor: pointer;"> <input
-									type="checkbox" id="two" name="star2"/>2
+									type="checkbox" id="two"/>2
 							</label> <label for="three" style="cursor: pointer;"> <input
-									type="checkbox" id="three" name="star3"/>3
+									type="checkbox" id="three"/>3
 							</label> <label for="four" style="cursor: pointer;"> <input
-									type="checkbox" id="four" name="star4"/>4
+									type="checkbox" id="four"/>4
 							</label> <label for="five" style="cursor: pointer;"> <input
-									type="checkbox" id="five" name="star5"/>5
+									type="checkbox" id="five"/>5
 							</label>
 							</label>
 						</div>
@@ -112,6 +118,7 @@
 								min="${pric.MINP}" max="${pric.MAXP}" name="maxPrice"></input>
 						</div>
 						</c:forEach>
+						<br>
 					</div>
 				</div>
 			</form>
@@ -122,8 +129,10 @@
 					<a href="getHouse.do?${house.house_seq}">
 						<div class="houseList" style="color: black">
 							<img src="${pageContext.request.contextPath}/resources/images/face.png"
-								alt="숙소 이미지" class="littleImg"> ${house.house_seq }<br>
-							${house.house_name }<br> ${house.house_location }<br>
+								alt="숙소 이미지" class="littleImg"> 
+								${house.house_seq }<br>
+								${house.house_name }<br> 
+								${house.house_location }<br>
 							별점<br> 
 							가격
 						</div>
@@ -171,7 +180,7 @@
 	</script>
 	<script type="text/javascript">
 		var f_seoul = [ "서울지역선택", "강남구", "강서구", "노원구" ];
-		var f_gyeonggi = [ "경기지역선택", "성남시", "수원시", "양주시" ];
+		var f_gyeonggi = [ "경기지역선택", "성남시", "수원시", "광주시" ];
 		var f_gangwon = [ "강원지역선택", "강릉시", "속초시", "양양시" ];
 		var f_cb = [ "충북지역선택", "청주시", "충주시", "제천시" ];
 		var f_cn = [ "충남지역선택", "보령시", "공주시", "천안시" ];
@@ -202,7 +211,6 @@
 	
 	<script language="javascript">
 		window.onload = function () {
-			document.getElementById("test").innerHTML = "${location}";
 			if('${location}'==="서울") {
 				var loc = document.getElementById("seo");
 				loc.selected = true;
@@ -248,6 +256,9 @@
 				loc.selected = true;
 				chgOptions();
 			}
+			let minLim = new Date().toISOString().substring(0, 10);
+			document.getElementById('checkIn').value = minLim;
+			document.getElementById('checkIn').min = minLim;
 		};
 	</script>
 
@@ -283,6 +294,59 @@
 		};
 
 		RangeMaxSlider();
+	</script>
+	
+	<script>
+	var nullCheck = function(){
+		if ($('input[id=parkingc]').is(":checked")) {
+		    $('input[name=parking]').val('true');
+		} else {
+		    $('input[name=parking]').val('false');
+		}
+		if ($('input[id=smokingc]').is(":checked")) {
+		    $('input[name=smoking]').val('true');
+		} else {
+		    $('input[name=smoking]').val('false');
+		}
+		if ($('input[id=petc]').is(":checked")) {
+		    $('input[name=pet]').val('true');
+		} else {
+		    $('input[name=pet]').val('false');
+		}
+		if ($('input[id=poolc]').is(":checked")) {
+		    $('input[name=pool]').val('true');
+		} else {
+		    $('input[name=pool]').val('false');
+		}
+		if ($('input[id=wific]').is(":checked")) {
+		    $('input[name=wifi]').val('true');
+		} else {
+		    $('input[name=wifi]').val('false');
+		}
+		if ($('input[id=laundryc]').is(":checked")) {
+		    $('input[name=laundry]').val('true');
+		} else {
+		    $('input[name=laundry]').val('false');
+		}
+		if ($('input[id=one]').is(":checked")){
+			$('input[name=star]').val('1');
+		}else if ($('input[id=two]').is(":checked")){
+				$('input[name=star]').val('2');
+		}else if ($('input[id=three]').is(":checked")){
+				$('input[name=star]').val('3');
+		}else if ($('input[id=four]').is(":checked")){
+				$('input[name=star]').val('4');
+		}else if ($('input[id=five]').is(":checked")){
+				$('input[name=star]').val('5');
+		}
+		
+	}
+	</script>
+	<script>
+		var checkout = function() {
+			let maxLim = document.getElementById("checkIn");
+			document.getElementById("checkOut").min = maxLim.value;
+		}
 	</script>
 	
 </body>

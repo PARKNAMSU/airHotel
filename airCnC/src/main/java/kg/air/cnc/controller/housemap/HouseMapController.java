@@ -1,6 +1,5 @@
 package kg.air.cnc.controller.housemap;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,11 +35,15 @@ public class HouseMapController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/getDetail.do")
+	@RequestMapping(value="/getDetail.do", produces="application/text; charset=utf-8")
 	public ModelAndView getHouse(@RequestParam Map<String, String> info, ModelAndView mav) {
 		//System.out.println(info.get("star1")+ " type >"+info.get("star1").getClass().getName());
+		System.out.println(info.toString());
+		System.out.println(info.size());
 		mav.addObject("houseList",houseMapService.getDetail(info));
-		mav.setViewName("getHouseList");
+		mav.addObject("location", info.get("location"));
+		mav.addObject("price", houseMapService.getPrice(info));
+		mav.setViewName("houseMap");
 		return mav;
 	}
 	
