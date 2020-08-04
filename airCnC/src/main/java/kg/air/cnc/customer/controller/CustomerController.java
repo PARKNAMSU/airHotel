@@ -54,7 +54,7 @@ public class CustomerController {
 	public boolean createEmailCheck(@RequestParam String customerEmail, HttpServletRequest request)throws Exception {
 		int cnt = -1;
 		cnt = service.createEmailCheck(customerEmail); // 이메일 중복 체크.
-		System.out.println(cnt); // 1이면 중복아이디 없음. 0이면 중복있음.
+		System.out.println(cnt); // 1이면 중복 이메일 있음. 0이면 중복 없음.
 
 		// 이메일 인증.
 		char[] keySet = new char[] { 
@@ -75,16 +75,17 @@ public class CustomerController {
 		session.setAttribute("authCode", authCode);
 		String subject = "회원가입 인증 코드 발급 안내 입니다.";
 		String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
-		if(cnt == 1) {
+//		if(cnt == 0) {
 			mailService.send(subject, text, "ljh160791@gmail.com", customerEmail);
 			return true;
-		}
-		else {
-			return false;
-		}
+//		}
+//		else {
+//			return false;
+//		}
 	}
 
 	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String emailAuth(@RequestParam String customerKey, HttpSession session)throws Exception{
 		String authCode = (String)session.getAttribute("authCode"); // 랜덤 생성한 인증번호.
 		System.out.println("랜덤으로 생성된 인증코드 : " + authCode); // 랜덤 생성한 인증번호.

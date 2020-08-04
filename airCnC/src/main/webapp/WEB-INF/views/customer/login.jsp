@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +54,7 @@
 			</div>
 		</div>
 	</header>
-	<form:form role="form" commandName="loginCommand" action="/cnc/loginView.do" accept-charset="utf-8" name="f" method="POST">
+	<form action="/cnc/loginView.do" accept-charset="utf-8" method="POST">
 		<div class="container">
 			<img src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
 			<div id="light1" class="white_content" style="text-align: center;">
@@ -72,17 +71,17 @@
 											계정으로 로그인</span></a>
 								</div>
 								<div class="a3">
-									<form:input class="bb6" type="text" id="customerId" name="customerId" 
-									placeholder="&nbsp;&nbsp;아이디" required path="id"/>
+									<input class="bb6" type="text" id="customerId" name="customerId" 
+									placeholder="&nbsp;&nbsp;아이디" required/>
 								</div>
 								<div class="a3">
-									<form:input class="bb6" type="password" id="customerPassword"
+									<input class="bb6" type="password" id="customerPassword"
 										name="customerPassword" placeholder="&nbsp;&nbsp;비밀번호"
-										required path="pw"/>
+										required/>
 								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
-									<form:input type="checkbox" id="remember_id"
-										name="remember_customerId" path="rememberId"/><label
+									<input type="checkbox" id="remember_id"
+										name="remember_customerId"/><label
 										for="idsave">아이디저장</label>
 								</div>
 
@@ -100,6 +99,6 @@
 				</div>
 			</div>
 		</div>
-	</form:form>
+	</form>
 </body>
 </html>
