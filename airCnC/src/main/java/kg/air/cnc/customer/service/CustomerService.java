@@ -1,9 +1,8 @@
 package kg.air.cnc.customer.service;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import kg.air.cnc.customer.vo.CustomerVO;
+import kg.air.cnc.vo.login.AuthInfo;
+import kg.air.cnc.vo.login.LoginCommand;
 
 public interface CustomerService {
 	
@@ -17,7 +16,7 @@ public interface CustomerService {
 	public int createEmailCheck(String customerEmail) throws Exception;
 	
 	// 로그인.
-	public int login(CustomerVO vo, HttpSession session, String rememberId, HttpServletResponse response)throws Exception;
+	public AuthInfo loginAuth(LoginCommand loginCommand) throws Exception;
 }
 
 

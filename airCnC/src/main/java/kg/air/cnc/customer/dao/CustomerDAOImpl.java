@@ -26,28 +26,24 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int createEmailCheck(String customerEmail) throws Exception {
 		return session.selectOne("customer.createEmailCheck", customerEmail);
 	}
-
+	
 	@Override
 	public int getKey(String customer_id, String customer_key) throws Exception{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int modifyKey(String customer_id, String customer_key) throws Exception{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int sendPassword(String customer_id, String customer_email, String customer_key)throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public CustomerVO login(String customer_id)throws Exception {
-		CustomerVO customerVO = session.selectOne("customer.login", customer_id);
-		return customerVO;
+	public CustomerVO selectById(String customerId) throws Exception {
+		return session.selectOne("customer.selectById", customerId);
 	}
 }
