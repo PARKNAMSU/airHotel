@@ -38,9 +38,10 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script type="text/javascript">
-	var idCheck = false;
-	var emailSendCheck = false;
-	var emailAuthCheck = false;
+	
+	let idCheck = false;
+	let emailSendCheck = false;
+	let emailAuthCheck = false;
 	
 	// 아이디 중복 체크.
 	$(document).on("click", "#idCheckBtn", function() {
@@ -66,24 +67,8 @@
 		}
 	});
 	
-	// 이메일 유효성 검사 조건문.
+	// 이메일 유효성 검사 조건문. 이메일 발송 버튼 클릭 이벤트.
 	$(document).on("click", "#emailBtn", function(){
-		if(!$.trim($("#customerId").val())){
-			alert("아이디를 먼저 입력해 주세요.");
-			return false;
-		}
-		if(!$.trim($("#customerEmail").val())){
-			alert("이메일을 입력하세요.");
-			return false;
-		}
-		
-		if ($("#customerEmail").val() != "") {
-			var emailChecked = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // 이메일 유효성검사
-			if (!emailChecked.test($("#customerEmail").val())) {
-				alert("잘못된 이메일 주소입니다.");
-				return false;
-			}
-		}
 		$.ajax({
 			type:"post",
 			url:"createEmailCheck.do",
@@ -92,7 +77,7 @@
 				if(data == true){
 					alert("인증번호 발송 완료");
 					emailSendCheck = true;
-				}else if(data == false){
+				}else{
 					alert("인증번호 발송 실패")
 				}
 			},
@@ -115,9 +100,6 @@
 				}else if(data == "false"){
 					alert("인증번호를 잘못 입력하셨습니다.")
 				}
-			},
-			error:function(data){
-				alert("에러가 발생했습니다.");
 			}
 		});
 	});
@@ -125,11 +107,10 @@
 	// 회원가입 버튼
 	$(document).on("click", "#reg_submit", function() {
 		var validate = true;
-		var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
+		var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
 		var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
 		var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
-		//var phoneChecked = /^[0-9-]{1,16}$/;
-		var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/;
+		var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/; // 전화번호 유효성 검사.
 		
 		if ($("#customerEmail").val()) {
 			if (!regExp.test($("#customerEmail").val())) {
@@ -171,11 +152,11 @@
 			return false;
 		} else if (emailSendCheck == false) {
 			alert("인증코드 발송을 완료해주세요.");
-			$("#emailBtn").focus();
+			$("#customerEmail").focus();
 			return false;
 		} else if (emailAuthCheck == false) {
 			alert("이메일 인증을 완료해주세요.");
-			$("#emailAuthBtn").focus();
+			$("#customerKey").focus();
 			return false;
 		} else if (!$("#customerPassword").val()) {
 			alert("비밀번호를 입력하세요.");
@@ -197,43 +178,41 @@
 					alert("회원가입이 완료되었습니다.");
 				}else if(data == "false"){
 					alert("회원가입이 실패하였습니다.")
-				}
+				}	
 			},
 			error:function(data){
 				alert("에러가 발생했습니다.");
 			}
 		});
 	});
+
 </script>
 </head>
 <body>
 	<!-- header-start -->
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/1123.png" /></a>
-			<label for="" style="font-size: 20px; background-color: white;">Trip</label>
+			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<li class="item"><a href="#">호스트 </a></li>
 					<li class="item">
-						<p>
-							<a href="/cnc/registerView.do">회원가입</a>
-						</p>
+						<a href="/Mainwork/html/hostresgister.html">호스트 </a>
 					</li>
 					<li class="item">
-						<p>
-							<a href="/cnc/loginView.do">로그인</a>
-						</p>
+						<p><a href="/cnc/registerView.do">회원가입</a></p>
+					</li>
+					<li class="item">
+						<p><a href="/cnc/loginView.do">로그인</a></p>
+					</li>
+					<li class="item">
+						<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
 					</li>
 				</ul>
 			</div>
-			<div id="fade" class="black_overlay"></div>
 		</div>
 	</header>
-	<!-- header-end -->
 	<form action="/cnc/registerCheck.do" method="post" id="regForm">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
@@ -285,15 +264,13 @@
 						name="customerEmail" placeholder="&nbsp;&nbsp;이메일 주소" required>
 					</span> <br>
 					<button id="emailBtn"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호
-						발송</button>
+						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호 발송</button>
 					<br> <span> <input class="iauth" type="text"
 						id="customerKey" name="customerKey" placeholder="&nbsp;&nbsp;인증번호"
 						required>
 					</span> <br>
 					<button id="emailAuthBtn"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">이메일
-						인증</button>
+						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">이메일 인증</button>
 					<!-- <input type="hidden" path="random" id="random" value="${random}" /> -->
 				</div>
 				<br>

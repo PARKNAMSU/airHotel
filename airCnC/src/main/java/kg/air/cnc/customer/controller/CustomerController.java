@@ -1,21 +1,27 @@
 package kg.air.cnc.customer.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import kg.air.cnc.customer.service.CustomerService;
 import kg.air.cnc.customer.vo.CustomerVO;
 import kg.air.cnc.service.mail.MailService;
+import kg.air.cnc.vo.login.AuthInfo;
+import kg.air.cnc.vo.login.LoginCommand;
 
 @Controller
 public class CustomerController {
@@ -42,11 +48,6 @@ public class CustomerController {
 		return "SignUp";
 	}
 
-	@RequestMapping(value = "/loginView.do", method = RequestMethod.GET)
-	public String loginView() throws Exception{
-		return "login";
-	}
-
 	// 아이디 중복 여부 검사.
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -61,6 +62,7 @@ public class CustomerController {
 	public boolean createEmailCheck(@RequestParam String customerEmail, HttpServletRequest request)throws Exception {
 		int cnt = -1;
 		cnt = service.createEmailCheck(customerEmail); // 이메일 중복 체크.
+		System.out.println(cnt); // 1이면 중복아이디 없음. 0이면 중복있음.
 
 		// 이메일 인증.
 		char[] keySet = new char[] { 
@@ -81,7 +83,7 @@ public class CustomerController {
 		session.setAttribute("authCode", authCode);
 		String subject = "회원가입 인증 코드 발급 안내 입니다.";
 		String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
-		if(cnt <= 0) {
+		if(cnt == 1) {
 			mailService.send(subject, text, "ljh160791@gmail.com", customerEmail);
 			return true;
 		}
@@ -93,13 +95,15 @@ public class CustomerController {
 	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.POST)
 	public String emailAuth(@RequestParam String customerKey, HttpSession session)throws Exception{
 		String authCode = (String)session.getAttribute("authCode"); // 랜덤 생성한 인증번호.
+		System.out.println("랜덤으로 생성된 인증코드 : " + authCode); // 랜덤 생성한 인증번호.
+		System.out.println("사용자가 입력한 인증코드 : " + customerKey); // 사용자가 입력한 인증번호.
 		if (authCode.equals(customerKey)) {
 			return "complate";
 		}else {
 			return "false";
 		}
 	}
-	
+
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
 	public String regist(CustomerVO vo)throws Exception{
@@ -115,6 +119,7 @@ public class CustomerController {
 				String inputPass = vo.getCustomerPassword();
 				String pwd = passwordEncoder.encode(inputPass);
 				vo.setCustomerPassword(pwd);
+				vo.setCustomerKey("Y");
 				service.register(vo);
 			}
 		} catch (Exception e) {
@@ -122,25 +127,65 @@ public class CustomerController {
 		}
 		return "login";
 	}
-
-	// 로그인 확인.
-	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
-	@ResponseBody
-	public int loginCheck(CustomerVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model)throws Exception{
-
-		// 아이디 기억하기 값 가져오기.
-		String rememberId = request.getParameter("rememberId"); 
-
-		// 비밀번호 암호화.
-		String loginPass = vo.getCustomerPassword();
-		String loginPwd = passwordEncoder.encode(loginPass);
-		vo.setCustomerPassword(loginPwd);
-
-		// 암호화 확인
-		System.out.println("암호화 된 비밀번호 : " + vo.getCustomerPassword());
-
-		// 로그인 메서드.
-		int result = service.login(vo, session, rememberId, response);
-		return result;
+	
+	@RequestMapping(value = "/loginView.do", method = RequestMethod.GET)
+	public ModelAndView loginForm(LoginCommand loginCommand, @CookieValue(value="REMEMBER", required = false) Cookie rememberCookie) throws Exception{
+		if (rememberCookie != null) {
+			loginCommand.setId(rememberCookie.getValue());
+			loginCommand.setRememberId(true);;
+		}
+		
+		ModelAndView mav = new ModelAndView("login");
+		return mav;
 	}
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public ModelAndView loginSuccess(@Valid LoginCommand loginCommand, BindingResult bindingResult, HttpSession session, HttpServletResponse response)throws Exception{
+		
+		if (bindingResult.hasErrors()) {
+			ModelAndView mav = new ModelAndView("index.jsp");
+			return mav;
+		}
+		
+		try {
+			AuthInfo authInfo = service.loginAuth(loginCommand);
+			session.setAttribute("authInfo", authInfo);
+			
+			Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getId());
+			rememberCookie.setPath("/");
+			if (loginCommand.isRememberId()) {
+				rememberCookie.setMaxAge(60*60*24*7);
+			}else {
+				rememberCookie.setMaxAge(0);
+			}
+			response.addCookie(rememberCookie);
+		} catch (Exception e) {
+			bindingResult.rejectValue("pw", "notMatch", "아이디와 비밀번호가 맞지 않습니다.");
+			ModelAndView mv = new ModelAndView("login.jsp");
+		}
+		
+		ModelAndView mv = new ModelAndView("index.jsp");
+		return mv;
+	}
+
+//	// 로그인 확인.
+//	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public int loginCheck(CustomerVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model)throws Exception{
+//
+//		// 아이디 기억하기 값 가져오기.
+//		String rememberId = request.getParameter("rememberId"); 
+//
+//		// 비밀번호 암호화.
+//		String loginPass = vo.getCustomerPassword();
+//		String loginPwd = passwordEncoder.encode(loginPass);
+//		vo.setCustomerPassword(loginPwd);
+//
+//		// 암호화 확인.
+//		System.out.println("암호화 된 비밀번호 : " + vo.getCustomerPassword());
+//
+//		// 로그인 메서드.
+//		int result = service.login(vo, session, rememberId, response);
+//		return result;
+//	}
 }
