@@ -3,16 +3,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="houseMap">
-	<select id="getHouseList" parameterType="String">
+	<select id="getHouseList" parameterType="String" resultType="kg.air.cnc.vo.House_InfoVO">
 		SELECT *
 		FROM house_info
-		WHERE house_location=#{house_location}
+		WHERE house_location=#{location}
 	</select>
 	
-	<select id="getHouse" parameterType="kg.air.cnc.vo.HouseVO">
-		SELECT *
+	
+	<select id="getPrice" parameterType="String" resultType="HashMap">
+		SELECT MIN(house_price_default) AS minp, MAX(house_price_default) AS maxp
 		FROM house_info
-		WHERE house_seq=#{house_seq}
+		WHERE house_location=#{location}
 	</select>
 	
 	<select id="getHouseDetail" parameterType="Map">

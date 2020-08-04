@@ -1,10 +1,12 @@
 package kg.air.cnc.service.housemap;
 
 import java.util.List;
+import java.util.Map;
 
-import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.House_InfoVO;
 
 public interface HouseMapService {
-	public List<HouseVO> getHouseList();
-	public HouseVO getHouse(HouseVO vo);
+	public List<House_InfoVO> getHouseList(String location);
+	public List<Map<String, Integer>> getPrice(String location);
+	public List<House_InfoVO> getDetail(Map<String, String> info);
 }

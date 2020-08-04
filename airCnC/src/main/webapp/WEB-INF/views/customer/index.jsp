@@ -68,13 +68,13 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=서울"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg" alt="">
 								</a>
 							</div>
 							<div class="content">
 								<p class="d-flex align-items-center">
-									서울 <a href="reservation_map.html">떠나자!</a>
+									서울 떠나자!
 								</p>
 							</div>
 						</div>
@@ -84,7 +84,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=경기"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg" alt="">
 								</a>
 							</div>
@@ -100,7 +100,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=강원"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="">
 								</a>
 							</div>
@@ -116,7 +116,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=충북"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg" alt="">
 								</a>
 							</div>
@@ -132,7 +132,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="충남"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png" alt="">
 								</a>
 							</div>
@@ -148,7 +148,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="전북"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg" alt="">
 								</a>
 							</div>
@@ -164,7 +164,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=전남"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg" alt="">
 								</a>
 							</div>
@@ -180,7 +180,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=경북"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg" alt="">
 								</a>
 							</div>
@@ -196,7 +196,7 @@
 					<div class="single_trip">
 						<div class="single_destination">
 							<div class="thumb">
-								<a href="#"> <img
+								<a href="getHouseList.do?location=경남"> <img
 									src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="">
 								</a>
 							</div>
