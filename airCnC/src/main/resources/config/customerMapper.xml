@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="createEmailCheck" resultType="int" parameterType="String">
-		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{customerEmail}
+		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{value}
 	</select>
 	
 	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO">
