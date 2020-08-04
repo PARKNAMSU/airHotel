@@ -89,9 +89,4 @@ public class CustomerVO{
 				+ customerBlaimWarn + ", customerBlaimStop=" + customerBlaimStop + ", customerRegdate="
 				+ customerRegdate + ", customerKey=" + customerKey + "]";
 	}
-	
-	// 비밀번호 확인.
-	public boolean matchPassword(String pw) {
-		return this.customerPassword.equals(pw);
-	}
 }

@@ -1,27 +1,19 @@
 package kg.air.cnc.customer.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import kg.air.cnc.customer.service.CustomerService;
 import kg.air.cnc.customer.vo.CustomerVO;
 import kg.air.cnc.service.mail.MailService;
-import kg.air.cnc.vo.login.AuthInfo;
-import kg.air.cnc.vo.login.LoginCommand;
 
 @Controller
 public class CustomerController {
@@ -126,46 +118,6 @@ public class CustomerController {
 			throw new RuntimeException();
 		}
 		return "login";
-	}
-	
-	@RequestMapping(value = "/loginView.do", method = RequestMethod.GET)
-	public ModelAndView loginForm(LoginCommand loginCommand, @CookieValue(value="REMEMBER", required = false) Cookie rememberCookie) throws Exception{
-		if (rememberCookie != null) {
-			loginCommand.setId(rememberCookie.getValue());
-			loginCommand.setRememberId(true);;
-		}
-		
-		ModelAndView mav = new ModelAndView("login");
-		return mav;
-	}
-	
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView loginSuccess(@Valid LoginCommand loginCommand, BindingResult bindingResult, HttpSession session, HttpServletResponse response)throws Exception{
-		
-		if (bindingResult.hasErrors()) {
-			ModelAndView mav = new ModelAndView("index.jsp");
-			return mav;
-		}
-		
-		try {
-			AuthInfo authInfo = service.loginAuth(loginCommand);
-			session.setAttribute("authInfo", authInfo);
-			
-			Cookie rememberCookie = new Cookie("REMEMBER", loginCommand.getId());
-			rememberCookie.setPath("/");
-			if (loginCommand.isRememberId()) {
-				rememberCookie.setMaxAge(60*60*24*7);
-			}else {
-				rememberCookie.setMaxAge(0);
-			}
-			response.addCookie(rememberCookie);
-		} catch (Exception e) {
-			bindingResult.rejectValue("pw", "notMatch", "아이디와 비밀번호가 맞지 않습니다.");
-			ModelAndView mv = new ModelAndView("login.jsp");
-		}
-		
-		ModelAndView mv = new ModelAndView("index.jsp");
-		return mv;
 	}
 
 //	// 로그인 확인.
