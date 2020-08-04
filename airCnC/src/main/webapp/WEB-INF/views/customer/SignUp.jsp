@@ -57,9 +57,10 @@
 				success : function(data) {
 					if (data == 1) {
 						alert("사용중인 아이디입니다.");
-						idCheck = true;
+						
 					} else if (data == 0) {
 						$("#idCheckBtn").attr("value", "Y");
+						idCheck = true;
 						alert("사용 가능한 아이디입니다.");
 					}
 				}

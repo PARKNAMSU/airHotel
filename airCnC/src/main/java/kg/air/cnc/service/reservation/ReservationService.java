@@ -45,35 +45,35 @@ public class ReservationService implements ReservationServiceImpl {
 	public ReservationHouseDetailVO getReservationHouse(ReservationHouseDetailVO vo) {
 		ReservationHouseDetailVO house = reservationDAO.getReservationHouse(vo);
 		ArrayList<String> convinList = new ArrayList<String>();
-		if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("±¸±Ş»óÀÚ");
+		if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("êµ¬ê¸‰ìƒì");
 		
-		if(house.getHouse_default_bedrock().trim().equals("true")) convinList.add("Ä§½ÇÀá±İ");
+		if(house.getHouse_default_bedrock().trim().equals("true")) convinList.add("ì¹¨ì‹¤ ì ê¸ˆ");
 		
-		if(house.getHouse_default_coditecter().trim().equals("true")) convinList.add("ÀÏ»êÈ­Åº¼Ò °¨Áö±â");
+		if(house.getHouse_default_coditecter().trim().equals("true")) convinList.add("ì¼ì‚°í™”íƒ„ì†Œ ê°ì§€ê¸°");
 		
-		if(house.getHouse_default_cooler().trim().equals("true")) convinList.add("³Ã¹æÀåÄ¡");
+		if(house.getHouse_default_cooler().trim().equals("true")) convinList.add("ëƒ‰ë°©ê¸°");
 		
-		if(house.getHouse_default_fireditecter().trim().equals("true")) convinList.add("È­Àç°¨Áö±â");
+		if(house.getHouse_default_fireditecter().trim().equals("true")) convinList.add("í™”ì¬ ê²½ë³´ê¸°");
 		
-		if(house.getHouse_default_firesofwa().trim().equals("true")) convinList.add("¼ÒÈ­±â");
+		if(house.getHouse_default_firesofwa().trim().equals("true")) convinList.add("ì†Œí™”ê¸°");
 		
-		if(house.getHouse_default_gym().trim().equals("true")) convinList.add("Ã¼À°°ü");
+		if(house.getHouse_default_gym().trim().equals("true")) convinList.add("ì²´ìœ¡ê´€");
 		
-		if(house.getHouse_default_heater().trim().equals("true")) convinList.add("³­¹æ±â");
+		if(house.getHouse_default_heater().trim().equals("true")) convinList.add("ë‚œë°©ê¸°");
 		
-		if(house.getHouse_default_iron().trim().equals("true")) convinList.add("´Ù¸®¹Ì");
+		if(house.getHouse_default_iron().trim().equals("true")) convinList.add("ë‹¤ë¦¬ë¯¸");
 		
-		if(house.getHouse_default_kitchen().trim().equals("true")) convinList.add("ÁÖ¹æ");
+		if(house.getHouse_default_kitchen().trim().equals("true")) convinList.add("ì£¼ë°©");
 		
-		if(house.getHouse_default_laundry_dryer().trim().equals("true")) convinList.add("°ÇÁ¶±â");
+		if(house.getHouse_default_laundry_dryer().trim().equals("true")) convinList.add("ê±´ì¡°ê¸°");
 		
-		if(house.getHouse_default_laundry_washer().trim().equals("true")) convinList.add("¼¼Å¹±â");
+		if(house.getHouse_default_laundry_washer().trim().equals("true")) convinList.add("ì„¸íƒê¸°");
 		
-		if(house.getHouse_default_livingroom_type().trim().equals("true")) convinList.add("´Üµ¶°Å½Ç");
+		if(house.getHouse_default_livingroom_type().trim().equals("true")) convinList.add("ë‹¨ë…ê±°ì‹¤");
 		
-		if(house.getHouse_default_parking().trim().equals("true")) convinList.add("ÁÖÂ÷Àå");
+		if(house.getHouse_default_parking().trim().equals("true")) convinList.add("ì£¼ì°¨ì¥");
 		
-		if(house.getHouse_default_pool().trim().equals("true")) convinList.add("¼ö¿µÀå");
+		if(house.getHouse_default_pool().trim().equals("true")) convinList.add("ìˆ˜ì˜ì¥");
 		
 		if(house.getHouse_default_tv().trim().equals("true")) {
 			convinList.add("TV");
@@ -82,26 +82,26 @@ public class ReservationService implements ReservationServiceImpl {
 		
 		if(house.getHouse_default_wifi().trim().equals("true")) convinList.add("Wifi");
 		
-		if(house.getHouse_defaultsetting().trim().equals("true")) convinList.add("ÇÊ¼öÇ°¸ñ");
+		if(house.getHouse_defaultsetting().trim().equals("true")) convinList.add("í•„ìˆ˜ í’ˆëª© ë³´ìœ ");
 		house.setConvinList(convinList);
 		
 		ArrayList<String> conditionList = new ArrayList<String>();
-		if(house.getHouse_condition_babyok().trim().equals("true"))conditionList.add("À¯¾Æ ¼÷¹Ú ÀûÇÕ");
-		if(house.getHouse_condition_childok().trim().equals("true"))conditionList.add("¾î¸°ÀÌ ¼÷¹Ú ÀûÇÕ");
-		if(house.getHouse_condition_partyok().trim().equals("true"))conditionList.add("ÆÄÆ¼ Çã¿ë");
-		if(house.getHouse_condition_smokeok().trim().equals("true"))conditionList.add("Èí¿¬ °¡´É");
-		if(house.getHouse_condition_petok().trim().equals("true"))conditionList.add("¾Ö¿Ïµ¿¹° ÃâÀÔ °¡´É");
+		if(house.getHouse_condition_babyok().trim().equals("true"))conditionList.add("ìœ ì•„ ìˆ™ë°• ì í•©");
+		if(house.getHouse_condition_childok().trim().equals("true"))conditionList.add("ì–´ë¦°ì´ ìˆ™ë°• ì í•©");
+		if(house.getHouse_condition_partyok().trim().equals("true"))conditionList.add("íŒŒí‹° ê°€ëŠ¥");
+		if(house.getHouse_condition_smokeok().trim().equals("true"))conditionList.add("í¡ì—°ê°€ëŠ¥");
+		if(house.getHouse_condition_petok().trim().equals("true"))conditionList.add("ì• ì™„ë™ë¬¼ ì¶œì… ê°€ëŠ¥");
 		house.setConditionList(conditionList);
 		ArrayList<String> restrictList = new ArrayList<String>();
-		if(house.getHouse_restrict_beast().trim().equals("true"))restrictList.add("À§Çè µ¿¹° ÁÖÀÇ");
-		if(house.getHouse_restrict_cantpark().trim().equals("true"))restrictList.add("°Ç¹° ³» ÁÖÂ÷ ±İÁö");
-		if(house.getHouse_restrict_cctv().trim().equals("true"))restrictList.add("CCTV ÀÖÀ½");
-		if(house.getHouse_restrict_commonspace().trim().equals("true"))restrictList.add("ÀÏºÎ °ø¿ë°ø°£ ÀÖÀ½");
-		if(house.getHouse_restrict_facility().trim().equals("true"))restrictList.add("ÆíÀÇ½Ã¼³ Á¦ÇÑ");
-		if(house.getHouse_restrict_pet().trim().equals("true"))restrictList.add("¼÷¼Ò¿¡ ¹İ·Áµ¿¹° ÀÖÀ½");
-		if(house.getHouse_restrict_noise().trim().equals("true"))restrictList.add("¼ÒÀ½ ¹ß»ıÇÒ ¼ö ÀÖÀ½");
-		if(house.getHouse_restrict_stairs().trim().equals("true"))restrictList.add("°è´Ü ÀÌ¿ëÇØ¾ßÇÔ");
-		if(house.getHouse_restrict_weapon().trim().equals("true"))restrictList.add("¹«±â ÀÖÀ½");
+		if(house.getHouse_restrict_beast().trim().equals("true"))restrictList.add("ìœ„í—˜ë™ë¬¼ ì£¼ì˜");
+		if(house.getHouse_restrict_cantpark().trim().equals("true"))restrictList.add("ê±´ë¬¼ ë‚´ ì£¼ì°¨ë¶ˆê°€");
+		if(house.getHouse_restrict_cctv().trim().equals("true"))restrictList.add("CCTV ë³´ìœ ");
+		if(house.getHouse_restrict_commonspace().trim().equals("true"))restrictList.add("ê³µìš© ê³µê°„ ì¡´ì¬");
+		if(house.getHouse_restrict_facility().trim().equals("true"))restrictList.add("í¸ì˜ì‹œì„¤ ì‚¬ìš© ì œí•œ");
+		if(house.getHouse_restrict_pet().trim().equals("true"))restrictList.add("ì• ì™„ë™ë¬¼ ë³´ìœ ");
+		if(house.getHouse_restrict_noise().trim().equals("true"))restrictList.add("ì†ŒìŒ ë°œìƒí•  ìˆ˜ ìˆìŒ");
+		if(house.getHouse_restrict_stairs().trim().equals("true"))restrictList.add("ê³„ë‹¨ ì´ìš©í•´ì•¼ í•¨");
+		if(house.getHouse_restrict_weapon().trim().equals("true"))restrictList.add("ë¬´ê¸° ì†Œìœ ");
 		house.setRestricList(restrictList);
 		return house;
 	}

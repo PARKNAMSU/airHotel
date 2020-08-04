@@ -153,12 +153,15 @@ div {
 	</div>
 	<div style="clear:both;"></div>
 	<br><br>
+	
 	<div class="reviewdiv">
+		
 		<div id="rate">
 			<p style="font-size:40px" style="font-family: 'Jua', sans-serif;">후기</p><br><br>
 			<a id="star" style="font-family: 'Jua', sans-serif;"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
 			${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
 			<br><br>
+			<c:if test="${house.accessType eq 'beforeres' }">
 			<form action="insertComments.do" id="commentsForm">
 				<textarea rows="5" cols="100" id="commant" name="comments_content" class="form-control"></textarea><br>
 				<input type="hidden" value="0" id="comments_rate" name="comments_rate">
@@ -168,7 +171,9 @@ div {
 				<input type="button" onclick="openSetRateUpdate()" class="btn btn-outline-danger" value="수정" style="width:150px;height:75px;font-family:'Jua', sans-serif;display: none;" >
 				<input type="reset" value="취소" class="btn btn-outline-danger" style="width:150px;height:75px; 'Jua', sans-serif;" >
 			</form>
+			</c:if>
 		</div>
+		
 		<div id="commantdiv">
 			<c:forEach items="${commentsList}" var="item" varStatus="i">
 			<div class="commantform">
@@ -177,7 +182,7 @@ div {
 				<input type="hidden" id="hidseq${i.index}" value="${item.comments_seq }">
 				<input type="hidden" id="hidhouse${i.index}" value="${house.house_seq }">
 				<input type="hidden" id="hidcontent${i.index}" value="${item.comments_content }">
-				<p><a style="margin-left:94%;" onclick="openSetRateUpdate(document.getElementById('hidseq${i.index}').value,document.getElementById('hidhouse${i.index}).value'),document.getElementById('hidcontent${i.index}').value)" style="font-family: 'Jua', sans-serif;" >수정</a> | <a href="deleteComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${house_seq}" style="font-family: 'Jua', sans-serif;">삭제</a></p>
+				<p><a style="margin-left:94%;" onclick="openSetRateUpdate(document.getElementById('hidseq${i.index}').value,document.getElementById('hidhouse${i.index}).value'),document.getElementById('hidcontent${i.index}').value)" style="font-family: 'Jua', sans-serif;" >수정</a> | <a href="deleteComments.do?comments_seq=${item.comments_seq}&comments_house_seq=${house.house_seq}" style="font-family: 'Jua', sans-serif;">삭제</a></p>
 				</c:if>
 				<br>
 				<p style="font-family: 'Jua', sans-serif;">${item.comments_date}</p>
