@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=123">
 <!-- Latest compiled JavaScript -->
-
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -43,7 +43,7 @@
     </div>
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
-	<%@ include file="../html/sideMenu.jsp" %>
+	<%@include file="../html/sideMenu.jsp" %>
 
 	<div class="maindiv" id="main">
 		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()">예약 내역</a> | <a onclick="getResBefore()" id="before">이전 예약</a></h1>
