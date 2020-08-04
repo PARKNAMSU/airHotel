@@ -58,6 +58,7 @@ public class ReservationDetailController {
 	}
 	@RequestMapping("deleteComments.do")
 	public ModelAndView deleteCommentsController(CommentsVO vo,ModelAndView mav) {
+		System.out.println(vo.getComments_seq());
 		commentsService.deleteComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
 		mav.addObject("house_seq",vo.getComments_house_seq());

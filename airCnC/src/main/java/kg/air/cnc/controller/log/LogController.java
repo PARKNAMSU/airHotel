@@ -18,7 +18,7 @@ public class LogController {
 	@Autowired
 	LogService logService;
 	
-	/*ÇØ´ç Á¶°ÇÀÇ ·Î±× jsonÇüÅÂ·Î º¯È¯ÈÄ °Ë»ö*/
+	/*JSONì´ìš© ë¡œê·¸ ê°€ì ¸ì˜¤ê¸°*/
 	@RequestMapping(value="/getLog.mdo", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String getLogListController(LogVO vo) throws JsonProcessingException{
