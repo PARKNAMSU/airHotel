@@ -74,7 +74,7 @@
 			url:"createEmailCheck.do",
 			data : {"customerEmail" : $("#customerEmail").val()},
 			success:function(data){
-				if(data == true){
+				if(data == false){
 					alert("인증번호 발송 완료");
 					emailSendCheck = true;
 				}else{
