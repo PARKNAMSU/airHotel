@@ -24,15 +24,11 @@
 	</select>
 	
 	<select id="createEmailCheck" resultType="int" parameterType="String">
-		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{customerEmail}
+		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{value}
 	</select>
 	
 	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO">
 		SELECT COUNT(*) FROM customer WHERE customer_id = #{customerId}
-	</select>
-	
-	<select id="selectById" resultType="kg.air.cnc.customer.vo.CustomerVO">
-		SELECT * FROM customer WHERE customer_id = #{customerId}
 	</select>
 	
 </mapper>
