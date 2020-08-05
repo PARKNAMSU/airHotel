@@ -75,7 +75,7 @@ public class BlameServiceImpl implements BlameService {
     public void suspendHost(String host_id, String suspend_day) {
         blameDAO.getHostHouses(host_id);
         // host 가 가지고 있는 house list
-        List<HouseVO> houseList = blameDAO.getHostHouses(host_id);
+        List<House_InfoVO> houseList = blameDAO.getHostHouses(host_id);
         //house_status -> 1 (정지상태)
         for(int i = 0; i < houseList.size(); i++){
             blameDAO.setHouseStatusStop(houseList.get(i));

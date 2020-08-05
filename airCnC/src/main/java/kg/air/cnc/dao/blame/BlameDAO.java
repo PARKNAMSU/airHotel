@@ -18,8 +18,8 @@ public interface BlameDAO {
     void increaseHostBlameWarn(String target_member_id);
     void increaseHostBlameStop(String host_id);
     void addBlackList(String id);
-    List<HouseVO> getHostHouses(String host_id); // host 가 가지고 있는 하우스 리스트 뽑아오는 기능
-    void setHouseStatusStop(HouseVO house); // house 의 상태를 1(정지상태)로 변경
+    List<House_InfoVO> getHostHouses(String host_id); // host 가 가지고 있는 하우스 리스트 뽑아오는 기능
+    void setHouseStatusStop(House_InfoVO house); // house 의 상태를 1(정지상태)로 변경
     List<ReservationVO> getReservationByHostId(String host_id); //
     List<ReservationVO> getReservationByCustomerId(String customer_id);
     void sendCustomerReservationCancelMessage(String to_id); // host 정지로 인한 취소메세지 전송

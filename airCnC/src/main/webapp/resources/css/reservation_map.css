@@ -1,0 +1,92 @@
+body{
+    font-family: "Jua", sans-serif;
+}
+
+hr{
+   	float: left;
+ 	width: auto;
+}
+
+main{
+    margin : 2% 0 10%;
+}
+
+.containerr{
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.searchZone{
+    margin-bottom : 2%;
+}
+
+.searchOptions{
+    text-align : center;
+}
+
+.searchConditions{
+    margin-left : 3%;
+}
+
+#searchDetails{
+    margin-right : 2%;
+    float : right;
+}
+
+.hiddenDetails{
+    display : none;
+    margin-bottom : 10;
+}
+.hiddenDetails table {
+    display : none;
+}
+
+#map{
+    position : sticky;
+    width : 40%;
+    height : 600px;
+    right : 0;
+    top : 10px;
+    float : right;
+    clear : both;
+}
+
+.mapleft{
+    float : left;
+}
+
+.houseList {
+	clear : left;
+	float : left;
+  	display: table-cell;
+  	vertical-align: middle;
+  	text-align: left;
+  	margin-bottom: 2%;
+  	width: 58%;
+  	color: black;
+  	border-bottom: 1px solid black;
+  	padding-bottom: 10px;
+  	max-length : 58%;
+}
+
+.littleImg{
+    width : 120px;
+    height : 120px;
+    float : left;
+    margin-right: 3%;
+}
+
+footer {
+    clear : both;
+}
+
+.hidden{
+    display : none;
+}
+
+.mapComment {
+    float : none;
+}

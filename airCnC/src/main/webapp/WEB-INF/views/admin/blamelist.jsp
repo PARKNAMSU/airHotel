@@ -64,7 +64,7 @@
     <c:set var="blamelist" value="${blamelist}"/>
 
     <div class="table-responsive">
-        <table class="table">
+        <table class="table" >
             
             <c:forEach var="bl" items="${blamelist}" begin="0" end="${blamelist.size()}" step="1">
                 <tr>
