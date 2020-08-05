@@ -20,14 +20,21 @@ public class HouseVO {
 	private int house_bed_type_queen;
 	
 	private int house_bathroom_amount;
-	private int house_bathroom_type;
+	private String house_bathroom_type_0or1;
+	private String house_bathroom_type;
+	
 	
 	private String house_location;
-	private String house_loaction_sido;
+	private String house_location_sido;
 	private String house_location_gugun;
 	private String house_location_postnum;
-	private String house_xlocation;
-	private String house_ylocation;
+	private String house_xlocation_str;
+	private float house_xlocation;
+	private String house_ylocation_str;
+	private float house_ylocation;
+	private String house_loaction_fulladdress;
+	private String house_loaction_detailaddress;
+	
 	
 	private String house_defaultsetting_0or1;
 	private String house_defaultsetting;
@@ -84,31 +91,287 @@ public class HouseVO {
 	private int house_price_default;
 	private int house_price_max;
 	
+	private String house_theme_bbq_0or1;
+	private String house_theme_bbq;
+	private String house_theme_pet_0or1;
+	private String house_theme_pet;
+	private String house_theme_party_0or1;
+	private String house_theme_party;
+	private String house_theme_pool_0or1;
+	private String house_theme_pool;
+	private String house_theme_farm_0or1;
+	private String house_theme_farm;
 	
 	
-	private boolean house_conditiion_childok;
-	private boolean house_condition_babyok;
-	private boolean house_condition_petok;
-	private boolean house_condition_smokeok;
-	private boolean house_condition_partyok;
-	private boolean house_restrict_stairs;
-	private boolean house_restrict_noise;
-	private boolean house_restrict_pet;
-	private boolean house_restrict_cantpark;
-	private boolean house_restrict_commonspace;
-	private boolean house_restrict_facility;
-	private boolean house_restrict_cctv;
-	private boolean house_restrict_weapon;
-	private boolean house_restrict_beast;
+	
+	private String house_condition_childok_0or1;
+	private String house_condition_childok;
+	private String house_condition_babyok_0or1;
+	private String house_condition_babyok;
+	private String house_condition_smokeok_0or1;
+	private String house_condition_smokeok;
+	private String house_restrict_stairs_0or1;
+	private String house_restrict_stairs;
+	private String house_restrict_noise_0or1;
+	private String house_restrict_noise;
+	private String house_restrict_pet_0or1;
+	private String house_restrict_pet;
+	private String house_restrict_cantpark_0or1;
+	private String house_restrict_cantpark;
+	private String house_restrict_commonspace_0or1;
+	private String house_restrict_commonspace;
+	private String house_restrict_facility_0or1;
+	private String house_restrict_facility;
+	private String house_restrict_cctv_0or1;
+	private String house_restrict_cctv;
+	private String house_restrict_weapon_0or1;
+	private String house_restrict_weapon;
+	private String house_restrict_beast_0or1;
+	private String house_restrict_beast;
+	
+	private String house_checkin_time;
+	private String house_checkout_time;
+	
 	
 	private float house_star;
 	private int house_status;
-	
 	private String house_host_id;
-
-	private Timestamp house_checkin_time;
-	private Timestamp house_checkout_time;
 	private Date house_regdate;
+	
+	
+	
+	
+	public String getHouse_checkin_time() {
+		return house_checkin_time;
+	}
+	public void setHouse_checkin_time(String house_checkin_time) {
+		this.house_checkin_time = house_checkin_time;
+	}
+	public String getHouse_checkout_time() {
+		return house_checkout_time;
+	}
+	public void setHouse_checkout_time(String house_checkout_time) {
+		this.house_checkout_time = house_checkout_time;
+	}
+	
+	
+	
+	
+	public String getHouse_condition_childok_0or1() {
+		return house_condition_childok_0or1;
+	}
+	public void setHouse_condition_childok_0or1(String house_conditiion_childok_0or1) {
+		this.house_condition_childok_0or1 = house_conditiion_childok_0or1;
+	}
+	public String getHouse_condition_childok() {
+		return house_condition_childok;
+	}
+	public void setHouse_condition_childok(String house_conditiion_childok) {
+		this.house_condition_childok = house_conditiion_childok;
+	}
+	public String getHouse_condition_babyok_0or1() {
+		return house_condition_babyok_0or1;
+	}
+	public void setHouse_condition_babyok_0or1(String house_condition_babyok_0or1) {
+		this.house_condition_babyok_0or1 = house_condition_babyok_0or1;
+	}
+	public String getHouse_condition_babyok() {
+		return house_condition_babyok;
+	}
+	public void setHouse_condition_babyok(String house_condition_babyok) {
+		this.house_condition_babyok = house_condition_babyok;
+	}
+	public String getHouse_condition_smokeok_0or1() {
+		return house_condition_smokeok_0or1;
+	}
+	public void setHouse_condition_smokeok_0or1(String house_condition_smokeok_0or1) {
+		this.house_condition_smokeok_0or1 = house_condition_smokeok_0or1;
+	}
+	public String getHouse_condition_smokeok() {
+		return house_condition_smokeok;
+	}
+	public void setHouse_condition_smokeok(String house_condition_smokeok) {
+		this.house_condition_smokeok = house_condition_smokeok;
+	}
+	public String getHouse_restrict_stairs_0or1() {
+		return house_restrict_stairs_0or1;
+	}
+	public void setHouse_restrict_stairs_0or1(String house_restrict_stairs_0or1) {
+		this.house_restrict_stairs_0or1 = house_restrict_stairs_0or1;
+	}
+	public String getHouse_restrict_stairs() {
+		return house_restrict_stairs;
+	}
+	public void setHouse_restrict_stairs(String house_restrict_stairs) {
+		this.house_restrict_stairs = house_restrict_stairs;
+	}
+	public String getHouse_restrict_noise_0or1() {
+		return house_restrict_noise_0or1;
+	}
+	public void setHouse_restrict_noise_0or1(String house_restrict_noise_0or1) {
+		this.house_restrict_noise_0or1 = house_restrict_noise_0or1;
+	}
+	public String getHouse_restrict_noise() {
+		return house_restrict_noise;
+	}
+	public void setHouse_restrict_noise(String house_restrict_noise) {
+		this.house_restrict_noise = house_restrict_noise;
+	}
+	public String getHouse_restrict_pet_0or1() {
+		return house_restrict_pet_0or1;
+	}
+	public void setHouse_restrict_pet_0or1(String house_restrict_pet_0or1) {
+		this.house_restrict_pet_0or1 = house_restrict_pet_0or1;
+	}
+	public String getHouse_restrict_pet() {
+		return house_restrict_pet;
+	}
+	public void setHouse_restrict_pet(String house_restrict_pet) {
+		this.house_restrict_pet = house_restrict_pet;
+	}
+	public String getHouse_restrict_cantpark_0or1() {
+		return house_restrict_cantpark_0or1;
+	}
+	public void setHouse_restrict_cantpark_0or1(String house_restrict_cantpark_0or1) {
+		this.house_restrict_cantpark_0or1 = house_restrict_cantpark_0or1;
+	}
+	public String getHouse_restrict_cantpark() {
+		return house_restrict_cantpark;
+	}
+	public void setHouse_restrict_cantpark(String house_restrict_cantpark) {
+		this.house_restrict_cantpark = house_restrict_cantpark;
+	}
+	public String getHouse_restrict_commonspace_0or1() {
+		return house_restrict_commonspace_0or1;
+	}
+	public void setHouse_restrict_commonspace_0or1(String house_restrict_commonspace_0or1) {
+		this.house_restrict_commonspace_0or1 = house_restrict_commonspace_0or1;
+	}
+	public String getHouse_restrict_commonspace() {
+		return house_restrict_commonspace;
+	}
+	public void setHouse_restrict_commonspace(String house_restrict_commonspace) {
+		this.house_restrict_commonspace = house_restrict_commonspace;
+	}
+	public String getHouse_restrict_facility_0or1() {
+		return house_restrict_facility_0or1;
+	}
+	public void setHouse_restrict_facility_0or1(String house_restrict_facility_0or1) {
+		this.house_restrict_facility_0or1 = house_restrict_facility_0or1;
+	}
+	public String getHouse_restrict_facility() {
+		return house_restrict_facility;
+	}
+	public void setHouse_restrict_facility(String house_restrict_facility) {
+		this.house_restrict_facility = house_restrict_facility;
+	}
+	public String getHouse_restrict_cctv_0or1() {
+		return house_restrict_cctv_0or1;
+	}
+	public void setHouse_restrict_cctv_0or1(String house_restrict_cctv_0or1) {
+		this.house_restrict_cctv_0or1 = house_restrict_cctv_0or1;
+	}
+	public String getHouse_restrict_cctv() {
+		return house_restrict_cctv;
+	}
+	public void setHouse_restrict_cctv(String house_restrict_cctv) {
+		this.house_restrict_cctv = house_restrict_cctv;
+	}
+	public String getHouse_restrict_weapon_0or1() {
+		return house_restrict_weapon_0or1;
+	}
+	public void setHouse_restrict_weapon_0or1(String house_restrict_weapon_0or1) {
+		this.house_restrict_weapon_0or1 = house_restrict_weapon_0or1;
+	}
+	public String getHouse_restrict_weapon() {
+		return house_restrict_weapon;
+	}
+	public void setHouse_restrict_weapon(String house_restrict_weapon) {
+		this.house_restrict_weapon = house_restrict_weapon;
+	}
+	public String getHouse_restrict_beast_0or1() {
+		return house_restrict_beast_0or1;
+	}
+	public void setHouse_restrict_beast_0or1(String house_restrict_beast_0or1) {
+		this.house_restrict_beast_0or1 = house_restrict_beast_0or1;
+	}
+	public String getHouse_restrict_beast() {
+		return house_restrict_beast;
+	}
+	public void setHouse_restrict_beast(String house_restrict_beast) {
+		this.house_restrict_beast = house_restrict_beast;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String getHouse_theme_bbq_0or1() {
+		return house_theme_bbq_0or1;
+	}
+	public void setHouse_theme_bbq_0or1(String house_theme_bbq_0or1) {
+		this.house_theme_bbq_0or1 = house_theme_bbq_0or1;
+	}
+	public String getHouse_theme_bbq() {
+		return house_theme_bbq;
+	}
+	public void setHouse_theme_bbq(String house_theme_bbq) {
+		this.house_theme_bbq = house_theme_bbq;
+	}
+	public String getHouse_theme_pet_0or1() {
+		return house_theme_pet_0or1;
+	}
+	public void setHouse_theme_pet_0or1(String house_theme_pet_0or1) {
+		this.house_theme_pet_0or1 = house_theme_pet_0or1;
+	}
+	public String getHouse_theme_pet() {
+		return house_theme_pet;
+	}
+	public void setHouse_theme_pet(String house_theme_pet) {
+		this.house_theme_pet = house_theme_pet;
+	}
+	public String getHouse_theme_party_0or1() {
+		return house_theme_party_0or1;
+	}
+	public void setHouse_theme_party_0or1(String house_theme_party_0or1) {
+		this.house_theme_party_0or1 = house_theme_party_0or1;
+	}
+	public String getHouse_theme_party() {
+		return house_theme_party;
+	}
+	public void setHouse_theme_party(String house_theme_party) {
+		this.house_theme_party = house_theme_party;
+	}
+	public String getHouse_theme_pool_0or1() {
+		return house_theme_pool_0or1;
+	}
+	public void setHouse_theme_pool_0or1(String house_theme_pool_0or1) {
+		this.house_theme_pool_0or1 = house_theme_pool_0or1;
+	}
+	public String getHouse_theme_pool() {
+		return house_theme_pool;
+	}
+	public void setHouse_theme_pool(String house_theme_pool) {
+		this.house_theme_pool = house_theme_pool;
+	}
+	public String getHouse_theme_farm_0or1() {
+		return house_theme_farm_0or1;
+	}
+	public void setHouse_theme_farm_0or1(String house_theme_farm_0or1) {
+		this.house_theme_farm_0or1 = house_theme_farm_0or1;
+	}
+	public String getHouse_theme_farm() {
+		return house_theme_farm;
+	}
+	public void setHouse_theme_farm(String house_theme_farm) {
+		this.house_theme_farm = house_theme_farm;
+	}
+	
+	
 	
 	
 	
@@ -448,17 +711,42 @@ public class HouseVO {
 	
 	
 	
-	public String getHouse_xlocation() {
+	public String getHouse_loaction_fulladdress() {
+		return house_loaction_fulladdress;
+	}
+	public void setHouse_loaction_fulladdress(String house_loaction_fulladdress) {
+		this.house_loaction_fulladdress = house_loaction_fulladdress;
+	}
+	public String getHouse_loaction_detailaddress() {
+		return house_loaction_detailaddress;
+	}
+	public void setHouse_loaction_detailaddress(String house_loaction_detailaddress) {
+		this.house_loaction_detailaddress = house_loaction_detailaddress;
+	}
+
+	public float getHouse_xlocation() {
 		return house_xlocation;
 	}
-	public void setHouse_xlocation(String house_xlocation) {
+	public void setHouse_xlocation(float house_xlocation) {
 		this.house_xlocation = house_xlocation;
 	}
-	public String getHouse_ylocation() {
+	public float getHouse_ylocation() {
 		return house_ylocation;
 	}
-	public void setHouse_ylocation(String house_ylocation) {
+	public void setHouse_ylocation(float house_ylocation) {
 		this.house_ylocation = house_ylocation;
+	}
+	public String getHouse_xlocation_str() {
+		return house_xlocation_str;
+	}
+	public void setHouse_xlocation_str(String house_xlocation_str) {
+		this.house_xlocation_str = house_xlocation_str;
+	}
+	public String getHouse_ylocation_str() {
+		return house_ylocation_str;
+	}
+	public void setHouse_ylocation_str(String house_ylocation_str) {
+		this.house_ylocation_str = house_ylocation_str;
 	}
 	public String getHouse_location() {
 		return house_location;
@@ -466,11 +754,11 @@ public class HouseVO {
 	public void setHouse_location(String house_location) {
 		this.house_location = house_location;
 	}
-	public String getHouse_loaction_sido() {
-		return house_loaction_sido;
+	public String getHouse_location_sido() {
+		return house_location_sido;
 	}
-	public void setHouse_loaction_sido(String house_loaction_sido) {
-		this.house_loaction_sido = house_loaction_sido;
+	public void setHouse_location_sido(String house_location_sido) {
+		this.house_location_sido = house_location_sido;
 	}
 	public String getHouse_location_gugun() {
 		return house_location_gugun;
@@ -490,18 +778,23 @@ public class HouseVO {
 	
 	
 	
-	
+	public String getHouse_bathroom_type_0or1() {
+		return house_bathroom_type_0or1;
+	}
+	public void setHouse_bathroom_type_0or1(String house_bathroom_type_0or1) {
+		this.house_bathroom_type_0or1 = house_bathroom_type_0or1;
+	}
+	public String getHouse_bathroom_type() {
+		return house_bathroom_type;
+	}
+	public void setHouse_bathroom_type(String house_bathroom_type) {
+		this.house_bathroom_type = house_bathroom_type;
+	}
 	public int getHouse_bathroom_amount() {
 		return house_bathroom_amount;
 	}
 	public void setHouse_bathroom_amount(int house_bathroom_amount) {
 		this.house_bathroom_amount = house_bathroom_amount;
-	}
-	public int getHouse_bathroom_type() {
-		return house_bathroom_type;
-	}
-	public void setHouse_bathroom_type(int house_bathroom_type) {
-		this.house_bathroom_type = house_bathroom_type;
 	}
 	public int getHouse_maxperson() {
 		return house_maxperson;
@@ -571,9 +864,46 @@ public class HouseVO {
 	}
 	@Override
 	public String toString() {
-		return "HouseVO [newhouse=" + newhouse + ", house_bedroom_amount=" + house_bedroom_amount
-				+ ", house_bathroom_type=" + house_bathroom_type + ", house_loaction_sido=" + house_loaction_sido + "]";
+		return "HouseVO [house_maxperson=" + house_maxperson + ", house_bedroom_amount=" + house_bedroom_amount
+				+ ", house_bed_amount=" + house_bed_amount + ", house_bed_type_single=" + house_bed_type_single
+				+ ", house_bed_type_double=" + house_bed_type_double + ", house_bed_type_queen=" + house_bed_type_queen
+				+ ", house_bathroom_amount=" + house_bathroom_amount + ", house_bathroom_type=" + house_bathroom_type
+				+ ", house_location=" + house_location + ", house_location_sido=" + house_location_sido
+				+ ", house_location_gugun=" + house_location_gugun + ", house_location_postnum="
+				+ house_location_postnum + ", house_xlocation=" + house_xlocation + ", house_ylocation="
+				+ house_ylocation + ", house_location_fulladdress=" + house_loaction_fulladdress
+				+ ", house_location_detailaddress=" + house_loaction_detailaddress + ", house_defaultsetting="
+				+ house_defaultsetting + ", house_default_tv=" + house_default_tv + ", house_default_wifi="
+				+ house_default_wifi + ", house_default_heater=" + house_default_heater + ", house_default_cooler="
+				+ house_default_cooler + ", house_default_iron_0or1=" + house_default_iron_0or1
+				+ ", house_default_iron=" + house_default_iron + ", house_default_fireditecter="
+				+ house_default_fireditecter + ", house_default_coditecter=" + house_default_coditecter
+				+ ", house_default_aidkit=" + house_default_aidkit + ", house_default_firesofwa="
+				+ house_default_firesofwa + ", house_default_bedrock=" + house_default_bedrock
+				+ ", house_default_livingroom_type=" + house_default_livingroom_type + ", house_default_kitchen="
+				+ house_default_kitchen + ", house_default_laundry_washer=" + house_default_laundry_washer
+				+ ", house_default_laundry_dryer=" + house_default_laundry_dryer + ", house_default_parking="
+				+ house_default_parking + ", house_default_gym=" + house_default_gym + ", house_default_pool="
+				+ house_default_pool + ", house_desc1=" + house_desc1 + ", house_desc2=" + house_desc2
+				+ ", house_desc3=" + house_desc3 + ", house_desc4=" + house_desc4 + ", house_desc5=" + house_desc5
+				+ ", house_photo=" + house_photo + ", house_photourl=" + house_photourl + ", house_name=" + house_name
+				+ ", house_price_default_parInt=" + house_price_default_parInt + ", house_price_max_parInt="
+				+ house_price_max_parInt + ", house_price_default=" + house_price_default + ", house_price_max="
+				+ house_price_max + ", house_theme_bbq=" + house_theme_bbq + ", house_theme_pet=" + house_theme_pet
+				+ ", house_theme_party=" + house_theme_party + ", house_theme_pool=" + house_theme_pool
+				+ ", house_theme_farm=" + house_theme_farm + ", house_condition_childok=" + house_condition_childok
+				+ ", house_condition_babyok=" + house_condition_babyok + ", house_condition_smokeok="
+				+ house_condition_smokeok + ", house_restrict_stairs=" + house_restrict_stairs
+				+ ", house_restrict_noise=" + house_restrict_noise + ", house_restrict_pet=" + house_restrict_pet
+				+ ", house_restrict_cantpark=" + house_restrict_cantpark + ", house_restrict_commonspace="
+				+ house_restrict_commonspace + ", house_restrict_facility=" + house_restrict_facility
+				+ ", house_restrict_cctv=" + house_restrict_cctv + ", house_restrict_weapon=" + house_restrict_weapon
+				+ ", house_restrict_beast=" + house_restrict_beast + ", house_checkin_time=" + house_checkin_time
+				+ ", house_checkout_time=" + house_checkout_time + ", house_star=" + house_star + ", house_status="
+				+ house_status + ", house_host_id=" + house_host_id + ", house_regdate=" + house_regdate + "]";
 	}
+	
+	
 	
 	
 	

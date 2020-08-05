@@ -62,8 +62,9 @@
 			<br class="guestcount">	
 			<div class="form">
 				<label for="guestcount">최대 숙박 인원</label>
+				<c:set var="maxperson" value="${house_maxperson}" />
 				<button type="button" onclick="javascript:this.form.amount.value++;">+</button> 
-        		<form:input type="text" id="amount" value="0" readonly="readonly" path="house_maxperson" />
+        		<form:input type="text" id="amount" value="${maxperson }" readonly="readonly" path="house_maxperson" />
         		<button type="button" onclick="javascript:this.form.amount.value--;">-</button>
 				
 				<div class="guestbad">
@@ -81,9 +82,10 @@
         		
         		<div class="guestbadcount">
 			        <div class="guestbadcount1">
-			          <label for="guestbadcount2">침대</label>        
+			        <label for="guestbadcount2">침대</label>  
+			        <c:set var="bed_amount" value="${house_bed_amount}" />      
 			        <button type="button" onclick="javascript:this.form.amount1.value++;">+</button>   
-			        <form:input type="text" id="amount1" value="0" readonly="readonly" path="house_bed_amount" />    
+			        <form:input type="text" id="amount1" value="${bed_amount }" readonly="readonly" path="house_bed_amount" />    
 			        <button type="button" onclick="javascript:this.form.amount1.value--;">-</button>
 			        </div>
 			    </div>
@@ -94,20 +96,23 @@
 			    	<div class="badcount">
 			    		<div class="bad1">
 			    			<label for="guestcount">싱글</label>
+			    			<c:set var="bed_type_single" value="${house_bed_type_single}" />   
 					        <button type="button" onclick="javascript:this.form.amount2.value++;">+</button>  
-					        <form:input type="text" id="amount2" value="0" readonly="readonly" path="house_bed_type_single" />
+					        <form:input type="text" id="amount2" value="${bed_type_single }" readonly="readonly" path="house_bed_type_single" />
 					        <button type="button" onclick="javascript:this.form.amount2.value--;">-</button>
 			    		</div><br>
 			    		<div class="bad2">
 			    			<label for="guestcount">더블</label>
+			    			<c:set var="bed_type_double" value="${house_bed_type_double}" />
 					        <button type="button" onclick="javascript:this.form.amount3.value++;">+</button>  
-					        <form:input type="text" id="amount3" value="0" readonly="readonly" path="house_bed_type_double" />  
+					        <form:input type="text" id="amount3" value="${bed_type_double }" readonly="readonly" path="house_bed_type_double" />  
 					        <button type="button" onclick="javascript:this.form.amount3.value--;">-</button>
 			    		</div><br>
 			    		<div class="bad3">
 			    			<label for="guestcount">퀸</label>
+			    			<c:set var="bed_type_queen" value="${house_bed_type_queen}" />
 					        <button type="button" onclick="javascript:this.form.amount4.value++;">+</button>  
-					        <form:input type="text" id="amount4" value="0" readonly="readonly" path="house_bed_type_queen" />    
+					        <form:input type="text" id="amount4" value="${bed_type_queen }" readonly="readonly" path="house_bed_type_queen" />    
 					        <button type="button" onclick="javascript:this.form.amount4.value--;">-</button>
 					        <div class="badfix"><br>
 					          <a href="#"><button>침대 수정하기</button></a>

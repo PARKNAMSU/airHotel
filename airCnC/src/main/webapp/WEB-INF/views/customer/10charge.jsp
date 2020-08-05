@@ -61,13 +61,23 @@
         <h4 style="font-size: 25px;">기본 요금</h4>
         <h4>스마트 요금 기능을 사용하지 않을 때 적용되는 기본 요금입니다.</h4>
         <input type="image" src="${pageContext.request.contextPath}/resources/images/won.png" style="width: 35px; height: 20px;">
-        
         <input type="text" name="house_price_default_parInt" numberonly placeholder="숫자만 입력해 주세요" maxlength="30"style="width: 150px;"><br></br>
         <h4 style="font-size: 25px;">최고요금</h4>
         <h4>인기 있는 지역 축제가 개최되는 등의 이유로 수요가 높아지면 요금을 1박당 최대 얼마까지 부과하시겠어요?</h4>
         <input type="image" src="${pageContext.request.contextPath}/resources/images/won.png" style="width: 35px; height: 20px;">
-        <input type="text" name="house_price_max_parInt" numberonly placeholder="숫자만 입력해 주세요" maxlength="30" style="width: 150px;"></div>
+        <input type="text" name="house_price_max_parInt" numberonly placeholder="숫자만 입력해 주세요" maxlength="30" style="width: 150px;"><br></br>
+
+		<h3 style="padding-top: 35px; font-size: 45px;">체크인-아웃시간 설정하기</h3></div><br>
+        <h4>체크인 시간과 체크아웃 시간을 설정하세요.</h4><br></br>
+		<p>CHECK-IN 시간 : <input type="time" name="house_checkin_time" value="15:00" min="00:00" max="24:00"maxlength="30" style="width: 100px;"></p><br></br>
+		<p>CHECK-OUT 시간 : <input type="time" name="house_checkout_time" value="11:00" min="00:00" max="24:00"maxlength="30" style="width: 100px;"></p><br></br>
+        
+        </div>
+	
+        
 	</div>
+	
+	
             
             
     	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">

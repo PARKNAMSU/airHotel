@@ -27,4 +27,9 @@ public class HouseDAOImpl implements HouseDAO {
 		sqlSessionTemplate.insert("product.insertProduct", vo);
 	}
 
+	@Override
+	public void insertHouse(HouseVO vo) {
+		sqlSessionTemplate.insert("product.insertHouse", vo);
+	}
+
 }

@@ -63,7 +63,8 @@
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 	                document.getElementById('sample4_postcode').value = data.zonecode;
 	                document.getElementById("sample4_roadAddress").value = data.address;
-	                
+	                document.getElementById("sample4_sido").value = data.sido;
+                    document.getElementById("sample4_sigungu").value = data.sigungu;
 	             	// 주소로 상세 정보를 검색
 	                geocoder.addressSearch(data.address, function(results, status) {
 	                    // 정상적으로 검색이 완료됐으면
@@ -75,6 +76,7 @@
 	                        var coords = new daum.maps.LatLng(result.y, result.x);
 	                        document.getElementById('sample4_xlocation').value = result.y;
 	                        document.getElementById('sample4_ylocation').value = result.x;
+	                        
 	                        // 지도를 보여준다.
 	                        mapContainer.style.display = "block";
 	                        map.relayout();
@@ -142,11 +144,11 @@
 			</div>
 			<div class="locationtitle6" style="padding-bottom: 20px;">
 				<label for="locationtitle6">도로명주소</label>
-				<form:input type="text" id="sample4_roadAddress" placeholder="도로명주소"  path="house_loaction_sido" /><br></br>
+				<form:input type="text" id="sample4_roadAddress" placeholder="도로명주소"  path="house_loaction_fulladdress" /><br></br>
 			</div>
 			<div class="locationtitle7" style="padding-bottom: 20px;">
         		<label for="locationtitle7">상세주소</label>
-			    <form:input type="text" placeholder="상세주소"  path="house_location_gugun" /><br></br>
+			    <form:input type="text" placeholder="상세주소"  path="house_loaction_detailaddress" /><br></br>
         	</div>
 			
 			
@@ -160,8 +162,10 @@
 			</div>
 			
 			<br></br><br></br><br></br>
-			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation" /><br></br>
-			<form:input type="hidden" id="sample4_ylocation" placeholder="y좌표"  path="house_ylocation" /><br></br>
+			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation_str" /><br></br>
+			<form:input type="hidden" id="sample4_ylocation" placeholder="y좌표"  path="house_ylocation_str" /><br></br>
+			<form:input type="hidden" id="sample4_sido" placeholder="도"  path="house_location_sido" /><br></br>
+			<form:input type="hidden" id="sample4_sigungu" placeholder="시군구"  path="house_location_gugun" /><br></br>
 			
 			<div id="map" class="hc vc" style="border:1px solid red;width:600px;height:300px;margin-top:10px; display:none"></div>
 			<br></br><br></br><br></br><br></br>

@@ -8,4 +8,6 @@ public interface HouseDAO {
 	public List<HouseVO> listProduct();
 	public HouseVO detailProduct(String houseId);
 	public void insertProduct(HouseVO vo);
+	
+	public void insertHouse(HouseVO vo);
 }

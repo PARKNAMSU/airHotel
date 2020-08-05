@@ -33,4 +33,9 @@ public class HouseServiceImpl implements HouseService {
 		houseDao.insertProduct(vo);
 	}
 
+	@Override
+	public void insertHouse(HouseVO vo) {
+		houseDao.insertHouse(vo);
+	}
+
 }

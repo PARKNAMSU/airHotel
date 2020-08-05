@@ -2,6 +2,7 @@ package kg.air.cnc.customer.controller.housereg;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -106,9 +107,21 @@ public class HouseController {
 	@RequestMapping(value = "/4location.do")
 	public String location(@ModelAttribute("house") HouseVO house, Model model) {
 		logger.info(house.toString());
-		System.out.println("location : " + house.getHouse_loaction_sido());
-		System.out.println("location_x : " + house.getHouse_xlocation());
-		System.out.println("location_y : " + house.getHouse_ylocation() );
+		if(house.getHouse_xlocation_str().length()>0) {
+			float xloca = Float.parseFloat(house.getHouse_xlocation_str());
+			house.setHouse_xlocation(xloca);
+		}
+		if(house.getHouse_ylocation_str().length()>0) {
+			float yloca = Float.parseFloat(house.getHouse_ylocation_str());
+			house.setHouse_ylocation(yloca);
+		}
+		System.out.println("sido : " + house.getHouse_location_sido());
+		System.out.println("sigun : " + house.getHouse_location_gugun());
+		System.out.println("location_x : " + house.getHouse_xlocation_str());
+		System.out.println("float x : " + house.getHouse_xlocation());
+		System.out.println("location_y : " + house.getHouse_ylocation_str());
+		System.out.println("location : " + house.getHouse_location());
+		System.out.println("location : " + house.getHouse_loaction_fulladdress());
 		return "5defaultoption";
 	}
 	
@@ -178,9 +191,11 @@ public class HouseController {
 		MultipartFile uploadFile = house.getHouse_photo();
 		if(!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
+			String path = "c:\\EclipsePractice\\aaa";
 			System.out.println("사진첨부한 파일 이름 : " + fileName);
 			try {
-				uploadFile.transferTo(new File("c:\\EclipsePractice\\" + fileName));
+				new File(path).mkdirs();
+				uploadFile.transferTo(new File(path + fileName));
 			} catch (IllegalStateException e) {
 				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
 			} catch (IOException e) {
@@ -213,6 +228,8 @@ public class HouseController {
 			int maxPrice = Integer.parseInt(maPrice);
 			house.setHouse_price_max(maxPrice);
 		}
+		System.out.println("check-in : " + house.getHouse_checkin_time());
+		System.out.println("check-out : " + house.getHouse_checkout_time());
 		System.out.println("charge : " + house.getHouse_price_default());
 		return "11restricttheme";
 	}
@@ -220,7 +237,62 @@ public class HouseController {
 	@RequestMapping(value = "/11restricttheme.do")
 	public String restricttheme(@ModelAttribute("house") HouseVO house, Model model) {
 		logger.info(house.toString());
-		System.out.println("hosttitle : " + house.getHouse_name());
+		if(house.getHouse_theme_bbq_0or1()==null) {house.setHouse_theme_bbq("false");} 
+		else {house.setHouse_theme_bbq("true");}
+		if(house.getHouse_theme_pet_0or1()==null) {house.setHouse_theme_pet("false");} 
+		else {house.setHouse_theme_pet("true");}
+		if(house.getHouse_theme_party_0or1()==null) {house.setHouse_theme_party("false");} 
+		else {house.setHouse_theme_party("true");}
+		if(house.getHouse_theme_pool_0or1()==null) {house.setHouse_theme_pool("false");} 
+		else {house.setHouse_theme_pool("true");}
+		if(house.getHouse_theme_farm_0or1()==null) {house.setHouse_theme_farm("false");} 
+		else {house.setHouse_theme_farm("true");}
+		
+		if(house.getHouse_condition_childok_0or1()==null) {house.setHouse_condition_childok("false");} 
+		else {house.setHouse_condition_childok("true");}
+		if(house.getHouse_condition_babyok_0or1()==null) {house.setHouse_condition_babyok("false");} 
+		else {house.setHouse_condition_babyok("true");}
+		if(house.getHouse_condition_smokeok_0or1()==null) {house.setHouse_condition_smokeok("false");} 
+		else {house.setHouse_condition_smokeok("true");}
+		
+		if(house.getHouse_restrict_stairs_0or1()==null) {house.setHouse_restrict_stairs("false");} 
+		else {house.setHouse_restrict_stairs("true");}
+		if(house.getHouse_restrict_noise_0or1()==null) {house.setHouse_restrict_noise("false");} 
+		else {house.setHouse_restrict_noise("true");}
+		if(house.getHouse_restrict_pet_0or1()==null) {house.setHouse_restrict_pet("false");} 
+		else {house.setHouse_restrict_pet("true");}
+		if(house.getHouse_restrict_cantpark_0or1()==null) {house.setHouse_restrict_cantpark("false");} 
+		else {house.setHouse_restrict_cantpark("true");}
+		if(house.getHouse_restrict_commonspace_0or1()==null) {house.setHouse_restrict_commonspace("false");} 
+		else {house.setHouse_restrict_commonspace("true");}
+		if(house.getHouse_restrict_facility_0or1()==null) {house.setHouse_restrict_facility("false");} 
+		else {house.setHouse_restrict_facility("true");}
+		if(house.getHouse_restrict_cctv_0or1()==null) {house.setHouse_restrict_cctv("false");} 
+		else {house.setHouse_restrict_cctv("true");}
+		if(house.getHouse_restrict_weapon_0or1()==null) {house.setHouse_restrict_weapon("false");} 
+		else {house.setHouse_restrict_weapon("true");}
+		if(house.getHouse_restrict_beast_0or1()==null) {house.setHouse_restrict_beast("false");} 
+		else {house.setHouse_restrict_beast("true");}
+		
+		System.out.println("theme_bbq : " + house.getHouse_theme_bbq());
+		System.out.println("restrict_beast : " + house.getHouse_restrict_beast());
+		
 		return "12guestcheck1";
+	}
+	
+	@RequestMapping(value = "/12guestcheck1.do")
+	public String guestcheck1(@ModelAttribute("house") HouseVO house, Model model) {
+		logger.info(house.toString());
+		System.out.println("게스트에게의 여러정보들!");
+		return "13chargetext";
+	}
+	
+	@RequestMapping(value = "/13chargetext.do")
+	public String chargetext(@ModelAttribute("house") HouseVO house, Model model, SessionStatus sessionStatus) throws Exception{
+		logger.info(house.toString());
+		houseService.insertHouse(house);
+		sessionStatus.setComplete();
+		System.out.println("집 등록 완료!");
+		return "redirect:/index.do";
 	}
 }
