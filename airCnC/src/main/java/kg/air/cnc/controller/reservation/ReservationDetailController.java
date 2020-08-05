@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import kg.air.cnc.service.blame.BlameServiceImpl;
 import kg.air.cnc.service.comments.CommentsService;
 import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.service.reservation.ReservationService;
+import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.MessageVO;
@@ -26,6 +28,8 @@ public class ReservationDetailController {
 	MessageService messageService;
 	@Autowired
 	ReservationService reservationService;
+	@Autowired
+	BlameServiceImpl blameService;
 	
 	@RequestMapping("myreservation.do")
 	public ModelAndView myReservationController(ModelAndView mav) {
@@ -53,6 +57,7 @@ public class ReservationDetailController {
 		System.out.println(vo.getComments_content()+"\n"+vo.getComments_rate()+"\n"+vo.getComments_house_seq()+"\n");
 		commentsService.insertComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
+		mav.addObject("accessType","beforeres");
 		mav.addObject("house_seq",vo.getComments_house_seq());
 		return mav;
 	}
@@ -88,6 +93,13 @@ public class ReservationDetailController {
 		messageService.insertMessage(vo);
 		mav.addObject("messageVO", null);
 		mav.setViewName("messagepopup");
+		return mav;
+	}
+	@RequestMapping("declaration.do")
+	public ModelAndView insertHostBlame(BlameVO vo,ModelAndView mav) {
+		System.out.println(vo.getBlame_target_member_id());
+		mav.addObject("blameVO",vo);
+		mav.setViewName("declarationpopup");
 		return mav;
 	}
 }

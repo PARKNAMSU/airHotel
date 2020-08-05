@@ -86,7 +86,7 @@
 					</select>
 					<input type="date" class="form-control form-control-lg" id="startDate" name="startDate" style="margin-right:30px">~<b style="margin-right:30px;"></b>
 					<input type="date" class="form-control form-control-lg" id="endDate" name="endDate" style="margin-right: 30px;">
-					<input type="text" name="log_id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
+					<input type="text" name="log_id" id="log_id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
 					<input type="button" value="검색" class="btn btn-outline-danger" id="formBtn" style="font-size:20px">
 				</form>
 			</div>
@@ -128,7 +128,7 @@
 			<div>
 				<button class="btn btn-outline-danger" onclick="ReportToExcel()">로그 문서화(Excel)</button>&nbsp;&nbsp;
 				<button class="btn btn-outline-danger" onclick="ReportToPDF()">로그 문서화(PDF)</button>&nbsp;&nbsp;
-				<button class="btn btn-outline-danger">로그 기록 삭제</button>
+				<button class="btn btn-outline-danger" onclick="deleteLog()">로그 기록 삭제</button>
 			</div>
 		</div>
 
@@ -320,7 +320,12 @@ function ReportToExcel(){
 			  } 
 		});
 }
-
+	function deleteLog(){
+		var result = confirm("정말로 삭제하시겠습니까?");
+		if(result){
+			location.href = "deleteLog.mdo?log_id="+$("#log_id").val()+"&log_type="+getData[0].log_type+"&startDate="+getData[0].log_regdate+"&endDate="+getData[getData.length-1].log_regdate
+		}
+	}
 </script>
 
 </html>

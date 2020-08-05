@@ -20,37 +20,37 @@ public class HostChartService implements HostChartServiceImpl{
 	@Override
 	public List<Host_ChartVO> getAdmin_HostForYears(Host_ChartVO vo) {
 		List<Host_ChartVO> list = hostChartDAO.getAdmin_hostForYears(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³â");
+		DateFormat format = new SimpleDateFormat("YYYYë…„");
 		return hostChartDAO.admin_salesSetting(list, format);
 	}
 
 	@Override
 	public List<Host_ChartVO> getAdmin_HostForYear(Host_ChartVO vo) {
 		List<Host_ChartVO> list = hostChartDAO.getAdmin_hostForYear(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ù");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”");
 		return hostChartDAO.admin_salesSetting(list, format);
 	}
 
 	@Override
 	public List<Host_ChartVO> getAdmin_HostForMonth(Host_ChartVO vo) {
 		List<Host_ChartVO> list = hostChartDAO.getAdmin_hostForMonth(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ùddÀÏ");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”ddì¼");
 		return hostChartDAO.admin_salesSetting(list, format);
 	}
 
 	@Override
 	public List<Host_ChartVO> getAdmin_HostForDays(Host_ChartVO vo) {
 		List<Host_ChartVO> list = hostChartDAO.getAdmin_hostForDays(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ùddÀÏ");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”ddì¼");
 		return hostChartDAO.admin_salesSetting(list, format);
 	}
 
 	@Override
 	public List<HostVO> getAdmin_HostDetail(Host_ChartVO vo) {
 		List<HostVO> list = hostChartDAO.getAdmin_hostDetail(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ùddÀÏ");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”ddì¼");
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setHost_image(format.format(list.get(i).getHost_regdate()));//ÀÓ½Ã·Î ÀÌ¹ÌÁö¿¡ ÀúÀå ³ªÁß¿¡ Æ÷¸ËÇÒdate »ı¼º
+			list.get(i).setHost_image(format.format(list.get(i).getHost_regdate()));//ï¿½Ó½Ã·ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½date ï¿½ï¿½ï¿½ï¿½
 		}
 		return list;
 	}

@@ -18,10 +18,11 @@ function closeWindow(){
 	self.close();
 }
 
-var openDeclaration  = function(){
+var openDeclaration  = function(hostid,guestid){
+	console.log(hostid)
 	var left_center = Math.ceil(( window.screen.width - 660 )/2);
 	var top_center = Math.ceil(( window.screen.width - 740 )/2);
-	openWin = window.open("declarationpopup.jsp","rankpopup","width=660, height=370, resizable = no, scrollbars = no")
+	openWin = window.open("declaration.do?blame_member_id="+guestid+"&blame_target_member_id="+hostid,"rankpopup","width=660, height=370, resizable = no, scrollbars = no")
 }
 var openMessage  = function(fromId,toId){
 	var left_center = Math.ceil(( window.screen.width - 660 )/2);

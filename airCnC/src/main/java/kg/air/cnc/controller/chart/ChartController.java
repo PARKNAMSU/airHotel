@@ -13,11 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kg.air.cnc.dao.chart.Sign_upChartDAO;
 import kg.air.cnc.service.chart.Admin_salesService;
 import kg.air.cnc.service.chart.HostChartService;
+import kg.air.cnc.service.chart.Reservation_ChartService;
 import kg.air.cnc.service.chart.Sign_upChartService;
 import kg.air.cnc.vo.Admin_salesVO;
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 import kg.air.cnc.vo.Host_ChartVO;
+import kg.air.cnc.vo.ReservationVO;
+import kg.air.cnc.vo.Reservation_ChartVO;
 import kg.air.cnc.vo.Sign_upChartVO;
 
 @Controller
@@ -28,16 +31,17 @@ public class ChartController {
 	private Sign_upChartService sign_upChartService;
 	@Autowired
 	private HostChartService hostChartService;
+	@Autowired
+	private Reservation_ChartService reservation_ChartService;
+	/*ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®*/
 	
-	/*¸ÅÃâ Â÷Æ®*/
-	
-	/*Ã³À½ ¸ÅÃâÆäÀÌÁö·Î ÀÌµ¿*/
+	/*Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½*/
 	@RequestMapping("salesChart.mdo")
 	public ModelAndView salesChartController(ModelAndView mav) {
 		mav.setViewName("admin_salesChart");
 		return mav;
 	}
-	/*Á¶°Ç¿¡ µû¶ó ¸ÅÃâ °Ë»ö*/
+	/*ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½*/
 	@RequestMapping("salesChartSearch.mdo")
 	public ModelAndView salesChartController(Admin_salesVO vo,ModelAndView mav) {
 		List<Admin_salesVO> list = null;
@@ -53,7 +57,7 @@ public class ChartController {
 		}
 		return mav;
 	}
-	/*ÇØ´ç ÀÏÀÚÀÇ ¸ÅÃâ »ó¼¼º¸±â*/
+	/*ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½*/
 	@RequestMapping("salesChartDetail.mdo")
 	public ModelAndView salesChartDetaliController(Admin_salesVO vo,ModelAndView mav) {
 		if(vo.getAdmin_sales_date() != null) {
@@ -67,7 +71,7 @@ public class ChartController {
 		return mav;
 	}
 	
-	/*È¸¿ø°¡ÀÔ Â÷Æ®*/
+	/*È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®*/
 	@RequestMapping("signupChart.mdo")
 	public ModelAndView sign_upChartController(ModelAndView mav) {
 		mav.setViewName("admin_signupChart");
@@ -101,7 +105,7 @@ public class ChartController {
 		mav.setViewName("admin_signupChartpopup");
 		return mav;
 	}
-	/*È£½ºÆ® ½ÅÃ» Â÷Æ®*/
+	/*È£ï¿½ï¿½Æ® ï¿½ï¿½Ã» ï¿½ï¿½Æ®*/
 	@RequestMapping("hostChart.mdo")
 	public ModelAndView hostChartController(ModelAndView mav) {
 		mav.setViewName("admin_hostChart");
@@ -133,6 +137,40 @@ public class ChartController {
 			}
 		}
 		mav.setViewName("admin_hostChartpopup");
+		return mav;
+	}
+	@RequestMapping("resChart.mdo")
+	public ModelAndView resChartController(ModelAndView mav) {
+		mav.setViewName("admin_resChart");
+		return mav;
+	}
+	@RequestMapping("resChartSearch.mdo")
+	public ModelAndView resChartController(Reservation_ChartVO vo,ModelAndView mav) {
+		System.out.println(vo.getSearchConditionFirst());
+		System.out.println(vo.getSearchType());
+		List<Reservation_ChartVO> list = null;
+		if(vo.getSearchType().equals("years"))list = reservation_ChartService.getAdmin_ResForYears(vo);
+		if(vo.getSearchType().equals("year"))list = reservation_ChartService.getAdmin_ResForYear(vo);
+		if(vo.getSearchType().equals("month"))list = reservation_ChartService.getAdmin_ResForMonth(vo);
+		if(vo.getSearchType().equals("days"))list = reservation_ChartService.getAdmin_ResForDays(vo);
+		if(list != null) {
+			mav.addObject("resList",list);
+			mav.setViewName("admin_resChart");
+		}else {
+			mav.setViewName("redirect:resChart.mdo");
+		}
+		System.out.println(list.size());
+		return mav;
+	}
+	@RequestMapping("resChartDetail.mdo")
+	public ModelAndView resChartDetaliController(Reservation_ChartVO vo,ModelAndView mav) {
+		if(vo.getReschart_date() != null) {
+			List<ReservationVO> list = reservation_ChartService.getAdmin_ResDetail(vo);
+			if(list.size() >0) {
+				mav.addObject("resList",list);
+			}
+		}
+		mav.setViewName("admin_resChartpopup");
 		return mav;
 	}
 

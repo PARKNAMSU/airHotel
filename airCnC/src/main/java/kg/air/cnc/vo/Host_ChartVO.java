@@ -11,6 +11,7 @@ public class Host_ChartVO {
 	private String searchConditionFirst;
 	private String searchConditionSecond;
 	private String searchType;
+	private Date hostchart_regdate;
 	public String getHostchart_date() {
 		return hostchart_date;
 	}
@@ -65,5 +66,5 @@ public class Host_ChartVO {
 	public void setHostchart_regdate(Date hostchart_regdate) {
 		this.hostchart_regdate = hostchart_regdate;
 	}
-	private Date hostchart_regdate;
+	
 }

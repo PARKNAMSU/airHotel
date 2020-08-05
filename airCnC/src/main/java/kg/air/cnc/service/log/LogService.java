@@ -22,4 +22,18 @@ public class LogService implements LogServiceImpl{
 	public List<LogVO> getLogListForId(LogVO vo) {
 		return logDAO.getLogListForId(vo);
 	}
+
+	@Override
+	public void deleteLog(LogVO vo) {
+		logDAO.deleteLog(vo);
+		
+	}
+
+	@Override
+	public void deleteLogWithId(LogVO vo) {
+		logDAO.deleteLogWithId(vo);
+		
+	}
+
+
 }

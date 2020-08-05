@@ -72,11 +72,13 @@ div {
 			<p style="font-family: 'Jua', sans-serif;">숙소소개<br>${house.house_desc1 }<br>${house.house_desc2}<br><br>주변 관광지<br>${house.house_desc4 }<br><br>숙소근처 교통<br>${house.house_desc5}</p>
 		</div><br><br>
 		<div id="" style="float:left;width:50%;padding-top:5%;padding-left: 16%">
-			<button class="btn btn-outline-danger" onclick="openMessage('${session_login}',${house.host_id })" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
+			<button class="btn btn-outline-danger" onclick="openMessage('${session_login}','${house.host_id }')" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
 		</div>
 	</div>
 	<div style="clear:both;"></div>
+	<br><br>
 	<div class="infodiv">
+		<hr>
 		<div class="subinfodiv">
 			<span id="title" style="font-family: 'Jua', sans-serif;">${house.host_id } 님의 숙소</span>
 			<br><br><br><br>
@@ -112,7 +114,7 @@ div {
 			</c:if>
 			</c:forEach>
 			</p>
-		</div>
+		</div><hr>
 		<div class="subinfodiv">
 			<span id="title" style="font-family: 'Jua', sans-serif;">제약사항</span><br><br><br><br>
 			<p style="font-family: 'Jua', sans-serif;">
@@ -139,17 +141,19 @@ div {
 				<p style="font-family: 'Jua', sans-serif;">2020/07/22</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkout_time }</p>
 			</div>
-		</div>
-		<br><br><hr>
-		<div class="subinfodiv">
-			<span id="title" style="font-family: 'Jua', sans-serif;">숙소 소개</span><br><br><br><br>
-			<h3 style="font-family: 'Jua', sans-serif;">안녕하세요</h3>
-		</div>
+		</div><br><br><br><br>
 		<hr>
 	</div>
 	<div class="buttondiv">
-			<button class="btn btn-outline-danger" id="btn" onclick="openDeclaration()" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
-			<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약 취소</button>
+			<button class="btn btn-outline-danger" id="btn" onclick="openDeclaration('${house.host_id}','${login_session }')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
+			<c:choose>
+			<c:when test="${house.accessType eq 'nowres' }">
+			<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약취소</button>
+			</c:when>
+			<c:otherwise>
+			<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약하기</button>
+			</c:otherwise>
+			</c:choose>
 	</div>
 	<div style="clear:both;"></div>
 	<br><br>
@@ -204,7 +208,7 @@ div {
 </body>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=124"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=126"></script>
 
 <script type="text/javascript">
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

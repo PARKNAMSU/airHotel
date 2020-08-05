@@ -30,3 +30,6 @@ function openSignupDetail(){
 function openHostDetail(){
 	window.open("hostChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
 }
+function openResDetail(){
+	window.open("resChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+}

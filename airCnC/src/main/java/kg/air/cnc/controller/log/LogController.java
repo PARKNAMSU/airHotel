@@ -1,5 +1,6 @@
 package kg.air.cnc.controller.log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,16 @@ public class LogController {
 	}
 	@RequestMapping(value="/logPage.mdo")
 	public String logPageController() {
+		return "admin_log";
+	}
+	@RequestMapping("deleteLog.mdo")
+	public String deleteLogController(LogVO vo) {
+		if(vo.getLog_id() == null || vo.getLog_id().equals("")) {
+			logService.deleteLog(vo);
+		}else {
+			logService.deleteLogWithId(vo);
+		}
+		
 		return "admin_log";
 	}
 }
