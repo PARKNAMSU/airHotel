@@ -1,4 +1,4 @@
-package kg.air.cnc.dao.message;
+package kg.air.cnc.service.message;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kg.air.cnc.service.message.MessageDAO;
+import kg.air.cnc.dao.message.MessageDAO;
 import kg.air.cnc.vo.MessageVO;
 
 @Service
@@ -15,6 +15,7 @@ public class MessageService implements MessageServiceImpl{
 	private MessageDAO messageDAO;
 	@Override
 	public void insertMessage(MessageVO vo) {
+		System.out.println("ser");
 		messageDAO.insertMessage(vo);
 		
 	}

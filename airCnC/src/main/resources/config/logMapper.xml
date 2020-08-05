@@ -16,4 +16,10 @@
 	<select id="getLogList" parameterType="kg.air.cnc.vo.LogVO" resultType="kg.air.cnc.vo.LogVO">
 	<![CDATA[SELECT * from loginfo WHERE to_char(log_regdate,'YYYY-MM-DD') >= #{startDate} AND to_char(log_regdate,'YYYY-MM-DD') <= #{endDate} AND log_type = #{log_type} ORDER BY log_seq]]>
 	</select>
+	<delete id="deleteLogWithId" parameterType="kg.air.cnc.vo.LogVO">
+		<![CDATA[DELETE loginfo WHERE log_id = #{log_id} and log_type= #{log_type} and (to_char(log_regdate, 'YYYY-MM-dd hh:mi:ss') >= #{startDate} and to_char(log_regdate, 'YYYY-MM-dd hh:mi:ss') <= #{endDate})]]>
+	</delete>
+	<delete id="deleteLog" parameterType="kg.air.cnc.vo.LogVO">
+		<![CDATA[DELETE loginfo WHERE log_type= #{log_type} and (to_char(log_regdate, 'YYYY-MM-dd hh:mi:ss') >= #{startDate} and to_char(log_regdate, 'YYYY-MM-dd hh:mi:ss') <= #{endDate})]]>
+	</delete>
 </mapper>

@@ -57,17 +57,17 @@
     <!-- slider_area_end -->
 	<div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a href="../project/admin_salesChart.jsp">매출현황</a></li>
-			<li class="menu"><a href="../project/admin_useChart.jsp">숙소이용 현황</a></li>
-			<li class="menu"><a href="../project/admin_signupChart.jsp">회원가입 현황</a></li>
-			<li class="menu"><a href="../project/admin_hostChart.jsp">호스트 신청 현황</a></li>
+			<li class="menu"><a href="salesChart.mdo">매출현황</a></li>
+			<li class="menu"><a href="">숙소이용 현황</a></li>
+			<li class="menu"><a href="signupChart.mdo">회원가입 현황</a></li>
+			<li class="menu"><a href="hostChart.mdo">호스트 신청 현황</a></li>
 		</ul>
 	</div>
 	<div class="top_first">
-		<div class="maindiv" ><a class="maintext" id="searchYears"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도별 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchYear"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchMonth"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">월별 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchCondition"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">사용자 정의 검색</a></div>
+		<div class="maindiv" ><a class="maintext" id="searchYears" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">년도별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchYear" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">년도 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchMonth" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">월별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchCondition" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">사용자 정의 검색</a></div>
 	</div>
 	<div class="top_second">
 		<div class="subdiv" id="years">

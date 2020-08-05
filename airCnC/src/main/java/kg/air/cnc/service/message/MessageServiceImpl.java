@@ -1,4 +1,4 @@
-package kg.air.cnc.dao.message;
+package kg.air.cnc.service.message;
 
 import java.util.List;
 import java.util.Map;

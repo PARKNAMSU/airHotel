@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kg.air.cnc.dao.comments.CommentsDAO;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Service
 public class CommentsService implements CommentsServiceImpl{
@@ -20,13 +21,16 @@ public class CommentsService implements CommentsServiceImpl{
 		commentsDAO.insertComments(vo);
 	}
 	@Override
-	public List<CommentsVO> getComments(HouseVO vo) {
+	public List<CommentsVO> getComments(ReservationHouseDetailVO vo) {
 		List<CommentsVO> list = commentsDAO.getComments(vo);
 		DateFormat format = new SimpleDateFormat("YYYY/MM/dd");
+		int sum = 0;
 		for(int i=0;i<list.size();i++) {
 			list.get(i).setComments_date(format.format(list.get(i).getComments_regdate()));
-			System.out.println(list.get(i).getComments_date());
+			sum+=list.get(i).getComments_rate();
 		}
+		float ave = ((float)sum)/list.size();
+		list.get(0).setComments_average(Math.round(ave*100)/100);
 		return list;
 	}
 	@Override

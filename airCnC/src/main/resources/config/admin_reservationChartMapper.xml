@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ResChartDAO">
+
+	<select id="getResForYears" resultType="kg.air.cnc.vo.Reservation_ChartVO" parameterType="kg.air.cnc.vo.Reservation_ChartVO">
+		<![CDATA[SELECT to_date(to_char(reservation_regdate,'yyyy'),'yyyy') AS reschart_regdate, COUNT(reservation_seq) AS reschart_num  FROM reservation WHERE to_char(reservation_regdate, 'yyyy') >= #{searchConditionFirst}
+		and to_char(reservation_regdate,'yyyy') <= #{searchConditionSecond} GROUP BY to_date(to_char(reservation_regdate,'yyyy'),'yyyy') ORDER BY to_date(to_char(reservation_regdate,'yyyy'),'yyyy') ASC]]>
+	</select>
+	<select id="getResForYear" resultType="kg.air.cnc.vo.Reservation_ChartVO" parameterType="kg.air.cnc.vo.Reservation_ChartVO">
+		<![CDATA[SELECT to_date(to_char(reservation_regdate,'MM'),'MM') as reschart_regdate,COUNT(reservation_seq) as reschart_num FROM reservation WHERE to_char(reservation_regdate, 'yyyy') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(reservation_regdate,'MM'),'MM') ORDER BY to_date(to_char(reservation_regdate,'MM'),'MM') ASC]]>
+	</select>
+	<select id="getResForMonth" resultType="kg.air.cnc.vo.Reservation_ChartVO" parameterType="kg.air.cnc.vo.Reservation_ChartVO">
+		<![CDATA[SELECT to_date(to_char(reservation_regdate,'MM/dd'),'MM/dd') as reschart_regdate,COUNT(reservation_seq) as reschart_num FROM reservation WHERE to_char(reservation_regdate, 'YYYY-MM') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(reservation_regdate,'MM/dd'),'MM/dd') ORDER BY to_date(to_char(reservation_regdate,'MM/dd'),'MM/dd') ASC]]>
+	</select>
+	<select id="getResForDays" resultType="kg.air.cnc.vo.Reservation_ChartVO" parameterType="kg.air.cnc.vo.Reservation_ChartVO">
+		<![CDATA[SELECT to_date(to_char(reservation_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') as reschart_regdate,COUNT(reservation_seq) as reschart_num FROM reservation WHERE to_char(reservation_regdate, 'YYYY-MM-DD') >= #{searchConditionFirst} and to_char(reservation_regdate, 'YYYY-MM-DD') <= #{searchConditionSecond} 
+		 GROUP BY to_date(to_char(reservation_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(reservation_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
+	</select>
+	<select id="getResDetail" resultType="kg.air.cnc.vo.ReservationVO" parameterType="kg.air.cnc.vo.Reservation_ChartVO">
+		SELECT reservation_seq, reservation_host_id, reservation_customer_id, reservation_house_seq,reservation_price,reservation_account ,reservation_bank, to_date(to_char(reservation_regdate,'yyyy/MM/dd')) as reservation_regdate FROM reservation WHERE to_char(reservation_regdate,'YYYY-MM-dd') = #{reschart_date}
+	</select>
+
+</mapper>

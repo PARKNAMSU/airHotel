@@ -29,6 +29,19 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/style.css">
+
+<!-- pdf,excel -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+	
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -73,7 +86,7 @@
 					</select>
 					<input type="date" class="form-control form-control-lg" id="startDate" name="startDate" style="margin-right:30px">~<b style="margin-right:30px;"></b>
 					<input type="date" class="form-control form-control-lg" id="endDate" name="endDate" style="margin-right: 30px;">
-					<input type="text" name="log_id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
+					<input type="text" name="log_id" id="log_id" class="form-control form-control-lg" placeholder="아이디" style="margin-right:30px" >
 					<input type="button" value="검색" class="btn btn-outline-danger" id="formBtn" style="font-size:20px">
 				</form>
 			</div>
@@ -112,10 +125,16 @@
 				<option value="20">20</option>
 			</select>
 			</div>
-
+			<div>
+				<button class="btn btn-outline-danger" onclick="ReportToExcel()">로그 문서화(Excel)</button>&nbsp;&nbsp;
+				<button class="btn btn-outline-danger" onclick="ReportToPDF()">로그 문서화(PDF)</button>&nbsp;&nbsp;
+				<button class="btn btn-outline-danger" onclick="deleteLog()">로그 기록 삭제</button>
+			</div>
 		</div>
+
 	</div>
 
+	<div style="margin-bottom:10%;"></div>
 	<footer>
 		<%@include file="../html/footer.jsp" %>
 	</footer>
@@ -273,6 +292,40 @@ var loadLog = function(pageNum){
 		a = a+1;
 	}
 }
+function ReportToExcel(){
+	fname = prompt("파일 이름을 입력해주세요")
+	$("#logtable").table2excel({
+		exclude: ".noExl",
+		name: "Excel sales",
+		filename:fname+'.xls',
+		fileext:"xls",
+		exclude_img: true,
+		exclued_links: true,
+		exclude_inputs:true
+	})
+
+}
+	function ReportToPDF(){
+			html2canvas(document.getElementById("logtable"), {
+				 onrendered : function(canvas){
+				  var imgData = canvas.toDataURL('image/png');
+		            var pageWidth = 210;
+		            var pageHeight = pageWidth * 1.414;
+		            var imgWidth = pageWidth - 20;
+		            var imgHeight = $('#logtable').height() * imgWidth / $('#logtable').width();
+				  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+
+				 doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
+				 doc.save('개인지출내역서.pdf');
+			  } 
+		});
+}
+	function deleteLog(){
+		var result = confirm("정말로 삭제하시겠습니까?");
+		if(result){
+			location.href = "deleteLog.mdo?log_id="+$("#log_id").val()+"&log_type="+getData[0].log_type+"&startDate="+getData[0].log_regdate+"&endDate="+getData[getData.length-1].log_regdate
+		}
+	}
 </script>
 
 </html>

@@ -2,7 +2,7 @@ package kg.air.cnc.customer.vo;
 
 import java.util.Date;
 
-public class CustomerVO {
+public class CustomerVO{
 	private String customerId;
 	private String customerPassword;
 	private String customerName;
