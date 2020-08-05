@@ -41,9 +41,4 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int sendPassword(String customer_id, String customer_email, String customer_key)throws Exception {
 		return 0;
 	}
-
-	@Override
-	public CustomerVO selectById(String customerId) throws Exception {
-		return session.selectOne("customer.selectById", customerId);
-	}
 }

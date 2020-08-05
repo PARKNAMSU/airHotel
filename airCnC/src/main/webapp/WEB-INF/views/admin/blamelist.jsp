@@ -54,9 +54,9 @@
     <div id="sidediv">
         <ul id="sidemenu">
             <li class="menu"><a href="admin_singo_complete_list.html">처리된 신고 내역</a></li>
-            <li class="menu"><a href="/blamelist.mdo">신규 신고 내역</a></li>
+            <li class="menu"><a href="/cnc/blamelist.mdo">신규 신고 내역</a></li>
             <li class="menu"><a href="admin_singo_judge.html">신고사항 처리</a></li>
-            <li class="menu"><a href="/blacklist.mdo">블랙리스트 보기</a></li>
+            <li class="menu"><a href="/cnc/blacklist.mdo">블랙리스트 보기</a></li>
             <li class="menu"><a href="admin_remove.html">계정삭제 내역</a></li>
         </ul>
     </div>
@@ -68,7 +68,7 @@
             
             <c:forEach var="bl" items="${blamelist}" begin="0" end="${blamelist.size()}" step="1">
                 <tr>
-                    <td><a href="/blameinfo.mdo?target_member_id=${bl.key}">${bl.key}</a></td>
+                    <td><a href="/cnc/blameinfo.mdo?target_member_id=${bl.key}">${bl.key}</a></td>
                     <td>신규 신고 합 : ${bl.value}</td>
 
                     <%--<td>

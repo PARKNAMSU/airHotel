@@ -54,9 +54,9 @@
     <div id="sidediv">
         <ul id="sidemenu">
             <li class="menu"><a href="admin_singo_complete_list.html">처리된 신고 내역</a></li>
-            <li class="menu"><a href="/blamelist.mdo">신규 신고 내역</a></li>
+            <li class="menu"><a href="/cnc/blamelist.mdo">신규 신고 내역</a></li>
             <li class="menu"><a href="admin_singo_judge.html">신고사항 처리</a></li>
-            <li class="menu"><a href="/blacklist.mdo">블랙리스트 보기</a></li>
+            <li class="menu"><a href="/cnc/blacklist.mdo">블랙리스트 보기</a></li>
             <li class="menu"><a href="admin_remove.html">계정삭제 내역</a></li>
         </ul>
     </div>
@@ -67,12 +67,12 @@
             검색할 아이디 : <input type="text" name="blackSearchId">
             <input type="submit" value="검색">
         </form>
-        <input type="button" value="목록가기" onclick="location.href='/blacklist.mdo'">
+        <input type="button" value="목록가기" onclick="location.href='/cnc/blacklist.mdo'">
         <table class="table">
             <tr>
                 <td>아이디 : ${blacklist.black_id}</td>
                 <td>블랙당한 날짜 : ${blacklist.regdate}</td>
-                <td> <input type="submit" value="블랙해제" onclick="location.href='/blacklistRelease.mdo?id=${blacklist.black_id}'"></td>
+                <td> <input type="submit" value="블랙해제" onclick="location.href='/cnc/blacklistRelease.mdo?id=${blacklist.black_id}'"></td>
             </tr>
         </table>
     </div>

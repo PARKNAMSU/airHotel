@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +25,9 @@
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>로그인</title>
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
 	<!-- header-start -->
@@ -60,10 +54,9 @@
 			</div>
 		</div>
 	</header>
-	<form:form role="form" commandName="loginCommand" action="/cnc/loginView.do" accept-charset="utf-8" name="f" method="POST">
+	<form action="/cnc/loginView.do" accept-charset="utf-8" method="POST">
 		<div class="container">
-			<img
-				src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
+			<img src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
 			<div id="light1" class="white_content" style="text-align: center;">
 				<div class="allScreen" id="my__all__login">
 					<div class="my__login" style="display: inline-block;">
@@ -78,18 +71,17 @@
 											계정으로 로그인</span></a>
 								</div>
 								<div class="a3">
-									<form:input class="bb6" type="text" id="customerId"
-										value="${cookie.customer_check.value}" name="customerId"
-										placeholder="&nbsp;&nbsp;아이디" required path="id"/>
+									<input class="bb6" type="text" id="customerId" name="customerId" 
+									placeholder="&nbsp;&nbsp;아이디" required/>
 								</div>
 								<div class="a3">
-									<form:input class="bb6" type="password" id="customerPassword"
+									<input class="bb6" type="password" id="customerPassword"
 										name="customerPassword" placeholder="&nbsp;&nbsp;비밀번호"
-										required path="pw"/>
+										required/>
 								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
-									<form:input type="checkbox" id="remember_id"
-										name="remember_customerId" ${checked} path="rememberId"/><label
+									<input type="checkbox" id="remember_id"
+										name="remember_customerId"/><label
 										for="idsave">아이디저장</label>
 								</div>
 
@@ -107,6 +99,6 @@
 				</div>
 			</div>
 		</div>
-	</form:form>
+	</form>
 </body>
 </html>
