@@ -73,7 +73,7 @@
         <c:set var="themeList" value="${themeList}"/>
         <c:forEach var="item" items="${themeList}" begin="0" end="${themeList.size()}" step="1">
             <div class="col-lg-4 col-md-1">
-                <div class="single_destination2" onclick=window.open("http://www.naver.com")>
+                <div class="single_destination2" onclick="location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq='+${item.house_seq}">
                     <div class="thumb">
                         <img src="${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg"
                              alt=""/>

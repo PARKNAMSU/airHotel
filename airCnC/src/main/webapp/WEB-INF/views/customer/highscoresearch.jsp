@@ -126,7 +126,7 @@
                     for(var i = 0 ; i < 10 ; i++){
                         $("#motehr").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
-                            "<div class=\"single_destination2\" onclick=window.open('http://localhost:8090/cnc/reservationHouse.do?"+getData[i].house_seq+"')>" +
+                            "<div class=\"single_destination2\" onclick="+"location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq="+getData[i].house_seq+"'>" +
                             "<div class=\"thumb\">" +
                             "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
                             "</div>" +
@@ -148,7 +148,7 @@
         function getMoreData() {
             for(var i = showed; i < showed+1; i++){
                 $("#motehr").append("<div class=\"col-lg-4 col-md-1\">" +
-                    "<div class=\"single_destination2\" onclick=window.open(\"http://www.naver.com\")>" +
+                    "<div class=\"single_destination2\" onclick="+"location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq="+getData[i].house_seq+"'>" +
                     "<div class=\"thumb\">" +
                     "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
                     "</div>" +
