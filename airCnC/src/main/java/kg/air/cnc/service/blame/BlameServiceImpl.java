@@ -125,7 +125,11 @@ public class BlameServiceImpl implements BlameService {
     @Override // 블랙리스트 추가
     public void addBlackList(String id) {
         HostVO host = blameDAO.checkHost(id);
+        CustomerVO customerVO = blameDAO.getCustomerVO(id);
         HashMap<String, String> deleteBlameMap = new HashMap<>();
+        HashMap<String, String> addBlackMap = new HashMap<>();
+        addBlackMap.put("id", id);
+        addBlackMap.put("email", customerVO.getCustomer_email());
         if(host != null){
             // host 인 경우
             System.out.println(id + " is host");
@@ -157,22 +161,9 @@ public class BlameServiceImpl implements BlameService {
             deleteBlameMap.put("target_member_id", id);
             deleteBlameMap.put("blame_type", "1");
         }
+
         blameDAO.deleteCustomer(id);
-        blameDAO.addBlackList(id);
+        blameDAO.addBlackList(addBlackMap);
         blameDAO.deleteBlame(deleteBlameMap);
-
-
-        /*
-        1. 해당 아이디가 호스트 테이블에 존재하는지 확인한다.
-        존재한다면 해당 아이디로 등록된 모든 하우스의 예약 내역을 환불한다.
-                해당 아이디가 예약한 모든 예약테이블을 환불처리한다.
-                모든 하우스를 삭제한다.
-        호스트 테이블에서 삭제한다.
-                커스터머 테이블에서 삭제한다.
-        2. 해당 아이디가 호스트 테이블에 존재하지 않는다면
-        해당 아이디가 예약한 모든 예약테이블을 환불처리한다.
-        커스터머 테이블에서 삭제한다.
-        */
-        // blameDAO.addBlackList(id);
     }
 }

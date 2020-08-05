@@ -36,7 +36,7 @@
     </insert>
 
     <insert id="addBlackList">
-        INSERT INTO blacklist VALUES (#{id}, sysdate)
+        INSERT INTO blacklist VALUES (#{id}, sysdate, #{email})
     </insert>
 
     <select id="getHostHouses" resultType="kg.air.cnc.vo.HouseVO">
@@ -94,5 +94,9 @@
     <delete id="deleteCustomer">
         DELETE FROM customer WHERE customer_id = #{customer_id}
     </delete>
+
+    <select id="getCustomerVO" resultType="kg.air.cnc.vo.CustomerVO">
+        SELECT * FROM customer WHERE customer_id = #{id}
+    </select>
 
 </mapper>

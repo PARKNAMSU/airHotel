@@ -62,12 +62,12 @@
     </div>
     <!-- 블랙리스트 테이블 -->
     <c:set var="blacklist" value="${blacklist}"/>
-    <div class="table-responsive">
-        <form class="blacklist-id-search-form" action="/blacklistSearchId.mdo" method="get">
+    <div style="color: black" class="table-responsive">
+        <form class="blacklist-id-search-form" action="/cnc/blacklistSearchId.mdo" method="get">
             검색할 아이디 : <input type="text" name="blackSearchId">
             <input type="submit" value="검색">
         </form>
-        <table class="table">
+        <table style="color: black;" class="table">
             <c:forEach var="item" items="${blacklist}" begin="0" end="${blacklist.size()}" step="1">
                 <tr>
                     <td>${item.black_id}</td>
