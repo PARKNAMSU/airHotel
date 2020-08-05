@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -7,40 +8,77 @@
 <title>메인 홈페이지</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/favicon.png">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostregister.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/images/favicon.png">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/footer.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hostregister.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/index.css">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<!-- header-start -->
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<li class="item">
-						<a href="/Mainwork/html/hostresgister.html">호스트 </a>
-					</li>
-					<li class="item">
-						<p><a href="/cnc/registerView.do">회원가입</a></p>
-					</li>
-					<li class="item">
-						<p><a href="/cnc/loginView.do">로그인</a></p>
-					</li>
-					<li class="item">
-						<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
-					</li>
+					<c:catch>
+						<c:choose>
+							<c:when test="${empty authInfo}">
+								<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+								<li class="item">
+									<p>
+										<a href="/cnc/registerView.do">회원가입</a>
+									</p>
+								</li>
+								<li class="item">
+									<p>
+										<a href="/cnc/loginView.do">로그인</a>
+									</p>
+								</li>
+								<li class="item">
+									<p>
+										<a href="javascript:void(0)"
+											onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
+									</p>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+								<li class="item">
+									<p>
+										<a href="/cnc/logout.do">로그아웃</a>
+									</p>
+								</li>
+								<li class="item">
+									<p>
+										<a href="javascript:void(0)"
+											onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
+									</p>
+								</li>
+							</c:otherwise>
+						</c:choose>
+					</c:catch>
 				</ul>
 			</div>
 		</div>
@@ -69,7 +107,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -85,7 +124,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -101,7 +141,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -117,7 +158,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -133,7 +175,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -149,7 +192,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -165,7 +209,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -181,7 +226,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -197,7 +243,8 @@
 						<div class="single_destination">
 							<div class="thumb">
 								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="">
+									src="${pageContext.request.contextPath}/resources/images/destination/busan.png"
+									alt="">
 								</a>
 							</div>
 							<div class="content">
@@ -240,8 +287,9 @@
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;" >
 					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_bbq'">
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/bbq1.jpg" alt=""><i
-								class="fas fa-drumstick-bite"
+							<img
+								src="${pageContext.request.contextPath}/resources/images/bbq1.jpg"
+								alt=""><i class="fas fa-drumstick-bite"
 								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
@@ -255,8 +303,9 @@
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
 					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_party'">
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/party1.jpg" alt=""><i
-								class="fas fa-glass-cheers"
+							<img
+								src="${pageContext.request.contextPath}/resources/images/party1.jpg"
+								alt=""><i class="fas fa-glass-cheers"
 								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
@@ -270,8 +319,10 @@
 				<div class="col-lg-4 col-md-1">
 					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearchhighscore.do'">
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/star.png" alt=""><i
-								class="fas fa-medal" style="font-size: 60px; float: right;"></i>
+							<img
+								src="${pageContext.request.contextPath}/resources/images/star.png"
+								alt=""><i class="fas fa-medal"
+								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
 							<p class="d-flex align-items-center">
@@ -283,8 +334,10 @@
 				<div class="col-lg-4 col-md-1">
 					<div class="single_destination1"onclick=window.open("http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_pool")>
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/familywater.jpg" alt=""><i
-								class="fas fa-water" style="font-size: 60px; float: right;"></i>
+							<img
+								src="${pageContext.request.contextPath}/resources/images/familywater.jpg"
+								alt=""><i class="fas fa-water"
+								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
 							<p class="d-flex align-items-center">
@@ -296,8 +349,10 @@
 				<div class="col-lg-4 col-md-1">
 					<div class="single_destination1" onclick=window.open("http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_farm")>
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/ground.jpg" alt=""><i
-								class="fas fa-seedling" style="font-size: 60px; float: right;"></i>
+							<img
+								src="${pageContext.request.contextPath}/resources/images/ground.jpg"
+								alt=""><i class="fas fa-seedling"
+								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
 							<p class="d-flex align-items-center">
@@ -325,8 +380,9 @@
 					<div class="save1" style="float: left; margin-left: 400px;">
 						<div class="single_destination2">
 							<div class="thumb" style="margin-top: 30px;">
-								<img src="${pageContext.request.contextPath}/resources/images/good.jpg" alt=""><i
-									class="fas fa-hand-holding-medical"
+								<img
+									src="${pageContext.request.contextPath}/resources/images/good.jpg"
+									alt=""><i class="fas fa-hand-holding-medical"
 									style="font-size: 60px; float: right;"></i>
 							</div>
 							<div class="content">
@@ -346,8 +402,10 @@
 						style="float: left; margin-left: 350px;">
 						<div class="single_destination2">
 							<div class="thumb" style="margin-top: 30px;">
-								<img src="${pageContext.request.contextPath}/resources/images/sad.PNG" alt=""><i
-									class="fas fa-child" style="font-size: 60px; float: right;"></i>
+								<img
+									src="${pageContext.request.contextPath}/resources/images/sad.PNG"
+									alt=""><i class="fas fa-child"
+									style="font-size: 60px; float: right;"></i>
 							</div>
 							<div class="content">
 								<p class="d-flex align-items-center">
@@ -365,8 +423,10 @@
 					<div class="save1" style="float: left; margin-left: 400px;">
 						<div class="single_destination2">
 							<div class="thumb" style="margin-top: 30px;">
-								<img src="${pageContext.request.contextPath}/resources/images/oldsad.jpg" alt=""><i
-									class="fas fa-blind" style="font-size: 60px; float: right;"></i>
+								<img
+									src="${pageContext.request.contextPath}/resources/images/oldsad.jpg"
+									alt=""><i class="fas fa-blind"
+									style="font-size: 60px; float: right;"></i>
 							</div>
 							<div class="content">
 								<p class="d-flex align-items-center">
@@ -389,50 +449,52 @@
 		<div class="second">
 			회사소개 | 이용약관 | 개인정보처리방침 |사업자 정보확인 | 여기어때 마케팅센터 | 액티비티 호스트센터 | HOTEL
 			여기어때 |콘텐츠산업진흥법에의한 표시<br> <br> 고객행복센터 1670-6250 오전 9시 - 새벽
-			3시, 점심시간: 오후 12시 - 오후 1시<br>
-			<br> (주) 여기어때컴퍼니<br>
-			<br> 주소 : 서울특별시 강남구 봉은사로 479, 479타워 11층<br> 대표이사 : 박남수 |
-			사업자등록번호: 742-86-00224<br> 통신판매번호 : 2017-서울강남-01779 | 관광사업자 등록번호:
+			3시, 점심시간: 오후 12시 - 오후 1시<br> <br> (주) 여기어때컴퍼니<br> <br>
+			주소 : 서울특별시 강남구 봉은사로 479, 479타워 11층<br> 대표이사 : 박남수 | 사업자등록번호:
+			742-86-00224<br> 통신판매번호 : 2017-서울강남-01779 | 관광사업자 등록번호:
 			제1026-24호<br> 전화번호 : 1670-6250<br> 전자우편주소 :
 			skatn7979@gmail.com<br> Copyright GC COMPANY Corp. All rights
 			reserved.<br>
 			<hr id="bline">
-			<img src="${pageContext.request.contextPath}/resources/images/face.png" id="blogo"> <img
-				src="${pageContext.request.contextPath}/resources/images/insta.png" id="blogo">
+			<img
+				src="${pageContext.request.contextPath}/resources/images/face.png"
+				id="blogo"> <img
+				src="${pageContext.request.contextPath}/resources/images/insta.png"
+				id="blogo">
 		</div>
 	</footer>
 	<script type="text/javascript"
 		src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	<script type="text/javascript">
-        $(function () {
-            $("a[name='trigger']").toggle(function () {
-                $(this).closest("tr").next().show();
-            }, function () {
-                $(this).closest("tr").next().hide();
-            });
-        });
-    </script>
+		$(function() {
+			$("a[name='trigger']").toggle(function() {
+				$(this).closest("tr").next().show();
+			}, function() {
+				$(this).closest("tr").next().hide();
+			});
+		});
+	</script>
 	<script>
-        var slideIndex = 0;
-        showSlides();
-        function showSlides() {
-	        var i;
-	        var slides = document.getElementsByClassName("mySlides");
-	        var dots = document.getElementsByClassName("dot");
-	        for (i = 0; i < slides.length; i++) {
-        		slides[i].style.display = "none";
-        	}
-       		slideIndex++;
-        	if (slideIndex > slides.length) {
-        		slideIndex = 1;
-        	}
-        	for (i = 0; i < dots.length; i++) {
-        		dots[i].className = dots[i].className.replace(" active", "");
-        	}
-	        slides[slideIndex - 1].style.display = "block";
-	        dots[slideIndex - 1].className += " active";
-	        setTimeout(showSlides, 2000); // Change image every 2 seconds
-	    }
-    </script>
+		var slideIndex = 0;
+		showSlides();
+		function showSlides() {
+			var i;
+			var slides = document.getElementsByClassName("mySlides");
+			var dots = document.getElementsByClassName("dot");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1;
+			}
+			for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			}
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].className += " active";
+			setTimeout(showSlides, 2000); // Change image every 2 seconds
+		}
+	</script>
 </body>
 </html>

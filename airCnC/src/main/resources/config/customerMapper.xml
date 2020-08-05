@@ -27,8 +27,8 @@
 		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{value}
 	</select>
 	
-	<select id="login" resultType="kg.air.cnc.customer.vo.CustomerVO">
-		SELECT * FROM customer WHERE customer_id = #{customerId}
+	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO">
+		SELECT COUNT(*) FROM customer WHERE customer_id = #{customerId}
 	</select>
 	
 </mapper>
