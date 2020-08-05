@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 
@@ -29,6 +30,12 @@ public class ReservationDAO implements ReservationDAOImpl{
 	@Override
 	public ReservationHouseDetailVO getReservationHouse(ReservationHouseDetailVO vo) {
 		return sqlSessionTemplate.selectOne("ReservationDAO.getMyReservationHouse", vo);
+	}
+
+	@Override
+	public void insertBlameHost(BlameVO vo) {
+		sqlSessionTemplate.insert("ReservationDAO.InsertBlameHost",vo);
+		
 	}
 	
 }

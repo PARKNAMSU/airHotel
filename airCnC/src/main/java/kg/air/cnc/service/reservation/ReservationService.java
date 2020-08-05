@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.reservation.ReservationDAO;
+import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 import kg.air.cnc.vo.ReservationVO;
@@ -104,6 +105,12 @@ public class ReservationService implements ReservationServiceImpl {
 		if(house.getHouse_restrict_weapon().trim().equals("true"))restrictList.add("무기 소유");
 		house.setRestricList(restrictList);
 		return house;
+	}
+
+	@Override
+	public void insertBlameHost(BlameVO vo) {
+		reservationDAO.insertBlameHost(vo);
+		
 	}
 
 }

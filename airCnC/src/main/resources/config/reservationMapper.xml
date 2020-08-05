@@ -18,5 +18,10 @@
 		 house_restrict_stairs,house_restrict_noise, house_restrict_cantpark, house_restrict_pet ,house_restrict_commonspace, house_restrict_facility, house_restrict_cctv, house_restrict_weapon, house_restrict_beast, house_price_max, house_xlocation,house_ylocation, house_checkin_time as house_checkin_time,
 		 house_checkout_time as house_checkout_time, house_regdate,h.host_name as host_name,h.host_id as host_id, h.host_phone as host_phone, h.host_regdate as host_regdate from house_info join host h on house_host_id = host_id where house_seq = #{house_seq} 
 	</select>
-
+	<insert id="InsertBlameHost" parameterType="kg.air.cnc.vo.BlameVO">
+		<selectKey keyProperty="blame_pk" resultType="int" order="BEFORE">
+			SELECT pk_sequence.nextval FROM dual
+		</selectKey>
+		INSERT INTO blame(blame_seq,blame_member_id,blame_target_member_id,blame_content) values(#{blame_pk},#{blame_member_id},#{blame_target_member_id},#{blame_content})
+	</insert>
 </mapper>

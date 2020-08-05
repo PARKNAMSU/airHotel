@@ -145,7 +145,7 @@ div {
 		<hr>
 	</div>
 	<div class="buttondiv">
-			<button class="btn btn-outline-danger" id="btn" onclick="openDeclaration('${house.host_id}','${login_session }')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
+			<button class="btn btn-outline-danger" id="btn" onclick="openDeclaration('${house.host_id}','${session_login }')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
 			<c:choose>
 			<c:when test="${house.accessType eq 'nowres' }">
 			<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약취소</button>

@@ -40,7 +40,6 @@ public class ReservationDetailController {
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,ModelAndView mav) {
 		session.setAttribute("session_login", "skatn");
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
-		System.out.println(vo.getReservation_seq());
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
 		mav.addObject("commentsList",commentsService.getComments(vo));
@@ -97,9 +96,13 @@ public class ReservationDetailController {
 	}
 	@RequestMapping("declaration.do")
 	public ModelAndView insertHostBlame(BlameVO vo,ModelAndView mav) {
-		System.out.println(vo.getBlame_target_member_id());
 		mav.addObject("blameVO",vo);
 		mav.setViewName("declarationpopup");
 		return mav;
+	}
+	@RequestMapping("insertBlameHost.do")
+	public String insertHostBlameDo(BlameVO vo,ModelAndView mav) {
+		reservationService.insertBlameHost(vo);
+		return "redirect:declaration.do";
 	}
 }
