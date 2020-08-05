@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="houseMap">
+	<select id="getHouseList" parameterType="String" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_location=#{location} AND house_status=0
+	]]>
+	</select>
+	
+	
+	<select id="getPrice" parameterType="String" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_location=#{location} AND house_status=0
+	]]>
+	</select>
+	
+	<select id="getDetail" parameterType="map" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+	]]>
+	</select>
+	
+	<select id="getDetailPrice" parameterType="map" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+	]]>
+	</select>
+	
+	<select id="getDetailWithCheckOut" parameterType="map" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+	]]>
+	</select>
+	
+	<select id="getDetailWithCheckOutPrice" parameterType="map" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+	]]>
+	</select>
+	
+	<select id="getDetailWithDetail" parameterType="map" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+		AND house_location_gugun=#{detail}
+	]]>
+	</select>
+	
+	<select id="getDetailWithDetailPrice" parameterType="map" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+		AND house_location_gugun=#{detail}
+	]]>
+	</select>
+	
+	<select id="getDetailWithBoth" parameterType="map" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+		AND house_location_gugun=#{detail}
+	]]>
+	</select>
+	
+	<select id="getDetailWithBothPrice" parameterType="map" resultType="HashMap">
+	<![CDATA[
+		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		AND house_default_wifi=#{wifi}
+		AND house_condition_petok=#{pet}
+		AND house_price_default>=#{minPrice}
+		AND house_price_default<=#{maxPrice}
+		AND house_condition_smokeok=#{smoking}
+		AND house_default_parking=#{parking}
+		AND house_default_laundry_washer=#{laundry}
+		AND house_default_pool=#{pool}
+		AND house_location=#{location}
+		AND house_maxperson>=#{people}
+		AND house_star>=#{star}
+		AND house_status=0
+		AND house_location_gugun=#{detail}
+	]]>
+	</select>
+	
+	
+</mapper>
