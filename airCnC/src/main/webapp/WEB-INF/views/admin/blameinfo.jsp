@@ -54,9 +54,9 @@
     <div id="sidediv">
         <ul id="sidemenu">
             <li class="menu"><a href="admin_singo_complete_list.html">처리된 신고 내역</a></li>
-            <li class="menu"><a href="/blamelist.mdo">신규 신고 내역</a></li>
+            <li class="menu"><a href="/cnc/blamelist.mdo">신규 신고 내역</a></li>
             <li class="menu"><a href="admin_singo_judge.html">신고사항 처리</a></li>
-            <li class="menu"><a href="/blacklist.mdo">블랙리스트 보기</a></li>
+            <li class="menu"><a href="/cnc/blacklist.mdo">블랙리스트 보기</a></li>
             <li class="menu"><a href="admin_remove.html">계정삭제 내역</a></li>
         </ul>
     </div>
@@ -73,10 +73,10 @@
                     <td>${item.blame_content}</td>
                     <td><c:set var="blame_type" value="${item.blame_type}"/>
                         <c:if test="${blame_type eq 0}">
-                            <a href="/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="HOST"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="HOST"/></a>
                         </c:if>
                         <c:if test="${blame_type eq 1}">
-                            <a href="/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="CUSTOMER"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="CUSTOMER"/></a>
                         </c:if>
                     </td>
                 </tr>

@@ -225,21 +225,20 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
-					<div class="single_destination1">
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_condition_petok'">
 						<div class="thumb">
-							<img src="${pageContext.request.contextPath}/resources/images/dog.png" alt=""><i
-								class="fas fa-dog" style="font-size: 60px; float: right;"></i>
+								<img src="${pageContext.request.contextPath}/resources/images/dog.png" alt=""><i
+									class="fas fa-dog" style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
 							<p class="d-flex align-items-center">
 								반려견과 함께<a href="travel_destination.html">여행</a>
 							</p>
-
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
-					<div class="single_destination1">
+				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;" >
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_bbq'">
 						<div class="thumb">
 							<img src="${pageContext.request.contextPath}/resources/images/bbq1.jpg" alt=""><i
 								class="fas fa-drumstick-bite"
@@ -254,7 +253,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
-					<div class="single_destination1">
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_party'">
 						<div class="thumb">
 							<img src="${pageContext.request.contextPath}/resources/images/party1.jpg" alt=""><i
 								class="fas fa-glass-cheers"
@@ -269,7 +268,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1">
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearchhighscore.do'">
 						<div class="thumb">
 							<img src="${pageContext.request.contextPath}/resources/images/star.png" alt=""><i
 								class="fas fa-medal" style="font-size: 60px; float: right;"></i>
@@ -282,7 +281,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1">
+					<div class="single_destination1"onclick=window.open("http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_pool")>
 						<div class="thumb">
 							<img src="${pageContext.request.contextPath}/resources/images/familywater.jpg" alt=""><i
 								class="fas fa-water" style="font-size: 60px; float: right;"></i>
@@ -295,7 +294,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1">
+					<div class="single_destination1" onclick=window.open("http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_farm")>
 						<div class="thumb">
 							<img src="${pageContext.request.contextPath}/resources/images/ground.jpg" alt=""><i
 								class="fas fa-seedling" style="font-size: 60px; float: right;"></i>
