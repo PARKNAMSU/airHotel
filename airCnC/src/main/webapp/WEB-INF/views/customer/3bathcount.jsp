@@ -26,6 +26,14 @@
 	<script type="text/javascript">
 		function bathcountSubmit() {
 			var f = document.bathcount;
+			if(f.house_bathroom_type.value != "true" && f.house_bathroom_type.value != "false") {
+				alert("욕실의 공용,개인 여부를 알려주세요.");
+				return;
+			}
+			if(f.house_bathroom_amount.value == 0) {
+				alert("욕실 수는 최소 1개 이상이어야합니다.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -35,7 +43,8 @@
 			f.action = "<c:url value='/1newhouse.do' />";
 			f.submit();
 		}
-
+	
+		
 	</script>
 </head>
 <body>
@@ -54,11 +63,12 @@
       </div>
     </header>
     <!-- header-end -->
+    <div class="container" style="align-content: center;">
+    <div class="form">
     <c:url value="/3bathcount.do" var="actionUrl" />
 	<form:form id="3bathcount" name="bathcount" modelAttribute="house" method="GET" action="${actionUrl}">
-    	<div class="container" style="align-content: center;">
-        <div class="form">
-        	<img src="${pageContext.request.contextPath}/resources/images/shawer.png" style="margin-bottom: 35px;" />
+    	
+        <img src="${pageContext.request.contextPath}/resources/images/shawer.png" style="margin-bottom: 35px;" />
         <div class="bathtitle" style="font-size: 30px; font-weight: bold; padding-bottom: 15px;">
         	욕실 수</div>
         <div class="bathcounttitle" style="padding-bottom: 15px;">
@@ -77,15 +87,17 @@
             <form:radiobutton id="radio2" path="house_bathroom_type" value="false" /><label> 아니오 </label>
         </div>
           
-        <div class="bathcontrol" style="padding-bottom: 15px;">
+       
+      
+	</form:form>
+   		<div class="bathcontrol" style="padding-bottom: 15px;">
         	<a href="#" onclick="PrevSubmit();" style="float : inherit;">
 			<button>뒤로가기</button></a>&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="bathcountSubmit();" style="float: inherit;">
 			<button>다음</button></a>
         </div>
-      </div>
+	</div>
     </div>
-  </form:form>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

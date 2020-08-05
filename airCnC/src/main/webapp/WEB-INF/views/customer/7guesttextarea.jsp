@@ -26,6 +26,26 @@
 	<script type="text/javascript">
 		function guesttextareaSubmit() {
 			var f = document.guesttext;
+			if(f.house_desc1.value == "") {
+				alert("'게스트에게 설명'을 입력해주세요.");
+				return;
+			}
+			if(f.house_desc2.value == "") {
+				alert("'숙소'를 입력해주세요.");
+				return;
+			}
+			if(f.house_desc3.value == "") {
+				alert("'게스트와의 교류'를 입력해주세요.");
+				return;
+			}
+			if(f.house_desc4.value == "") {
+				alert("'숙소가 위치한 지역'을 입력해주세요.");
+				return;
+			}
+			if(f.house_desc5.value == "") {
+				alert("'교통편'를 입력해주세요.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -54,11 +74,11 @@
       </div>
     </header>
     <!-- header-end -->
-    
+    <div class="container">
+    <div class="form">
     <c:url value="/7guesttextarea.do" var="actionUrl" />
 	<form:form id="7guesttextarea" name="guesttext" modelAttribute="house" method="GET" action="${actionUrl}">
-	<div class="container">
-    	<div class="form">
+	
     	
     	<div class="guesttextarea">
         <img src="${pageContext.request.contextPath}/resources/images/welcome.png" alt="">
@@ -88,14 +108,16 @@
             <form:textarea name="guesttextarea" path="house_desc5" rows="10" cols="75" placeholder="500자 이내로 작성하세요." maxlength="500"/>
 		</div>
               
+      	
+      	</form:form>	
+      	
       	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
         	<a href="#" onclick="PrevSubmit();" style="float: left;"><button>< 뒤로가기</button></a>
           	<a href="#" onclick="guesttextareaSubmit();" style="float: right;"><button>다음</button></a>
       	</div>
-      		
     	</div>
     </div>
-	</form:form>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.vo.noticeop;
+package kg.air.cnc.vo;
 
 import java.sql.Date;
 

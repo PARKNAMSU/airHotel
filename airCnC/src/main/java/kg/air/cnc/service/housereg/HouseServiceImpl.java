@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.service.housereg;
+package kg.air.cnc.service.housereg;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kg.air.cnc.customer.dao.housereg.HouseDAO;
-import kg.air.cnc.customer.vo.housereg.HouseVO;
+import kg.air.cnc.dao.housereg.HouseDAO;
+import kg.air.cnc.vo.HouseVO;
 @Service("houseService")
 public class HouseServiceImpl implements HouseService {
 

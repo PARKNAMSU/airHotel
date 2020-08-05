@@ -26,6 +26,10 @@
 	<script type="text/javascript">
 		function chargeSubmit() {
 			var f = document.charge;
+			if(f.house_price_default_parInt.value < 10000) {
+				alert("숙소의 가격은 최소 10,000원 이상입니다.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -46,9 +50,9 @@
       </div>
     </header>
     <!-- header-end -->
-    
-	<form action="/hotel/10charge.do" name="charge" accept-charset="utf-8" method="GET">
     <div class="container" style="text-align: center;">
+	<form action="/hotel/10charge.do" name="charge" accept-charset="utf-8" method="GET">
+   
     
     
 	<div class="form">
@@ -72,21 +76,18 @@
 		<p>CHECK-IN 시간 : <input type="time" name="house_checkin_time" value="15:00" min="00:00" max="24:00"maxlength="30" style="width: 100px;"></p><br></br>
 		<p>CHECK-OUT 시간 : <input type="time" name="house_checkout_time" value="11:00" min="00:00" max="24:00"maxlength="30" style="width: 100px;"></p><br></br>
         
-        </div>
+    </div>
 	
+        </form>
         
-	</div>
-	
-	
-            
             
     	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
     		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>< 뒤로가기</button></a>
 			<a href="#" onclick="chargeSubmit();" style="float: right;"><button>다음</button></a>
     	</div>
-      
-    </div>
-	</form>
+        
+	</div>
+	
     
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"

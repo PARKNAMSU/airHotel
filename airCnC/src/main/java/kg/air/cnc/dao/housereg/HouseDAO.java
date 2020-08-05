@@ -1,8 +1,8 @@
-package kg.air.cnc.customer.dao.housereg;
+package kg.air.cnc.dao.housereg;
 
 import java.util.List;
 
-import kg.air.cnc.customer.vo.housereg.HouseVO;
+import kg.air.cnc.vo.HouseVO;
 
 public interface HouseDAO {
 	public List<HouseVO> listProduct();

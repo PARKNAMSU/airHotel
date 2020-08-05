@@ -1,12 +1,12 @@
-package kg.air.cnc.customer.service.noticeop;
+package kg.air.cnc.service.noticeop;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kg.air.cnc.customer.dao.noticeop.BoardDao;
-import kg.air.cnc.customer.vo.noticeop.BoardVO;
+import kg.air.cnc.dao.noticeop.BoardDao;
+import kg.air.cnc.vo.BoardVO;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	@Autowired

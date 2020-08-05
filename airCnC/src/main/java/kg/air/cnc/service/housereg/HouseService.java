@@ -1,8 +1,8 @@
-package kg.air.cnc.customer.service.housereg;
+package kg.air.cnc.service.housereg;
 
 import java.util.List;
 
-import kg.air.cnc.customer.vo.housereg.HouseVO;
+import kg.air.cnc.vo.HouseVO;
 
 public interface HouseService {
 	public List<HouseVO> listProduct();

@@ -26,6 +26,12 @@
 	<script type="text/javascript">
 		function hosthouseimgSubmit() {
 			var f = document.hostpic;
+			var fileCheck = document.getElementById("house_photo").value;
+		    if(!fileCheck){
+		        alert("파일을 첨부해 주세요");
+		        return;
+		    }
+			
 			f.submit();
 		}
 		
@@ -54,10 +60,10 @@
       </div>
     </header>
     <!-- header-end -->
-    
+    <div class="container">
     
     <form action="/hotel/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
-	<div class="container">
+	
 	
     <div class="hostpic1">
     	<img src="${pageContext.request.contextPath}/resources/images/sleep1.jpg" alt="">
@@ -69,19 +75,21 @@
         <div id="image_container" style="text-align: center;"></div>
         <div class="filebox">
         
-			<input type="file" name="house_photo"  /><br>
+			<input type="file" name="house_photo" id="house_photo" /><br>
             <label for="image" style="color: black;">첨부할 사진을 선택하세요</label>
         </div>
     </div>
     
+	
+    
+    
+    
+	</form>
 	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
 		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>< 뒤로가기</button></a>
 		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>다음</button></a>
     </div>
-    
-    
-    </div>
-	</form>
+	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

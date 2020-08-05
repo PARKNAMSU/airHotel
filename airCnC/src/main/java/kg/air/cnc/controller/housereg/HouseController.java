@@ -1,8 +1,7 @@
-package kg.air.cnc.customer.controller.housereg;
+package kg.air.cnc.controller.housereg;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,9 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import kg.air.cnc.customer.service.housereg.HouseService;
-import kg.air.cnc.customer.vo.housereg.HousePhotoVO;
-import kg.air.cnc.customer.vo.housereg.HouseVO;
+import kg.air.cnc.service.housereg.HouseService;
+import kg.air.cnc.vo.HouseVO;
 
 
 @Controller
@@ -76,7 +74,7 @@ public class HouseController {
 	
 	
 
-	@RequestMapping(value = "/index.do")
+	@RequestMapping(value = "/hostregisterindex.do")
 	public String mainPage() {
 		return "1newhouse";
 	}

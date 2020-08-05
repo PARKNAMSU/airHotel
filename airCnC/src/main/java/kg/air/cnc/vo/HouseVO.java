@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.vo.housereg;
+package kg.air.cnc.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;

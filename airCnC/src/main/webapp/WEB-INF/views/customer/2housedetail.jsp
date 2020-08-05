@@ -25,6 +25,14 @@
 	<script type="text/javascript">
 		function houseDetailSubmit() {
 			var f = document.hostchoose1;
+			if(f.house_maxperson.value == 0) {
+				alert("최대숙박인원은 최소 1명 이상입니다.");
+				return;
+			}
+			if(f.house_bedroom_amount.value == 0) {
+				alert("침실선택을 해주세요.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -54,8 +62,9 @@
     </header>
     <!-- header-end -->
     <c:url value="/2housedetail.do" var="actionUrl" />
+    <div class="container">
 	<form:form id="2housedetail" name="hostchoose1" modelAttribute="house" method="GET" action="${actionUrl}">
-		<div class="container">
+		
 			<img src="${pageContext.request.contextPath}/resources/images/badroom.jpg"style="align-content: center; padding-top: 30px;">
 			<div class="title">숙소에 얼마나 많은 인원이 숙박 할수 있나요?</div>
 			<div class="title1">모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지 확인하세요.</div>
@@ -114,26 +123,26 @@
 					        <button type="button" onclick="javascript:this.form.amount4.value++;">+</button>  
 					        <form:input type="text" id="amount4" value="${bed_type_queen }" readonly="readonly" path="house_bed_type_queen" />    
 					        <button type="button" onclick="javascript:this.form.amount4.value--;">-</button>
-					        <div class="badfix"><br>
-					          <a href="#"><button>침대 수정하기</button></a>
-					        </div>
 			    		</div>
 			    	</div>
 			    </div>
 			    
 			</div>
 			    
-			    <div class="control">
+			    
+	</form:form>
+				<div class="control">
 				    <div class="control2">
 				    <a href="#" onclick="PrevSubmit();" style="float : left;">
 				    <button>뒤로가기</button></a>
 				    <a href="#" onclick="houseDetailSubmit();" style="float: right;">
 				    <button>다음</button></a>
-			    	</div>
-			    <div class="bor1" style="height: 3px;"></div>
+				    <br></br><br></br>
+			    </div>
+					<div class="bor1" style="height: 30px;"></div>
+				
 				</div>
-		</div>
-	</form:form>
+	</div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"

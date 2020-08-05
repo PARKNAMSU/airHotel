@@ -26,6 +26,14 @@
 	<script type="text/javascript">
 		function locationSubmit() {
 			var f = document.llocation;
+			if(f.house_location.value == 0) {
+				alert("지역선택을 해주세요.");
+				return;
+			}
+			if(f.house_location_postnum.value == "") {
+				alert("우편번호 찾기를 통해 주소를 입력해주세요.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -94,7 +102,7 @@
 	div { position:relative; } 
 	#map { position:absolute; } 
 	.hc { width:200px; left:0; right:0; margin-left:auto; margin-right:auto; } /* 가로 중앙 정렬 */ 
-	.vc { height:40px; top: 83%; bottom:10%; margin-top:auto; margin-bottom:auto; } /* 세로 중앙 정렬 */ 
+	.vc { height:40px; top: 79%; bottom:20%; margin-top:auto; margin-bottom:auto; } /* 세로 중앙 정렬 */ 
 	</style> 
 
 </head>
@@ -116,11 +124,11 @@
       </div>
     </header>
     <!-- header-end -->
-    
+    <div class="container" style="align-content: center;">
+	<div class="form">
     <c:url value="/4location.do" var="actionUrl" />
 	<form:form id="4location" name="llocation" modelAttribute="house" method="GET" action="${actionUrl}">
-		<div class="container" style="align-content: center;">
-		<div class="form">
+		
 			<img src="${pageContext.request.contextPath}/resources/images/diretion.jpg">
 			<div class="locationtitle" style="font-size: 25px; font-weight: bold;">숙소의 위치를 알려주세요</div>
 			<div class="locationtitle1" style="font-size: 15px; font-weight: bold;">정확한 숙소 주소는 게스트가 예약을 완료한 후에만 공개됩니다.</div>
@@ -148,30 +156,33 @@
 			</div>
 			<div class="locationtitle7" style="padding-bottom: 20px;">
         		<label for="locationtitle7">상세주소</label>
-			    <form:input type="text" placeholder="상세주소"  path="house_loaction_detailaddress" /><br></br>
+			    <form:input type="text" placeholder="상세주소"  path="house_loaction_detailaddress" />
         	</div>
 			
-			
-        	
-			<div class="locationbutton">
-				<a href="#" onclick="PrevSubmit();">
-				<button>뒤로가기</button></a>&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="locationSubmit();">
-				<button>다음</button></a><br></br>
-				<label id="map_message" for="locationtitle7" style="font-size: 10px"> 주소를 입력하면 지도가 나옵니다. <br></br>아래 지도에서 숙소위치를 확인하세요.</label>
-			</div>
-			
-			<br></br><br></br><br></br>
 			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation_str" /><br></br>
 			<form:input type="hidden" id="sample4_ylocation" placeholder="y좌표"  path="house_ylocation_str" /><br></br>
 			<form:input type="hidden" id="sample4_sido" placeholder="도"  path="house_location_sido" /><br></br>
 			<form:input type="hidden" id="sample4_sigungu" placeholder="시군구"  path="house_location_gugun" /><br></br>
-			
-			<div id="map" class="hc vc" style="border:1px solid red;width:600px;height:300px;margin-top:10px; display:none"></div>
-			<br></br><br></br><br></br><br></br>
+	</form:form>	
+	<div class="control">
+		<div class="control2">
+				    <a href="#" onclick="PrevSubmit();" style="float : left;">
+				    <button>뒤로가기</button></a>
+				    <a href="#" onclick="locationSubmit();" style="float: right;">
+				    <button>다음</button></a>
+				    <br></br><br></br>
 		</div>
-	</div>			
-	</form:form>
+		<div class="bor1" style="height: 30px;"></div>		
+	</div>
+	
+		
+	
+	<div id="map" class="hc vc" style="border:1px solid red;width:600px;height:300px;margin-top:10px; display:none"></div>
+	<br></br><br></br><br></br><br></br>
+				
+	</div>
+	
+	</div>	
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="

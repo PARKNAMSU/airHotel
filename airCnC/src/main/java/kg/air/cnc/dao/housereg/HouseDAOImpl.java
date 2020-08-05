@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.dao.housereg;
+package kg.air.cnc.dao.housereg;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kg.air.cnc.customer.vo.housereg.HouseVO;
+import kg.air.cnc.vo.HouseVO;
 @Repository
 public class HouseDAOImpl implements HouseDAO {
 

@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.controller.noticeop;
+package kg.air.cnc.controller.noticeop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import kg.air.cnc.customer.service.noticeop.BoardService;
-import kg.air.cnc.customer.vo.noticeop.BoardVO;
+import kg.air.cnc.service.noticeop.BoardService;
+import kg.air.cnc.vo.BoardVO;
 
 @Controller
 @SessionAttributes("board")

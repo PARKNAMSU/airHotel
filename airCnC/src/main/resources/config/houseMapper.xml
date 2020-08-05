@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="product">
-	<resultMap type="kg.air.cnc.customer.vo.housereg.HouseVO" id="houseinfo">
+	<resultMap type="kg.air.cnc.vo.HouseVO" id="houseinfo">
 		<id property="houseId" column="house_id" />
 		<result property="houseName" column="house_name" />
 		<result property="housePrice" column="house_price" />
@@ -11,7 +11,7 @@
 		<result property="houseUrl" column="house_url"/>
 	</resultMap>
 
-	<select id="listProduct" resultType="kg.air.cnc.customer.vo.housereg.HouseVO">
+	<select id="listProduct" resultType="kg.air.cnc.vo.HouseVO">
 	select
 	house_id as houseId,
 	house_name as houseName,
@@ -21,7 +21,7 @@
 	order by house_id
 	</select>
 	
-	<select id="detailProduct" resultType="kg.air.cnc.customer.vo.housereg.HouseVO">
+	<select id="detailProduct" resultType="kg.air.cnc.vo.HouseVO">
 	select
 	house_id as houseId,
 	house_name as houseName,
@@ -31,14 +31,14 @@
 	where house_id=#{houseId}
 	</select>
 	
-	<insert id="insertProduct" parameterType="kg.air.cnc.customer.vo.housereg.HouseVO">
+	<insert id="insertProduct" parameterType="kg.air.cnc.vo.HouseVO">
 	insert into imsi_housereg
 	values(
 	(select nvl(max(house_id), 0)+1 from imsi_housereg),#{houseName},#{housePrice},#{houseDesc})
 	</insert>
 	
 	
-	<insert id="insertHouse" parameterType="kg.air.cnc.customer.vo.housereg.HouseVO">
+	<insert id="insertHouse" parameterType="kg.air.cnc.vo.HouseVO">
 	insert into house_info
 	(
 	house_seq,

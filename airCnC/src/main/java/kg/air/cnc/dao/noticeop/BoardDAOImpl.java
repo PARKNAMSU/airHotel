@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.dao.noticeop;
+package kg.air.cnc.dao.noticeop;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kg.air.cnc.customer.vo.noticeop.BoardVO;
+import kg.air.cnc.vo.BoardVO;
 @Repository
 public class BoardDAOImpl implements BoardDao {
 	@Autowired

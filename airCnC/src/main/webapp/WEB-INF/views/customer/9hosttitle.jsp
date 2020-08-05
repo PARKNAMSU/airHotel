@@ -26,6 +26,10 @@
 	<script type="text/javascript">
 		function hosttitleSubmit() {
 			var f = document.hosttitle;
+			if(f.house_name.value == "") {
+				alert("숙소의 제목을 입력해주세요.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -53,10 +57,10 @@
     </header>
     <!-- header-end -->
     
-    
+    <div class="container" style="align-content: center;">
     <c:url value="/9hosttitle.do" var="actionUrl" />
 	<form:form id="9hosttitle" name="hosttitle" modelAttribute="house" method="GET" action="${actionUrl}">
-    <div class="container" style="align-content: center;">
+   
    
    
     	<div class="hosttitle" style="padding-top: 35px;">
@@ -66,15 +70,19 @@
         	<form:textarea name="guest" path="house_name" rows="2" cols="60" placeholder="50자 이내로 작성하세요." maxlength="50"/>          
         </div>
               
-              
+     </form:form>         
     	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
      		<a href="#" onclick="PrevSubmit();" style="padding-right: 26.5%;"><button>< 뒤로가기</button></a>
 			<a href="#" onclick="hosttitleSubmit();" style="float: right;"><button>다음</button></a>
     	</div>
       
       
-    </div>
-  	</form:form>
+   
+  	
+  	
+  	
+  	
+  	</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
