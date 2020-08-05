@@ -70,8 +70,8 @@ public class House_InfoVO {
 	private String house_host_id;
 	private String house_xlocation;
 	private String house_ylocation;
-	private Timestamp house_checkin_time;
-	private Timestamp house_checkout_time;
+	private String house_checkin_time;
+	private String house_checkout_time;
 	private Date house_regdate;
 
 	public int getHouse_seq() {
@@ -546,19 +546,19 @@ public class House_InfoVO {
 		this.house_ylocation = house_ylocation;
 	}
 
-	public Timestamp getHouse_checkin_time() {
+	public String getHouse_checkin_time() {
 		return house_checkin_time;
 	}
 
-	public void setHouse_checkin_time(Timestamp house_checkin_time) {
+	public void setHouse_checkin_time(String house_checkin_time) {
 		this.house_checkin_time = house_checkin_time;
 	}
 
-	public Timestamp getHouse_checkout_time() {
+	public String getHouse_checkout_time() {
 		return house_checkout_time;
 	}
 
-	public void setHouse_checkout_time(Timestamp house_checkout_time) {
+	public void setHouse_checkout_time(String house_checkout_time) {
 		this.house_checkout_time = house_checkout_time;
 	}
 

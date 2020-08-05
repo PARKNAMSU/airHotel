@@ -133,8 +133,8 @@
 								${house.house_seq }<br>
 								${house.house_name }<br> 
 								${house.house_location }<br>
-							별점<br> 
-							가격
+								별점<br> 
+								가격
 						</div>
 						<hr>
 					</a>
@@ -179,16 +179,16 @@
 		});
 	</script>
 	<script type="text/javascript">
-		var f_seoul = [ "서울지역선택", "강남구", "강서구", "노원구" ];
-		var f_gyeonggi = [ "경기지역선택", "성남시", "수원시", "광주시" ];
-		var f_gangwon = [ "강원지역선택", "강릉시", "속초시", "양양시" ];
-		var f_cb = [ "충북지역선택", "청주시", "충주시", "제천시" ];
-		var f_cn = [ "충남지역선택", "보령시", "공주시", "천안시" ];
-		var f_gb = [ "경북지역선택", "포항시", "안동시", "경주시" ];
-		var f_gn = [ "경남지역선택", "창원시", "통영시", "거제시" ];
-		var f_jb = [ "전북지역선택", "전주시", "익산시", "군산시" ];
-		var f_jn = [ "전남지역선택", "여수시", "순천시", "목포시" ];
-		var foods = [ [ "지역 선택" ], f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
+		var f_seoul = [ "서울지역 선택", "강남구", "강서구", "노원구" ];
+		var f_gyeonggi = [ "경기지역 선택", "성남시", "수원시", "광주시" ];
+		var f_gangwon = [ "강원지역 선택", "강릉시", "속초시", "양양시" ];
+		var f_cb = [ "충북지역 선택", "청주시", "충주시", "제천시" ];
+		var f_cn = [ "충남지역 선택", "보령시", "공주시", "천안시" ];
+		var f_gb = [ "경북지역 선택", "포항시", "안동시", "경주시" ];
+		var f_gn = [ "경남지역 선택", "창원시", "통영시", "거제시" ];
+		var f_jb = [ "전북지역 선택", "전주시", "익산시", "군산시" ];
+		var f_jn = [ "전남지역 선택", "여수시", "순천시", "목포시" ];
+		var foods = [ "지역 선택", f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
 
 		function createTag(index) {
 			var result = "";

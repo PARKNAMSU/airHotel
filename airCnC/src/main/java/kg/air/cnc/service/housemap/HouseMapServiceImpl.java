@@ -22,32 +22,50 @@ public class HouseMapServiceImpl implements HouseMapService{
 		System.out.println(tmp.size());
 		return tmp;
 	}
-
-	@Override
-	public List<House_InfoVO> getDetail(Map<String, String> info){
-		if(info.get("checkOut").equals("") && info.get("detail").equals("전체")) { //상세지역 상관 없고 체크아웃도 상관 없는 상태
-			return houseMapDAO.getDetailWithBoth(info);
-		}
-		else if(info.get("checkOut").equals("")) { // 체크인 체크아웃 선택 x 상세지역 선택
-			return houseMapDAO.getDetail(info);
-		}
-		else if(info.get("detail").equals("전체")) { // 체크인 체크아웃 선택하고 상세지역 선택x
-			return houseMapDAO.getDetailWithDetail(info);
-		}
-		else {	//둘다 선택한 상태
-			return houseMapDAO.getDetailWithCheckOut(info);
-		}
-		//내일부터 여기서 메서드 위치 정하고 쿼리문 작성해야한다.
-	}
 	
 	@Override
 	public List<Map<String, Integer>> getPrice(String location) {
 		return houseMapDAO.getPrice(location);
 	}
+
+	@Override
+	public List<House_InfoVO> getDetail(Map<String, String> info){
+		if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+			System.out.println("상세지역과 체크아웃 둘 다 설정");
+			return houseMapDAO.getDetailWithBoth(info);
+		}
+		else if(!info.get("detail").contains("선택") && info.get("checkOut").equals("")) { // 체크인 체크아웃 선택 x 상세지역 선택
+			System.out.println("체크인 체크아웃 선택 x 상세지역 선택");
+			return houseMapDAO.getDetailWithDetail(info);
+		}
+		else if(info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { // 체크인 체크아웃 선택하고 상세지역 선택x
+			System.out.println("체크인 체크아웃 선택하고 상세지역 선택x");
+			return houseMapDAO.getDetailWithCheckOut(info);
+		}
+		else {	// 둘 다 설정하지 않은 상태
+			System.out.println("둘 다 설정하지 않음");
+			return houseMapDAO.getDetail(info);
+		}
+	}
 	
 	@Override
-	public List<Map<String, Integer>> getPrice(Map<String, String> info) {
-		return houseMapDAO.getPrice(info);
+	public List<Map<String, Integer>> getPrice(Map<String, String> info) { //상세검색에서 실행되는것
+		if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+			System.out.println("상세지역과 체크아웃 둘 다 설정");
+			return houseMapDAO.getDetailWithBothPrice(info);
+		}
+		else if(!info.get("detail").contains("선택") && info.get("checkOut").equals("")) { // 체크인 체크아웃 선택 x 상세지역 선택
+			System.out.println("체크인 체크아웃 선택 x 상세지역 선택");
+			return houseMapDAO.getDetailWithDetailPrice(info);
+		}
+		else if(info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { // 체크인 체크아웃 선택하고 상세지역 선택x
+			System.out.println("체크인 체크아웃 선택하고 상세지역 선택x");
+			return houseMapDAO.getDetailWithCheckOutPrice(info);
+		}
+		else {	// 둘 다 설정하지 않은 상태
+			System.out.println("둘 다 설정하지 않음");
+			return houseMapDAO.getPrice(info);
+		}
 	}
 
 }
