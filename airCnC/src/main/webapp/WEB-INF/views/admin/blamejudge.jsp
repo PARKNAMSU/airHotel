@@ -55,9 +55,9 @@
     <div id="sidediv">
         <ul id="sidemenu">
             <li class="menu"><a href="admin_singo_complete_list.html">처리된 신고 내역</a></li>
-            <li class="menu"><a href="/blamelist.mdo">신규 신고 내역</a></li>
+            <li class="menu"><a href="/cnc/blamelist.mdo">신규 신고 내역</a></li>
             <li class="menu"><a href="admin_singo_judge.html">신고사항 처리</a></li>
-            <li class="menu"><a href="/blacklist.mdo">블랙리스트 보기</a></li>
+            <li class="menu"><a href="/cnc/blacklist.mdo">블랙리스트 보기</a></li>
             <li class="menu"><a href="admin_remove.html">계정삭제 내역</a></li>
         </ul>
     </div>
@@ -65,12 +65,27 @@
     <div id="admin_singo_main">
         <div class="singo_history">
             <table class="table">
-                <c:set var="blame" value="${blameinfo}"/>
-                <c:set var="blamejudgeinfo" value="${blamejudgeinfo}"/>
+                <c:set var="blameHostJudgeInfo" value="${blameHostJudgeInfo}"/>
+                <c:set var="blameCustomerJudgeInfo" value="${blameCustomerJudgeInfo}"/>
+                <c:set var="blame_type" value="${sessionScope.blame_type}"/>
                 <tr>
                     <td>신고당한 아이디 ${sessionScope.target_member_id}</td>
-                    <td>누적경고횟수 : ${blamejudgeinfo.customer_blame_warn}</td>
-                    <td>정지여부 : ${blamejudgeinfo.customer_blame_stop}</td>
+                    <td>누적경고횟수 :
+                    <c:if test="${blameHostJudgeInfo eq null}" >
+                        <c:out value="${blameCustomerJudgeInfo.customer_blame_warn}"/>
+                    </c:if>
+                    <c:if test="${blameCustomerJudgeInfo eq null}" >
+                        <c:out value="${blameHostJudgeInfo.host_blame_warn}"/>
+                    </c:if>
+                    </td>
+                    <td>정지여부 :
+                        <c:if test="${blameHostJudgeInfo eq null}">
+                            <c:out value="${blameCustomerJudgeInfo.customer_blame_stop}"/>
+                        </c:if>
+                        <c:if test="${blameCustomerJudgeInfo eq null}">
+                            <c:out value="${blameHostJudgeInfo.host_blame_stop}"/>
+                        </c:if>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -84,15 +99,15 @@
         </div>
 
         <div class="account_susspend">
-            <form>
-                <input type="text" name="" value="3"  size="10"> 일
-                <input id="susspend_btn" type="submit" value="정지부여">
+            <form method="post" action="/blameSuspend.mdo">
+                <input type="text" name="suspend_day" value="3"  size="10"> 일
+                <input id="suspend_btn" type="submit" value="정지부여">
             </form>
         </div>
 
         <div class="black_list">
-            <form>
-                <input type="button" name="" value="블랙리스트 추가하기">
+            <form action="/addBlacklist.mdo" method="get">
+                <input type="submit" value="블랙리스트 추가하기">
             </form>
         </div>
     </div>

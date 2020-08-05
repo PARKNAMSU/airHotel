@@ -9,15 +9,23 @@
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.3.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-
+   
    <context:property-placeholder location="classpath:db.properties"/>
+   
+   <!-- 패스워드 단방향 암호화 -->
+   <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+   
    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
       destroy-method="close">
          <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -25,10 +33,12 @@
          <property name="username" value="${jdbc.username}"/>
          <property name="password" value="${jdbc.password}"/>
    </bean>
+   
 	<!-- Transaction 관리자 설정 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource" />
+		
 	<!-- myBatis 사용을 위한 설정 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -39,6 +49,25 @@
 		<constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactoryBean" />
 	</bean>
-<mvc:annotation-driven></mvc:annotation-driven>
-<context:component-scan base-package="kg.air"></context:component-scan>
+	<!-- 이메일 관련 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="ljh160791@gmail.com"/>
+		<property name="password" value="rhksflwk@43"/>
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="mailService" class="kg.air.cnc.service.mail.MailServiceImpl"/>
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="kg.air"></context:component-scan>
+	<task:annotation-driven></task:annotation-driven>
 </beans>

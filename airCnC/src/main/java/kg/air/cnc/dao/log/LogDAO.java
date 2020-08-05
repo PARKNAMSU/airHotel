@@ -24,5 +24,24 @@ public class LogDAO implements LogDAOImpl{
 	public List<LogVO> getLogList(LogVO vo) {
 		return sqlSessionTemplate.selectList("LogDAO.getLogList",vo);
 	}
+
+	@Override
+	public List<LogVO> getLogListForId(LogVO vo) {
+		return sqlSessionTemplate.selectList("LogDAO.getLogListForId",vo);
+	}
+
+	@Override
+	public void deleteLog(LogVO vo) {
+		sqlSessionTemplate.delete("LogDAO.deleteLog",vo);
+		
+	}
+
+	@Override
+	public void deleteLogWithId(LogVO vo) {
+		sqlSessionTemplate.delete("LogDAO.deleteLogWithId",vo);
+		
+	}
+
+
 	
 }

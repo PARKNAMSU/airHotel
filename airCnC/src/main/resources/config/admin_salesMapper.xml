@@ -21,6 +21,6 @@
 		 GROUP BY to_date(to_char(admin_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(admin_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
 	</select>
 	<select id="getSalesDetail" resultType="kg.air.cnc.vo.Admin_salesVO" parameterType="kg.air.cnc.vo.Admin_salesVO">
-		SELECT admin_sales_seq, admin_sales, admin_sales_house_seq, to_char(admin_sales_regdate,'YYYY/MM/DD') as admin_sales_date FROM admin_sales WHERE to_char(admin_sales_regdate,'YYYY-MM-DD') = #{admin_sales_date}
+		SELECT admin_sales_seq, admin_sales, admin_sales_house_seq, to_char(admin_sales_regdate,'YYYY/MM/dd') as admin_sales_date FROM admin_sales WHERE to_char(admin_sales_regdate,'YYYY-MM-dd') = #{admin_sales_date}
 	</select>
 </mapper>

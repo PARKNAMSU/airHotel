@@ -16,6 +16,12 @@
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -51,23 +57,23 @@
     <!-- slider_area_end -->
 	<div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a href="../project/admin_salesChart.jsp">매출현황</a></li>
-			<li class="menu"><a href="../project/admin_useChart.jsp">숙소이용 현황</a></li>
-			<li class="menu"><a href="../project/admin_signupChart.jsp">회원가입 현황</a></li>
-			<li class="menu"><a href="../project/admin_hostChart.jsp">호스트 신청 현황</a></li>
+			<li class="menu"><a href="salesChart.mdo">매출현황</a></li>
+			<li class="menu"><a href="">숙소이용 현황</a></li>
+			<li class="menu"><a href="signupChart.mdo">회원가입 현황</a></li>
+			<li class="menu"><a href="hostChart.mdo">호스트 신청 현황</a></li>
 		</ul>
 	</div>
 	<div class="top_first">
-		<div class="maindiv" ><a class="maintext" id="searchYears"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도별 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchYear"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">년도 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchMonth"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">월별 검색</a></div>
-		<div class="maindiv"><a class="maintext" id="searchCondition"><img alt="" src="${pageContext.request.contextPath}/resources/images/salesChart/admintri.png" style="width:22px;height:22px">사용자 정의 검색</a></div>
+		<div class="maindiv" ><a class="maintext" id="searchYears" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">년도별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchYear" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">년도 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchMonth" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">월별 검색</a></div>
+		<div class="maindiv"><a class="maintext" id="searchCondition" style="color:black;"><img alt="" src="${pageContext.request.contextPath}/resources/images/admin/admintri.png" style="width:22px;height:22px">사용자 정의 검색</a></div>
 	</div>
 	<div class="top_second">
 		<div class="subdiv" id="years">
 			<form action="salesChartSearch.mdo" id="yearsForm">
-				from year<input type="number" min="2000" max="2020" name="searchConditionFirst"  class="form-control"><br><br>
-				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  class="form-control">
+				from year<input type="number" min="2000" max="2020" name="searchConditionFirst" id="yearsCondition1" class="form-control"><br><br>
+				to year<input type="number" min="2000" max="2020" name="searchConditionSecond"  id="yearsCondition2" class="form-control">
 				<br>
 				<input type="hidden" name="searchType" value="years">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
@@ -98,8 +104,8 @@
 		<div id="month_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="condition">
 			<form action="salesChartSearch.mdo">
-				from <br><input type="date" class="form-control" name="searchConditionFirst"><br><br>
-				to <input type="date" class="form-control" name="searchConditionSecond"><br><br>
+				from <br><input type="date" class="form-control" name="searchConditionFirst" id="dayCondition1"><br><br>
+				to <input type="date" class="form-control" name="searchConditionSecond" id="dayCondition2"><br><br>
 				<input type="hidden" name="searchType" value="days">
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
@@ -119,6 +125,7 @@
 					<th>총매출</th>
 				</tr>
 				<c:if test="${salesList != null}">
+					<c:if test="${salesList.size() >0 }">
 					<c:forEach begin="0" end="${salesList.size()-1}" var="i">
 					<c:if test="${i == 0}">
 					<tr>
@@ -138,9 +145,12 @@
 					</tr>
 					</c:if>
 					</c:forEach>
+					</c:if>
 				</c:if>
 			</table>
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
+			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>&nbsp;&nbsp;
+			
 			<button onclick="openDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
 		</div>
 	</div>
@@ -160,6 +170,20 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js"></script>
 <script type="text/javascript">
+	$(function(){
+		$("#yearsCondition1").change(function() {
+			$("#yearsCondition2").attr("min", $("#yearsCondition1").val())
+		}), 
+		$("#yearsCondition2").change(function() {
+			$("#yearsCondition1").attr("max", $("#yearsCondition2").val())
+		}),
+		$("#dayCondition1").change(function() {
+			$("#dayCondition2").attr("min", $("#dayCondition1").val())
+		}), 
+		$("#dayCondition2").change(function() {
+			$("#dayCondition1").attr("max", $("#dayCondition2").val())
+		})
+	})
 	function ReportToExcel(){
 		fname = prompt("파일 이름을 입력해주세요")
 		$("#salesTable").table2excel({
@@ -173,6 +197,25 @@
 		})
 
 	}
+	$(function(){
+		$('#reportPDF').click(function(){
+
+				html2canvas(document.getElementById("salesTable"), {
+					 onrendered : function(canvas){
+					  var imgData = canvas.toDataURL('image/png');
+			            var pageWidth = 210;
+			            var pageHeight = pageWidth * 1.414;
+			            var imgWidth = pageWidth - 20;
+			            var imgHeight = $('#salesTable').height() * imgWidth / $('#salesTable').width();
+					  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+
+					  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
+					  doc.save('매출보고서.pdf');
+					  } 
+				});
+		     
+		})
+	})
 		function getChart(){
 		    google.charts.load('current', {'packages':['bar']});
 		    google.charts.setOnLoadCallback(drawChart);

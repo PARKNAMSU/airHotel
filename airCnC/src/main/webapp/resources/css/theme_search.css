@@ -1,0 +1,190 @@
+@import "bootstrap.min.css";
+@import "font-awesome.min.css";
+@import "footer.css";
+@import "menu.css";
+@import "reset.css";
+@import "style.css";
+
+/*폰트적용*/
+body {
+    font-family: "Jua", sans-serif;
+}
+
+.theme_search_container .theme_image {
+    align-items: center;
+    text-align: center;
+    opacity: 0.9;
+    height: 400px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.theme_search_container {
+    padding-top: 150px;
+    padding-bottom: 120px;
+}
+
+.theme_search_container .single_trip {
+    margin-bottom: 30px;
+}
+
+.theme_search_container .single_trip .thumb {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.theme_search_container .single_trip .thumb img {
+    width: 100%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.theme_search_container .single_trip .info {
+    font-family: "Jua", sans-serif;
+    padding-top: 16px;
+}
+
+.theme_search_container .single_trip .info .date span {
+    font-family: "Jua", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #7a838b;
+    display: block;
+}
+
+.theme_search_container .single_trip .info a h3 {
+    font-family: "Jua", sans-serif;
+    color: #040e27;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.popular_destination_area .single_destination2:hover .info a p {
+    font-family: "Jua", sans-serif;
+    font-size: 20px;
+    color: #ff4a52;
+}
+
+.popular_destination_area .btn1:hover .info a p {
+    font-family: "Jua", sans-serif;
+    font-size: 20px;
+    color: #ff4a52;
+}
+
+#theme_title .theme_title {
+    font-family: "Jua", sans-serif;
+    color: #ff4a52;
+}
+
+.single_trip:hover .info a h5 {
+    color: #ff4a52;
+}
+.btn1 {
+    color: white;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    font-weight: 300;
+    font-size: 25px;
+    text-decoration: none;
+    padding: 6px;
+    border: none;
+    margin-top: 14px;
+    margin-bottom: 25px;
+    background-color: #ff5a5f;
+    padding-top: 10px;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Verdana, sans-serif;
+}
+.mySlides {
+    display: none;
+}
+img {
+    vertical-align: middle;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Caption text */
+.text {
+    color: #000000;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px;
+    }
+}

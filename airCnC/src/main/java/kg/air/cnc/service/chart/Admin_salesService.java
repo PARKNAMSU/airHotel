@@ -17,25 +17,25 @@ public class Admin_salesService implements Admin_salesServiceImpl{
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForYears(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForYears(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³â");
+		DateFormat format = new SimpleDateFormat("YYYYë…„");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForYear(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForYear(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ù");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForMonth(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForMonth(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ùDDÀÏ");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”ddì¼");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override
 	public List<Admin_salesVO> getAdmin_salesForDays(Admin_salesVO vo) {
 		List<Admin_salesVO> list = admin_salesDAO.getAdmin_salesForDays(vo);
-		DateFormat format = new SimpleDateFormat("YYYY³âMM¿ùDDÀÏ");
+		DateFormat format = new SimpleDateFormat("YYYYë…„MMì›”ddì¼");
 		return admin_salesDAO.admin_salesSetting(list, format);
 	}
 	@Override
