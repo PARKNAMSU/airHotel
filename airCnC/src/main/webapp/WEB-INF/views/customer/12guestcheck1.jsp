@@ -53,7 +53,7 @@
       </div>
     </header>
     <!-- header-end -->
-	<form action="/hotel/12guestcheck1.do" name="check" accept-charset="utf-8" method="GET">
+	<form action="/cnc/12guestcheck1.do" name="check" accept-charset="utf-8" method="GET">
 	<div class="container">
 	<div class="check">
 	

@@ -62,7 +62,7 @@
     <!-- header-end -->
     <div class="container">
     
-    <form action="/hotel/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
+    <form action="/cnc/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
 	
 	
     <div class="hostpic1">

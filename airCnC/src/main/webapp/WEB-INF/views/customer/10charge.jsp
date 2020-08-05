@@ -51,7 +51,7 @@
     </header>
     <!-- header-end -->
     <div class="container" style="text-align: center;">
-	<form action="/hotel/10charge.do" name="charge" accept-charset="utf-8" method="GET">
+	<form action="/cnc/10charge.do" name="charge" accept-charset="utf-8" method="GET">
    
     
     

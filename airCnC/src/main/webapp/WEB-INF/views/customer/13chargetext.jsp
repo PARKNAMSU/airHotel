@@ -47,7 +47,7 @@
     </header>
     <!-- header-end -->
     
-	<form action="/hotel/13chargetext.do" name="chargetext" accept-charset="utf-8" method="GET">
+	<form action="/cnc/13chargetext.do" name="chargetext" accept-charset="utf-8" method="GET">
     
     <div class="container" style="text-align: center;">
     
