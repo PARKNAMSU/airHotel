@@ -39,12 +39,12 @@
         INSERT INTO blacklist VALUES (#{id}, sysdate, #{email})
     </insert>
 
-    <select id="getHostHouses" resultType="kg.air.cnc.vo.HouseVO">
-        SELECT house_seq FROM housetemp WHERE host_id = #{host_id}
+    <select id="getHostHouses" resultType="kg.air.cnc.vo.House_InfoVO">
+        SELECT house_seq FROM house_info WHERE house_host_id = #{host_id}
     </select>
 
     <update id="setHouseStatusStop">
-        UPDATE housetemp SET house_status = 1 WHERE house_seq = #{house_seq}
+        UPDATE house_info SET house_status = 1 WHERE house_seq = #{house_seq}
     </update>
 
     <select id="getReservationByHostId" resultType="kg.air.cnc.vo.ReservationVO" parameterType="String">
