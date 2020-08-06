@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kg.air.cnc.dao.releasestop.ReleaseStopDAO">
+    <update id="setHostStopRelease">
+        UPDATE host SET host_stop_end_date = null, host_status = 0 WHERE sysdate >= host_stop_end_date
+    </update>
+
+    <update id="setHouseStopRelease">
+        UPDATE house_info SET house_status = 0 WHERE house_status = 1 AND sysdate >= house_stop_end_date
+    </update>
+
+    <update id="setCustomerStopRelease">
+        UPDATE customer SET customer_stop_end_date = null, customer_status = 0 WHERE sysdate >= customer_stop_end_date
+    </update>
+
+</mapper>

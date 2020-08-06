@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,8 @@ public class BlameDAOImpl implements BlameDAO{
         sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setHouseStatusStop", house);
     }
 
+
+
     @Override
     public List<ReservationVO> getReservationByHostId(String host_id) {
         List<ReservationVO> reservationList =  sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getReservationByHostId", host_id);
@@ -139,5 +142,15 @@ public class BlameDAOImpl implements BlameDAO{
     @Override
     public CustomerVO getCustomerVO(String id) {
         return sqlSession.selectOne("kg.air.cnc.dao.blame.BlameDAO.getCustomerVO", id);
+    }
+
+    @Override // id 호스트의 host_status 를 1 (정지상태) 로 변경하고, host_stop_end_date 설정
+    public void setHostStatusStop(HostVO host) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setHostStatusStop", host);
+    }
+
+    @Override // 커스터머의  customer_status 를 1 (정지상태) 로 변경하고, customer_stop_end_date 설정
+    public void setCustomerStatusStop(CustomerVO customer) {
+        sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setCustomerStatusStop", customer);
     }
 }

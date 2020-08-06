@@ -44,7 +44,7 @@
     </select>
 
     <update id="setHouseStatusStop">
-        UPDATE house_info SET house_status = 1 WHERE house_seq = #{house_seq}
+        UPDATE house_info SET house_status = 1, house_stop_end_date = #{house_stop_end_date} WHERE house_seq = #{house_seq}
     </update>
 
     <select id="getReservationByHostId" resultType="kg.air.cnc.vo.ReservationVO" parameterType="String">
@@ -78,6 +78,16 @@
     <update id="increaseCustomerBlameStop">
         UPDATE customer SET customer_blame_stop = customer_blame_stop +1 WHERE customer_id = #{customer_id}
     </update>
+
+
+    <update id="setHostStatusStop">
+        UPDATE host SET host_status = #{host_status}, host_stop_end_date = #{host_stop_end_date} WHERE host_id = #{host_id}
+    </update>
+
+    <update id="setCustomerStatusStop">
+        UPDATE customer set customer_status = #{customer_status}, customer_stop_end_date = #{customer_stop_end_date} WHERE customer_id =#{customer_id}
+    </update>
+
 
     <select id="checkHost" resultType="kg.air.cnc.vo.HostVO">
         SELECT * FROM HOST WHERE host_id = #{id}

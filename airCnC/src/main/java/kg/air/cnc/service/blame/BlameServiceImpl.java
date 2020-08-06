@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kg.air.cnc.vo.HostVO;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("blameService")
@@ -73,11 +74,18 @@ public class BlameServiceImpl implements BlameService {
 
     @Override // 호스트 정지
     public void suspendHost(String host_id, String suspend_day) {
+        int suspend_date = Integer.parseInt(suspend_day);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, suspend_date);
+        Date suspend_end_date = calendar.getTime();
+
         blameDAO.getHostHouses(host_id);
         // host 가 가지고 있는 house list
         List<House_InfoVO> houseList = blameDAO.getHostHouses(host_id);
-        //house_status -> 1 (정지상태)
+        //house_status -> 1 (정지상태) , house_stop_end_date 설정
         for(int i = 0; i < houseList.size(); i++){
+            houseList.get(i).setHouse_stop_end_date(suspend_end_date);
             blameDAO.setHouseStatusStop(houseList.get(i));
         }
         // host_id 를 통해 해당 호스트의 하우스의 reservation list 가져옴
@@ -98,11 +106,22 @@ public class BlameServiceImpl implements BlameService {
         blameDAO.increaseHostBlameStop(host_id);
 
         // todo 정지기간이 끝나면 어떻게 처리하지?
+        HostVO host = new HostVO();
+        host.setHost_id(host_id);
+        host.setHost_status(1);
+        host.setHost_stop_end_date(suspend_end_date);
+        // host 상태 정지 및 정지풀리는 날짜 설정
+        blameDAO.setHostStatusStop(host);
 
     }
 
     @Override // 커스터머 정지
     public void suspendCustomer(String customer_id, String suspend_day) {
+        int suspend_date = Integer.parseInt(suspend_day);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, suspend_date);
+        Date suspend_end_date = calendar.getTime();
         //customer 가 예약한 숙소 리스트
         List<ReservationVO> reservationList = blameDAO.getReservationByCustomerId(customer_id);
         //해당 예약을 환불대기 상태로 변경 및 호스트에게 메세지 전송
@@ -119,6 +138,14 @@ public class BlameServiceImpl implements BlameService {
 
         //해당 customer 의 customer_blame_stop 1 증가
         blameDAO.increaseCustomerBlameStop(customer_id);
+
+        //customer 상태 정지 및 정지 풀리는 날짜 설정
+        CustomerVO customer = new CustomerVO();
+        customer.setCustomer_id(customer_id);
+        customer.setCustomer_stop_end_date(suspend_end_date);
+        customer.setCustomer_status(1);
+        blameDAO.setCustomerStatusStop(customer);
+
 
     }
 
@@ -138,12 +165,17 @@ public class BlameServiceImpl implements BlameService {
                 blameDAO.setReservationStatusRefund(reservationList.get(i).getReservation_host_id());
                 blameDAO.sendCustomerReservationCancelMessage(reservationList.get(i).getReservation_customer_id());
             }
-            /* 해당 host 가 가지고 있는 house 삭제처리
-            List<HouseVO>houseList = blameDAO.getHostHouses(id);
+             //해당 host 가 가지고 있는 house 삭제처리
+            List<House_InfoVO>houseList = blameDAO.getHostHouses(id);
+            for (House_InfoVO house : houseList) {
+                blameDAO.deleteHouse(house.getHouse_host_id());
+            }
+            /*
             for(int i = 0 ; i < houseList.size(); i++){
-                 blameDAO.deleteHouse(houseList.get(i).getHouse_host_id);
+                 blameDAO.deleteHouse(houseList.get(i).getHouse_host_id());
             }
             */
+
             blameDAO.deleteHost(id);
 
             deleteBlameMap.put("target_member_id", id);

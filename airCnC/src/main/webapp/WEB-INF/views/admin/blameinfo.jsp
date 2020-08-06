@@ -63,7 +63,7 @@
 
     <c:set var="blameinfo" value="${blameinfo}"/>
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="color: black">
         <table style="color: black" class="table">
             <thead>
                 <tr>

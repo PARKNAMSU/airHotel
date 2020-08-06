@@ -14,6 +14,8 @@ public class HostVO {
     private Date host_regdate;
     private int host_blame_warn;
     private int host_blame_stop;
+    private Date host_stop_end_date;
+    private int host_status;
 
     public String getHost_id() {
         return host_id;
@@ -96,6 +98,22 @@ public class HostVO {
         this.host_blame_stop = host_blame_stop;
     }
 
+    public Date getHost_stop_end_date() {
+        return host_stop_end_date;
+    }
+
+    public void setHost_stop_end_date(Date host_stop_end_date) {
+        this.host_stop_end_date = host_stop_end_date;
+    }
+
+    public int getHost_status() {
+        return host_status;
+    }
+
+    public void setHost_status(int host_status) {
+        this.host_status = host_status;
+    }
+
     @Override
     public String toString() {
         return "HostVO{" +
@@ -109,6 +127,8 @@ public class HostVO {
                 ", host_regdate=" + host_regdate +
                 ", host_blame_warn=" + host_blame_warn +
                 ", host_blame_stop=" + host_blame_stop +
+                ", host_stop_end_date=" + host_stop_end_date +
+                ", host_status=" + host_status +
                 '}';
     }
 }
