@@ -92,21 +92,21 @@
 
         <div class="warning_message">
 
-            <form method="post" action="/blameWarnMessage.mdo">
+            <form method="post" action="/cnc/blameWarnMessage.mdo">
                 <input type="text" name="warn_message" value="경고 메세지 입력란" size="100">
                 <input type="submit" value="전송">
             </form>
         </div>
 
         <div class="account_susspend">
-            <form method="post" action="/blameSuspend.mdo">
+            <form method="post" action="/cnc/blameSuspend.mdo">
                 <input type="text" name="suspend_day" value="3"  size="10"> 일
                 <input id="suspend_btn" type="submit" value="정지부여">
             </form>
         </div>
 
         <div class="black_list">
-            <form action="/addBlacklist.mdo" method="get">
+            <form action="/cnc/addBlacklist.mdo" method="get">
                 <input type="submit" value="블랙리스트 추가하기">
             </form>
         </div>

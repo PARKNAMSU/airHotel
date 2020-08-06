@@ -3,6 +3,7 @@ package kg.air.cnc.dao.blame;
 import kg.air.cnc.vo.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public interface BlameDAO {
     void increaseCustomerBlameStop(String customer_id);
     void increaseHostBlameWarn(String target_member_id);
     void increaseHostBlameStop(String host_id);
-    void addBlackList(String id);
+    void addBlackList(Map<String,String>id);
     List<House_InfoVO> getHostHouses(String host_id); // host 가 가지고 있는 하우스 리스트 뽑아오는 기능
     void setHouseStatusStop(House_InfoVO house); // house 의 상태를 1(정지상태)로 변경
     List<ReservationVO> getReservationByHostId(String host_id); //
@@ -30,6 +31,9 @@ public interface BlameDAO {
     void deleteHouse(String host_id);
     void deleteHost(String host_id);
     void deleteCustomer(String customer_id);
+    CustomerVO getCustomerVO(String id);
+    void setHostStatusStop(HostVO host); //  호스트의 host_status 를 1 (정지상태) 로 변경하고, host_stop_end_date 설정
+    void setCustomerStatusStop(CustomerVO customer);  // 커스터머의  customer_status 를 1 (정지상태) 로 변경하고, customer_stop_end_date 설정
 
 
 }

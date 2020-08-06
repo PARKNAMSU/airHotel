@@ -3,16 +3,18 @@ package kg.air.cnc.vo;
 import java.util.Date;
 
 public class CustomerVO {
-    String customer_id;
-    String customer_password;
-    String customer_name;
-    String customer_email;
-    String customer_type;
-    String customer_image;
-    String customer_phone;
-    int customer_blame_warn;
-    int customer_blame_stop;
-    Date customer_regdate;
+    private String customer_id;
+    private String customer_password;
+    private String customer_name;
+    private String customer_email;
+    private String customer_type;
+    private String customer_image;
+    private String customer_phone;
+    private int customer_blame_warn;
+    private int customer_blame_stop;
+    private Date customer_regdate;
+    private Date customer_stop_end_date;
+    private int customer_status;
 
     public String getCustomer_id() {
         return customer_id;
@@ -92,5 +94,21 @@ public class CustomerVO {
 
     public void setCustomer_regdate(Date customer_regdate) {
         this.customer_regdate = customer_regdate;
+    }
+
+    public Date getCustomer_stop_end_date() {
+        return customer_stop_end_date;
+    }
+
+    public void setCustomer_stop_end_date(Date customer_stop_end_date) {
+        this.customer_stop_end_date = customer_stop_end_date;
+    }
+
+    public int getCustomer_status() {
+        return customer_status;
+    }
+
+    public void setCustomer_status(int customer_status) {
+        this.customer_status = customer_status;
     }
 }

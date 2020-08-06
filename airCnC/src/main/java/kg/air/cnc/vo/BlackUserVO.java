@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BlackUserVO {
     String black_id;
+    String black_email;
     Date regdate;
 
     public String getBlack_id() {
@@ -22,10 +23,19 @@ public class BlackUserVO {
         this.regdate = regdate;
     }
 
+    public String getBlack_email() {
+        return black_email;
+    }
+
+    public void setBlack_email(String black_email) {
+        this.black_email = black_email;
+    }
+
     @Override
     public String toString() {
         return "BlackUserVO{" +
                 "black_id='" + black_id + '\'' +
+                ", black_email='" + black_email + '\'' +
                 ", regdate=" + regdate +
                 '}';
     }

@@ -63,8 +63,15 @@
 
     <c:set var="blameinfo" value="${blameinfo}"/>
 
-    <div class="table-responsive">
-        <table class="table">
+    <div class="table-responsive" style="color: black">
+        <table style="color: black" class="table">
+            <thead>
+                <tr>
+                    <th>신고자</th>
+                    <th>신고내용</th>
+                    <th>HOST/CUSTOMER</th>
+                </tr>
+            </thead>
             <c:set var="blame_target_member_id" value="${blameinfo.get(0).blame_target_member_id}"/>
             ${blame_target_member_id}
             <c:forEach var="item" items="${blameinfo}" begin="0" end="${blameinfo.size()}" step="1">
