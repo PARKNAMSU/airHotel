@@ -31,7 +31,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>My Reservation</h3>
+                                <h3>My House</h3>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
 	<%@include file="../html/sideMenu.jsp" %>
 
 	<div class="maindiv" id="main">
-		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()">예약 내역</a> | <a onclick="getResBefore()" id="before">이전 예약</a></h1>
+		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
 		</div>
@@ -81,19 +81,19 @@
 	var getData = [];
 	var area = 1;
 	var instanceNum = 3;
-	var type = "nowres";
+	var type = "host";
 	window.onload = function(){	
 	     $.ajax({
 	           type:"GET",
-	           url:"myReservation.mdo",
+	           url:"myHouseList.do",
 	           dataType:"json",	   
 	           success : function(data) {
 					getData = data;
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"')")
+							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
 							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
+							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
 						}else{
 							$("#imgdiv"+i).css("display","none")
 						}
@@ -121,9 +121,9 @@
 			var b = 1;
 			for(var i=a;i<a+instanceNum;i++){
 				if(getData[i] != null){
-					$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].reservation_seq+",'"+type+"')")
+					$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].house_status+",'"+type+"')")
 					//$("img"+b).attr("src","") 나중에 추가
-					$("#td"+b).html('<p>'+getData[i].house_name+'</p>')
+					$("#td"+b).html('<p>'+getData[i].house_name+'</p><br><hr><p>숙소상태: '+getData[i].house_status_text+'</p>')
 					console.log(i)
 				}else{
 					$("#imgdiv"+b).css("display","none");
@@ -142,9 +142,9 @@
 			var b = 1;
 			for(var i=1; i<=3;i++){
 				$("#imgdiv"+i).css("display","initial");
-				$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].reservation_seq+",'"+type+"')")
+				$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].house_status+",'"+type+"')")
 				//$("img"+b).attr("src","") 나중에 추가
-				$("#td"+i).html('<p>'+getData[a].house_name+'</p>')
+				$("#td"+i).html('<p>'+getData[a].house_name+'</p><br><hr><p>숙소상태: '+getData[a].house_status_text+'</p>')
 				a++;
 			}
 			if(area == 1){
@@ -152,80 +152,12 @@
 			}
 		})
 	})
-	var getRes = function(){
-		area = 1;
-		type = "nowres";
-		for(var i=1; i<=3;i++){
-			$("#imgdiv"+i).css("display","initial");
-		}
-	     $.ajax({
-	           type:"GET",
-	           url:"myReservation.mdo",
-	           dataType:"json",	   
-	           success : function(data) {
-	        	  
-					getData = data;
-					if(getData.length > instanceNum){
-						$("#tri2").css('display','initial');
-					}
-					for(var i=1;i<=instanceNum;i++){
-						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[i-1].house_seq+","+getData[i-1].reservation_seq+",'"+type+"')")
-							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
-						}else{
-							$("#imgdiv"+i).css("display","none")
-						}
-					}
-					if(getData.length <= instanceNum){
-						$("#tri2").css('display','none');
-					}
-	           },
-	           error : function(request, status, error) {
-	        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-	           }
-	     });
-	}
 		
-		var getResBefore = function(){
-			area = 1;
-			type = "beforeres";
-			for(var i=1; i<= 3;i++){
-				$("#imgdiv"+i).css("display","initial");
-			}
-		     $.ajax({
-		           type:"GET",
-		           url:"myReservationBefore.mdo",
-		           dataType:"json",	   
-		           success : function(data) {
-						getData = data;
-						if(getData.length > instanceNum){
-							$("#tri2").css('display','initial');
-						}
-						for(var i=1;i<=instanceNum;i++){
-							if(getData[i-1] != null){
-								$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[i-1].house_seq+","+getData[i-1].reservation_seq+",'"+type+"')")
-								//$("img"+i).attr("src","") 나중에 추가
-								$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
-							}else{
-								$("#imgdiv"+i).css("display","none")
-							}
-							
-						}
-						if(getData.length <= instanceNum){
-							$("#tri2").css('display','none');
-						}
-		           },
-		           error : function(request, status, error) {
-		        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-		           }
-		     });
-		}
-		function goToResHouse(house_seq,reservation_seq,accessType){
+		function goToResHouse(house_seq,house_status,accessType){
 			var form = document.createElement("form");
 			var input = new Array()
-			var names = ["house_seq","reservation_seq","accessType"]
-			var values = [house_seq,reservation_seq,accessType]
+			var names = ["house_seq","accessType"]
+			var values = [house_seq,accessType]
 	        form.action = "reservationHouse.do";
 	        form.method = "post";
 	        
@@ -238,7 +170,11 @@
 	            form.appendChild(input[i]);
 	        }
 	        document.body.appendChild(form);
-	        form.submit();
+	        if(house_status == 0){
+	        	form.submit();
+	        }else{
+	        	alert("현재 접근할 수 없는 상태입니다")
+	        }
 		}
 
 </script>

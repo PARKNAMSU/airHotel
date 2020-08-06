@@ -38,4 +38,12 @@ var openSetRateUpdate = function(seq,house_seq,content){
 	openWin = window.open("updateCommentsPage.do?comments_seq="+seq+"&comments_house_seq="+house_seq+"&comments_content="+content,"rankpopup","width=570, height=350, resizable = no, scrollbars = no left ="+left_center+" top="+top_center);
 	
 }
-
+var deleteComments = function(comments_seq,comments_house_seq, type){
+	var result = confirm("삭제하시겠습니까?")
+	if(result){
+		location.href = "deleteComments.do?comments_seq="+comments_seq+"&comments_house_seq="+comments_house_seq+"&accessType="+type;
+	}
+}
+var openResList = function(house_seq){
+	location.href = "myHouseResList.do?house_seq="+house_seq;
+}
