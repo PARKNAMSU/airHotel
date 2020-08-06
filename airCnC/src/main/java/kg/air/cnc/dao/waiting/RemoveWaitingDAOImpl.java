@@ -2,11 +2,11 @@ package kg.air.cnc.dao.waiting;
 
 import java.util.List;
 
-import kg.air.cnc.vo.HouseVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kg.air.cnc.vo.House_InfoVO;
 import kg.air.cnc.vo.RemoveWaitingVO;
 
 @Repository
@@ -14,23 +14,23 @@ public class RemoveWaitingDAOImpl {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public HouseVO getHouse(HouseVO vo) {
+	public House_InfoVO getHouse(House_InfoVO vo) {
 		return mybatis.selectOne("waitingDAO.getHouse", vo);
 	}
 	
-	public List<HouseVO> getRemoveWaitingList() {
+	public List<House_InfoVO> getRemoveWaitingList() {
 		return mybatis.selectList("waitingDAO.getRemoveWaitingList");
 	}
 	
-	public void updateDate (HouseVO vo){
+	public void updateDate (House_InfoVO vo){
 		mybatis.update("waitingDAO.updateDate",vo);
 	}
 	
-	public void cancelRemove(HouseVO vo){
+	public void cancelRemove(House_InfoVO vo){
 		mybatis.update("waitingDAO.registerHouse",vo);
 	}
 	
-	public void deleteRemoveWaiting(HouseVO vo) {
+	public void deleteRemoveWaiting(House_InfoVO vo) {
 		mybatis.delete("waitingDAO.deleteRemoveWaiting", vo);
 	}
 	
