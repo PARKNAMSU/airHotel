@@ -74,14 +74,14 @@ public class BlameDAOImpl implements BlameDAO{
     }
 
     @Override // host 가 가지고 있는 하우스 리스트 뽑아오는 기능
-    public List<HouseVO> getHostHouses(String host_id) {
+    public List<House_InfoVO> getHostHouses(String host_id) {
         //host id를 통해 host 가 가지고있는 house 의 house_seq 를 뽑아옴
-        List<HouseVO> houseList = sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getHostHouses", host_id);
+        List<House_InfoVO> houseList = sqlSession.selectList("kg.air.cnc.dao.blame.BlameDAO.getHostHouses", host_id);
         return houseList;
     }
 
     @Override
-    public void setHouseStatusStop(HouseVO house) {
+    public void setHouseStatusStop(House_InfoVO house) {
         sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setHouseStatusStop", house);
     }
 
