@@ -17,7 +17,6 @@ public class House_InfoVO {
 	private String house_bathroom_type;
 
 	private String house_location;
-	private String house_loaction_sido;
 	private String house_location_gugun;
 	private String house_location_postnum;
 
@@ -205,14 +204,6 @@ public class House_InfoVO {
 
 	public void setHouse_location(String house_location) {
 		this.house_location = house_location;
-	}
-
-	public String getHouse_loaction_sido() {
-		return house_loaction_sido;
-	}
-
-	public void setHouse_loaction_sido(String house_loaction_sido) {
-		this.house_loaction_sido = house_loaction_sido;
 	}
 
 	public String getHouse_location_gugun() {
@@ -654,7 +645,7 @@ public class House_InfoVO {
 				+ ", house_bed_type_single=" + house_bed_type_single + ", house_bed_type_double="
 				+ house_bed_type_double + ", house_bed_type_queen=" + house_bed_type_queen + ", house_bathroom_amount="
 				+ house_bathroom_amount + ", house_bathroom_type=" + house_bathroom_type + ", house_location="
-				+ house_location + ", house_loaction_sido=" + house_loaction_sido + ", house_location_gugun="
+				+ house_location + ", house_location_sido=" + house_location_sido + ", house_location_gugun="
 				+ house_location_gugun + ", house_location_postnum=" + house_location_postnum
 				+ ", house_defaultsetting=" + house_defaultsetting + ", house_default_tv=" + house_default_tv
 				+ ", house_default_wifi=" + house_default_wifi + ", house_default_heater=" + house_default_heater
