@@ -20,7 +20,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-   
+
    <context:property-placeholder location="classpath:db.properties"/>
    
    <!-- 패스워드 단방향 암호화 -->
@@ -49,6 +49,7 @@
 		<constructor-arg name="sqlSessionFactory"
 			ref="sqlSessionFactoryBean" />
 	</bean>
+	
 	<!-- 이메일 관련 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com"/>
@@ -66,6 +67,24 @@
 		</property>
 	</bean>
 	<bean id="mailService" class="kg.air.cnc.service.mail.MailServiceImpl"/>
+	
+	<!-- 사용자 입터셉터 -->
+	<bean id="authenticationInterceptor" class="kg.air.cnc.common.interceptor.AuthenticationInterceptor"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path=""/>
+			<ref bean="authenticationInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 관리자 인터셉터 -->
+	<bean id="adminInterceptor" class="kg.air.cnc.common.interceptor.AdminInterceptor"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path=""/>
+			<ref bean="adminInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="kg.air"></context:component-scan>

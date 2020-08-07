@@ -1,5 +1,6 @@
 package kg.air.cnc.customer.service;
 
+import java.util.Date;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import kg.air.cnc.customer.dao.CustomerDAO;
@@ -27,7 +28,28 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	// 이메일 중복 여부 검사.
 	@Override
-	public int createEmailCheck(String customerEmail) throws Exception {
-		return dao.createEmailCheck(customerEmail);
+	public int createEmailCheck(String customer_email) throws Exception {
+		return dao.createEmailCheck(customer_email);
+	}
+	
+	// 회원 체크.
+	@Override
+	public CustomerVO customerCheck(String customer_id) throws Exception {
+		return dao.customerCheck(customer_id);
+	}
+
+	@Override
+	public CustomerVO login(CustomerVO customerVO) throws Exception {
+		return dao.login(customerVO);
+	}
+
+	@Override
+	public void keepLogin(String customer_id, String session_id, Date session_limit)throws Exception {
+		dao.keepLogin(customer_id, session_id, session_limit);
+	}
+
+	@Override
+	public CustomerVO checkCustomerWithSessionKey(String session_id) throws Exception {
+		return dao.checkCustomerWithSessionKey(session_id);
 	}
 }

@@ -38,23 +38,39 @@
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<li class="item">
-						<a href="/Mainwork/html/hostresgister.html">호스트 </a>
-					</li>
-					<li class="item">
-						<p><a href="/cnc/registerView.do">회원가입</a></p>
-					</li>
-					<li class="item">
-						<p><a href="/cnc/loginView.do">로그인</a></p>
-					</li>
-					<li class="item">
-						<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
-					</li>
+					<c:if test="${empty login}">
+						<li class="item">
+							<a href="/Mainwork/html/hostresgister.html">호스트 </a>
+						</li>
+						<li class="item">
+							<p><a href="/cnc/registerView.do">회원가입</a></p>
+						</li>
+						<li class="item">
+							<p><a href="/cnc/loginView.do">로그인</a></p>
+						</li>
+						<li class="item">
+							<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
+						</li>
+					</c:if>
+					<c:if test="${not empty login}">
+						<li class="item">
+							<a href="/Mainwork/html/hostresgister.html">호스트 </a>
+						</li>
+						<li class="item">
+							<p><a href="/cnc/myPageView.do">마이 페이지</a></p>
+						</li>
+						<li class="item">
+							<p><a href="/cnc/logout.do">로그아웃</a></p>
+						</li>
+						<li class="item">
+							<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
 	</header>
-	<form action="/cnc/loginView.do" accept-charset="utf-8" method="POST">
+	<form action="/cnc/loginProcess.do" method="post">
 		<div class="container">
 			<img src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
 			<div id="light1" class="white_content" style="text-align: center;">
@@ -71,18 +87,18 @@
 											계정으로 로그인</span></a>
 								</div>
 								<div class="a3">
-									<input class="bb6" type="text" id="customerId" name="customerId" 
+									<input class="bb6" type="text" id="customerId" name="customer_id" 
 									placeholder="&nbsp;&nbsp;아이디" required/>
 								</div>
 								<div class="a3">
 									<input class="bb6" type="password" id="customerPassword"
-										name="customerPassword" placeholder="&nbsp;&nbsp;비밀번호"
+										name="customer_password" placeholder="&nbsp;&nbsp;비밀번호"
 										required/>
 								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
 									<input type="checkbox" id="remember_id"
 										name="remember_customerId"/><label
-										for="idsave">아이디저장</label>
+										for="idsave">아이디 저장</label>
 								</div>
 
 								<div class="a5">
@@ -90,7 +106,7 @@
 										않으세요?</a>
 								</div>
 								<div>
-									<button id="loginBtn" name="loginBtn" type="submit">로그인</button>
+									<button id="loginBtn" name="loginBtn">로그인</button>
 								</div>
 							</div>
 						</div>
