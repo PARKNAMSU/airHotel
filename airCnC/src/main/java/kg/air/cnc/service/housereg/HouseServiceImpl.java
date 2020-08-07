@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kg.air.cnc.dao.housereg.HouseDAO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.House_InfoVO;
 @Service("houseService")
 public class HouseServiceImpl implements HouseService {
 
@@ -15,26 +16,26 @@ public class HouseServiceImpl implements HouseService {
 	private HouseDAO houseDao;
 	@Override
 	@Transactional
-	public List<HouseVO> listProduct() {
+	public List<House_InfoVO> listProduct() {
 		return houseDao.listProduct();
 	}
 
 	@Override
 	@Transactional
-	public HouseVO detailProduct(String houseId) {
-		HouseVO houseVO = houseDao.detailProduct(houseId);
+	public House_InfoVO detailProduct(String houseId) {
+		House_InfoVO houseVO = houseDao.detailProduct(houseId);
 		return houseVO;
 		//return houseDao.detailProduct(houseId);
 	}
 
 	@Override
 	@Transactional
-	public void insertProduct(HouseVO vo) {
+	public void insertProduct(House_InfoVO vo) {
 		houseDao.insertProduct(vo);
 	}
 
 	@Override
-	public void insertHouse(HouseVO vo) {
+	public void insertHouse(House_InfoVO vo) {
 		houseDao.insertHouse(vo);
 	}
 

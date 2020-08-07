@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.housereg.HouseService;
-import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.House_InfoVO;
 
 
 @Controller
@@ -38,8 +38,8 @@ public class HouseController {
 	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
 	
 	@ModelAttribute("house")
-	public HouseVO setEmptySawon() {
-		return new HouseVO();
+	public House_InfoVO setEmptySawon() {
+		return new House_InfoVO();
 	}
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
 	public String detail(String houseId, Model model) {
@@ -48,23 +48,23 @@ public class HouseController {
 	}
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String houseLlist(Model model, SessionStatus sessionStatus) throws Exception {
-		List<HouseVO> list = houseService.listProduct();
+		List<House_InfoVO> list = houseService.listProduct();
 		logger.info(list.toString());
 		model.addAttribute("list", list);
 		sessionStatus.setComplete();
 		return "houseList";
 	}
 	@RequestMapping(value = "/topage.do")
-	public String topage(@ModelAttribute("house") HouseVO house, Model model) {
+	public String topage(@ModelAttribute("house") House_InfoVO house, Model model) {
 		return "houseinsert1";
 	}
 	@RequestMapping(value="/write1.do", method = RequestMethod.POST)
-	public String write1(@ModelAttribute("house") HouseVO house, Model model) {
+	public String write1(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		return "houseinsert2";
 	}
 	@RequestMapping(value="/write2.do", method = RequestMethod.POST)
-	public String write2(@ModelAttribute("house") HouseVO house, Model model, SessionStatus sessionStatus) throws Exception {
+	public String write2(@ModelAttribute("house") House_InfoVO house, Model model, SessionStatus sessionStatus) throws Exception {
 		logger.info(house.toString());
 		houseService.insertProduct(house);
 		sessionStatus.setComplete();
@@ -79,7 +79,7 @@ public class HouseController {
 		return "1newhouse";
 	}
 	@RequestMapping(value = "/1newhouse.do")
-	public String newhouse(@ModelAttribute("house") HouseVO house, Model model) {
+	public String newhouse(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println("newhouse : " + house.getNewhouse());
 		if(house.getNewhouse().equals("new1")) {
 			logger.info(house.toString());
@@ -89,42 +89,32 @@ public class HouseController {
 		return null;
 	}
 	@RequestMapping(value = "/2housedetail.do")
-	public String housedetail(@ModelAttribute("house") HouseVO house, Model model) {
+	public String housedetail(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
 		return "3bathcount";
 	}
 	
 	@RequestMapping(value = "/3bathcount.do")
-	public String bathcount(@ModelAttribute("house") HouseVO house, Model model) {
+	public String bathcount(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("bathcount : " + house.getHouse_bathroom_type());
 		return "4location";
 	}
 	
 	@RequestMapping(value = "/4location.do")
-	public String location(@ModelAttribute("house") HouseVO house, Model model) {
+	public String location(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
-		if(house.getHouse_xlocation_str().length()>0) {
-			float xloca = Float.parseFloat(house.getHouse_xlocation_str());
-			house.setHouse_xlocation(xloca);
-		}
-		if(house.getHouse_ylocation_str().length()>0) {
-			float yloca = Float.parseFloat(house.getHouse_ylocation_str());
-			house.setHouse_ylocation(yloca);
-		}
 		System.out.println("sido : " + house.getHouse_location_sido());
 		System.out.println("sigun : " + house.getHouse_location_gugun());
-		System.out.println("location_x : " + house.getHouse_xlocation_str());
-		System.out.println("float x : " + house.getHouse_xlocation());
-		System.out.println("location_y : " + house.getHouse_ylocation_str());
+		System.out.println("location_x : " + house.getHouse_xlocation());
 		System.out.println("location : " + house.getHouse_location());
-		System.out.println("location : " + house.getHouse_loaction_fulladdress());
+		System.out.println("location : " + house.getHouse_location_fulladdress());
 		return "5defaultoption";
 	}
 	
 	@RequestMapping(value = "/5defaultoption.do")
-	public String defaultoption(@ModelAttribute("house") HouseVO house, Model model) {
+	public String defaultoption(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		if(house.getHouse_defaultsetting_0or1()==null) {house.setHouse_defaultsetting("false");} 
 		else {house.setHouse_defaultsetting("true");}
@@ -154,7 +144,7 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/6guestcomfortable.do")
-	public String guestcomfortable(@ModelAttribute("house") HouseVO house, Model model) {
+	public String guestcomfortable(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		if(house.getHouse_default_livingroom_type_0or1()==null) {house.setHouse_default_livingroom_type("false");} 
 		else {house.setHouse_default_livingroom_type("true");}
@@ -177,14 +167,14 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/7guesttextarea.do")
-	public String guesttextarea(@ModelAttribute("house") HouseVO house, Model model) {
+	public String guesttextarea(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("guesttextarea : " + house.getHouse_desc1());
 		return "8hosthouseimg";
 	}
 	
 	@RequestMapping(value = "/8hosthouseimg.do")
-	public String hosthouseimg(@ModelAttribute("house") HouseVO house, Model model) {
+	public String hosthouseimg(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println(house.toString());
 		MultipartFile uploadFile = house.getHouse_photo();
 		if(!uploadFile.isEmpty()) {
@@ -207,14 +197,14 @@ public class HouseController {
 	} 
 	
 	@RequestMapping(value = "/9hosttitle.do")
-	public String hosttitle(@ModelAttribute("house") HouseVO house, Model model) {
+	public String hosttitle(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("hosttitle : " + house.getHouse_name());
 		return "10charge";
 	}
 	
 	@RequestMapping(value = "10charge.do")
-	public String charge(@ModelAttribute("house") HouseVO house, Model model) {
+	public String charge(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		if(house.getHouse_price_default_parInt().length()>0) {
 			String dePrice = (house.getHouse_price_default_parInt()).replace(",", "");
@@ -233,7 +223,7 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/11restricttheme.do")
-	public String restricttheme(@ModelAttribute("house") HouseVO house, Model model) {
+	public String restricttheme(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		if(house.getHouse_theme_bbq_0or1()==null) {house.setHouse_theme_bbq("false");} 
 		else {house.setHouse_theme_bbq("true");}
@@ -279,14 +269,14 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/12guestcheck1.do")
-	public String guestcheck1(@ModelAttribute("house") HouseVO house, Model model) {
+	public String guestcheck1(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("게스트에게의 여러정보들!");
 		return "13chargetext";
 	}
 	
 	@RequestMapping(value = "/13chargetext.do")
-	public String chargetext(@ModelAttribute("house") HouseVO house, Model model, SessionStatus sessionStatus) throws Exception{
+	public String chargetext(@ModelAttribute("house") House_InfoVO house, Model model, SessionStatus sessionStatus) throws Exception{
 		logger.info(house.toString());
 		houseService.insertHouse(house);
 		sessionStatus.setComplete();
