@@ -159,8 +159,8 @@
 			    <form:input type="text" placeholder="상세주소"  path="house_loaction_detailaddress" />
         	</div>
 			
-			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation_str" /><br></br>
-			<form:input type="hidden" id="sample4_ylocation" placeholder="y좌표"  path="house_ylocation_str" /><br></br>
+			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation" /><br></br>
+			<form:input type="hidden" id="sample4_ylocation" placeholder="y좌표"  path="house_ylocation" /><br></br>
 			<form:input type="hidden" id="sample4_sido" placeholder="도"  path="house_location_sido" /><br></br>
 			<form:input type="hidden" id="sample4_sigungu" placeholder="시군구"  path="house_location_gugun" /><br></br>
 	</form:form>	
