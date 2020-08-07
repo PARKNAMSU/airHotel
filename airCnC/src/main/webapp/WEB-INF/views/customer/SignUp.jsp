@@ -107,99 +107,95 @@
 		});
 	});
 
-	// 회원가입 버튼
-	$(document)
-			.on(
-					"click",
-					"#reg_submit",
-					function() {
-						var getData;
-						// var validate = true;
-						var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
-						var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
-						var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
-						var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/; // 전화번호 유효성 검사.
+	// 회원가입 버튼.
+	$(document).on("click","#reg_submit",function() {
+		var getData;
+		// var validate = true;
+		var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
+		var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
+		var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
+		var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/; // 전화번호 유효성 검사.
 
-						if ($("#customerEmail").val()) {
-							if (!regExp.test($("#customerEmail").val())) {
-								alert("이메일 주소가 유효하지 않습니다");
-								$("#customerEmail").focus();
-								return false;
-							}
-						}
-						if ($("#customerPhone").val()) {
-							if (!phoneChecked.test($("#customerPhone").val())) {
-								alert("전화번호가 잘못 되었습니다.");
-								$("#customerPhone").focus();
-								return false;
-							}
-						}
-						if (!$("#customerId").val()) {
-							alert("아이디를 입력 하세요.");
-							$("#customerId").focus();
-							//validate = false;
-							return false;
-						} else if (idCheck == false) {
-							alert("아이디 중복체크를 해주세요.");
-							$('#idCheckBtn').focus();
-							return false;
-						} else if (!idChecked.test($("#customerId").val())) {
-							alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
-							return false;
-						} else if (!$("#customerName").val()) {
-							alert("이름을 입력 하세요.");
-							$("#customerName").focus();
-							return false;
-						} else if (!hanChecked.test($("#customerName").val())) {
-							alert("이름이 잘못 되었습니다.");
-							$("#customerName").focus();
-							return false;
-						} else if (!$("#customerEmail").val()) {
-							alert("이메일을 입력하세요.");
-							$("#customerEmail").focus();
-							return false;
-						} else if (emailSendCheck == false) {
-							alert("인증코드 발송을 완료해주세요.");
-							$("#customerEmail").focus();
-							return false;
-						} else if (emailAuthCheck == false) {
-							alert("이메일 인증을 완료해주세요.");
-							$("#customerKey").focus();
-							return false;
-						} else if (!$("#customerPassword").val()) {
-							alert("비밀번호를 입력하세요.");
-							$("#customerPassword").focus();
-							return false;
-						} else if ($("#customerPassword").val().length > 16
-								|| $("#customerPassword").val().length < 8) {
-							alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
-							return false;
-						} else {
-							getData = "complate";
-							alert("회원가입이 완료되었습니다.");
-						}
-						if (getData == "complate") {
-							document.getElementById("regForm").submit();
-						}
-						/*
-						$.ajax({
-							type:"post",
-							url:"registerCheck.do",
-							data:$("#regForm").serialize(),
-							success:function(data){
-								
-								if(getData=="complate"){
-									alert("회원가입이 완료되었습니다.");
-								}else if(getData == "false"){
-									alert("회원가입이 실패하였습니다.")
-								}	
-							},
-							error:function(data){
-								alert("에러가 발생했습니다.");
-							}
-						});
-						 */
-					});
+		if ($("#customerEmail").val()) {
+			if (!regExp.test($("#customerEmail").val())) {
+				alert("이메일 주소가 유효하지 않습니다");
+				$("#customerEmail").focus();
+				return false;
+			}
+		}
+		if ($("#customerPhone").val()) {
+			if (!phoneChecked.test($("#customerPhone").val())) {
+				alert("전화번호가 잘못 되었습니다.");
+				$("#customerPhone").focus();
+				return false;
+			}
+		}
+		if (!$("#customerId").val()) {
+			alert("아이디를 입력 하세요.");
+			$("#customerId").focus();
+			//validate = false;
+			return false;
+		} else if (idCheck == false) {
+			alert("아이디 중복체크를 해주세요.");
+			$('#idCheckBtn').focus();
+			return false;
+		} else if (!idChecked.test($("#customerId").val())) {
+			alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
+			return false;
+		} else if (!$("#customerName").val()) {
+			alert("이름을 입력 하세요.");
+			$("#customerName").focus();
+			return false;
+		} else if (!hanChecked.test($("#customerName").val())) {
+			alert("이름이 잘못 되었습니다.");
+			$("#customerName").focus();
+			return false;
+		} else if (!$("#customerEmail").val()) {
+			alert("이메일을 입력하세요.");
+			$("#customerEmail").focus();
+			return false;
+		} else if (emailSendCheck == false) {
+			alert("인증코드 발송을 완료해주세요.");
+			$("#customerEmail").focus();
+			return false;
+		} else if (emailAuthCheck == false) {
+			alert("이메일 인증을 완료해주세요.");
+			$("#customerKey").focus();
+			return false;
+		} else if (!$("#customerPassword").val()) {
+			alert("비밀번호를 입력하세요.");
+			$("#customerPassword").focus();
+			return false;
+		} else if ($("#customerPassword").val().length > 16
+				|| $("#customerPassword").val().length < 8) {
+			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
+			return false;
+		} else {
+			getData = "complate";
+			alert("회원가입이 완료되었습니다.");
+		}
+		if (getData == "complate") {
+			document.getElementById("regForm").submit();
+		}
+		/*
+		$.ajax({
+			type:"post",
+			url:"registerCheck.do",
+			data:$("#regForm").serialize(),
+			success:function(data){
+				
+				if(getData=="complate"){
+					alert("회원가입이 완료되었습니다.");
+				}else if(getData == "false"){
+					alert("회원가입이 실패하였습니다.")
+				}	
+			},
+			error:function(data){
+				alert("에러가 발생했습니다.");
+			}
+		});
+		 */
+	});
 </script>
 </head>
 <body>
@@ -240,24 +236,24 @@
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">회원가입</h3>
 				<br> <br>
 				<div class="input_id">
-					<span> <input class="bb6" type="text" name="customerId"
+					<span> <input class="bb6" type="text" name="customer_id"
 						id="customerId" placeholder="&nbsp;&nbsp;아이디 입력" required>
 					</span>
 					<button type="button" class="idCheckBtn" id="idCheckBtn" value="N">중복확인</button>
 				</div>
 				<div class="input_password">
 					<span> <input class="ipassword" type="password"
-						id="customerPassword" name="customerPassword"
+						id="customerPassword" name="customer_password"
 						placeholder="&nbsp;&nbsp;비밀번호 설정" required>
 					</span>
 				</div>
 				<div class="input_phone">
 					<span><input class="itel" type="tel" id="customerPhone"
 						placeholder="&nbsp;&nbsp;전화번호(예:010-0000-0000)"
-						name="customerPhone" maxlength="13" required> </span>
+						name="customer_phone" maxlength="13" required> </span>
 				</div>
 				<div class="input_name">
-					<span> <input class="iname" type="text" name="customerName"
+					<span> <input class="iname" type="text" name="customer_name"
 						id="customerName" placeholder="&nbsp;&nbsp;이름(예:홍길동)" required>
 					</span>
 				</div>
@@ -279,17 +275,17 @@
 				<div class="filebox">
 					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label><input
 						type="file" class="multi" id="image" accept="image/*"
-						maxlength="2" onchange="setThumbnail(event);" name="customerImage" />
+						maxlength="2" onchange="setThumbnail(event);" name="customer_image" />
 				</div>
 				<div class="input_email">
 					<span> <input class="iemail" type="email" id="customerEmail"
-						name="customerEmail" placeholder="&nbsp;&nbsp;이메일 주소" required>
+						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소" required>
 					</span> <br>
 					<button id="emailBtn"
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호
 						발송</button>
 					<br> <span> <input class="iauth" type="text"
-						id="customerKey" name="customerKey" placeholder="&nbsp;&nbsp;인증번호"
+						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호"
 						required>
 					</span> <br> <input id="emailAuthBtn"
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"

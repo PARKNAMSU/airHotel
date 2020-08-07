@@ -1,24 +1,23 @@
 package kg.air.cnc.admin.vo;
 
 public class AdminVO {
-	private String adminId;
-	private String adminPassword;
+	private String admin_id;
+	private String admin_password;
 	
-	public String getAdminId() {
-		return adminId;
+	public String getAdmin_id() {
+		return admin_id;
 	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setAdmin_id(String admin_id) {
+		this.admin_id = admin_id;
 	}
-	public String getAdminPassword() {
-		return adminPassword;
+	public String getAdmin_password() {
+		return admin_password;
 	}
-	public void setAdminPassword(String adminPassword) {
-		this.adminPassword = adminPassword;
+	public void setAdmin_password(String admin_password) {
+		this.admin_password = admin_password;
 	}
-	
 	@Override
 	public String toString() {
-		return "AdminVO [adminId=" + adminId + ", adminPassword=" + adminPassword + "]";
+		return "AdminVO [admin_id=" + admin_id + ", admin_password=" + admin_password + "]";
 	}
 }

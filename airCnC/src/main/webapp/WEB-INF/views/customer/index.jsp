@@ -44,7 +44,7 @@
 				<ul id="menuItems">
 					<c:catch>
 						<c:choose>
-							<c:when test="${empty authInfo}">
+							<c:when test="${login_session eq null}">
 								<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
 								<li class="item">
 									<p>
