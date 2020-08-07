@@ -50,16 +50,34 @@ public class MyHouseController {
 		return mav;
 	}
 	@RequestMapping("myHouseSales.do")
-	public ModelAndView myHouseSalesController(Host_sales_chartVO vo,ModelAndView mav) {
+	public ModelAndView myHouseSalesController(Host_sales_chartVO vo,HttpSession session,ModelAndView mav) {
 		List<Host_sales_chartVO> list = null;
+		List<Host_sales_chartVO> list2 = null;
+		System.out.println(vo.getSearchConditionFirst());
 		if(vo.getSearchType() != null) {
-			if(vo.getSearchType().equals("years"))list = myHouseService.getAdmin_salesForYears(vo);
-			if(vo.getSearchType().equals("year"))list = myHouseService.getAdmin_salesForYear(vo);
-			if(vo.getSearchType().equals("month"))list = myHouseService.getAdmin_salesForMonth(vo);
-			if(vo.getSearchType().equals("days"))list = myHouseService.getAdmin_salesForDays(vo);
-			mav.addObject("salesList", list);
+			vo.setHost_id((String)session.getAttribute("login_session"));
+			if(vo.getSearchType().equals("years")) {
+				list = myHouseService.getAdmin_salesForYears(vo);
+				list2 = myHouseService.getHost_salesForYearsEachHouse(vo);
+			}
+			if(vo.getSearchType().equals("year")) {
+				list = myHouseService.getAdmin_salesForYear(vo);
+				list2= myHouseService.getHost_salesForYearEachHouse(vo);
+			}
+			if(vo.getSearchType().equals("month")) {
+				list = myHouseService.getAdmin_salesForMonth(vo);
+				list2 = myHouseService.getHost_salesForMonthEachHouse(vo);
+			}
+			if(vo.getSearchType().equals("days")) {
+				list = myHouseService.getAdmin_salesForDays(vo);
+				list2 = myHouseService.getHost_salesForDaysEachHouse(vo);
+			}
+			if(list.size()>0) {
+				mav.addObject("salesList", list);
+				mav.addObject("salesList2",list2);
+			}
 		}
-		mav.setViewName("myHouseSales");
+		mav.setViewName("hostSales");
 		return mav;
 	}
 	@RequestMapping(value = "deleteHouse.do",method = RequestMethod.POST, produces = "application/text; charset=utf8")

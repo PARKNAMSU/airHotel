@@ -1,7 +1,9 @@
 package kg.air.cnc.controller.reservation;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import kg.air.cnc.service.blame.BlameServiceImpl;
 import kg.air.cnc.service.comments.CommentsService;
@@ -38,8 +42,16 @@ public class ReservationDetailController {
 		mav.setViewName("myreservation");
 		return mav;
 	}
-	@RequestMapping(value = "reservationHouse.do", method = RequestMethod.POST )
-	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,ModelAndView mav) {
+	@RequestMapping(value = "reservationHouse.do")
+	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,HttpServletRequest request,ModelAndView mav) {
+		System.out.println(vo.getHouse_seq());
+		if(vo.getHouse_seq() == 0) {
+			Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
+			if(redirectMap != null) {
+				vo.setHouse_seq(Integer.parseInt((String)redirectMap.get("house_seq")));
+				vo.setAccessType((String)redirectMap.get("accessType"));
+			}
+		}
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
@@ -53,22 +65,19 @@ public class ReservationDetailController {
 		return "rankpopup";
 	}
 	@RequestMapping("insertComments.do")
-	public ModelAndView insertCommentsController(CommentsVO vo,ModelAndView mav) {
-		System.out.println(vo.getComments_content()+"\n"+vo.getComments_rate()+"\n"+vo.getComments_house_seq()+"\n");
+	public String insertCommentsController(CommentsVO vo,RedirectAttributes ra) {
 		commentsService.insertComments(vo);
-		mav.setViewName("redirect:reservationHouse.do");
-		mav.addObject("accessType","beforeres");
-		mav.addObject("house_seq",vo.getComments_house_seq());
-		return mav;
+		ra.addFlashAttribute("accessType","beforeres");
+		ra.addFlashAttribute("house_seq",vo.getComments_house_seq());
+		return "redirect:reservationHouse.do";
 	}
 	@RequestMapping("deleteComments.do")
-	public ModelAndView deleteCommentsController(CommentsVO vo,@RequestParam("accessType")String accessType,ModelAndView mav) {
+	public String deleteCommentsController(CommentsVO vo,@RequestParam("accessType")String accessType,RedirectAttributes ra) {
 		System.out.println(accessType);
 		commentsService.deleteComments(vo);
-		mav.setViewName("redirect:reservationHouse.do");
-		mav.addObject("accessType",accessType);
-		mav.addObject("house_seq",vo.getComments_house_seq());
-		return mav;
+		ra.addFlashAttribute("accessType",accessType);
+		ra.addFlashAttribute("house_seq",vo.getComments_house_seq());
+		return "redirect:reservationHouse.do";
 	}
 	@RequestMapping("updateCommentsPage.do")
 	public ModelAndView openUpdateComments(CommentsVO vo,ModelAndView mav) {

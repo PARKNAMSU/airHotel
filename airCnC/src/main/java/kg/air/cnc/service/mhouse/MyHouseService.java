@@ -67,6 +67,23 @@ public class MyHouseService {
 		DateFormat format = new SimpleDateFormat("YYYY년MM월dd일");
 		return myHouseDAO.admin_salesSetting(list, format);
 	}
+	public List<Host_sales_chartVO> getHost_salesForYearsEachHouse(Host_sales_chartVO vo){
+		List<Host_sales_chartVO> list = myHouseDAO.getHost_salesForYearsEachHouse(vo);
+		return myHouseDAO.eachHouse_salesSetting(list);
+	}
+	public List<Host_sales_chartVO> getHost_salesForYearEachHouse(Host_sales_chartVO vo){
+		List<Host_sales_chartVO> list = myHouseDAO.getHost_salesForYearEachHouse(vo);
+		return myHouseDAO.eachHouse_salesSetting(list);
+	}
+	public List<Host_sales_chartVO> getHost_salesForMonthEachHouse(Host_sales_chartVO vo){
+		List<Host_sales_chartVO> list = myHouseDAO.getHost_salesForMonthEachHouse(vo);
+		return myHouseDAO.eachHouse_salesSetting(list);
+	}
+	public List<Host_sales_chartVO> getHost_salesForDaysEachHouse(Host_sales_chartVO vo){
+		List<Host_sales_chartVO> list = myHouseDAO.getHost_salesForDaysEachHouse(vo);
+		System.out.println(list.size());
+		return myHouseDAO.eachHouse_salesSetting(list);
+	}
 	public void deleteResHouse(int seq) {
 		myHouseDAO.deleteResHouse(seq);
 	}

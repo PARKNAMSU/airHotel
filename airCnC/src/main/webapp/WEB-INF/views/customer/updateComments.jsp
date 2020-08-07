@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -30,7 +31,7 @@
 <script type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style="font-family: 'Jua', sans-serif;">
 	<c:if test="${comments == null }">
 	<script type="text/javascript">
 		opener.location.reload();

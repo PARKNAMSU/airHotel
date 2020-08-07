@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/myreservation.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -18,7 +19,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="font-family: 'Jua', sans-serif;">
 	<head>
 	<%@ include file="../html/menu.jsp" %>
 	</head>

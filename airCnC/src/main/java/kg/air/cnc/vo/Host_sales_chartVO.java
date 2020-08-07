@@ -1,6 +1,9 @@
 package kg.air.cnc.vo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Host_sales_chartVO {
 	private int host_sales_seq;
@@ -15,6 +18,21 @@ public class Host_sales_chartVO {
 	private String searchConditionSecond;
 	private String searchType;
 	private int sumSales;
+	private Map<Integer, Integer> sumSalesEachHouse = new HashMap<Integer, Integer>();
+	private ArrayList<Integer> house_seq_list = new ArrayList<Integer>();
+	
+	public ArrayList<Integer> getHouse_seq_list() {
+		return house_seq_list;
+	}
+	public void setHouse_seq_list(ArrayList<Integer> house_seq_list) {
+		this.house_seq_list = house_seq_list;
+	}
+	public Map<Integer, Integer> getSumSalesEachHouse() {
+		return sumSalesEachHouse;
+	}
+	public void setSumSalesEachHouse(Map<Integer, Integer> sumSalesEachHouse) {
+		this.sumSalesEachHouse = sumSalesEachHouse;
+	}
 	public int getHost_sales_seq() {
 		return host_sales_seq;
 	}

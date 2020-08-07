@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/myreservation.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -53,7 +54,7 @@
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	
-	<div class="maindiv" id="main" style="margin-left:25%;">
+	<div class="maindiv" id="main" style="margin-left:25%;font-family: 'Jua', sans-serif;">
 		<div>
 			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:80%;" onclick="hostSales()">매출 통계보기</button>
 		</div>

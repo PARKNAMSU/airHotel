@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/chatpopup.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -16,11 +17,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 <title>Insert title here</title>
 </head>
-<body>
+<body style="font-family: 'Jua', sans-serif;">
 	<div id="headdiv">
 		<h1>${toId}</h1>
 	</div>
-	<div id="chatdiv">
+	<div id="chatdiv" style="font-family: 'Jua', sans-serif;">
 
 
 		<c:forEach begin="0" end="${messageList.size() -1}" step="1" var="i">

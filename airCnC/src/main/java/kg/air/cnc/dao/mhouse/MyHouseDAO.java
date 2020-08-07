@@ -60,7 +60,39 @@ public class MyHouseDAO {
 		}
 		return list;
 	}
-	
+	public List<Host_sales_chartVO> eachHouse_salesSetting(List<Host_sales_chartVO> list){
+		int sum = 0;
+		if(list.size()>0) {
+			for(int i=0;i<list.size();i++) {
+				if(list.get(0).getSumSalesEachHouse().get(list.get(i).getHost_house_seq()) == null) {
+					list.get(0).getHouse_seq_list().add(list.get(i).getHost_house_seq());
+					list.get(0).getSumSalesEachHouse().put(list.get(i).getHost_house_seq(),list.get(i).getHost_sales());
+				}else {
+					int getval = list.get(0).getSumSalesEachHouse().get(list.get(i).getHost_house_seq()) + list.get(i).getHost_sales();
+					list.get(0).getSumSalesEachHouse().put(list.get(i).getHost_house_seq(),getval);
+				}
+				sum+= list.get(i).getHost_sales();
+			}
+			list.get(0).getHouse_seq_list().add(-1);
+			list.get(0).setSumSales(sum);
+		}
+		return list;
+	}
+ 	public List<Host_sales_chartVO> getHost_salesForYearsEachHouse(Host_sales_chartVO vo){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getSalesForYearsEachHouse",vo);
+	}
+ 	public List<Host_sales_chartVO> getHost_salesForYearEachHouse(Host_sales_chartVO vo){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getSalesForYearEachHouse",vo);
+	}
+ 	
+ 	public List<Host_sales_chartVO> getHost_salesForMonthEachHouse(Host_sales_chartVO vo){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getSalesForMonthEachHouse",vo);
+	}
+ 	
+ 	public List<Host_sales_chartVO> getHost_salesForDaysEachHouse(Host_sales_chartVO vo){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getSalesForDaysEachHouse",vo);
+	}
+ 	
 	public void deleteResHouse(int seq) {
 		sqlSessionTemplate.update("HostHouseManageVO.deleteResHouse",seq);
 	}
