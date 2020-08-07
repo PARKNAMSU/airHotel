@@ -49,7 +49,7 @@ public class House_InfoVO {
     private String house_photourl;
     private String house_name;
 
-    private String house_conditiion_childok;
+    private String house_condition_childok;
     private String house_condition_babyok;
     private String house_condition_petok;
     private String house_condition_smokeok;
@@ -432,12 +432,12 @@ public class House_InfoVO {
         this.house_name = house_name;
     }
 
-    public String getHouse_conditiion_childok() {
-        return house_conditiion_childok;
+    public String getHouse_condition_childok() {
+        return house_condition_childok;
     }
 
-    public void setHouse_conditiion_childok(String house_conditiion_childok) {
-        this.house_conditiion_childok = house_conditiion_childok;
+    public void setHouse_condition_childok(String house_condition_childok) {
+        this.house_condition_childok = house_condition_childok;
     }
 
     public String getHouse_condition_babyok() {
@@ -646,7 +646,7 @@ public class House_InfoVO {
                 + ", house_default_pool=" + house_default_pool + ", house_desc1=" + house_desc1 + ", house_desc2="
                 + house_desc2 + ", house_desc3=" + house_desc3 + ", house_desc4=" + house_desc4 + ", house_desc5="
                 + house_desc5 + ", house_photourl=" + house_photourl + ", house_name=" + house_name
-                + ", house_conditiion_childok=" + house_conditiion_childok + ", house_condition_babyok="
+                + ", house_conditiion_childok=" + house_condition_childok + ", house_condition_babyok="
                 + house_condition_babyok + ", house_condition_petok=" + house_condition_petok
                 + ", house_condition_smokeok=" + house_condition_smokeok + ", house_condition_partyok="
                 + house_condition_partyok + ", house_restrict_stairs=" + house_restrict_stairs
