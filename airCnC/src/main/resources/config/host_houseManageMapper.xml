@@ -8,8 +8,40 @@
 		<![CDATA[select house_seq , house_photourl, house_name, house_status from house_info where house_host_id = #{value}]]> 
 	</select>
 	<select id="getMyHouseResList" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO" resultType="kg.air.cnc.vo.HouseReservationMemberVO">
-		<![CDATA[select reservation_seq,reservation_customer_id,reservation_house_seq, to_char(reservation_check_in,'yyyy/MM/dd') as reservation_check_in, to_char(reservation_check_out,'yyyy/MM/dd') as reservation_check_out, to_char(reservation_regdate,'yyyy/MM/dd') as reservation_regdate 
+		<![CDATA[select reservation_seq,reservation_customer_id,reservation_house_seq, to_char(reservation_check_in,'yyyy/MM/dd') as reservation_check_in, 
+		to_char(reservation_check_out,'yyyy/MM/dd') as reservation_check_out, to_char(reservation_regdate,'yyyy/MM/dd') as reservation_regdate 
 		,c.customer_name as customer_name, c.customer_image as customer_image, c.customer_email as customer_email, c.customer_phone as customer_phone
 		from reservation join customer c on reservation_customer_id = c.customer_id where reservation_house_seq = #{house_seq} and reservation_check_in > sysdate ORDER BY reservation_seq]]>
 	</select>
+	
+	
+	<select id="getSalesForYears" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
+		<![CDATA[SELECT to_date(to_char(host_sales_regdate,'YYYY'),'YYYY') as admin_sales_regdate,sum(host_sales) as host_sales FROM host_sales WHERE to_char(host_sales_regdate, 'yyyy') >= #{searchConditionFirst}
+		and to_char(host_sales_regdate,'yyyy') <= #{searchConditionSecond} and host_id = #{host_id} GROUP BY to_date(to_char(host_sales_regdate,'YYYY'),'YYYY') ORDER BY to_date(to_char(host_sales_regdate,'YYYY'),'YYYY') ASC]]>
+	</select>
+	<select id="getSalesForYear" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
+		<![CDATA[SELECT to_date(to_char(host_sales_regdate,'MM'),'MM') as host_sales_regdate,sum(host_sales) as host_sales FROM host_sales WHERE to_char(host_sales_regdate, 'yyyy') = #{searchConditionFirst} and host_id = #{host_id}
+		 GROUP BY to_date(to_char(host_sales_regdate,'MM'),'MM') ORDER BY to_date(to_char(host_sales_regdate,'MM'),'MM') ASC]]>
+	</select>
+	<select id="getSalesForMonth" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
+		<![CDATA[SELECT to_date(to_char(host_sales_regdate,'MM/dd'),'MM/dd') as host_sales_regdate,sum(host_sales) as host_sales FROM host_sales WHERE to_char(host_sales_regdate, 'YYYY-MM') = #{searchConditionFirst}
+		 GROUP BY to_date(to_char(host_sales_regdate,'MM/dd'),'MM/dd') ORDER BY to_date(to_char(host_sales_regdate,'MM/dd'),'MM/dd') ASC]]>
+	</select>
+	<select id="getSalesForDays" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
+		<![CDATA[SELECT to_date(to_char(host_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') as 
+		host_sales_regdate,sum(host_sales) as host_sales FROM host_sales WHERE to_char(host_sales_regdate, 'YYYY-MM-DD') >= #{searchConditionFirst} and to_char(host_sales_regdate, 'YYYY-MM-DD') <= #{searchConditionSecond} 
+		 and host_id = #{host_id} GROUP BY to_date(to_char(host_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ORDER BY to_date(to_char(host_sales_regdate,'YYYY/MM/dd'),'YYYY/MM/dd') ASC]]>
+	</select>
+	<select id="getSalesDetail" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
+		SELECT admin_sales_seq, admin_sales, admin_sales_house_seq, to_char(admin_sales_regdate,'YYYY/MM/dd') 
+		as admin_sales_date FROM admin_sales WHERE to_char(admin_sales_regdate,'YYYY-MM-dd') = #{admin_sales_date}
+	</select>
+	
+	<update id="deleteResHouse" parameterType="int">
+		UPDATE house_info set house_status = 2 WHERE house_seq = #{seq}
+	</update>
+	<update id="RollbackDeleteHouse" parameterType="int">
+		UPDATE house_info set house_status = 0 WHERE house_seq = #{seq}
+	</update>
 </mapper>
+

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kg.air.cnc.service.mhouse.MyHouseService;
+import kg.air.cnc.vo.Host_sales_chartVO;
 import kg.air.cnc.vo.HouseReservationMemberVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 import kg.air.cnc.vo.ReservationVO;
@@ -45,6 +47,38 @@ public class MyHouseController {
 		mav.addObject("resList",list);
 		mav.addObject("house_seq",vo.getHouse_seq());
 		mav.setViewName("houseResList");
+		return mav;
+	}
+	@RequestMapping("myHouseSales.do")
+	public ModelAndView myHouseSalesController(Host_sales_chartVO vo,ModelAndView mav) {
+		List<Host_sales_chartVO> list = null;
+		if(vo.getSearchType() != null) {
+			if(vo.getSearchType().equals("years"))list = myHouseService.getAdmin_salesForYears(vo);
+			if(vo.getSearchType().equals("year"))list = myHouseService.getAdmin_salesForYear(vo);
+			if(vo.getSearchType().equals("month"))list = myHouseService.getAdmin_salesForMonth(vo);
+			if(vo.getSearchType().equals("days"))list = myHouseService.getAdmin_salesForDays(vo);
+			mav.addObject("salesList", list);
+		}
+		mav.setViewName("myHouseSales");
+		return mav;
+	}
+	@RequestMapping(value = "deleteHouse.do",method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String deleteHouseController(String house_seq) {
+		int house_sequence = Integer.parseInt(house_seq);
+		myHouseService.deleteResHouse(house_sequence);
+		return "삭제신청이 완료되었습니다.";
+	}
+	@RequestMapping("rollbackDelete.do")
+	public String rollbackDeleteController(ReservationHouseDetailVO vo) {
+		myHouseService.rollbackDeleteHouse(vo.getHouse_seq());
+		return "hostHouseList";
+	}
+	@RequestMapping("hostSales.do")
+	public ModelAndView hostSalesController(Host_sales_chartVO vo, ModelAndView mav) {
+		if(vo.getSearchConditionFirst() == null) {
+			mav.setViewName("hostSales");
+		}
 		return mav;
 	}
 }

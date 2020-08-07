@@ -158,23 +158,26 @@
 		<hr>
 	</div>
 	<div class="buttondiv">
+			<c:if test="${house.accessType eq 'host' }">
+				<button class="btn btn-outline-danger" id="btn0" onclick="deleteHouse(${house.house_seq})" style="font-family: 'Jua', sans-serif;">숙소 삭제 신청</button>
+			</c:if>
 			<c:choose>
 				<c:when test="${house.accessType eq 'host' }">
-					<button class="btn btn-outline-danger" id="btn" onclick="openResList(${house.house_seq})" style="font-family: 'Jua', sans-serif;">예약 명단 확인</button>
+					<button class="btn btn-outline-danger" id="btn1" onclick="openResList(${house.house_seq})" style="font-family: 'Jua', sans-serif;">예약 명단 확인</button>
 				</c:when>
 				<c:otherwise>
-					<button class="btn btn-outline-danger" id="btn" onclick="openDeclaration('${house.host_id}','${session_login }')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
+					<button class="btn btn-outline-danger" id="btn2" onclick="openDeclaration('${house.host_id}','${session_login }')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${house.accessType eq 'nowres' }">
-				<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약취소</button>
+				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;">예약취소</button>
 				</c:when>
 				<c:when test="${house.accessType eq 'host' }">
-				<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">수정하기</button>
+				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;">수정하기</button>
 				</c:when>
 				<c:otherwise>
-				<button class="btn btn-outline-danger" id="btn" style="font-family: 'Jua', sans-serif;">예약하기</button>
+				<button class="btn btn-outline-danger" id="btn5" style="font-family: 'Jua', sans-serif;">예약하기</button>
 				</c:otherwise>
 			</c:choose>
 	</div>
@@ -275,7 +278,26 @@ var overlay = new kakao.maps.CustomOverlay({
 kakao.maps.event.addListener(marker, 'click', function() {
 	overlay.setMap(map);
 });
-
+var deleteHouse = function(house){
+	var result = confirm("정말로 삭제하시겠습니까?\n※삭제 요청시 10일이내에 취소하지 않을 시 삭제됩니다")
+	if(result){
+	     $.ajax({
+	           type:"POST",
+	           url:"deleteHouse.do",
+	           dataType:"text",
+	           data:{
+	        	   house_seq:house
+	           },
+	           success : function(data) {
+			   		alert(data);
+			   		location.href="myHouse.do"
+	           },
+	           error : function(request, status, error) {
+	        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	           }
+	     });	
+	}
+}
 </script>
 
 </html>

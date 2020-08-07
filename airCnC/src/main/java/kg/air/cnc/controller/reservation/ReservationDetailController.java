@@ -40,7 +40,6 @@ public class ReservationDetailController {
 	}
 	@RequestMapping(value = "reservationHouse.do", method = RequestMethod.POST )
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,ModelAndView mav) {
-		session.setAttribute("session_login", "skatn"); //로그인 완료 시 제거
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());

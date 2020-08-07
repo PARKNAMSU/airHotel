@@ -15,6 +15,15 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -43,10 +52,12 @@
     </div>
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
-	<%@include file="../html/sideMenu.jsp" %>
-
-	<div class="maindiv" id="main">
-		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;">내 숙소 목록</h1>
+	
+	<div class="maindiv" id="main" style="margin-left:25%;">
+		<div>
+			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:80%;" onclick="hostSales()">매출 통계보기</button>
+		</div>
+		<h1 style="margin-bottom:5%;margin-left:29%;font-size:40px;color:red;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
 		</div>
@@ -70,8 +81,9 @@
 		</div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
-	
+
 	<div style="clear:both;"></div>
+
 	<footer>
 		<%@ include file="../html/footer.jsp" %>
 	</footer>
@@ -172,10 +184,20 @@
 	        document.body.appendChild(form);
 	        if(house_status == 0){
 	        	form.submit();
+	        }else if(house_status == 2){
+	        	var result = confirm("삭제를 취소하시겠습니까?")
+	        	if(result){
+	        		form.action = "rollbackDelete.do";
+	        		form.submit();
+	        	}
 	        }else{
 	        	alert("현재 접근할 수 없는 상태입니다")
 	        }
 		}
+	
+var hostSales = function(){
+	location.href="hostSales.do";
+}
 
 </script>
 </html>
