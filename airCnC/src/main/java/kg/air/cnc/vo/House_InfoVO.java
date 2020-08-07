@@ -1,6 +1,5 @@
 package kg.air.cnc.vo;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class House_InfoVO {
@@ -73,6 +72,9 @@ public class House_InfoVO {
     private String house_checkin_time;
     private String house_checkout_time;
     private Date house_regdate;
+    private String house_location_fulladdress;
+    private String house_location_detailaddress;
+    private Date house_stop_end_date;
 
     public int getHouse_seq() {
         return house_seq;
@@ -570,41 +572,66 @@ public class House_InfoVO {
         this.house_regdate = house_regdate;
     }
 
-    @Override
-    public String toString() {
-        return "House_InfoVO [house_seq=" + house_seq + ", house_maxperson=" + house_maxperson
-                + ", house_bedroom_amount=" + house_bedroom_amount + ", house_bed_amount=" + house_bed_amount
-                + ", house_bed_type_single=" + house_bed_type_single + ", house_bed_type_double="
-                + house_bed_type_double + ", house_bed_type_queen=" + house_bed_type_queen + ", house_bathroom_amount="
-                + house_bathroom_amount + ", house_bathroom_type=" + house_bathroom_type + ", house_location="
-                + house_location + ", house_loaction_sido=" + house_loaction_sido + ", house_location_gugun="
-                + house_location_gugun + ", house_location_postnum=" + house_location_postnum
-                + ", house_defaultsetting=" + house_defaultsetting + ", house_default_tv=" + house_default_tv
-                + ", house_default_wifi=" + house_default_wifi + ", house_default_heater=" + house_default_heater
-                + ", house_default_cooler=" + house_default_cooler + ", house_default_iron=" + house_default_iron
-                + ", house_default_fireditecter=" + house_default_fireditecter + ", house_default_coditecter="
-                + house_default_coditecter + ", house_default_aidkit=" + house_default_aidkit
-                + ", house_default_firesofwa=" + house_default_firesofwa + ", house_default_bedrock="
-                + house_default_bedrock + ", house_default_livingroom_type=" + house_default_livingroom_type
-                + ", house_default_kitchen=" + house_default_kitchen + ", house_default_laundry_washer="
-                + house_default_laundry_washer + ", house_default_laundry_dryer=" + house_default_laundry_dryer
-                + ", house_default_parking=" + house_default_parking + ", house_default_gym=" + house_default_gym
-                + ", house_default_pool=" + house_default_pool + ", house_desc1=" + house_desc1 + ", house_desc2="
-                + house_desc2 + ", house_desc3=" + house_desc3 + ", house_desc4=" + house_desc4 + ", house_desc5="
-                + house_desc5 + ", house_photourl=" + house_photourl + ", house_name=" + house_name
-                + ", house_conditiion_childok=" + house_conditiion_childok + ", house_condition_babyok="
-                + house_condition_babyok + ", house_condition_petok=" + house_condition_petok
-                + ", house_condition_smokeok=" + house_condition_smokeok + ", house_condition_partyok="
-                + house_condition_partyok + ", house_restrict_stairs=" + house_restrict_stairs
-                + ", house_restrict_noise=" + house_restrict_noise + ", house_restrict_pet=" + house_restrict_pet
-                + ", house_restrict_cantpark=" + house_restrict_cantpark + ", house_restrict_commonspace="
-                + house_restrict_commonspace + ", house_restrict_facility=" + house_restrict_facility
-                + ", house_restrict_cctv=" + house_restrict_cctv + ", house_restrict_weapon=" + house_restrict_weapon
-                + ", house_restrict_beast=" + house_restrict_beast + ", house_price_default=" + house_price_default
-                + ", house_price_max=" + house_price_max + ", house_star=" + house_star + ", house_status="
-                + house_status + ", house_host_id=" + house_host_id + ", house_xlocation=" + house_xlocation
-                + ", house_ylocation=" + house_ylocation + ", house_checkin_time=" + house_checkin_time
-                + ", house_checkout_time=" + house_checkout_time + ", house_regdate=" + house_regdate + "]";
+    public Date getHouse_stop_end_date() {
+        return house_stop_end_date;
     }
 
+    public void setHouse_stop_end_date(Date house_stop_end_date) {
+        this.house_stop_end_date = house_stop_end_date;
+    }
+
+	public String getHouse_location_fulladdress() {
+		return house_location_fulladdress;
+	}
+
+	public void setHouse_location_fulladdress(String house_location_fulladdress) {
+		this.house_location_fulladdress = house_location_fulladdress;
+	}
+
+	public String getHouse_location_detailaddress() {
+		return house_location_detailaddress;
+	}
+
+	public void setHouse_location_detailaddress(String house_location_detailaddress) {
+		this.house_location_detailaddress = house_location_detailaddress;
+	}
+
+	@Override
+	public String toString() {
+		return "House_InfoVO [house_seq=" + house_seq + ", house_maxperson=" + house_maxperson
+				+ ", house_bedroom_amount=" + house_bedroom_amount + ", house_bed_amount=" + house_bed_amount
+				+ ", house_bed_type_single=" + house_bed_type_single + ", house_bed_type_double="
+				+ house_bed_type_double + ", house_bed_type_queen=" + house_bed_type_queen + ", house_bathroom_amount="
+				+ house_bathroom_amount + ", house_bathroom_type=" + house_bathroom_type + ", house_location="
+				+ house_location + ", house_loaction_sido=" + house_loaction_sido + ", house_location_gugun="
+				+ house_location_gugun + ", house_location_postnum=" + house_location_postnum
+				+ ", house_defaultsetting=" + house_defaultsetting + ", house_default_tv=" + house_default_tv
+				+ ", house_default_wifi=" + house_default_wifi + ", house_default_heater=" + house_default_heater
+				+ ", house_default_cooler=" + house_default_cooler + ", house_default_iron=" + house_default_iron
+				+ ", house_default_fireditecter=" + house_default_fireditecter + ", house_default_coditecter="
+				+ house_default_coditecter + ", house_default_aidkit=" + house_default_aidkit
+				+ ", house_default_firesofwa=" + house_default_firesofwa + ", house_default_bedrock="
+				+ house_default_bedrock + ", house_default_livingroom_type=" + house_default_livingroom_type
+				+ ", house_default_kitchen=" + house_default_kitchen + ", house_default_laundry_washer="
+				+ house_default_laundry_washer + ", house_default_laundry_dryer=" + house_default_laundry_dryer
+				+ ", house_default_parking=" + house_default_parking + ", house_default_gym=" + house_default_gym
+				+ ", house_default_pool=" + house_default_pool + ", house_desc1=" + house_desc1 + ", house_desc2="
+				+ house_desc2 + ", house_desc3=" + house_desc3 + ", house_desc4=" + house_desc4 + ", house_desc5="
+				+ house_desc5 + ", house_photourl=" + house_photourl + ", house_name=" + house_name
+				+ ", house_conditiion_childok=" + house_conditiion_childok + ", house_condition_babyok="
+				+ house_condition_babyok + ", house_condition_petok=" + house_condition_petok
+				+ ", house_condition_smokeok=" + house_condition_smokeok + ", house_condition_partyok="
+				+ house_condition_partyok + ", house_restrict_stairs=" + house_restrict_stairs
+				+ ", house_restrict_noise=" + house_restrict_noise + ", house_restrict_pet=" + house_restrict_pet
+				+ ", house_restrict_cantpark=" + house_restrict_cantpark + ", house_restrict_commonspace="
+				+ house_restrict_commonspace + ", house_restrict_facility=" + house_restrict_facility
+				+ ", house_restrict_cctv=" + house_restrict_cctv + ", house_restrict_weapon=" + house_restrict_weapon
+				+ ", house_restrict_beast=" + house_restrict_beast + ", house_price_default=" + house_price_default
+				+ ", house_price_max=" + house_price_max + ", house_star=" + house_star + ", house_status="
+				+ house_status + ", house_host_id=" + house_host_id + ", house_xlocation=" + house_xlocation
+				+ ", house_ylocation=" + house_ylocation + ", house_checkin_time=" + house_checkin_time
+				+ ", house_checkout_time=" + house_checkout_time + ", house_regdate=" + house_regdate
+				+ ", house_location_fulladdress=" + house_location_fulladdress + ", house_location_detailaddress="
+				+ house_location_detailaddress + ", house_stop_end_date=" + house_stop_end_date + "]";
+	}
 }

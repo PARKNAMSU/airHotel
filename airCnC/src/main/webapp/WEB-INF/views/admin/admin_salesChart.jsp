@@ -58,7 +58,7 @@
 	<div id="sidediv">
 		<ul id="sidemenu">
 			<li class="menu"><a href="salesChart.mdo">매출현황</a></li>
-			<li class="menu"><a href="">숙소이용 현황</a></li>
+			<li class="menu"><a href="resChart.mdo">숙소이용 현황</a></li>
 			<li class="menu"><a href="signupChart.mdo">회원가입 현황</a></li>
 			<li class="menu"><a href="hostChart.mdo">호스트 신청 현황</a></li>
 		</ul>
@@ -186,34 +186,37 @@
 	})
 	function ReportToExcel(){
 		fname = prompt("파일 이름을 입력해주세요")
-		$("#salesTable").table2excel({
-			exclude: ".noExl",
-			name: "Excel sales",
-			filename:fname+'.xls',
-			fileext:"xls",
-			exclude_img: true,
-			exclued_links: true,
-			exclude_inputs:true
-		})
+		if(fname != null || fname == ""){
+			$("#salesTable").table2excel({
+				exclude: ".noExl",
+				name: "Excel sales",
+				filename:fname+'.xls',
+				fileext:"xls",
+				exclude_img: true,
+				exclued_links: true,
+				exclude_inputs:true
+			})
+		}
 
 	}
 	$(function(){
 		$('#reportPDF').click(function(){
-
-				html2canvas(document.getElementById("salesTable"), {
-					 onrendered : function(canvas){
-					  var imgData = canvas.toDataURL('image/png');
-			            var pageWidth = 210;
-			            var pageHeight = pageWidth * 1.414;
-			            var imgWidth = pageWidth - 20;
-			            var imgHeight = $('#salesTable').height() * imgWidth / $('#salesTable').width();
-					  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
-
-					  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
-					  doc.save('매출보고서.pdf');
-					  } 
-				});
-		     
+				fname = prompt("파일 이름을 입력해주세요")
+				if(fname != null || fname == ""){
+					html2canvas(document.getElementById("salesTable"), {
+						 onrendered : function(canvas){
+						  var imgData = canvas.toDataURL('image/png');
+				            var pageWidth = 210;
+				            var pageHeight = pageWidth * 1.414;
+				            var imgWidth = pageWidth - 20;
+				            var imgHeight = $('#salesTable').height() * imgWidth / $('#salesTable').width();
+						  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+	
+						  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
+						  doc.save('매출보고서.pdf');
+						  } 
+					});
+				}
 		})
 	})
 		function getChart(){

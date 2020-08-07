@@ -1,6 +1,6 @@
 package kg.air.cnc.controller.waiting;
 
-import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.House_InfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,70 +17,70 @@ public class WaitingController {
 	@Autowired
 	RemoveWaitingServiceImpl removeWaiting;
 
-	// ���� ��� ��� ������
+	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRegisterWaitingList.mdo")
 	public ModelAndView getHouseWaitingList(ModelAndView mav) {
 		mav.addObject("waitingList", registerWaiting.getWaitingList());
-		mav.setViewName("getRegisterHouseList"); // ���߿� ������ ���� �Ŀ� ���� �� �� ����
+		mav.setViewName("getRegisterHouseList"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
 
-	// ���� ��� �� ������
+	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRegisterHouse.mdo")
-	public ModelAndView getRegisterHouse(HouseVO vo, ModelAndView mav) {
+	public ModelAndView getRegisterHouse(House_InfoVO vo, ModelAndView mav) {
 		mav.addObject("registerHouse", registerWaiting.getHouse(vo));
-		mav.setViewName("waiting"); // ���߿� ������ ���� �Ŀ� ���� �� �� ����
+		mav.setViewName("waiting"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
 	
-	// ���� ��� ��� Ȯ��
+	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占� 확占쏙옙
 	@RequestMapping(value = "/registerHouse.mdo")
-	public ModelAndView registerHouse(HouseVO vo, ModelAndView mav) {
+	public ModelAndView registerHouse(House_InfoVO vo, ModelAndView mav) {
 		registerWaiting.registerHouse(vo);
 		mav.setViewName("redirect:getRegisterWaitingList.mdo");
 		return mav;
 	}
 	
-	// ���� ��� ��� ���
+	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占� 占쏙옙占�
 	@RequestMapping(value="/cancelRegister.mdo")
-	public ModelAndView cancelRegister(HouseVO vo, ModelAndView mav) {
+	public ModelAndView cancelRegister(House_InfoVO vo, ModelAndView mav) {
 		registerWaiting.cancelRegister(vo);
 		mav.setViewName("redirect:getRegisterWaitingList.mdo");
 		return mav;
 	}
 	
-	// ���� ���� ��� ������
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRemoveWaitingList.mdo")
 	public ModelAndView getRemoveWaitingList(ModelAndView mav) {
 		mav.addObject("waitingList", removeWaiting.getWaitingList());
-		mav.setViewName("getRemoveHouseList"); // ���߿� ������ ���� �Ŀ� ���� �� �� ����
+		mav.setViewName("getRemoveHouseList"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
 
-	// ���� ���� �� ������
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRemoveHouse.mdo")
-	public ModelAndView getRemoveHouse(HouseVO vo, ModelAndView mav) {
+	public ModelAndView getRemoveHouse(House_InfoVO vo, ModelAndView mav) {
 		mav.addObject("removeHouse", removeWaiting.getHouse(vo));
-		mav.setViewName("removeWaiting"); // ���߿� ������ ���� �Ŀ� ���� �� �� ����
+		mav.setViewName("removeWaiting"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
 	
-	// ���� ���� ���(����)
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占�(占쏙옙占쏙옙)
 	@RequestMapping(value = "/updateDate.mdo")
-	public ModelAndView updateDate(HouseVO vo, ModelAndView mav) {
+	public ModelAndView updateDate(House_InfoVO vo, ModelAndView mav) {
 		removeWaiting.updateDate(vo);
 		mav.setViewName("redirect:getRemoveWaitingList.mdo");
 		return mav;
 	}
 	
-	// ���� ���� ����(���� �Ұ�)
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙 占쌀곤옙)
 	@RequestMapping(value = "/cancelRemove.mdo")
-	public ModelAndView cancelRemove(HouseVO vo, ModelAndView mav) {
+	public ModelAndView cancelRemove(House_InfoVO vo, ModelAndView mav) {
 		removeWaiting.cancelRemove(vo);
 		mav.setViewName("redirect:getRemoveWaitingList.mdo");
 		return mav;
 	}
 	
-	//spring quartz�� �̿��� ���� �޼���
+	//spring quartz占쏙옙 占싱울옙占쏙옙 占쏙옙占쏙옙 占쌨쇽옙占쏙옙
 	
 }

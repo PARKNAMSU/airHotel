@@ -121,11 +121,10 @@ public class BlameController {
     }
 
 
-    //todo : 아이디 블랙리스트 추가하기
     @RequestMapping(value = "/addBlacklist.mdo", method = RequestMethod.GET)
     public ModelAndView addBlackList(HttpServletRequest request, ModelAndView mav){
         HttpSession session = request.getSession();
-        String id = (String)session.getAttribute("target_member_id");
+        String id = (String)session.getAttribute("target_member_id");;
         blameService.addBlackList(id);
         mav.setViewName("redirect:/blamelist.mdo");
         return mav;

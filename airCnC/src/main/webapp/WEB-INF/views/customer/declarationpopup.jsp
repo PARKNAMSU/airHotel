@@ -29,8 +29,18 @@
 			<textarea rows="" cols="" class="form-control" name="blame_content"></textarea><br>
 			<input type="hidden" name="blame_member_id" value="${blameVO.blame_member_id }">
 			<input type="hidden" name="blame_target_member_id" value="${blameVO.blame_target_member_id}">
-			<input type="submit" value="제출" class="btn btn-outline-danger" style="font-size:30px;margin-left:70%;" onclick="">&nbsp;&nbsp;<button style="font-size:30px;" class="btn btn-outline-danger" onclick="window.close()">취소</button>
+			<input type="button" onclick="formSubmit()" value="제출" class="btn btn-outline-danger" style="font-size:30px;margin-left:70%;" onclick="">&nbsp;&nbsp;<button style="font-size:30px;" class="btn btn-outline-danger" onclick="window.close()">취소</button>
 		</form>
 	</div>
 </body>
+<script type="text/javascript">
+	function formSubmit(){
+		var result = confirm("신고하시겠습니까?")
+		if(result){
+			document.getElementById("blameForm").submit()
+		}else{
+			self.close()
+		}
+	}
+</script>
 </html>

@@ -62,16 +62,17 @@
     </div>
     <!-- 블랙리스트 테이블 -->
     <c:set var="blacklist" value="${blacklist}"/>
-    <div class="table-responsive">
+    <div style="color: black" class="table-responsive">
         <form class="blacklist-id-search-form" action="/blacklistSearchId.mdo" method="get">
             검색할 아이디 : <input type="text" name="blackSearchId">
             <input type="submit" value="검색">
         </form>
         <input type="button" value="목록가기" onclick="location.href='/cnc/blacklist.mdo'">
-        <table class="table">
+        <table style="color: black" class="table">
             <tr>
                 <td>아이디 : ${blacklist.black_id}</td>
                 <td>블랙당한 날짜 : ${blacklist.regdate}</td>
+                <td>블랙당한 이메일 : ${blacklist.black_email}</td>
                 <td> <input type="submit" value="블랙해제" onclick="location.href='/cnc/blacklistRelease.mdo?id=${blacklist.black_id}'"></td>
             </tr>
         </table>

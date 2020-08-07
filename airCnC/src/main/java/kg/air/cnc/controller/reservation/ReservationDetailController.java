@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.blame.BlameServiceImpl;
@@ -36,9 +38,9 @@ public class ReservationDetailController {
 		mav.setViewName("myreservation");
 		return mav;
 	}
-	@RequestMapping("reservationHouse.do")
+	@RequestMapping(value = "reservationHouse.do", method = RequestMethod.POST )
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,ModelAndView mav) {
-		session.setAttribute("session_login", "skatn");
+		session.setAttribute("session_login", "skatn"); //로그인 완료 시 제거
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
@@ -61,10 +63,11 @@ public class ReservationDetailController {
 		return mav;
 	}
 	@RequestMapping("deleteComments.do")
-	public ModelAndView deleteCommentsController(CommentsVO vo,ModelAndView mav) {
-		System.out.println(vo.getComments_seq());
+	public ModelAndView deleteCommentsController(CommentsVO vo,@RequestParam("accessType")String accessType,ModelAndView mav) {
+		System.out.println(accessType);
 		commentsService.deleteComments(vo);
 		mav.setViewName("redirect:reservationHouse.do");
+		mav.addObject("accessType",accessType);
 		mav.addObject("house_seq",vo.getComments_house_seq());
 		return mav;
 	}
@@ -76,7 +79,7 @@ public class ReservationDetailController {
 		return mav;
 	}
 	@RequestMapping("updateComment.do")
-	public ModelAndView updateCommentsController(CommentsVO vo, ModelAndView mav) {
+	public ModelAndView updateCommentsController(CommentsVO vo,HttpSession session, ModelAndView mav) {
 		commentsService.updateComments(vo);
 		mav.setViewName("updateComments");
 		return mav;
@@ -95,13 +98,13 @@ public class ReservationDetailController {
 		return mav;
 	}
 	@RequestMapping("declaration.do")
-	public ModelAndView insertHostBlame(BlameVO vo,ModelAndView mav) {
+	public ModelAndView goToHostBlame(BlameVO vo,ModelAndView mav) {
 		mav.addObject("blameVO",vo);
 		mav.setViewName("declarationpopup");
 		return mav;
 	}
 	@RequestMapping("insertBlameHost.do")
-	public String insertHostBlameDo(BlameVO vo,ModelAndView mav) {
+	public String insertHostBlame(BlameVO vo,ModelAndView mav) {
 		reservationService.insertBlameHost(vo);
 		return "redirect:declaration.do";
 	}

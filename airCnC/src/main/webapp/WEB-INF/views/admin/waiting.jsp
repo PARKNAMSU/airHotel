@@ -11,8 +11,8 @@
 	<div>
 		${registerHouse.house_seq}<br>
 		${registerHouse.house_name }<br>
-		${registerHouse.house_price }<br>
-		${registerHouse.house_address }<br>
+		${registerHouse.house_price_default }<br>
+		${registerHouse.house_location_fulladdress }<br>
 	</div>
 	<a href="registerHouse.mdo?house_seq=${registerHouse.house_seq}"><input type="button" value="등록" /></a>
 	<a href="cancelRegister.mdo?house_seq=${registerHouse.house_seq}"><input type="button" value="취소" /></a>

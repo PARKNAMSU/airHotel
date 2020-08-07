@@ -1,5 +1,7 @@
 package kg.air.cnc.common;
 
+import javax.servlet.http.HttpSession;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import kg.air.cnc.dao.log.LogDAO;
+import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.LogVO;
 import kg.air.cnc.vo.MessageVO;
@@ -23,11 +26,11 @@ public class LogAdvice {
 	
 	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..)) || execution(public * kg.air.cnc..*Controller.update*(..))")
 	private void logTarget() {}
-	/*¸Þ¼­µå ½ÇÇà ½Ã ·Î±× ÀúÀå*/
+	/*ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	@After("logTarget()")
 	public void trace(JoinPoint joinPoint)throws Throwable{
-		String methodName = joinPoint.getSignature().getName();//¸Þ¼­µå ¸Þ¼­µå¸í
-		Object [] arguments = joinPoint.getArgs();//¸Þ¼­µå ¸Å°³º¯¼ö
+		String methodName = joinPoint.getSignature().getName();//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½
+		Object [] arguments = joinPoint.getArgs();//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½
 		LogVO logVO = new LogVO();
 		System.out.println(methodName);
 		if(methodName.equals("insertMessageController")) {
@@ -36,7 +39,7 @@ public class LogAdvice {
 			logVO.setLog_content(messageVO.getMessage_content());
 			logVO.setLog_type("sendMessage");
 			logDAO.addLog(logVO);
-			System.out.println("sendMessage ¿Ï·á");
+			System.out.println("sendMessage ì‹¤í–‰");
 		}
 		if(methodName.equals("insertCommentsController")) {
 			CommentsVO commentsVO = (CommentsVO)arguments[0];
@@ -44,15 +47,25 @@ public class LogAdvice {
 			logVO.setLog_content(commentsVO.getComments_content());
 			logVO.setLog_type("insertCommnets");
 			logDAO.addLog(logVO);
-			System.out.println("insertComments¿Ï·á");
+			System.out.println("insertComments ì‹¤í–‰");
 		}
 		if(methodName.equals("updateCommentsController")){
 			CommentsVO commentsVO = (CommentsVO)arguments[0];
-			logVO.setLog_id(String.valueOf(commentsVO.getComments_seq()));
+			HttpSession session = (HttpSession)arguments[1];
+			
+			logVO.setLog_id((String)session.getAttribute("login_session"));
 			logVO.setLog_content(commentsVO.getComments_content());
 			logVO.setLog_type("updateComments");
 			logDAO.addLog(logVO);
-			System.out.println("updateComments ¿Ï·á");
+			System.out.println("updateComments ì‹¤í–‰");
+		}
+		if(methodName.equals("insertHostBlame")) {
+			BlameVO blameVO = (BlameVO)arguments[0];
+			logVO.setLog_id(blameVO.getBlame_member_id());
+			logVO.setLog_content("to "+blameVO.getBlame_target_member_id()+" content "+blameVO.getBlame_content());
+			logVO.setLog_type("insertBlame");
+			logDAO.addLog(logVO);
+			System.out.println("insertBlame ì‹¤í–‰");
 		}
 	}
 }

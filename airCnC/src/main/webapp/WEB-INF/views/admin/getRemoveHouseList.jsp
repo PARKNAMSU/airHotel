@@ -68,9 +68,9 @@
             <img src="../images/face.png" alt="¼÷¼Ò ÀÌ¹ÌÁö" class="littleImg">
             ${house.house_name}<br>
                           ¼÷¼Ò ¼Ò°³<br>
-      		${house.house_address}<br>
+      		${house.house_location_fulladdress}<br>
             ${house.house_star}<br>					
-           ${house.house_price}<br>
+           ${house.house_price_default}<br>
         </div>
         </a>
         <hr>
