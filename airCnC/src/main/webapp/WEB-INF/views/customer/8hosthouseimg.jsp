@@ -26,11 +26,7 @@
 	<script type="text/javascript">
 		function hosthouseimgSubmit() {
 			var f = document.hostpic;
-			var fileCheck = document.getElementById("house_photo").value;
-		    if(!fileCheck){
-		        alert("파일을 첨부해 주세요");
-		        return;
-		    }
+			
 			
 			f.submit();
 		}

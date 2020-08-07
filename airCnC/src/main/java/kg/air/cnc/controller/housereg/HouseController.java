@@ -176,22 +176,23 @@ public class HouseController {
 	@RequestMapping(value = "/8hosthouseimg.do")
 	public String hosthouseimg(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println(house.toString());
-		MultipartFile uploadFile = house.getHouse_photo();
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			String path = "c:\\EclipsePractice\\aaa";
-			System.out.println("사진첨부한 파일 이름 : " + fileName);
-			try {
-				new File(path).mkdirs();
-				uploadFile.transferTo(new File(path + fileName));
-			} catch (IllegalStateException e) {
-				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			house.setHouse_photourl(fileName);
-			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
-		}
+//		MultipartFile uploadFile = house.getHouse_photo();
+//		if(!uploadFile.isEmpty()) {
+//			String fileName = uploadFile.getOriginalFilename();
+//			String path = "c:\\EclipsePractice\\aaa";
+//			System.out.println("사진첨부한 파일 이름 : " + fileName);
+//			try {
+//				new File(path).mkdirs();
+//				uploadFile.transferTo(new File(path + fileName));
+//			} catch (IllegalStateException e) {
+//				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			house.setHouse_photourl(fileName);
+//			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
+//		}
+		house.setHouse_photourl("사진이 안들어가아앙");
 		System.out.println("사진첨부 안했음");
 		return "9hosttitle";
 	} 
@@ -203,7 +204,7 @@ public class HouseController {
 		return "10charge";
 	}
 	
-	@RequestMapping(value = "10charge.do")
+	@RequestMapping(value = "/10charge.do")
 	public String charge(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		if(house.getHouse_price_default_parInt().length()>0) {
@@ -281,6 +282,6 @@ public class HouseController {
 		houseService.insertHouse(house);
 		sessionStatus.setComplete();
 		System.out.println("집 등록 완료!");
-		return "redirect:/index.do";
+		return "redirect:/hostregisterindex.do";
 	}
 }
