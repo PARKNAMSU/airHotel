@@ -95,7 +95,7 @@
 		<div class="subinfodiv">
 			<span id="title" >${house.host_id } 님의 숙소</span>
 			<br><br><br><br>
-			<p >최대인원 ${house.house_maxperson}명, 욕실 ${house_bathroom_amount}개<br>
+			<p >최대인원 ${house.house_maxperson}명, 욕실 ${house.house_bathroom_amount}개<br>
 			싱글침대 ${house.house_bed_type_single }, 더블침대 ${house.house_bed_type_double }, 퀸사이즈 침대 ${house.house_bed_type_queen }</p>
 			
 		</div>
@@ -159,25 +159,25 @@
 	</div>
 	<div class="buttondiv" style="font-family: 'Jua', sans-serif;">
 			<c:if test="${house.accessType eq 'host' }">
-				<button class="btn btn-outline-danger" id="btn0" onclick="deleteHouse(${house.house_seq})" style="font-family: 'Jua', sans-serif;">숙소 삭제 신청</button>
+				<button class="btn btn-outline-danger" id="btn0" onclick="deleteHouse(${house.house_seq})" style="font-family: 'Jua', sans-serif;font-size:20px;">숙소 삭제 신청</button>
 			</c:if>
 			<c:choose>
 				<c:when test="${house.accessType eq 'host' }">
-					<button class="btn btn-outline-danger" id="btn1" onclick="openResList(${house.house_seq})" style="font-family: 'Jua', sans-serif;">예약 명단 확인</button>
+					<button class="btn btn-outline-danger" id="btn1" onclick="openResList(${house.house_seq})" style="font-family: 'Jua', sans-serif;font-size:20px;">예약 명단 확인</button>
 				</c:when>
 				<c:otherwise>
-					<button class="btn btn-outline-danger" id="btn2" onclick="openDeclaration('${house.host_id}','${login_session}')" style="font-family: 'Jua', sans-serif;">호스트 신고</button>
+					<button class="btn btn-outline-danger" id="btn2" onclick="openDeclaration('${house.host_id}','${login_session}')" style="font-family: 'Jua', sans-serif;font-size:20px;">호스트 신고</button>
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
 				<c:when test="${house.accessType eq 'nowres' }">
-				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;">예약취소</button>
+				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;font-size:20px;">예약취소</button>
 				</c:when>
 				<c:when test="${house.accessType eq 'host' }">
-				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;">수정하기</button>
+				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;">수정하기</button>
 				</c:when>
 				<c:otherwise>
-				<button class="btn btn-outline-danger" id="btn5" style="font-family: 'Jua', sans-serif;">예약하기</button>
+				<button class="btn btn-outline-danger" id="btn5" style="font-family: 'Jua', sans-serif;font-size:20px;">예약하기</button>
 				</c:otherwise>
 			</c:choose>
 	</div>

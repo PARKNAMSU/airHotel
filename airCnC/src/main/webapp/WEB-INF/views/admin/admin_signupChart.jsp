@@ -174,7 +174,7 @@
 								<tr>
 									<td>${sign_upList.get(i).signupchart_date }</td>
 									<td>${sign_upList.get(i).signupchart_num }명</td>
-									<td></td>
+									<td>N/A</td>
 									<td>${sign_upList.get(i).signupchart_persant }%</td>
 									<td>${sign_upList.get(i).signupchart_sum }명</td>
 								</tr>
@@ -185,7 +185,7 @@
 									<td>${sign_upList.get(i).signupchart_num }명</td>
 									<td>${sign_upList.get(i).signupchart_compare_before }명</td>
 									<td>${sign_upList.get(i).signupchart_persant }%</td>
-									<td></td>
+									<td>N/A</td>
 								</tr>
 							</c:if>
 						</c:forEach>

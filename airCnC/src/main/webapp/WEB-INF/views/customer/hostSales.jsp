@@ -121,7 +121,7 @@
 					<tr>
 						<td>${salesList.get(i).host_sales_date }</td>
 						<td>${salesList.get(i).host_sales}￦</td>
-						<td></td>
+						<td>N/A</td>
 						<td>${salesList.get(i).host_sales_persant }%</td>
 					</tr>
 					</c:if>
@@ -153,28 +153,28 @@
 						<c:forEach begin="0" end="${salesList2.size()-1 }" var="i">
 							<c:if test="${i == 0 }">
 							<tr>
-								<td>${salesList2.get(i).host_house_seq }</td>
+								<td>No.${salesList2.get(i).host_house_seq }</td>
 								<td>${salesList2.get(i).host_sales_date}</td>
-								<td>${salesList2.get(i).host_sales }</td>
-								<td>${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(a)) }</td>
-								<td>${salesList2.get(0).sumSales }</td>
+								<td>${salesList2.get(i).host_sales }￦</td>
+								<td>${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(a)) }￦</td>
+								<td>${salesList2.get(0).sumSales }￦</td>
 								<c:set var="a" value="${a+1 }"></c:set>					
 							</tr>
 							</c:if>
 							<c:if test="${i >0 }">
 							<tr>
-								<td>${salesList2.get(i).host_house_seq }</td>
-								<td>${salesList2.get(i).host_sales_date}</td>
-								<td>${salesList2.get(i).host_sales }</td>
+								<td>No.${salesList2.get(i).host_house_seq }</td>
+								<td>${salesList2.get(i).host_sales_date}￦</td>
+								<td>${salesList2.get(i).host_sales }￦</td>
 								<c:choose>
 								<c:when test="${salesList2.get(i).host_house_seq == salesList2.get(0).house_seq_list.get(a) }">
-									<td>${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(a)) }</td>
-									<td>.</td>
+									<td>${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(a)) }￦</td>
+									<td>N/A</td>
 									<c:set var="a" value="${a+1 }"></c:set>
 								</c:when>
 								<c:otherwise>
-									<td>.</td>
-									<td>.</td>
+									<td>N/A</td>
+									<td>N/A</td>
 								</c:otherwise>
 								</c:choose>
 							</tr>
@@ -184,7 +184,8 @@
 				</c:if>
 			</c:if>
 		</div>
-					<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
+					
+			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
 			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>&nbsp;&nbsp;
 			
 			<button onclick="openDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
@@ -193,19 +194,22 @@
 	<div class="chart" style="margin-bottom:5%;margin-left: 23.5%;font-family: 'Jua', sans-serif;">
 		<p style="font-size:30px;color:black;">매출 그래프</p>
 		<div id="salesChart"></div>
+		<c:if test = "${salesList != null }">
 		<button onclick="getChart()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">매출 보기</button>&nbsp;&nbsp;
 		<button onclick="getPieChart()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">수입비율 보기</button>&nbsp;&nbsp;
-		<button onclick="getPieChartForHouse()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">수입비율 보기</button>
+		<button onclick="getPieChartForHouse()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">숙소별 비율 보기</button><br><br><br><br>
+		</c:if>
+		<button onclick="location.href='myHouse.do'" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">숙소리스트</button> 
 	</div>
 	</div>
 	<div style="clear: both;"></div>
-	
 	<footer>
 		<%@ include file="../html/footer.jsp" %>
 	</footer>
 </body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+var list = "${salesList}"
 	$(function(){
 		$("#yearsCondition1").change(function() {
 			$("#yearsCondition2").attr("min", $("#yearsCondition1").val())
@@ -258,6 +262,7 @@
 		function getChart(){
 		    google.charts.load('current', {'packages':['bar']});
 		    google.charts.setOnLoadCallback(drawChart);
+	
 		    function drawChart() {
 		      var data = google.visualization.arrayToDataTable([
 		        ['chart', 'Sales'],
@@ -277,11 +282,12 @@
 	
 		      chart.draw(data, google.charts.Bar.convertOptions(options));
 		    }
+		    
 		}
 		function getPieChart(){
 		      google.charts.load('current', {'packages':['corechart']});
 		      google.charts.setOnLoadCallback(drawChart);
-
+		   
 		      function drawChart() {
 
 		        var data = google.visualization.arrayToDataTable([
@@ -300,18 +306,21 @@
 
 		        chart.draw(data, options);
 		      }
+		      
 		}
 		function getPieChartForHouse(){
 		      google.charts.load('current', {'packages':['corechart']});
 		      google.charts.setOnLoadCallback(drawChart);
-
+	
 		      function drawChart() {
-
+				var a = 0;
 		        var data = google.visualization.arrayToDataTable([
 		          ['Task', 'Hours per Day'],
-			        <c:forEach begin="0" end="${salesList2.get(0).house_seq_list.size() -2}" var="i">
-		        		['${salesList2.get(0).house_seq_list.get(i)}번',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],
+		          	<c:if test="${salesList2 != null}">
+				      <c:forEach begin="0" end="${salesList2.get(0).house_seq_list.size()-2}" var="i" >
+		        		['${salesList2.get(0).house_seq_list.get(i)})}',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],
 		        	</c:forEach>
+		        	</c:if>
 		        ]);
 
 		        var options = {
@@ -323,6 +332,7 @@
 
 		        chart.draw(data, options);
 		      }
+		      
 			
 		}
 	
