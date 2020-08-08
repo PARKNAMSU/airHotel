@@ -146,8 +146,6 @@ public class ChartController {
 	}
 	@RequestMapping("resChartSearch.mdo")
 	public ModelAndView resChartController(Reservation_ChartVO vo,ModelAndView mav) {
-		System.out.println(vo.getSearchConditionFirst());
-		System.out.println(vo.getSearchType());
 		List<Reservation_ChartVO> list = null;
 		if(vo.getSearchType().equals("years"))list = reservation_ChartService.getAdmin_ResForYears(vo);
 		if(vo.getSearchType().equals("year"))list = reservation_ChartService.getAdmin_ResForYear(vo);

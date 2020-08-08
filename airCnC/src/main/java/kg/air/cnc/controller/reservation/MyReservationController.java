@@ -29,7 +29,7 @@ public class MyReservationController {
 	@RequestMapping(value = "myReservation.mdo", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String myReservationController(HttpSession session) throws JsonProcessingException {
-		session.setAttribute("login_session", "skatn");
+		session.setAttribute("login_session", "skatn");//로그인 완료 시 제거
 		String id = (String)session.getAttribute("login_session");
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservation(id);
 		ObjectMapper mapper = new ObjectMapper();

@@ -10,8 +10,8 @@
 	<div>
 		${removeHouse.house_seq}<br>
 		${removeHouse.house_name }<br>
-		${removeHouse.house_price }<br>
-		${removeHouse.house_address }<br>
+		${removeHouse.house_price_default }<br>
+		${removeHouse.house_location_fulladdress }<br>
 	</div>
 	<a href="updateDate.mdo?house_seq=${removeHouse.house_seq}"><input type="button" value="삭제 허가" /></a>
 	<a href="cancelRemove.mdo?house_seq=${removeHouse.house_seq}"><input type="button" value="취소" /></a>

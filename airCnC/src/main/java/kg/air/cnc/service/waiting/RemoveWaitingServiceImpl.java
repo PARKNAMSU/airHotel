@@ -2,12 +2,12 @@ package kg.air.cnc.service.waiting;
 
 import java.util.List;
 
-import kg.air.cnc.vo.HouseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.waiting.RemoveWaitingDAOImpl;
+import kg.air.cnc.vo.House_InfoVO;
 import kg.air.cnc.vo.RemoveWaitingVO;
 
 @Service
@@ -16,19 +16,19 @@ public class RemoveWaitingServiceImpl {
 	@Autowired
 	RemoveWaitingDAOImpl removeWaitingDAO;
 
-	public HouseVO getHouse(HouseVO vo) {
+	public House_InfoVO getHouse(House_InfoVO vo) {
 		return removeWaitingDAO.getHouse(vo);
 	}
 
-	public List<HouseVO> getWaitingList() {
+	public List<House_InfoVO> getWaitingList() {
 		return removeWaitingDAO.getRemoveWaitingList();
 	}
 	
-	public void updateDate(HouseVO vo) {
+	public void updateDate(House_InfoVO vo) {
 		removeWaitingDAO.updateDate(vo);
 	}
 	
-	public void cancelRemove(HouseVO vo) {
+	public void cancelRemove(House_InfoVO vo) {
 		removeWaitingDAO.deleteRemoveWaiting(vo);
 		removeWaitingDAO.cancelRemove(vo);
 	}

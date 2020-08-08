@@ -1,13 +1,21 @@
 package kg.air.cnc.customer.dao;
 
+import java.util.Date;
 import kg.air.cnc.customer.vo.CustomerVO;
 
 public interface CustomerDAO {
-	
+
 	public int register(CustomerVO vo)throws Exception; // 회원가입 메서드.
-	public int getKey(String customer_id, String customer_key)throws Exception; // 인증키 생성 메서드.
-	public int modifyKey(String customer_id, String customer_key)throws Exception; // 인증키 Y로 수정하는 메서드.
-	public int sendPassword(String customer_id, String customer_email, String customer_key)throws Exception; // 임시 비밀번호 변경 메서드.
 	public int idCheck(CustomerVO vo)throws Exception; // 아이디 중복 여부 확인 메서드.
-	public int createEmailCheck(String customerEmail)throws Exception; // 이메일 중복 여부 확인 메서드.
+	public int createEmailCheck(String customer_email)throws Exception; // 이메일 중복 여부 확인 메서드.
+	public CustomerVO customerCheck(String customer_id) throws Exception; // 회원 체크
+
+	// 로그인 
+	public CustomerVO login(CustomerVO customerVO) throws Exception;
+
+	// 자동로그인 체크한 경우에 사용자 테이블에 세션과 유효시간을 저장하기 위한 메서드.
+	public void keepLogin(String customer_id, String session_id, Date session_limit)throws Exception;
+
+	// 이전에 로그인한 적이 있는지, 유효시간이 넘지 않은 세션을 가지고 있는지 확인하는 메서드.
+	public CustomerVO checkCustomerWithSessionKey(String session_id)throws Exception;
 }

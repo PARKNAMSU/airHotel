@@ -63,6 +63,8 @@ public class ReservationHouseDetailVO {
 	private int house_price_max;
 	private String house_checkin_time;
 	private String house_checkout_time;
+	private int house_status;
+	private String house_status_text;
 	private String host_id;
 	private String host_name;
     private String host_image;
@@ -74,7 +76,20 @@ public class ReservationHouseDetailVO {
     private ArrayList<String> restricList;
     private ArrayList<String> conditionList;
     private String accessType;
-    public String getHost_id() {
+    
+    public int getHouse_status() {
+		return house_status;
+	}
+	public void setHouse_status(int house_status) {
+		this.house_status = house_status;
+	}
+	public String getHouse_status_text() {
+		return house_status_text;
+	}
+	public void setHouse_status_text(String house_status_text) {
+		this.house_status_text = house_status_text;
+	}
+	public String getHost_id() {
 		return host_id;
 	}
 	public void setHost_id(String host_id) {

@@ -23,7 +23,6 @@ public class RemoveHostController {
 	
 	@RequestMapping(value="/deleteHost.mdo")
 	public ModelAndView deleteHost(HostVO vo, ModelAndView mav) {
-		System.out.println("fucking "+vo.getHost_id());
 		removeHostService.deleteHost(vo);
 		mav.setViewName("redirect:getRemoveHostList.mdo");
 		return mav;

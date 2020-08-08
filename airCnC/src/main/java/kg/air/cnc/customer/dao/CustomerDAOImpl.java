@@ -1,5 +1,8 @@
 package kg.air.cnc.customer.dao;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -23,22 +26,34 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 	
 	@Override
-	public int createEmailCheck(String customerEmail) throws Exception {
-		return session.selectOne("customer.createEmailCheck", customerEmail);
+	public int createEmailCheck(String customer_email) throws Exception {
+		return session.selectOne("customer.createEmailCheck", customer_email);
 	}
 	
 	@Override
-	public int getKey(String customer_id, String customer_key) throws Exception{
-		return 0;
+	public CustomerVO customerCheck(String customer_id) throws Exception {
+		return session.selectOne("customer.customerCheck", customer_id);
 	}
 
+	// 로그인에 성공하면 유저 정보를 담고 있는 vo객체를 반환.
 	@Override
-	public int modifyKey(String customer_id, String customer_key) throws Exception{
-		return 0;
+	public CustomerVO login(CustomerVO customerVO) throws Exception {
+		return session.selectOne("customer.login", customerVO);
 	}
 
+	// 로그인 유지 처리.
 	@Override
-	public int sendPassword(String customer_id, String customer_email, String customer_key)throws Exception {
-		return 0;
+	public void keepLogin(String customer_id, String session_id, Date session_limit)throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customer_id);
+		map.put("sessionId", session_id);
+		map.put("sessionLimit", session_limit);
+		session.update("customer.keepLogin", map);
+	}
+
+	// 세션키 검증.
+	@Override
+	public CustomerVO checkCustomerWithSessionKey(String session_id)throws Exception {
+		return session.selectOne("customer.checkCustomerWithSessionKey", session_id);
 	}
 }
