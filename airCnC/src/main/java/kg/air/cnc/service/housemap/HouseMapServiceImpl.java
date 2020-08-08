@@ -30,7 +30,11 @@ public class HouseMapServiceImpl implements HouseMapService{
 
 	@Override
 	public List<House_InfoVO> getDetail(Map<String, String> info){
-		if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+		if(info.get("location").contains("지역")) {
+			System.out.println("전체지역 선택");
+			return houseMapDAO.getAll(info);
+		}
+		else if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
 			System.out.println("상세지역과 체크아웃 둘 다 설정");
 			return houseMapDAO.getDetailWithBoth(info);
 		}
@@ -49,8 +53,11 @@ public class HouseMapServiceImpl implements HouseMapService{
 	}
 	
 	@Override
-	public List<Map<String, Integer>> getPrice(Map<String, String> info) { //상세검색에서 실행되는것
-		if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//상세검색에서 실행되는것
+		if(info.get("location").contains("지역")) {
+			return houseMapDAO.getAllPrice(info);
+		}
+		else if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
 			System.out.println("상세지역과 체크아웃 둘 다 설정");
 			return houseMapDAO.getDetailWithBothPrice(info);
 		}
@@ -67,5 +74,55 @@ public class HouseMapServiceImpl implements HouseMapService{
 			return houseMapDAO.getPrice(info);
 		}
 	}
+
+	@Override
+	public List<House_InfoVO> searchIndex(Map<String, String> info) {
+		if(info.get("location").contains("지역")) {
+			System.out.println("전체지역 선택");
+			return houseMapDAO.searchIndexAll(info);
+		}
+		else if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+			System.out.println("상세지역과 체크아웃 둘 다 설정");
+			return houseMapDAO.searchIndexWithBoth(info);
+		}
+		else if(!info.get("detail").contains("선택") && info.get("checkOut").equals("")) { // 체크인 체크아웃 선택 x 상세지역 선택
+			System.out.println("체크인 체크아웃 선택 x 상세지역 선택");
+			return houseMapDAO.searchIndexWithDetail(info);
+		}
+		else if(info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { // 체크인 체크아웃 선택하고 상세지역 선택x
+			System.out.println("체크인 체크아웃 선택하고 상세지역 선택x");
+			return houseMapDAO.searchIndexWithCheckOut(info);
+		}
+		else {	// 둘 다 설정하지 않은 상태
+			System.out.println("큰 지역만 선택함");
+			return houseMapDAO.searchIndex(info);
+		}
+	}
+
+	@Override
+	public List<Map<String, Integer>> searchIndexPrice(Map<String, String> info) {
+		if(info.get("location").contains("지역")) {
+			System.out.println("전체지역 선택");
+			return houseMapDAO.searchIndexAllPrice(info);
+		}
+		else if(!info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { //상세지역과 체크아웃 둘 다 설정
+			System.out.println("상세지역과 체크아웃 둘 다 설정");
+			return houseMapDAO.searchIndexWithBothPrice(info);
+		}
+		else if(!info.get("detail").contains("선택") && info.get("checkOut").equals("")) { // 체크인 체크아웃 선택 x 상세지역 선택
+			System.out.println("체크인 체크아웃 선택 x 상세지역 선택");
+			return houseMapDAO.searchIndexWithDetailPrice(info);
+		}
+		else if(info.get("detail").contains("선택") && !info.get("checkOut").equals("")) { // 체크인 체크아웃 선택하고 상세지역 선택x
+			System.out.println("체크인 체크아웃 선택하고 상세지역 선택x");
+			return houseMapDAO.searchIndexWithCheckOutPrice(info);
+		}
+		else {	// 둘 다 설정하지 않은 상태
+			System.out.println("큰 지역만 선택함");
+			return houseMapDAO.searchIndexPrice(info);
+		}
+	}
+	
+	
 
 }

@@ -40,5 +40,13 @@ public class HouseMapController {
 		mav.setViewName("houseMap");
 		return mav;
 	}
-	
+
+	@RequestMapping(value="/searchIndex.do", produces="application/text; charset=utf-8")
+	public ModelAndView searchIndex(@RequestParam Map<String, String> info, ModelAndView mav) {
+		mav.addObject("houseList", houseMapService.searchIndex(info));
+		mav.addObject("location", info.get("location"));
+		mav.addObject("price", houseMapService.searchIndexPrice(info));
+		mav.setViewName("houseMap");
+		return mav;
+	}
 }

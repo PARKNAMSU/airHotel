@@ -11,7 +11,7 @@
 	</select>
 	<!-- 삭제 대기 house 목록 가지고 오기 -->
 	<select id="getRemoveWaitingList" resultType="kg.air.cnc.vo.House_InfoVO">
-		SELECT h.house_seq as house_seq, h.house_name as house_name, h.house_loaction_fulladdress as house_location_fulladdress, h.house_loaction_detailaddress as house_location_detailaddress, h.house_price_default as house_price_default, h.house_status as house_status, h.house_star as house_star
+		SELECT h.house_seq as house_seq, h.house_name as house_name, h.house_location_fulladdress as house_location_fulladdress, h.house_location_detailaddress as house_location_detailaddress, h.house_price_default as house_price_default, h.house_status as house_status, h.house_star as house_star
 		FROM remove_waiting rw JOIN house_info h
 		ON rw.house_seq = h.house_seq
 		WHERE h.house_status=2 AND rw.remove_status=0
