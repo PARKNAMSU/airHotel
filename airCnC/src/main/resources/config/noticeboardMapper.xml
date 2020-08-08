@@ -8,7 +8,7 @@
         SELECT
             *
         FROM
-            (select rownum rnum, idx, title, writer, regDate
+            (select rownum rnum, idx, title, writer, regDate, content
             from (select * from imsi_board order by idx desc))
         WHERE
         	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
@@ -24,7 +24,60 @@
     ]]>
 	</select>
 
+	<insert id="insertBoard" parameterType="kg.air.cnc.vo.BoardVO">
+		<![CDATA[
+		INSERT INTO imsi_board(idx, title,writer,content)
+		VALUES(tmp_seq.NEXTVAL, #{title}, '관리자', #{content})
+		]]>
+	</insert>
+	
+	<select id="getNoticeListAdmin" resultType="kg.air.cnc.vo.BoardVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, idx, title, writer, regDate, content
+            from (select * from imsi_board order by idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
 
+    ]]>
+	</select>
+	
+	<select id="detailNotice" resultType="kg.air.cnc.vo.BoardVO">
+	 <![CDATA[
+		SELECT
+			idx, title, writer, regDate, content
+		FROM
+			imsi_board
+		WHERE
+			idx=#{idx}
+	]]>
+	</select>
+	
+	<update id="updateNotice">
+		<![CDATA[
+		UPDATE 
+			imsi_board 
+		SET
+			title = #{title},
+			content = #{content}
+		WHERE 
+			idx = #{idx}
+		]]>
+	</update>
+	
+	<delete id="deleteNotice">
+		<![CDATA[
+		DELETE FROM 
+			imsi_board
+		WHERE
+			idx = #{idx}
+		]]>
+	</delete>
+	
+	
+	
 	
 	
 	
@@ -47,28 +100,7 @@
 		]]>
 	</select>
 	
-	<select id="insertBoard">
-		<![CDATA[
-		INSERT INTO imsi_board(idx, title,writer,content,reg_date)
-		VALUES(tmp_seq.NEXTVAL, #{title}, #{writer}, #{content})
-		]]>
-	</select>
 	
-	<update id="updateBoard">
-		<![CDATA[
-		UPDATE imsi_board SET
-		title = #{title},
-		content = #{content}
-		WHERE idx = #{idx}
-		]]>
-	</update>
-
-	<delete id="deleteBoard">
-		<![CDATA[
-		DELETE FROM imsi_board
-		WHERE idx = #{idx}
-		]]>
-	</delete>
 	
 	<select id="getTotalCnt" resultType="int">
 		SELECT count(*)

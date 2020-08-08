@@ -23,6 +23,29 @@ public class NoticeDAO {
 		System.out.println("===> Mybatis로 countBoardList() 기능 처리");
 	    return mybatis.selectOne("noticeMapper.countBoardList");
 	}
-
-
+	
+	public int insertNoticeBoard(BoardVO vo) {
+		System.out.println("===> Mybatis로 insertNoticeBoard() 기능 처리");
+		return mybatis.insert("noticeMapper.insertBoard", vo);
+	}
+	
+	public List<BoardVO> getNoticeListAdmin(PagingCriteria cri) {
+		System.out.println("===> Mybatis로 getNoticeListAdmin() 기능 처리");
+		return mybatis.selectList("noticeMapper.getNoticeListAdmin",cri);
+	}
+	
+	public BoardVO detailNotice(int idx) {
+		System.out.println("===> Mybatis로 detailNotice() 기능 처리");
+		return mybatis.selectOne("noticeMapper.detailNotice", idx);
+	}
+	
+	public void updateNotice(BoardVO vo) {
+		System.out.println("===> Mybatis로 updateNotice() 기능 처리");
+		mybatis.update("noticeMapper.updateNotice", vo);
+	}
+	
+	public void deleteNotice(int idx) {
+		System.out.println("===> Mybatis로 deleteNotice() 기능 처리");
+		mybatis.update("noticeMapper.deleteNotice", idx);
+	}
 }	

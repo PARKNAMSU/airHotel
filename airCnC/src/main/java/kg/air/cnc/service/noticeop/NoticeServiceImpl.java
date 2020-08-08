@@ -20,5 +20,25 @@ public class NoticeServiceImpl implements NoticeService {
 	public int countBoardListTotal() {
 	    return noticeDAO.countBoardList();
 	}
+	@Override
+	public int insertBoard(BoardVO vo) {
+		return noticeDAO.insertNoticeBoard(vo);
+	}
+	@Override
+	public List<BoardVO> getNoticeListAdmin(PagingCriteria cri) {
+		return noticeDAO.getNoticeListAdmin(cri);
+	}
+	@Override
+	public BoardVO detailNotice(int idx) {
+		return noticeDAO.detailNotice(idx);
+	}
+	@Override
+	public void updateNotice(BoardVO vo) {
+		noticeDAO.updateNotice(vo);
+	}
+	@Override
+	public void deleteNotice(int idx) {
+		noticeDAO.deleteNotice(idx);
+	}
 
 }

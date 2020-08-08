@@ -55,6 +55,21 @@
 		border-top: 1px solid rgba(0, 0, 0, 0.08);
 	}
 	</style>
+	
+	<script>
+		
+		function UpdateSubmit() {
+			var f = document.form1;
+			f.action = "<c:url value='/update.do' />";
+			f.submit();
+		}
+		function DeleteSubmit() {
+			var f = document.form1;
+			f.action = "<c:url value='/delete.do' />";
+			f.submit();
+		}
+			
+	</script>
 </head>
 <body>
 <header class="menudiv1" style="position : static">
@@ -114,21 +129,25 @@
 	<div class="title">
 					<h2>공지사항 관리</h2>
 					<hr>
-					<span class="byline">공지사항을 등록합니다.</span><br><br>
+					<span class="byline">공지사항을 수정합니다.</span><br><br>
 				</div>
 		<ul>
             <li>
-                <form  action="/cnc/addNoticeList.do" method="POST">
+                <form id="form1" name="form1" method="POST">
 
-                   			<input name="title" class="" type="text" value="새로운 공지의 제목을 입력하세요."
+                   			<input name="title" class="" type="text" value="${detail.title }"
           					onfocus="if(this.value == '새로운 공지의 제목을 입력하세요.') { this.value = ''; }"
           					onblur="if(this.value == '') { this.value = '새로운 공지의 제목을 입력하세요.'; }" />
-          					<textarea name="content" cols="" rows=""
+          					<textarea name="content" cols="" rows="" 
           					onfocus="if(this.value == '새로운 공지의 내용을 입력하세요.') { this.value = ''; }"
-          					onblur="if(this.value == '') { this.value = '새로운 공지의 내용을 입력하세요.'; }">새로운 공지의 내용을 입력하세요.</textarea>
+          					onblur="if(this.value == '') { this.value = '새로운 공지의 내용을 입력하세요.'; }">${detail.content }</textarea>
 
-          					<input type="submit" value="등록" class="submitbtn" />
-          					<input type="button" value="취소" class="submitbtn"  
+							<input type="hidden" name="idx" value="${detail.idx }">
+          					<input type="button" id="editBtn" value="수정" class="submitbtn" />
+          					<input type="button"  value="삭제" class="submitbtn"/>
+          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
+          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
+          					<input type="button" value="취소" class="submitbtn"
           					onclick="location.href='/cnc/goNoticeListAdmin.do'"/>
                 </form>
 			</li>
@@ -158,4 +177,7 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
 </html>

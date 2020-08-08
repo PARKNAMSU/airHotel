@@ -9,4 +9,9 @@ public interface NoticeService {
 	
 	List<BoardVO> selectBoardList(PagingCriteria cri);
 	int countBoardListTotal();
+	int insertBoard(BoardVO vo);
+	List<BoardVO> getNoticeListAdmin(PagingCriteria cri);
+	public BoardVO detailNotice(int idx);
+	public void updateNotice(BoardVO vo);
+	public void deleteNotice(int idx);
 }
