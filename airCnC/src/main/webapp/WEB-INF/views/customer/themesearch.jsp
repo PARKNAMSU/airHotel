@@ -73,7 +73,19 @@
         <c:set var="themeList" value="${themeList}"/>
         <c:forEach var="item" items="${themeList}" begin="0" end="${themeList.size()}" step="1">
             <div class="col-lg-4 col-md-1">
-                <div class="single_destination2" onclick="location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq='+${item.house_seq}">
+                <div class="single_destination2" onclick="goReservationHouse()">
+                    <form name="houseinfo">
+                        <input type="hidden" name="house_seq">
+                    </form>
+                    <script>
+                        function goReservationHouse() {
+                            var f = document.houseinfo;
+                            f.house_seq.value = ${item.house_seq};
+                            f.action = "/reservationHouse.do";
+                            f.method = "post";
+                            f.submit();
+                        }
+                    </script>
                     <div class="thumb">
                         <img src="${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg"
                              alt=""/>

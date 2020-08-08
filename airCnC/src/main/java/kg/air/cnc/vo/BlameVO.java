@@ -8,7 +8,7 @@ public class BlameVO {
     private String blame_member_id;                     //신고한 아이디
     private String blame_target_member_id;              //신고당한 아이디
     private String blame_content;                       //신고내용
-    private Date blame_time;
+    private Date blame_time;                            //신고시간
 
     public int getBlame_pk() {
         return blame_pk;
