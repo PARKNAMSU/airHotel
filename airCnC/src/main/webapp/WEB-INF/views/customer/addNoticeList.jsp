@@ -118,7 +118,7 @@
 				</div>
 		<ul>
             <li>
-                <form  action="/hotel/addNoticeList.do" method="POST">
+                <form  action="/cnc/addNoticeList.do" method="POST">
 
                    			<input name="title" class="" type="text" value="새로운 공지의 제목을 입력하세요."
           					onfocus="if(this.value == '새로운 공지의 제목을 입력하세요.') { this.value = ''; }"

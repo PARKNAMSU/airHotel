@@ -10,7 +10,11 @@
 		WHERE seq =
 		#{seq}
 	</select>
-
+	
+	<select id="getBoardCnt" parameterType="kg.air.cnc.vo.BoardVO" resultType="int">
+    SELECT COUNT(*)
+    FROM imsi_board
+	</select>
 	<select id="getBoardList" resultType="kg.air.cnc.vo.BoardVO">
 		SELECT * FROM imsi_board
 		ORDER BY seq DESC
