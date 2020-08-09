@@ -184,6 +184,7 @@
 	        }
 	        document.body.appendChild(form);
 	        if(house_status == 0){
+	        	form.action = "reservationHouse.do";
 	        	form.submit();
 	        }else if(house_status == 2){
 	        	var result = confirm("삭제를 취소하시겠습니까?")

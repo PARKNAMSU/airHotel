@@ -214,7 +214,7 @@
 						  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 	
 						  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
-						  doc.save('매출보고서.pdf');
+						  doc.save(fname+'.pdf');
 						  } 
 					});
 				}
@@ -266,6 +266,6 @@
 		        chart.draw(data, options);
 		      }
 		}
-	
+
 </script>
 </html>

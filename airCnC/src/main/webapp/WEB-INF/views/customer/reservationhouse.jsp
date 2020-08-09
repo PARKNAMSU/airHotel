@@ -49,11 +49,24 @@
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
 				${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
 			</div>
-			<div class="headimgdiv" style="margin-left:2%;">
-				<a href="" style="font-family: 'Jua', sans-serif;">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/heart.png" class="headimg">
-				저장</a><!-- 좋아하는 숙소 등록 -->
-			</div>
+			<c:if test="${house.accessType != 'host' }">
+				<c:choose>
+				<c:when test="${house.favorite_state eq 'false' }">
+				<div class="headimgdiv" style="margin-left:2%;" onclick="storeFavoriteHouse(${house.house_seq})">
+					<a href="" style="font-family: 'Jua', sans-serif;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/heart2.png" class="headimg">
+					저장</a><!-- 좋아하는 숙소 등록 -->
+				</div>
+				</c:when>
+				<c:when test="${house.favorite_state eq 'true' }">
+				<div class="headimgdiv" style="margin-left:2%;" onclick="removeFavoriteHouse(${house.house_seq})">
+					<a href="" style="font-family: 'Jua', sans-serif;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/heart.png" class="headimg">
+					취소</a><!-- 좋아하는 숙소 등록 -->
+				</div>
+				</c:when>
+				</c:choose>
+			</c:if>
 		</div>
 	</div>
 	<br><br><br><br>
@@ -171,7 +184,7 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${house.accessType eq 'nowres' }">
-				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;font-size:20px;">예약취소</button>
+				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;font-size:20px;" onclick="cancelReservation(${house.reservation_seq})">예약취소</button>
 				</c:when>
 				<c:when test="${house.accessType eq 'host' }">
 				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;">수정하기</button>
@@ -296,6 +309,64 @@ var deleteHouse = function(house){
 	        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	           }
 	     });	
+	}
+}
+var cancelReservation = function(res){
+	var result = confirm("정말로 취소하시겠습니까?\n※삭제 요청시 10일이내에 취소하지 않을 시 삭제됩니다")
+	if(result){
+		$.ajax({
+			type:"POST",
+			url:"cancelReservation.do",
+			dataType:"text",
+			data:{
+				reservation_seq:res
+			},
+			success: function(data){
+				alert(data);
+				location.href="reservationPage.do"
+			},
+	        error : function(request, status, error) {
+	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	        }
+		})
+	}
+}
+var storeFavoriteHouse = function(house_seq){
+	var result = confirm("숙소를 저장하시겠습니까?")
+	if(result){
+		$.ajax({
+			type:"POST",
+			url:"addFavoritHouse.do",
+			dataType:"text",
+			data:{
+				house_seq:house_seq
+			},
+			success:function(data){
+				window.location.reload()
+			},
+	        error : function(request, status, error) {
+	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	        }
+		})
+	}
+}
+var removeFavoriteHouse = function(house_seq){
+	var result = confirm("숙소를 삭제하시겠습니까?")
+	if(result){
+		$.ajax({
+			type:"POST",
+			url:"removeFavoritHouse.do",
+			dataType:"text",
+			data:{
+				house_seq:house_seq
+			},
+			success:function(data){
+				window.location.reload()
+			},
+	        error : function(request, status, error) {
+	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	        }
+		})
 	}
 }
 </script>

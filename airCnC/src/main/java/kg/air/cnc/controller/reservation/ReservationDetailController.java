@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -21,6 +22,7 @@ import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.service.reservation.ReservationService;
 import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.CommentsVO;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.MessageVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
@@ -44,7 +46,6 @@ public class ReservationDetailController {
 	}
 	@RequestMapping(value = "reservationHouse.do")
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,HttpServletRequest request,ModelAndView mav) {
-		System.out.println(vo.getHouse_seq());
 		if(vo.getHouse_seq() == 0) {
 			Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
 			if(redirectMap != null) {
@@ -55,6 +56,7 @@ public class ReservationDetailController {
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
+		house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq())); 
 		mav.addObject("commentsList",commentsService.getComments(vo));
 		mav.addObject("house",house);
 		mav.setViewName("reservationhouse");
@@ -115,5 +117,30 @@ public class ReservationDetailController {
 	public String insertHostBlame(BlameVO vo,ModelAndView mav) {
 		reservationService.insertBlameHost(vo);
 		return "redirect:declaration.do";
+	}
+	@RequestMapping(value = "cancelReservation.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String cancelReservationController(ReservationHouseDetailVO vo) {
+		reservationService.cancelReservation(vo);
+		return "예약이 취소되었습니다.";
+	}
+	@RequestMapping(value = "addFavoritHouse.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String addFavoritHouse(ReservationHouseDetailVO vo,HttpSession session) {
+		
+		CustomerVO customer = new CustomerVO();
+		customer.setCustomer_id((String)session.getAttribute("login_session"));
+		customer.setFavorite_house(String.valueOf(vo.getHouse_seq()));
+		reservationService.addFavoriteHouse(customer);
+		return "저장되었습니다.";
+	}
+	@RequestMapping(value = "removeFavoritHouse.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String removeFavoriteHous(ReservationHouseDetailVO vo,HttpSession session) {
+		System.out.println(vo.getHouse_seq());
+		String id = (String)session.getAttribute("login_session");
+		String favoriteList = reservationService.getFavoriteHouseNumber(id);
+		reservationService.removeFavoriteHouse(id, favoriteList, vo.getHouse_seq());
+		return "삭제되었습니다.";
 	}
 }

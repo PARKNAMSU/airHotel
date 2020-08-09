@@ -318,7 +318,7 @@ var list = "${salesList}"
 		          ['Task', 'Hours per Day'],
 		          	<c:if test="${salesList2 != null}">
 				      <c:forEach begin="0" end="${salesList2.get(0).house_seq_list.size()-2}" var="i" >
-		        		['${salesList2.get(0).house_seq_list.get(i)})}',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],
+		        		['No.${salesList2.get(0).house_seq_list.get(i)}',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],
 		        	</c:forEach>
 		        	</c:if>
 		        ]);
