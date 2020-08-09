@@ -10,19 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.housereg.HouseService;
 import kg.air.cnc.vo.House_InfoVO;
@@ -173,13 +167,16 @@ public class HouseController {
 		return "8hosthouseimg";
 	}
 	
-	@RequestMapping(value = "/8hosthouseimg.do")
-	public String hosthouseimg(@ModelAttribute("house") House_InfoVO house, Model model) {
+	@RequestMapping(value = "/8hosthouseimg.do", method = RequestMethod.POST)
+	public String hosthouseimg(@ModelAttribute("house") House_InfoVO house, Model model,
+			MultipartHttpServletRequest mtfRequest) {
 		System.out.println(house.toString());
 //		MultipartFile uploadFile = house.getHouse_photo();
+//		String file = uploadFile.getOriginalFilename();
+//		System.out.println("file :" + file);
 //		if(!uploadFile.isEmpty()) {
 //			String fileName = uploadFile.getOriginalFilename();
-//			String path = "c:\\EclipsePractice\\aaa";
+//			String path = "c:\\EclipsePractice\\aaa\\";
 //			System.out.println("사진첨부한 파일 이름 : " + fileName);
 //			try {
 //				new File(path).mkdirs();
@@ -192,8 +189,28 @@ public class HouseController {
 //			house.setHouse_photourl(fileName);
 //			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
 //		}
-		house.setHouse_photourl("사진이 안들어가아앙");
-		System.out.println("사진첨부 안했음");
+		List<MultipartFile> fileList = mtfRequest.getFiles("house_photo");
+		String path = "c:\\EclipsePractice\\aaa\\";
+		
+		for(MultipartFile mf : fileList) {
+			String fileName = mf.getOriginalFilename();
+			System.out.println("오리지널 파일 네임 : " + fileName);
+			try {
+				new File(path).mkdirs();
+				mf.transferTo(new File(path + fileName));
+				System.out.println("복사완료");
+				
+				String newurl = house.getHouse_photourl();
+				System.out.println("이전 이름 : " + newurl);
+				house.setHouse_photourl(newurl + "_" + fileName);
+				System.out.println("새 이름 : " + house.getHouse_photourl());
+			} catch (IllegalStateException e) {
+				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		}	
 		return "9hosttitle";
 	} 
 	

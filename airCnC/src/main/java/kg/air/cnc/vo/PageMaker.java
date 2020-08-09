@@ -1,5 +1,8 @@
 package kg.air.cnc.vo;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {
 	
 	private PagingCriteria cri;
@@ -71,5 +74,25 @@ public class PageMaker {
     public void setDisplayPageNum(int displayPageNum) {
         this.displayPageNum = displayPageNum;
     }
+    
+    
+    public String makeQueryPage(int page) {
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("perPageNum", cri.getPerPageNum())
+                .build();
+        return uri.toUriString();
+    }
+    
+    public String makeQueryPage(int idx, int page) {
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                .queryParam("idx", idx)
+                .queryParam("page", page)
+                .queryParam("perPageNum", cri.getPerPageNum())
+                .build();
+        return uri.toUriString();
+    }
+
+
 
 }

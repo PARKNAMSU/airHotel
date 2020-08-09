@@ -79,31 +79,4 @@
 	
 	
 	
-	
-	
-	<select id="getBoardList" resultType="kg.air.cnc.vo.BoardVO">
-		<![CDATA[
-		SELECT idx, title, writer, regDate
-		FROM (SELECT /*+INDEX_DESC(boardTest pk_board) */
-				rownum rn, idx, title, writer, regDate
-			from imsi_board where rownum <= #{pageNum} * #{amount})
-			where rn > (#{pageNum}-1) * #{amount}
-			ORDER BY idx DESC
-		]]>
-	</select>
-	
-	<select id="getContent" resultType="kg.air.cnc.vo.BoardVO">
-		<![CDATA[
-			SELECT *
-			FROM imsi_board
-			WHERE idx = #{idx}
-		]]>
-	</select>
-	
-	
-	
-	<select id="getTotalCnt" resultType="int">
-		SELECT count(*)
-		FROM imsi_board
-	</select>
 </mapper>

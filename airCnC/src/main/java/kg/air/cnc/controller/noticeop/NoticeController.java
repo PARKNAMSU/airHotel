@@ -64,21 +64,38 @@ public class NoticeController {
 		}
 		
 		@RequestMapping(value = "/detail/{idx}.do")//관리자가 공지사항 목록 클릭해서 들어감.
-		public String detail(@PathVariable("idx") int idx, Model model) throws Exception {
+		public String detail(@PathVariable("idx") int idx, Model model, PagingCriteria cri) throws Exception {
 			System.out.println("idx : " + idx);
 			model.addAttribute("detail", noticeService.detailNotice(idx));
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			model.addAttribute("page", cri.getPage());
+			model.addAttribute("paging", pageMaker);
 			return "addNoticeListModi";
 		}
 		
-		@RequestMapping("/update.do")
-		public String update(BoardVO vo){
+		@RequestMapping("/update.do")//목록 클릭해서 들어가면 있는 수정 기능
+		public String update(BoardVO vo, Model model, PagingCriteria cri){
 			noticeService.updateNotice(vo);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			model.addAttribute("page", cri.getPage());
+			model.addAttribute("paging", pageMaker);
+			
 			return "redirect:/goNoticeListAdmin.do";
 		}
 		
-		@RequestMapping("/delete.do")
-		public String delete(@RequestParam int idx){
+		@RequestMapping("/delete.do")//목록 클릭해서 들어가면 있는 삭제 기능
+		public String delete(@RequestParam int idx, Model model, PagingCriteria cri){
 			noticeService.deleteNotice(idx);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			model.addAttribute("page", cri.getPage());
+			model.addAttribute("paging", pageMaker);
+			
 			return "redirect:/goNoticeListAdmin.do";
 		}
 	

@@ -60,12 +60,17 @@
 		
 		function UpdateSubmit() {
 			var f = document.form1;
-			f.action = "<c:url value='/update.do' />";
+			f.action = '<c:url value="/update.do${paging.makeQueryPage(detail.idx, page) }" />';
 			f.submit();
 		}
 		function DeleteSubmit() {
 			var f = document.form1;
-			f.action = "<c:url value='/delete.do' />";
+			f.action = "<c:url value='/delete.do${paging.makeQueryPage(detail.idx, page) }' />";
+			f.submit();
+		}
+		function ListSubmit() {
+			var f = document.form1;
+			f.action = '<c:url value="/goNoticeListAdmin.do${paging.makeQueryPage(page) }" />';
 			f.submit();
 		}
 			
@@ -145,10 +150,12 @@
 							<input type="hidden" name="idx" value="${detail.idx }">
           					<input type="button" id="editBtn" value="수정" class="submitbtn" />
           					<input type="button"  value="삭제" class="submitbtn"/>
-          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
-          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
           					<input type="button" value="취소" class="submitbtn"
           					onclick="location.href='/cnc/goNoticeListAdmin.do'"/>
+          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
+          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
+          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로라구</button></a>
+          					
                 </form>
 			</li>
 		</ul>

@@ -268,8 +268,9 @@
 						<li class="first">
 							<p class="date"><fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/></p>
 							<h3>글번호 : ${board.idx }번</h3>
-							<p><a href="/cnc/detail/${board.idx }.do">${board.title }</a></p>
-						</li>
+							<p><a href='<c:url value='/detail/${board.idx }.do${paging.makeQueryPage(board.idx, paging.cri.page) }'/>'>${board.title }</a></p>
+						</li>         
+
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
@@ -289,17 +290,17 @@
 		<ul class="pagination">
 		    <c:if test="${paging.prev }">
 		    <li>
-		        <a href='<c:url value="/goNoticeListAdmin.do?page=${paging.startPage-1 }"/>'>이전</a>
+		        <a href='<c:url value="/goNoticeListAdmin.do${paging.makeQueryPage(paging.startPage-1) }"/>'>이전</a>
 		    </li>
 		    </c:if>
 		    <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="pageNum">
 		    <li>
-		        <a href='<c:url value="/goNoticeListAdmin.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+		        <a href='<c:url value="/goNoticeListAdmin.do${paging.makeQueryPage(pageNum) }"/>'><i class="fa">${pageNum }</i></a>
 		    </li>
 		    </c:forEach>
 		    <c:if test="${paging.next && paging.endPage >0 }">
 		    <li>
-		        <a href='<c:url value="/goNoticeListAdmin.do?page=${paging.endPage+1 }"/>'>다음</a>
+		        <a href='<c:url value="/goNoticeListAdmin.do${paging.makeQueryPage(paging.endPage+1) }"/>'>다음</a>
 		    </li>
 		    </c:if>
 		</ul>

@@ -36,6 +36,7 @@
 		function PrevSubmit() {
 			var f = document.hosttitle;
 			f.action = "<c:url value='/7guesttextarea.do' />";
+			f.submit();
 		}
 	
 	</script>
