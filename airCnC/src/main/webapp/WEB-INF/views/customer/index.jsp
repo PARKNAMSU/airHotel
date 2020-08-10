@@ -344,8 +344,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1"
-						onclick="window.open('http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_pool')">
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_pool'">
 						<div class="thumb">
 							<img
 								src="${pageContext.request.contextPath}/resources/images/familywater.jpg"
@@ -360,8 +359,7 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1"
-						onclick="window.open('http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_farm')">
+					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_farm'">
 						<div class="thumb">
 							<img
 								src="${pageContext.request.contextPath}/resources/images/ground.jpg"

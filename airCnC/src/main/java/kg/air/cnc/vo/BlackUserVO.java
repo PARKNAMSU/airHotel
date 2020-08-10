@@ -3,9 +3,9 @@ package kg.air.cnc.vo;
 import java.util.Date;
 
 public class BlackUserVO {
-    String black_id;
-    String black_email;
-    Date regdate;
+    String black_id;                        // 블랙당한 아이디
+    String black_email;                     // 블랙 이메일 (해당 이메일로 회원가입 불가) (pk)
+    Date regdate;                           // 블랙당한 날짜
 
     public String getBlack_id() {
         return black_id;
