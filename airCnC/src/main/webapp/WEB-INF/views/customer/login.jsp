@@ -25,84 +25,92 @@
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>로그인</title>
 </head>
 <body>
 	<!-- header-start -->
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<c:if test="${empty login}">
-						<li class="item">
-							<a href="/Mainwork/html/hostresgister.html">호스트 </a>
-						</li>
-						<li class="item">
-							<p><a href="/cnc/registerView.do">회원가입</a></p>
-						</li>
-						<li class="item">
-							<p><a href="/cnc/loginView.do">로그인</a></p>
-						</li>
-						<li class="item">
-							<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
-						</li>
-					</c:if>
-					<c:if test="${not empty login}">
-						<li class="item">
-							<a href="/Mainwork/html/hostresgister.html">호스트 </a>
-						</li>
-						<li class="item">
-							<p><a href="/cnc/myPageView.do">마이 페이지</a></p>
-						</li>
-						<li class="item">
-							<p><a href="/cnc/logout.do">로그아웃</a></p>
-						</li>
-						<li class="item">
-							<p><a href="javascript:void(0)" onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a></p>
-						</li>
-					</c:if>
+					<c:catch>
+						<c:choose>
+							<c:when test="${login_session eq null}">
+								<li class="item"><a
+									href="/Mainwork/html/hostresgister.html">호스트 </a></li>
+								<li class="item">
+									<p>
+										<a href="/cnc/registerView.do">회원가입</a>
+									</p>
+								</li>
+								<li class="item">
+									<p>
+										<a href="/cnc/loginView.do">로그인</a>
+									</p>
+								</li>
+								<li class="item">
+									<p>
+										<a href="javascript:void(0)"
+											onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
+									</p>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<script>location.href = "/cnc/indexView.do";</script>
+							</c:otherwise>
+						</c:choose>
+					</c:catch>
 				</ul>
 			</div>
 		</div>
 	</header>
 	<form action="/cnc/loginProcess.do" method="post">
 		<div class="container">
-			<img src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
+			<img
+				src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
 			<div id="light1" class="white_content" style="text-align: center;">
 				<div class="allScreen" id="my__all__login">
 					<div class="my__login" style="display: inline-block;">
 						<div class="a">
 							<div class="login">
-								<div>
-									<a class="bb1" style="font-size: 30px;"><span>네이버
-											계정으로 로그인</span></a>
+								<script type="text/javascript"
+									src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+									charset="utf-8"></script>
+								<div id="naver_id_login" style="text-align: center;">
+									<a href="${naverUrl}"> <img width="200"
+										src="${pageContext.request.contextPath}/resources/images/naver_login.png" />
+									</a>
 								</div>
-								<div>
-									<a class="bb2" style="font-size: 30px;"> <span>카카오
-											계정으로 로그인</span></a>
+								<div id="kakao_id_login" style="text-align: center">
+									<a href="${kakaoUrl}" id="kakao-login-btn"> <img width="200"
+										src="${pageContext.request.contextPath}/resources/images/kakao_login.png" />
+									</a>
 								</div>
 								<div class="a3">
-									<input class="bb6" type="text" id="customerId" name="customer_id" 
-									placeholder="&nbsp;&nbsp;아이디" required/>
+									<input class="bb6" type="text" id="customerId"
+										name="customer_id" placeholder="&nbsp;&nbsp;아이디" required />
 								</div>
 								<div class="a3">
 									<input class="bb6" type="password" id="customerPassword"
 										name="customer_password" placeholder="&nbsp;&nbsp;비밀번호"
-										required/>
+										required />
 								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
 									<input type="checkbox" id="remember_id"
-										name="remember_customerId"/><label
-										for="idsave">아이디 저장</label>
+										name="remember_customerId" /><label for="idsave">아이디
+										저장</label>
 								</div>
 
 								<div class="a5">
-									<a class="bb9" style="font-size: 15px;" href="#">비밀번호가 생각나지
+									<a class="bb9" style="font-size: 15px;" href="/cnc/forgotPasswordView.do">비밀번호가 생각나지
 										않으세요?</a>
 								</div>
 								<div>
