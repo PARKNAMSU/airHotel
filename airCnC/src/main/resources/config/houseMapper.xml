@@ -38,7 +38,7 @@
 	</insert>
 	
 	
-	<insert id="insertHouse" parameterType="kg.air.cnc.vo.HouseVO">
+	<insert id="insertHouse" parameterType="kg.air.cnc.vo.House_InfoVO">
 	insert into house_info
 	(
 	house_seq,
@@ -52,8 +52,8 @@
 	house_bathroom_type,
 	house_location,
 	house_location_postnum,
-	house_loaction_fulladdress,
-	house_loaction_detailaddress,
+	house_location_fulladdress,
+	house_location_detailaddress,
 	house_location_sido,
 	house_location_gugun,
 	house_xlocation,
@@ -118,8 +118,8 @@
 	#{house_bathroom_type},
 	#{house_location},
 	#{house_location_postnum},
-	#{house_loaction_fulladdress},
-	#{house_loaction_detailaddress},
+	#{house_location_fulladdress},
+	#{house_location_detailaddress},
 	#{house_location_sido},
 	#{house_location_gugun},
 	#{house_xlocation},

@@ -3,16 +3,17 @@ package kg.air.cnc.vo;
 import java.sql.Date;
 
 public class BoardVO {
-	private int seq;
+	private int idx;
 	private String title;
 	private String writer;
 	private String content;
 	private Date regDate;
-	public int getSeq() {
-		return seq;
+	
+	public int getIdx() {
+		return idx;
 	}
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getTitle() {
 		return title;
@@ -40,7 +41,7 @@ public class BoardVO {
 	}
 	@Override
 	public String toString() {
-		return "BoardVO [seq=" + seq + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regDate="
+		return "BoardVO [idx=" + idx + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regDate="
 				+ regDate + "]";
 	}
 	
