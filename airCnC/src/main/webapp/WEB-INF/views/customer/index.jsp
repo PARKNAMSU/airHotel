@@ -56,8 +56,7 @@
 						</li>
 						<li class="item">
 							<p>
-								<a href="javascript:void(0)"
-									onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
 					</c:if>
@@ -65,8 +64,7 @@
 						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
 						<li class="item">
 							<p>
-								<a href="javascript:void(0)"
-									onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
 						<c:choose>
