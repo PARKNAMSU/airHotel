@@ -17,4 +17,5 @@ public interface ReservationDAOImpl {
 	public String getFavoriteHouse(String id);
 	public void addFavoriteHouse(CustomerVO vo);
 	public void removeFavoriteHouse(CustomerVO vo);
+	public List<ReservationHouseDetailVO> getResForSpecHouse(int house_seq);
 }

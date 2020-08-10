@@ -39,4 +39,13 @@
 	<update id="removeFavoriteHouse" parameterType="kg.air.cnc.vo.CustomerVO">
 		UPDATE customer SET favorite_house = #{favorite_house}  WHERE customer_id = #{customer_id}
 	</update>
+	<select id="getResForSpecHouse" parameterType="Integer" resultType="kg.air.cnc.vo.ReservationHouseDetailVO"> 
+		SELECT to_char(reservation_check_in,'yyyy-mm-dd') as reservation_check_in, to_char(reservation_check_out,'yyyy-mm-dd') as reservation_check_out FROM reservation WHERE reservation_house_seq = #{house_seq}
+	</select>
+	<select id="getMyFavoriteHouse" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
+		SELECT house_seq, house_photourl, house_name FROM house_info WHERE house_seq IN
+		<foreach collection="seqArray" item="arr" open="(" close=")" separator=",">
+		 #{arr}
+		</foreach>
+	</select>
 </mapper>
