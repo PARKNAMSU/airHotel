@@ -50,7 +50,7 @@
           "
       ></i
       ></span>
-    <label for="fas fa-question" style="font-size: 40px;">강아지 테마 페이지</label>
+    <label for="fas fa-question" style="font-size: 40px;">파티룸 테마 페이지</label>
 </header>
 <!-- header-end -->
 
@@ -65,7 +65,7 @@
                 <div id="theme_title" class="section_title text-center mb_70">
                     <!-- 선택한 테마에 따라서 동적으로 변환 -->
                     <h3 class="theme_title" style="padding-top: 30px;">
-                        강아지와 함께 떠나는 여행
+                        파티를 즐기자
                     </h3>
                 </div>
             </div>
@@ -99,13 +99,13 @@
                 </div>
             </div>
         </c:forEach>
-            <div class="btn" style="padding-top: 15px;">
-                <button class="btn1" type="submit" style="float: right;">
-                    <a href="/html/reservation_map.html">상세페이지로 가기</a>
-                </button>
-            </div>
+        <div class="btn" style="padding-top: 15px;">
+            <button class="btn1" type="submit" style="float: right;">
+                <a href="/html/reservation_map.html">상세페이지로 가기</a>
+            </button>
         </div>
     </div>
+</div>
 </div>
 <!-- 메인화면  -->
 

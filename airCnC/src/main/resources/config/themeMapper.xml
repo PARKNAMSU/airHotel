@@ -4,7 +4,7 @@
 
 <mapper namespace="kg.air.cnc.dao.theme.ThemeDAO">
     <select id="getThemeHouseList" resultType="kg.air.cnc.vo.House_InfoVO" parameterType="String">
-        SELECT * FROM house_info WHERE ${value} = 'true' AND house_status = 0
+        SELECT * FROM house_info WHERE ${value} = 'true' AND house_status = 0 ORDER BY house_star DESC
     </select>
 
     <select id="getHighScoreHouseList" resultType="kg.air.cnc.vo.House_InfoVO">
