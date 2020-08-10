@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>공지사항 등록 페이지</title>
+	<title>이벤트 수정 페이지</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css"
-		href="../css/font-awesome.min.css">
+		href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" type="text/css"
@@ -60,68 +60,68 @@
 		
 		function UpdateSubmit() {
 			var f = document.form1;
-			f.action = '<c:url value="/update.do${paging.makeQueryPage(detail.idx, page) }" />';
+			f.action = '<c:url value="/updateEvent.mdo${paging.makeQueryPage(detail.event_idx, page) }" />';
 			f.submit();
 		}
 		function DeleteSubmit() {
 			var f = document.form1;
-			f.action = "<c:url value='/delete.do${paging.makeQueryPage(detail.idx, page) }' />";
+			f.action = "<c:url value='/deleteEvent.mdo${paging.makeQueryPage(detail.event_idx, page) }' />";
 			f.submit();
 		}
 		function ListSubmit() {
 			var f = document.form1;
-			f.action = '<c:url value="/goNoticeListAdmin.do${paging.makeQueryPage(page) }" />';
+			f.action = '<c:url value="/goEventListAdmin.mdo${paging.makeQueryPage(page) }" />';
 			f.submit();
 		}
 			
 	</script>
 </head>
 <body>
-<header class="menudiv1" style="position : static">
-  <div class="menudiv2-1" >
-  <img alt="" src="../images/logo2.png">
-  </div>
-  <div class="menudiv2-2" style="overflow : hidden">
-    <div class="menudiv3-1" id="div1">
-      <ul id="menuItems">
-                  <li class="item">계정관리</li>
-                  <li class="item">통계</li>
-                  <li class="item">숙소관리</li>
-                  <li class="item">로그관리</li>
-        <li class="item">로그인</li>
-              </ul>
-          </div>
-      </div>
-  </header>
+	<header class="menudiv1" style="position : static">
+	<div class="menudiv2-1" >
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png">
+	</div>
+	<div class="menudiv2-2" style="overflow : hidden">
+		<div class="menudiv3-1" id="div1">
+		<ul id="menuItems">
+			<li class="item">계정관리</li>
+			<li class="item">통계</li>
+			<li class="item">숙소관리</li>
+			<li class="item">로그관리</li>
+	        <li class="item">로그인</li>
+		</ul>
+		</div>
+	</div>
+	</header>
 	<!--/ header-start -->
-	 <!-- bradcam_area  -->
-     <div class="bradcam_area bradcam_bg_5">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>contact</h3>
-                        <p>관리자-공지사항등록 화면이에요</p>
-                    </div>
-                </div>
-            </div>
+	
+	<!-- bradcam_area  -->
+	<div class="bradcam_area bradcam_bg_5">
+		<div class="container">
+			<div class="row">
+		 		<div class="col-xl-12">
+					<div class="bradcam_text text-center">
+						<h3>contact</h3>
+						<p>관리자-공지사항수정 화면이에요</p>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
     <!--/ bradcam_area  -->
-
-	<div class="container">
+    
+    
+    <div class="container">
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="공지사항.html">공지사항</a></li>
-	    <li><a href="이벤트.html">이벤트</a></li>
-	    <li><a href="약관정책.html">약관정책</a></li>
+	    <li><a href="공지사항.html">공지사항 관리</a></li>
+	    <li><a href="이벤트.html">이벤트 관리</a></li>
+	    <li><a href="약관정책.html">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의</a></li>
-	        <li><a href="나의질문.html" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="안내.html" aria-label="subemnu">안내</a></li>
-	        <li><a href="약관정책.html" aria-label="subemnu">약관정책</a></li>
+	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -132,37 +132,45 @@
 
 	<div style="float: left; width: 60%; " id="featured">
 	<div class="title">
-					<h2>공지사항 관리</h2>
-					<hr>
-					<span class="byline">공지사항을 수정합니다.</span><br><br>
-				</div>
+	<h2>이벤트 관리</h2>
+	<hr>
+	<span class="byline">행사를 수정합니다.</span><br><br>
+	</div>
 		<ul>
-            <li>
-                <form id="form1" name="form1" method="POST">
+		<li>
+		<form id="form1" name="form1" method="POST" enctype="multipart/form-data">
 
-                   			<input name="title" class="" type="text" value="${detail.title }"
-          					onfocus="if(this.value == '새로운 공지의 제목을 입력하세요.') { this.value = ''; }"
-          					onblur="if(this.value == '') { this.value = '새로운 공지의 제목을 입력하세요.'; }" />
-          					<textarea name="content" cols="" rows="" 
-          					onfocus="if(this.value == '새로운 공지의 내용을 입력하세요.') { this.value = ''; }"
-          					onblur="if(this.value == '') { this.value = '새로운 공지의 내용을 입력하세요.'; }">${detail.content }</textarea>
+		<input name="event_title" class="" type="text" value="${detail.event_title}"
+		onfocus="if(this.value == '새로운 행사의 제목을 입력하세요.') { this.value = ''; }"
+		onblur="if(this.value == '') { this.value = '새로운 행사의 제목을 입력하세요.'; }" />
+		
+		<textarea name="event_content" cols="" rows=""
+		onfocus="if(this.value == '새로운 행사의 내용을 입력하세요.') { this.value = ''; }"
+		onblur="if(this.value == '') { this.value = '새로운 행사의 내용을 입력하세요.'; }">${detail.event_content }</textarea>
+ 		
+ 		<p>
+		<input type="date" id="trip-start" name="event_start"
+ 		value="${detail.event_start }" min="2020-01-01" max="2020-12-31">
+ 		 ~
+		<input type="date" id="trip-end" name="event_end"
+		value="${detail.event_end }" min="2020-01-01" max="2020-12-31">
+       	</p>
+       	
+       	<input type="text" name="event_url" value="${detail.event_url}">
+       	<p>(이전 이미지 파일을 수정하려면 아래 파일선택을 해주세요.)</p><br>
+		<input multiple="multiple" type="file" name="event_img" id="event_img" />
+		
+		<input type="hidden" name="event_idx" value="${detail.event_idx }">
+		<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
+		<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
+		<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로라구</button></a>
 
-							<input type="hidden" name="idx" value="${detail.idx }">
-          					<input type="button" id="editBtn" value="수정" class="submitbtn" />
-          					<input type="button"  value="삭제" class="submitbtn"/>
-          					<input type="button" value="취소" class="submitbtn"
-          					onclick="location.href='/cnc/goNoticeListAdmin.do'"/>
-          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
-          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
-          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로라구</button></a>
-          					
-                </form>
-			</li>
+		</form>
+		</li>
 		</ul>
 	</div>
 	</div>
-
-
+	
 	<div id="footer"></div>
      <footer class="first" id="bottom" >
 		<div class="second">
@@ -181,8 +189,6 @@
 			<img src="../images/insta.png" id="blogo">
 		</div>
 	</footer>
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
