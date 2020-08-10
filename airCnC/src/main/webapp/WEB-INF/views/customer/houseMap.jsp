@@ -42,7 +42,7 @@
 			<form action="getDetail.do">
 				<div class="srcachlocation">
 					<select id="select_type" name="location">
-						<option id="first">지역 선택</option>
+						<option id="first">지역 전체</option>
 						<option id="seo">서울</option>
 						<option id="gye">경기</option>
 						<option id="gw">강원</option>
@@ -125,24 +125,24 @@
 				</div>
 			</form>
 		</div>
-		<div class="containerr">
+			<div class="containerr">
+			<div id="map"></div>
+			<div class="mapSide">
 			<c:forEach items="${houseList}" var="house">
 				<a href="getHouse.do?${house.house_seq}">
 					<div class="houseList" style="color: black">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/face.png"
-							alt="숙소 이미지" class="littleImg">
-						${house.house_seq }<br>
-						${house.house_name }<br> 
-						${house.house_location }<br>
-						별점<br>
-						가격
+						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
+							${house.house_seq }<br>
+							${house.house_name }<br> 
+							${house.house_location }<br>
+							별점<br>
+							가격
 					</div>
-				</a>
-				<br>
-			</c:forEach>
-			<div id="map"></div>
-		</div>
+					</a>
+					<br>
+				</c:forEach>
+			</div>
+			</div>
 	</main>
 	<footer class="first" id="bottom">
 		<div class="second">
@@ -407,9 +407,9 @@
 
 	<script>
 		var peopleCheck = function() {
-			let peo = document.getElementById("people").value;
-			if(peo<0) peo = 1;
-			if(peo>10) peo = 10;
+			let peo = document.getElementById("people");
+			if(peo.value<1) peo.value = 1;
+			if(peo.value>10) peo.value = 10;
 		}
 	</script>
 </body>

@@ -4,7 +4,7 @@ body{
 
 hr{
    	float: left;
- 	width: 58%;
+ 	width: 100%;
  	color : black;
 }
 
@@ -17,7 +17,8 @@ main{
     padding-right: 10px;
     padding-left: 10px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
+    height : 460px;
 }
 
 .searchZone{
@@ -45,23 +46,17 @@ main{
     display : none;
 }
 
-#map{
-    position : sticky;
+#map {
     width : 40%;
     height : 600px;
-    right : 0;
-    left : 0;
-    bottom : 0;
     float : right;
-  	overflow : hidden;
-  	z-index : 20;
 }
 
 .houseList {
 	float : left;
   	display: table-cell;
   	text-align: left;
-  	width : 58%;
+  	width : 98%;
   	color: black;
   	padding : 5px 0 5px;
   	border-bottom : 1px solid gray;
@@ -75,7 +70,7 @@ main{
 }
 
 footer {
-    clear : left;
+    clear : both;
     z-index : 999;
 }
 
@@ -90,4 +85,9 @@ footer {
 .house_name{
 	color : black;
 	align: center;
+}
+
+.mapSide{
+	height : 600px;
+	overflow : scroll;
 }
