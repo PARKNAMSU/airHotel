@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-    <title>°ü¸®ÀÚ »èÁ¦ ÆÄÀÏ</title>
+    <title>ê´€ë¦¬ìž ì‚­ì œ íŒŒì¼</title>
 </head>
 <body>
     <!-- header-start -->
@@ -23,11 +23,11 @@
 		<div class="menudiv2-2" style="overflow : hidden">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-                    <li class="item">°èÁ¤°ü¸®</li>
-                    <li class="item">Åë°è</li>
-                    <li class="item">¼÷¼Ò°ü¸®</li>
-                    <li class="item">·Î±×°ü¸®</li>
-					<li class="item">·Î±×ÀÎ</li>
+                    <li class="item">ê³„ì •ê´€ë¦¬</li>
+                    <li class="item">í†µê³„</li>
+                    <li class="item">ìˆ™ì†Œê´€ë¦¬</li>
+                    <li class="item">ë¡œê·¸ê´€ë¦¬</li>
+					<li class="item">ë¡œê·¸ì¸</li>
                 </ul>
             </div>
         </div>
@@ -53,9 +53,9 @@
     <br>
     <div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a href="getRegisterWaitingList.mdo">È£½ºÆ® µî·Ï °ü¸®</a></li>
-			<li class="menu"><a href="getRemoveWaitingList.mdo">È£½ºÆ® »èÁ¦ °ü¸®</a></li>
-			<li class="menu"><a id="topmenu" href="getRemoveHostList.mdo">È£½ºÆ® »èÁ¦</a></li>
+			<li class="menu"><a href="getRegisterWaitingList.mdo">ìˆ™ì†Œ ë“±ë¡ ê´€ë¦¬</a></li>
+			<li class="menu"><a href="getRemoveWaitingList.mdo">ìˆ™ì†Œ ì‚­ì œ ê´€ë¦¬</a></li>
+			<li class="menu"><a id="topmenu" href="getRemoveHostList.mdo">í˜¸ìŠ¤íŠ¸ ì‚­ì œ</a></li>
 		</ul>
     </div>
     <!-- <form action="deleteHost.mdo"> -->
@@ -68,7 +68,7 @@
     </div>
     <!-- 
         <div style="text-align: center;">
-        <input type="submit" class="btn btn" value="»èÁ¦">
+        <input type="submit" class="btn btn" value="ì‚­ì œ">
     </div>
     </form>
 	-->

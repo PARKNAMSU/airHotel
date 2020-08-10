@@ -69,7 +69,7 @@
 
 div hr{
     float: left;
-    width: 73%;
+    width: 79%;
 }
 
  footer {
@@ -78,10 +78,11 @@ div hr{
 
 
  .hostList {
+ 	clear : left;
      margin-top: 3%;
      text-align: center;
      padding-right: 4%;
- }
+}
 
  .hostList li {
      margin-bottom: 1%;

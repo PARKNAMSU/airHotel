@@ -9,6 +9,6 @@ import kg.air.cnc.vo.CuponVO;
 public interface CuponService {
 	public void makeCupon(HttpSession session);
 	public void useCupon(String cuponNumber);
-	public int checkNumber(String cuponNumber);
+	public CuponVO checkNumber(String cuponNumber);
 	public List<CuponVO> getCuponList();
 }

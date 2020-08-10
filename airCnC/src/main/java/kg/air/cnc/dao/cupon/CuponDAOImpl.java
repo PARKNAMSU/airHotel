@@ -21,7 +21,7 @@ public class CuponDAOImpl {
 		mybatis.delete("cuponDAO.makeCupon", cuponNumber);
 	}
 
-	public int checkNumber(String cuponNumber) {
+	public CuponVO checkNumber(String cuponNumber) {
 		return mybatis.selectOne("cuponDAO.checkNumber", cuponNumber);
 	}
 	

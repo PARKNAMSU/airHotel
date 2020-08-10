@@ -125,12 +125,13 @@
 				</div>
 			</form>
 		</div>
-			<div class="containerr">
+		<div class="containerr">
 			<div id="map"></div>
 			<div class="mapSide">
 			<c:forEach items="${houseList}" var="house">
-				<a href="getHouse.do?${house.house_seq}">
-					<div class="houseList" style="color: black">
+				<form action="reservationHouse.do" method="post" id="test">
+				<input type="hidden" value="%{house.house_seq}"/>
+					<div class="houseList" style="color: black" onclick="sub()">
 						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
 							${house.house_seq }<br>
 							${house.house_name }<br> 
@@ -138,11 +139,11 @@
 							별점<br>
 							가격
 					</div>
-					</a>
+				</form>
 					<br>
 				</c:forEach>
 			</div>
-			</div>
+		</div>
 	</main>
 	<footer class="first" id="bottom">
 		<div class="second">
@@ -410,6 +411,12 @@
 			let peo = document.getElementById("people");
 			if(peo.value<1) peo.value = 1;
 			if(peo.value>10) peo.value = 10;
+		}
+	</script>
+		
+	<script>
+		var sub = function() {
+			${"#test"}.submit();
 		}
 	</script>
 </body>

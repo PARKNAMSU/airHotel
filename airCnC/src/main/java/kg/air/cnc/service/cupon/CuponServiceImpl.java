@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-
 import kg.air.cnc.dao.cupon.CuponDAOImpl;
 import kg.air.cnc.vo.CuponVO;
 //@Service
@@ -26,10 +23,8 @@ public class CuponServiceImpl implements CuponService {
 	}
 
 	@Override
-	public int checkNumber(String cuponNumber) {
-		int result = cuponDAO.checkNumber(cuponNumber);
-		if(result==0) return 0;
-		else return 1;
+	public CuponVO checkNumber(String cuponNumber) {
+		return cuponDAO.checkNumber(cuponNumber);
 	}
 	
 	@Override
