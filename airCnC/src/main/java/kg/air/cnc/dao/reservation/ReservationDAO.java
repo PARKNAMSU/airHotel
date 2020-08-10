@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.BlameVO;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 
@@ -37,5 +38,33 @@ public class ReservationDAO implements ReservationDAOImpl{
 		sqlSessionTemplate.insert("ReservationDAO.InsertBlameHost",vo);
 		
 	}
+
+	@Override
+	public void rollbackReservationCancel(ReservationHouseDetailVO vo) {
+		sqlSessionTemplate.update("ReservationDAO.rollbackReservationCancel",vo);
+	}
+
+	@Override
+	public void cancelReservation(ReservationHouseDetailVO vo) {
+		sqlSessionTemplate.update("ReservationDAO.cancelReservation",vo);
+		
+	}
+
+	@Override
+	public String getFavoriteHouse(String id) {
+		
+		return sqlSessionTemplate.selectOne("ReservationDAO.getFavoriteHouse",id);
+	}
+
+	@Override
+	public void addFavoriteHouse(CustomerVO vo) {
+		sqlSessionTemplate.update("ReservationDAO.addFavoriteHouse",vo);
+	}
+
+	@Override
+	public void removeFavoriteHouse(CustomerVO vo) {
+		sqlSessionTemplate.update("ReservationDAO.removeFavoriteHouse",vo);
+	}
+	
 	
 }

@@ -83,6 +83,7 @@
 						<option value="sendMessage">메세지전송</option>
 						<option value="insertCommnets">후기등록</option>
 						<option value="updateComments">후기수정</option>
+						<option value="insertBlame">유저신고</option>
 					</select>
 					<input type="date" class="form-control form-control-lg" id="startDate" name="startDate" style="margin-right:30px">~<b style="margin-right:30px;"></b>
 					<input type="date" class="form-control form-control-lg" id="endDate" name="endDate" style="margin-right: 30px;">

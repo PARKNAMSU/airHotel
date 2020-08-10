@@ -76,7 +76,7 @@
 	<div id="sidediv">
 		<ul id="sidemenu">
 			<li class="menu"><a href="salesChart.mdo">매출현황</a></li>
-			<li class="menu"><a href="">숙소이용 현황</a></li>
+			<li class="menu"><a href="resChart.mdo">숙소이용 현황</a></li>
 			<li class="menu"><a href="signupChart.mdo">회원가입 현황</a></li>
 			<li class="menu"><a href="hostChart.mdo">호스트 신청 현황</a></li>
 		</ul>
@@ -174,7 +174,7 @@
 								<tr>
 									<td>${sign_upList.get(i).signupchart_date }</td>
 									<td>${sign_upList.get(i).signupchart_num }명</td>
-									<td></td>
+									<td>N/A</td>
 									<td>${sign_upList.get(i).signupchart_persant }%</td>
 									<td>${sign_upList.get(i).signupchart_sum }명</td>
 								</tr>
@@ -185,7 +185,7 @@
 									<td>${sign_upList.get(i).signupchart_num }명</td>
 									<td>${sign_upList.get(i).signupchart_compare_before }명</td>
 									<td>${sign_upList.get(i).signupchart_persant }%</td>
-									<td></td>
+									<td>N/A</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -236,6 +236,7 @@ $(function(){
 
 function ReportToExcel(){
 	fname = prompt("파일 이름을 입력해주세요")
+	if(fname != null || fname == ""){
 	$("#salesTable").table2excel({
 		exclude: ".noExl",
 		name: "Excel sales",
@@ -245,9 +246,12 @@ function ReportToExcel(){
 		exclued_links: true,
 		exclude_inputs:true
 	})
+	}
 
 }
 	function ReportToPDF(){
+		fname = prompt("파일 이름을 입력해주세요")
+		if(fname != null || fname == ""){
 			html2canvas(document.getElementById("salesTable"), {
 				 onrendered : function(canvas){
 				  var imgData = canvas.toDataURL('image/png');
@@ -261,6 +265,7 @@ function ReportToExcel(){
 				 doc.save('개인지출내역서.pdf');
 			  } 
 		});
+		}
 }
 
 	function getCharts(){

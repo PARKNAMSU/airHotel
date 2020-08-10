@@ -5,7 +5,7 @@
 <mapper namespace="ReservationDAO">
 
 	<select id="getMyReservaiton" parameterType="String" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
-		<![CDATA[select reservation_seq,h.house_seq as house_seq , h.house_photourl as house_photourl, h.house_name as house_name from reservation join house_info h on reservation_house_seq = house_seq where reservation_customer_id = #{value} and reservation_check_in > sysdate]]> 
+		<![CDATA[select reservation_seq,reservation_status,h.house_seq as house_seq , h.house_photourl as house_photourl, h.house_name as house_name from reservation join house_info h on reservation_house_seq = house_seq where reservation_customer_id = #{value} and reservation_check_in > sysdate]]> 
 	</select>
 	<select id="getMyReservationBefore" parameterType="String" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
 		<![CDATA[select reservation_seq,h.house_seq as house_seq , h.house_photourl as house_photourl, h.house_name as house_name from reservation join house_info h on reservation_house_seq = house_seq where reservation_customer_id = #{value} and reservation_check_in < sysdate]]> 
@@ -18,10 +18,25 @@
 		 house_restrict_stairs,house_restrict_noise, house_restrict_cantpark, house_restrict_pet ,house_restrict_commonspace, house_restrict_facility, house_restrict_cctv, house_restrict_weapon, house_restrict_beast, house_price_max, house_xlocation,house_ylocation, house_checkin_time as house_checkin_time,
 		 house_checkout_time as house_checkout_time, house_regdate,h.host_name as host_name,h.host_id as host_id, h.host_phone as host_phone, h.host_regdate as host_regdate from house_info join host h on house_host_id = host_id where house_seq = #{house_seq} 
 	</select>
+	<select id="getFavoriteHouse" parameterType="String" resultType="String">
+		SELECT favorite_house FROM customer WHERE customer_id = #{value}
+	</select>
 	<insert id="InsertBlameHost" parameterType="kg.air.cnc.vo.BlameVO">
 		<selectKey keyProperty="blame_pk" resultType="int" order="BEFORE">
 			SELECT pk_sequence.nextval FROM dual
 		</selectKey>
 		INSERT INTO blame(blame_seq,blame_member_id,blame_target_member_id,blame_content) values(#{blame_pk},#{blame_member_id},#{blame_target_member_id},#{blame_content})
 	</insert>
+	<update id="rollbackReservationCancel" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO">
+		UPDATE reservation SET reservation_status = 0 WHERE reservation_seq = #{reservation_seq}
+	</update>
+	<update id="cancelReservation" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO">
+		UPDATE reservation SET reservation_status = 1 WHERE reservation_seq = #{reservation_seq}
+	</update>
+	<update id="addFavoriteHouse" parameterType="kg.air.cnc.vo.CustomerVO">
+		UPDATE customer SET favorite_house = favorite_house || #{favorite_house}  WHERE customer_id = #{customer_id}
+	</update>
+	<update id="removeFavoriteHouse" parameterType="kg.air.cnc.vo.CustomerVO">
+		UPDATE customer SET favorite_house = #{favorite_house}  WHERE customer_id = #{customer_id}
+	</update>
 </mapper>

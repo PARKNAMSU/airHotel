@@ -22,14 +22,14 @@ $(function(){
 	})
 })
 function openDetail(){
-	window.open("salesChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+	window.open("salesChartDetail.mdo",'aa',"width=1200, height=900, resizable = no, scrollbars = no")
 }
 function openSignupDetail(){
-	window.open("signupChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+	window.open("signupChartDetail.mdo",'aa',"width=1200, height=900, resizable = no, scrollbars = no")
 }
 function openHostDetail(){
-	window.open("hostChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+	window.open("hostChartDetail.mdo",'aa',"width=1200, height=900, resizable = no, scrollbars = no")
 }
 function openResDetail(){
-	window.open("resChartDetail.mdo",'aa',"width=1200, height=1000, resizable = no, scrollbars = no")
+	window.open("resChartDetail.mdo",'aa',"width=1200, height=900, resizable = no, scrollbars = no")
 }

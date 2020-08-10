@@ -11,8 +11,7 @@ public class AdminDAOImpl implements AdminDAO{
 	SqlSession sqlSession;
 	
 	@Override
-	public boolean loginCheck(AdminVO adminVO) throws Exception {
-		String adminId = sqlSession.selectOne("admin.login_check", adminVO);
-		return (adminId == null) ? false : true;
+	public AdminVO loginCheck(String admin_id) throws Exception {
+		return sqlSession.selectOne("admin.loginCheck", admin_id);
 	}
 }

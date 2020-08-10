@@ -63,18 +63,66 @@ public class ReservationHouseDetailVO {
 	private int house_price_max;
 	private String house_checkin_time;
 	private String house_checkout_time;
+	private int house_status;
+	private String house_status_text;
 	private String host_id;
 	private String host_name;
     private String host_image;
     private String host_phone;
     private Date host_regdate;
-
+    private String reservation_status_text;
 	private int reservation_seq;
+	private int reservation_status;
     private ArrayList<String> convinList;
     private ArrayList<String> restricList;
     private ArrayList<String> conditionList;
     private String accessType;
-    public String getHost_id() {
+    private String favoriteHouse_String;
+    private ArrayList<Integer> favoriteHouse_list;
+    private String favorite_state;
+    public String getFavorite_state() {
+		return favorite_state;
+	}
+	public void setFavorite_state(String favorite_state) {
+		this.favorite_state = favorite_state;
+	}
+	public String getFavoriteHouse_String() {
+		return favoriteHouse_String;
+	}
+	public void setFavoriteHouse_String(String favoriteHouse_String) {
+		this.favoriteHouse_String = favoriteHouse_String;
+	}
+	public ArrayList<Integer> getFavoriteHouse_list() {
+		return favoriteHouse_list;
+	}
+	public void setFavoriteHouse_list(ArrayList<Integer> favoriteHouse_list) {
+		this.favoriteHouse_list = favoriteHouse_list;
+	}
+	public String getReservation_status_text() {
+		return reservation_status_text;
+	}
+	public void setReservation_status_text(String reservation_status_text) {
+		this.reservation_status_text = reservation_status_text;
+	}
+	public int getReservation_status() {
+		return reservation_status;
+	}
+	public void setReservation_status(int reservation_status) {
+		this.reservation_status = reservation_status;
+	}
+	public int getHouse_status() {
+		return house_status;
+	}
+	public void setHouse_status(int house_status) {
+		this.house_status = house_status;
+	}
+	public String getHouse_status_text() {
+		return house_status_text;
+	}
+	public void setHouse_status_text(String house_status_text) {
+		this.house_status_text = house_status_text;
+	}
+	public String getHost_id() {
 		return host_id;
 	}
 	public void setHost_id(String host_id) {

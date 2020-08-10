@@ -15,8 +15,17 @@ public class CustomerVO {
     private Date customer_regdate;
     private Date customer_stop_end_date;
     private int customer_status;
+    private String favorite_house;
+    
+    public String getFavorite_house() {
+		return favorite_house;
+	}
 
-    public String getCustomer_id() {
+	public void setFavorite_house(String favorite_house) {
+		this.favorite_house = favorite_house;
+	}
+
+	public String getCustomer_id() {
         return customer_id;
     }
 

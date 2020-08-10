@@ -18,6 +18,9 @@
 <title>관리자 메인</title>
 </head>
 <body>
+	<c:if test="${admin_session eq null}">
+		<script type="text/javascript">location.href="/admin/adminLoginView.mdo"</script>
+	</c:if>
 	<!-- header-start -->
 	<header class="menudiv1" style="position: sticky;">
 		<div class="menudiv2-1">
@@ -26,21 +29,22 @@
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<li class="item">계정관리</li>
-					<li class="item">통계</li>
-					<li class="item">숙소관리</li>
-					<li class="item">로그관리</li>
-					<li class="item">
+					<c:catch>
 						<c:choose>
-							<c:when test="${sessionScope.adminId == null}">
-								<a href="${pageContext.request.contextPath}/admin/adminLoginView.mdo">로그인</a>
+							<c:when test="${admin_session eq null}">
+								<script>history.go(-1);</script>
 							</c:when>
 							<c:otherwise>
-								${sessionScope.adminId}관리자 로그인 중.
-								<a href="${pageContext.request.contextPath}/admin/logout.mdo">로그아웃</a>
+								<li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo">통계</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a></li>
+								<li class="item"><a href="/cnc/logout.mdo">로그아웃</a></li>	
 							</c:otherwise>
 						</c:choose>
-					</li>
+					</c:catch>
 				</ul>
 			</div>
 		</div>

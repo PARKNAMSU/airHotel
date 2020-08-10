@@ -23,13 +23,14 @@ public class MyReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping("reservationPage.do")
-	public String reservationPageController() {
+	public String reservationPageController(HttpSession session) {
+		session.setAttribute("login_session", "skatn");
 		return "myreservation";
 	}
 	@RequestMapping(value = "myReservation.mdo", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String myReservationController(HttpSession session) throws JsonProcessingException {
-		session.setAttribute("login_session", "skatn");
+		//로그인 완료 시 제거
 		String id = (String)session.getAttribute("login_session");
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservation(id);
 		ObjectMapper mapper = new ObjectMapper();
@@ -46,5 +47,10 @@ public class MyReservationController {
 		String jsonStr = mapper.writeValueAsString(list);
 		System.out.println(jsonStr);
 		return jsonStr;
+	}
+	@RequestMapping("rollbackReservationCancel.do")
+	public String rollbackReservationCancelController(ReservationHouseDetailVO vo) {
+		reservationService.rollbackReservationCancel(vo);
+		return "redirect:reservationPage.do";
 	}
 }

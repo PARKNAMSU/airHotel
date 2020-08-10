@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- jQuery library -->
@@ -30,7 +31,7 @@
 <script type="text/javascript"></script>
 <title>Insert title here</title>
 </head>
-<body>
+<body style="font-family: 'Jua', sans-serif;">
 	<c:if test="${comments == null }">
 	<script type="text/javascript">
 		opener.location.reload();
@@ -47,17 +48,25 @@
 	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star4">
 	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star5">
 	</div><br><br>
-	<form action="updateComment.do">
+	<form action="updateComment.do" id="updateForm">
 		<textarea name="comments_content" class="form-control">${comments.comments_content }</textarea>
 		<input type="hidden" value="0" id="comments_rate" name="comments_rate">
 		<input type="hidden" name="comments_seq" value="${comments.comments_seq }">
 		<input type="hidden" name="comments_house_seq" value="${comments.comments_house_seq }"><br>
-		<input type="submit" value="수정" class="btn btn-outline-danger">
+		<input type="button" onclick="formSubmit()" value="수정" class="btn btn-outline-danger">
 	</form>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=123" ></script>
 <script type="text/javascript">
+	function formSubmit(){
+		var result = confirm("수정하시겠습니까?")
+		if(result){
+			document.getElementById("updateForm").submit()
+		}else{
+			self.close()
+		}
+	}
 	$(document).ready(function(){
 		$("#star1").on("click",function(){
 			$("#star1").attr({"src":"${pageContext.request.contextPath}/resources/images/reservationhouse/star.png"})

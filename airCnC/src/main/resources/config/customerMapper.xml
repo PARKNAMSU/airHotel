@@ -3,32 +3,51 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="customer">
+
 	<insert id="register" parameterType="kg.air.cnc.customer.vo.CustomerVO">
 		INSERT INTO customer
 		VALUES(
-			#{customerId}, 
-			#{customerPassword}, 
-			#{customerName}, 
-			#{customerEmail}, 
+			#{customer_id}, 
+			#{customer_password}, 
+			#{customer_name}, 
+			#{customer_email}, 
 			DEFAULT, 
-			#{customerImage},
-			#{customerPhone},
+			#{customer_image},
+			#{customer_phone},
 			DEFAULT, 
 			DEFAULT,
 			SYSDATE,
+			#{customer_key},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT, 
+			DEFAULT,
 			DEFAULT)
 	</insert>
 	
 	<select id="idCheck" resultType="int">
-		SELECT COUNT(*) FROM customer WHERE customer_id = #{customerId}
+		SELECT COUNT(*) FROM customer WHERE customer_id = #{customer_id}
 	</select>
 	
 	<select id="createEmailCheck" resultType="int" parameterType="String">
 		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{value}
 	</select>
 	
-	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO">
-		SELECT COUNT(*) FROM customer WHERE customer_id = #{customerId}
+	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO" parameterType="String">
+		SELECT customer_id, customer_password FROM customer WHERE customer_id = #{customer_id}
 	</select>
 	
+	<select id="login" resultType="kg.air.cnc.customer.vo.CustomerVO" parameterType="String">
+		SELECT customer_id FROM customer WHERE customer_id = #{customer_id}
+	</select>
+	
+	<update id="keepLogin">
+		UPDATE customer SET session_id = #{session_id}, session_limit = #{session_limit} WHERE customer_id = #{customer_id}
+	</update>
+	
+	<select id="checkCustomerWithSessionKey" resultType="kg.air.cnc.customer.vo.CustomerVO">
+		<![CDATA[
+			SELECT customer_id, customer_password, customer_name, customer_email, customer_type, customer_image, customer_phone, customer_blame_warn, customer_blame_stop, customer_regdate, customer_key, session_id, session_limit, customer_stop_end_date, customer_status FROM customer WHERE session_id = #{session_id} AND session_limit > sysdate
+		]]>
+	</select>
 </mapper>
