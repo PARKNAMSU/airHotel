@@ -42,43 +42,49 @@
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-					<c:catch>
+					<c:if test="${login_session eq null && sessionScope.token eq null}">
+						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+						<li class="item">
+							<p>
+								<a href="/cnc/registerView.do">회원가입</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/loginView.do">로그인</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
+							</p>
+						</li>
+					</c:if>
+					<c:if test="${login_session ne null && sessionScope.token ne null}">
+						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
+							</p>
+						</li>
 						<c:choose>
-							<c:when test="${login_session eq null}">
-								<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+							<c:when test="${login_session ne null}">
 								<li class="item">
-									<p>
-										<a href="/cnc/registerView.do">회원가입</a>
-									</p>
-								</li>
-								<li class="item">
-									<p>
-										<a href="/cnc/loginView.do">로그인</a>
-									</p>
-								</li>
-								<li class="item">
-									<p>
-										<a href="javascript:void(0)"
-											onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
-									</p>
+									<p><a href="/cnc/logout.do">로그아웃</a></p>
 								</li>
 							</c:when>
-							<c:otherwise>
-								<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+							<c:when test="${sessionScope.token ne null}">
 								<li class="item">
-									<p>
-										<a href="/cnc/logout.do">로그아웃</a>
-									</p>
+									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
 								</li>
+							</c:when>
+							<c:when test="${sessionScope ne null}">
 								<li class="item">
-									<p>
-										<a href="javascript:void(0)"
-											onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
-									</p>
+									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
 								</li>
-							</c:otherwise>
+							</c:when>
 						</c:choose>
-					</c:catch>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -272,10 +278,13 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
-					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_condition_petok'">
+					<div class="single_destination1"
+						onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_condition_petok'">
 						<div class="thumb">
-								<img src="${pageContext.request.contextPath}/resources/images/dog.png" alt=""><i
-									class="fas fa-dog" style="font-size: 60px; float: right;"></i>
+							<img
+								src="${pageContext.request.contextPath}/resources/images/dog.png"
+								alt=""><i class="fas fa-dog"
+								style="font-size: 60px; float: right;"></i>
 						</div>
 						<div class="content">
 							<p class="d-flex align-items-center">
@@ -284,8 +293,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;" >
-					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_bbq'">
+				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
+					<div class="single_destination1"
+						onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_bbq'">
 						<div class="thumb">
 							<img
 								src="${pageContext.request.contextPath}/resources/images/bbq1.jpg"
@@ -301,7 +311,8 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
-					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_party'">
+					<div class="single_destination1"
+						onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_party'">
 						<div class="thumb">
 							<img
 								src="${pageContext.request.contextPath}/resources/images/party1.jpg"
@@ -317,7 +328,8 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-1">
-					<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearchhighscore.do'">
+					<div class="single_destination1"
+						onclick="location.href='http://localhost:8090/cnc/themesearchhighscore.do'">
 						<div class="thumb">
 							<img
 								src="${pageContext.request.contextPath}/resources/images/star.png"

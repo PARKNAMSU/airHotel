@@ -131,7 +131,7 @@
 					<tr>
 						<td>${salesList.get(i).admin_sales_date }</td>
 						<td>${salesList.get(i).admin_sales}￦</td>
-						<td></td>
+						<td>N/A</td>
 						<td>${salesList.get(i).admin_sales_persant }%</td>
 						<td>${salesList.get(i).sumSales }￦</td>
 					</tr>
@@ -141,7 +141,8 @@
 						<td>${salesList.get(i).admin_sales_date }</td>
 						<td>${salesList.get(i).admin_sales}￦</td>
 						<td>${salesList.get(i).admin_sales_compare_before}￦</td>
-						<td colspan="2">${salesList.get(i).admin_sales_persant }%</td>	
+						<td>${salesList.get(i).admin_sales_persant }%</td>
+						<td>N/A</td>
 					</tr>
 					</c:if>
 					</c:forEach>
@@ -168,7 +169,7 @@
 	</footer>
 </body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#yearsCondition1").change(function() {
@@ -213,7 +214,7 @@
 						  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 	
 						  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
-						  doc.save('매출보고서.pdf');
+						  doc.save(fname+'.pdf');
 						  } 
 					});
 				}
@@ -265,6 +266,6 @@
 		        chart.draw(data, options);
 		      }
 		}
-	
+
 </script>
 </html>

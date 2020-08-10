@@ -173,7 +173,7 @@
 								<tr>
 									<td>${hostList.get(i).hostchart_date }</td>
 									<td>${hostList.get(i).hostchart_num }명</td>
-									<td></td>
+									<td>N/A</td>
 									<td>${hostList.get(i).hostchart_persant }%</td>
 									<td>${hostList.get(i).hostchart_sum }명</td>
 								</tr>
@@ -184,7 +184,7 @@
 									<td>${hostList.get(i).hostchart_num }명</td>
 									<td>${hostList.get(i).hostchart_compare_before }명</td>
 									<td>${hostList.get(i).hostchart_persant }%</td>
-									<td></td>
+									<td>N/A</td>
 								</tr>
 							</c:if>
 						</c:forEach>

@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kg.air.cnc.common.Utils;
 import kg.air.cnc.dao.reservation.ReservationDAO;
 import kg.air.cnc.vo.BlameVO;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 import kg.air.cnc.vo.ReservationVO;
@@ -26,6 +28,12 @@ public class ReservationService implements ReservationServiceImpl {
 			name = list.get(i).getHouse_name();
 			if(name.length() >10)name = name.substring(0,8)+"...";
 			list.get(i).setHouse_name(name);
+			if(list.get(i).getReservation_status() == 0) {
+				list.get(i).setReservation_status_text("예약상태: 정상");
+			}
+			if(list.get(i).getReservation_status() == 1) {
+				list.get(i).setReservation_status_text("예약상태: 취소대기");
+			}
 		}
 		return list;
 	}
@@ -115,5 +123,51 @@ public class ReservationService implements ReservationServiceImpl {
 		reservationDAO.insertBlameHost(vo);
 		
 	}
+
+	@Override
+	public void rollbackReservationCancel(ReservationHouseDetailVO vo) {
+		reservationDAO.rollbackReservationCancel(vo);
+	}
+
+	@Override
+	public void cancelReservation(ReservationHouseDetailVO vo) {
+		reservationDAO.cancelReservation(vo);
+	}
+
+	@Override
+	public String getFavoriteHouse(String id,int house_seq) {
+		String favorite_state = "false";
+		System.out.println("id:"+id);
+		String fav_list = "";
+		fav_list = reservationDAO.getFavoriteHouse(id);
+		if(!fav_list.equals("-1")) {
+			String [] favoriteList =  reservationDAO.getFavoriteHouse(id).split(",");
+			for(int i=0;i<favoriteList.length;i++) {
+				if(Integer.parseInt(favoriteList[i]) == house_seq) {
+					favorite_state = "true";
+					break;
+				}
+			}
+		}
+		return favorite_state;
+	}
+	public String getFavoriteHouseNumber(String id) {
+		return reservationDAO.getFavoriteHouse(id);
+	}
+	@Override
+	public void addFavoriteHouse(CustomerVO vo) {
+		vo.setFavorite_house(","+vo.getFavorite_house());
+		reservationDAO.addFavoriteHouse(vo);
+	}
+
+	@Override
+	public void removeFavoriteHouse(String id,String favorite, int house_seq) {
+		CustomerVO vo = new CustomerVO();
+		vo.setCustomer_id(id);
+		String fav = ","+house_seq;
+		vo.setFavorite_house(favorite.replace(fav, ""));
+		reservationDAO.removeFavoriteHouse(vo);
+	}
+	
 
 }

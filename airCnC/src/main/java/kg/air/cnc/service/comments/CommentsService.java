@@ -30,7 +30,8 @@ public class CommentsService implements CommentsServiceImpl{
 			sum+=list.get(i).getComments_rate();
 		}
 		float ave = ((float)sum)/list.size();
-		list.get(0).setComments_average(Math.round(ave*100)/100);
+		ave = (float) (Math.round(ave*100)/100.0);
+		list.get(0).setComments_average(ave);
 		return list;
 	}
 	@Override

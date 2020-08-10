@@ -152,11 +152,11 @@
 			</div>
 			<div class="locationtitle6" style="padding-bottom: 20px;">
 				<label for="locationtitle6">도로명주소</label>
-				<form:input type="text" id="sample4_roadAddress" placeholder="도로명주소"  path="house_loaction_fulladdress" /><br></br>
+				<form:input type="text" id="sample4_roadAddress" placeholder="도로명주소"  path="house_location_fulladdress" /><br></br>
 			</div>
 			<div class="locationtitle7" style="padding-bottom: 20px;">
         		<label for="locationtitle7">상세주소</label>
-			    <form:input type="text" placeholder="상세주소"  path="house_loaction_detailaddress" />
+			    <form:input type="text" placeholder="상세주소"  path="house_location_detailaddress" />
         	</div>
 			
 			<form:input type="hidden" id="sample4_xlocation" placeholder="x좌표"  path="house_xlocation" /><br></br>

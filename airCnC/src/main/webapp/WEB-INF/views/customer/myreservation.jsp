@@ -92,9 +92,9 @@
 					getData = data;
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"')")
+							$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"',"+getData[i-1].reservation_status+")")
 							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
+							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>'+getData[i-1].reservation_status_text+'</p>')
 						}else{
 							$("#imgdiv"+i).css("display","none")
 						}
@@ -122,10 +122,15 @@
 			var b = 1;
 			for(var i=a;i<a+instanceNum;i++){
 				if(getData[i] != null){
-					$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].reservation_seq+",'"+type+"')")
+					
 					//$("img"+b).attr("src","") 나중에 추가
-					$("#td"+b).html('<p>'+getData[i].house_name+'</p>')
-					console.log(i)
+					if(type = "nowres"){
+						$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i].house_seq)+","+(getData[i].reservation_seq)+",'"+type+"',"+getData[i].reservation_status+")")
+						$("#td"+i).html('<p>'+getData[i].house_name+'</p><br><hr><p>'+getData[i].reservation_status_text+'</p>')
+					}else{
+						$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].reservation_seq+",'"+type+"')")
+						$("#td"+i).html('<p>'+getData[i].house_name+'</p>')
+					}
 				}else{
 					$("#imgdiv"+b).css("display","none");
 				}
@@ -143,9 +148,15 @@
 			var b = 1;
 			for(var i=1; i<=3;i++){
 				$("#imgdiv"+i).css("display","initial");
-				$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].reservation_seq+",'"+type+"')")
+				
 				//$("img"+b).attr("src","") 나중에 추가
-				$("#td"+i).html('<p>'+getData[a].house_name+'</p>')
+				if(type == "nowres"){
+					$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[a].house_seq)+","+(getData[a].reservation_seq)+",'"+type+"',"+getData[a].reservation_status+")")
+					$("#td"+i).html('<p>'+getData[a].house_name+'</p><br><hr><p>'+getData[a].reservation_status_text+'</p>')
+				}else{
+					$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].reservation_seq+",'"+type+"')")
+					$("#td"+i).html('<p>'+getData[a].house_name+'</p>')
+				}
 				a++;
 			}
 			if(area == 1){
@@ -154,6 +165,7 @@
 		})
 	})
 	var getRes = function(){
+		$("#tri1").css('display','none');
 		area = 1;
 		type = "nowres";
 		for(var i=1; i<=3;i++){
@@ -171,9 +183,10 @@
 					}
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[i-1].house_seq+","+getData[i-1].reservation_seq+",'"+type+"')")
-							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
+							$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"',"+getData[i-1].reservation_status+")")
+									//$("img"+i).attr("src","") 나중에 추가
+							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>'+getData[i-1].reservation_status_text+'</p>')
+							
 						}else{
 							$("#imgdiv"+i).css("display","none")
 						}
@@ -189,6 +202,7 @@
 	}
 		
 		var getResBefore = function(){
+			$("#tri1").css('display','none');
 			area = 1;
 			type = "beforeres";
 			for(var i=1; i<= 3;i++){
@@ -240,6 +254,34 @@
 	        }
 	        document.body.appendChild(form);
 	        form.submit();
+		}
+		function goToResHouseNow(house_seq,reservation_seq,accessType,reservation_status){
+			var form = document.createElement("form");
+			var input = new Array()
+			var names = ["house_seq","reservation_seq","accessType"]
+			var values = [house_seq,reservation_seq,accessType]
+	        form.action = "reservationHouse.do";
+	        form.method = "post";   
+	        for (var i = 0; i < 3; i++) {
+	        	            
+	        	input[i] = document.createElement("input");
+	            input[i].setAttribute("type", "hidden");
+	            input[i].setAttribute('name', names[i]);
+	            input[i].setAttribute("value", values[i]);
+	            form.appendChild(input[i]);
+	        }
+	        document.body.appendChild(form);
+			if(reservation_status == 1){
+				var result = confirm("현재 예약취소 대기중인 숙소입니다.\n예약취소를 취하하시겠습니까?")
+				if(result){
+					form.action = "rollbackReservationCancel.do"
+					form.submit();
+				}
+			}
+			if(reservation_status ==0){
+				form.action = "reservationHouse.do";
+		        form.submit();
+			}
 		}
 
 </script>

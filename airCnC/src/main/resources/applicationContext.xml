@@ -86,6 +86,8 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
+	<bean id="naverController" class="kg.air.cnc.common.NaverController"></bean>
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="kg.air"></context:component-scan>
 	<task:annotation-driven></task:annotation-driven>

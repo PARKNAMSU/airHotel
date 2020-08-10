@@ -173,7 +173,7 @@
 								<tr>
 									<td>${resList.get(i).reschart_date }</td>
 									<td>${resList.get(i).reschart_num }명</td>
-									<td></td>
+									<td>N/A</td>
 									<td>${resList.get(i).reschart_persant }%</td>
 									<td>${resList.get(i).reschart_sum }명</td>
 								</tr>
@@ -184,7 +184,7 @@
 									<td>${resList.get(i).reschart_num }명</td>
 									<td>${resList.get(i).reschart_compare_before }명</td>
 									<td>${resList.get(i).reschart_persant }%</td>
-									<td></td>
+									<td>N/A</td>
 								</tr>
 							</c:if>
 						</c:forEach>
