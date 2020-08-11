@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=123">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=124">
 <!-- Latest compiled JavaScript -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -54,31 +54,32 @@
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	
-	<div class="maindiv" id="main" style="margin-left:25%;font-family: 'Jua', sans-serif;">
-		<div>
-			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:80%;" onclick="hostSales()">매출 통계보기</button>
+	<div class="maindiv" id="main" style="margin-left:20%;margin-top:2%;font-family: 'Jua', sans-serif;">
+		<div >
+			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:60%;" onclick="hostSales()">매출 통계보기</button>&nbsp;&nbsp;
+			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="hostSales()">숙소 등록하기</button>
 		</div>
-		<h1 style="margin-bottom:5%;margin-left:29%;font-size:40px;color:red;">내 숙소 목록</h1>
+		<h1 style="margin-top:5%;margin-bottom:5%;margin-left:35%;font-size:40px;color:red;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
 		</div>
-		<div class="subdiv" id="imgdiv1" onclick="">
+		<div class="subdiv" id="imgdiv1" onclick="" >
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1"></div>
 		</div>
-		<div class="subdiv" id="imgdiv2" onclick="">
+		<div class="subdiv" id="imgdiv2" onclick="" >
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
+				<img  alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
 			</div>
-			<div class="textdiv" id="td2"></div>
+			<div class="textdiv" id="td2" ></div>
 		</div>
 		<div class="subdiv" id="imgdiv3" onclick="">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
+				<img " alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
 			</div>
-			<div class="textdiv" id="td3"></div>
+			<div class="textdiv" id="td3" ></div>
 		</div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
@@ -106,7 +107,7 @@
 						if(getData[i-1] != null){
 							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
 							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
+							$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
 						}else{
 							$("#imgdiv"+i).css("display","none")
 						}

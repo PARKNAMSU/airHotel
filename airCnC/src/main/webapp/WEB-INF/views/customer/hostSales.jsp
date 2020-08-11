@@ -164,7 +164,7 @@
 							<c:if test="${i >0 }">
 							<tr>
 								<td>No.${salesList2.get(i).host_house_seq }</td>
-								<td>${salesList2.get(i).host_sales_date}￦</td>
+								<td>${salesList2.get(i).host_sales_date}</td>
 								<td>${salesList2.get(i).host_sales }￦</td>
 								<c:choose>
 								<c:when test="${salesList2.get(i).host_house_seq == salesList2.get(0).house_seq_list.get(a) }">
@@ -186,9 +186,7 @@
 		</div>
 					
 			<button onclick="ReportToExcel()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(Excel)</button>&nbsp;&nbsp;
-			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>&nbsp;&nbsp;
-			
-			<button onclick="openDetail()" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">상세검색</button>
+			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>
 	</div>
 	
 	<div class="chart" style="margin-bottom:5%;margin-left: 23.5%;font-family: 'Jua', sans-serif;">
