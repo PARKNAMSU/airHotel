@@ -413,12 +413,5 @@
 			if(peo.value>10) peo.value = 10;
 		}
 	</script>
-	<!-- 
-	<script>
-		var sub = function(seq) {
-			${"#seq"}.submit();
-		}
-	</script>
-	-->
 </body>
 </html>
