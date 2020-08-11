@@ -34,6 +34,7 @@
 </head>
 <body>
 	<!-- header-start -->
+	<c:if test="${login_session eq null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -41,9 +42,7 @@
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<c:if test="${login_session eq null && sessionScope.token eq null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				<ul id="menuItems">		
 						<li class="item">
 							<p>
 								<a href="/cnc/registerView.do">회원가입</a>
@@ -59,36 +58,34 @@
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-					</c:if>
-					<c:if test="${login_session ne null && sessionScope.token ne null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	</c:if>
+	<c:if test="${login_session ne null }">
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">	
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-						<c:choose>
-							<c:when test="${login_session ne null}">
-								<li class="item">
-									<p><a href="/cnc/logout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope.token ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-						</c:choose>
-					</c:if>
+						<li class="item"><a href="myHouse.do">호스트</a></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do">로그아웃</a></p>
+						</li>
 				</ul>
 			</div>
 		</div>
 	</header>
+	</c:if>
 	<!-- slider_area_start -->
 	<div class="mainview">
 		<div class="content">
