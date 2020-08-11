@@ -26,6 +26,7 @@ public class MyReservationController {
 	@RequestMapping("reservationPage.do")
 	public String reservationPageController(HttpSession session) {
 		session.setAttribute("login_session", "skatn");
+		System.out.println((String)session.getAttribute("login_session"));
 		return "myreservation";
 	}
 	@RequestMapping(value = "myReservation.mdo", produces = "application/text; charset=utf8")
