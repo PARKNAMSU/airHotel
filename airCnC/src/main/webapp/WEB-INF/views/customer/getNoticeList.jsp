@@ -17,8 +17,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css"
-		href="../css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
@@ -35,7 +34,7 @@
 <body>
 	<header class="menudiv1">
         <div class="menudiv2-1">
-            <img alt="" src="../images/logo2.png">
+            <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png">
         </div>
         <div class="menudiv2-2">
             <div class="menudiv3-1" id="div1">

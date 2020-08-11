@@ -1,7 +1,9 @@
 package kg.air.cnc.service.reservation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,9 +55,11 @@ public class ReservationService implements ReservationServiceImpl {
 	@Override
 	public ReservationHouseDetailVO getReservationHouse(ReservationHouseDetailVO vo) {
 		System.out.println("vo "+vo.getHouse_seq());
-		ReservationHouseDetailVO house = reservationDAO.getReservationHouse(vo);
+		ReservationHouseDetailVO house = null;
+		house = reservationDAO.getReservationHouse(vo);
 		ArrayList<String> convinList = new ArrayList<String>();
-		if(house.getHouse_name() != null) {
+		Utils utils = new Utils();
+		if(!utils.stringNullCheck(house.getHouse_name())) {
 			if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("구급상자");
 			
 			if(house.getHouse_default_bedrock().trim().equals("true")) convinList.add("침실 잠금");
@@ -168,6 +172,22 @@ public class ReservationService implements ReservationServiceImpl {
 		vo.setFavorite_house(favorite.replace(fav, ""));
 		reservationDAO.removeFavoriteHouse(vo);
 	}
-	
+
+	@Override
+	public List<ReservationHouseDetailVO> getResForSpecHouse(Integer house_seq) {
+		return reservationDAO.getResForSpecHouse(house_seq);
+	}
+	public List<ReservationHouseDetailVO> getMyFavoriteHouse(String id){
+		String [] fav_list = reservationDAO.getFavoriteHouse(id).split(",");
+		List<Integer> numList = new ArrayList<Integer>();
+		for(int i=0; i<fav_list.length;i++) {
+			if(i != 0) {
+				numList.add(Integer.parseInt(fav_list[i]));
+			}
+		}
+		Map<String, Object> seqMap = new HashMap<String, Object>();
+		seqMap.put("seqArray", numList);
+		return reservationDAO.getFavoriteHouse(seqMap);
+	}
 
 }

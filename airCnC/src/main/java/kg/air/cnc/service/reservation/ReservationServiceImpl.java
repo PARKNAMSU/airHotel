@@ -18,4 +18,5 @@ public interface ReservationServiceImpl {
 	public void addFavoriteHouse(CustomerVO vo);
 	public void removeFavoriteHouse(String id,String favorite,int house_seq);
 	public String getFavoriteHouseNumber(String id);
+	public List<ReservationHouseDetailVO> getResForSpecHouse(Integer house_seq);
 }

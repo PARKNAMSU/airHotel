@@ -206,7 +206,13 @@ li {
     max-width: 450px;
     max-height: 300px;
 }
-
+#imageEventDetail {
+	display: block;
+	max-width:500px;
+	max-height:800px;
+	width: auto;
+	height: auto;
+}
 #event_hr {
     margin: 0 0 0 15%;
     width: 100%;

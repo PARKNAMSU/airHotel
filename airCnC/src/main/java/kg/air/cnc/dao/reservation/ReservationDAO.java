@@ -1,6 +1,7 @@
 package kg.air.cnc.dao.reservation;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,13 @@ public class ReservationDAO implements ReservationDAOImpl{
 	public void removeFavoriteHouse(CustomerVO vo) {
 		sqlSessionTemplate.update("ReservationDAO.removeFavoriteHouse",vo);
 	}
-	
+
+	@Override
+	public List<ReservationHouseDetailVO> getResForSpecHouse(int house_seq) {	
+		return sqlSessionTemplate.selectList("ReservationDAO.getResForSpecHouse",house_seq);
+	}
+	public List<ReservationHouseDetailVO> getFavoriteHouse(Map<String, Object> seqMap){
+		return sqlSessionTemplate.selectList("ReservationDAO.getMyFavoriteHouse",seqMap);
+	}
 	
 }

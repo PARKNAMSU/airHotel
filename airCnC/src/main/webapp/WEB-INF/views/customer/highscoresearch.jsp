@@ -51,7 +51,7 @@
           "
       ></i
       ></span>
-    <label for="fas fa-question" style="font-size: 40px;">강아지 테마 페이지</label>
+    <label for="fas fa-question" style="font-size: 40px;">최고의 숙소</label>
 </header>
 <!-- header-end -->
 
@@ -67,12 +67,17 @@
                 <div id="theme_title" class="section_title text-center mb_70">
                     <!-- 선택한 테마에 따라서 동적으로 변환 -->
                     <h3 class="theme_title" style="padding-top: 30px;">
-                        강아지와 함께 떠나는 여행
+                        최고의 평점을 받은 숙소에서 최고의 여행을
                     </h3>
                 </div>
             </div>
         </div>
         <div id="motehr">
+            <script>
+                function goReservationHouse() {
+                    $("#houseInfo").submit();
+                }
+            </script>
         </div>
         <div class="btn" style="padding-top: 15px;">
             <button id="moreBtn" class="btn1" type="submit" style="float: right;" onclick="getMoreData()">
@@ -122,11 +127,14 @@
                 success : function (data) {
                     getData = data;
                     var max = getData.length;
-
-                    for(var i = 0 ; i < 10 ; i++){
+                    var accessType = "notres";
+                    for(var i = 0 ; i < 3 ; i++){
                         $("#motehr").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
-                            "<div class=\"single_destination2\" onclick="+"location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq="+getData[i].house_seq+"'>" +
+                            "<form id=\"houseInfo\" "+i+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
+                            "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
+                            "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
                             "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
                             "</div>" +
@@ -136,9 +144,11 @@
                             "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
                             "</a>" +
                             "</div>" +
-                            "</div>");
+                            "</div>" +
+                            "</form>"
+                        );
                     }
-                    showed = 10;
+                    showed = 3;
                 },
                 error : function () {
                     alert("에러")
@@ -147,8 +157,11 @@
         }
         function getMoreData() {
             for(var i = showed; i < showed+1; i++){
-                $("#motehr").append("<div class=\"col-lg-4 col-md-1\">" +
-                    "<div class=\"single_destination2\" onclick="+"location.href='http://localhost:8090/cnc/reservationHouse.do?house_seq="+getData[i].house_seq+"'>" +
+                $("#motehr").append(
+                    "<div class=\"col-lg-4 col-md-1\">" +
+                    "<form id=\"houseInfo\" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
+                    "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                    "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                     "<div class=\"thumb\">" +
                     "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
                     "</div>" +
@@ -158,7 +171,9 @@
                     "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
                     "</a>" +
                     "</div>" +
-                    "</div>");
+                    "</div>" +
+                    "</form>"
+                );
             }
             showed++;
         }
