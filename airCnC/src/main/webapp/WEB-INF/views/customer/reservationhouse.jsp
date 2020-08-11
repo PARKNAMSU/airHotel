@@ -65,9 +65,9 @@
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
-			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson">&nbsp;&nbsp;&nbsp;
-			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control">&nbsp;&nbsp;&nbsp;
-			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" >&nbsp;&nbsp;&nbsp;
+			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;
+			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
+			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
 			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">			 
 		</form>
@@ -500,7 +500,23 @@ function dateFormSubmit(){
 		alert("체크인 시간을 입력하세요")
 	}else if(document.getElementById("checkout").value == null || document.getElementById("checkout").value == ""){
 		alert("체크아웃 시간을 입력하세요")
-	}else{
+	}
+	else{
+		var ci_date = new Date(document.getElementById("checkin").value)
+		var co_date = new Date(document.getElementById("checkout").value)		
+		while(ci_date <= co_date){
+			   var mon = (ci_date.getMonth()+1);
+			   mon = mon < 10 ? '0'+mon : mon;
+			   var day = ci_date.getDate();
+			   day = day < 10 ? '0'+day : day;
+			   for(var i=0; i < dates.length; i++){
+			   		if((ci_date.getFullYear() + '-' + mon + '-' +  day) == dates[i]){
+			   			alert("이미 예약된 날짜가 존재합니다.")
+			   			return false;
+			   		}
+			   }
+			   ci_date.setDate(ci_date.getDate() + 1);
+		}
 		document.getElementById("dateForm").submit();
 	}
 }
