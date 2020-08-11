@@ -40,9 +40,14 @@ public class PaymentController {
         return mav;
     }
 
-    @RequestMapping(value = "/paytest.mdo", method = RequestMethod.GET)
-    public ModelAndView test(ModelAndView mav){
-        mav.setViewName("paymenttest");
+    @RequestMapping(value = "/paymentfinal.do", method = RequestMethod.POST)
+    public ModelAndView test(HttpServletRequest httpServletRequest, ModelAndView mav){
+        int price = Integer.parseInt(httpServletRequest.getParameter("totalPrice"));
+        HttpSession session = httpServletRequest.getSession();
+        ReservationHouseDetailVO houseInfo = (ReservationHouseDetailVO)session.getAttribute("house");
+        mav.addObject("totalPrice", price);
+        mav.addObject("house", houseInfo);
+        mav.setViewName("paymentfinal");
         return mav;
     }
 }

@@ -72,11 +72,33 @@
                         <td><input class="btn btn-outline-danger" type="button" value="쿠폰사용하기"></td>
                     </tr>
                     <tr class="noline">
-                        <td><input class="btn btn-outline-danger" type="button" value="결제하기"></td>
+                        <td><input class="btn btn-outline-danger" type="button" value="결제하기" onclick="goPaymentFinal()"></td>
+                        <script>
+                            function goPaymentFinal(){
+                                var form = document.createElement("form");
+                                var input = document.createElement("input");
+                                input.setAttribute("type", "hidden");
+                                input.setAttribute("name", "totalPrice");
+                                input.setAttribute("value", ${totalPrice});
+
+                                form.appendChild(input);
+
+
+                                document.body.appendChild(form);
+                                form.action = "paymentfinal.do";
+                                form.method = "post";
+                                form.submit();
+                            }
+                        </script>
+
+
                     </tr>
                 </table>
             </div>
         </div>
+        <form>
+            <input type="hidden" name="">
+        </form>
         <div class="right_container" style="color: black">
             <div class="warning_container ">
                 <div class="room_policy">
