@@ -129,9 +129,9 @@
 			<div id="map"></div>
 			<div class="mapSide">
 			<c:forEach items="${houseList}" var="house">
-				<form action="reservationHouse.do" method="post" id="test">
+				<form action="reservationHouse.do" method="post" id="${house.house_seq}">
 				<input type="hidden" value="%{house.house_seq}"/>
-					<div class="houseList" style="color: black" onclick="sub()">
+					<div class="houseList" style="color: black" onclick="sub(${house.house_seq})">
 						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
 							${house.house_seq }<br>
 							${house.house_name }<br> 
@@ -415,8 +415,8 @@
 	</script>
 		
 	<script>
-		var sub = function() {
-			${"#test"}.submit();
+		var sub = function(let seq) {
+			${"#seq"}.submit();
 		}
 	</script>
 </body>

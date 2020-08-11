@@ -23,11 +23,13 @@
 		<div class="menudiv2-2" style="overflow : hidden">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-                    <li class="item">계정관리</li>
-                    <li class="item">통계</li>
-                    <li class="item">숙소관리</li>
-                    <li class="item">로그관리</li>
-					<li class="item">로그인</li>
+                    <li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo">통계</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a></li>
+					<li class="item"><a href="/cnc/logout.mdo">로그아웃</a></li>	
                 </ul>
             </div>
         </div>
@@ -60,6 +62,7 @@
     </div>
     <!-- <form action="deleteHost.mdo"> -->
     <div class="hostList">
+    <h3>호스트 삭제</h3>
         <ul>
         	<c:forEach items="${hostList}" var="host">
             	<li><a href="deleteHost.mdo?host_id=${host.host_id}">${host.host_id}</a></li>

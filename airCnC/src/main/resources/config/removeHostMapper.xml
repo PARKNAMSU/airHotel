@@ -5,7 +5,7 @@
 <mapper namespace="RemoveHostDAO">
 
 	<select id="getRemoveHostList" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.HostVO">
-		SELECT * 
+		SELECT *
 		FROM host
 	</select>
 	
