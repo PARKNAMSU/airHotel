@@ -30,6 +30,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:if test="${login_session == null }">
+		<script type="text/javascript">location.href ='loginView.do'</script>
+	</c:if>
 	<header>
 		<%@ include file="../html/menu.jsp" %>
 	</header>

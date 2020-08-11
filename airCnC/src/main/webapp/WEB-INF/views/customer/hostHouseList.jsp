@@ -29,6 +29,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:if test="${login_session == null }">
+		<script type="text/javascript">location.href ='loginView.do'</script>
+	</c:if>
 	<head>
 	<%@ include file="../html/menu.jsp" %>
 	</head>
@@ -83,7 +86,12 @@
 		</div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
-
+	<div style="display:none;font-family: 'Jua', sans-serif;border:solid;" id="noneDiv" >
+		<div style="width:50%;font-size:50px;margin-top:10%;margin-bottom:10%;margin-left:42%;" >			
+			<h1 >숙소를 등록해주세요</h1><br><br>
+			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="hostSales()">숙소 등록하러 가기</button>
+		</div>
+	</div>
 	<div style="clear:both;"></div>
 
 	<footer>
@@ -103,17 +111,22 @@
 	           dataType:"json",	   
 	           success : function(data) {
 					getData = data;
-					for(var i=1;i<=instanceNum;i++){
-						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
-							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
-						}else{
-							$("#imgdiv"+i).css("display","none")
+					if(getData.length >0){
+						for(var i=1;i<=instanceNum;i++){
+							if(getData[i-1] != null){
+								$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
+								//$("img"+i).attr("src","") 나중에 추가
+								$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
+							}else{
+								$("#imgdiv"+i).css("display","none")
+							}
 						}
-					}
-					if(getData.length <= instanceNum){
-						$("#tri2").css('display','none');
+						if(getData.length <= instanceNum){
+							$("#tri2").css('display','none');
+						}
+					}else{
+						$("#main").css('display','none');
+						$("#noneDiv").css('display','initial');
 					}
 	           },
 	           error : function(request, status, error) {
