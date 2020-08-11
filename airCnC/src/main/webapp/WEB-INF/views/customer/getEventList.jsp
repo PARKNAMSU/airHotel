@@ -90,7 +90,8 @@
 							<li id="event_li">
 			 				<b>${event.event_title }</b><br><br>
 			 				<span>기간 : ${event.event_start } ~ ${event.event_end }</span><br><br>
-			 				<a href="#">
+			 				
+			 				<a href='<c:url value='/partiEvent/${event.event_idx}.do${paging.makeQueryPage(event.event_idx, paging.cri.page) }'/>'>
 			 					<img id="image1" src="${pageContext.request.contextPath}/resources/images/여기어때2.png">
 			 				</a>
 			 				</li>

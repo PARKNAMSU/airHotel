@@ -42,7 +42,19 @@ public class EventController {
 	  
 	    return "getEventList"; //jsp파일 1
 	}
-
+	
+	@RequestMapping(value = "/partiEvent/{event_idx}.do")
+	public String partiEvent(@PathVariable("event_idx") int event_idx, Model model, PagingCriteria cri) throws Exception {
+		System.out.println("event_idx : " + event_idx);
+		model.addAttribute("detail", eventService.detailEvent(event_idx));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		model.addAttribute("page", cri.getPage());
+		model.addAttribute("paging", pageMaker);
+		return "getEventOpen"; //jsp파일 5
+	}
+	
 	@RequestMapping("/addEventList.mdo")//새 이벤트 등록하는 페이지에서의 동작
 	public String addEvent(@ModelAttribute("event") EventVO event, Model model,
 			MultipartHttpServletRequest mtfRequest) {
