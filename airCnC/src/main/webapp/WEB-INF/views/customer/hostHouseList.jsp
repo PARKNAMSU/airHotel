@@ -10,6 +10,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=124">
 <!-- Latest compiled JavaScript -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -32,9 +34,27 @@
 	<c:if test="${login_session == null }">
 		<script type="text/javascript">location.href ='loginView.do'</script>
 	</c:if>
-	<head>
-	<%@ include file="../html/menu.jsp" %>
-	</head>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+	</header>
 	<div style="clear:both;"></div>
 	 <!-- slider_area_start -->
     <div class="slider_area">
@@ -88,8 +108,8 @@
 	</div>
 	<div style="display:none;font-family: 'Jua', sans-serif;border:solid;" id="noneDiv" >
 		<div style="width:50%;font-size:50px;margin-top:10%;margin-bottom:10%;margin-left:42%;" >			
-			<h1 >숙소를 등록해주세요</h1><br><br>
-			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="hostSales()">숙소 등록하러 가기</button>
+			<h1 style="font-family:'Jua', sans-serif;">숙소를 등록해주세요</h1><br><br>
+			<button class="btn btn-outline-danger" style="font-size:20px;font-family:'Jua', sans-serif;" onclick="hostSales()">숙소 등록하러 가기</button>
 		</div>
 	</div>
 	<div style="clear:both;"></div>

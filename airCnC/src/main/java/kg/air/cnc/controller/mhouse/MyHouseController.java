@@ -28,7 +28,7 @@ public class MyHouseController {
 	
 	@RequestMapping("myHouse.do")
 	public String hostHouseList(HttpSession session) {
-		session.setAttribute("login_session", "skatn");//로그인 완료 시 제거
+		session.setAttribute("login_session", "host");//로그인 완료 시 제거
 		return "hostHouseList";
 	}
 	@RequestMapping(value = "myHouseList.do", produces = "application/text; charset=utf8")

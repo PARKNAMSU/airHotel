@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,33 +42,34 @@
                 <table class="payment_info_table" style="color: black;">
                     <tr class="noline">
                         <td>
-                            제주 맛있는 감귤 숙소
+                            숙소이름 : ${house.house_name}
                         </td>
                     </tr>
                     <tr>
                         <td class="border-bottom">
-                            게스트 3명
+                            인원 : ${peopleNum}
                         </td>
                     </tr>
                     <tr>
                         <td class="border-bottom">
-                            2020년 6월 7일 -> 2020년 6월 10일
+                            ${checkin} -> ${checkout}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            4,0000 원 x 3박 -> 120,000 원
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            서비스 수수료 -> 12,000 원
+                            <c:set var="housePrice" value="${house.house_price_default}"/>
+                            <c:set var="totalDay" value="${totalDay}"/>
+                            <c:set var="totalPrice" value="${housePrice * totalDay}"/>
+                           1박 ${house.house_price_default}원 X ${totalDay}박 -> ${totalPrice}원
                         </td>
                     </tr>
                     <tr>
                         <td class="border-bottom">
-                            총 합계 -> 144,000 원
+                            총 합계 -> ${totalPrice} 원
                         </td>
+                    </tr>
+                    <tr class="noline">
+                        <td><input class="btn btn-outline-danger" type="button" value="쿠폰사용하기"></td>
                     </tr>
                     <tr class="noline">
                         <td><input class="btn btn-outline-danger" type="button" value="결제하기"></td>
@@ -78,26 +80,36 @@
         <div class="right_container" style="color: black">
             <div class="warning_container ">
                 <div class="room_policy">
-                    <h1>숙소 이용규칙 확인하기</h1>
+                    <h1>숙소 제약사함</h1>
                     <ul>
-                        <li><i class="fa fa-exclamation"></i>너무 소란스러운 행위는 금지입니다.</li>
-                        <li><i class="fa fa-exclamation"></i>너무 소란스러운 행위는 금지입니다.</li>
+                        <c:set var="restrictList" value="${restrictList}" />
+                        <c:forEach var="item" items="${restrictList}" begin="0" end="${restrictList.size()}" step="1">
+                            <li><i class="fa fa-exclamation"></i>${item}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                <div class="room_policy">
+                    <h1>숙소 편의사항</h1>
+                    <ul>
+                        <c:forEach var="item" items="${convinList}" begin="0" end="${convinList.size()}" step="1">
+                            <li><i class="fa fa-exclamation"></i>${item}</li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="room_reservation_day">
                     <i class="fas fa-calendar-day fa-2x"></i>
                     <ul>
-                        <li id="li-margin-bottom"><span class="checkin-day">6월 7일 체크인:화요일 오후 2:00 이후</span></li>
-                        <li><span class="checkout-day">6월 10일 체크아웃:목요일 오전 11:00 </span></li>
+                        <li id="li-margin-bottom"><span class="checkin-day">${checkin} 체크인:${house.house_checkin_time} 이후</span></li>
+                        <li><span class="checkout-day">${checkout} 체크아웃:${house.house_checkout_time} 이전</span></li>
                     </ul>
                 </div>
 
-                <div class="warning-icons">
+
+                <%--<div class="warning-icons">
                     <ul>
                         <li><i class="fas fa-paw fa-2x"></i><span> 강아지와 함께 숙소 이용 가능 </span></li>
-
                     </ul>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
