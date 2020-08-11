@@ -131,6 +131,10 @@
 			<c:forEach items="${houseList}" var="house">
 				<form action="reservationHouse.do" method="post" id="${house.house_seq}">
 				<input type="hidden" name="house_seq" value="${house.house_seq}"/>
+				<input type="hidden" name="accessType" value="notres" />
+				<input type="hidden" name="check_in" value="documnet.getElementById('checkIn').value;">
+				<input type="hidden" name="check_out" value="document.getElementById('checkOut').value;">
+				<input type="hidden" name="house_person" value="document.getElementById('people').value;">
 					<div class="houseList" style="color: black" onclick="document.getElementById(${house.house_seq}).submit();">
 						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
 							${house.house_seq }<br>
