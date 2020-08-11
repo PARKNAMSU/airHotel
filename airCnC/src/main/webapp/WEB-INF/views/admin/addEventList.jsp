@@ -130,6 +130,9 @@
 		<input type="date" id="trip-end" name="event_end"
 		value="" min="2020-01-01" max="2020-12-31">
        	</p>
+       	<p>(전체 이벤트 리스트에 표시될 이미지 파일을 선택해주세요.)</p><br>
+		<input multiple="multiple" type="file" name="event_img" id="event_img" />
+		<p>(이벤트 상세보기에 표시될 이미지 파일을 선택해주세요.)</p><br>
 		<input multiple="multiple" type="file" name="event_img" id="event_img" />
 		
 		<input type="submit" value="등록" name="subscribe" class="submitbtn" />

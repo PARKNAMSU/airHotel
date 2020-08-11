@@ -121,8 +121,8 @@
 	    <li><a href="약관정책.html">약관정책</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의 관리</a></li>
-	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
+	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의</a></li>
+	        <li><a href="안내.html" aria-label="subemnu">안내</a></li>
 	      </ul>
 	    </li>
 	   </ul>

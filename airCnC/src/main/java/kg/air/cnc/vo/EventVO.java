@@ -14,6 +14,15 @@ public class EventVO {
 	private String event_end;
 	private MultipartFile event_img;
 	private String event_url;
+	private String event_url_detail;
+	
+	
+	public String getEvent_url_detail() {
+		return event_url_detail;
+	}
+	public void setEvent_url_detail(String event_url_detail) {
+		this.event_url_detail = event_url_detail;
+	}
 	public int getEvent_idx() {
 		return event_idx;
 	}
@@ -73,7 +82,7 @@ public class EventVO {
 		return "EventVO [event_idx=" + event_idx + ", event_title=" + event_title + ", event_writer=" + event_writer
 				+ ", event_content=" + event_content + ", event_regdate=" + event_regdate + ", event_start="
 				+ event_start + ", event_end=" + event_end + ", event_img=" + event_img + ", event_url=" + event_url
-				+ "]";
+				+ ", event_url_detail=" + event_url_detail + "]";
 	}
 	
 	

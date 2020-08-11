@@ -64,11 +64,17 @@ public class EventController {
 		for(MultipartFile mf : fileList) {
 			String fileName = mf.getOriginalFilename();
 			try {
+				if(event.getEvent_url() == null) {
 				new File(path).mkdirs();
 				mf.transferTo(new File(path + fileName));
 				System.out.println("복사완료");
 				event.setEvent_url(path + fileName);
-				System.out.println("이벤트 사진 경로 : " + event.getEvent_url());
+				System.out.println("이벤트 메인작은사진 경로 : " + event.getEvent_url());
+				} else {
+					mf.transferTo(new File(path + fileName));
+					event.setEvent_url_detail(path + fileName);
+					System.out.println("이벤트 디테일큰사진 경로 : " + event.getEvent_url_detail());
+				}
 			} catch (IllegalStateException e) {
 				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
 			} catch (IOException e) {
@@ -114,20 +120,34 @@ public class EventController {
 			,MultipartHttpServletRequest mtfRequest){
 		List<MultipartFile> fileList = mtfRequest.getFiles("event_img");
 		String path = "c:\\EclipsePractice\\bbb\\";
-		
+		int count = 0;
 		for(MultipartFile mf : fileList) {
+			System.out.println((count+1) +" 번째 이미지 파일 복사");
 			String fileName = mf.getOriginalFilename();
-			try {
-				new File(path).mkdirs();
-				mf.transferTo(new File(path + fileName));
-				System.out.println("복사완료");
-				vo.setEvent_url(path + fileName);
-				System.out.println("이벤트 사진 경로 : " + vo.getEvent_url());
-			} catch (IllegalStateException e) {
-				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(count == 0) {
+				try {
+					new File(path).mkdirs();
+					mf.transferTo(new File(path + fileName));
+					vo.setEvent_url(path + fileName);
+				} catch(IOException e) {
+					System.out.println("메인 변경 없으므로 이전 사진 가져옵니다.");
+					String backaddress = vo.getEvent_url();
+					vo.setEvent_url(backaddress);
+				}
+				System.out.println("메인 : " + vo.getEvent_url());
+			} else {
+				try {
+					new File(path).mkdirs();
+					mf.transferTo(new File(path + fileName));
+					vo.setEvent_url_detail(path + fileName);
+				} catch(IOException e2) {
+					System.out.println("상세 변경 없으므로 이전 사진 가져옵니다.");
+					String backaddress2 = vo.getEvent_url_detail();
+					vo.setEvent_url_detail(backaddress2);
+				}
+				System.out.println("상세 : " + vo.getEvent_url_detail());
 			}
+			count++;
 		}	
 		
 		eventService.updateEvent(vo);

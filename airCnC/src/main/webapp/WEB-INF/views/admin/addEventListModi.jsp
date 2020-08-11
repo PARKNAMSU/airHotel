@@ -156,11 +156,17 @@
 		value="${detail.event_end }" min="2020-01-01" max="2020-12-31">
        	</p>
        	
-       	<input type="text" name="event_url" value="${detail.event_url}">
-       	<p>(이전 이미지 파일을 수정하려면 아래 파일선택을 해주세요.)</p><br>
+       	<input type="text" name="event_url" value="이벤트 메인 이미지 : ${detail.event_url}" disabled >
+       	<p>(이전 메인 이미지 파일을 수정하려면 아래 파일선택을 해주세요.)</p><br>
+		<input multiple="multiple" type="file" name="event_img" id="event_img" />
+		
+		<input type="text" name="event_url" value="이벤트 상세 이미지 : ${detail.event_url_detail}" disabled >
+       	<p>(이전 상세 이미지 파일을 수정하려면 아래 파일선택을 해주세요.)</p><br>
 		<input multiple="multiple" type="file" name="event_img" id="event_img" />
 		
 		<input type="hidden" name="event_idx" value="${detail.event_idx }">
+		<input type="hidden" name="event_url" value="${detail.event_url }">
+		<input type="hidden" name="event_url_detail" value="${detail.event_url_detail }">
 		<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
 		<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
 		<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로라구</button></a>
