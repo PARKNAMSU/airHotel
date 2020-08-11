@@ -52,4 +52,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public CustomerVO checkCustomerWithSessionKey(String session_id) throws Exception {
 		return dao.checkCustomerWithSessionKey(session_id);
 	}
+
+	@Override
+	public int changePassword(CustomerVO customerVO) throws Exception {
+		return dao.changePassword(customerVO);
+	}
 }
