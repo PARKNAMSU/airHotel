@@ -58,10 +58,11 @@ public class ReservationDetailController {
 				vo.setAccessType((String)redirectMap.get("accessType"));
 			}
 		}
+		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		if(vo.getHouse_seq() > 0) {
+			session.setAttribute("house", house);
 			session.setAttribute("house_seq", vo.getHouse_seq());
 		}
-		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
 		if(!util.stringNullCheck((String)session.getAttribute("login_session"))) {
