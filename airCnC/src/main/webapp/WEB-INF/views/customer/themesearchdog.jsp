@@ -25,7 +25,7 @@
             type="text/css"
             href="${pageContext.request.contextPath}/resources/css/SUHWAN.css"
     />
-    <script type="text/javascript" src="../js/hostregister.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/hostregister.js"></script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
     <link
@@ -51,7 +51,7 @@
           "
       ></i
       ></span>
-    <label for="fas fa-question" style="font-size: 40px;">최고의 숙소</label>
+    <label for="fas fa-question" style="font-size: 40px;">반려동물과 함께</label>
 </header>
 <!-- header-end -->
 
@@ -67,7 +67,7 @@
                 <div id="theme_title" class="section_title text-center mb_70">
                     <!-- 선택한 테마에 따라서 동적으로 변환 -->
                     <h3 class="theme_title" style="padding-top: 30px;">
-                        최고의 평점을 받은 숙소에서 최고의 여행을
+                        반려동물과 함께
                     </h3>
                 </div>
             </div>
@@ -128,11 +128,13 @@
                 success : function (data) {
                     getData = data;
                     var max = getData.length;
+                    var accessType = "notres";
                     for(var i = 0 ; i < 10 ; i++){
                         $("#motehr").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
                             "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
                             "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
                             "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
@@ -148,6 +150,9 @@
                         );
                     }
                     showed = 10;
+                    if(max < 10 ){
+                        showed = max;
+                    }
                 },
                 error : function () {
                     alert("에러")

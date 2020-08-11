@@ -127,12 +127,13 @@
                 success : function (data) {
                     getData = data;
                     var max = getData.length;
-
-                    for(var i = 0 ; i < 10 ; i++){
+                    var accessType = "notres";
+                    for(var i = 0 ; i < 3 ; i++){
                         $("#motehr").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
                             "<form id=\"houseInfo\" "+i+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
                             "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
                             "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
@@ -147,7 +148,7 @@
                             "</form>"
                         );
                     }
-                    showed = 10;
+                    showed = 3;
                 },
                 error : function () {
                     alert("에러")
