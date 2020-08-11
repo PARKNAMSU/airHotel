@@ -39,7 +39,6 @@ public class MyHouseController {
 		List<ReservationHouseDetailVO> list = myHouseService.getHostHouseList(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping("myHouseResList.do")

@@ -27,10 +27,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/admincss/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <!-- pdf,excel -->
 <script type="text/javascript"
@@ -96,10 +95,10 @@
         </div>
 
     </div>
+    <div style="clear:both;"></div>
     <!-- slider_area_end -->
-	<div class="container-xl"> 
-		<div class="all">
-			<div class="headdiv">
+		<div class="all" style="width:60%;border: solid;margin-left:20%;margin-bottom:10%;overflow:scroll;">
+			<div class="headdiv" style="border: solid;">
 				<form action="getLog.mdo" class="form-inline" id="logForm">
 					<select name="log_type" class="form-control form-control-lg" style="margin-right:30px;margin-left:0%;">
 						<option value="login">로그인</option>
@@ -142,7 +141,7 @@
 			<div style="margin-bottom: 10%;width:500px;margin-left: 40%;margin-top: 5%;">
 			<a onclick="clickPrev()" id="prev" class="page" style="font-size:20px;">prev</a>
 				<c:forEach begin="1" end="5" var="i">
-					<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;">${i}</a>
+					<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;color:black;">${i}</a>
 				</c:forEach>		
 			<a onclick="clickNext()" id="next" class="page" style="font-size:20px;">next</a>
 			<select id="instanceNum" style="width:200px;margin-left:90%;"onchange="" class="form-control form-control-lg">
@@ -156,15 +155,8 @@
 				<button class="btn btn-outline-danger" onclick="ReportToExcel()">로그 문서화(Excel)</button>&nbsp;&nbsp;
 				<button class="btn btn-outline-danger" onclick="ReportToPDF()">로그 문서화(PDF)</button>&nbsp;&nbsp;
 				<button class="btn btn-outline-danger" onclick="deleteLog()">로그 기록 삭제</button>
-			</div>
+			</div >
 		</div>
-
-	</div>
-
-	<div style="margin-bottom:10%;"></div>
-	<footer>
-		<%@include file="../html/footer.jsp" %>
-	</footer>
 </body>
 <script type="text/javascript">
 var getData;

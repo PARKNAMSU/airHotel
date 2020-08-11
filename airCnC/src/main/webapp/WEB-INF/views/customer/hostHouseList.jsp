@@ -80,7 +80,7 @@
 	<div class="maindiv" id="main" style="margin-left:20%;margin-top:2%;font-family: 'Jua', sans-serif;">
 		<div >
 			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:60%;" onclick="hostSales()">매출 통계보기</button>&nbsp;&nbsp;
-			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="hostSales()">숙소 등록하기</button>
+			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="location.href='hostregisterindex.do'">숙소 등록하기</button>
 		</div>
 		<h1 style="margin-top:5%;margin-bottom:5%;margin-left:35%;font-size:40px;color:red;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
@@ -109,7 +109,7 @@
 	<div style="display:none;font-family: 'Jua', sans-serif;border:solid;" id="noneDiv" >
 		<div style="width:50%;font-size:50px;margin-top:10%;margin-bottom:10%;margin-left:42%;" >			
 			<h1 style="font-family:'Jua', sans-serif;">숙소를 등록해주세요</h1><br><br>
-			<button class="btn btn-outline-danger" style="font-size:20px;font-family:'Jua', sans-serif;" onclick="hostSales()">숙소 등록하러 가기</button>
+			<button class="btn btn-outline-danger" style="font-size:20px;font-family:'Jua', sans-serif;" onclick="location.href='hostregisterindex.do'">숙소 등록하러 가기</button>
 		</div>
 	</div>
 	<div style="clear:both;"></div>
