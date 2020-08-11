@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/admin_salesChart.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sideMenu.css?version=123">
@@ -48,8 +50,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header>
-		<%@ include file="../html/menu.jsp"%>
+	<header class="menudiv1" style="position: sticky;">
+		<div class="menudiv2-1">
+			<img alt="" src="${pageContext.request.contextPath}/resources/image/trip/logo2.png" />
+		</div>
+		<div class="menudiv2-2" style="margin-left:56%">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems" >
+					<c:catch>
+						<c:choose>
+							<c:when test="${admin_session eq null}">
+								<script>history.go(-1);</script>
+							</c:when>
+							<c:otherwise>
+								<li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo" style="color:white;">신고관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo" style="color:white;">통계</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo" style="color:white;">호스트관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo" style="color:white;">로그관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo" style="color:white;">쿠폰관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" style="color:white;">게시판관리</a></li>
+								<li class="item"><a href="/cnc/logout.mdo" style="color:white;">로그아웃</a></li>	
+							</c:otherwise>
+						</c:choose>
+					</c:catch>
+				</ul>
+			</div>
+		</div>
 	</header>
 	<div style="clear: both;"></div>
 	<!-- slider_area_start -->
