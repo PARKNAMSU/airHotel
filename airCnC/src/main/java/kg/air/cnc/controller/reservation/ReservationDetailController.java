@@ -51,6 +51,7 @@ public class ReservationDetailController {
 	@RequestMapping(value = "reservationHouse.do")
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,HttpServletRequest request,ModelAndView mav) {
 		Utils util = new Utils();
+		System.out.println(vo.getCheck_in());
 		if(vo.getHouse_seq() == 0) {
 			Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
 			if(redirectMap != null) {

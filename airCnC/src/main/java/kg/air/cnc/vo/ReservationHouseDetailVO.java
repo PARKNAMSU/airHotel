@@ -73,6 +73,9 @@ public class ReservationHouseDetailVO {
     private String reservation_status_text;
 	private int reservation_seq;
 	private int reservation_status;
+	private int house_person;
+	private String check_in;
+	private String check_out;
 	private String reservation_check_in;
 	private String reservation_check_out;
     private ArrayList<String> convinList;
@@ -83,7 +86,25 @@ public class ReservationHouseDetailVO {
     private ArrayList<Integer> favoriteHouse_list;
     private String favorite_state;
     
-    public String getReservation_check_in() {
+    public String getCheck_in() {
+		return check_in;
+	}
+	public void setCheck_in(String check_in) {
+		this.check_in = check_in;
+	}
+	public String getCheck_out() {
+		return check_out;
+	}
+	public void setCheck_out(String check_out) {
+		this.check_out = check_out;
+	}
+	public int getHouse_person() {
+		return house_person;
+	}
+	public void setHouse_person(int house_person) {
+		this.house_person = house_person;
+	}
+	public String getReservation_check_in() {
 		return reservation_check_in;
 	}
 	public void setReservation_check_in(String reservation_check_in) {
