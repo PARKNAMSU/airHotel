@@ -65,8 +65,11 @@ public class ReservationDetailController {
 		}
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
+		System.out.println(vo.getAccessType());
 		if(!util.stringNullCheck((String)session.getAttribute("login_session"))) {
-			house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq())); 
+			if(!vo.getAccessType().trim().equals("host")) {
+				house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq())); 
+			}
 		}
 		if(commentsService.getComments(vo).size()>0) {
 			mav.addObject("commentsList",commentsService.getComments(vo));

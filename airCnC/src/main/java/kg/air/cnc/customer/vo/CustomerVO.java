@@ -18,6 +18,7 @@ public class CustomerVO{
 	private Date session_limit;
 	private Date customer_stop_end_date;
 	private int customer_status;
+	private String favorite_house; 
 	private boolean useCookie;
 	
 	public String getCustomer_id() {
@@ -110,6 +111,12 @@ public class CustomerVO{
 	public void setCustomer_status(int customer_status) {
 		this.customer_status = customer_status;
 	}
+	public String getFavorite_house() {
+		return favorite_house;
+	}
+	public void setFavorite_house(String favorite_house) {
+		this.favorite_house = favorite_house;
+	}
 	public boolean isUseCookie() {
 		return useCookie;
 	}
@@ -124,6 +131,7 @@ public class CustomerVO{
 				+ ", customer_blame_warn=" + customer_blame_warn + ", customer_blame_stop=" + customer_blame_stop
 				+ ", customer_regdate=" + customer_regdate + ", customer_key=" + customer_key + ", session_id="
 				+ session_id + ", session_limit=" + session_limit + ", customer_stop_end_date=" + customer_stop_end_date
-				+ ", customer_status=" + customer_status + ", useCookie=" + useCookie + "]";
+				+ ", customer_status=" + customer_status + ", favorite_house=" + favorite_house + ", useCookie="
+				+ useCookie + "]";
 	}
 }

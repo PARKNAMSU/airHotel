@@ -82,6 +82,50 @@ public class CustomerController {
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
 	}
+	
+	// 비밀번호 찾기 이메일 전송.
+	@RequestMapping(value = "/findPassword.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int findPassword(@RequestParam String customer_email, CustomerVO vo, HttpServletRequest request)throws Exception{
+		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
+		int resultCnt = 0;
+		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
+		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
+			return 0;
+		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
+			char[] keySet = new char[] { 
+					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+					'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+					'U', 'V', 'W', 'X', 'Y', 'Z',
+					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+					'u', 'v', 'w', 'x', 'y', 'z'};
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0 ; i < 11 ; i++) {
+				int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
+				sb.append(keySet[idx]);
+			}
+			HttpSession session = request.getSession(true);
+			String newPassword = String.valueOf(sb); // 랜덤 인증 코드.
+			session.setAttribute("newPassword", newPassword);
+			String subject = "[AirCnC] 임시 비밀번호 발급 안내.";
+			String text = "<div align = 'left'>";
+			text += "<h3>임시 비밀번호입니다. 로그인 후 비밀번호를 변경하여 사용하세요.</h3>";
+			text += "<h2>임시 비밀번호 : " + newPassword + "</h2>";
+			// if(cnt == 0) {
+			mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
+			vo.setCustomer_password(newPassword);
+//			int changePwResult = service.changePassword(vo.getCustomer_password(),customer_email);
+			return 1;
+			//	}
+			//	else {
+			//		return false;
+			//	}
+		} else {
+			return -1;
+		}
+	}
 
 	// 아이디 중복 여부 검사.
 	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
@@ -142,8 +186,9 @@ public class CustomerController {
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean createEmailCheck(@RequestParam String customer_email, HttpServletRequest request)throws Exception {
+	public boolean createEmailCheck(@RequestParam(value = "customer_email" ,required = false)String customer_email, HttpServletRequest request)throws Exception {
 		int cnt = -1;
+		System.out.println(customer_email);
 		cnt = service.createEmailCheck(customer_email); // 이메일 중복 체크.
 		System.out.println(cnt); // 1이면 중복 이메일 있음. 0이면 중복 없음.
 
@@ -164,7 +209,7 @@ public class CustomerController {
 		HttpSession session = request.getSession(true);
 		String authCode = String.valueOf(sb); // 랜덤 인증 코드.
 		session.setAttribute("authCode", authCode);
-		String subject = "회원가입 인증 코드 발급 안내 입니다.";
+		String subject = "[AirCnC] 회원가입 인증 코드 발급 안내 입니다.";
 		String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
 		//		if(cnt == 0) {
 		mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
