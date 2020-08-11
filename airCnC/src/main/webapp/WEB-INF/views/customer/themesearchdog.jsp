@@ -74,8 +74,8 @@
         </div>
         <div id="motehr">
             <script>
-                function goReservationHouse() {
-                    $("#houseInfo").submit();
+                function goReservationHouse(seq) {
+                    document.getElementById(seq).submit();
                 }
             </script>
         </div>
@@ -122,16 +122,16 @@
         window.onload = function () {
             $.ajax({
                 type : "GET",
-                url : "getMoreHighScoreHouse.do",
+                url : "getMoreThemeHouse.do",
                 dataType : "json",
+                data : {theme_type : "house_condition_petok"},
                 success : function (data) {
                     getData = data;
                     var max = getData.length;
-
                     for(var i = 0 ; i < 10 ; i++){
                         $("#motehr").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
-                            "<form id=\"houseInfo\" "+i+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
+                            "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
                             "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +

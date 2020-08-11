@@ -9,13 +9,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	811cfc852fdf2dfcea71594f0a24a256"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reservationhouse.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reservationhouse.css?version=123">
 <meta charset="UTF-8">
 <style type="text/css">
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -39,16 +41,29 @@
 	<header>
 		<%@include file="../html/menu.jsp" %>
 	</header>
-	<div style="clear:both;"></div>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
+	<div style="clear:both;margin-bottom:3%;"></div>
+	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
+	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
+		<form action="payment.do" method="post" class="form-inline" id="dateForm">
+			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson">&nbsp;&nbsp;&nbsp;
+			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control">&nbsp;&nbsp;&nbsp;
+			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" >&nbsp;&nbsp;&nbsp;
+			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
+			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">			 
+		</form>
+	</div>
+	</c:if>
+	<br><br><br><br>
 	<div class="headdiv" style="font-family: 'Jua', sans-serif;">
 		<span style="font-size:50px;">${house.house_name }</span>
 		<div id="belike">
-			<div class="headimgdiv">
-				<a href="#rate" style="font-family: 'Jua', sans-serif;">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
-				${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
-			</div>
+			
+				<div class="headimgdiv">
+					<a href="#rate" style="font-family: 'Jua', sans-serif;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
+					${commentsList.get(0).comments_average }<c:if test="${commentsList != null }">(${commentsList.size() })</c:if></a><!-- 평점, 후기 개수 -->
+				</div>
+			
 			<c:if test="${house.accessType != 'host' }">
 				<c:choose>
 				<c:when test="${house.favorite_state eq 'false' }">
@@ -158,7 +173,7 @@
 		<div class="subinfodiv" style="font-family: 'Jua', sans-serif;">
 			<span id="title" style="font-family: 'Jua', sans-serif;">체크인 / 체크아웃 시간</span><br><br>
 			<div class="check">
-				<strong style="font-family: 'Jua', sans-serif;">체크인</strong><br><br>
+				<strong style="font-family: 'Jua', sans-serif;>체크인</strong><br><br>
 				<p style="font-family: 'Jua', sans-serif;">2020/07/21</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkin_time }</p>
 			</div>
@@ -189,16 +204,11 @@
 				<c:when test="${house.accessType eq 'host' }">
 				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;">수정하기</button>
 				</c:when>
-				<c:otherwise>
-				<button class="btn btn-outline-danger" id="btn5" style="font-family: 'Jua', sans-serif;font-size:20px;">예약하기</button>
-				</c:otherwise>
 			</c:choose>
 	</div>
 	<div style="clear:both;"></div>
 	<br><br>
-	
 	<div class="reviewdiv" style="font-family: 'Jua', sans-serif;">
-		
 		<div id="rate">
 			<p style="font-size:40px" style="font-family: 'Jua', sans-serif;">후기</p><br><br>
 			<a id="star" style="font-family: 'Jua', sans-serif;"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
@@ -215,7 +225,7 @@
 			</form>
 			</c:if>
 		</div>
-		
+		<c:if test="${commentsList != null }">
 		<div id="commantdiv">
 			<c:forEach items="${commentsList}" var="item" varStatus="i">
 			<div class="commantform">
@@ -234,6 +244,7 @@
 			</div>
 			</c:forEach>
 		</div>
+		</c:if>
 	</div>
 	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>
@@ -249,6 +260,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/reservationhouse.js?version=127"></script>
 
 <script type="text/javascript">
+
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var mposition = new kakao.maps.LatLng(37.570988,126.992540)
 var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -332,8 +344,6 @@ var cancelReservation = function(res){
 	}
 }
 var storeFavoriteHouse = function(house_seq){
-	var result = confirm("숙소를 저장하시겠습니까?")
-	if(result){
 		$.ajax({
 			type:"POST",
 			url:"addFavoritHouse.do",
@@ -348,11 +358,10 @@ var storeFavoriteHouse = function(house_seq){
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	        }
 		})
-	}
+
 }
 var removeFavoriteHouse = function(house_seq){
-	var result = confirm("숙소를 삭제하시겠습니까?")
-	if(result){
+
 		$.ajax({
 			type:"POST",
 			url:"removeFavoritHouse.do",
@@ -367,7 +376,118 @@ var removeFavoriteHouse = function(house_seq){
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	        }
 		})
+
+}
+
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+}
+var getData;
+var dates = [];
+	$(function(){
+			$.ajax({
+			type:"POST",
+			url:"getCertainResDate.do",
+			dataType:"json",
+			success:function(data){
+				getData = data;
+				for(var i=0; i< getData.length;i++){
+					var ci = getData[i].reservation_check_in;
+					var co = getData[i].reservation_check_out;
+					var ci_date = new Date(ci);
+					var co_date = new Date(co);
+					while(ci_date < co_date){
+						var mon = (ci_date.getMonth()+1);
+			  			mon = mon < 10 ? '0'+mon : mon;
+			  			var day = ci_date.getDate();
+			  			day = day < 10 ? '0'+day : day;
+			   			dates.push(ci_date.getFullYear() + '-' + mon + '-' +  day);
+			   			ci_date.setDate(ci_date.getDate() + 1);
+					}
+				}
+				$("#checkout").datepicker('option', 'beforeShowDay',DisableDates)
+				$("#checkin").datepicker('option', 'beforeShowDay',DisableDates)
+			},
+	        error : function(request, status, error) {
+	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+	        }
+		})
+	
+	})
+
+function DisableDates(date) {
+	var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+	return [dates.indexOf(string) == -1];
+}
+  
+ $("#checkin").datepicker({
+                 dateFormat: 'yy-mm-dd' //Input Display Format 변경
+                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                ,changeYear: true //콤보박스에서 년 선택 가능
+                ,changeMonth: true //콤보박스에서 월 선택 가능                
+                ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+                ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+                ,minDate: getFormatDate(new Date()) //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,maxDate:""
+                ,beforeShowDay: DisableDates 
+ 
+ });
+ $("#checkout").datepicker({
+ 	            dateFormat: 'yy-mm-dd' //Input Display Format 변경
+                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                ,changeYear: true //콤보박스에서 년 선택 가능
+                ,changeMonth: true //콤보박스에서 월 선택 가능                
+                ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+                ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+                ,minDate: getFormatDate(new Date()) //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                ,beforeShowDay: DisableDates 
+ });
+ 	$(function(){
+		$("#checkin").change(function() {
+			$("#checkout").datepicker('option', 'minDate',$("#checkin").datepicker('getDate').getFullYear()+"-"+($("#checkin").datepicker('getDate').getMonth()+1)+"-"+($("#checkin").datepicker('getDate').getDate()+1))
+		}), 
+		$("#checkout").change(function() {
+			$("#checkin").datepicker('option','minDate',$("#checkin").datepicker('getDate'))
+			$("#checkin").datepicker('option','maxDate',$("#checkout").datepicker('getDate').getFullYear()+"-"+($("#checkout").datepicker('getDate').getMonth()+1)+"-"+($("#checkout").datepicker('getDate').getDate()-1))
+		})
+	})
+
+function dateFormSubmit(){
+	if(document.getElementById("numPerson").value == null || document.getElementById("numPerson").value == ""){
+		alert("인원수를 입력하세요")
+	}else if(document.getElementById("checkin").value == null || document.getElementById("checkin").value == ""){
+		alert("체크인 시간을 입력하세요")
+	}else if(document.getElementById("checkout").value == null || document.getElementById("checkout").value == ""){
+		alert("체크아웃 시간을 입력하세요")
+	}else{
+		document.getElementById("dateForm").submit();
 	}
+}
+function resetDate(){
+	$("#checkout").datepicker('option','minDate',getFormatDate(new Date()))
+	$("#checkin").datepicker('option','minDate',getFormatDate(new Date()))
+	$("#checkin").datepicker('option','maxDate',"")
 }
 </script>
 

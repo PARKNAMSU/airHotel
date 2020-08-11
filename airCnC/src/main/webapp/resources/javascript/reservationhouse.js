@@ -45,5 +45,6 @@ var deleteComments = function(comments_seq,comments_house_seq, type){
 	}
 }
 var openResList = function(house_seq){
+	
 	location.href = "myHouseResList.do?house_seq="+house_seq;
 }

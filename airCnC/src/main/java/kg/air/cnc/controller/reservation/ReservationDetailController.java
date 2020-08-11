@@ -16,6 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kg.air.cnc.common.Utils;
 import kg.air.cnc.service.blame.BlameServiceImpl;
 import kg.air.cnc.service.comments.CommentsService;
 import kg.air.cnc.service.message.MessageService;
@@ -46,6 +50,7 @@ public class ReservationDetailController {
 	}
 	@RequestMapping(value = "reservationHouse.do")
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo,HttpSession session,HttpServletRequest request,ModelAndView mav) {
+		Utils util = new Utils();
 		if(vo.getHouse_seq() == 0) {
 			Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
 			if(redirectMap != null) {
@@ -53,11 +58,18 @@ public class ReservationDetailController {
 				vo.setAccessType((String)redirectMap.get("accessType"));
 			}
 		}
+		if(vo.getHouse_seq() > 0) {
+			session.setAttribute("house_seq", vo.getHouse_seq());
+		}
 		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
-		house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq())); 
-		mav.addObject("commentsList",commentsService.getComments(vo));
+		if(!util.stringNullCheck((String)session.getAttribute("login_session"))) {
+			house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq())); 
+		}
+		if(commentsService.getComments(vo).size()>0) {
+			mav.addObject("commentsList",commentsService.getComments(vo));
+		}
 		mav.addObject("house",house);
 		mav.setViewName("reservationhouse");
 		return mav;
@@ -142,5 +154,13 @@ public class ReservationDetailController {
 		String favoriteList = reservationService.getFavoriteHouseNumber(id);
 		reservationService.removeFavoriteHouse(id, favoriteList, vo.getHouse_seq());
 		return "삭제되었습니다.";
+	}
+	@RequestMapping(value = "getCertainResDate.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String getCertainResDate(HttpSession session) throws JsonProcessingException {
+		List<ReservationHouseDetailVO> list = reservationService.getResForSpecHouse((Integer)session.getAttribute("house_seq"));
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		return jsonStr;
 	}
 }

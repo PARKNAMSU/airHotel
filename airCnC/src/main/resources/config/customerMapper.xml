@@ -21,6 +21,7 @@
 			DEFAULT,
 			DEFAULT,
 			DEFAULT, 
+			DEFAULT,
 			DEFAULT)
 	</insert>
 	

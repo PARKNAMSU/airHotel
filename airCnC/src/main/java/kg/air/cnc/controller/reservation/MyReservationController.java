@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,6 @@ public class MyReservationController {
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservation(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping(value = "myReservationBefore.mdo",produces = "application/text; charset=utf8")
@@ -45,12 +45,17 @@ public class MyReservationController {
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservationBefore(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping("rollbackReservationCancel.do")
 	public String rollbackReservationCancelController(ReservationHouseDetailVO vo) {
 		reservationService.rollbackReservationCancel(vo);
 		return "redirect:reservationPage.do";
+	}
+	@RequestMapping("myFavoriteHouse.do")
+	public ModelAndView myFavoriteHouseController(HttpSession session,ModelAndView mav){	
+		mav.addObject("favoriteList",reservationService.getMyFavoriteHouse((String)session.getAttribute("login_session")));
+		mav.setViewName("myFavoriteHouse");
+		return mav;
 	}
 }
