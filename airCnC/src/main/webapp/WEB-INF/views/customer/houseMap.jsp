@@ -130,8 +130,8 @@
 			<div class="mapSide">
 			<c:forEach items="${houseList}" var="house">
 				<form action="reservationHouse.do" method="post" id="${house.house_seq}">
-				<input type="hidden" value="%{house.house_seq}"/>
-					<div class="houseList" style="color: black" onclick="sub(${house.house_seq})">
+				<input type="hidden" name="house_seq" value="${house.house_seq}"/>
+					<div class="houseList" style="color: black" onclick="document.getElementById(${house.house_seq}).submit();">
 						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
 							${house.house_seq }<br>
 							${house.house_name }<br> 
@@ -413,11 +413,12 @@
 			if(peo.value>10) peo.value = 10;
 		}
 	</script>
-		
+	<!-- 
 	<script>
-		var sub = function(let seq) {
+		var sub = function(seq) {
 			${"#seq"}.submit();
 		}
 	</script>
+	-->
 </body>
 </html>
