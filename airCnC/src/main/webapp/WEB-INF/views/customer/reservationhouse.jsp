@@ -17,6 +17,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	811cfc852fdf2dfcea71594f0a24a256"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reservationhouse.css?version=123">
 <meta charset="UTF-8">
 <style type="text/css">
@@ -38,8 +40,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header>
-		<%@include file="../html/menu.jsp" %>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
 	</header>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">

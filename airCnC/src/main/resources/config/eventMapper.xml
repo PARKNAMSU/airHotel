@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="eventMapper">
+<select id="selectEventList" resultType="kg.air.cnc.vo.EventVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, event_idx, event_title, event_writer, 
+            event_content, event_regdate, event_start, event_end, event_url 
+            from (select * from event_board order by event_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	<select id="countEventList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            event_board
+    ]]>
+	</select>
+
+	<insert id="insertEvent" parameterType="kg.air.cnc.vo.EventVO">
+		<![CDATA[
+		INSERT INTO event_board(event_idx, event_title, event_content,
+		event_start, event_end, event_url)
+		VALUES((select nvl(max(event_idx), 0)+1 from event_board), 
+		#{event_title}, #{event_content}, #{event_start}, #{event_end}, #{event_url})
+		]]>
+	</insert>
+	
+	<select id="getEventListAdmin" resultType="kg.air.cnc.vo.EventVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, event_idx, event_title, event_writer, 
+            event_content, event_regdate, event_start, event_end, event_url 
+            from (select * from event_board order by event_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	
+	<select id="detailEvent" resultType="kg.air.cnc.vo.EventVO">
+	 <![CDATA[
+		SELECT
+			event_idx, event_title, event_writer, event_content, 
+			event_regdate, event_start, event_end, event_url
+		FROM
+			event_board
+		WHERE
+			event_idx=#{event_idx}
+	]]>
+	</select>
+	
+	<update id="updateEvent">
+		<![CDATA[
+		UPDATE 
+			event_board 
+		SET
+			event_title = #{event_title},
+			event_content = #{event_content},
+			event_start = #{event_start},
+			event_end = #{event_end},
+			event_url = #{event_url} 	
+		WHERE 
+			event_idx = #{event_idx}
+		]]>
+	</update>
+	
+	<delete id="deleteEvent">
+		<![CDATA[
+		DELETE FROM 
+			event_board
+		WHERE
+			event_idx = #{event_idx}
+		]]>
+	</delete>
+	
+	
+	
+</mapper>

@@ -72,9 +72,7 @@
 		$.ajax({
 			type : "post",
 			url : "createEmailCheck.do",
-			data : {
-				"customerEmail" : $("#customerEmail").val()
-			},
+			data : {"customer_email" : $("#customerEmail").val()},
 			success : function(data) {
 				if (data == false) {
 					alert("인증번호 발송 실패");
@@ -95,7 +93,7 @@
 			type : "post",
 			url : "emailAuth.do",
 			data : {
-				"customerKey" : $("#customerKey").val()
+				"customer_key" : $("#customerKey").val()
 			},
 			success : function(data) {
 				if (data == "complate") {
@@ -288,7 +286,7 @@
 					<br> <span> <input class="iauth" type="text"
 						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호"
 						required>
-					</span> <br> <input id="emailAuthBtn"
+					</span> <br> <input id="emailAuthBtn" type="button"
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"
 						value="이메일 인증">
 				</div>

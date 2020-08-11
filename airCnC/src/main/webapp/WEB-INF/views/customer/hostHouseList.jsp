@@ -10,6 +10,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=124">
 <!-- Latest compiled JavaScript -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -29,9 +31,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<head>
-	<%@ include file="../html/menu.jsp" %>
-	</head>
+	<c:if test="${login_session == null }">
+		<script type="text/javascript">location.href ='loginView.do'</script>
+	</c:if>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+	</header>
 	<div style="clear:both;"></div>
 	 <!-- slider_area_start -->
     <div class="slider_area">
@@ -83,7 +106,12 @@
 		</div>
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
-
+	<div style="display:none;font-family: 'Jua', sans-serif;border:solid;" id="noneDiv" >
+		<div style="width:50%;font-size:50px;margin-top:10%;margin-bottom:10%;margin-left:42%;" >			
+			<h1 style="font-family:'Jua', sans-serif;">숙소를 등록해주세요</h1><br><br>
+			<button class="btn btn-outline-danger" style="font-size:20px;font-family:'Jua', sans-serif;" onclick="hostSales()">숙소 등록하러 가기</button>
+		</div>
+	</div>
 	<div style="clear:both;"></div>
 
 	<footer>
@@ -103,17 +131,22 @@
 	           dataType:"json",	   
 	           success : function(data) {
 					getData = data;
-					for(var i=1;i<=instanceNum;i++){
-						if(getData[i-1] != null){
-							$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
-							//$("img"+i).attr("src","") 나중에 추가
-							$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
-						}else{
-							$("#imgdiv"+i).css("display","none")
+					if(getData.length >0){
+						for(var i=1;i<=instanceNum;i++){
+							if(getData[i-1] != null){
+								$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
+								//$("img"+i).attr("src","") 나중에 추가
+								$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
+							}else{
+								$("#imgdiv"+i).css("display","none")
+							}
 						}
-					}
-					if(getData.length <= instanceNum){
-						$("#tri2").css('display','none');
+						if(getData.length <= instanceNum){
+							$("#tri2").css('display','none');
+						}
+					}else{
+						$("#main").css('display','none');
+						$("#noneDiv").css('display','initial');
 					}
 	           },
 	           error : function(request, status, error) {

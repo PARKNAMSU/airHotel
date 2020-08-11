@@ -6,9 +6,16 @@
 <head>
 
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sideMenu.css?version=123">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/chat.css?version=123">
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 <style type="text/css">
 body {
   font-family: "Jua", sans-serif;
@@ -25,23 +32,72 @@ body {
 <title>Insert title here</title>
 </head>
 <body>
-<header>
-<%@include file="../html/menu.jsp" %>
-</header>
+	<c:if test="${login_session == null }">
+		<script type="text/javascript">location.href ='loginView.do'</script>
+	</c:if>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+	</header>
 
-<div style="clear:both;"></div>
-<%@include file="../html/sideMenu.jsp" %>
+	 <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_2">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>Chatting</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <!-- slider_area_end -->
+	<div style="clear:both;"></div>
+	
+	<div id="sidediv">
+		<ul id="sidemenu">
+			<li class="menu"><span id="topmenu" style="font-family: 'Jua', sans-serif;">내정보 관리</span></li>
+			<li class="menu"><a href="reservationPage.do" style="font-family: 'Jua', sans-serif;" >예약내역</a></li>
+			<li class="menu"><a href="myFavoriteHouse.do" style="font-family: 'Jua', sans-serif;">저장한 숙소</a></li>
+			<li class="menu"><a href="chat.do" style="font-family: 'Jua', sans-serif;">메세지</a></li>		
+			<li class="menu"><a href="#" style="font-family: 'Jua', sans-serif;">회원탈퇴</a></li>
+		</ul>
+	</div>
 	
 	<div class="headdiv">
 		<h1 style="font-size:40px;margin-left:3%;font-family: 'Jua', sans-serif;">나의 채팅</h1>
 	</div>
 	<div class="chatdiv">
 		<div id="chatbox">
-			<div id="chatelement" onclick="openChat('message.do?message_to_id=admin')">
+			<div id="chatelement" onclick="openChat('message.do?message_to_id=admin')" >
 				<div  id="imgdiv" >
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
 				</div>
-				<div id="namediv">
+				<div id="namediv" >
 					<p style="font-family: 'Jua', sans-serif;">admin</p><!-- db에서 받아온 이름 -->
 					<br>
 					<p style="color:gray;font-family: 'Jua', sans-serif;"></p><!-- db에서 받아온 최신 메세지 날짜 -->
@@ -67,15 +123,6 @@ body {
 			</div>
 			<hr>
 			</c:forEach>
-			<div id="chatelement">
-			
-			</div>
-			<div id="chatelement">
-			
-			</div>
-			<div id="chatelement">
-			
-			</div>
 		</div>
 	</div>
 <div style="clear:both;"></div>
