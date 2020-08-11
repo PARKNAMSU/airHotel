@@ -26,7 +26,8 @@
             href="${pageContext.request.contextPath}/resources/css/SUHWAN.css"
     />
     <script type="text/javascript" src="../js/hostregister.js"></script>
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
     <link
             href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
             rel="stylesheet"
@@ -50,7 +51,7 @@
           "
       ></i
       ></span>
-    <label for="fas fa-question" style="font-size: 40px;">물놀이 테마 페이지</label>
+    <label for="fas fa-question" style="font-size: 40px;">가족 물놀이</label>
 </header>
 <!-- header-end -->
 
@@ -58,47 +59,32 @@
 <div class="popular_destination_area" style="text-align: center;">
     <div class="container">
         <div class="theme_image">
-            <img src="${pageContext.request.contextPath}/resources/images/theme_search/dog.jpg" style="border-radius: 20px;"/>
+            <img src="${pageContext.request.contextPath}/resources/images/theme_search/dog.jpg"
+                 style="border-radius: 20px;"/>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div id="theme_title" class="section_title text-center mb_70">
                     <!-- 선택한 테마에 따라서 동적으로 변환 -->
                     <h3 class="theme_title" style="padding-top: 30px;">
-                        풀장이 있는 숙소
+                        가족 물놀이
                     </h3>
                 </div>
             </div>
         </div>
-        <c:set var="themeList" value="${themeList}"/>
-        <c:forEach var="item" items="${themeList}" begin="0" end="${themeList.size()}" step="1">
-            <div class="col-lg-4 col-md-1">
-                <div class="single_destination2" onclick="goReservationHouse()">
-                    <form name="houseinfo">
-                        <input type="hidden" name="house_seq">
-                    </form>
-                    <script>
-                        function goReservationHouse() {
-                            var f = document.houseinfo;
-                            f.house_seq.value = ${item.house_seq};
-                            f.action = "/reservationHouse.do";
-                            f.method = "post";
-                            f.submit();
-                        }
-                    </script>
-                    <div class="thumb">
-                        <img src="${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg"
-                             alt=""/>
-                    </div>
-                    <div class="info">
-                        <a href="#">
-                            <p>${item.house_location}</p>
-                            <p>1박 기준 ${item.house_price_default}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
+        <div id="motehr">
+            <script>
+                function goReservationHouse(seq) {
+                    document.getElementById(seq).submit();
+                }
+            </script>
+        </div>
+        <div class="btn" style="padding-top: 15px;">
+            <button id="moreBtn" class="btn1" type="submit" style="float: right;" onclick="getMoreData()">
+                더보기
+            </button>
+        </div>
+
         <div class="btn" style="padding-top: 15px;">
             <button class="btn1" type="submit" style="float: right;">
                 <a href="/html/reservation_map.html">상세페이지로 가기</a>
@@ -106,7 +92,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <!-- 메인화면  -->
 
 <!-- footer-start -->
@@ -129,6 +115,71 @@
         <img src="${pageContext.request.contextPath}/resources/images/face.png" id="blogo"/>
         <img src="${pageContext.request.contextPath}/resources/images/insta.png" id="blogo"/>
     </div>
+
+    <script>
+        var getData = [];
+        var showed = 0;
+        window.onload = function () {
+            $.ajax({
+                type : "GET",
+                url : "getMoreThemeHouse.do",
+                dataType : "json",
+                data : {theme_type : "house_theme_pool"},
+                success : function (data) {
+                    getData = data;
+                    var max = getData.length;
+                    var accessType = "notres";
+
+                    for(var i = 0 ; i < 10 ; i++){
+                        $("#motehr").append(
+                            "<div class=\"col-lg-4 col-md-1\">" +
+                            "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
+                            "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
+                            "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
+                            "<div class=\"thumb\">" +
+                            "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                            "</div>" +
+                            " <div class=\"info\">" +
+                            "<a href=\"#\">" +
+                            "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
+                            "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                            "</a>" +
+                            "</div>" +
+                            "</div>" +
+                            "</form>"
+                        );
+                    }
+                    showed = 10;
+                },
+                error : function () {
+                    alert("에러")
+                }
+            });
+        }
+        function getMoreData() {
+            for(var i = showed; i < showed+1; i++){
+                $("#motehr").append(
+                    "<div class=\"col-lg-4 col-md-1\">" +
+                    "<form id=\"houseInfo\" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
+                    "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                    "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
+                    "<div class=\"thumb\">" +
+                    "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                    "</div>" +
+                    " <div class=\"info\">" +
+                    "<a href=\"#\">" +
+                    "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
+                    "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                    "</a>" +
+                    "</div>" +
+                    "</div>" +
+                    "</form>"
+                );
+            }
+            showed++;
+        }
+    </script>
 </footer>
 <!-- footer-end -->
 </body>
