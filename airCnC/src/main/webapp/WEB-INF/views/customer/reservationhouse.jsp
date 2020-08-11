@@ -344,8 +344,6 @@ var cancelReservation = function(res){
 	}
 }
 var storeFavoriteHouse = function(house_seq){
-	var result = confirm("숙소를 저장하시겠습니까?")
-	if(result){
 		$.ajax({
 			type:"POST",
 			url:"addFavoritHouse.do",
@@ -360,11 +358,10 @@ var storeFavoriteHouse = function(house_seq){
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	        }
 		})
-	}
+
 }
 var removeFavoriteHouse = function(house_seq){
-	var result = confirm("숙소를 삭제하시겠습니까?")
-	if(result){
+
 		$.ajax({
 			type:"POST",
 			url:"removeFavoritHouse.do",
@@ -379,7 +376,7 @@ var removeFavoriteHouse = function(house_seq){
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	        }
 		})
-	}
+
 }
 
 function getFormatDate(date){
