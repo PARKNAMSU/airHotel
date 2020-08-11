@@ -47,7 +47,7 @@
 	<div class="maindiv" id="main">
 	<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;">내가 좋아하는  숙소</h1>
 	<c:forEach items="${favoriteList }" var="item">
-		<div class="subdiv" id="imgdiv1" onclick="" style="color:black;margin-top:5%;">
+		<div class="subdiv" id="imgdiv1" onclick="goToHouse(${item.house_seq},'notres')" style="color:black;margin-top:5%;">
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
 			</div>
@@ -61,4 +61,23 @@
 		<%@ include file="../html/footer.jsp" %>
 	</footer>
 </body>
+<script type="text/javascript">
+	function goToHouse(house_seq,accessType){
+		var form = document.createElement("form");
+		var input = new Array()
+		var names = ["house_seq","accessType"]
+		var values = [house_seq,accessType]
+        form.action = "reservationHouse.do";
+        form.method = "post";
+        for (var i = 0; i < 3; i++) {
+        	input[i] = document.createElement("input");
+            input[i].setAttribute("type", "hidden");
+            input[i].setAttribute('name', names[i]);
+            input[i].setAttribute("value", values[i]);
+            form.appendChild(input[i]);
+        }
+        document.body.appendChild(form);
+        form.submit();
+	}
+</script>
 </html>

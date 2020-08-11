@@ -57,11 +57,13 @@
 	<div class="headdiv" style="font-family: 'Jua', sans-serif;">
 		<span style="font-size:50px;">${house.house_name }</span>
 		<div id="belike">
-			<div class="headimgdiv">
-				<a href="#rate" style="font-family: 'Jua', sans-serif;">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
-				${commentsList.get(0).comments_average }(${commentsList.size() })</a><!-- 평점, 후기 개수 -->
-			</div>
+			
+				<div class="headimgdiv">
+					<a href="#rate" style="font-family: 'Jua', sans-serif;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
+					${commentsList.get(0).comments_average }<c:if test="${commentsList != null }">(${commentsList.size() })</c:if></a><!-- 평점, 후기 개수 -->
+				</div>
+			
 			<c:if test="${house.accessType != 'host' }">
 				<c:choose>
 				<c:when test="${house.favorite_state eq 'false' }">
@@ -206,9 +208,7 @@
 	</div>
 	<div style="clear:both;"></div>
 	<br><br>
-	
 	<div class="reviewdiv" style="font-family: 'Jua', sans-serif;">
-		
 		<div id="rate">
 			<p style="font-size:40px" style="font-family: 'Jua', sans-serif;">후기</p><br><br>
 			<a id="star" style="font-family: 'Jua', sans-serif;"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg">
@@ -225,7 +225,7 @@
 			</form>
 			</c:if>
 		</div>
-		
+		<c:if test="${commentsList != null }">
 		<div id="commantdiv">
 			<c:forEach items="${commentsList}" var="item" varStatus="i">
 			<div class="commantform">
@@ -244,6 +244,7 @@
 			</div>
 			</c:forEach>
 		</div>
+		</c:if>
 	</div>
 	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>

@@ -23,15 +23,17 @@ public class CommentsService implements CommentsServiceImpl{
 	@Override
 	public List<CommentsVO> getComments(ReservationHouseDetailVO vo) {
 		List<CommentsVO> list = commentsDAO.getComments(vo);
-		DateFormat format = new SimpleDateFormat("YYYY/MM/dd");
-		int sum = 0;
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setComments_date(format.format(list.get(i).getComments_regdate()));
-			sum+=list.get(i).getComments_rate();
+		if(list.size()>0) {
+			DateFormat format = new SimpleDateFormat("YYYY/MM/dd");
+			int sum = 0;
+			for(int i=0;i<list.size();i++) {
+				list.get(i).setComments_date(format.format(list.get(i).getComments_regdate()));
+				sum+=list.get(i).getComments_rate();
+			}
+			float ave = ((float)sum)/list.size();
+			ave = (float) (Math.round(ave*100)/100.0);
+			list.get(0).setComments_average(ave);
 		}
-		float ave = ((float)sum)/list.size();
-		ave = (float) (Math.round(ave*100)/100.0);
-		list.get(0).setComments_average(ave);
 		return list;
 	}
 	@Override

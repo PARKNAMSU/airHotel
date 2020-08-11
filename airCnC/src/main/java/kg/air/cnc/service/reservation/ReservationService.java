@@ -55,9 +55,11 @@ public class ReservationService implements ReservationServiceImpl {
 	@Override
 	public ReservationHouseDetailVO getReservationHouse(ReservationHouseDetailVO vo) {
 		System.out.println("vo "+vo.getHouse_seq());
-		ReservationHouseDetailVO house = reservationDAO.getReservationHouse(vo);
+		ReservationHouseDetailVO house = null;
+		house = reservationDAO.getReservationHouse(vo);
 		ArrayList<String> convinList = new ArrayList<String>();
-		if(house.getHouse_name() != null) {
+		Utils utils = new Utils();
+		if(!utils.stringNullCheck(house.getHouse_name())) {
 			if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("구급상자");
 			
 			if(house.getHouse_default_bedrock().trim().equals("true")) convinList.add("침실 잠금");
