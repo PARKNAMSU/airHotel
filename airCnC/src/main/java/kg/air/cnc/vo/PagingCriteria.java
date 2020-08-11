@@ -10,7 +10,7 @@ public class PagingCriteria {
     
     public PagingCriteria() {
         this.page = 1;
-        this.perPageNum = 6;
+        this.perPageNum = 5;
     }
     
     public int getPage() {
