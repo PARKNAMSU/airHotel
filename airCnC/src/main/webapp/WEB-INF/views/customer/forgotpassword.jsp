@@ -39,19 +39,19 @@ $(document).on("click","#sendEmailBtn",function() {
 		type : "post",
 		url : "findPassword.do",
 		data : {
-			"customerEmail" : $("#customerEmail").val()
+			"customer_email" : $("#customerEmail").val()
 		},
 		success : function(data) {
 			if (data == 0) {
 				alert("가입되어 있지 않은 이메일 계정입니다.");
+				return false;
 			}else if(data == 1){
 				alert("새 비밀번호 발송에 성공하였습니다.")
+				return false;
 			}else{
 				alert("새 비밀번호 발송에 실패하였습니다.")
+				return false;
 			}
-		},
-		error : function(data) {
-			alert("에러");
 		}
 	});
 });
@@ -125,6 +125,9 @@ $(document).on("click","#sendEmailBtn",function() {
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
 			<button id="sendEmailBtn">비밀번호 재설정</button>
+			<div class="moveLoginForm">
+				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
+			</div>
 		</div>
 	</form>
 </body>

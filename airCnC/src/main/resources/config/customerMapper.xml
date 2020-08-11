@@ -50,4 +50,8 @@
 			SELECT customer_id, customer_password, customer_name, customer_email, customer_type, customer_image, customer_phone, customer_blame_warn, customer_blame_stop, customer_regdate, customer_key, session_id, session_limit, customer_stop_end_date, customer_status FROM customer WHERE session_id = #{session_id} AND session_limit > sysdate
 		]]>
 	</select>
+	
+	<update id="changePassword">
+		UPDATE customer SET customer_password = #{customer_password} WHERE customer_email = #{customer_email}
+	</update>
 </mapper>

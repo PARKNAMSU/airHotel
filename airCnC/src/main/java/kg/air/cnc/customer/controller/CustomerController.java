@@ -86,7 +86,7 @@ public class CustomerController {
 	// 비밀번호 찾기 이메일 전송.
 	@RequestMapping(value = "/findPassword.do", method = RequestMethod.POST)
 	@ResponseBody
-	public int findPassword(@RequestParam String customer_email, CustomerVO vo, HttpServletRequest request)throws Exception{
+	public int findPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletRequest request)throws Exception{
 		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		int resultCnt = 0;
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
@@ -107,16 +107,18 @@ public class CustomerController {
 				sb.append(keySet[idx]);
 			}
 			HttpSession session = request.getSession(true);
-			String newPassword = String.valueOf(sb); // 랜덤 인증 코드.
-			session.setAttribute("newPassword", newPassword);
-			String subject = "[AirCnC] 임시 비밀번호 발급 안내.";
-			String text = "<div align = 'left'>";
-			text += "<h3>임시 비밀번호입니다. 로그인 후 비밀번호를 변경하여 사용하세요.</h3>";
-			text += "<h2>임시 비밀번호 : " + newPassword + "</h2>";
+			String newPwd = String.valueOf(sb); // 임시 비밀번호.
+			String subject = "[AirCnC] 임시 비밀번호 발급 안내."
+					+ "";
+			String text = "회원님, 안녕하세요.\n";
+			text += "임시 비밀번호입니다.\n로그인 후 반드시 비밀번호를 변경하여 사용하세요.\n";
+			text += "임시 비밀번호 : " + newPwd;
 			// if(cnt == 0) {
 			mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
-			vo.setCustomer_password(newPassword);
-//			int changePwResult = service.changePassword(vo.getCustomer_password(),customer_email);
+			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
+			session.setAttribute("newPassword", newPassword);
+			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
+			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
 			return 1;
 			//	}
 			//	else {
