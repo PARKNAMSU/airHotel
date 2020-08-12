@@ -75,8 +75,8 @@
         </div>
         <div id="mother" class="row" style="padding-top: 30px; color: black">
             <script>
-                function goReservationHouse() {
-                    $("#houseInfo").submit();
+                function goReservationHouse(seq) {
+                    document.getElementById(seq).submit();
                 }
             </script>
         </div>
@@ -132,8 +132,8 @@
                     for(var i = 0 ; i < 3 ; i++){
                         $("#mother").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
-                            "<form id=\"houseInfo\" "+i+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
-                            "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<form id=" + getData[i].house_seq + " name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse(" + getData[i].house_seq + ")\">" +
+                            "<input type=\"hidden\" name=\"house_seq\" value=" + getData[i].house_seq + ">" +
                             "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
