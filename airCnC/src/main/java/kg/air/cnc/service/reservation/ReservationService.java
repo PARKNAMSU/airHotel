@@ -54,7 +54,6 @@ public class ReservationService implements ReservationServiceImpl {
 
 	@Override
 	public ReservationHouseDetailVO getReservationHouse(ReservationHouseDetailVO vo) {
-		System.out.println("vo "+vo.getHouse_seq());
 		ReservationHouseDetailVO house = null;
 		house = reservationDAO.getReservationHouse(vo);
 		ArrayList<String> convinList = new ArrayList<String>();
