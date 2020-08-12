@@ -63,7 +63,6 @@
 	</header>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
-	${house.check_in }
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
 			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;
@@ -133,7 +132,7 @@
 		</div><br><br>
 		<div id="" style="float:left;width:50%;padding-top:5%;padding-left: 16%">
 			<c:if test="${house.accessType != 'host' }">
-				<button class="btn btn-outline-danger" onclick="openMessage('${session_login}','${house.host_id }')" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
+				<button class="btn btn-outline-danger" onclick="openMessage('${login_session}','${house.host_id }')" style="font-family: 'Jua', sans-serif;">호스트에게 메세지 보내기</button>
 			</c:if>
 		</div>
 	</div>
@@ -195,12 +194,10 @@
 			<span id="title" style="font-family: 'Jua', sans-serif;">체크인 / 체크아웃 시간</span><br><br>
 			<div class="check">
 				<strong style="font-family: 'Jua', sans-serif;">체크인</strong><br><br>
-				<p style="font-family: 'Jua', sans-serif;">2020/07/21</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkin_time }</p>
 			</div>
 			<div class="check" style="border: none;">
 				<strong style="font-family: 'Jua', sans-serif;">체크아웃</strong><br><br>
-				<p style="font-family: 'Jua', sans-serif;">2020/07/22</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkout_time }</p>
 			</div>
 		</div><br><br><br><br>
@@ -513,6 +510,10 @@ function dateFormSubmit(){
 			   for(var i=0; i < dates.length; i++){
 			   		if((ci_date.getFullYear() + '-' + mon + '-' +  day) == dates[i]){
 			   			alert("이미 예약된 날짜가 존재합니다.")
+			   			$("#checkout").val("");
+			   			$("#checkin").val("");
+			   			$("#numPerson").val("");
+			   			resetDate();
 			   			return false;
 			   		}
 			   }

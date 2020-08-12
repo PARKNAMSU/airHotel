@@ -25,7 +25,7 @@ public class MyReservationController {
 	
 	@RequestMapping("reservationPage.do")
 	public String reservationPageController(HttpSession session) {
-		session.setAttribute("login_session", "skatn");
+		session.setAttribute("login_session", "skatn7979");
 		System.out.println((String)session.getAttribute("login_session"));
 		return "myreservation";
 	}

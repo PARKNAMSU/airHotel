@@ -15,7 +15,6 @@ public class MessageService implements MessageServiceImpl{
 	private MessageDAO messageDAO;
 	@Override
 	public void insertMessage(MessageVO vo) {
-		System.out.println("ser");
 		messageDAO.insertMessage(vo);
 		
 	}

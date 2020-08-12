@@ -88,8 +88,8 @@
 	function goToHouse(house_seq,accessType){
 		var form = document.createElement("form");
 		var input = new Array()
-		var names = ["house_seq","accessType","check_in"]
-		var values = [house_seq,accessType,"2020-08-01"]
+		var names = ["house_seq","accessType"]
+		var values = [house_seq,accessType]
         form.action = "reservationHouse.do";
         form.method = "post";
         for (var i = 0; i < 3; i++) {

@@ -19,16 +19,15 @@
 </head>
 <body style="font-family: 'Jua', sans-serif;">
 	<div id="headdiv">
-		<c:set var="loop_flag" value="false" />
 		<c:if test="${toId != 'admin' }">
-		<c:forEach var="items" items="${messageList }" varStatus="status">
-		    <c:if test="${not loop_flag }">
-		        <c:if test="${items.message_from_id != login_session }">
-		        	<h1>${items.message_from_name }</h1>
-		            <c:set var="loop_flag" value="true" />
-		        </c:if>
-		    </c:if>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${messageList.get(0).message_from_id == login_session }">
+				<h1>${messageList.get(0).message_to_name }</h1>
+			</c:when>
+			<c:otherwise>
+				<h1>${messageList.get(0).message_from_name }</h1>
+			</c:otherwise>
+		</c:choose>
 		</c:if>
 		<c:if test="${toId eq 'admin' }">
 		<h1>Admin</h1>
