@@ -23,15 +23,14 @@
 //회원가입 버튼.
 $(document).on("click","#sendEmailBtn",function() {
 	var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사.
-	if ($("#customerEmail").val()) {
-		if (!regExp.test($("#customerEmail").val())) {
-			alert("이메일 주소가 유효하지 않습니다");
-			$("#customerEmail").focus();
-			return false;
-		}
-	}
-	if (!$("#customerEmail").val()) {
+
+	if ($("#customerEmail").val() == "" || $("#customerEmail").val() == null) {
 		alert("이메일을 입력하세요.");
+		$("#customerEmail").focus();
+		return false;
+	}
+	if (!regExp.test($("#customerEmail").val())) {
+		alert("이메일 주소가 유효하지 않습니다");
 		$("#customerEmail").focus();
 		return false;
 	}
@@ -39,26 +38,26 @@ $(document).on("click","#sendEmailBtn",function() {
 		type : "post",
 		url : "findPassword.do",
 		data : {
-			"customerEmail" : $("#customerEmail").val()
+			"customer_email" : $("#customerEmail").val()
 		},
 		success : function(data) {
-			if (data == 0) {
+			if (data == "0") {
 				alert("가입되어 있지 않은 이메일 계정입니다.");
-			}else if(data == 1){
-				alert("새 비밀번호 발송에 성공하였습니다.")
-			}else{
-				alert("새 비밀번호 발송에 실패하였습니다.")
+				$("#customerEmail").focus();
+			}else if(data == "1"){
+				alert("새 비밀번호 발송에 성공하였습니다.");
+			}else if(data == "-1"){
+				alert("새 비밀번호 발송에 실패하였습니다.");
+				$("#customerEmail").focus();
 			}
-		},
-		error : function(data) {
-			alert("에러");
 		}
-	});
+	});		
 });
 </script>
 </head>
 <body>
 	<!-- header-start -->
+	<c:if test="${login_session eq null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -66,9 +65,7 @@ $(document).on("click","#sendEmailBtn",function() {
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<c:if test="${login_session eq null && sessionScope.token eq null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				<ul id="menuItems">		
 						<li class="item">
 							<p>
 								<a href="/cnc/registerView.do">회원가입</a>
@@ -84,36 +81,34 @@ $(document).on("click","#sendEmailBtn",function() {
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-					</c:if>
-					<c:if test="${login_session ne null && sessionScope.token ne null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	</c:if>
+	<c:if test="${login_session ne null }">
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">	
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-						<c:choose>
-							<c:when test="${login_session ne null}">
-								<li class="item">
-									<p><a href="/cnc/logout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope.token ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-						</c:choose>
-					</c:if>
+						<li class="item"><a href="myHouse.do">호스트</a></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do">로그아웃</a></p>
+						</li>
 				</ul>
 			</div>
 		</div>
 	</header>
+	</c:if>
 	<!-- header-end -->
 	<form action="/cnc/findPassword.do" accept-charset="utf-8" id="passwordForm" method="POST">
 		<div class="container" style="padding-top: 12.5%;">
@@ -125,6 +120,9 @@ $(document).on("click","#sendEmailBtn",function() {
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
 			<button id="sendEmailBtn">비밀번호 재설정</button>
+			<div class="moveLoginForm">
+				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
+			</div>
 		</div>
 	</form>
 </body>

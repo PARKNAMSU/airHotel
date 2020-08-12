@@ -25,7 +25,11 @@
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 	
-	
+	<style>
+	#main-menu li:nth-child(1)>a {
+		border-left: 1px solid #ee575d;
+	}
+	</style>
 </head>
 <body>
 	<header class="menudiv1">
@@ -61,12 +65,12 @@
     <!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="공지사항.html">공지사항 관리</a></li>
-	    <li><a href="이벤트.html">이벤트 관리</a></li>
-	    <li><a href="약관정책.html">약관정책 관리</a></li>
+	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
+	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
+	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
 	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>

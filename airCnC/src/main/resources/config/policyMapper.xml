@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="policyMapper">
+
+	<select id="selectPolicyList" resultType="kg.air.cnc.vo.PolicyVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, policy_idx, policy_title, policy_writer, policy_content, policy_regdate
+            from (select * from policy_board order by policy_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	<select id="countPolicyList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            policy_board
+    ]]>
+	</select>
+
+	<insert id="insertPolicy" parameterType="kg.air.cnc.vo.PolicyVO">
+		<![CDATA[
+		INSERT INTO policy_board(policy_idx, policy_title, policy_content)
+		VALUES((select nvl(max(policy_idx), 0)+1 from policy_board), #{policy_title}, #{policy_content})
+		]]>
+	</insert>
+	
+	<select id="getPolicyListAdmin" resultType="kg.air.cnc.vo.PolicyVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, policy_idx, policy_title, policy_content, policy_regdate
+            from (select * from	 policy_board order by policy_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	
+	<select id="detailPolicy" resultType="kg.air.cnc.vo.PolicyVO">
+	 <![CDATA[
+		SELECT
+			policy_idx, policy_title, policy_content, policy_regdate
+		FROM
+			policy_board
+		WHERE
+			policy_idx=#{policy_idx}
+	]]>
+	</select>
+	
+	<update id="updatePolicy">
+		<![CDATA[
+		UPDATE 
+			policy_board 
+		SET
+			policy_title = #{policy_title},
+			policy_content = #{policy_content}
+		WHERE 
+			policy_idx = #{policy_idx}
+		]]>
+	</update>
+	
+	<delete id="deletePolicy">
+		<![CDATA[
+		DELETE FROM 
+			policy_board
+		WHERE
+			policy_idx = #{policy_idx}
+		]]>
+	</delete>
+	
+
+</mapper>

@@ -10,7 +10,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>이벤트 페이지</title>
+	<title>약관정책-관리자 페이지</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -26,7 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 	
 	<style>
-	#main-menu li:nth-child(2)>a {
+	#main-menu li:nth-child(3)>a {
 		border-left: 1px solid #ee575d;
 	}
 	</style>
@@ -52,8 +52,8 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Event</h3>
-                        <p>이벤트는 여기에요</p>
+                        <h3>policy</h3>
+                        <p>관리자-약관정책은 여기에요</p>
                     </div>
                 </div>
             </div>
@@ -61,70 +61,70 @@
     </div>
     
     <div class="container">
-	<!-- 좌측 목차 -->
+    <!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="/cnc/selectBoardList.do">공지사항</a></li>
-	    <li><a href="/cnc/selectEventList.do">이벤트</a></li>
-	    <li><a href="/cnc/selectPolicyList.do">약관정책</a></li>
+	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
+	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
+	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
-	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>
 	 </nav>
-	 
-	 
-	 <!-- 우측 게시판 -->
-	 <div class="event-area"style="float: left; width: 60%;" class="center_gonji">
-	 	<div class="event">
-	 	<br></br><br></br><br></br><br></br>
-	 		<ul id="events" class="event_list">
-		 		<c:choose>
-					<c:when test="${!empty eventList}">
-						<c:forEach items="${eventList }" var="event">
-							<li id="event_li">
-			 				<b>${event.event_title }</b><br><br>
-			 				<span>기간 : ${event.event_start } ~ ${event.event_end }</span><br><br>
-			 				
-			 				<a href='<c:url value='/partiEvent/${event.event_idx}.do${paging.makeQueryPage(event.event_idx, paging.cri.page) }'/>'>
-			 					<img id="image1" src="${pageContext.request.contextPath}/resources/images/여기어때2.png">
-			 				</a>
-			 				</li>
-			 				<hr id="event_hr" color="#ee575d" size=0.5px noshade><br><br>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="5">등록된 글이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-		
-	 		</ul>
-	 	</div>
-	 </div>
-	 
-	   
+	<div id="featured">
+			<div class="title">
+				<h2>약관정책 관리</h2>
+				<hr>
+				<span class="byline">전체 약관정책을 관리합니다.</span><br><br>
+				<button id="gonjibtn" type="button" onclick="location.href='/cnc/goaddPolicy.mdo' ">
+				새 정책 등록</button>
+			</div>
+			
+		<ul class="style1">
+		<c:choose>
+			<c:when test="${!empty policyList}">
+				<c:forEach items="${policyList }" var="policy">
+				
+						<li class="first">
+							<p class="date"><fmt:formatDate value="${policy.policy_regdate }" pattern="yyyy-MM-dd"/></p>
+							<h3>글번호 : ${policy.policy_idx }번</h3>
+							<p><a href='<c:url value='/detailPolicy/${policy.policy_idx }.mdo${paging.makeQueryPage(policy.policy_idx, paging.cri.page) }'/>'>${policy.policy_title }</a></p>
+						</li>         
+
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="5">등록된 글이 없습니다.</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		</ul>
+			
+		</div>
+
+
+
 	<div style="float: left; width: 30%; " class="center_paging">
-		<!-- Start Pagination -->
+	<!-- Start Pagination -->
 		<ul class="pagination">
 		    <c:if test="${paging.prev }">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${paging.startPage-1 }"/>'>이전</a>
+		        <a href='<c:url value="/goPolicyListAdmin.mdo${paging.makeQueryPage(paging.startPage-1) }"/>'>이전</a>
 		    </li>
 		    </c:if>
 		    <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="pageNum">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+		        <a href='<c:url value="/goPolicyListAdmin.mdo${paging.makeQueryPage(pageNum) }"/>'><i class="fa">${pageNum }</i></a>
 		    </li>
 		    </c:forEach>
 		    <c:if test="${paging.next && paging.endPage >0 }">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${paging.endPage+1 }"/>'>다음</a>
+		        <a href='<c:url value="/goPolicyListAdmin.mdo${paging.makeQueryPage(paging.endPage+1) }"/>'>다음</a>
 		    </li>
 		    </c:if>
 		</ul>
@@ -132,17 +132,10 @@
 		<br></br>
 		<br></br>
 	</div>
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	</div>
 	
-	<div id="footer"></div>
+	</div>
+    
+    <div id="footer"></div>
      <footer class="first" id="bottom" >
 		<div class="second">
 			회사소개  | 이용약관 | 개인정보처리방침 |사업자 정보확인 | 여기어때 마케팅센터 | 액티비티 호스트센터 | HOTEL 여기어때 |콘텐츠산업진흥법에의한 표시<br>
@@ -160,18 +153,6 @@
 			<img src="../images/insta.png" id="blogo">
 		</div>
 	</footer>
-
-	<script type="text/javascript"
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$("a[name='trigger']").toggle(function() {
-					$(this).closest("tr").next().show();
-				}, function() {
-					$(this).closest("tr").next().hide();
-				});
-			});
-	</script>
-	 
+    
 </body>
 </html>

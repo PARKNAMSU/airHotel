@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.codec.binary.StringUtils;
+import org.springframework.util.StringUtils;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthRequest;
@@ -43,7 +43,7 @@ public class NaverController {
 	public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException { 
 		/* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */ 
 		String sessionState = getSession(session); 
-		if (StringUtils.equals(sessionState, state)){ 
+		if (StringUtils.pathEquals(sessionState, state)){ 
 			OAuth20Service oauthService = new ServiceBuilder()
 					.apiKey(CLIENT_ID)
 					.apiSecret(CLIENT_SECRET)

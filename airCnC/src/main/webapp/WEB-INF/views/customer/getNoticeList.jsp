@@ -64,15 +64,14 @@
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="공지사항.html">공지사항</a></li>
-	    <li><a href="이벤트.html">이벤트</a></li>
-	    <li><a href="약관정책.html">약관정책</a></li>
+	    <li><a href="/cnc/selectBoardList.do">공지사항</a></li>
+	    <li><a href="/cnc/selectEventList.do">이벤트</a></li>
+	    <li><a href="/cnc/selectPolicyList.do">약관정책</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="#" aria-label="subemnu">1대1 문의</a></li>
-	        <li><a href="#" aria-label="subemnu">나의 질문</a></li>
+	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
+	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
 	        <li><a href="#" aria-label="subemnu">안내</a></li>
-	        <li><a href="자주질문.html" aria-label="subemnu">자주하는질문</a></li>
 	      </ul>
 	    </li>
 	   </ul>

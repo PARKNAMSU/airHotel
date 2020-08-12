@@ -1,7 +1,8 @@
-package kg.air.cnc.customer.dao;
+package kg.air.cnc.dao.customer;
 
 import java.util.Date;
-import kg.air.cnc.customer.vo.CustomerVO;
+
+import kg.air.cnc.vo.CustomerVO;
 
 public interface CustomerDAO {
 

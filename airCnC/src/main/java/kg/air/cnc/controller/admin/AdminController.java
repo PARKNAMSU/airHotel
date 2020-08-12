@@ -1,4 +1,4 @@
-package kg.air.cnc.admin.controller;
+package kg.air.cnc.controller.admin;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import kg.air.cnc.admin.service.AdminService;
-import kg.air.cnc.admin.vo.AdminVO;
+import kg.air.cnc.service.admin.AdminService;
+import kg.air.cnc.vo.AdminVO;
 
 @Controller
 public class AdminController {
