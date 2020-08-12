@@ -136,7 +136,7 @@
 							if(getData[i-1] != null){
 								$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
 								//$("img"+i).attr("src","") 나중에 추가
-								$("#td"+i).html('<p style="font-size:30px;color:black;">'+getData[i-1].house_name+'</p><br><hr><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
+								$("#td"+i).html('<p style="font-size:20px;color:black;">'+getData[i-1].house_name+'</p><hr><p>숙소번호: no.'+getData[i-1].house_seq+'</p><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
 							}else{
 								$("#imgdiv"+i).css("display","none")
 							}
@@ -170,7 +170,7 @@
 				if(getData[i] != null){
 					$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].house_status+",'"+type+"')")
 					//$("img"+b).attr("src","") 나중에 추가
-					$("#td"+b).html('<p>'+getData[i].house_name+'</p><br><hr><p>숙소상태: '+getData[i].house_status_text+'</p>')
+					$("#td"+b).html('<p style="font-size:20px;color:black;">'+getData[i].house_name+'</p><hr><p>숙소번호: no.'+getData[i].house_seq+'</p><p>숙소상태: '+getData[i].house_status_text+'</p>')
 					console.log(i)
 				}else{
 					$("#imgdiv"+b).css("display","none");
@@ -191,7 +191,7 @@
 				$("#imgdiv"+i).css("display","initial");
 				$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].house_status+",'"+type+"')")
 				//$("img"+b).attr("src","") 나중에 추가
-				$("#td"+i).html('<p>'+getData[a].house_name+'</p><br><hr><p>숙소상태: '+getData[a].house_status_text+'</p>')
+				$("#td"+i).html('<p style="font-size:20px;color:black;">'+getData[a].house_name+'</p><hr><p>숙소번호: no.'+getData[a].house_seq+'</p><p>숙소상태: '+getData[a].house_status_text+'</p>')
 				a++;
 			}
 			if(area == 1){

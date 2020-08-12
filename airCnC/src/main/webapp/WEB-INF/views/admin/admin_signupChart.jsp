@@ -141,9 +141,6 @@
 					type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="years_temp" class="day_temp">
-			<br> <br>
-		</div>
 		<div class="subdiv" id="year">
 			<form action="signupChartSearch.mdo">
 				year <select name="searchConditionFirst" class="form-control">
@@ -155,9 +152,6 @@
 					class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="year_temp" class="day_temp">
-			<br> <br>
-		</div>
 		<div class="subdiv" id="month">
 			<form action="signupChartSearch.mdo">
 				month <input type="month" name="searchConditionFirst"
@@ -165,9 +159,6 @@
 					type="hidden" name="searchType" value="month"> <input
 					type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
-		</div>
-		<div id="month_temp" class="day_temp">
-			<br> <br>
 		</div>
 		<div class="subdiv" id="condition">
 			<form action="signupChartSearch.mdo">
@@ -233,10 +224,10 @@
 		<p style="font-size: 30px; color: black;">회원가입 그래프</p>
 		<div id="salesChart"></div>
 		<button onclick="getCharts()" class="btn btn-outline-danger"
-			style="font-size: 30px; margin-top: 10px;">매출 보기</button>
+			style="font-size: 30px; margin-top: 10px;">가입현황 보기</button>
 		&nbsp;&nbsp;
 		<button onclick="getPieCharts()" class="btn btn-outline-danger"
-			style="font-size: 30px; margin-top: 10px;">수입비율 보기</button>
+			style="font-size: 30px; margin-top: 10px;">가입비율 보기</button>
 	</div>
 	<div style="clear: both;"></div>
 	<footer>
@@ -307,8 +298,8 @@ function ReportToExcel(){
 
 	      var options = {
 	        chart: {
-	          title: 'Company Performance',
-	          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+	          title: '회원가입',
+	          subtitle: 'SignUp',
 	        }
 	      };
 

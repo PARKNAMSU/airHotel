@@ -63,6 +63,7 @@
 	</header>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
+	${house.check_in }
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
 			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;

@@ -105,7 +105,6 @@
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="years_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="year">
 			<form action="salesChartSearch.mdo" >
 				year
@@ -118,7 +117,6 @@
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="year_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="month">
 			<form action="salesChartSearch.mdo">
 				month
@@ -127,7 +125,6 @@
 				<input type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="month_temp" class="day_temp"><br><br></div>
 		<div class="subdiv" id="condition">
 			<form action="salesChartSearch.mdo">
 				from <br><input type="date" class="form-control" name="searchConditionFirst" id="dayCondition1"><br><br>
@@ -259,8 +256,8 @@
 	
 		      var options = {
 		        chart: {
-		          title: 'Company Performance',
-		          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+		          title: '매출 통계',
+		          subtitle: 'Sales, Expenses',
 		        }
 		      };
 	

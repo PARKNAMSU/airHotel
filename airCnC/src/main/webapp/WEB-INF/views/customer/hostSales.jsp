@@ -275,7 +275,7 @@ var list = "${salesList}"
 						  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 	
 						  doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
-						  doc.save('매출보고서.pdf');
+						  doc.save(fname+'.pdf');
 						  } 
 					});
 				}
@@ -295,8 +295,8 @@ var list = "${salesList}"
 	
 		      var options = {
 		        chart: {
-		          title: 'Company Performance',
-		          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+		          title: '나의 매출현황',
+		          subtitle: 'Sales, Expenses',
 		        }
 		      };
 	
@@ -337,7 +337,7 @@ var list = "${salesList}"
 		      function drawChart() {
 				var a = 0;
 		        var data = google.visualization.arrayToDataTable([
-		          ['Task', 'Hours per Day'],
+		          ['Task', 'Each House'],
 		          	<c:if test="${salesList2 != null}">
 				      <c:forEach begin="0" end="${salesList2.get(0).house_seq_list.size()-2}" var="i" >
 		        		['No.${salesList2.get(0).house_seq_list.get(i)}',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],

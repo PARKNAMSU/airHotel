@@ -51,9 +51,6 @@ public class ReservationDetailController {
 	public ModelAndView reservationDetailController(ReservationHouseDetailVO vo, HttpSession session,
 			HttpServletRequest request, ModelAndView mav) {
 		Utils util = new Utils();
-		System.out.println(vo.getCheck_in());
-		System.out.println(vo.getCheck_out());
-		System.out.println(vo.getHouse_person());
 		if (vo.getHouse_seq() == 0) {
 			Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
 			if (redirectMap != null) {
@@ -68,6 +65,9 @@ public class ReservationDetailController {
 		}
 		house.setReservation_seq(vo.getReservation_seq());
 		house.setAccessType(vo.getAccessType());
+		house.setCheck_in(vo.getCheck_in());
+		house.setCheck_out(vo.getCheck_out());
+		house.setHouse_person(vo.getHouse_person());
 		System.out.println(vo.getAccessType());
 		if (!util.stringNullCheck((String) session.getAttribute("login_session"))) {
 			if (!vo.getAccessType().trim().equals("host")) {
@@ -153,7 +153,7 @@ public class ReservationDetailController {
 	@ResponseBody
 	public String cancelReservationController(ReservationHouseDetailVO vo) {
 		reservationService.cancelReservation(vo);
-		return "¿¹¾àÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù.";
+		return "ì˜ˆì•½ì´ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 	}
 
 	@RequestMapping(value = "addFavoritHouse.do", produces = "application/text; charset=utf8")
@@ -164,7 +164,7 @@ public class ReservationDetailController {
 		customer.setCustomer_id((String) session.getAttribute("login_session"));
 		customer.setFavorite_house(String.valueOf(vo.getHouse_seq()));
 		reservationService.addFavoriteHouse(customer);
-		return "ÀúÀåµÇ¾ú½À´Ï´Ù.";
+		return "";
 	}
 
 	@RequestMapping(value = "removeFavoritHouse.do", produces = "application/text; charset=utf8")
@@ -174,7 +174,7 @@ public class ReservationDetailController {
 		String id = (String) session.getAttribute("login_session");
 		String favoriteList = reservationService.getFavoriteHouseNumber(id);
 		reservationService.removeFavoriteHouse(id, favoriteList, vo.getHouse_seq());
-		return "»èÁ¦µÇ¾ú½À´Ï´Ù.";
+		return "";
 	}
 
 	@RequestMapping(value = "getCertainResDate.do", produces = "application/text; charset=utf8")
