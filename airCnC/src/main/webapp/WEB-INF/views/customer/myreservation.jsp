@@ -65,8 +65,10 @@
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	<%@include file="../html/sideMenu.jsp" %>
-
-	<div class="maindiv" id="main">
+	<div class="maindiv" id="main" style="width:70%;">
+		<div style="margin-bottom:5%;margin-left:55%;">
+			<span style="font-size:30px;color:black;">예약하신 숙소가 없으십니까?</span><br><br><button class="btn btn-outline-danger" style="font-size:30px;" onclick="location.href='http://localhost:8080/cnc/themesearchhighscore.do'">숙소 예약하러 가기</button>
+		</div>
 		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()">예약 내역</a> | <a onclick="getResBefore()" id="before">이전 예약</a></h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">

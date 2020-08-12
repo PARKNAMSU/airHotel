@@ -43,7 +43,7 @@ public class AdminController {
 		}else {
 			if (adminVO != null) { // 로그인 성공.
 				session.setAttribute("admin_session", vo);
-				returnURL = "adminMain";
+				returnURL = "redirect:salesChart.mdo";
 			}
 			return returnURL;
 		}

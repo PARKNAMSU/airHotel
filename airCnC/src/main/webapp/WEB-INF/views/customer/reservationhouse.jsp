@@ -193,7 +193,7 @@
 		<div class="subinfodiv" style="font-family: 'Jua', sans-serif;">
 			<span id="title" style="font-family: 'Jua', sans-serif;">체크인 / 체크아웃 시간</span><br><br>
 			<div class="check">
-				<strong style="font-family: 'Jua', sans-serif;>체크인</strong><br><br>
+				<strong style="font-family: 'Jua', sans-serif;">체크인</strong><br><br>
 				<p style="font-family: 'Jua', sans-serif;">2020/07/21</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkin_time }</p>
 			</div>
