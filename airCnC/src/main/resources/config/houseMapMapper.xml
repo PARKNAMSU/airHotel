@@ -200,10 +200,12 @@
 	</select>
 	
 	<select id="getAllPrice" resultType="HashMap">
+	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
 		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
 		AND house_status=0
+	]]>
 	</select>
 	
 	<select id="searchIndex" parameterType="map" resultType="kg.air.cnc.vo.House_InfoVO">
@@ -304,10 +306,12 @@
 	</select>
 	
 	<select id="searchIndexAllPrice" resultType="HashMap">
+	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
 		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_check_out>=sysdate)
 		AND house_status=0
+	]]>
 	</select>
 	
 </mapper>

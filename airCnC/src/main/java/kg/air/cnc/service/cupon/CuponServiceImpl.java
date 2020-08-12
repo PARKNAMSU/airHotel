@@ -2,16 +2,17 @@ package kg.air.cnc.service.cupon;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.cupon.CuponDAOImpl;
 import kg.air.cnc.vo.CuponVO;
-//@Service
+
+@Service
 public class CuponServiceImpl implements CuponService {
 	
 	//@Autowired
 	private CuponDAOImpl cuponDAO;
-
+	/*
 	@Override
 	public void makeCupon(HttpSession session) {
 		
@@ -26,15 +27,14 @@ public class CuponServiceImpl implements CuponService {
 	public CuponVO checkNumber(String cuponNumber) {
 		return cuponDAO.checkNumber(cuponNumber);
 	}
-	
+	*/
 	@Override
-	public List<CuponVO> getCuponList() {
-		return cuponDAO.getCuponList();
+	public List<CuponVO> getCuponList(String id) {
+		return cuponDAO.getCuponList(id);
 	}
 	
 	//@Scheduled(cron="0 0 1 * * ?")
 	public void deleteCupon() {
-		//자동으로 날짜 지난 쿠폰 삭제
 		cuponDAO.deleteCupon();
 	}
 

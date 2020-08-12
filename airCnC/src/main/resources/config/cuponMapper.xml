@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cuponDAO">
+	<select id="getCuponList" parameterType="String" resultType="kg.air.cnc.vo.CuponVO">
+	<![CDATA[
+		SELECT *
+		FROM cupon
+		WHERE cupon_customer_id=#{id} AND cupon_limit>=sysdate
+	]]>
+	</select>
+	
+	<delete id="deleteCupon">
+	<![CDATA[
+		DELETE FROM cupon
+		WHERE cupon_limit<=sysdate
+	]]>
+	</delete>
+</mapper>

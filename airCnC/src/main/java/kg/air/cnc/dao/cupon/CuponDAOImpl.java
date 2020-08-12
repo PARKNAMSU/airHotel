@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.CuponVO;
 
-//@Repository
+@Repository
 public class CuponDAOImpl {
 	
-	//@Autowired
+	@Autowired
 	private SqlSessionTemplate mybatis;
-
+	/*
 	public void makeCupon() {
 		mybatis.insert("cuponDAO.makeCupon");
 	}
@@ -24,11 +25,11 @@ public class CuponDAOImpl {
 	public CuponVO checkNumber(String cuponNumber) {
 		return mybatis.selectOne("cuponDAO.checkNumber", cuponNumber);
 	}
-	
-	public List<CuponVO> getCuponList() {
-		return mybatis.selectList("cuponDAO.getCuponList");
+	*/
+	public List<CuponVO> getCuponList(String id) {
+		return mybatis.selectList("cuponDAO.getCuponList", id);
 	}
-	
+
 	public void deleteCupon() {
 		mybatis.delete("cuponDAO.deleteCupon");
 	}
