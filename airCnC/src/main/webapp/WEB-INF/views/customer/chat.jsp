@@ -83,6 +83,7 @@ body {
 			<li class="menu"><span id="topmenu" style="font-family: 'Jua', sans-serif;">내정보 관리</span></li>
 			<li class="menu"><a href="reservationPage.do" style="font-family: 'Jua', sans-serif;" >예약내역</a></li>
 			<li class="menu"><a href="myFavoriteHouse.do" style="font-family: 'Jua', sans-serif;">저장한 숙소</a></li>
+			<li class="menu"><a href="" style="font-family: 'Jua', sans-serif;">내 쿠폰함</a></li>
 			<li class="menu"><a href="chat.do" style="font-family: 'Jua', sans-serif;">메세지</a></li>		
 			<li class="menu"><a href="#" style="font-family: 'Jua', sans-serif;">회원탈퇴</a></li>
 		</ul>

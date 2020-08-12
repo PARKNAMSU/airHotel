@@ -71,8 +71,7 @@ public class ReservationDetailController {
 		System.out.println(vo.getAccessType());
 		if (!util.stringNullCheck((String) session.getAttribute("login_session"))) {
 			if (!vo.getAccessType().trim().equals("host")) {
-				house.setFavorite_state(reservationService
-						.getFavoriteHouse((String) session.getAttribute("login_session"), vo.getHouse_seq()));
+				house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq()));
 			}
 		}
 		if (commentsService.getComments(vo).size() > 0) {
