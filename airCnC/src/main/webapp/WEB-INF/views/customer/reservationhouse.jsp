@@ -65,7 +65,7 @@
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
-			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;
+			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}" onkeydown="filterNumber(event);">&nbsp;&nbsp;&nbsp;
 			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
 			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
@@ -498,6 +498,8 @@ function dateFormSubmit(){
 		alert("체크인 시간을 입력하세요")
 	}else if(document.getElementById("checkout").value == null || document.getElementById("checkout").value == ""){
 		alert("체크아웃 시간을 입력하세요")
+	}else if(document.getElementById("numPerson").value == "0"){
+		alert("1명이상 예약 가능합니다")
 	}
 	else{
 		var ci_date = new Date(document.getElementById("checkin").value)
@@ -527,6 +529,9 @@ function resetDate(){
 	$("#checkin").datepicker('option','minDate',getFormatDate(new Date()))
 	$("#checkin").datepicker('option','maxDate',"")
 }
+function filterNumber(event) {
+	  event.preventDefault(); 
+	}
 </script>
 
 </html>
