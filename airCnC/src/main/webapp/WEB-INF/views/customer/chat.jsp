@@ -52,6 +52,9 @@ body {
 						<li class="item">
 								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
 						</li>
+						<li class="item">
+								<p><a href="/cnc/chat.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >내정보</a></p>
+						</li>
 				</ul>
 			</div>
 		</div>
