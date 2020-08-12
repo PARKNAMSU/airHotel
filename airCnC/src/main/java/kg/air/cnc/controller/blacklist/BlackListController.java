@@ -38,5 +38,4 @@ public class BlackListController {
             return mav;
     }
 
-
 }

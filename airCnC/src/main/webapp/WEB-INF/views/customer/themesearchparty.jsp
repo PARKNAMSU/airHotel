@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -72,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <div id="motehr">
+        <div id="mother" class="row" style="padding-top: 30px; color: black">
             <script>
                 function goReservationHouse(seq) {
                     document.getElementById(seq).submit();
@@ -87,7 +88,7 @@
 
         <div class="btn" style="padding-top: 15px;">
             <button class="btn1" type="submit" style="float: right;">
-                <a href="/html/reservation_map.html">상세페이지로 가기</a>
+                <a href="http://localhost:8090/cnc/indexView.do">뒤로가기</a>
             </button>
         </div>
     </div>
@@ -130,7 +131,7 @@
                     var max = getData.length;
                     var accessType = "notres";
                     for(var i = 0 ; i < 10 ; i++){
-                        $("#motehr").append(
+                        $("#mother").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
                             "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
                             "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
@@ -158,7 +159,7 @@
         }
         function getMoreData() {
             for(var i = showed; i < showed+1; i++){
-                $("#motehr").append(
+                $("#mother").append(
                     "<div class=\"col-lg-4 col-md-1\">" +
                     "<form id=\"houseInfo\" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
                     "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
