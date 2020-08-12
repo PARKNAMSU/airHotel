@@ -20,7 +20,7 @@ public class MessageController {
 	@Autowired
 	MessageService messageService;
 	
-	/*�޼��� ������*/
+	/*메세지 보내기*/
 	@RequestMapping(value="/insertMessage.do")
 	public ModelAndView insertMessageController(MessageVO vo,ModelAndView mav) {
 		messageService.insertMessage(vo);
@@ -28,17 +28,18 @@ public class MessageController {
 		mav.setViewName("redirect:message.do");
 		return mav;
 	}
-	/*ä�� ����Ʈ*/
+	/*채팅페이지*/
 	@RequestMapping(value = "/chat.do")
 	public ModelAndView chatController(HttpSession session, ModelAndView mav) {
-		session.setAttribute("login_session", "skatn");//로그인 완료 시 제거
+		session.setAttribute("login_session","skatn7979");//로그인 완료 시 제거
 		String id = (String)session.getAttribute("login_session");
 		List<MessageVO> messageList = messageService.getChatList(id);
+		System.out.println("msize"+messageList.size());
 		mav.addObject("messageList",messageList);
 		mav.setViewName("chat");
 		return mav;
 	}
-	/*�ش� �ο����� �޼��� ����Ʈ*/
+	/*채팅 메세지 페이지*/
 	@RequestMapping(value="/message.do")
 	public ModelAndView messageController(HttpSession session,@RequestParam(value="message_to_id", required=false) String message_to_id, ModelAndView mav) {
 		Map<String, String> map = new HashMap<String, String>();

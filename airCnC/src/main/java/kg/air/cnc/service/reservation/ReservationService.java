@@ -181,9 +181,7 @@ public class ReservationService implements ReservationServiceImpl {
 		String [] fav_list = reservationDAO.getFavoriteHouse(id).split(",");
 		List<Integer> numList = new ArrayList<Integer>();
 		for(int i=0; i<fav_list.length;i++) {
-			if(i != 0) {
-				numList.add(Integer.parseInt(fav_list[i]));
-			}
+			numList.add(Integer.parseInt(fav_list[i]));
 		}
 		Map<String, Object> seqMap = new HashMap<String, Object>();
 		seqMap.put("seqArray", numList);
