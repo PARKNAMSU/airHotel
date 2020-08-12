@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="personalqMapper">
+
+	<select id="selectPersonalQueList" resultType="kg.air.cnc.vo.PersonalQueVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, personalq_idx, personalq_title, personalq_writer, 
+            personalq_type, personalq_content, personalq_answer, personalq_regdate
+            from (select * from personal_que where personalq_writer='로그인한아이디' 
+            order by personalq_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	<select id="countPersonalQueList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            personal_que
+    ]]>
+	</select>
+	
+	<insert id="insertPersonalQue" parameterType="kg.air.cnc.vo.PersonalQueVO">
+		<![CDATA[
+		INSERT INTO personal_que(personalq_idx, personalq_title, personalq_writer, personalq_type,  personalq_content)
+		VALUES((select nvl(max(personalq_idx), 0)+1 from personal_que), #{personalq_title}, '22로그인한아이디',
+		#{personalq_type}, #{personalq_content})
+		]]>
+	</insert>
+	
+	<select id="getPersonalQueListAdmin" resultType="kg.air.cnc.vo.PersonalQueVO" >
+    <![CDATA[
+    	SELECT
+            *
+        FROM
+            (select rownum rnum, personalq_idx, personalq_title, personalq_writer, 
+            personalq_type, personalq_content, personalq_answer, personalq_regdate
+            from (select * from personal_que 
+            order by personalq_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+       
+    ]]>
+	</select>
+
+
+
+	
+	<select id="detailPersonalQue" resultType="kg.air.cnc.vo.PersonalQueVO">
+	 <![CDATA[
+		SELECT
+			personalq_idx, personalq_title, personalq_writer, personalq_type, 
+			personalq_content, personalq_answer
+		FROM
+			personal_que
+		WHERE
+			personalq_idx=#{personalq_idx}
+	]]>
+	</select>
+	
+	<update id="updatePersonalQue">
+		<![CDATA[
+		UPDATE 
+			personal_que 
+		SET
+			personalq_title = #{personalq_title},
+			personalq_content = #{personalq_content},
+			personalq_answer = #{personalq_answer}
+		WHERE 
+			personalq_idx=#{personalq_idx}
+		]]>
+	</update>
+	
+	<delete id="deletePersonalQue">
+		<![CDATA[
+		DELETE FROM 
+			personal_que
+		WHERE
+			personalq_idx=#{personalq_idx}
+		]]>
+	</delete>
+</mapper>

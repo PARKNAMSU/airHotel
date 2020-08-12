@@ -10,7 +10,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>이벤트 페이지</title>
+	<title>약관정책 페이지</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -26,7 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 	
 	<style>
-	#main-menu li:nth-child(2)>a {
+	#main-menu li:nth-child(3)>a {
 		border-left: 1px solid #ee575d;
 	}
 	</style>
@@ -47,13 +47,14 @@
         </div>
     </header>
     
+    
     <div class="bradcam_area bradcam_bg_5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Event</h3>
-                        <p>이벤트는 여기에요</p>
+                        <h3>Policy</h3>
+                        <p>약관정책은 여기에요</p>
                     </div>
                 </div>
             </div>
@@ -77,54 +78,57 @@
 	   </ul>
 	 </nav>
 	 
-	 
-	 <!-- 우측 게시판 -->
-	 <div class="event-area"style="float: left; width: 60%;" class="center_gonji">
-	 	<div class="event">
-	 	<br></br><br></br><br></br><br></br>
-	 		<ul id="events" class="event_list">
-		 		<c:choose>
-					<c:when test="${!empty eventList}">
-						<c:forEach items="${eventList }" var="event">
-							<li id="event_li">
-			 				<b>${event.event_title }</b><br><br>
-			 				<span>기간 : ${event.event_start } ~ ${event.event_end }</span><br><br>
-			 				
-			 				<a href='<c:url value='/partiEvent/${event.event_idx}.do${paging.makeQueryPage(event.event_idx, paging.cri.page) }'/>'>
-			 					<img id="image1" src="${pageContext.request.contextPath}/resources/images/여기어때2.png">
-			 				</a>
-			 				</li>
-			 				<hr id="event_hr" color="#ee575d" size=0.5px noshade><br><br>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="5">등록된 글이 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
+	  <!-- 우측 게시판 -->
+	<div style="float: left; width: 60%; " class="center_gonji">
+	<table id="list" class="type10">
+		<thead>
+			<tr>
+				<th>글번호</th>
+				<th scope="cols">약관정책</th>
+				<th scope="cols">등록날짜</th>
+			</tr>
+		</thead>
 		
-	 		</ul>
-	 	</div>
-	 </div>
-	 
-	   
+		<c:choose>
+			<c:when test="${!empty policyList}">
+				<c:forEach items="${policyList }" var="policy">
+					<tr>
+						<td>${policy.policy_idx }</td>
+						<td id="longtitle"><a href="#1" name="trigger">${policy.policy_title }</a></td>
+						<td><fmt:formatDate value="${policy.policy_regdate }" pattern="yyyy-MM-dd"/></td>
+					</tr>
+					<tr name="article" class="hide">
+						<td class="even" colspan="3">${policy.policy_content }</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="5">등록된 글이 없습니다.</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+	</table>
+	<br>
+	</div>
+	
+	
 	<div style="float: left; width: 30%; " class="center_paging">
-		<!-- Start Pagination -->
+	<!-- Start Pagination -->
 		<ul class="pagination">
 		    <c:if test="${paging.prev }">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${paging.startPage-1 }"/>'>이전</a>
+		        <a href='<c:url value="/selectPolicyList.do?page=${paging.startPage-1 }"/>'>이전</a>
 		    </li>
 		    </c:if>
 		    <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="pageNum">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
+		        <a href='<c:url value="/selectPolicyList.do?page=${pageNum }"/>'><i class="fa">${pageNum }</i></a>
 		    </li>
 		    </c:forEach>
 		    <c:if test="${paging.next && paging.endPage >0 }">
 		    <li>
-		        <a href='<c:url value="/selectEventList.do?page=${paging.endPage+1 }"/>'>다음</a>
+		        <a href='<c:url value="/selectPolicyList.do?page=${paging.endPage+1 }"/>'>다음</a>
 		    </li>
 		    </c:if>
 		</ul>
@@ -132,16 +136,8 @@
 		<br></br>
 		<br></br>
 	</div>
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	</div>
 	
+	</div>
 	<div id="footer"></div>
      <footer class="first" id="bottom" >
 		<div class="second">
@@ -171,7 +167,6 @@
 					$(this).closest("tr").next().hide();
 				});
 			});
-	</script>
-	 
+	</script> 
 </body>
 </html>

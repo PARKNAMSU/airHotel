@@ -34,25 +34,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	
 	<style>
-	.title {
-		margin-bottom: 3em;
-	}
-	
-	.title h2 {
-		text-transform: lowercase;
-		font-size: 2.8em;
-	}
-	
-	.title .byline {
-		font-size: 1.3em;
-		color: #6F6F6F;
-	}
-	
-	#featured {
-		overflow: hidden;
-		margin-bottom: 3em;
-		padding-top: 5em;
-		border-top: 1px solid rgba(0, 0, 0, 0.08);
+	#main-menu li:nth-child(2)>a {
+		border-left: 1px solid #ee575d;
 	}
 	</style>
 	
@@ -115,12 +98,12 @@
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="공지사항.html">공지사항 관리</a></li>
-	    <li><a href="이벤트.html">이벤트 관리</a></li>
-	    <li><a href="약관정책.html">약관정책 관리</a></li>
+	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
+	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
+	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
 	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>

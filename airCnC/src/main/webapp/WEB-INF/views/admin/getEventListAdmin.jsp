@@ -26,193 +26,11 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 	
 	<style>
-		.title
-		{
-			margin-bottom: 3em;
-		}
-
-		.title h2
-		{
-			text-transform: lowercase;
-			font-size: 2.8em;
-		}
-
-		.title .byline
-		{
-			font-size: 1.3em;
-			color: #6F6F6F;
-		}
-		ul.style1
-		{
-			margin: 0 auto;
-			padding: 0;
-			width: 80%;
-			overflow: hidden;
-			list-style: none;
-			text-align: left;
-			color: #6c6c6c
-		}
-
-		ul.style1 li
-		{
-			padding: 1.6em 0em 0em 0em;
-			margin: 0 0 2.5em 0;
-			border-top: 1px solid rgba(0,0,0,.1);
-		}
-
-		ul.style1 li:first-child
-		{
-			border-top: none;
-		}
-
-		ul.style1 p
-		{
-			padding: 10px 0em 10px 0em;
-			margin: 0;
-		}
-
-		ul.style1 a
-		{
-			display: block;
-			text-decoration: none;
-			color: #2D2D2D;
-		}
-
-		ul.style1 a:hover
-		{
-			text-decoration: underline;
-		}
-
-		ul.style1 h3
-		{
-			padding: 1em 0em 20px 0em;
-			text-transform: uppercase;
-			font-size: 1em;
-			font-weight: 400;
-		}
-
-		ul.style1 .first
-		{
-			padding-top: 0;
-			background: none;
-		}
-
-		ul.style1 .date
-		{
-			float: left;
-			position: relative;
-			width: 80px;
-			height: 70px;
-			margin: 0.5em 1.5em 0em 0.5em;
-			padding: 1.5em 0em 1.5em 0em;
-			box-shadow: 0px 0px 0px 5px rgba(255,255,255,0.1);
-			line-height: normal;
-			text-align: center;
-			text-transform: uppercase;
-			text-shadow: 0px 1px 0px rgba(0,0,0,.2);
-			font-size: 1em;
-			font-weight: 400;
-			border-right: 1px solid rgba(0,0,0,.1);
-		}
-
-		ul.style1 .date:after
-		{
-			content: '';
-			display: block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			border-radius: 6px;
-		}
-
-		ul.style1 .date b
-		{
-			margin: 0;
-			padding: 0;
-			display: block;
-			margin-top: -5px;
-			font-size: 1.8em;
-			font-weight: 700;
-		}
-
-		ul.style1 .date a
-		{
-		}
-
-		ul.style1 .date a:hover
-		{
-			text-decoration: none;
-		}
-
-
-		#featured
-		{
-			overflow: hidden;
-			margin-bottom: 3em;
-			padding-top: 5em;
-			border-top: 1px solid rgba(0,0,0,0.08);
-		}
-
-
-		.pagination {
-		  position: absolute;
-		  left: 50%;
-		  -webkit-transform: translate(-50%, -50%);
-				  transform: translate(-50%, -50%);
-		  margin: 0;
-		  padding: 10px;
-		  background-color: #fff;
-		  border-radius: 40px;
-		  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.1);
-		}
-		.pagination li {
-		  display: inline-block;
-		  list-style: none;
-		}
-		.pagination li a {
-		  display: block;
-		  width: 40px;
-		  height: 40px;
-		  line-height: 40px;
-		  background-color: #fff;
-		  text-align: center;
-		  text-decoration: none;
-		  color: #252525;
-		  border-radius: 4px;
-		  margin: 5px;
-		  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.1);
-		  -webkit-transition: all 0.3s ease;
-		  transition: all 0.3s ease;
-		}
-		.pagination li a:hover, .pagination li a.active {
-		  color: #fff;
-		  background-color: #ff4242;
-		}
-		.pagination li:first-child a {
-		  border-radius: 40px 0 0 40px;
-		}
-		.pagination li:last-child a {
-		  border-radius: 0 40px 40px 0;
-		}
-
-
-		#gonjibtn {
-		float:right;
-			width:100px;
-			background-color: #f8585b;
-			border-radius:10px 0 10px 0;
-			border: none;
-			color:#fff;
-			padding: 15px 0;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 15px;
-			margin: 4px;
-			cursor: pointer;
-		}
+	
+		
+	#main-menu li:nth-child(2)>a {
+		border-left: 1px solid #ee575d;
+	}
 
 
 
@@ -254,12 +72,12 @@
     <!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="공지사항.html">공지사항 관리</a></li>
-	    <li><a href="이벤트.html">이벤트 관리</a></li>
-	    <li><a href="약관정책.html">약관정책 관리</a></li>
+	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
+	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
+	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="1대1문의.html" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
 	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>

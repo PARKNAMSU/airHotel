@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ public class HouseController {
 	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
 	
 	@ModelAttribute("house")
-	public House_InfoVO setEmptySawon() {
+	public House_InfoVO setEmptyHouse() {
 		return new House_InfoVO();
 	}
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
@@ -70,6 +72,9 @@ public class HouseController {
 
 	@RequestMapping(value = "/hostregisterindex.do")
 	public String mainPage() {
+		//HttpSession session
+		//HttpSession session = request.getSession();
+		//session.getAttribute("login_session");
 		return "1newhouse";
 	}
 	@RequestMapping(value = "/1newhouse.do")
@@ -295,6 +300,7 @@ public class HouseController {
 	
 	@RequestMapping(value = "/13chargetext.do")
 	public String chargetext(@ModelAttribute("house") House_InfoVO house, Model model, SessionStatus sessionStatus) throws Exception{
+		
 		logger.info(house.toString());
 		houseService.insertHouse(house);
 		sessionStatus.setComplete();

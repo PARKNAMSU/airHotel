@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>이벤트 상세 페이지</title>
+	<title>1대1문의 등록 페이지</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -34,49 +34,38 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	
 	<style>
-	.title {
-		margin-bottom: 3em;
+	#main-menu li:nth-child(4)>a {
+		border-left: 1px solid #ee575d;
 	}
 	
-	.title h2 {
-		text-transform: lowercase;
-		font-size: 2.8em;
+	input[type=radio]{
+	  width: 0;
+	  height: 0;
+	  position: absolute;
+	  left: -9999px;
 	}
-	
-	.title .byline {
-		font-size: 1.3em;
-		color: #6F6F6F;
+	input[type=radio] + label{
+	  margin: 0;
+	  padding: .75em 1.5em;
+	  box-sizing: border-box;
+	  position: relative;
+	  display: inline-block;
+	  border: solid 1px #DDD;
+	  background-color: #FFF;
+	  line-height: 140%;
+	  text-align: center;
+	  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+	  transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out;
+	  cursor: pointer;
 	}
-	
-	#featured {
-		overflow: hidden;
-		margin-bottom: 3em;
-		padding-top: 5em;
-		border-top: 1px solid rgba(0, 0, 0, 0.08);
+	input[type=radio]:checked + label{
+	  background-color: #4B9DEA;
+	  color: #FFF;
+	  box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+	  border-color: #4B9DEA;
+	  z-index: 1;
 	}
 	</style>
-	
-	<script>
-		
-		function TakeSubmit() {
-			var f = document.form1;
-			f.action = '택현이 쿠폰 발급 액션';
-			f.submit();
-		}
-		
-		function ListSubmit() {
-			var f = document.form1;
-			f.action = '<c:url value="/selectEventList.do${paging.makeQueryPage(page) }" />';
-			f.submit();
-		}
-			
-		
-		function ExampleSubmit() {
-			var f = document.form1;
-			f.action = "<c:url value='/delete.mdo${paging.makeQueryPage(detail.event_idx, page) }' />";
-			f.submit();
-		}
-	</script>
 </head>
 <body>
 	<header class="menudiv1" style="position : static">
@@ -96,23 +85,21 @@
 	</div>
 	</header>
 	
-	<!-- bradcam_area  -->
-     <div class="bradcam_area bradcam_bg_5">
+	<div class="bradcam_area bradcam_bg_5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Event</h3>
-                        <p>사용자-이벤트상세 화면이에요</p>
+                        <h3>contact</h3>
+                        <p>관리자-약관정책등록 화면이에요</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--/ bradcam_area  -->
-    
-    
-    <div class="container">
+	
+	
+	<div class="container">
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
@@ -133,26 +120,46 @@
 
 	<div style="float: left; width: 60%; " id="featured">
 	<div class="title">
-					<h2>${detail.event_title }</h2>
+					<h2>1대1문의 등록하기</h2>
 					<hr>
-					<span class="byline">※ 이벤트 기간 : ${detail.event_start } ~ ${detail.event_end }  </span><br><br>
+					<span class="byline">질문을 등록합니다.</span><br><br>
 				</div>
 		<ul>
             <li>
-                <form id="form1" name="form1" method="POST">
-							<h4></h4>
-							<img id=imageEventDetail src="${pageContext.request.contextPath}/resources/images/여기어때3.jpg">
-          					
-							<input type="hidden" name="idx" value="${detail.event_idx }">
-          					<a href="#" onclick="TakeSubmit();" id="takeBtn" class="submitbtn"><button>쿠폰발급받기</button></a>
-          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로가기</button></a>
-          					
+                <form  action="/cnc/addPersonalQueList.do" method="POST" >
+                
+                <label>질문의 유형을 선택해주세요.</label><br /><br />
+                
+                	<input type="radio" id="option1" name="personalq_type" value="예약결제" checked="checked">
+					<label for="option1">예약결제</label>
+					<input type="radio" id="option2" name="personalq_type" value="예약취소">
+					<label for="option2">예약취소</label>
+					<input type="radio" id="option3" name="personalq_type" value="이용문의">
+					<label for="option3">이용문의</label>
+					<input type="radio" id="option4" name="personalq_type" value="회원정보">
+					<label for="option4">회원정보</label>
+					<input type="radio" id="option5" name="personalq_type" value="기타문의">
+					<label for="option5">기타문의</label>
+					
+					<br></br>
+					
+					<input name="personalq_title" class="" type="text" value="당신의 질문의 제목을 입력하세요."
+					onfocus="if(this.value == '당신의 질문의 제목을 입력하세요.') { this.value = ''; }"
+					onblur="if(this.value == '') { this.value = '당신의 질문의 제목을 입력하세요.'; }" />
+					<textarea name="personalq_content" cols="" rows=""
+					onfocus="if(this.value == '당신의 질문의 내용을 입력하세요.') { this.value = ''; }"
+					onblur="if(this.value == '') { this.value = '당신의 질문의 내용을 입력하세요.'; }">당신의 질문의 내용을 입력하세요.</textarea>
+				
+					<input type="submit" value="등록" class="submitbtn" />
+					<input type="button" value="취소" class="submitbtn"  
+					onclick="location.href='/cnc/selectPersonalQueList.do'"/>
                 </form>
 			</li>
 		</ul>
 	</div>
 	</div>
-	
+
+
 	<div id="footer"></div>
      <footer class="first" id="bottom" >
 		<div class="second">
@@ -171,9 +178,6 @@
 			<img src="../images/insta.png" id="blogo">
 		</div>
 	</footer>
-	
+	 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
 </html>
