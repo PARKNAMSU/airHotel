@@ -9,7 +9,7 @@
             *
         FROM
             (select rownum rnum, event_idx, event_title, event_writer, 
-            event_content, event_regdate, event_start, event_end, event_url 
+            event_content, event_regdate, event_start, event_end, event_url, event_url_detail
             from (select * from event_board order by event_idx desc))
         WHERE
         	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
@@ -28,9 +28,9 @@
 	<insert id="insertEvent" parameterType="kg.air.cnc.vo.EventVO">
 		<![CDATA[
 		INSERT INTO event_board(event_idx, event_title, event_content,
-		event_start, event_end, event_url)
+		event_start, event_end, event_url, event_url_detail)
 		VALUES((select nvl(max(event_idx), 0)+1 from event_board), 
-		#{event_title}, #{event_content}, #{event_start}, #{event_end}, #{event_url})
+		#{event_title}, #{event_content}, #{event_start}, #{event_end}, #{event_url}, #{event_url_detail})
 		]]>
 	</insert>
 	
@@ -40,7 +40,7 @@
             *
         FROM
             (select rownum rnum, event_idx, event_title, event_writer, 
-            event_content, event_regdate, event_start, event_end, event_url 
+            event_content, event_regdate, event_start, event_end, event_url, event_url_detail 
             from (select * from event_board order by event_idx desc))
         WHERE
         	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
@@ -52,7 +52,7 @@
 	 <![CDATA[
 		SELECT
 			event_idx, event_title, event_writer, event_content, 
-			event_regdate, event_start, event_end, event_url
+			event_regdate, event_start, event_end, event_url, event_url_detail
 		FROM
 			event_board
 		WHERE
@@ -69,7 +69,8 @@
 			event_content = #{event_content},
 			event_start = #{event_start},
 			event_end = #{event_end},
-			event_url = #{event_url} 	
+			event_url = #{event_url},
+			event_url_detail = #{event_url_detail} 	
 		WHERE 
 			event_idx = #{event_idx}
 		]]>

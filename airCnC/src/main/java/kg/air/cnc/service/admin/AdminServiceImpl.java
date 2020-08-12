@@ -1,11 +1,10 @@
-package kg.air.cnc.admin.service;
+package kg.air.cnc.service.admin;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
-import kg.air.cnc.admin.dao.AdminDAO;
-import kg.air.cnc.admin.vo.AdminVO;
 
+import kg.air.cnc.dao.admin.AdminDAO;
+import kg.air.cnc.vo.AdminVO;
 @Service
 public class AdminServiceImpl implements AdminService {
 	

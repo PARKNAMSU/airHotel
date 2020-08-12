@@ -199,6 +199,7 @@
 </head>
 <body>
 	<!-- header-start -->
+	<c:if test="${login_session eq null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -206,29 +207,50 @@
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트
-					</a></li>
-					<li class="item">
-						<p>
-							<a href="/cnc/registerView.do">회원가입</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="/cnc/loginView.do">로그인</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="javascript:void(0)"
-								onclick="document.getElementById('light1').style.display='block';document.getElementById('fade').style.display='block'">공지사항</a>
-						</p>
-					</li>
+				<ul id="menuItems">		
+						<li class="item">
+							<p>
+								<a href="/cnc/registerView.do">회원가입</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/loginView.do">로그인</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
+							</p>
+						</li>
 				</ul>
 			</div>
 		</div>
 	</header>
+	</c:if>
+	<c:if test="${login_session ne null }">
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do">공지사항</a>
+							</p>
+						</li>
+						<li class="item"><a href="myHouse.do">호스트</a></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do">로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	</c:if>
 	<form action="/cnc/registerCheck.do" method="post" id="regForm">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">

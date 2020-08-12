@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>이벤트 상세 페이지</title>
+	<title>약관정책 등록 페이지</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -34,49 +34,10 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	
 	<style>
-	.title {
-		margin-bottom: 3em;
-	}
-	
-	.title h2 {
-		text-transform: lowercase;
-		font-size: 2.8em;
-	}
-	
-	.title .byline {
-		font-size: 1.3em;
-		color: #6F6F6F;
-	}
-	
-	#featured {
-		overflow: hidden;
-		margin-bottom: 3em;
-		padding-top: 5em;
-		border-top: 1px solid rgba(0, 0, 0, 0.08);
+	#main-menu li:nth-child(3)>a {
+		border-left: 1px solid #ee575d;
 	}
 	</style>
-	
-	<script>
-		
-		function TakeSubmit() {
-			var f = document.form1;
-			f.action = '택현이 쿠폰 발급 액션';
-			f.submit();
-		}
-		
-		function ListSubmit() {
-			var f = document.form1;
-			f.action = '<c:url value="/selectEventList.do${paging.makeQueryPage(page) }" />';
-			f.submit();
-		}
-			
-		
-		function ExampleSubmit() {
-			var f = document.form1;
-			f.action = "<c:url value='/delete.mdo${paging.makeQueryPage(detail.event_idx, page) }' />";
-			f.submit();
-		}
-	</script>
 </head>
 <body>
 	<header class="menudiv1" style="position : static">
@@ -96,34 +57,31 @@
 	</div>
 	</header>
 	
-	<!-- bradcam_area  -->
-     <div class="bradcam_area bradcam_bg_5">
+	<div class="bradcam_area bradcam_bg_5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Event</h3>
-                        <p>사용자-이벤트상세 화면이에요</p>
+                        <h3>contact</h3>
+                        <p>관리자-약관정책등록 화면이에요</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--/ bradcam_area  -->
-    
-    
-    <div class="container">
+	
+	
+	<div class="container">
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
 	  <ul id="main-menu">
-	    <li><a href="/cnc/selectBoardList.do">공지사항</a></li>
-	    <li><a href="/cnc/selectEventList.do">이벤트</a></li>
-	    <li><a href="/cnc/selectPolicyList.do">약관정책</a></li>
+	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
+	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
+	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
-	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
-	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
+	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -133,26 +91,31 @@
 
 	<div style="float: left; width: 60%; " id="featured">
 	<div class="title">
-					<h2>${detail.event_title }</h2>
+					<h2>약관정책 관리</h2>
 					<hr>
-					<span class="byline">※ 이벤트 기간 : ${detail.event_start } ~ ${detail.event_end }  </span><br><br>
+					<span class="byline">약관정책을 등록합니다.</span><br><br>
 				</div>
 		<ul>
             <li>
-                <form id="form1" name="form1" method="POST">
-							<h4></h4>
-							<img id=imageEventDetail src="${pageContext.request.contextPath}/resources/images/여기어때3.jpg">
-          					
-							<input type="hidden" name="idx" value="${detail.event_idx }">
-          					<a href="#" onclick="TakeSubmit();" id="takeBtn" class="submitbtn"><button>쿠폰발급받기</button></a>
-          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로가기</button></a>
-          					
+                <form  action="/cnc/addPolicyList.mdo" method="POST" >
+
+                   			<input name="policy_title" class="" type="text" value="새로운 정책의 제목을 입력하세요."
+          					onfocus="if(this.value == '새로운 정책의 제목을 입력하세요.') { this.value = ''; }"
+          					onblur="if(this.value == '') { this.value = '새로운 정책의 제목을 입력하세요.'; }" />
+          					<textarea name="policy_content" cols="" rows=""
+          					onfocus="if(this.value == '새로운 정책의 내용을 입력하세요.') { this.value = ''; }"
+          					onblur="if(this.value == '') { this.value = '새로운 정책의 내용을 입력하세요.'; }">새로운 정책의 내용을 입력하세요.</textarea>
+
+          					<input type="submit" value="등록" class="submitbtn" />
+          					<input type="button" value="취소" class="submitbtn"  
+          					onclick="location.href='/cnc/goPolicyListAdmin.mdo'"/>
                 </form>
 			</li>
 		</ul>
 	</div>
 	</div>
-	
+
+
 	<div id="footer"></div>
      <footer class="first" id="bottom" >
 		<div class="second">
@@ -171,9 +134,6 @@
 			<img src="../images/insta.png" id="blogo">
 		</div>
 	</footer>
-	
+	 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
 </html>
