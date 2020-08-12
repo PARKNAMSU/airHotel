@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.controller;
+package kg.air.cnc.controller.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,9 +25,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kg.air.cnc.common.KakaoController;
 import kg.air.cnc.common.NaverController;
-import kg.air.cnc.customer.service.CustomerService;
-import kg.air.cnc.customer.vo.CustomerVO;
+import kg.air.cnc.service.customer.CustomerService;
 import kg.air.cnc.service.mail.MailService;
+import kg.air.cnc.service.message.MessageService;
+import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.MessageVO;
 
 @Controller
 public class CustomerController {
@@ -40,6 +42,9 @@ public class CustomerController {
 	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
 	}
+	
+	@Autowired
+	MessageService messageService;
 	
 	@Inject
 	CustomerService service;
@@ -226,6 +231,7 @@ public class CustomerController {
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
 	public String regist(CustomerVO vo)throws Exception{
+		MessageVO messageVO = new MessageVO();
 		// 회원가입 시 프로필 사진을 등록안했을때 none처리.
 		if (vo.getCustomer_image().equals("")) {
 			vo.setCustomer_image("none");
@@ -240,6 +246,11 @@ public class CustomerController {
 				vo.setCustomer_password(pwd);
 				vo.setCustomer_key("Y");
 				service.register(vo);
+				messageVO.setMessage_from_id("admin");
+				messageVO.setMessage_to_id(vo.getCustomer_id());
+				messageVO.setMessage_type("nomal");
+				messageVO.setMessage_content("회원가입을 축하합니다.");
+				messageService.insertMessage(messageVO);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

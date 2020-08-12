@@ -1,7 +1,7 @@
-package kg.air.cnc.customer.service;
+package kg.air.cnc.service.customer;
 
 import java.util.Date;
-import kg.air.cnc.customer.vo.CustomerVO;
+import kg.air.cnc.vo.CustomerVO;
 
 public interface CustomerService {
 	

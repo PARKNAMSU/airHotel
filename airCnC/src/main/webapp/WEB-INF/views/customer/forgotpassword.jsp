@@ -29,34 +29,29 @@ $(document).on("click","#sendEmailBtn",function() {
 		$("#customerEmail").focus();
 		return false;
 	}
-	else if (!regExp.test($("#customerEmail").val())) {
-		console.log(123);
+	if (!regExp.test($("#customerEmail").val())) {
 		alert("이메일 주소가 유효하지 않습니다");
 		$("#customerEmail").focus();
 		return false;
 	}
-	else{
-		$.ajax({
-			type : "post",
-			url : "findPassword.do",
-			dataType : "text",
-			data : {
-				"customer_email" : $("#customerEmail").val()
-			},
-			success : function(data) {
-				if (data == "0") {
-					alert("가입되어 있지 않은 이메일 계정입니다.");
-					$("#customerEmail").focus();
-				}else if(data == "1"){
-					alert("새 비밀번호 발송에 성공하였습니다.");
-				}else if(data == "-1"){
-					alert("새 비밀번호 발송에 실패하였습니다.");
-					$("#customerEmail").focus();
-				}
+	$.ajax({
+		type : "post",
+		url : "findPassword.do",
+		data : {
+			"customer_email" : $("#customerEmail").val()
+		},
+		success : function(data) {
+			if (data == "0") {
+				alert("가입되어 있지 않은 이메일 계정입니다.");
+				$("#customerEmail").focus();
+			}else if(data == "1"){
+				alert("새 비밀번호 발송에 성공하였습니다.");
+			}else if(data == "-1"){
+				alert("새 비밀번호 발송에 실패하였습니다.");
+				$("#customerEmail").focus();
 			}
-		});	
-		
-	}
+		}
+	});		
 });
 </script>
 </head>
