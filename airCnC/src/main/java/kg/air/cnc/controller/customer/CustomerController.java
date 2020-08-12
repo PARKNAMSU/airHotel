@@ -85,7 +85,7 @@ public class CustomerController {
 	}
 	
 	// 비밀번호 찾기 이메일 전송.
-	@RequestMapping(value = "/findPassword.do", produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/findPassword.do", produces = "application/text", method = RequestMethod.POST)
 	@ResponseBody
 	public String findPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletRequest request)throws Exception{
 		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
@@ -294,7 +294,7 @@ public class CustomerController {
 			// 로그인이 성공하면 CustomerVO객체를 반환.
 			CustomerVO vo = service.login(customerVO);
 			if (vo != null) { // 로그인 성공.
-				session.setAttribute("login_session", vo);
+				session.setAttribute("login_session", vo.getCustomer_id());
 				returnURL = "index";
 				if (customerVO.isUseCookie()) {
 					Cookie cookie = new Cookie("loginCookie", session.getId());
