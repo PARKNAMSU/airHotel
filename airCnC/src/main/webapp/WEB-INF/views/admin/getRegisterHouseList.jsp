@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-    <title>°ü¸®ÀÚ ´ë±â ÆÄÀÏ</title>
+    <title>ê´€ë¦¬ìž ëŒ€ê¸° íŒŒì¼</title>
 </head>
 <body>
      <!-- header-start -->
@@ -23,11 +23,13 @@
 		<div class="menudiv2-2" style="overflow : hidden">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">
-                    <li class="item">°èÁ¤°ü¸®</li>
-                    <li class="item">Åë°è</li>
-                    <li class="item">¼÷¼Ò°ü¸®</li>
-                    <li class="item">·Î±×°ü¸®</li>
-					<li class="item">·Î±×ÀÎ</li>
+					<li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo">ì‹ ê³ ê´€ë¦¬</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo">í†µê³„</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">í˜¸ìŠ¤íŠ¸ê´€ë¦¬</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo">ë¡œê·¸ê´€ë¦¬</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo">ì¿ í°ê´€ë¦¬</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">ê²Œì‹œíŒê´€ë¦¬</a></li>
+					<li class="item"><a href="/cnc/logout.mdo">ë¡œê·¸ì•„ì›ƒ</a></li>	
                 </ul>
             </div>
         </div>
@@ -53,24 +55,24 @@
     <br>
     <div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><a id="topmenu" href="getRegisterWaitingList.mdo">È£½ºÆ® µî·Ï °ü¸®</a></li>
-			<li class="menu"><a href="getRemoveWaitingList.mdo">È£½ºÆ® »èÁ¦ °ü¸®</a></li>
-			<li class="menu"><a href="getRemoveHostList.mdo">È£½ºÆ® »èÁ¦</a></li>
+			<li class="menu"><a id="topmenu" href="getRegisterWaitingList.mdo">ìˆ™ì†Œ ë“±ë¡ ê´€ë¦¬</a></li>
+			<li class="menu"><a href="getRemoveWaitingList.mdo">ìˆ™ì†Œ ì‚­ì œ ê´€ë¦¬</a></li>
+			<li class="menu"><a href="getRemoveHostList.mdo">í˜¸ìŠ¤íŠ¸ ì‚­ì œ</a></li>
 		</ul>
     </div>
     <div class="container" style="margin-top : 3%">
-        <h3>È£½ºÆ® µî·Ï °ü¸®</h3>
+        <h3>ìˆ™ì†Œ ë“±ë¡ ê´€ë¦¬</h3>
         <br>
         <c:forEach items="${waitingList}" var="house">
-        <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}">
-        <div class="houseList">
-            <img src="../images/face.png" alt="¼÷¼Ò ÀÌ¹ÌÁö" class="littleImg">
+        <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}" style="clear : left">
+        	<div class="houseList">
+            <img src="../images/face.png" alt="ìˆ™ì†Œ ì´ë¯¸ì§€" class="littleImg">
 		    ${house.house_name }<br>
-		         ¼÷¼Ò ¼Ò°³<br>
+		         ìˆ™ì†Œ ì†Œê°œ<br>
 		    ${house.house_location_fulladdress}<br>
 		    ${house.house_star }<br>					
 		    ${house.house_price_default }<br>
-        </div>
+        	</div>
         </a>
         <hr>
         </c:forEach>

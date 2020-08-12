@@ -34,6 +34,7 @@
 </head>
 <body>
 	<!-- header-start -->
+	<c:if test="${login_session eq null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -41,9 +42,7 @@
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<c:if test="${login_session eq null && sessionScope.token eq null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				<ul id="menuItems">		
 						<li class="item">
 							<p>
 								<a href="/cnc/registerView.do">회원가입</a>
@@ -59,43 +58,67 @@
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-					</c:if>
-					<c:if test="${login_session ne null && sessionScope.token ne null}">
-						<li class="item"><a href="/Mainwork/html/hostresgister.html">호스트</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	</c:if>
+	<c:if test="${login_session ne null }">
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">	
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-						<c:choose>
-							<c:when test="${login_session ne null}">
-								<li class="item">
-									<p><a href="/cnc/logout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope.token ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-							<c:when test="${sessionScope ne null}">
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:when>
-						</c:choose>
-					</c:if>
+						<li class="item"><a href="myHouse.do">호스트</a></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do">로그아웃</a></p>
+						</li>
 				</ul>
 			</div>
 		</div>
 	</header>
-	<!-- slider_area_start -->
-	<div class="mainview">
-		<div class="content">
-			<label for="content">Travelo</label>
-		</div>
-		<div class="img-cover"></div>
-	</div>
+	</c:if>
+	 <!-- slider_area_start -->
+    <div class="mainview">
+    <div class="content">
+        <label1 for="content">Travelo</label1>
+    </div>
+    <div class="searchOptions">
+        <form action="searchIndex.do">
+           <div class="srcachlocation">
+              <select id="select_type" name="location" style="border: none;">
+                 <option id="first">지역 전체</option>
+                 <option id="seo">서울</option>
+                 <option id="gye">경기</option>
+                 <option id="gw">강원</option>
+                 <option id="cb">충북</option>
+                 <option id="cn">충남</option>
+                 <option id="gb">경북</option>
+                 <option id="gn">경남</option>
+                 <option id="jb">전북</option>
+                 <option id="jn">전남</option>
+              </select> <select id="select_menu" name="detail">
+                 <option>지역 선택</option>
+              </select> <label class="searchConditions">체크인 <input type="date"
+                 id="checkIn" name="checkIn" value="" min="" max="" /></label> <label
+                 class="searchConditions">체크아웃 <input type="date"
+                 id="checkOut" name="checkOut" min="" max="" onclick="checkout()" />
+              </label> <label class="searchConditions">최소 인원 <input type="number"
+                 id="people" name="people" value="1" onclick="peopleCheck()"/></label>
+              <button class="btn1" type="submit" value="검색">검색</button>
+           </div>
+        </form>
+    </div>
+    <div class="img-cover"></div>
+    </div>
 	<!-- slider_area_end -->
 	<div class="popular_destination_area"
 		style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
@@ -506,6 +529,75 @@
 			slides[slideIndex - 1].style.display = "block";
 			dots[slideIndex - 1].className += " active";
 			setTimeout(showSlides, 2000); // Change image every 2 seconds
+		}
+	</script>
+	
+	<script type="text/javascript">
+		var f_base =["지역 전체"]
+		var f_seoul = [ "서울지역 선택", "강남구", "강서구", "노원구" ];
+		var f_gyeonggi = [ "경기지역 선택", "성남시", "수원시", "광주시" ];
+		var f_gangwon = [ "강원지역 선택", "강릉시", "속초시", "양양시" ];
+		var f_cb = [ "충북지역 선택", "청주시", "충주시", "제천시" ];
+		var f_cn = [ "충남지역 선택", "보령시", "공주시", "천안시" ];
+		var f_gb = [ "경북지역 선택", "포항시", "안동시", "경주시" ];
+		var f_gn = [ "경남지역 선택", "창원시", "통영시", "거제시" ];
+		var f_jb = [ "전북지역 선택", "전주시", "익산시", "군산시" ];
+		var f_jn = [ "전남지역 선택", "여수시", "순천시", "목포시" ];
+		var foods = [ f_base, f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
+
+		function createTag(index) {
+			var result = "";
+			foods[index].forEach(function(item) {
+				result += "<option>" + item + "</option>";
+			});
+			return result;
+		}
+
+		function chgOptions() {
+			var selected_index = $("#select_type option").index(
+					$("#select_type option:selected"));
+			$("#select_menu").html(createTag(selected_index));
+		}
+
+		$("#select_type").on("change", function() {
+			chgOptions();
+		});
+	</script>
+
+	<script>
+		window.onload = function () {
+			let minlim = new Date().toISOString().substring(0, 10);
+			document.getElementById('checkIn').value = minlim;
+			document.getElementById('checkIn').min = minlim;
+		};
+	</script>
+	
+	<script>
+		var peopleCheck = function() {
+			let peo = document.getElementById("people");
+			if(peo.value<1) {
+				peo.value = 1;
+				alert('최소인원은 1명 입니다.');
+			}
+			if(peo.value>10) {
+				peo.value = 10;
+				alert('너무 많은 인원입니다.');
+			}
+		}
+	</script>
+	
+	<script>
+		var checkout = function() {
+			let maxLim = document.getElementById("checkIn");
+			document.getElementById("checkOut").min = maxLim.value;
+		}
+	</script>
+	
+	<script>
+		window.onload = function () {
+			var loc = document.getElementById("first");
+			loc.selected = true;
+			chgOptions();
 		}
 	</script>
 </body>

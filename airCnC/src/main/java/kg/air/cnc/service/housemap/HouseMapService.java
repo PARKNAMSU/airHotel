@@ -10,4 +10,6 @@ public interface HouseMapService {
 	public List<Map<String, Integer>> getPrice(String location);
 	public List<House_InfoVO> getDetail(Map<String, String> info);
 	public List<Map<String, Integer>> getPrice(Map<String, String> info);
+	public List<House_InfoVO> searchIndex(Map<String, String> info);
+	public List<Map<String, Integer>> searchIndexPrice(Map<String, String> info);
 }

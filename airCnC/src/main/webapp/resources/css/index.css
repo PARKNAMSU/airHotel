@@ -1,25 +1,37 @@
 .mainview {
   position: relative;
-  background-image: url(/images/main/mainview.gif);
+  background-image: url(/Mainwork/images/main/mainview.gif);
   height: 100vh;
   background-size: cover;
 }
-
 .img-cover {
   position: absolute;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1;
 }
 
 .mainview .content {
+  top: 40%;
+  left: 40%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  color: white;
+  font-size: 100px;
+  color: gray;
   z-index: 2;
-  text-align: center;
+}
+.mainview .searchOptions {
+  margin-top: 8%;
+  margin-left: 25%;
+  align-items: center;
+  position: absolute;
+  color: gray;
+  z-index: 2;
+}
+@media screen and (max-width: 768px) {
+  .img-cover {
+    background-image: url(/Mainwork/images/main/mainback1.png);
+  }
+  .mainview .content {
+    display: none;
+  }
 }

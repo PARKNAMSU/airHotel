@@ -7,15 +7,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/style.css" />
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/menu.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/footer.css" />
 <link rel="stylesheet" type="text/css"
@@ -42,7 +42,7 @@
 			<form action="getDetail.do">
 				<div class="srcachlocation">
 					<select id="select_type" name="location">
-						<option id="first">종류 선택</option>
+						<option id="first">지역 전체</option>
 						<option id="seo">서울</option>
 						<option id="gye">경기</option>
 						<option id="gw">강원</option>
@@ -55,11 +55,11 @@
 					</select> <select id="select_menu" name="detail">
 						<option>지역 선택</option>
 					</select> <label class="searchConditions">체크인 <input type="date"
-						id="checkIn" name="checkIn" value="" min="" max="" /></label> <label
+						id="checkIn" name="checkIn" value="${checkInDate }" min="" max="" /></label> <label
 						class="searchConditions">체크아웃 <input type="date"
-						id="checkOut" name="checkOut" min="" max="" onclick="checkout()" />
+						id="checkOut" name="checkOut" value="${checkOutDate }" min="" max="" onclick="checkout()" />
 					</label> <label class="searchConditions">최소 인원 <input type="number"
-						id="people" name="people" value="1" /></label>
+						id="people" name="people" value="${person }" onclick="peopleCheck()"/></label>
 					<button class="btn1" type="submit" value="검색" onclick="nullCheck()">검색</button>
 					<button class="btn2" id="button">상세검색</button>
 				</div>
@@ -127,18 +127,26 @@
 		</div>
 		<div class="containerr">
 			<div id="map"></div>
+			<div class="mapSide">
 			<c:forEach items="${houseList}" var="house">
-				<a href="getHouse.do?${house.house_seq}">
-					<div class="houseList" style="color: black">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/face.png"
-							alt="숙소 이미지" class="littleImg"> ${house.house_seq }<br>
-						${house.house_name }<br> ${house.house_location }<br> 별점<br>
-						가격
+				<form action="reservationHouse.do" method="post" id="${house.house_seq}">
+				<input type="hidden" name="house_seq" value="${house.house_seq}"/>
+				<input type="hidden" name="accessType" value="notres" />
+				<input type="hidden" name="check_in" value="">
+				<input type="hidden" name="check_out" value="">
+				<input type="hidden" name="house_person" value="">
+					<div class="houseList" style="color: black" onclick="sub(${house.house_seq})">
+						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
+							${house.house_seq }<br>
+							${house.house_name }<br> 
+							${house.house_location }<br>
+							별점<br>
+							가격
 					</div>
-					<hr>
-				</a>
-			</c:forEach>
+				</form>
+					<br>
+				</c:forEach>
+			</div>
 		</div>
 	</main>
 	<footer class="first" id="bottom">
@@ -178,6 +186,7 @@
 		});
 	</script>
 	<script type="text/javascript">
+		var f_base =["지역 전체"]
 		var f_seoul = [ "서울지역 선택", "강남구", "강서구", "노원구" ];
 		var f_gyeonggi = [ "경기지역 선택", "성남시", "수원시", "광주시" ];
 		var f_gangwon = [ "강원지역 선택", "강릉시", "속초시", "양양시" ];
@@ -187,7 +196,7 @@
 		var f_gn = [ "경남지역 선택", "창원시", "통영시", "거제시" ];
 		var f_jb = [ "전북지역 선택", "전주시", "익산시", "군산시" ];
 		var f_jn = [ "전남지역 선택", "여수시", "순천시", "목포시" ];
-		var foods = [ "지역 선택", f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
+		var foods = [ f_base, f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
 
 		function createTag(index) {
 			var result = "";
@@ -256,8 +265,10 @@
 				chgOptions();
 			}
 			let minLim = new Date().toISOString().substring(0, 10);
-			document.getElementById('checkIn').value = minLim;
+			<!--document.getElementById('checkIn').value = minLim;-->
 			document.getElementById('checkIn').min = minLim;
+			if('${checkIn}'==="") document.getElementById('checkIn').value = minLim;
+			if('${person}'==="") document.getElementById('people').value = 1;
 		};
 	</script>
 
@@ -361,7 +372,7 @@
 		var positions = [
 		    <c:forEach items="${houseList}" var="list">
 				{
-					content : '<div>"${list.house_seq}"</div>',
+					content : '<div class="house_name">${list.house_name}</div>',
 					latlng : new kakao.maps.LatLng("${list.house_xlocation}", "${list.house_ylocation}")
 				},
 			</c:forEach>
@@ -401,5 +412,33 @@
 		}
 	</script>
 
+	<script>
+		var peopleCheck = function() {
+			let peo = document.getElementById("people");
+			if(peo.value<1) peo.value = 1;
+			if(peo.value>10) peo.value = 10;
+		}
+	</script>
+	
+	<script>
+		var sub = function(seq) {
+			let inn = document.getElementById("checkIn").value;
+			let outt = document.getElementById("checkOut").value;
+			let perr = document.getElementById("people").value;
+			let size = document.getElementsByName("check_in").length;
+			let size1 = document.getElementsByName("check_out").length;
+			let size2 = document.getElementsByName("house_person").length;
+		    for(var i = 0; i < size; i++){
+		    	document.getElementsByName("check_in")[i].value = inn;
+		    }
+		    for(var i = 0; i < size1; i++){
+		    	document.getElementsByName("check_out")[i].value = outt;
+		    }
+		    for(var i = 0; i < size2; i++){
+		    	document.getElementsByName("house_person")[i].value = perr;
+		    }
+			document.getElementById(seq).submit();
+		}
+	</script>
 </body>
 </html>

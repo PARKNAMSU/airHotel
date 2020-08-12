@@ -17,6 +17,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	811cfc852fdf2dfcea71594f0a24a256"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reservationhouse.css?version=123">
 <meta charset="UTF-8">
 <style type="text/css">
@@ -38,16 +40,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header>
-		<%@include file="../html/menu.jsp" %>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
 	</header>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
+	${house.check_in }
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
-			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson">&nbsp;&nbsp;&nbsp;
-			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control">&nbsp;&nbsp;&nbsp;
-			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" >&nbsp;&nbsp;&nbsp;
+			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;
+			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
+			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
 			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">			 
 		</form>
@@ -173,7 +194,7 @@
 		<div class="subinfodiv" style="font-family: 'Jua', sans-serif;">
 			<span id="title" style="font-family: 'Jua', sans-serif;">체크인 / 체크아웃 시간</span><br><br>
 			<div class="check">
-				<strong style="font-family: 'Jua', sans-serif;>체크인</strong><br><br>
+				<strong style="font-family: 'Jua', sans-serif;">체크인</strong><br><br>
 				<p style="font-family: 'Jua', sans-serif;">2020/07/21</p><br>
 				<p style="font-family: 'Jua', sans-serif;">${house.house_checkin_time }</p>
 			</div>
@@ -480,7 +501,23 @@ function dateFormSubmit(){
 		alert("체크인 시간을 입력하세요")
 	}else if(document.getElementById("checkout").value == null || document.getElementById("checkout").value == ""){
 		alert("체크아웃 시간을 입력하세요")
-	}else{
+	}
+	else{
+		var ci_date = new Date(document.getElementById("checkin").value)
+		var co_date = new Date(document.getElementById("checkout").value)		
+		while(ci_date <= co_date){
+			   var mon = (ci_date.getMonth()+1);
+			   mon = mon < 10 ? '0'+mon : mon;
+			   var day = ci_date.getDate();
+			   day = day < 10 ? '0'+day : day;
+			   for(var i=0; i < dates.length; i++){
+			   		if((ci_date.getFullYear() + '-' + mon + '-' +  day) == dates[i]){
+			   			alert("이미 예약된 날짜가 존재합니다.")
+			   			return false;
+			   		}
+			   }
+			   ci_date.setDate(ci_date.getDate() + 1);
+		}
 		document.getElementById("dateForm").submit();
 	}
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
     <footer class="first" id="bottom" >
-		<div class="second">
+		<div class="second" style="margin-top:5%;">
 			회사소개  | 이용약관 | 개인정보처리방침 |사업자 정보확인 | 여기어때 마케팅센터 | 액티비티 호스트센터 | HOTEL 여기어때 |콘텐츠산업진흥법에의한 표시<br>
 			<br>
 			고객행복센터 1670-6250 오전 9시 - 새벽 3시, 점심시간: 오후 12시 - 오후 1시<br><br> 

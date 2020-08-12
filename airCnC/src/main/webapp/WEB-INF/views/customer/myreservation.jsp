@@ -4,15 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/myreservation.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=123">
 <!-- Latest compiled JavaScript -->
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -20,9 +22,27 @@
 <title>Insert title here</title>
 </head>
 <body style="font-family: 'Jua', sans-serif;">
-	<head>
-	<%@ include file="../html/menu.jsp" %>
-	</head>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" >
+				<ul id="menuItems">	
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+						<li class="item">
+								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
+						</li>
+				</ul>
+			</div>
+		</div>
+	</header>
 	<div style="clear:both;"></div>
 	 <!-- slider_area_start -->
     <div class="slider_area">
@@ -45,8 +65,10 @@
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	<%@include file="../html/sideMenu.jsp" %>
-
-	<div class="maindiv" id="main">
+	<div class="maindiv" id="main" style="width:70%;">
+		<div style="margin-bottom:5%;margin-left:55%;">
+			<span style="font-size:30px;color:black;">예약하신 숙소가 없으십니까?</span><br><br><button class="btn btn-outline-danger" style="font-size:30px;" onclick="location.href='http://localhost:8080/cnc/themesearchhighscore.do'">숙소 예약하러 가기</button>
+		</div>
 		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()">예약 내역</a> | <a onclick="getResBefore()" id="before">이전 예약</a></h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">

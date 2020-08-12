@@ -4,7 +4,8 @@ body{
 
 hr{
    	float: left;
- 	width: auto;
+ 	width: 100%;
+ 	color : black;
 }
 
 main{
@@ -16,7 +17,8 @@ main{
     padding-right: 10px;
     padding-left: 10px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
+    height : 460px;
 }
 
 .searchZone{
@@ -44,43 +46,32 @@ main{
     display : none;
 }
 
-#map{
-    position : sticky;
+#map {
     width : 40%;
     height : 600px;
-    right : 0;
-    top : 10px;
     float : right;
-    clear : both;
-}
-
-.mapleft{
-    float : left;
 }
 
 .houseList {
-	clear : left;
 	float : left;
   	display: table-cell;
-  	vertical-align: middle;
   	text-align: left;
-  	margin-bottom: 2%;
-  	width: 58%;
+  	width : 98%;
   	color: black;
-  	border-bottom: 1px solid black;
-  	padding-bottom: 10px;
-  	max-length : 58%;
+  	padding : 5px 0 5px;
+  	border-bottom : 1px solid gray;
 }
 
 .littleImg{
     width : 120px;
     height : 120px;
     float : left;
-    margin-right: 3%;
+    margin-right: 8px;
 }
 
 footer {
     clear : both;
+    z-index : 999;
 }
 
 .hidden{
@@ -89,4 +80,14 @@ footer {
 
 .mapComment {
     float : none;
+}
+
+.house_name{
+	color : black;
+	align: center;
+}
+
+.mapSide{
+	height : 600px;
+	overflow : scroll;
 }

@@ -37,8 +37,22 @@ public class HouseMapController {
 		mav.addObject("houseList",houseMapService.getDetail(info));
 		mav.addObject("location", info.get("location"));
 		mav.addObject("price", houseMapService.getPrice(info));
+		mav.addObject("checkInDate", info.get("checkIn"));
+		mav.addObject("checkOutDate", info.get("checkOut"));
+		mav.addObject("person", info.get("people"));
 		mav.setViewName("houseMap");
 		return mav;
 	}
-	
+
+	@RequestMapping(value="/searchIndex.do", produces="application/text; charset=utf-8")
+	public ModelAndView searchIndex(@RequestParam Map<String, String> info, ModelAndView mav) {
+		mav.addObject("houseList", houseMapService.searchIndex(info));
+		mav.addObject("location", info.get("location"));
+		mav.addObject("price", houseMapService.searchIndexPrice(info));
+		mav.addObject("checkInDate", info.get("checkIn"));
+		mav.addObject("checkOutDate", info.get("checkOut"));
+		mav.addObject("person", info.get("people"));
+		mav.setViewName("houseMap");
+		return mav;
+	}
 }

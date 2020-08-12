@@ -27,18 +27,18 @@ public class MyHouseController {
 	MyHouseService myHouseService;
 	
 	@RequestMapping("myHouse.do")
-	public String hostHouseList() {
+	public String hostHouseList(HttpSession session) {
+		session.setAttribute("login_session", "host");//로그인 완료 시 제거
 		return "hostHouseList";
 	}
 	@RequestMapping(value = "myHouseList.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String myHouseListController(HttpSession session) throws JsonProcessingException {
-		session.setAttribute("login_session", "host");//로그인 완료 시 제거
+		
 		String id = (String)session.getAttribute("login_session");
 		List<ReservationHouseDetailVO> list = myHouseService.getHostHouseList(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping("myHouseResList.do")

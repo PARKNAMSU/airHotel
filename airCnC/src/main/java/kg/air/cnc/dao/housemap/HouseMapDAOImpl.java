@@ -19,7 +19,17 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 	public List<House_InfoVO> getHouseList(String location) {
 		return mybatis.selectList("houseMap.getHouseList", location);
 	}
-
+	
+	public List<House_InfoVO> getAll(Map<String, String> info){
+		return mybatis.selectList("houseMap.getAll");
+	}
+	
+	@Override
+	public List<Map<String, Integer>> getAllPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.getAllPrice");
+	}
+	
+	@Override
 	public List<House_InfoVO> getDetail(Map<String, String> info) {
 		return mybatis.selectList("houseMap.getDetail", info);
 	}
@@ -33,6 +43,7 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//세부검색에서 실행되는것
 		return mybatis.selectList("houseMap.getDetailPrice", info);
 	}
+	
 	
 	@Override
 	public List<House_InfoVO> getDetailWithCheckOut(Map<String, String> info) {
@@ -62,6 +73,56 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 	@Override
 	public List<Map<String, Integer>> getDetailWithBothPrice(Map<String, String> info) {
 		return mybatis.selectList("houseMap.getDetailWithBothPrice", info);
+	}
+
+	@Override
+	public List<House_InfoVO> searchIndexAll(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexAll", info);
+	}
+
+	@Override
+	public List<Map<String, Integer>> searchIndexAllPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexAllPrice", info);
+	}
+	
+	@Override
+	public List<House_InfoVO> searchIndex(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndex", info);
+	}
+
+	@Override
+	public List<Map<String, Integer>> searchIndexPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexPrice", info);
+	}
+	
+	@Override
+	public List<House_InfoVO> searchIndexWithCheckOut(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithCheckOut", info);
+	}
+	
+	@Override
+	public List<Map<String, Integer>> searchIndexWithCheckOutPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithCheckOutPrice", info);
+	}
+
+	@Override
+	public List<House_InfoVO> searchIndexWithDetail(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithDetail", info);
+	}
+
+	@Override
+	public List<Map<String, Integer>> searchIndexWithDetailPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithDetailPrice", info);
+	}
+	
+	@Override
+	public List<House_InfoVO> searchIndexWithBoth(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithBoth", info);
+	}
+
+	@Override
+	public List<Map<String, Integer>> searchIndexWithBothPrice(Map<String, String> info) {
+		return mybatis.selectList("houseMap.searchIndexWithBothPrice", info);
 	}
 
 }

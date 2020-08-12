@@ -56,4 +56,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public CustomerVO checkCustomerWithSessionKey(String session_id)throws Exception {
 		return session.selectOne("customer.checkCustomerWithSessionKey", session_id);
 	}
+
+	// 비밀번호 변경.
+	@Override
+	public int changePassword(CustomerVO customerVO) throws Exception {
+		return session.update("customer.changePassword", customerVO);
+	}
 }

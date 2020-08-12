@@ -140,9 +140,6 @@
 					type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="years_temp" class="day_temp">
-			<br> <br>
-		</div>
 		<div class="subdiv" id="year">
 			<form action="resChartSearch.mdo">
 				year <select name="searchConditionFirst" class="form-control">
@@ -154,9 +151,6 @@
 					class="btn btn-outline-danger">
 			</form>
 		</div>
-		<div id="year_temp" class="day_temp">
-			<br> <br>
-		</div>
 		<div class="subdiv" id="month">
 			<form action="resChartSearch.mdo">
 				month <input type="month" name="searchConditionFirst"
@@ -164,9 +158,6 @@
 					type="hidden" name="searchType" value="month"> <input
 					type="submit" value="검색" class="btn btn-outline-danger">
 			</form>
-		</div>
-		<div id="month_temp" class="day_temp">
-			<br> <br>
 		</div>
 		<div class="subdiv" id="condition">
 			<form action="resChartSearch.mdo">
@@ -182,7 +173,7 @@
 	<div style="clear: both;"></div>
 	<div class="temp"></div>
 	<div class="sales">
-		<p style="font-size: 30px; color: black;">호스트 신청 현황</p>
+		<p style="font-size: 30px; color: black;">숙소 예약 현황</p>
 		<div id="salesArea">
 			<table class="table table-striped" id="salesTable">
 				<tr>
@@ -229,13 +220,13 @@
 
 	</div>
 	<div class="chart" style="margin-bottom: 5%;">
-		<p style="font-size: 30px; color: black;">회원가입 그래프</p>
+		<p style="font-size: 30px; color: black;">숙소 예약 그래프</p>
 		<div id="salesChart"></div>
 		<button onclick="getCharts()" class="btn btn-outline-danger"
-			style="font-size: 30px; margin-top: 10px;">매출 보기</button>
+			style="font-size: 30px; margin-top: 10px;">예약현황 보기</button>
 		&nbsp;&nbsp;
 		<button onclick="getPieCharts()" class="btn btn-outline-danger"
-			style="font-size: 30px; margin-top: 10px;">수입비율 보기</button>
+			style="font-size: 30px; margin-top: 10px;">예약비율 보기</button>
 	</div>
 	<div style="clear: both;"></div>
 	<footer>
@@ -286,7 +277,7 @@ function ReportToExcel(){
 				  var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 
 				 doc.addImage(imgData, 'PNG',10 ,10,imgWidth, imgHeight);
-				 doc.save('개인지출내역서.pdf');
+				 doc.save(fname+'.pdf');
 			  } 
 			});
 		}
@@ -305,8 +296,8 @@ function ReportToExcel(){
 
 	      var options = {
 	        chart: {
-	          title: 'Company Performance',
-	          subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+	          title: '숙소 예약 그래프',
+	          subtitle: 'Reservation, House',
 	        }
 	      };
 
@@ -329,7 +320,7 @@ function ReportToExcel(){
 	        ]);
 
 	        var options = {
-	          title: '가입비율',
+	          title: '예약비율',
 	          pieSliceText: 'label'
 	        };
 

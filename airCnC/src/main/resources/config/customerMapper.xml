@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="createEmailCheck" resultType="int" parameterType="String">
-		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{value}
+		SELECT COUNT(customer_email) FROM customer WHERE customer_email = #{customer_email}
 	</select>
 	
 	<select id="customerCheck" resultType="kg.air.cnc.customer.vo.CustomerVO" parameterType="String">
