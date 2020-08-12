@@ -83,6 +83,9 @@
 								<li class="item">
 										<p><a href="/cnc/logout.do">로그아웃</a></p>
 								</li>
+								<li class="item">
+										<p><a href="getCuponList.do">쿠폰함</a></p>
+								</li>
 							</c:when>
 							<c:otherwise>
 								<li class="item">
