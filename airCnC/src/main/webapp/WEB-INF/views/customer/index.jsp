@@ -58,6 +58,7 @@
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
+
 				</ul>
 			</div>
 		</div>
@@ -78,11 +79,17 @@
 							</p>
 						</li>
 						<li class="item"><a href="myHouse.do">호스트</a></li>
+						<li class="item">
+							<p>
+								<a href="/cnc/chat.do">내정보</a>
+							</p>
+						</li>
 						<c:choose>
 							<c:when test="${social_type eq null}">
 								<li class="item">
 										<p><a href="/cnc/logout.do">로그아웃</a></p>
 								</li>
+								
 							</c:when>
 							<c:otherwise>
 								<li class="item">
