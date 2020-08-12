@@ -564,56 +564,11 @@
 		});
 	</script>
 
-	<script language="javascript">
+	<script>
 		window.onload = function () {
-			if('${location}'==="서울") {
-				var loc = document.getElementById("seo");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="경기") {
-				var loc = document.getElementById("gye");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="강원") {
-				var loc = document.getElementById("gw");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="충북") {
-				var loc = document.getElementById("cb");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="충남") {
-				var loc = document.getElementById("cn");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="경북") {
-				var loc = document.getElementById("gb");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="경남") {
-				var loc = document.getElementById("gn");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="전남") {
-				var loc = document.getElementById("jn");
-				loc.selected = true;
-				chgOptions();
-			}
-			else if('${location}'==="전북") {
-				var loc = document.getElementById("jb");
-				loc.selected = true;
-				chgOptions();
-			}
-			let minLim = new Date().toISOString().substring(0, 10);
-			document.getElementById('checkIn').value = minLim;
-			document.getElementById('checkIn').min = minLim;
+			let minlim = new Date().toISOString().substring(0, 10);
+			document.getElementById('checkIn').value = minlim;
+			document.getElementById('checkIn').min = minlim;
 		};
 	</script>
 	

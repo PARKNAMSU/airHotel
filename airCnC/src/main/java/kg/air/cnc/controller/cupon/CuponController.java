@@ -19,4 +19,10 @@ public class CuponController {
 		return mav;
 	}
 	
+	//@RequestMapping(value="getCuponList.do")
+	public ModelAndView getCuponList(ModelAndView mav, HttpSession session) {
+		mav.addObject("cuponList", cuponService.getCuponList());
+		return mav;
+	}
+	
 }

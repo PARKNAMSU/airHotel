@@ -55,11 +55,11 @@
 					</select> <select id="select_menu" name="detail">
 						<option>지역 선택</option>
 					</select> <label class="searchConditions">체크인 <input type="date"
-						id="checkIn" name="checkIn" value="" min="" max="" /></label> <label
+						id="checkIn" name="checkIn" value="${checkInDate }" min="" max="" /></label> <label
 						class="searchConditions">체크아웃 <input type="date"
-						id="checkOut" name="checkOut" min="" max="" onclick="checkout()" />
+						id="checkOut" name="checkOut" value="${checkOutDate }" min="" max="" onclick="checkout()" />
 					</label> <label class="searchConditions">최소 인원 <input type="number"
-						id="people" name="people" value="1" onclick="peopleCheck()"/></label>
+						id="people" name="people" value="${person }" onclick="peopleCheck()"/></label>
 					<button class="btn1" type="submit" value="검색" onclick="nullCheck()">검색</button>
 					<button class="btn2" id="button">상세검색</button>
 				</div>
@@ -132,10 +132,10 @@
 				<form action="reservationHouse.do" method="post" id="${house.house_seq}">
 				<input type="hidden" name="house_seq" value="${house.house_seq}"/>
 				<input type="hidden" name="accessType" value="notres" />
-				<input type="hidden" name="check_in" value="documnet.getElementById('checkIn').value;">
-				<input type="hidden" name="check_out" value="document.getElementById('checkOut').value;">
-				<input type="hidden" name="house_person" value="document.getElementById('people').value;">
-					<div class="houseList" style="color: black" onclick="document.getElementById(${house.house_seq}).submit();">
+				<input type="hidden" name="check_in" value="">
+				<input type="hidden" name="check_out" value="">
+				<input type="hidden" name="house_person" value="">
+					<div class="houseList" style="color: black" onclick="sub(${house.house_seq})">
 						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
 							${house.house_seq }<br>
 							${house.house_name }<br> 
@@ -265,8 +265,10 @@
 				chgOptions();
 			}
 			let minLim = new Date().toISOString().substring(0, 10);
-			document.getElementById('checkIn').value = minLim;
+			<!--document.getElementById('checkIn').value = minLim;-->
 			document.getElementById('checkIn').min = minLim;
+			if('${checkIn}'==="") document.getElementById('checkIn').value = minLim;
+			if('${person}'==="") document.getElementById('people').value = 1;
 		};
 	</script>
 
@@ -415,6 +417,27 @@
 			let peo = document.getElementById("people");
 			if(peo.value<1) peo.value = 1;
 			if(peo.value>10) peo.value = 10;
+		}
+	</script>
+	
+	<script>
+		var sub = function(seq) {
+			let inn = document.getElementById("checkIn").value;
+			let outt = document.getElementById("checkOut").value;
+			let perr = document.getElementById("people").value;
+			let size = document.getElementsByName("check_in").length;
+			let size1 = document.getElementsByName("check_out").length;
+			let size2 = document.getElementsByName("house_person").length;
+		    for(var i = 0; i < size; i++){
+		    	document.getElementsByName("check_in")[i].value = inn;
+		    }
+		    for(var i = 0; i < size1; i++){
+		    	document.getElementsByName("check_out")[i].value = outt;
+		    }
+		    for(var i = 0; i < size2; i++){
+		    	document.getElementsByName("house_person")[i].value = perr;
+		    }
+			document.getElementById(seq).submit();
 		}
 	</script>
 </body>

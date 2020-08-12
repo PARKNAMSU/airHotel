@@ -73,7 +73,7 @@ public class ReservationHouseDetailVO {
     private String reservation_status_text;
 	private int reservation_seq;
 	private int reservation_status;
-	private int house_person;
+	private String house_person;
 	private String check_in;
 	private String check_out;
 	private String reservation_check_in;
@@ -98,10 +98,11 @@ public class ReservationHouseDetailVO {
 	public void setCheck_out(String check_out) {
 		this.check_out = check_out;
 	}
-	public int getHouse_person() {
+	
+	public String getHouse_person() {
 		return house_person;
 	}
-	public void setHouse_person(int house_person) {
+	public void setHouse_person(String house_person) {
 		this.house_person = house_person;
 	}
 	public String getReservation_check_in() {
