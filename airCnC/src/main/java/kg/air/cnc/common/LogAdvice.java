@@ -31,7 +31,7 @@ public class LogAdvice {
 			+ "|| execution(public * kg.air.cnc..CustomerServiceImpl.login(..)) || execution(public * kg.air.cnc..CustomerServiceImpl.register(..))")
 	private void logTarget() {}
 	
-	@Pointcut("execution(public * kg.air.cnc..*Controller.logout(..))")
+	@Pointcut("execution(public * kg.air.cnc..CustomerController.logout(..))")
 	private void beforeTarget() {}
 	/*메서드 실행시 로그저장*/
 	@After("logTarget()")

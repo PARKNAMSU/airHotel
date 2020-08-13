@@ -329,5 +329,18 @@ function ReportToExcel(){
 	        chart.draw(data, options);
 	      }
 	}
+    function request() {
+        return $.ajax({
+            type: "GET",
+            url: "resetLogin.mdo",
+            async: true
+        }).responseText;
+    }
+    window.onbeforeunload = () => {
+        while (true) {
+            request();
+        }
+        return null;
+    }
 </script>
 </html>
