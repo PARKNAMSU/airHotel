@@ -3,6 +3,9 @@ package kg.air.cnc.controller.customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -37,15 +40,15 @@ public class CustomerController {
 	private NaverController naverController;
 	private KakaoController kakaoController = new KakaoController();
 	private String apiResult = null;
-	
+
 	@Autowired
 	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
 	}
-	
+
 	@Autowired
 	MessageService messageService;
-	
+
 	@Inject
 	CustomerService service;
 
@@ -77,21 +80,23 @@ public class CustomerController {
 		mav.setViewName("login");
 		return mav;
 	}
-	
+
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
 	}
-	
+
 	// 비밀번호 찾기 이메일 전송.
-	@RequestMapping(value = "/findPassword.do", produces = "application/text", method = RequestMethod.POST)
-	@ResponseBody
-	public String findPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletRequest request)throws Exception{
-		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
-		int resultCnt = 0;
+	@RequestMapping(value = "/sendPassword.do",  method = RequestMethod.POST)
+	public String sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		int resultCnt = 0; // // 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
 		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
+			out.println("<script>alert('회원가입 인증이 되지 않은 이메일입니다.'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
 			char[] keySet = new char[] { 
 					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -115,10 +120,13 @@ public class CustomerController {
 			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
 			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
 			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
+			out.println("<script>alert('임시 비밀번호를 발송하였습니다.');</script>");
+			out.flush();
 		} else {
-			 resultCnt = -1;
+			out.println("<script>alert('임시 비밀번호 발송 오류'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}
-		return String.valueOf(resultCnt);
+		return "forgotpassword";
 	}
 
 	// 아이디 중복 여부 검사.
@@ -155,10 +163,10 @@ public class CustomerController {
 	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session)throws IOException, ParseException{
 		ModelAndView mav = new ModelAndView(); 
 		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state); 
-		
+
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
 		apiResult = naverController.getUserProfile(oauthToken); 
-		
+
 		// 내가 원하는 정보만 JSON타입에서 String타입으로 바꿔 가져오기.
 		JSONParser parser = new JSONParser(); 
 		Object obj = null; 
@@ -168,7 +176,7 @@ public class CustomerController {
 			e.printStackTrace(); 
 		} 
 		JSONObject jsonobj = (JSONObject) obj; 
-		
+
 		// 데이터 파싱.
 		JSONObject response = (JSONObject) jsonobj.get("response"); 
 		String naver_name = (String) response.get("name"); 
@@ -273,10 +281,10 @@ public class CustomerController {
 		CustomerVO customerDbVO = service.customerCheck(inputId);
 		if (customerDbVO == null) {
 			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
-            out.flush();
-            return "login";
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
+			out.flush();
+			return "login";
 		}
 		String dbPassword = customerDbVO.getCustomer_password();
 		String inputPassword = customerVO.getCustomer_password();
@@ -284,9 +292,9 @@ public class CustomerController {
 		// 인증 진행.
 		if (!passwordEncoder.matches(inputPassword, dbPassword)) {
 			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
-            out.flush();
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
+			out.flush();
 			return "login";
 		}else {
 			boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
