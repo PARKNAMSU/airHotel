@@ -101,7 +101,7 @@
 														if(getData[idx].cupon_number===num.value){
 															justOne++;
 															let price = document.getElementById("totalPrice");
-															finalPrice = ${totalPrice}*getData[idx].cupon_discount_rate-getData[idx].cupon_discount_money;
+															finalPrice = Math.ceil(${totalPrice}*((100-getData[idx].cupon_discount_rate)/100)-getData[idx].cupon_discount_money);
 															if(finalPrice<0) finalPrice = 0;
 															price.innerText = finalPrice;
 															console.log("쿠폰이 적용되었습니다.");
