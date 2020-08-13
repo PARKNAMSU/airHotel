@@ -127,13 +127,6 @@
 		})
 	</script>
 	</c:if>
-	<script type="text/javascript">
-		$(function(){
-			$("#myinfo").click(function(){
-				$("#mydiv").fadeToggle("slow");
-			})
-		})
-	</script>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
