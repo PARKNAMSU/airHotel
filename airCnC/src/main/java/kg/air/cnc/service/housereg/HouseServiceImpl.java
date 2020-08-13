@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kg.air.cnc.dao.housereg.HouseDAO;
-import kg.air.cnc.vo.HouseVO;
 import kg.air.cnc.vo.House_InfoVO;
 @Service("houseService")
 public class HouseServiceImpl implements HouseService {
@@ -37,6 +36,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public void insertHouse(House_InfoVO vo) {
 		houseDao.insertHouse(vo);
+	}
+
+	@Override
+	public void updateHouse_housedetail(int house_seq) {
+		houseDao.updateHouse_housedetail(house_seq);
 	}
 
 }

@@ -66,7 +66,11 @@ public class HouseController {
 		sessionStatus.setComplete();
 		return "redirect:/list.do";
 	}
-	
+	@RequestMapping(value = "/totestpage.do")
+	public String totestpage() {
+		//return "hostHouse_resume";
+		return "hostHouse_ReviseList";
+	}
 	
 	
 
@@ -95,6 +99,12 @@ public class HouseController {
 		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
 		return "3bathcount";
 	}
+//	@RequestMapping(value = "/update_2housedetail.do")
+//	public String update_2housedetail(@ModelAttribute("house") House_InfoVO house, Model model) {
+//		houseService.updateHouse_housedetail(2);
+//	
+//	}
+	
 	
 	@RequestMapping(value = "/3bathcount.do")
 	public String bathcount(@ModelAttribute("house") House_InfoVO house, Model model) {

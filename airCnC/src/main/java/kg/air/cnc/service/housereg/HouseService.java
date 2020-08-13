@@ -11,4 +11,5 @@ public interface HouseService {
 	public void insertProduct(House_InfoVO vo);
 	
 	public void insertHouse(House_InfoVO vo);
+	public void updateHouse_housedetail(int house_seq);
 }

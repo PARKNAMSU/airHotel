@@ -32,4 +32,9 @@ public class HouseDAOImpl implements HouseDAO {
 		sqlSessionTemplate.insert("product.insertHouse", vo);
 	}
 
+	@Override
+	public void updateHouse_housedetail(int house_seq) {
+		sqlSessionTemplate.update("product.updateHouse_housedetail", house_seq);
+	}
+
 }
