@@ -3,9 +3,6 @@ package kg.air.cnc.controller.customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -139,7 +136,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response, CustomerVO vo)throws Exception {
 		ModelAndView mav = new ModelAndView();
 		// 결과값을 node에 보여줌.
 		JsonNode node = kakaoController.getAccessToken(code);
@@ -148,10 +145,14 @@ public class CustomerController {
 		// 사용자의 정보.
 		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
 		String kemail = null;
+		String kname = null;
+		String kimage = null;
 		// 사용자 정보를 카카오에서 가져오기.
-		// JsonNode properties = userInfo.path("properties");
+		JsonNode properties = userInfo.path("properties");
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
 		kemail = kakaoAccount.path("email").asText();
+		kname = properties.path("nickname").asText();
+		kimage = properties.path("profile_image").asText();
 		session.setAttribute("login_session", kemail);
 		session.setAttribute("social_type", "kakao");
 		mav.setViewName("index");
@@ -341,7 +342,6 @@ public class CustomerController {
 
 	@RequestMapping(value = "/kakaologout.do", produces = "application/json")
 	public String kakaoLogout(HttpSession session)throws Exception{
-		// KakaoRestApi 객체 선언.
 		JsonNode jsonToken = kakaoController.Logout(session.getAttribute("login_session").toString());
 		session.invalidate();
 		return "index";
