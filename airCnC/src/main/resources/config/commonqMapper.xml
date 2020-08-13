@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commonqMapper">
+
+	<select id="selectCommonQueList" resultType="kg.air.cnc.vo.CommonQueVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, commonq_idx, commonq_title, commonq_content, commonq_type, commonq_regdate
+            from (select * from common_que order by commonq_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	<select id="selectCommonQueListType" resultType="kg.air.cnc.vo.CommonQueVO" >
+    <![CDATA[
+        SELECT
+            commonq_idx, commonq_title, commonq_content, commonq_type, commonq_regdate
+        FROM
+        	common_que
+        WHERE
+        	commonq_type=#{commonq_type} 
+
+    ]]>
+	</select>
+	<select id="countCommonQueList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            common_que
+    ]]>
+	</select>
+
+	<insert id="insertCommonQue" parameterType="kg.air.cnc.vo.CommonQueVO">
+		<![CDATA[
+		INSERT INTO common_que(commonq_idx, commonq_title, commonq_content, commonq_type)
+		VALUES((select nvl(max(commonq_idx), 0)+1 from common_que), #{commonq_title}, 
+		#{commonq_content}, #{commonq_type})
+		]]>
+	</insert>
+	
+	<select id="getCommonQueListAdmin" resultType="kg.air.cnc.vo.CommonQueVO" >
+    <![CDATA[
+        SELECT
+            *
+        FROM
+            (select rownum rnum, commonq_idx, commonq_title, commonq_content, commonq_type, commonq_regdate
+            from (select * from	 common_que order by commonq_idx desc))
+        WHERE
+        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+
+    ]]>
+	</select>
+	
+	<select id="detailCommonQue" resultType="kg.air.cnc.vo.CommonQueVO">
+	 <![CDATA[
+		SELECT
+			commonq_idx, commonq_title, commonq_content, commonq_type, commonq_regdate
+		FROM
+			common_que
+		WHERE
+			commonq_idx=#{commonq_idx}
+	]]>
+	</select>
+	
+	<update id="updateCommonQue">
+		<![CDATA[
+		UPDATE 
+			common_que 
+		SET
+			commonq_title = #{commonq_title},
+			commonq_content = #{commonq_content},
+			commonq_type = #{commonq_type}
+		WHERE 
+			commonq_idx = #{commonq_idx}
+		]]>
+	</update>
+	
+	<delete id="deleteCommonQue">
+		<![CDATA[
+		DELETE FROM 
+			common_que
+		WHERE
+			commonq_idx = #{commonq_idx}
+		]]>
+	</delete>
+	
+
+</mapper>
