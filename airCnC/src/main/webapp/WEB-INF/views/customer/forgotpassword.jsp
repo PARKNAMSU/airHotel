@@ -20,7 +20,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>로그인</title>
 <script type="text/javascript">
-//회원가입 버튼.
 $(document).on("click","#sendPasswordBtn",function() {
 	var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사.
 	if ($("#customerEmail").val() == "" || $("#customerEmail").val() == null) {

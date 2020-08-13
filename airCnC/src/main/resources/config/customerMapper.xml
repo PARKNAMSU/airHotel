@@ -54,4 +54,8 @@
 	<update id="changePassword">
 		UPDATE customer SET customer_password = #{customer_password} WHERE customer_email = #{customer_email}
 	</update>
+	
+	<select id="blacklistEmailCheck" resultType="int" parameterType="kg.air.cnc.vo.CustomerVO">
+		SELECT COUNT(black_email) FROM blacklist WHERE black_email = #{customer_email}
+	</select>
 </mapper>

@@ -131,8 +131,7 @@ public class CustomerController {
 	@ResponseBody
 	public String idCheck(CustomerVO vo)throws Exception{
 		int result = service.idCheck(vo);
-		String result1 = String.valueOf(result);
-		return result1;
+		return String.valueOf(result);
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
@@ -144,15 +143,32 @@ public class CustomerController {
 		JsonNode accessToken = node.get("access_token");
 		// 사용자의 정보.
 		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
+		String kid = null;
 		String kemail = null;
 		String kname = null;
 		String kimage = null;
 		// 사용자 정보를 카카오에서 가져오기.
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
+		kid = userInfo.path("id").asText();
 		kemail = kakaoAccount.path("email").asText();
 		kname = properties.path("nickname").asText();
 		kimage = properties.path("profile_image").asText();
+		vo.setCustomer_id(kemail);
+		vo.setCustomer_password("none");
+		vo.setCustomer_name(kname);
+		if (kemail.substring(0, 3).trim().equals("010")) {
+			vo.setCustomer_phone(kemail);
+		}else {
+			vo.setCustomer_phone("none");
+		}
+		vo.setCustomer_email(kid);
+		vo.setCustomer_image(kimage);
+		if (vo.getCustomer_image().equals("")) {
+			vo.setCustomer_image("none");
+		}
+		vo.setCustomer_key("kakao");
+		service.register(vo);
 		session.setAttribute("login_session", kemail);
 		session.setAttribute("social_type", "kakao");
 		mav.setViewName("index");
@@ -190,38 +206,42 @@ public class CustomerController {
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean createEmailCheck(@RequestParam(value = "customer_email" ,required = false)String customer_email, HttpServletRequest request)throws Exception {
+	public String createEmailCheck(@RequestParam(value = "customer_email" ,required = false)String customer_email, CustomerVO vo, HttpServletRequest request)throws Exception {
 		int cnt = -1;
-		System.out.println(customer_email);
 		cnt = service.createEmailCheck(customer_email); // 이메일 중복 체크.
-		System.out.println(cnt); // 1이면 중복 이메일 있음. 0이면 중복 없음.
-
-		// 이메일 인증.
-		char[] keySet = new char[] { 
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-				'U', 'V', 'W', 'X', 'Y', 'Z',
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-				'u', 'v', 'w', 'x', 'y', 'z'};
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0 ; i < 6 ; i++) {
-			int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
-			sb.append(keySet[idx]);
+		
+		if (service.blacklistEmailCheck(vo) == 1) {
+			return "blacklist";
+		}else if(service.blacklistEmailCheck(vo) == 0){
+			// 이메일 인증.
+			char[] keySet = new char[] { 
+					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+					'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+					'U', 'V', 'W', 'X', 'Y', 'Z',
+					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+					'u', 'v', 'w', 'x', 'y', 'z'};
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0 ; i < 6 ; i++) {
+				int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
+				sb.append(keySet[idx]);
+			}
+			HttpSession session = request.getSession(true);
+			String authCode = String.valueOf(sb); // 랜덤 인증 코드.
+			session.setAttribute("authCode", authCode);
+			String subject = "[AirCnC] 회원가입 인증 코드 발급 안내 입니다.";
+			String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
+			//		if(cnt == 0) {
+			mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
+			return "complate";
+			//		}
+			//		else {
+			//			return false;
+			//		}
+		}else {
+			return "fail";
 		}
-		HttpSession session = request.getSession(true);
-		String authCode = String.valueOf(sb); // 랜덤 인증 코드.
-		session.setAttribute("authCode", authCode);
-		String subject = "[AirCnC] 회원가입 인증 코드 발급 안내 입니다.";
-		String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
-		//		if(cnt == 0) {
-		mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
-		return true;
-		//		}
-		//		else {
-		//			return false;
-		//		}
 	}
 
 	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.POST)
@@ -245,7 +265,7 @@ public class CustomerController {
 		if (vo.getCustomer_image().equals("")) {
 			vo.setCustomer_image("none");
 		}
-		int result = service.idCheck(vo);
+		int result = service.blacklistEmailCheck(vo);
 		try {
 			if (result == 1) {
 				return "SignUp"; 
@@ -253,7 +273,7 @@ public class CustomerController {
 				String inputPass = vo.getCustomer_password();
 				String pwd = passwordEncoder.encode(inputPass);
 				vo.setCustomer_password(pwd);
-				vo.setCustomer_key("Y");
+				vo.setCustomer_key("Y"); 
 				service.register(vo);
 				messageVO.setMessage_from_id("admin");
 				messageVO.setMessage_to_id(vo.getCustomer_id());
@@ -267,7 +287,7 @@ public class CustomerController {
 		return "login";
 	}
 
-	// 로그인 처리
+	// 로그인 처리.
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
 	public String loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response)throws Exception{
 

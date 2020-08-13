@@ -58,4 +58,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public int changePassword(CustomerVO customerVO) throws Exception {
 		return dao.changePassword(customerVO);
 	}
+
+	@Override
+	public int blacklistEmailCheck(CustomerVO vo) throws Exception {
+		return dao.blacklistEmailCheck(vo);
+	}
 }
