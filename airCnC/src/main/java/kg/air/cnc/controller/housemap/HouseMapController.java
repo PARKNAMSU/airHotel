@@ -17,9 +17,6 @@ public class HouseMapController {
 	@Autowired
 	private HouseMapServiceImpl houseMapService;
 	
-	// getHouseList 할 때 api연동해서 좌표 찍어주는것 , 지역 값 가지고 넘어가는것
-	// getHouse 할 때 api 마찬가지
-	
 	@RequestMapping(value="/getHouseList.do")
 	public ModelAndView getHouseList(String location, ModelAndView mav) {
 		mav.addObject("houseList",houseMapService.getHouseList(location));

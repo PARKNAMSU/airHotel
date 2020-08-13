@@ -3,20 +3,11 @@ package kg.air.cnc.vo;
 import java.util.Date;
 
 public class CuponVO {
-	private int cupon_seq;
 	private String cupon_number;
 	private int cupon_discount_money;
 	private int cupon_discount_rate;
 	private Date cupon_limit;
 	private String cupon_customer_id;
-
-	public int getCupon_seq() {
-		return cupon_seq;
-	}
-
-	public void setCupon_seq(int cupon_seq) {
-		this.cupon_seq = cupon_seq;
-	}
 
 	public String getCupon_number() {
 		return cupon_number;
@@ -60,7 +51,7 @@ public class CuponVO {
 
 	@Override
 	public String toString() {
-		return "CuponVO [cupon_seq=" + cupon_seq + ", cupon_number=" + cupon_number + ", cupon_discount_money="
+		return "CuponVO [cupon_number=" + cupon_number + ", cupon_discount_money="
 				+ cupon_discount_money + ", cupon_discount_rate=" + cupon_discount_rate + ", cupon_limit=" + cupon_limit
 				+ ", cupon_customer_id=" + cupon_customer_id + "]";
 	}

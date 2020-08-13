@@ -30,99 +30,97 @@ public class HouseMapServiceImpl implements HouseMapService{
 
 	@Override
 	public List<House_InfoVO> getDetail(Map<String, String> info){
-		if(info.get("location").contains("Áö¿ª")) {
-			System.out.println("ÀüÃ¼Áö¿ª ¼±ÅÃ");
+		if(info.get("location").contains("ì§€ì—­")) {
+			System.out.println("ì „ì²´ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.getAll(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { //»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤
-			System.out.println("»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤");
+		else if(!info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { //ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •
+			System.out.println("ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •");
 			return houseMapDAO.getDetailWithBoth(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ");
+		else if(!info.get("detail").contains("ì„ íƒ") && info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.getDetailWithDetail(info);
 		}
-		else if(info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx");
+		else if(info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx");
 			return houseMapDAO.getDetailWithCheckOut(info);
 		}
-		else {	// µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀº »óÅÂ
-			System.out.println("µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀ½");
+		else {	// ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•Šì€ ìƒíƒœ
+			System.out.println("ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•ŠìŒ");
 			return houseMapDAO.getDetail(info);
 		}
 	}
 	
 	@Override
-	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//»ó¼¼°Ë»ö¿¡¼­ ½ÇÇàµÇ´Â°Í
-		if(info.get("location").contains("Áö¿ª")) {
+	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//ìƒì„¸ê²€ìƒ‰ì—ì„œ ì‹¤í–‰ë˜ëŠ”ê²ƒ
+		if(info.get("location").contains("ì§€ì—­")) {
 			return houseMapDAO.getAllPrice(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { //»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤
-			System.out.println("»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤");
+		else if(!info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { //ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •
+			System.out.println("ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •");
 			return houseMapDAO.getDetailWithBothPrice(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ");
+		else if(!info.get("detail").contains("ì„ íƒ") && info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.getDetailWithDetailPrice(info);
 		}
-		else if(info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx");
+		else if(info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx");
 			return houseMapDAO.getDetailWithCheckOutPrice(info);
 		}
-		else {	// µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀº »óÅÂ
-			System.out.println("µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀ½");
+		else {	// ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•Šì€ ìƒíƒœ
+			System.out.println("ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•ŠìŒ");
 			return houseMapDAO.getPrice(info);
 		}
 	}
 
 	@Override
 	public List<House_InfoVO> searchIndex(Map<String, String> info) {
-		if(info.get("location").contains("Áö¿ª")) {
-			System.out.println("ÀüÃ¼Áö¿ª ¼±ÅÃ");
+		if(info.get("location").contains("ì§€ì—­")) {
+			System.out.println("ì „ì²´ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.searchIndexAll(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { //»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤
-			System.out.println("»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤");
+		else if(!info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { //ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •
+			System.out.println("ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •");
 			return houseMapDAO.searchIndexWithBoth(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ");
+		else if(!info.get("detail").contains("ì„ íƒ") && info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.searchIndexWithDetail(info);
 		}
-		else if(info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx");
+		else if(info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx");
 			return houseMapDAO.searchIndexWithCheckOut(info);
 		}
-		else {	// µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀº »óÅÂ
-			System.out.println("Å« Áö¿ª¸¸ ¼±ÅÃÇÔ");
+		else {	// ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•Šì€ ìƒíƒœ
+			System.out.println("í° ì§€ì—­ë§Œ ì„ íƒí•¨");
 			return houseMapDAO.searchIndex(info);
 		}
 	}
 
 	@Override
 	public List<Map<String, Integer>> searchIndexPrice(Map<String, String> info) {
-		if(info.get("location").contains("Áö¿ª")) {
-			System.out.println("ÀüÃ¼Áö¿ª ¼±ÅÃ");
+		if(info.get("location").contains("ì§€ì—­")) {
+			System.out.println("ì „ì²´ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.searchIndexAllPrice(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { //»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤
-			System.out.println("»ó¼¼Áö¿ª°ú Ã¼Å©¾Æ¿ô µÑ ´Ù ¼³Á¤");
+		else if(!info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { //ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •
+			System.out.println("ìƒì„¸ì§€ì—­ê³¼ ì²´í¬ì•„ì›ƒ ë‘˜ ë‹¤ ì„¤ì •");
 			return houseMapDAO.searchIndexWithBothPrice(info);
 		}
-		else if(!info.get("detail").contains("¼±ÅÃ") && info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃ x »ó¼¼Áö¿ª ¼±ÅÃ");
+		else if(!info.get("detail").contains("ì„ íƒ") && info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒ x ìƒì„¸ì§€ì—­ ì„ íƒ");
 			return houseMapDAO.searchIndexWithDetailPrice(info);
 		}
-		else if(info.get("detail").contains("¼±ÅÃ") && !info.get("checkOut").equals("")) { // Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx
-			System.out.println("Ã¼Å©ÀÎ Ã¼Å©¾Æ¿ô ¼±ÅÃÇÏ°í »ó¼¼Áö¿ª ¼±ÅÃx");
+		else if(info.get("detail").contains("ì„ íƒ") && !info.get("checkOut").equals("")) { // ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx
+			System.out.println("ì²´í¬ì¸ ì²´í¬ì•„ì›ƒ ì„ íƒí•˜ê³  ìƒì„¸ì§€ì—­ ì„ íƒx");
 			return houseMapDAO.searchIndexWithCheckOutPrice(info);
 		}
-		else {	// µÑ ´Ù ¼³Á¤ÇÏÁö ¾ÊÀº »óÅÂ
-			System.out.println("Å« Áö¿ª¸¸ ¼±ÅÃÇÔ");
+		else {	// ë‘˜ ë‹¤ ì„¤ì •í•˜ì§€ ì•Šì€ ìƒíƒœ
+			System.out.println("í° ì§€ì—­ë§Œ ì„ íƒí•¨");
 			return houseMapDAO.searchIndexPrice(info);
 		}
 	}
-	
-	
 
 }
