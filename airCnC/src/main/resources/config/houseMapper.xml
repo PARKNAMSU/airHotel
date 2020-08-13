@@ -174,4 +174,106 @@
 	#{house_host_id}
 	)
 	</insert>
+	
+	<select id="listHouse" resultType="kg.air.cnc.vo.House_InfoVO" >
+    <![CDATA[
+        SELECT
+        	house_seq, house_name, house_regdate
+        FROM
+            house_info
+        WHERE
+        	house_host_id = #{house_host_id}
+        order by house_seq	
+
+    ]]>
+	</select>
+	
+	
+	<select id="detailHouse" resultType="kg.air.cnc.vo.House_InfoVO">
+	select
+		house_maxperson,
+		house_bedroom_amount,
+		house_bed_amount,
+		house_bed_type_single,
+		house_bed_type_double,
+		house_bed_type_queen,
+		house_bathroom_amount,
+		house_bathroom_type,
+		house_location,
+		house_location_postnum,
+		house_location_fulladdress,
+		house_location_detailaddress,
+		house_location_sido,
+		house_location_gugun,
+		house_xlocation,
+		house_ylocation,
+		house_defaultsetting,
+		house_default_tv,
+		house_default_wifi,
+		house_default_heater,
+		house_default_cooler,
+		house_default_iron,
+		house_default_fireditecter,
+		house_default_coditecter,
+		house_default_aidkit,
+		house_default_firesofwa,
+		house_default_bedrock,
+		house_default_livingroom_type,
+		house_default_kitchen,
+		house_default_laundry_washer,
+		house_default_laundry_dryer,
+		house_default_parking,
+		house_default_gym,
+		house_default_pool,
+		house_desc1,
+		house_desc2,
+		house_desc3,
+		house_desc4,
+		house_desc5,
+		house_photourl,
+		house_name,
+		house_price_default,
+		house_price_max,
+		house_checkin_time,
+		house_checkout_time,
+		house_theme_bbq,
+		house_theme_pet,
+		house_theme_party,
+		house_theme_pool,
+		house_theme_farm,
+		house_condition_childok,
+		house_condition_babyok,
+		house_condition_smokeok,
+		house_restrict_stairs,
+		house_restrict_noise,
+		house_restrict_pet,
+		house_restrict_cantpark,
+		house_restrict_commonspace,
+		house_restrict_facility,
+		house_restrict_cctv,
+		house_restrict_weapon,
+		house_restrict_beast,
+		house_host_id
+	from 
+		house_info
+	where 
+		house_seq=#{house_seq}
+	</select>
+	
+	<update id="updateHouse_housedetail">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_maxperson = #{house_maxperson},
+			house_bedroom_amount = #{house_bedroom_amount},
+			house_bed_amount = #{house_bed_amount},
+			house_bed_type_single = #{house_bed_type_single},
+			house_bed_type_double = #{house_bed_type_double}, 
+			house_bed_type_queen = #{house_bed_type_queen}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
 </mapper>

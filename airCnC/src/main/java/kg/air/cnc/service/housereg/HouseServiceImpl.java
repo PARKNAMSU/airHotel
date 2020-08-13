@@ -37,10 +37,21 @@ public class HouseServiceImpl implements HouseService {
 	public void insertHouse(House_InfoVO vo) {
 		houseDao.insertHouse(vo);
 	}
+	
+	@Override
+	public List<House_InfoVO> listHouse() {
+		return houseDao.listHouse();
+	}
 
 	@Override
-	public void updateHouse_housedetail(int house_seq) {
-		houseDao.updateHouse_housedetail(house_seq);
+	public void updateHouse_housedetail(House_InfoVO vo) {
+		houseDao.updateHouse_housedetail(vo);
+	}
+
+	@Override
+	public House_InfoVO detailHouse(int house_seq) {
+		House_InfoVO houseVO = houseDao.detailHouse(house_seq);
+		return houseVO;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,35 +76,74 @@ public class HouseController {
 	
 
 	@RequestMapping(value = "/hostregisterindex.do")
-	public String mainPage(@ModelAttribute("house") House_InfoVO house, HttpSession session) {
-		//HttpSession session
-		//HttpSession session = request.getSession();
+	public String mainPage(@ModelAttribute("house") House_InfoVO house, Model model, HttpSession session) {
 		String hostId = (String)session.getAttribute("login_session");
 		house.setHouse_host_id(hostId);
+		System.out.println(house.getHouse_host_id());
+		
+		house.setHouse_seq(26);
 		System.out.println("호스트 아이디 : " + hostId);
+		System.out.println("수정하려는 집 pk : " + house.getHouse_seq());
 		return "1newhouse";
 	}
-	@RequestMapping(value = "/1newhouse.do")
+	
+//	@RequestMapping(value = "/house_revise.do")
+//	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
+//			, Model model) {
+//		String host_house_seq = (String) session.getAttribute("house_seq");
+//		int house_seq = Integer.parseInt(host_house_seq);
+//		house.setHouse_seq(house_seq);
+//		model.addAttribute("detail", houseService.detailHouse(house_seq));
+//		return "hostHouse_ReviseList";
+//	}
+	
+	@RequestMapping(value = "/1newhouse.do")//여기는 등록만 하도록 됨
 	public String newhouse(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println("newhouse : " + house.getNewhouse());
 		if(house.getNewhouse().equals("new1")) {
-			logger.info(house.toString());
 			return "2housedetail";
+			
+		} else if(house.getNewhouse().equals("new2")) {
+			int house_seq = house.getHouse_seq();
+			model.addAttribute("detail", houseService.detailHouse(house_seq));
+			return "hostHouse_ReviseList";
 		}
 		//숙소 등록중, 등록했던 숙소는 new2, new3로 조건부여
 		return null;
 	}
+	
 	@RequestMapping(value = "/2housedetail.do")
 	public String housedetail(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
 		return "3bathcount";
 	}
-//	@RequestMapping(value = "/update_2housedetail.do")
-//	public String update_2housedetail(@ModelAttribute("house") House_InfoVO house, Model model) {
-//		houseService.updateHouse_housedetail(2);
-//	
-//	}
+	@RequestMapping(value = "/update_2housedetailopen.do")
+	public String update_2housedetailopen(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("2housedetail 수정 페이지로 이동");
+		return "2housedetail_update";
+	}
+	
+	@RequestMapping(value = "/update_2housedetailwork.do")
+	public String update_2housedetailwork(@ModelAttribute("house") House_InfoVO house, Model model) {
+		houseService.updateHouse_housedetail(house);
+		System.out.println("2housedetail 수정완료");
+		return "forward:/1newhouse.do";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value = "/3bathcount.do")

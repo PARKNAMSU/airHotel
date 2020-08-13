@@ -48,14 +48,10 @@
 					</div>
 					<div class="hosting">
 						<form:radiobutton path="newhouse" value="new2" />
-						<span class="up">숙소 등록중</span> 
+						<span class="up">등록한 숙소</span> 
 						<img src="${pageContext.request.contextPath}/resources/images/host/house1.png" />
 					</div>
-					<div class="hosted">
-						<form:radiobutton path="newhouse" value="new3" /> 
-						<span class="up">등록했던 숙소</span> 
-						<img src="${pageContext.request.contextPath}/resources/images/host/house1.png" />
-					</div>
+					
 				</div>
 				<div class="button" style="float: right;">
 				 	<a href="#" onclick="newHouseSubmit();">next</a>

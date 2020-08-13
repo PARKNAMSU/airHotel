@@ -30,11 +30,23 @@ public class HouseDAOImpl implements HouseDAO {
 	@Override
 	public void insertHouse(House_InfoVO vo) {
 		sqlSessionTemplate.insert("product.insertHouse", vo);
-	}
+	}//집등록
 
 	@Override
-	public void updateHouse_housedetail(int house_seq) {
-		sqlSessionTemplate.update("product.updateHouse_housedetail", house_seq);
-	}
+	public List<House_InfoVO> listHouse() {
+		return sqlSessionTemplate.selectList("product.listHouse");
+	}//자신이 등록한 집을 조회해서 리스트화 하여 거기서 radio 누르면 수정할 seq 받을수 있도록. 일단 안씀
+	
+	@Override
+	public void updateHouse_housedetail(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_housedetail", vo);
+	}//수정하기 위해 seq이용해서 집 세부정보 받아오기
+
+	@Override
+	public House_InfoVO detailHouse(int house_seq) {
+		return sqlSessionTemplate.selectOne("product.detailHouse", house_seq);
+	}//세부정보 받아온 detail이용해서 housedetail 수정
+
+	
 
 }
