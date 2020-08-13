@@ -790,4 +790,49 @@ svg {
   width: 60%;
   padding: 10px;
 }
+.srcachlocation {
+  text-transform: uppercase;
+  position: relative;
+  height: auto;
+  width: 100%;
+  background: #fff;
+  border-radius: 32px;
+}
+.srcachlocation label {
+  width: 90%;
+  font: size 14px;
+  columns: #ff5a5f;
+}
 
+.btn12 {
+  margin-top: 6px;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  right: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background: #ff5a5f;
+  border-radius: 32px;
+}
+/*
+.popular_destination_area {
+  padding-top: 140px;
+  padding-bottom: 120px;
+  background-color: white;
+  transition: all ease 0.5s;
+}
+.popular_destination_area1:hover {
+  transform: rotate(15deg);
+}
+*/
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}

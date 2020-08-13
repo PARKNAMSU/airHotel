@@ -1,6 +1,7 @@
 package kg.air.cnc.controller.cupon;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,9 +25,13 @@ public class CuponController {
 	@Autowired
 	private CuponServiceImpl cuponService;
 	
-	//@RequestMapping(value="makeCupon.do")
-	public ModelAndView makeCupon(HttpSession session, ModelAndView mav) {
-		//cuponService.makeCupon(session);
+	@RequestMapping(value="makeCupon.mdo")
+	public ModelAndView makeCupon(@RequestParam Map<String,String> info, HttpSession session, ModelAndView mav) {
+		String id = (String)session.getAttribute("login_session");
+		System.out.println(info.toString());
+		if(info.get("rate").equals("") && info.get("money").equals("")) System.out.println("아무것도 없습니다.");
+		else cuponService.makeCupon(info);
+		mav.setViewName("makeCupon");
 		return mav;
 	}
 	
@@ -52,6 +58,12 @@ public class CuponController {
 		String jsonStr = mapper.writeValueAsString(list);
 		System.out.println("jsonStr: "+jsonStr);
 		return jsonStr;
+	}
+	
+	@RequestMapping(value="makeCuponView.mdo")
+	public ModelAndView makeCuponView(ModelAndView mav) {
+		mav.setViewName("makeCupon");
+		return mav;
 	}
 	
 }

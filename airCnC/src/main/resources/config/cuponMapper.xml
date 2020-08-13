@@ -23,20 +23,14 @@
 		WHERE cupon_number=#{cuponNumber}
 	</delete>
 	
-	<select id="checkNumber" parameterType="String" resultType="kg.air.cnc.vo.CuponVO">
-		SELECT NVL(cupon_discount_money, 0), NVL(cupon_discount_rate, 1)
-		FROM cupon
-		WHERE cupon_number=#{cuponNumber}	
-	</select>
-	<!-- 
 	<insert id="checkRate" parameterType="map">
 		INSERT INTO cupon (cupon_number,cupon_discount_rate,cupon_limit, cupon_customer_id)
-		VALUES (#{number}, #{rate}, #{limit}, #{id})
+		VALUES (#{number}, #{rate}, sysdate+#{limit}, #{id})
 	</insert>
 	
 	<insert id="checkMoney" parameterType="map">
 		INSERT INTO cupon (cupon_number,cupon_discount_money,cupon_limit, cupon_customer_id)
-		VALUES (#{number}, #{money}, #{limit}, #{id})
+		VALUES (#{number}, #{money}, sysdate+#{limit}, #{id})
 	</insert>
-	-->
+
 </mapper>

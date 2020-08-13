@@ -121,7 +121,8 @@
     </div>
     <div class="searchOptions">
         <form action="searchIndex.do">
-           <div class="srcachlocation">
+           <div class="srcachlocation" style="vertical-align: middle;">
+               &nbsp;<label for="srcachlocation">지역 전체</label>
               <select id="select_type" name="location" style="border: none;">
                  <option id="first">지역 전체</option>
                  <option id="seo">서울</option>
@@ -133,15 +134,20 @@
                  <option id="gn">경남</option>
                  <option id="jb">전북</option>
                  <option id="jn">전남</option>
-              </select> <select id="select_menu" name="detail">
+              </select> 
+              <select id="select_menu" name="detail" style="border: none;">
                  <option>지역 선택</option>
-              </select> <label class="searchConditions">체크인 <input type="date"
-                 id="checkIn" name="checkIn" value="" min="" max="" /></label> <label
-                 class="searchConditions">체크아웃 <input type="date"
-                 id="checkOut" name="checkOut" min="" max="" onclick="checkout()" />
-              </label> <label class="searchConditions">최소 인원 <input type="number"
-                 id="people" name="people" value="1" onclick="peopleCheck()"/></label>
-              <button class="btn1" type="submit" value="검색">검색</button>
+              </select> 
+              <label class="searchConditions" style="padding-bottom: 15px;">체크인 
+                  <input type="date" id="checkIn" name="checkIn" value="" min="" max=""  style="border: none; margin-bottom: 15px;"/>
+                </label> 
+                 <label class="searchConditions">체크아웃 
+                     <input type="date"id="checkOut" name="checkOut" min="" max="" onclick="checkout()"  style="border: none;"/>
+                </label> 
+                <label class="searchConditions">최소 인원 <input type="number"
+                 id="people" name="people" value="1" onclick="peopleCheck()"/>
+                </label>
+              <button class="btn12" type="submit" value="검색" style="border-radius: 32px;">검색</button>
            </div>
         </form>
     </div>
