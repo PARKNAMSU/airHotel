@@ -99,7 +99,7 @@
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a><br><br>
-				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: ${item.customer_email }</b><br><br>
+				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
 				<b>예약날짜: ${item.reservation_regdate }</b><br><br>
 				<b>체크인 시간:${item.reservation_check_in }</b>&nbsp;&nbsp;<b>체크아웃 시간:${item.reservation_check_out }</b>
 				<hr>		
@@ -107,10 +107,11 @@
 			</c:forEach>
 		</div>
 		<div style="clear: both;"></div>
-
 	</div>
 	<div style="width:80%;margin-left:13.4%;font-family: 'Jua', sans-serif;margin-top:5%;margin-bottom:10%;">
-		<button onclick="reservationDetail(${house_seq})" class="btn btn-outline-danger" style="font-size:30px;">뒤로가기</button>&nbsp;&nbsp;<button class="btn btn-outline-danger" style="font-size:30px;" onclick="myHouseList()">숙소리스트</button>
+		<button onclick="reservationDetail(${house_seq})" class="btn btn-outline-danger" style="font-size:30px;">뒤로가기</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="myHouseList()">숙소리스트</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="ResListBefore(${house_seq})">이전 예약명단</button>
 	</div>
 	<footer>
 		<%@include file="../html/footer.jsp" %>
@@ -141,6 +142,27 @@ var reservationDetail = function(house_seq){
 }
 var myHouseList = function(){
 	location.href = "myHouse.do";
+}
+var ResListBefore = function(house_seq){
+	var form = document.createElement("form");
+	var input = new Array()
+	var names = ["house_seq"]
+	var values = [house_seq]
+	 window.open("" ,"beforeForm",
+     "toolbar=no, width=540, height=800, directories=no, status=no,scrollorbars=no, resizable=no");
+    form.action = "myHouseBeforeResList.do";
+    form.method = "post";
+    form.target = "beforeForm"
+    
+    for (var i = 0; i < 2; i++) {
+    	input[i] = document.createElement("input");
+        input[i].setAttribute("type", "hidden");
+        input[i].setAttribute('name', names[i]);
+        input[i].setAttribute("value", values[i]);
+        form.appendChild(input[i]);
+    }
+    document.body.appendChild(form);
+    form.submit();
 }
 </script>
 </html>

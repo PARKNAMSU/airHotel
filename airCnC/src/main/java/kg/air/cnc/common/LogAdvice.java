@@ -115,6 +115,7 @@ public class LogAdvice {
 		if(methodName.equals("logout")) {
 			HttpSession session = (HttpSession)arguments[0];
 			String id = (String)session.getAttribute("login_session");
+			System.out.println(id);
 			logVO.setLog_id(id);
 			logVO.setLog_content("로그아웃 성공");
 			logVO.setLog_type("logout");

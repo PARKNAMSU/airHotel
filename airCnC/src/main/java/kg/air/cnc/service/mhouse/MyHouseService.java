@@ -47,6 +47,10 @@ public class MyHouseService {
 		List<HouseReservationMemberVO> list = myHouseDAO.getHouseResList(vo);
 		return list;
 	}
+	public List<HouseReservationMemberVO> getHouseBeforeResList(ReservationHouseDetailVO vo){
+		List<HouseReservationMemberVO> list = myHouseDAO.getHouseBeforeResList(vo);
+		return list;
+	}
 	public List<Host_sales_chartVO> getAdmin_salesForYears(Host_sales_chartVO vo) {
 		List<Host_sales_chartVO> list = myHouseDAO.getAdmin_salesForYears(vo);
 		DateFormat format = new SimpleDateFormat("YYYY년");

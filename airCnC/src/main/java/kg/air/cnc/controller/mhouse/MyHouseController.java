@@ -49,6 +49,14 @@ public class MyHouseController {
 		mav.setViewName("houseResList");
 		return mav;
 	}
+	@RequestMapping("myHouseBeforeResList.do")
+	public ModelAndView myHouseBeforeResListController(ReservationHouseDetailVO vo, ModelAndView mav) {
+		List<HouseReservationMemberVO> list = myHouseService.getHouseBeforeResList(vo);
+		mav.addObject("resList",list);
+		mav.addObject("house_seq",vo.getHouse_seq());
+		mav.setViewName("houseBeforeResList");
+		return mav;
+	}
 	@RequestMapping("myHouseSales.do")
 	public ModelAndView myHouseSalesController(Host_sales_chartVO vo,HttpSession session,ModelAndView mav) {
 		List<Host_sales_chartVO> list = null;

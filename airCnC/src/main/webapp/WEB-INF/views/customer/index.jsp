@@ -82,11 +82,11 @@
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:35px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:15px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
 			</div>
 		</div>
-		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+		<div id="mydiv" style="display:none;margin-left:86%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
 						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
@@ -94,7 +94,14 @@
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null }">
+						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
+						</c:when>
+						<c:otherwise>
 						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>
 						<li ><br></li>
 					</ul>
 		</div>
