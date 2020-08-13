@@ -1,16 +1,19 @@
 package kg.air.cnc.controller.payment;
 
-import kg.air.cnc.service.payment.PaymentService;
-import kg.air.cnc.vo.ReservationHouseDetailVO;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import kg.air.cnc.service.cupon.CuponServiceImpl;
+import kg.air.cnc.service.payment.PaymentService;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 
 @Controller
@@ -18,6 +21,8 @@ public class PaymentController {
 
     @Autowired
     PaymentService paymentService;
+    @Autowired
+    CuponServiceImpl cuponService;
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
@@ -26,9 +31,11 @@ public class PaymentController {
         session = httpServletRequest.getSession();
         ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house");
         reservationHouseDetailVO.setHouse_price_default(12345);
+        String id = (String)session.getAttribute("login_session");
         ArrayList<String> restrictList = reservationHouseDetailVO.getRestricList();
         ArrayList<String> convinList = reservationHouseDetailVO.getConvinList();
         int totalDay = paymentService.calculatePay(httpServletRequest.getParameter("checkin"), httpServletRequest.getParameter("checkout"));
+        mav.addObject("cuponList", cuponService.getCuponList(id));
         mav.addObject("house", reservationHouseDetailVO );
         mav.addObject("peopleNum", httpServletRequest.getParameter("number") );
         mav.addObject("checkin",httpServletRequest.getParameter("checkin"));

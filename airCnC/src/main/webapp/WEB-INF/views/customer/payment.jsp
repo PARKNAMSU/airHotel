@@ -15,6 +15,7 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
 <!-- 아이콘 이미지 -->
 
 </head>
@@ -63,21 +64,55 @@
 								${house.house_price_default}원 X ${totalDay}박 -> ${totalPrice}원</td>
 						</tr>
 						<tr>
-							<td class="border-bottom">총 합계 -> ${totalPrice} 원</td>
+							<td class="border-bottom">총 합계 -> <font id="totalPrice">${totalPrice}</font> 원</td>
 						</tr>
 						<tr class="noline">
-							<td><a href="#" data-popup-open="example"><input
-									type="submit" value="쿠폰사용"
-									class="btn btn-outline-danger" /></a>
+							<td>
 								<div class="popup" data-popup="example">
 								<form action="checkNumber.do">
 									<div class="popup-inner">
 										<div class="popup-contents"
-											style="text-align: center; margin-top: 15px;">
-											<a class="popup-close" data-popup-close="example" href="#">X</a>
-											<label for="" style="font-size: 30px; font-weight: bold;">쿠폰리스트</label></br>
-											<input type="text" name="cuponNumber">&nbsp;
-											<input type="submit" value="검색"> 
+											style="text-align: center; margin-top: 4px;">
+											<label for="cuponNum" style="font-size: 30px; font-weight: bold;">쿠폰사용</label></br>
+											<input type="text" name="cuponNumber" id="cuponNum" value="">&nbsp;
+											<input type="button" value="쿠폰 적용" class="btn btn-sm" onclick="getCupon()">
+											<script type="text/javascript">
+												var getData = [];
+												var justOne = 0;
+												var finalPrice = '${totalPrice}';
+												window.onload = function() {
+													$.ajax({
+														type:"GET",
+														url:"cuponList.do",
+														dataType:"json",
+														success : function(data){
+															getData = data;
+														},
+														error:function(){
+															alert("error");
+														}
+													});
+												}
+												var getCupon = function() {
+													if(justOne>=1) return;
+													let flag = false;
+													var num = document.getElementById("cuponNum");
+													for(var idx=0; idx<getData.length; idx++){
+														if(getData[idx].cupon_number===num.value){
+															justOne++;
+															let price = document.getElementById("totalPrice");
+															finalPrice = ${totalPrice}*getData[idx].cupon_discount_rate-getData[idx].cupon_discount_money;
+															if(finalPrice<0) finalPrice = 0;
+															price.innerText = finalPrice;
+															console.log("쿠폰이 적용되었습니다.");
+															flag = true;
+															num.disabled = true;
+															break;
+														}
+													}
+													if(flag==false) console.log("해당 쿠폰이 없습니다.");
+												}
+											</script>
 										</div>
 									</div>
 								</form>
@@ -92,7 +127,7 @@
                                 var input = document.createElement("input");
                                 input.setAttribute("type", "hidden");
                                 input.setAttribute("name", "totalPrice");
-                                input.setAttribute("value", ${totalPrice});
+                                input.setAttribute("value", finalPrice);
 
                                 form.appendChild(input);
 
@@ -176,19 +211,6 @@
 		</div>
 	</footer>
 	<!-- footer-end -->
-	<script>
-    $(function () {
-      $("[data-popup-open]").on("click", function (e) {
-        var targeted_popup_class = jQuery(this).attr("data-popup-open");
-        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-        e.preventDefault();
-      });
-      $("[data-popup-close]").on("click", function (e) {
-        var targeted_popup_class = jQuery(this).attr("data-popup-close");
-        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-        e.preventDefault();
-      });
-    });
-  </script>
+	
 </body>
 </html>

@@ -28,7 +28,7 @@
 		FROM cupon
 		WHERE cupon_number=#{cuponNumber}	
 	</select>
-	
+	<!-- 
 	<insert id="checkRate" parameterType="map">
 		INSERT INTO cupon (cupon_number,cupon_discount_rate,cupon_limit, cupon_customer_id)
 		VALUES (#{number}, #{rate}, #{limit}, #{id})
@@ -38,4 +38,5 @@
 		INSERT INTO cupon (cupon_number,cupon_discount_money,cupon_limit, cupon_customer_id)
 		VALUES (#{number}, #{money}, #{limit}, #{id})
 	</insert>
+	-->
 </mapper>
