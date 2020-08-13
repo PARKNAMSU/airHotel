@@ -31,7 +31,7 @@ public class LogAdvice {
 			+ "|| execution(public * kg.air.cnc..CustomerServiceImpl.login(..)) || execution(public * kg.air.cnc..CustomerServiceImpl.register(..))")
 	private void logTarget() {}
 	
-	@Pointcut("execution(public * kg.air.cnc..*Controller.logout(..))")
+	@Pointcut("execution(public * kg.air.cnc..CustomerController.logout(..))")
 	private void beforeTarget() {}
 	/*메서드 실행시 로그저장*/
 	@After("logTarget()")
@@ -115,6 +115,7 @@ public class LogAdvice {
 		if(methodName.equals("logout")) {
 			HttpSession session = (HttpSession)arguments[0];
 			String id = (String)session.getAttribute("login_session");
+			System.out.println(id);
 			logVO.setLog_id(id);
 			logVO.setLog_content("로그아웃 성공");
 			logVO.setLog_type("logout");

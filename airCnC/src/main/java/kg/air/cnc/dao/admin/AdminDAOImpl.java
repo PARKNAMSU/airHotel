@@ -14,4 +14,16 @@ public class AdminDAOImpl implements AdminDAO{
 	public AdminVO loginCheck(String admin_id) throws Exception {
 		return sqlSession.selectOne("admin.loginCheck", admin_id);
 	}
+
+	@Override
+	public void updateLoginStatus(String id) {
+		sqlSession.update("admin.updateLoginStatus",id);
+		
+	}
+
+	@Override
+	public void updateLogoutStatus(String id) {
+		sqlSession.update("admin.updateLogoutStatus",id);
+		
+	}
 }

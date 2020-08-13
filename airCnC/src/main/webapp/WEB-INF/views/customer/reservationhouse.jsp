@@ -46,6 +46,38 @@
 			history.go(-1);
 		</script>
 	</c:if>
+	<!-- header-start -->
+	<c:if test="${login_session eq null }">
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1">
+				<ul id="menuItems">		
+						<li class="item">
+							<p>
+								<a href="/cnc/registerView.do" style="color:white;font-family:'Jua', sans-serif;">회원가입</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/loginView.do" style="color:white;font-family:'Jua', sans-serif;">로그인</a>
+							</p>
+						</li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;">공지사항</a>
+							</p>
+						</li>
+
+				</ul>
+			</div>
+		</div>
+	</header>
+	</c:if>
+	<c:if test="${login_session ne null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -63,11 +95,11 @@
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:35px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:15px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
 			</div>
 		</div>
-		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+		<div id="mydiv" style="display:none;margin-left:86%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
 						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
@@ -75,7 +107,14 @@
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null }">
+						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
+						</c:when>
+						<c:otherwise>
 						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>
 						<li ><br></li>
 					</ul>
 		</div>
@@ -87,6 +126,7 @@
 			})
 		})
 	</script>
+	</c:if>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
@@ -95,7 +135,7 @@
 			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
 			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
-			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">			 
+			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">
 		</form>
 	</div>
 	</c:if>
@@ -114,16 +154,16 @@
 				<c:choose>
 				<c:when test="${house.favorite_state eq 'false' }">
 				<div class="headimgdiv" style="margin-left:2%;" onclick="storeFavoriteHouse(${house.house_seq})">
-					<a href="" style="font-family: 'Jua', sans-serif;">
+					<b style="font-family: 'Jua', sans-serif;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/heart2.png" class="headimg">
-					저장</a><!-- 좋아하는 숙소 등록 -->
+					저장</b><!-- 좋아하는 숙소 등록 -->
 				</div>
 				</c:when>
 				<c:when test="${house.favorite_state eq 'true' }">
 				<div class="headimgdiv" style="margin-left:2%;" onclick="removeFavoriteHouse(${house.house_seq})">
-					<a href="" style="font-family: 'Jua', sans-serif;">
+					<b style="font-family: 'Jua', sans-serif;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/heart.png" class="headimg">
-					취소</a><!-- 좋아하는 숙소 등록 -->
+					취소</b><!-- 좋아하는 숙소 등록 -->
 				</div>
 				</c:when>
 				</c:choose>
@@ -246,7 +286,7 @@
 				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;font-size:20px;" onclick="cancelReservation(${house.reservation_seq})">예약취소</button>
 				</c:when>
 				<c:when test="${house.accessType eq 'host' }">
-				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;">수정하기</button>
+				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;" onclick="openHouseModify(${house.house_seq})" >수정하기</button>
 				</c:when>
 			</c:choose>
 	</div>
@@ -396,7 +436,7 @@ var storeFavoriteHouse = function(house_seq){
 				house_seq:house_seq
 			},
 			success:function(data){
-				window.location.reload()
+				setTimeout(window.location.reload(true),1000)
 			},
 	        error : function(request, status, error) {
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -414,7 +454,8 @@ var removeFavoriteHouse = function(house_seq){
 				house_seq:house_seq
 			},
 			success:function(data){
-				window.location.reload()
+				setTimeout(window.location.reload(true),1000)
+				
 			},
 	        error : function(request, status, error) {
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -558,6 +599,26 @@ function resetDate(){
 function filterNumber(event) {
 	  event.preventDefault(); 
 	}
+	
+function openHouseModify(house_seq){
+	var form = document.createElement("form");
+	var input = new Array()
+	var names = ["house_seq"]
+	var values = [house_seq]
+    form.action = "house_revise.do";
+    form.method = "post";
+    
+    for (var i = 0; i < 3; i++) {
+    	            
+    	input[i] = document.createElement("input");
+        input[i].setAttribute("type", "hidden");
+        input[i].setAttribute('name', names[i]);
+        input[i].setAttribute("value", values[i]);
+        form.appendChild(input[i]);
+    }
+    document.body.appendChild(form);
+    form.submit();
+}
 </script>
 
 </html>

@@ -66,9 +66,9 @@ public class KakaoController {
 		JsonNode returnNode = null;
 		try {
 			final HttpResponse response = client.execute(post);
-//			final int responseCode = response.getStatusLine().getStatusCode();
-//			System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
-//			System.out.println("Response Code : " + responseCode);
+			final int responseCode = response.getStatusLine().getStatusCode();
+			System.out.println("\nSending 'POST' request to URL : " + RequestUrl);
+			System.out.println("Response Code : " + responseCode);
 
 			//JSON 형태 반환값 처리
 			ObjectMapper mapper = new ObjectMapper();
