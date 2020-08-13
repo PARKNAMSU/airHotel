@@ -304,6 +304,13 @@
 	        }
 	        return null;
 	    }
-		
+	    $(function () {
+	        $("a").not('#lnkLogOut').click(function () {
+	            window.onbeforeunload = null;
+	        });
+	        $(".btn").click(function () {
+	            window.onbeforeunload = null;
+	    	});
+	    });
 </script>
 </html>
