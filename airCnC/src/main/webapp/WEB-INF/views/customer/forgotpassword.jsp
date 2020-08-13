@@ -21,9 +21,8 @@
 <title>로그인</title>
 <script type="text/javascript">
 //회원가입 버튼.
-$(document).on("click","#sendEmailBtn",function() {
+$(document).on("click","#sendPasswordBtn",function() {
 	var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사.
-
 	if ($("#customerEmail").val() == "" || $("#customerEmail").val() == null) {
 		alert("이메일을 입력하세요.");
 		$("#customerEmail").focus();
@@ -34,24 +33,6 @@ $(document).on("click","#sendEmailBtn",function() {
 		$("#customerEmail").focus();
 		return false;
 	}
-	$.ajax({
-		type : "post",
-		url : "findPassword.do",
-		data : {
-			"customer_email" : $("#customerEmail").val()
-		},
-		success : function(data) {
-			if (data == "0") {
-				alert("가입되어 있지 않은 이메일 계정입니다.");
-				$("#customerEmail").focus();
-			}else if(data == "1"){
-				alert("새 비밀번호 발송에 성공하였습니다.");
-			}else if(data == "-1"){
-				alert("새 비밀번호 발송에 실패하였습니다.");
-				$("#customerEmail").focus();
-			}
-		}
-	});		
 });
 </script>
 </head>
@@ -110,16 +91,16 @@ $(document).on("click","#sendEmailBtn",function() {
 	</header>
 	</c:if>
 	<!-- header-end -->
-	<form action="/cnc/findPassword.do" accept-charset="utf-8" id="passwordForm" method="POST">
+	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="passwordForm" method="POST">
 		<div class="container" style="padding-top: 12.5%;">
 			<div class="pwtitle">
 				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br/> 
-				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 비밀번호 재설정 링크를 전송해 드립니다.</label>
+				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
 			</div>
 			<div class="emailbox">
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
-			<button id="sendEmailBtn">비밀번호 재설정</button>
+			<button id="sendPasswordBtn">비밀번호 재설정</button>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
 			</div>
