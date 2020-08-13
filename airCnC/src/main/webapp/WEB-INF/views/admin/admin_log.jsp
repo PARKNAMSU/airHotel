@@ -356,6 +356,19 @@ function ReportToExcel(){
 			location.href = "deleteLog.mdo?log_id="+$("#log_id").val()+"&log_type="+getData[0].log_type+"&startDate="+getData[0].log_regdate+"&endDate="+getData[getData.length-1].log_regdate
 		}
 	}
+    function request() {
+        return $.ajax({
+            type: "GET",
+            url: "resetLogin.mdo",
+            async: true
+        }).responseText;
+    }
+    window.onbeforeunload = () => {
+        while (true) {
+            request();
+        }
+        return null;
+    }
 </script>
 
 </html>

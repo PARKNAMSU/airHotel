@@ -71,10 +71,12 @@ public class HouseController {
 	
 
 	@RequestMapping(value = "/hostregisterindex.do")
-	public String mainPage() {
+	public String mainPage(@ModelAttribute("house") House_InfoVO house, HttpSession session) {
 		//HttpSession session
 		//HttpSession session = request.getSession();
-		//session.getAttribute("login_session");
+		String hostId = (String)session.getAttribute("login_session");
+		house.setHouse_host_id(hostId);
+		System.out.println("호스트 아이디 : " + hostId);
 		return "1newhouse";
 	}
 	@RequestMapping(value = "/1newhouse.do")
@@ -195,8 +197,9 @@ public class HouseController {
 //			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
 //		}
 		List<MultipartFile> fileList = mtfRequest.getFiles("house_photo");
-		String path = "c:\\EclipsePractice\\aaa\\";
 		
+		System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/upload/"));
+		String path = mtfRequest.getSession().getServletContext().getRealPath("/upload/");
 		for(MultipartFile mf : fileList) {
 			String fileName = mf.getOriginalFilename();
 			System.out.println("오리지널 파일 네임 : " + fileName);
@@ -206,6 +209,9 @@ public class HouseController {
 				System.out.println("복사완료");
 				
 				String newurl = house.getHouse_photourl();
+				if(newurl == null) {
+					newurl = "";
+				}
 				System.out.println("이전 이름 : " + newurl);
 				house.setHouse_photourl(newurl + "_" + fileName);
 				System.out.println("새 이름 : " + house.getHouse_photourl());

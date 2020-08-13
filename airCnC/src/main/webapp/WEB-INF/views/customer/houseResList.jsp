@@ -46,16 +46,13 @@
 							</p>
 						</li>
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
-						<li class="item">
-								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
-						</li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:25px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:35px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
 			</div>
 		</div>
-		<div id="mydiv" style="display:none;margin-left:87.3%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
 						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
@@ -63,7 +60,7 @@
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
-						<li style="margin-bottom:20px;"><a href="">회원탈퇴</a></li>
+						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
 						<li ><br></li>
 					</ul>
 		</div>
@@ -102,7 +99,7 @@
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a><br><br>
-				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: ${item.customer_email }</b><br><br>
+				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
 				<b>예약날짜: ${item.reservation_regdate }</b><br><br>
 				<b>체크인 시간:${item.reservation_check_in }</b>&nbsp;&nbsp;<b>체크아웃 시간:${item.reservation_check_out }</b>
 				<hr>		
@@ -110,10 +107,11 @@
 			</c:forEach>
 		</div>
 		<div style="clear: both;"></div>
-
 	</div>
 	<div style="width:80%;margin-left:13.4%;font-family: 'Jua', sans-serif;margin-top:5%;margin-bottom:10%;">
-		<button onclick="reservationDetail(${house_seq})" class="btn btn-outline-danger" style="font-size:30px;">뒤로가기</button>&nbsp;&nbsp;<button class="btn btn-outline-danger" style="font-size:30px;" onclick="myHouseList()">숙소리스트</button>
+		<button onclick="reservationDetail(${house_seq})" class="btn btn-outline-danger" style="font-size:30px;">뒤로가기</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="myHouseList()">숙소리스트</button>&nbsp;&nbsp;
+		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="ResListBefore(${house_seq})">이전 예약명단</button>
 	</div>
 	<footer>
 		<%@include file="../html/footer.jsp" %>
@@ -144,6 +142,27 @@ var reservationDetail = function(house_seq){
 }
 var myHouseList = function(){
 	location.href = "myHouse.do";
+}
+var ResListBefore = function(house_seq){
+	var form = document.createElement("form");
+	var input = new Array()
+	var names = ["house_seq"]
+	var values = [house_seq]
+	 window.open("" ,"beforeForm",
+     "toolbar=no, width=540, height=800, directories=no, status=no,scrollorbars=no, resizable=no");
+    form.action = "myHouseBeforeResList.do";
+    form.method = "post";
+    form.target = "beforeForm"
+    
+    for (var i = 0; i < 2; i++) {
+    	input[i] = document.createElement("input");
+        input[i].setAttribute("type", "hidden");
+        input[i].setAttribute('name', names[i]);
+        input[i].setAttribute("value", values[i]);
+        form.appendChild(input[i]);
+    }
+    document.body.appendChild(form);
+    form.submit();
 }
 </script>
 </html>

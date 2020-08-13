@@ -29,7 +29,7 @@ public class PersonalQueDAO {
 		return mybatis.insert("personalqMapper.insertPersonalQue", vo);
 	}//유저가 질문을 올리는 메소드
 	
-	public List<PersonalQueVO> getPolicyListAdmin(PagingCriteria cri) {
+	public List<PersonalQueVO> getPersonalQueListAdmin(PagingCriteria cri) {
 		System.out.println("===> Mybatis로 getPersonalQueListAdmin() 기능 처리");
 		return mybatis.selectList("personalqMapper.getPersonalQueListAdmin",cri);
 	}//관리자가 모든 질문을 불러올 메소드
