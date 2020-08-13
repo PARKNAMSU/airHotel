@@ -4,6 +4,12 @@
 
 <mapper namespace="admin">
 	<select id="loginCheck" resultType="kg.air.cnc.vo.AdminVO" parameterType="String">
-		SELECT admin_id, admin_password FROM admin WHERE admin_id = #{admin_id}
+		SELECT admin_id, admin_password,admin_login_status FROM admin WHERE admin_id = #{admin_id}
 	</select>
+	<update id="updateLoginStatus" parameterType="String">
+		UPDATE admin SET admin_login_status = 1 WHERE admin_id = #{value}
+	</update>
+	<update id="updateLogoutStatus" parameterType="String">
+		UPDATE admin SET admin_login_status = 0 WHERE admin_id = #{value}
+	</update>
 </mapper>

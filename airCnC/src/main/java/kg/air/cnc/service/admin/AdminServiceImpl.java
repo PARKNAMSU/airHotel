@@ -15,4 +15,16 @@ public class AdminServiceImpl implements AdminService {
 	public AdminVO loginCheck(String admin_id) throws Exception {
 		return adminDAO.loginCheck(admin_id);
 	}
+
+	@Override
+	public void updateLoginStatus(String id) {
+		adminDAO.updateLoginStatus(id);
+		
+	}
+
+	@Override
+	public void updateLogoutStatus(String id) {
+		adminDAO.updateLogoutStatus(id);
+		
+	}
 }
