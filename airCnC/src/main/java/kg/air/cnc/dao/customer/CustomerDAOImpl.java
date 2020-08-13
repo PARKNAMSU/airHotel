@@ -62,4 +62,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int changePassword(CustomerVO customerVO) throws Exception {
 		return session.update("customer.changePassword", customerVO);
 	}
+
+	// 블랙 리스트 확인.
+	@Override
+	public int blacklistEmailCheck(CustomerVO vo) throws Exception {
+		return session.selectOne("customer.blacklistEmailCheck", vo);
+	}
 }

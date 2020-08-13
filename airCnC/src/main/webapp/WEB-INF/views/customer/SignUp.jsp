@@ -41,6 +41,7 @@
 	let idCheck = false;
 	let emailSendCheck = false;
 	let emailAuthCheck = false;
+	let blacklistEmailCheck = false;
 
 	// 아이디 중복 체크.
 	$(document).on("click", "#idCheckBtn", function() {
@@ -69,41 +70,54 @@
 
 	// 이메일 유효성 검사 조건문. 이메일 발송 버튼 클릭 이벤트.
 	$(document).on("click", "#emailBtn", function() {
-		$.ajax({
-			type : "post",
-			url : "createEmailCheck.do",
-			data : {"customer_email" : $("#customerEmail").val()},
-			success : function(data) {
-				if (data == false) {
-					alert("인증번호 발송 실패");
-				} else {
-					alert("인증번호 발송 성공")
-					emailSendCheck = true;
+		if ($("#customerEmail").val() == "") {
+			alert("이메일을 입력하세요.");
+			$("#customerEmail").focus();
+		}else{
+			$.ajax({
+				type : "post",
+				url : "createEmailCheck.do",
+				data : {"customer_email" : $("#customerEmail").val()},
+				success : function(data) {
+					if (data == "blacklist") {
+						alert("회원가입할 수 없는 이메일 계정입니다.");
+					} else if(data == "complate") {
+						alert("인증번호 발송 성공")
+						emailSendCheck = true;
+						blacklistEmailCheck = true;
+					} else if (data == "fail") {
+						alert("인증번호 발송 실패");
+					}
+				},
+				error : function(data) {
+					alert("인증번호 발송에 실패하였습니다.");
 				}
-			},
-			error : function(data) {
-				alert("인증번호 발송에 실패하였습니다.");
-			}
-		});
+			});
+		}
 	});
 
 	/* 이메일 인증번호 입력 후 인증 버튼 클릭 이벤트. */
 	$(document).on("click", "#emailAuthBtn", function() {
-		$.ajax({
-			type : "post",
-			url : "emailAuth.do",
-			data : {
-				"customer_key" : $("#customerKey").val()
-			},
-			success : function(data) {
-				if (data == "complate") {
-					alert("인증이 완료되었습니다.")
-					emailAuthCheck = true;
-				} else if (data == "false") {
-					alert("인증번호를 잘못 입력하셨습니다.")
+		if ($("#customerKey").val() == "") {
+			alert("인증번호를 입력하세요.");
+			$("#customerKey").focus();
+		}else{
+			$.ajax({
+				type : "post",
+				url : "emailAuth.do",
+				data : {
+					"customer_key" : $("#customerKey").val()
+				},
+				success : function(data) {
+					if (data == "complate") {
+						alert("인증이 완료되었습니다.")
+						emailAuthCheck = true;
+					} else if (data == "false") {
+						alert("인증번호를 잘못 입력하셨습니다.")
+					}
 				}
-			}
-		});
+			});	
+		}
 	});
 
 	// 회원가입 버튼.
@@ -161,7 +175,11 @@
 			alert("이메일 인증을 완료해주세요.");
 			$("#customerKey").focus();
 			return false;
-		} else if (!$("#customerPassword").val()) {
+		} else if (blacklistEmailCheck == false) {
+			alert("회원가입 불가한 이메일 계정입니다.");
+			$("#customerEmail").focus();
+			return false;
+		}  else if (!$("#customerPassword").val()) {
 			alert("비밀번호를 입력하세요.");
 			$("#customerPassword").focus();
 			return false;
@@ -237,7 +255,7 @@
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">	
-						<li class="item">
+					<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
@@ -245,7 +263,7 @@
 						<li class="item"><a href="myHouse.do">호스트</a></li>
 						<li class="item">
 								<p><a href="/cnc/logout.do">로그아웃</a></p>
-						</li>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -280,7 +298,7 @@
 				</div>
 
 				<div style="padding-top: 30px;">
-					<div class="loginMove" style="text-align: center">
+					<div class="loginMove" style="text-align: center; color: black;">
 						이미 에어비앤비 계정이 있나요? <a class="my__login__link"
 							href="/cnc/loginView.do">로그인</a>
 					</div>
