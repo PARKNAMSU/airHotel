@@ -151,7 +151,7 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "cancelReservation.do", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String cancelReservationController(ReservationHouseDetailVO vo) {
+	public String deleteReservationController(ReservationHouseDetailVO vo) {
 		reservationService.cancelReservation(vo);
 		return "예약이 취소되었습니다.";
 	}
