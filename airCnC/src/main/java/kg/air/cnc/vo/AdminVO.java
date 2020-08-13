@@ -1,4 +1,4 @@
-package kg.air.cnc.admin.vo;
+package kg.air.cnc.vo;
 
 public class AdminVO {
 	private String admin_id;

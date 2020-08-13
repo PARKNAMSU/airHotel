@@ -25,15 +25,13 @@ public class MyReservationController {
 	
 	@RequestMapping("reservationPage.do")
 	public String reservationPageController(HttpSession session) {
-		session.setAttribute("login_session", "skatn");
-		System.out.println((String)session.getAttribute("login_session"));
 		return "myreservation";
 	}
 	@RequestMapping(value = "myReservation.mdo", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String myReservationController(HttpSession session) throws JsonProcessingException {
 		//로그인 완료 시 제거
-		String id = (String)session.getAttribute("login_session");
+		String id = String.valueOf(session.getAttribute("login_session"));
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservation(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);

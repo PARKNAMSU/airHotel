@@ -58,27 +58,27 @@ public class ReservationDetailController {
 				vo.setAccessType((String) redirectMap.get("accessType"));
 			}
 		}
-		ReservationHouseDetailVO house = reservationService.getReservationHouse(vo);
+		ReservationHouseDetailVO house = null;
 		if (vo.getHouse_seq() > 0) {
+			house = reservationService.getReservationHouse(vo);
 			session.setAttribute("house", house);
 			session.setAttribute("house_seq", vo.getHouse_seq());
-		}
-		house.setReservation_seq(vo.getReservation_seq());
-		house.setAccessType(vo.getAccessType());
-		house.setCheck_in(vo.getCheck_in());
-		house.setCheck_out(vo.getCheck_out());
-		house.setHouse_person(vo.getHouse_person());
-		System.out.println(vo.getAccessType());
-		if (!util.stringNullCheck((String) session.getAttribute("login_session"))) {
-			if (!vo.getAccessType().trim().equals("host")) {
-				house.setFavorite_state(reservationService
-						.getFavoriteHouse((String) session.getAttribute("login_session"), vo.getHouse_seq()));
+			house.setReservation_seq(vo.getReservation_seq());
+			house.setAccessType(vo.getAccessType());
+			house.setCheck_in(vo.getCheck_in());
+			house.setCheck_out(vo.getCheck_out());
+			house.setHouse_person(vo.getHouse_person());
+			if (!util.stringNullCheck((String)session.getAttribute("login_session"))) {
+				if (!vo.getAccessType().trim().equals("host")) {
+					house.setFavorite_state(reservationService.getFavoriteHouse((String)session.getAttribute("login_session"), vo.getHouse_seq()));
+				}
 			}
+			if (commentsService.getComments(vo).size() > 0) {
+				mav.addObject("commentsList", commentsService.getComments(vo));
+			}
+			mav.addObject("house", house);
+			
 		}
-		if (commentsService.getComments(vo).size() > 0) {
-			mav.addObject("commentsList", commentsService.getComments(vo));
-		}
-		mav.addObject("house", house);
 		mav.setViewName("reservationhouse");
 		return mav;
 	}
@@ -151,7 +151,7 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "cancelReservation.do", produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String cancelReservationController(ReservationHouseDetailVO vo) {
+	public String deleteReservationController(ReservationHouseDetailVO vo) {
 		reservationService.cancelReservation(vo);
 		return "예약이 취소되었습니다.";
 	}

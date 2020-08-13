@@ -8,8 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
-import kg.air.cnc.customer.service.CustomerService;
-import kg.air.cnc.customer.vo.CustomerVO;
+
+import kg.air.cnc.service.customer.CustomerService;
+import kg.air.cnc.vo.CustomerVO;
 
 // 로그인 처리를 담당하는 인터셉터.
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter{

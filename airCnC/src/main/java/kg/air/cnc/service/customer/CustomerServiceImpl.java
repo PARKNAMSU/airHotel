@@ -1,10 +1,11 @@
-package kg.air.cnc.customer.service;
+package kg.air.cnc.service.customer;
 
 import java.util.Date;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-import kg.air.cnc.customer.dao.CustomerDAO;
-import kg.air.cnc.customer.vo.CustomerVO;
+
+import kg.air.cnc.dao.customer.CustomerDAO;
+import kg.air.cnc.vo.CustomerVO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{

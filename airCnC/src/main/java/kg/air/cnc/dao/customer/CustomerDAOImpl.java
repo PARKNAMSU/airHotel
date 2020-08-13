@@ -1,4 +1,4 @@
-package kg.air.cnc.customer.dao;
+package kg.air.cnc.dao.customer;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import kg.air.cnc.customer.vo.CustomerVO;
+import kg.air.cnc.vo.CustomerVO;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO{

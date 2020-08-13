@@ -40,21 +40,41 @@
 				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1" >
+			<div class="menudiv3-1" id="div1" style="float:left;">
 				<ul id="menuItems">	
+						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
 							</p>
 						</li>
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
-						<li class="item">
-								<p><a href="/cnc/logout.do" style="color:white;font-family: 'Jua', sans-serif;font-size:20px;" >로그아웃</a></p>
-						</li>
 				</ul>
 			</div>
+			<div style="width:50px;height:50px;margin-left:35px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+			</div>
+		</div>
+		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+					<ul>
+						<li><br></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
+						<li ><br></li>
+					</ul>
 		</div>
 	</header>
+	<script type="text/javascript">
+		$(function(){
+			$("#myinfo").click(function(){
+				$("#mydiv").fadeToggle("slow");
+			})
+		})
+	</script>
 	<div style="clear:both;"></div>
 	 <!-- slider_area_start -->
     <div class="slider_area">

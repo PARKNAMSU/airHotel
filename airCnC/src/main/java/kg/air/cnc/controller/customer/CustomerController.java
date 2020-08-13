@@ -1,7 +1,11 @@
-package kg.air.cnc.customer.controller;
+package kg.air.cnc.controller.customer;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -24,27 +28,27 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kg.air.cnc.common.KakaoController;
 import kg.air.cnc.common.NaverController;
-import kg.air.cnc.customer.service.CustomerService;
-import kg.air.cnc.customer.vo.CustomerVO;
+import kg.air.cnc.service.customer.CustomerService;
 import kg.air.cnc.service.mail.MailService;
+import kg.air.cnc.service.message.MessageService;
+import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.MessageVO;
 
 @Controller
 public class CustomerController {
 
 	private NaverController naverController;
-	private KakaoController kakaoController;
+	private KakaoController kakaoController = new KakaoController();
 	private String apiResult = null;
-	
+
 	@Autowired
-	public void setNaverController(NaverController naverController) {
+	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
 	}
-	
-//	@Autowired
-//	public void setKakaoController(KakaoController kakaoController) {
-//		this.kakaoController = kakaoController;
-//	}
-	
+
+	@Autowired
+	MessageService messageService;
+
 	@Inject
 	CustomerService service;
 
@@ -76,22 +80,23 @@ public class CustomerController {
 		mav.setViewName("login");
 		return mav;
 	}
-	
+
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
 	}
-	
+
 	// 비밀번호 찾기 이메일 전송.
-	@RequestMapping(value = "/findPassword.do", method = RequestMethod.POST)
-	@ResponseBody
-	public int findPassword(@RequestParam String customer_email, CustomerVO vo, HttpServletRequest request)throws Exception{
-		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
-		int resultCnt = 0;
+	@RequestMapping(value = "/sendPassword.do",  method = RequestMethod.POST)
+	public String sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		int resultCnt = 0; // // 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
 		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
-			return 0;
+			out.println("<script>alert('회원가입 인증이 되지 않은 이메일입니다.'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
 			char[] keySet = new char[] { 
 					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -106,25 +111,22 @@ public class CustomerController {
 				int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
 				sb.append(keySet[idx]);
 			}
-			HttpSession session = request.getSession(true);
-			String newPassword = String.valueOf(sb); // 랜덤 인증 코드.
-			session.setAttribute("newPassword", newPassword);
+			String newPwd = String.valueOf(sb); // 임시 비밀번호.
 			String subject = "[AirCnC] 임시 비밀번호 발급 안내.";
-			String text = "<div align = 'left'>";
-			text += "<h3>임시 비밀번호입니다. 로그인 후 비밀번호를 변경하여 사용하세요.</h3>";
-			text += "<h2>임시 비밀번호 : " + newPassword + "</h2>";
-			// if(cnt == 0) {
+			String text = "회원님, 안녕하세요.\n";
+			text += "임시 비밀번호입니다.\n로그인 후 반드시 비밀번호를 변경하여 사용하세요.\n";
+			text += "임시 비밀번호 : " + newPwd;	
 			mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
-			vo.setCustomer_password(newPassword);
-//			int changePwResult = service.changePassword(vo.getCustomer_password(),customer_email);
-			return 1;
-			//	}
-			//	else {
-			//		return false;
-			//	}
+			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
+			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
+			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
+			out.println("<script>alert('임시 비밀번호를 발송하였습니다.');</script>");
+			out.flush();
 		} else {
-			return -1;
+			out.println("<script>alert('임시 비밀번호 발송 오류'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}
+		return "forgotpassword";
 	}
 
 	// 아이디 중복 여부 검사.
@@ -151,6 +153,7 @@ public class CustomerController {
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
 		kemail = kakaoAccount.path("email").asText();
 		session.setAttribute("login_session", kemail);
+		session.setAttribute("social_type", "kakao");
 		mav.setViewName("index");
 		return mav;
 	}
@@ -159,12 +162,11 @@ public class CustomerController {
 	@RequestMapping(value = "/naverlogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session)throws IOException, ParseException{
 		ModelAndView mav = new ModelAndView(); 
-		OAuth2AccessToken oauthToken; 
-		oauthToken = naverController.getAccessToken(session, code, state); 
-		
+		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state); 
+
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
 		apiResult = naverController.getUserProfile(oauthToken); 
-		
+
 		// 내가 원하는 정보만 JSON타입에서 String타입으로 바꿔 가져오기.
 		JSONParser parser = new JSONParser(); 
 		Object obj = null; 
@@ -174,12 +176,13 @@ public class CustomerController {
 			e.printStackTrace(); 
 		} 
 		JSONObject jsonobj = (JSONObject) obj; 
-		
+
 		// 데이터 파싱.
 		JSONObject response = (JSONObject) jsonobj.get("response"); 
 		String naver_name = (String) response.get("name"); 
 		String naver_email = (String) response.get("email");
 		session.setAttribute("login_session", naver_email);
+		session.setAttribute("social_type", "naver");
 		mav.setViewName("index"); 
 		return mav;
 	}
@@ -236,6 +239,7 @@ public class CustomerController {
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
 	public String regist(CustomerVO vo)throws Exception{
+		MessageVO messageVO = new MessageVO();
 		// 회원가입 시 프로필 사진을 등록안했을때 none처리.
 		if (vo.getCustomer_image().equals("")) {
 			vo.setCustomer_image("none");
@@ -250,6 +254,11 @@ public class CustomerController {
 				vo.setCustomer_password(pwd);
 				vo.setCustomer_key("Y");
 				service.register(vo);
+				messageVO.setMessage_from_id("admin");
+				messageVO.setMessage_to_id(vo.getCustomer_id());
+				messageVO.setMessage_type("nomal");
+				messageVO.setMessage_content("회원가입을 축하합니다.");
+				messageService.insertMessage(messageVO);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -270,12 +279,22 @@ public class CustomerController {
 
 		// DB에서 아이디 및 비밀번호를 가져온다.
 		CustomerVO customerDbVO = service.customerCheck(inputId);
+		if (customerDbVO == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
+			out.flush();
+			return "login";
+		}
 		String dbPassword = customerDbVO.getCustomer_password();
 		String inputPassword = customerVO.getCustomer_password();
 
 		// 인증 진행.
 		if (!passwordEncoder.matches(inputPassword, dbPassword)) {
-			System.out.println("비밀번호가 일치하지 않습니다.");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
+			out.flush();
 			return "login";
 		}else {
 			boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
@@ -283,7 +302,7 @@ public class CustomerController {
 			// 로그인이 성공하면 CustomerVO객체를 반환.
 			CustomerVO vo = service.login(customerVO);
 			if (vo != null) { // 로그인 성공.
-				session.setAttribute("login_session", vo);
+				session.setAttribute("login_session", vo.getCustomer_id());
 				returnURL = "index";
 				if (customerVO.isUseCookie()) {
 					Cookie cookie = new Cookie("loginCookie", session.getId());
@@ -303,9 +322,9 @@ public class CustomerController {
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
-		Object obj = session.getAttribute("login_session");
+		Object object = (Object)session.getAttribute("login_session");
+		String obj = String.valueOf(object);
 		if (obj != null) {
-			CustomerVO vo = (CustomerVO)obj;
 			session.removeAttribute("login_session");
 			session.invalidate();
 			Cookie loginCookie  = WebUtils.getCookie(request, "loginCookie");
@@ -314,7 +333,7 @@ public class CustomerController {
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
 				Date date = new Date(System.currentTimeMillis());
-				service.keepLogin(vo.getCustomer_id(), session.getId(), date);
+				service.keepLogin(obj, session.getId(), date);
 			}
 		}
 		return "index";
@@ -323,7 +342,8 @@ public class CustomerController {
 	@RequestMapping(value = "/kakaologout.do", produces = "application/json")
 	public String kakaoLogout(HttpSession session)throws Exception{
 		// KakaoRestApi 객체 선언.
-		JsonNode jsonToken = kakaoController.Logout(session.getAttribute("userid").toString());
+		JsonNode jsonToken = kakaoController.Logout(session.getAttribute("login_session").toString());
+		session.invalidate();
 		return "index";
 	}
 }

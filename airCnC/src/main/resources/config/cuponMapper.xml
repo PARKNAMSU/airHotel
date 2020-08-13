@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cuponDAO">
+	<select id="getCuponList" parameterType="String" resultType="kg.air.cnc.vo.CuponVO">
+	<![CDATA[
+		SELECT *
+		FROM cupon
+		WHERE cupon_customer_id=#{id} AND cupon_limit>=sysdate
+	]]>
+	</select>
+	
+	<delete id="deleteCupon">
+	<![CDATA[
+		DELETE FROM cupon
+		WHERE cupon_limit<=sysdate
+	]]>
+	</delete>
+	
+	<delete id="useCupon" parameterType="String">
+		DELETE FROM cupon 
+		WHERE cupon_number=#{cuponNumber}
+	</delete>
+	
+	<select id="checkNumber" parameterType="String" resultType="kg.air.cnc.vo.CuponVO">
+		SELECT NVL(cupon_discount_money, 0), NVL(cupon_discount_rate, 1)
+		FROM cupon
+		WHERE cupon_number=#{cuponNumber}	
+	</select>
+	
+	<insert id="checkRate" parameterType="map">
+		INSERT INTO cupon (cupon_number,cupon_discount_rate,cupon_limit, cupon_customer_id)
+		VALUES (#{number}, #{rate}, #{limit}, #{id})
+	</insert>
+	
+	<insert id="checkMoney" parameterType="map">
+		INSERT INTO cupon (cupon_number,cupon_discount_money,cupon_limit, cupon_customer_id)
+		VALUES (#{number}, #{money}, #{limit}, #{id})
+	</insert>
+</mapper>
