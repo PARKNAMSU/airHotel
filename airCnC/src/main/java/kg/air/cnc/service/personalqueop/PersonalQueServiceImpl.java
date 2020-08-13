@@ -30,7 +30,7 @@ public class PersonalQueServiceImpl implements PersonalQueService {
 
 	@Override
 	public List<PersonalQueVO> getPersonalQueListAdmin(PagingCriteria cri) {
-		return personalqDAO.getPolicyListAdmin(cri);
+		return personalqDAO.getPersonalQueListAdmin(cri);
 	}
 
 	@Override

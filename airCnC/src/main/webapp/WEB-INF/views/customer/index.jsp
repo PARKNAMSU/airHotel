@@ -71,36 +71,48 @@
 				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
+			<div class="menudiv3-1" id="div1" style="float:left;">
 				<ul id="menuItems">	
+						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">
 							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
 							</p>
 						</li>
-						<li class="item"><a href="myHouse.do">호스트</a></li>
-						<li class="item">
-							<p>
-								<a href="/cnc/chat.do">내정보</a>
-							</p>
-						</li>
-						<c:choose>
-							<c:when test="${social_type eq null}">
-								<li class="item">
-										<p><a href="/cnc/logout.do">로그아웃</a></p>
-								</li>
-								
-							</c:when>
-							<c:otherwise>
-								<li class="item">
-									<p><a href="/cnc/kakaologout.do">로그아웃</a></p>
-								</li>
-							</c:otherwise>
-					</c:choose>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
+			<div style="width:50px;height:50px;margin-left:15px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+			</div>
+		</div>
+		<div id="mydiv" style="display:none;margin-left:86%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+					<ul>
+						<li><br></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null }">
+						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
+						</c:when>
+						<c:otherwise>
+						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
+						</c:otherwise>
+					</c:choose>
+						<li ><br></li>
+					</ul>
 		</div>
 	</header>
+	<script type="text/javascript">
+		$(function(){
+			$("#myinfo").click(function(){
+				$("#mydiv").fadeToggle("slow");
+			})
+		})
+	</script>
 	</c:if>
 	 <!-- slider_area_start -->
     <div class="mainview">
@@ -109,7 +121,8 @@
     </div>
     <div class="searchOptions">
         <form action="searchIndex.do">
-           <div class="srcachlocation">
+           <div class="srcachlocation" style="vertical-align: middle;">
+               &nbsp;<label for="srcachlocation">지역 전체</label>
               <select id="select_type" name="location" style="border: none;">
                  <option id="first">지역 전체</option>
                  <option id="seo">서울</option>
@@ -121,15 +134,20 @@
                  <option id="gn">경남</option>
                  <option id="jb">전북</option>
                  <option id="jn">전남</option>
-              </select> <select id="select_menu" name="detail">
+              </select> 
+              <select id="select_menu" name="detail" style="border: none;">
                  <option>지역 선택</option>
-              </select> <label class="searchConditions">체크인 <input type="date"
-                 id="checkIn" name="checkIn" value="" min="" max="" /></label> <label
-                 class="searchConditions">체크아웃 <input type="date"
-                 id="checkOut" name="checkOut" min="" max="" onclick="checkout()" />
-              </label> <label class="searchConditions">최소 인원 <input type="number"
-                 id="people" name="people" value="1" onclick="peopleCheck()"/></label>
-              <button class="btn1" type="submit" value="검색">검색</button>
+              </select> 
+              <label class="searchConditions" style="padding-bottom: 15px;">체크인 
+                  <input type="date" id="checkIn" name="checkIn" value="" min="" max=""  style="border: none; margin-bottom: 15px;"/>
+                </label> 
+                 <label class="searchConditions">체크아웃 
+                     <input type="date"id="checkOut" name="checkOut" min="" max="" onclick="checkout()"  style="border: none;"/>
+                </label> 
+                <label class="searchConditions">최소 인원 <input type="number"
+                 id="people" name="people" value="1" onclick="peopleCheck()"/>
+                </label>
+              <button class="btn12" type="submit" value="검색" style="border-radius: 32px;">검색</button>
            </div>
         </form>
     </div>

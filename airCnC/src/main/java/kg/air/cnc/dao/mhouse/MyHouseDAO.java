@@ -27,6 +27,9 @@ public class MyHouseDAO {
 	public List<HouseReservationMemberVO> getHouseResList(ReservationHouseDetailVO vo){
 		return sqlSessionTemplate.selectList("HostHouseManageVO.getMyHouseResList",vo);
 	}
+	public List<HouseReservationMemberVO> getHouseBeforeResList(ReservationHouseDetailVO vo){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getMyHouseBeforeResList",vo);
+	}
 	/*호스트의 매출 관련*/
 	public List<Host_sales_chartVO> getAdmin_salesForYears(Host_sales_chartVO vo) {
 		return sqlSessionTemplate.selectList("HostHouseManageVO.getSalesForYears",vo);

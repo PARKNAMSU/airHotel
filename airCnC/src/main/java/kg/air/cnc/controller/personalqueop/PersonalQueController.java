@@ -22,7 +22,7 @@ public class PersonalQueController {
 	@Autowired
 	private PersonalQueService personalqService;
 	@ModelAttribute("personalq")
-	public PersonalQueVO setEmptyPolicy() {
+	public PersonalQueVO setEmptyPersonalQue() {
 		return new PersonalQueVO();
 	}
 	

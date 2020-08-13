@@ -22,4 +22,7 @@ public interface CustomerDAO {
 	
 	// 비밀번호 변경.
 	public int changePassword(CustomerVO customerVO)throws Exception;
+	
+	// 블랙리스트 확인.
+	public int blacklistEmailCheck(CustomerVO vo)throws Exception;
 }

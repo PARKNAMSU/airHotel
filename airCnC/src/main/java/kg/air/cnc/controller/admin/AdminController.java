@@ -25,9 +25,6 @@ public class AdminController {
 	@RequestMapping(value = "/adminLogin.mdo", method = RequestMethod.POST)
 	public String adminLogin(HttpSession session, AdminVO vo, HttpServletResponse response, Model model)throws Exception {
 		String returnURL = "";
-		if (session.getAttribute("admin_session") != null) {
-			session.removeAttribute("admin_session"); // login이란 세션값이 존재하면, 기존의 세션을 지움.
-		}
 		String adminId = vo.getAdmin_id();
 		String adminPw = vo.getAdmin_password();
 		AdminVO adminVO = adminService.loginCheck(adminId);
@@ -42,8 +39,13 @@ public class AdminController {
 			return "adminLogin";
 		}else {
 			if (adminVO != null) { // 로그인 성공.
-				session.setAttribute("admin_session", vo);
-				returnURL = "redirect:salesChart.mdo";
+				if(adminVO.getAdmin_login_status() == 0) {
+					adminService.updateLoginStatus(adminId);
+					session.setAttribute("admin_session",adminId);
+					returnURL = "redirect:salesChart.mdo";
+				}else {
+					returnURL = "adminLogin";
+				}
 			}
 			return returnURL;
 		}
@@ -52,9 +54,16 @@ public class AdminController {
 	@RequestMapping(value = "/logout.mdo", method = RequestMethod.GET)
 	public String logout(HttpSession session, HttpServletRequest requset, HttpServletResponse response)throws Exception{
 		Object obj = session.getAttribute("admin_session");
+		System.out.println(obj);
 		if (obj != null) {
+			adminService.updateLogoutStatus((String)obj);
 			session.invalidate();
 		}
 		return "adminLogin";
+	}
+	@RequestMapping("resetLogin.mdo")
+	public void resetLogin(HttpSession session) {
+		Object obj = session.getAttribute("admin_session");
+		adminService.updateLogoutStatus((String)obj);
 	}
 }

@@ -2,22 +2,21 @@ package kg.air.cnc.controller.payment;
 
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Controller;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.service.cupon.CuponServiceImpl;
 import kg.air.cnc.service.payment.PaymentService;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
-import kg.air.cnc.common.I_mportGetToken;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-
 
 @Controller
 public class PaymentController {
@@ -26,12 +25,9 @@ public class PaymentController {
     PaymentService paymentService;
     @Autowired
     CuponServiceImpl cuponService;
-    @Autowired
-    I_mportGetToken i_mportGetToken;
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
-        //남수페이지에서 결제하기 누르면 session 에 house 정보를 담은채로 여기로 옴.
         session = httpServletRequest.getSession();
         ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house");
         reservationHouseDetailVO.setHouse_price_default(12345);

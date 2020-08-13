@@ -5,7 +5,7 @@
 <mapper namespace="HostHouseManageVO">
 
 	<select id="getMyHouse" parameterType="String" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
-		<![CDATA[select house_seq , house_photourl, house_name, house_status from house_info where house_host_id = #{value}]]> 
+		<![CDATA[select house_seq , house_photourl, house_name, house_status from house_info where house_host_id = #{value} ORDER BY house_seq ASC]]> 
 	</select>
 	<select id="getMyHouseResList" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO" resultType="kg.air.cnc.vo.HouseReservationMemberVO">
 		<![CDATA[select reservation_seq,reservation_customer_id,reservation_house_seq, to_char(reservation_check_in,'yyyy/MM/dd') as reservation_check_in, 
@@ -13,7 +13,12 @@
 		,c.customer_name as customer_name, c.customer_image as customer_image, c.customer_email as customer_email, c.customer_phone as customer_phone
 		from reservation join customer c on reservation_customer_id = c.customer_id where reservation_house_seq = #{house_seq} and reservation_check_in > sysdate ORDER BY reservation_seq]]>
 	</select>
-	
+	<select id="getMyHouseBeforeResList" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO" resultType="kg.air.cnc.vo.HouseReservationMemberVO">
+		<![CDATA[select reservation_seq,reservation_customer_id,reservation_house_seq, to_char(reservation_check_in,'yyyy/MM/dd') as reservation_check_in, 
+		to_char(reservation_check_out,'yyyy/MM/dd') as reservation_check_out, to_char(reservation_regdate,'yyyy/MM/dd') as reservation_regdate 
+		,c.customer_name as customer_name, c.customer_image as customer_image, c.customer_email as customer_email, c.customer_phone as customer_phone
+		from reservation join customer c on reservation_customer_id = c.customer_id where reservation_house_seq = #{house_seq} and reservation_check_in < sysdate ORDER BY reservation_seq]]>
+	</select>
 	
 	<select id="getSalesForYears" resultType="kg.air.cnc.vo.Host_sales_chartVO" parameterType="kg.air.cnc.vo.Host_sales_chartVO">
 		<![CDATA[SELECT to_date(to_char(host_sales_regdate,'YYYY'),'YYYY') as host_sales_regdate,sum(host_sales) as host_sales FROM host_sales WHERE to_char(host_sales_regdate, 'yyyy') >= #{searchConditionFirst}

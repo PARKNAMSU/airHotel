@@ -103,7 +103,8 @@
 	house_restrict_facility,
 	house_restrict_cctv,
 	house_restrict_weapon,
-	house_restrict_beast
+	house_restrict_beast,
+	house_host_id
 	)
 	values
 	(
@@ -169,7 +170,8 @@
 	#{house_restrict_facility},
 	#{house_restrict_cctv},
 	#{house_restrict_weapon},
-	#{house_restrict_beast}
+	#{house_restrict_beast},
+	#{house_host_id}
 	)
 	</insert>
 </mapper>

@@ -37,15 +37,15 @@ public class CustomerController {
 	private NaverController naverController;
 	private KakaoController kakaoController = new KakaoController();
 	private String apiResult = null;
-	
+
 	@Autowired
 	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
 	}
-	
+
 	@Autowired
 	MessageService messageService;
-	
+
 	@Inject
 	CustomerService service;
 
@@ -77,21 +77,23 @@ public class CustomerController {
 		mav.setViewName("login");
 		return mav;
 	}
-	
+
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
 	}
-	
+
 	// 비밀번호 찾기 이메일 전송.
-	@RequestMapping(value = "/findPassword.do", produces = "application/text", method = RequestMethod.POST)
-	@ResponseBody
-	public String findPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletRequest request)throws Exception{
-		// 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
-		int resultCnt = 0;
+	@RequestMapping(value = "/sendPassword.do",  method = RequestMethod.POST)
+	public String sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		int resultCnt = 0; // // 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
 		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
+			out.println("<script>alert('회원가입 인증이 되지 않은 이메일입니다.'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
 			char[] keySet = new char[] { 
 					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -115,10 +117,13 @@ public class CustomerController {
 			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
 			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
 			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
+			out.println("<script>alert('임시 비밀번호를 발송하였습니다.');</script>");
+			out.flush();
 		} else {
-			 resultCnt = -1;
+			out.println("<script>alert('임시 비밀번호 발송 오류'); $(\"#customerEmail\").focus();</script>");
+			out.flush();
 		}
-		return String.valueOf(resultCnt);
+		return "forgotpassword";
 	}
 
 	// 아이디 중복 여부 검사.
@@ -126,12 +131,11 @@ public class CustomerController {
 	@ResponseBody
 	public String idCheck(CustomerVO vo)throws Exception{
 		int result = service.idCheck(vo);
-		String result1 = String.valueOf(result);
-		return result1;
+		return String.valueOf(result);
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response, CustomerVO vo)throws Exception {
 		ModelAndView mav = new ModelAndView();
 		// 결과값을 node에 보여줌.
 		JsonNode node = kakaoController.getAccessToken(code);
@@ -139,11 +143,32 @@ public class CustomerController {
 		JsonNode accessToken = node.get("access_token");
 		// 사용자의 정보.
 		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
+		String kid = null;
 		String kemail = null;
+		String kname = null;
+		String kimage = null;
 		// 사용자 정보를 카카오에서 가져오기.
-		// JsonNode properties = userInfo.path("properties");
+		JsonNode properties = userInfo.path("properties");
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
+		kid = userInfo.path("id").asText();
 		kemail = kakaoAccount.path("email").asText();
+		kname = properties.path("nickname").asText();
+		kimage = properties.path("profile_image").asText();
+		vo.setCustomer_id(kemail);
+		vo.setCustomer_password("none");
+		vo.setCustomer_name(kname);
+		if (kemail.substring(0, 3).trim().equals("010")) {
+			vo.setCustomer_phone(kemail);
+		}else {
+			vo.setCustomer_phone("none");
+		}
+		vo.setCustomer_email(kid);
+		vo.setCustomer_image(kimage);
+		if (vo.getCustomer_image().equals("")) {
+			vo.setCustomer_image("none");
+		}
+		vo.setCustomer_key("kakao");
+		service.register(vo);
 		session.setAttribute("login_session", kemail);
 		session.setAttribute("social_type", "kakao");
 		mav.setViewName("index");
@@ -155,10 +180,10 @@ public class CustomerController {
 	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session)throws IOException, ParseException{
 		ModelAndView mav = new ModelAndView(); 
 		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state); 
-		
+
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
 		apiResult = naverController.getUserProfile(oauthToken); 
-		
+
 		// 내가 원하는 정보만 JSON타입에서 String타입으로 바꿔 가져오기.
 		JSONParser parser = new JSONParser(); 
 		Object obj = null; 
@@ -168,7 +193,7 @@ public class CustomerController {
 			e.printStackTrace(); 
 		} 
 		JSONObject jsonobj = (JSONObject) obj; 
-		
+
 		// 데이터 파싱.
 		JSONObject response = (JSONObject) jsonobj.get("response"); 
 		String naver_name = (String) response.get("name"); 
@@ -181,38 +206,42 @@ public class CustomerController {
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean createEmailCheck(@RequestParam(value = "customer_email" ,required = false)String customer_email, HttpServletRequest request)throws Exception {
+	public String createEmailCheck(@RequestParam(value = "customer_email" ,required = false)String customer_email, CustomerVO vo, HttpServletRequest request)throws Exception {
 		int cnt = -1;
-		System.out.println(customer_email);
 		cnt = service.createEmailCheck(customer_email); // 이메일 중복 체크.
-		System.out.println(cnt); // 1이면 중복 이메일 있음. 0이면 중복 없음.
-
-		// 이메일 인증.
-		char[] keySet = new char[] { 
-				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-				'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-				'U', 'V', 'W', 'X', 'Y', 'Z',
-				'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-				'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-				'u', 'v', 'w', 'x', 'y', 'z'};
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0 ; i < 6 ; i++) {
-			int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
-			sb.append(keySet[idx]);
+		
+		if (service.blacklistEmailCheck(vo) == 1) {
+			return "blacklist";
+		}else if(service.blacklistEmailCheck(vo) == 0){
+			// 이메일 인증.
+			char[] keySet = new char[] { 
+					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+					'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+					'U', 'V', 'W', 'X', 'Y', 'Z',
+					'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+					'u', 'v', 'w', 'x', 'y', 'z'};
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0 ; i < 6 ; i++) {
+				int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
+				sb.append(keySet[idx]);
+			}
+			HttpSession session = request.getSession(true);
+			String authCode = String.valueOf(sb); // 랜덤 인증 코드.
+			session.setAttribute("authCode", authCode);
+			String subject = "[AirCnC] 회원가입 인증 코드 발급 안내 입니다.";
+			String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
+			//		if(cnt == 0) {
+			mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
+			return "complate";
+			//		}
+			//		else {
+			//			return false;
+			//		}
+		}else {
+			return "fail";
 		}
-		HttpSession session = request.getSession(true);
-		String authCode = String.valueOf(sb); // 랜덤 인증 코드.
-		session.setAttribute("authCode", authCode);
-		String subject = "[AirCnC] 회원가입 인증 코드 발급 안내 입니다.";
-		String text = "귀하의 인증 코드는 " + authCode + " 입니다.";
-		//		if(cnt == 0) {
-		mailService.send(subject, text, "ljh160791@gmail.com", customer_email);
-		return true;
-		//		}
-		//		else {
-		//			return false;
-		//		}
 	}
 
 	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.POST)
@@ -236,7 +265,7 @@ public class CustomerController {
 		if (vo.getCustomer_image().equals("")) {
 			vo.setCustomer_image("none");
 		}
-		int result = service.idCheck(vo);
+		int result = service.blacklistEmailCheck(vo);
 		try {
 			if (result == 1) {
 				return "SignUp"; 
@@ -244,7 +273,7 @@ public class CustomerController {
 				String inputPass = vo.getCustomer_password();
 				String pwd = passwordEncoder.encode(inputPass);
 				vo.setCustomer_password(pwd);
-				vo.setCustomer_key("Y");
+				vo.setCustomer_key("Y"); 
 				service.register(vo);
 				messageVO.setMessage_from_id("admin");
 				messageVO.setMessage_to_id(vo.getCustomer_id());
@@ -258,7 +287,7 @@ public class CustomerController {
 		return "login";
 	}
 
-	// 로그인 처리
+	// 로그인 처리.
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
 	public String loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response)throws Exception{
 
@@ -273,10 +302,10 @@ public class CustomerController {
 		CustomerVO customerDbVO = service.customerCheck(inputId);
 		if (customerDbVO == null) {
 			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
-            out.flush();
-            return "login";
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
+			out.flush();
+			return "login";
 		}
 		String dbPassword = customerDbVO.getCustomer_password();
 		String inputPassword = customerVO.getCustomer_password();
@@ -284,9 +313,9 @@ public class CustomerController {
 		// 인증 진행.
 		if (!passwordEncoder.matches(inputPassword, dbPassword)) {
 			response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
-            out.flush();
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
+			out.flush();
 			return "login";
 		}else {
 			boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
@@ -333,7 +362,6 @@ public class CustomerController {
 
 	@RequestMapping(value = "/kakaologout.do", produces = "application/json")
 	public String kakaoLogout(HttpSession session)throws Exception{
-		// KakaoRestApi 객체 선언.
 		JsonNode jsonToken = kakaoController.Logout(session.getAttribute("login_session").toString());
 		session.invalidate();
 		return "index";

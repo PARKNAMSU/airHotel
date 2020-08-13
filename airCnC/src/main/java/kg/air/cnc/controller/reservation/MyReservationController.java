@@ -44,6 +44,7 @@ public class MyReservationController {
 		List<ReservationHouseDetailVO> list = reservationService.getMyReservationBefore(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
+		System.out.println(jsonStr);
 		return jsonStr;
 	}
 	@RequestMapping("rollbackReservationCancel.do")
