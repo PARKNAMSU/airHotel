@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import kg.air.cnc.dao.log.LogDAO;
 import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.CommentsVO;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.LogVO;
 import kg.air.cnc.vo.MessageVO;
 
@@ -24,7 +25,8 @@ public class LogAdvice {
 	@Autowired
 	private LogDAO logDAO;
 	
-	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..)) || execution(public * kg.air.cnc..*Controller.update*(..))")
+	@Pointcut("execution(public * kg.air.cnc..*Controller.insert*(..)) || execution(public * kg.air.cnc..*Controller.update*(..))"
+			+ "|| execution(public * kg.air.cnc..CustomerServiceImpl.login(..)) || execution(public * kg.air.cnc..CustomerServiceImpl.register(..))")
 	private void logTarget() {}
 	/*�޼��� ���� �� �α� ����*/
 	@After("logTarget()")
@@ -67,5 +69,21 @@ public class LogAdvice {
 			logDAO.addLog(logVO);
 			System.out.println("insertBlame 실행");
 		}
+		if(methodName.equals("login")) {
+			CustomerVO vo = (CustomerVO)arguments[0];
+			logVO.setLog_id(vo.getCustomer_id());
+			logVO.setLog_content("로그인 성공");
+			logVO.setLog_type("login");
+			logDAO.addLog(logVO);
+			System.out.println("login 실행");
+		}
+		if(methodName.equals("register")) {
+			CustomerVO vo = (CustomerVO)arguments[0];
+			logVO.setLog_id(vo.getCustomer_id());
+			logVO.setLog_content("회원가입 성공");
+			logVO.setLog_type("createAccount");
+			logDAO.addLog(logVO);
+		}
+		System.out.println("로그완료");
 	}
 }

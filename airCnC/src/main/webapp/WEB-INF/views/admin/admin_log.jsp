@@ -103,7 +103,7 @@
 					<select name="log_type" class="form-control form-control-lg" style="margin-right:30px;margin-left:0%;">
 						<option value="login">로그인</option>
 						<option value="logout">로그아웃</option>
-						<option value="logout">회원가입</option>
+						<option value="createAccount">회원가입</option>
 						<option value="reservation">예약</option>
 						<option value="sendMessage">메세지전송</option>
 						<option value="insertCommnets">후기등록</option>
@@ -139,11 +139,13 @@
 				</table>
 			</div>
 			<div style="margin-bottom: 10%;width:500px;margin-left: 40%;margin-top: 5%;">
-			<a onclick="clickPrev()" id="prev" class="page" style="font-size:20px;">prev</a>
-				<c:forEach begin="1" end="5" var="i">
-					<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;color:black;">${i}</a>
-				</c:forEach>		
-			<a onclick="clickNext()" id="next" class="page" style="font-size:20px;">next</a>
+			<div style="float:left;box-shadow: 2px 2px 2px 2px gray;border-radius: 15px 15px 15px 15px;padding:10px;">
+				<a onclick="clickPrev()" id="prev" class="page" style="font-size:20px;color:black;">prev</a>
+					<c:forEach begin="1" end="5" var="i">
+						<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;color:black;margin-left:10px">${i}</a>
+					</c:forEach>		
+				<a onclick="clickNext()" id="next" class="page" style="font-size:20px;color:black;">next</a>
+			</div>
 			<select id="instanceNum" style="width:200px;margin-left:90%;"onchange="" class="form-control form-control-lg">
 				<option value="5">5</option>
 				<option value="10">10</option>
@@ -202,8 +204,19 @@ $(document).ready(function() {
 			   
 			           success : function(data) {
 							getData = data;
-							$("allElement").val(getData.length)
-							allElement = Number($("allElement").val(getData.length))
+							$("#allElement").val(getData.length)
+							allElement = Number($("#allElement").val())
+							if(allElement%10 == 0){
+								allArea = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
+							}else{
+								allArea = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
+								alert(allArea);
+							}
+							if(allArea <= 1){
+								$("#next").css('display','none');
+							}else{
+								$("#next").css('display','initial');
+							}
 							for(var i=0;i<instanceNum;i++){
 								if(getData[i] != null){
 									$("#seq"+(i+1)).html(getData[i].log_seq)
@@ -233,6 +246,7 @@ if(allElement%10 == 0){
 	allArea = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
 }else{
 	allArea = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
+	alert(allArea);
 }
 if(allArea <= 1){
 	$("#next").css('display','none');
@@ -244,8 +258,8 @@ var clickNext = function(){
 	}
 	if(area == allArea){
 		$("#next").css('display','none');
-		if(area !=Math.floor(allElement/(instanceNum*areaToPageNum))){
-
+		if(allElement % instanceNum*areaToPageNum != 0){
+			
 			var page = allElement - (instanceNum*areaToPageNum*Math.floor(allElement/(instanceNum*areaToPageNum)))
 			var pageDiv = page/5
 			if(pageDiv !== parseInt(pageDiv, 10)){
@@ -255,9 +269,8 @@ var clickNext = function(){
 			for(var i=area;i<area+pageDiv;i++){
 				a = a+1
 				$("#page"+a).html(a+(5*(area-1)));
-				
 			}
-			for(var i =6-a;i>a;i--){
+			for(var i =a+1;i<6;i++){
 				$("#page"+i).html("");
 			}
 		}else{
@@ -277,11 +290,9 @@ var clickNext = function(){
 }
 var clickPrev = function(){
 	area -= 1;
+	$("#next").css('display','initial');
 	if(area == 1){
 		$("#prev").css('display','none');
-	}
-	if(area < allPage){
-		$("#next").css('display','initial');
 	}
 	var a= 1
 	for(var i=area ;i<area+5;i++){

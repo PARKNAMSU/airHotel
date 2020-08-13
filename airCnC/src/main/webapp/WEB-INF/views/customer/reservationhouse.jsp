@@ -40,14 +40,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:if test="${house == null }">
+		<script type="text/javascript">
+			alert("잘못 접근된 경로입니다.")
+			history.go(-1);
+		</script>
+	</c:if>
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
 				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1" >
+			<div class="menudiv3-1" id="div1" style="float:left;">
 				<ul id="menuItems">	
+						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
@@ -59,13 +66,35 @@
 						</li>
 				</ul>
 			</div>
+			<div style="width:50px;height:50px;margin-left:25px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+			</div>
+		</div>
+		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+					<ul>
+						<li><br></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+						<li style="margin-bottom:20px;"><a href="">회원탈퇴</a></li>
+						<li ><br></li>
+					</ul>
 		</div>
 	</header>
+	<script type="text/javascript">
+		$(function(){
+			$("#myinfo").click(function(){
+				$("#mydiv").fadeToggle("slow");
+			})
+		})
+	</script>
 	<div style="clear:both;margin-bottom:3%;"></div>
 	<c:if test="${house.accessType eq 'beforeres' || house.accessType eq 'notres'}">
 	<div id="middle2" style="width:80%;font-size:30px;margin-left:10%;">
 		<form action="payment.do" method="post" class="form-inline" id="dateForm">
-			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}">&nbsp;&nbsp;&nbsp;
+			<b>인원:</b>&nbsp;&nbsp;&nbsp;<input type="number" name="number" class="form-control" min="1" max="${house.house_maxperson}" id="numPerson" value="${house.house_person}" onkeydown="filterNumber(event);">&nbsp;&nbsp;&nbsp;
 			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
 			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
@@ -498,6 +527,8 @@ function dateFormSubmit(){
 		alert("체크인 시간을 입력하세요")
 	}else if(document.getElementById("checkout").value == null || document.getElementById("checkout").value == ""){
 		alert("체크아웃 시간을 입력하세요")
+	}else if(document.getElementById("numPerson").value == "0"){
+		alert("1명이상 예약 가능합니다")
 	}
 	else{
 		var ci_date = new Date(document.getElementById("checkin").value)
@@ -527,6 +558,9 @@ function resetDate(){
 	$("#checkin").datepicker('option','minDate',getFormatDate(new Date()))
 	$("#checkin").datepicker('option','maxDate',"")
 }
+function filterNumber(event) {
+	  event.preventDefault(); 
+	}
 </script>
 
 </html>

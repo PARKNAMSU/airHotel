@@ -31,7 +31,6 @@ public class MessageController {
 	/*채팅페이지*/
 	@RequestMapping(value = "/chat.do")
 	public ModelAndView chatController(HttpSession session, ModelAndView mav) {
-		session.setAttribute("login_session","skatn7979");//로그인 완료 시 제거
 		String id = (String)session.getAttribute("login_session");
 		List<MessageVO> messageList = messageService.getChatList(id);
 		System.out.println("msize"+messageList.size());
