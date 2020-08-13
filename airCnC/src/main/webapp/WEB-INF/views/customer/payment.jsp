@@ -85,16 +85,26 @@
 						</tr>
 						<tr class="noline">
 							<td><input class="btn btn-outline-danger" type="button"
-								value="결제하기" onclick="goPaymentFinal()"></td>
+								value="결제하기" onclick="goPaymentFinal('${checkin}', '${checkout}')"></td>
 							<script>
-                            function goPaymentFinal(){
+                            function goPaymentFinal(checkin, checkout){
                                 var form = document.createElement("form");
                                 var input = document.createElement("input");
+                                var input2 = document.createElement("input");
+                                var input3 = document.createElement("input");
                                 input.setAttribute("type", "hidden");
                                 input.setAttribute("name", "totalPrice");
                                 input.setAttribute("value", ${totalPrice});
+                                input2.setAttribute("type", "hidden");
+                                input2.setAttribute("name", "checkin");
+                                input2.setAttribute("value", checkin);
+								input3.setAttribute("type", "hidden");
+								input3.setAttribute("name", "checkout");
+								input3.setAttribute("value", checkout);
 
                                 form.appendChild(input);
+                                form.appendChild(input2);
+                                form.appendChild(input3);
 
 
                                 document.body.appendChild(form);

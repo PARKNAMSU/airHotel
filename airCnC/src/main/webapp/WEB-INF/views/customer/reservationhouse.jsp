@@ -98,7 +98,7 @@
 			<b>체크인:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkin" id="checkin"  max="" class="form-control" value="${house.check_in }">&nbsp;&nbsp;&nbsp;
 			<b>체크아웃:</b>&nbsp;&nbsp;&nbsp;<input type="text" name="checkout"  id="checkout" min="" class="form-control" value="${house.check_out }">&nbsp;&nbsp;&nbsp;
 			<input type="reset" value="초기화" class="btn btn-outline-danger" style="font-size:30px;" onclick="resetDate()">&nbsp;&nbsp;&nbsp;
-			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">			 
+			<input type="button" value="예약하기" class="btn btn-outline-danger" style="font-size:30px;" onclick="dateFormSubmit()">
 		</form>
 	</div>
 	</c:if>

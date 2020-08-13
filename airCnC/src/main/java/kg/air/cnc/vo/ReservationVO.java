@@ -1,5 +1,7 @@
 package kg.air.cnc.vo;
 
+
+
 import java.util.Date;
 
 public class ReservationVO {
@@ -12,10 +14,12 @@ public class ReservationVO {
     private int reservation_price;
     private Date reservation_check_in;
     private Date reservation_check_out;
-    private int reservation_prioud;
+    private int reservation_period;
     private String reservation_account;
     private String reservation_bank;
     private Date reservation_regdate;
+    private String card_apply_num;
+    private String imp_uid;
 
     public int getReservation_seq() {
         return reservation_seq;
@@ -89,12 +93,12 @@ public class ReservationVO {
         this.reservation_check_out = reservation_check_out;
     }
 
-    public int getReservation_prioud() {
-        return reservation_prioud;
+    public int getReservation_period() {
+        return reservation_period;
     }
 
-    public void setReservation_prioud(int reservation_prioud) {
-        this.reservation_prioud = reservation_prioud;
+    public void setReservation_period(int reservation_period) {
+        this.reservation_period = reservation_period;
     }
 
     public String getReservation_account() {
@@ -121,14 +125,30 @@ public class ReservationVO {
         this.reservation_regdate = reservation_regdate;
     }
 
+    public String getCard_apply_num() {
+        return card_apply_num;
+    }
+
+    public void setCard_apply_num(String card_apply_num) {
+        this.card_apply_num = card_apply_num;
+    }
+
+    public String getImp_uid() {
+        return imp_uid;
+    }
+
+    public void setImp_uid(String imp_uid) {
+        this.imp_uid = imp_uid;
+    }
+
     @Override
     public String toString() {
         return "ReservationVO [reservation_seq=" + reservation_seq + ", reservation_host_id=" + reservation_host_id
                 + ", reservation_customer_id=" + reservation_customer_id + ", reservation_status=" + reservation_status
                 + ", reservation_house_seq=" + reservation_house_seq + ", reservation_super_host="
                 + reservation_super_host + ", reservation_price=" + reservation_price + ", reservation_check_in="
-                + reservation_check_in + ", reservation_check_out=" + reservation_check_out + ", reservation_prioud="
-                + reservation_prioud + ", reservation_account=" + reservation_account + ", reservation_bank="
+                + reservation_check_in + ", reservation_check_out=" + reservation_check_out + ", reservation_period="
+                + reservation_period + ", reservation_account=" + reservation_account + ", reservation_bank="
                 + reservation_bank + ", reservation_regdate=" + reservation_regdate + "]";
     }
 

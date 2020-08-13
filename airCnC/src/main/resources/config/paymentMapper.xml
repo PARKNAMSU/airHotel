@@ -4,5 +4,14 @@
 
 <mapper namespace="kg.air.cnc.dao.payment.PaymentDAO">
 
+    <select id="getCustomerInfo" resultType="kg.air.cnc.vo.CustomerVO">
+        SELECT * FROM customer WHERE customer_id = #{customer_id}
+    </select>
+
+    <insert id="insertReservation" parameterType="kg.air.cnc.vo.ReservationVO">
+        INSERT INTO reservation VALUES(reservation_seq.nextval, #{reservation_host_id},
+        #{reservation_customer_id}, 0, #{reservation_house_seq}, 0, #{reservation_price}, #{reservation_check_in},
+         #{reservation_check_out}, #{reservation_period}, '', '', #{reservation_regdate}, #{card_apply_num}, #{imp_uid})
+    </insert>
 
 </mapper>
