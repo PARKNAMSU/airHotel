@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -84,6 +85,15 @@
     <div class="couponimage" style="margin-top: 50px;">
       <img src="/Mainwork2/images/partyroom.jpg" alt="" />
     </div>
+    <ol>
+    <c:forEach items="${cuponList}" var="cupon">
+    	<c:set var="dis" value="${cupon.cupon_discount_money }"/>
+    	<li>쿠폰 번호: ${cupon.cupon_number },
+    	<c:if test="${dis eq 0}">할인 율: ${cupon.cupon_discount_rate}%,</c:if>
+    	<c:if test="${dis ne 0}">할인 금액: ${cupon.cupon_discount_money },</c:if>
+    	유효기간: ${cupon.cupon_limit}</li>
+    </c:forEach>
+    </ol>
     <footer></footer>
     <script type="text/javascript">
       function openChat(url) {

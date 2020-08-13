@@ -70,15 +70,17 @@
 									type="submit" value="쿠폰사용"
 									class="btn btn-outline-danger" /></a>
 								<div class="popup" data-popup="example">
+								<form action="checkNumber.do">
 									<div class="popup-inner">
 										<div class="popup-contents"
 											style="text-align: center; margin-top: 15px;">
 											<a class="popup-close" data-popup-close="example" href="#">X</a>
 											<label for="" style="font-size: 30px; font-weight: bold;">쿠폰리스트</label></br>
-											<input type="text">&nbsp;
-											<button>검색</button>
+											<input type="text" name="cuponNumber">&nbsp;
+											<input type="submit" value="검색"> 
 										</div>
 									</div>
+								</form>
 								</div></td>
 						</tr>
 						<tr class="noline">

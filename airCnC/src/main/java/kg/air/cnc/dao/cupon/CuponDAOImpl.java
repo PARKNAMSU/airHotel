@@ -21,11 +21,11 @@ public class CuponDAOImpl {
 	public void useCupon(String cuponNumber) {
 		mybatis.delete("cuponDAO.makeCupon", cuponNumber);
 	}
-
+	*/
 	public CuponVO checkNumber(String cuponNumber) {
 		return mybatis.selectOne("cuponDAO.checkNumber", cuponNumber);
 	}
-	*/
+	
 	public List<CuponVO> getCuponList(String id) {
 		return mybatis.selectList("cuponDAO.getCuponList", id);
 	}
