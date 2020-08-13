@@ -246,7 +246,7 @@
 				<button class="btn btn-outline-danger" id="btn3" style="font-family: 'Jua', sans-serif;font-size:20px;" onclick="cancelReservation(${house.reservation_seq})">예약취소</button>
 				</c:when>
 				<c:when test="${house.accessType eq 'host' }">
-				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;">수정하기</button>
+				<button class="btn btn-outline-danger" id="btn4" style="font-family: 'Jua', sans-serif;font-size:20px;" onclick="openHouseModify(${house.house_seq})" >수정하기</button>
 				</c:when>
 			</c:choose>
 	</div>
@@ -396,7 +396,7 @@ var storeFavoriteHouse = function(house_seq){
 				house_seq:house_seq
 			},
 			success:function(data){
-				window.location.reload()
+				window.location.reload(true)
 			},
 	        error : function(request, status, error) {
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -414,7 +414,8 @@ var removeFavoriteHouse = function(house_seq){
 				house_seq:house_seq
 			},
 			success:function(data){
-				window.location.reload()
+				await sleep(5000)
+				window.location.reload(true)
 			},
 	        error : function(request, status, error) {
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
@@ -558,6 +559,26 @@ function resetDate(){
 function filterNumber(event) {
 	  event.preventDefault(); 
 	}
+	
+function openHouseModify(house_seq){
+	var form = document.createElement("form");
+	var input = new Array()
+	var names = ["house_seq"]
+	var values = [house_seq]
+    form.action = "house_revise.do";
+    form.method = "post";
+    
+    for (var i = 0; i < 3; i++) {
+    	            
+    	input[i] = document.createElement("input");
+        input[i].setAttribute("type", "hidden");
+        input[i].setAttribute('name', names[i]);
+        input[i].setAttribute("value", values[i]);
+        form.appendChild(input[i]);
+    }
+    document.body.appendChild(form);
+    form.submit();
+}
 </script>
 
 </html>

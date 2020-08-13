@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div style="width:90%;margin-left:10%;font-family: 'Jua', sans-serif;color:black;">
-		<div style="font-size:40px;margin-top:10%;"><h1>이전 예약자 리스트(이름 클릭시 해당유저와 대화)</h1></div>
+		<div style="font-size:40px;margin-top:10%;"><h1>이전 예약자 리스트</h1></div>
 		<div style="margin-top:10%;margin-left:0%;">
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
