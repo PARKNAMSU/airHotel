@@ -634,5 +634,30 @@
 			chgOptions();
 		}
 	</script>
+	<script type="text/javascript">
+		window.onload = function(){
+		     $.ajax({
+		           type:"GET",
+		           url:"http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=b7672f5a9052b4493d3d1a41da66f308",
+		           dataType:"json",
+		           async:"false",
+		           success : function(data) {
+		                console.log("현재온도 : "+ (data.main.temp- 273.15) );
+		                console.log("현재습도 : "+ data.main.humidity);
+		                console.log("날씨 : "+ data.weather[0].main );
+		                console.log("상세날씨설명 : "+ data.weather[0].description );
+		                console.log("날씨 이미지 : "+ data.weather[0].icon );
+		                console.log("바람   : "+ data.wind.speed );
+		                console.log("나라   : "+ data.sys.country );
+		                console.log("도시이름  : "+ data.name );
+		                console.log("구름  : "+ (data.clouds.all) +"%" );    
+		           },
+		           error : function(request, status, error) {
+		        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+		           }
+		     });
+			
+		}
+	</script>
 </body>
 </html>
