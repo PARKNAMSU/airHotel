@@ -64,7 +64,7 @@ public class HouseDAOImpl implements HouseDAO {
 
 	@Override
 	public void updateHouse_guestcomfortable(House_InfoVO vo) {
-		sqlSessionTemplate.update("product.updateHouse_gusetcomfortable", vo);
+		sqlSessionTemplate.update("product.updateHouse_guestcomfortable", vo);
 	}
 
 	
