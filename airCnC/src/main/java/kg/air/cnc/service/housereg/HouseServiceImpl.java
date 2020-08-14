@@ -54,4 +54,24 @@ public class HouseServiceImpl implements HouseService {
 		return houseVO;
 	}
 
+	@Override
+	public void updateHouse_bathcount(House_InfoVO vo) {
+		houseDao.updateHouse_bathcount(vo);
+	}
+
+	@Override
+	public void updateHouse_location(House_InfoVO vo) {
+		houseDao.updateHouse_location(vo);
+	}
+
+	@Override
+	public void updateHouse_defaultoption(House_InfoVO vo) {
+		houseDao.updateHouse_defaultoption(vo);
+	}
+
+	@Override
+	public void updateHouse_guestcomfortable(House_InfoVO vo) {
+		houseDao.updateHouse_guestcomfortable(vo);
+	}
+
 }
