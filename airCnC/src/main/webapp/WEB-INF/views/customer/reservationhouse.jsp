@@ -330,13 +330,11 @@
 		</div>
 		</c:if>
 	</div>
-	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
+	<div class="mapdiv" style="font-family: 'Jua', sans-serif;margin-bottom:30%;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>
 		<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div><br>
 		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="openFindMap('${house.house_name}',${house.fhouse_xlocation},${house.fhouse_ylocation})">길찾기</button>
-		<div id="map" ></div>
 	</div>
-
 	<footer>
 		<%@include file="../html/footer.jsp" %>
 	</footer>

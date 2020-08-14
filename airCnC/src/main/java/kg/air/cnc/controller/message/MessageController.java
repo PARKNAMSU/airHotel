@@ -19,7 +19,7 @@ import kg.air.cnc.vo.MessageVO;
 public class MessageController {
 	@Autowired
 	MessageService messageService;
-	
+
 	/*메세지 보내기*/
 	@RequestMapping(value="/insertMessage.do")
 	public ModelAndView insertMessageController(MessageVO vo,ModelAndView mav) {
