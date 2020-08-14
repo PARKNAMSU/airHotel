@@ -29,7 +29,7 @@ public class PaymentController {
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
         session = httpServletRequest.getSession();
-        ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house");
+        ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house_detail");
         reservationHouseDetailVO.setHouse_price_default(12345);
         String id = (String)session.getAttribute("login_session");
         if(id == null){
@@ -58,7 +58,7 @@ public class PaymentController {
         String customer_id = (String) session.getAttribute("login_session");
         System.out.println("session에서 받아온 customer_id : " + customer_id);
         CustomerVO customerVO = paymentService.getCustomerInfo(customer_id); // 커스터머 정보 추출
-        ReservationHouseDetailVO houseInfo = (ReservationHouseDetailVO) session.getAttribute("house");
+        ReservationHouseDetailVO houseInfo = (ReservationHouseDetailVO) session.getAttribute("house_detail");
         mav.addObject("customerInfo", customerVO);
         mav.addObject("totalPrice", price);
         mav.addObject("house", houseInfo);

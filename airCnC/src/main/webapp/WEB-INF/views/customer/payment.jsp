@@ -23,17 +23,7 @@
 	<!-- header-start -->
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<img alt=""
-				src="${pageContext.request.contextPath}/resources/images/logo2.png">
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<li class="item">호스트</li>
-					<!-- 히든으로 리스트 -->
-					<li class="item">로그인</li>
-				</ul>
-			</div>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" onclick="location.href='/cnc/indexView.do'">
 		</div>
 	</header>
 	<!-- header-end -->
