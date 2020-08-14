@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/menu.css?version=123">
+	href="${pageContext.request.contextPath}/resources/css/menu.css?version=123"><!--  -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
@@ -120,7 +120,6 @@
 	<div class="content">
 		<label1 for="content">Travelo</label1>
 	</div>
-
 
 	<div class="searchOptions">
 		<form action="searchIndex.do">
