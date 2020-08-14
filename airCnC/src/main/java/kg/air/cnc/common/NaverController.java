@@ -18,7 +18,7 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 public class NaverController {
 
 	private final static String CLIENT_ID = "o0jwpGYCKGhXkDzRGdbK";
-	private final static String CLIENT_SECRET = "Y3C4cITrQHv";
+	private final static String CLIENT_SECRET = "Y3C4cITrQH";
 	private final static String REDIRECT_URI = "http://localhost:8080/cnc/naverlogin.do";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */ 
