@@ -61,7 +61,7 @@ public class ReservationDetailController {
 		ReservationHouseDetailVO house = null;
 		if (vo.getHouse_seq() > 0) {
 			house = reservationService.getReservationHouse(vo);
-			session.setAttribute("house", house);
+			session.setAttribute("house_detail", house);
 			session.setAttribute("house_seq", vo.getHouse_seq());
 			house.setReservation_seq(vo.getReservation_seq());
 			house.setAccessType(vo.getAccessType());

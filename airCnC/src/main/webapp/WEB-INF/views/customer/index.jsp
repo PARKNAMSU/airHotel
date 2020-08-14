@@ -106,6 +106,7 @@
 					</ul>
 		</div>
 	</header>
+
 	<script type="text/javascript">
 		$(function(){
 			$("#myinfo").click(function(){
@@ -119,6 +120,19 @@
     <div class="content">
         <label1 for="content">Travelo</label1>
     </div>
+    
+    <div style="z-index:10;margin-left:85%;margin-top:5%;width:300px;height:300px;position:absolute;">
+   		<p id="weathercity" style="font-size:50px;"></p><br><br>
+   		<div style="width:50%;float:left;">
+			<img src=""  id="weathericon" style="width:64px;height:64px;vertical-align:top;"><b id="templature" style="font-size:40px;"></b>
+		</div>
+		<div style="width:50%;float:left;font-size: 30px;">
+			<b>습도: </b><b id="rainy"></b><br><br>
+			<b>구름: </b><b id="cloud"></b><br><br>
+			<b>풍속: </b><b id="wind"></b><br><br>
+		</div>
+	</div>
+
     <div class="searchOptions">
         <form action="searchIndex.do">
            <div class="srcachlocation" style="vertical-align: middle;">
@@ -635,14 +649,16 @@
 		}
 	</script>
 	<script type="text/javascript">
+		var citys = ["Seoul","Busan","","Gwangju","Jeju",]
+	
 		window.onload = function(){
 		     $.ajax({
 		           type:"GET",
-		           url:"http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=b7672f5a9052b4493d3d1a41da66f308",
+		           url: "http://api.openweathermap.org/data/2.5/weather?q=Jeju&appid=b7672f5a9052b4493d3d1a41da66f308",
 		           dataType:"json",
 		           async:"false",
 		           success : function(data) {
-		                console.log("현재온도 : "+ (data.main.temp- 273.15) );
+		                console.log("현재온도 : "+ Math.round((data.main.temp- 273.15)) );
 		                console.log("현재습도 : "+ data.main.humidity);
 		                console.log("날씨 : "+ data.weather[0].main );
 		                console.log("상세날씨설명 : "+ data.weather[0].description );
@@ -650,7 +666,13 @@
 		                console.log("바람   : "+ data.wind.speed );
 		                console.log("나라   : "+ data.sys.country );
 		                console.log("도시이름  : "+ data.name );
-		                console.log("구름  : "+ (data.clouds.all) +"%" );    
+		                console.log("구름  : "+ (data.clouds.all) +"%" );
+		                $("#weathercity").html(data.name)
+		                $("#templature").html(Math.round((data.main.temp- 273.15))+"°C")
+		                $("#weathericon").attr("src","http://openweathermap.org/img/w/"+data.weather[0].icon+".png")
+		                $("#rainy").html(data.main.humidity+"%")
+		                $("#cloud").html((data.clouds.all) +"%")
+		                $("#wind").html(data.wind.speed+"m/s")
 		           },
 		           error : function(request, status, error) {
 		        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
