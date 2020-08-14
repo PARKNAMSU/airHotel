@@ -23,17 +23,7 @@
 	<!-- header-start -->
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<img alt=""
-				src="${pageContext.request.contextPath}/resources/images/logo2.png">
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<li class="item">호스트</li>
-					<!-- 히든으로 리스트 -->
-					<li class="item">로그인</li>
-				</ul>
-			</div>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" onclick="location.href='/cnc/indexView.do'">
 		</div>
 	</header>
 	<!-- header-end -->
@@ -80,6 +70,7 @@
 												var getData = [];
 												var justOne = 0;
 												var finalPrice = '${totalPrice}';
+												var num = document.getElementById("cuponNum");
 												window.onload = function() {
 													$.ajax({
 														type:"GET",
@@ -96,7 +87,7 @@
 												var getCupon = function() {
 													if(justOne>=1) return;
 													let flag = false;
-													var num = document.getElementById("cuponNum");
+													num = document.getElementById("cuponNum");
 													for(var idx=0; idx<getData.length; idx++){
 														if(getData[idx].cupon_number===num.value){
 															justOne++;
@@ -127,6 +118,7 @@
                                 var input = document.createElement("input");
                                 var input2 = document.createElement("input");
                                 var input3 = document.createElement("input");
+                                var input4 = document.createElement("input");
                                 input.setAttribute("type", "hidden");
                                 input.setAttribute("name", "totalPrice");
 								input.setAttribute("value", finalPrice);
@@ -136,12 +128,14 @@
 								input3.setAttribute("type", "hidden");
 								input3.setAttribute("name", "checkout");
 								input3.setAttribute("value", checkout);
-
+								input4.setAttribute("type", "hidden");
+								input4.setAttribute("name", "cuponNum");
+								input4.setAttribute("value", num.value);
 
                                 form.appendChild(input);
                                 form.appendChild(input2);
                                 form.appendChild(input3);
-
+								form.appendChild(input4);
 
                                 document.body.appendChild(form);
                                 form.action = "paymentfinal.do";

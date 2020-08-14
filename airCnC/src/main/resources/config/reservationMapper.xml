@@ -12,10 +12,10 @@
 	</select>
 
 	<select id="getMyReservationHouse" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
-		 SELECT house_seq, house_maxperson,house_bed_type_single, house_bed_type_double, house_bed_type_queen, house_bathroom_amount, house_location, house_location_sido,house_location_gugun, house_location_postnum, house_default_tv, house_default_wifi,house_default_heater,
+		 SELECT house_seq, house_maxperson,house_bed_type_single, house_bed_type_double, house_bed_type_queen, house_bathroom_amount, house_location, house_location_sido,house_location_gugun, house_location_postnum, house_default_tv, house_default_wifi,house_default_heater, house_xlocation ,house_ylocation,
 		 house_defaultsetting ,house_default_cooler, house_default_iron, house_default_fireditecter, house_default_coditecter, house_default_aidkit, house_default_firesofwa, house_default_bedrock, house_default_livingroom_type, house_default_kitchen, house_default_laundry_washer, house_default_laundry_dryer,
 		 house_default_parking, house_default_gym, house_default_pool, house_desc1,house_desc2,house_desc3,house_desc4,house_desc5, house_photourl, house_name, house_condition_childok, house_condition_babyok,house_condition_petok, house_condition_smokeok, house_condition_partyok,
-		 house_restrict_stairs,house_restrict_noise, house_restrict_cantpark, house_restrict_pet ,house_restrict_commonspace, house_restrict_facility, house_restrict_cctv, house_restrict_weapon, house_restrict_beast, house_price_max, house_xlocation,house_ylocation, house_checkin_time as house_checkin_time,
+		 house_restrict_stairs,house_restrict_noise, house_restrict_cantpark, house_restrict_pet ,house_restrict_commonspace, house_restrict_facility, house_restrict_cctv, house_restrict_weapon, house_restrict_beast, house_price_max, house_checkin_time as house_checkin_time,
 		 house_checkout_time as house_checkout_time, house_regdate,h.host_name as host_name,h.host_id as host_id, h.host_phone as host_phone, h.host_regdate as host_regdate from house_info join host h on house_host_id = host_id where house_seq = #{house_seq} 
 	</select>
 	<select id="getFavoriteHouse" parameterType="String" resultType="String">

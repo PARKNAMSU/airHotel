@@ -1,6 +1,11 @@
+.popular_destination_area {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .mainview {
   position: relative;
-  background-image: url(/Mainwork/images/main/mainview.gif);
+  background-image: url(../images/main/mainview.gif);
   height: 100vh;
   background-size: cover;
 }
@@ -19,6 +24,7 @@
   color: gray;
   z-index: 2;
 }
+
 .mainview .searchOptions {
   margin-top: 8%;
   margin-left: 25%;
@@ -27,9 +33,10 @@
   color: gray;
   z-index: 2;
 }
+
 @media screen and (max-width: 768px) {
   .img-cover {
-    background-image: url(/Mainwork/images/main/mainback1.png);
+    background-image: url(../images/main/mainview.gif);
   }
   .mainview .content {
     display: none;

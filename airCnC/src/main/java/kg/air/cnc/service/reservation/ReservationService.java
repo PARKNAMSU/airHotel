@@ -58,6 +58,13 @@ public class ReservationService implements ReservationServiceImpl {
 		house = reservationDAO.getReservationHouse(vo);
 		ArrayList<String> convinList = new ArrayList<String>();
 		Utils utils = new Utils();
+			try {
+				System.out.println(vo.getHouse_xlocation());
+				house.setFhouse_xlocation(Float.valueOf(house.getHouse_xlocation()));
+				house.setFhouse_ylocation(Float.valueOf(house.getHouse_ylocation()));
+				System.out.println(vo.getFhouse_xlocation());
+			} catch (Exception e) {e.printStackTrace();}
+		
 		if(!utils.stringNullCheck(house.getHouse_name())) {
 			if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("구급상자");
 			

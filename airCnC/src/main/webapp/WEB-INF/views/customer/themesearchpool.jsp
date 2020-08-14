@@ -159,26 +159,33 @@
             });
         }
         function getMoreData() {
-            for(var i = showed; i < showed+1; i++){
-                $("#mother").append(
-                    "<div class=\"col-lg-4 col-md-1\">" +
-                    "<form id=" + getData[i].house_seq + " name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse(" + getData[i].house_seq + ")\">" +
-                    "<input type=\"hidden\" name=\"house_seq\" value=" + getData[i].house_seq + ">" +
-                    "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
-                    "<div class=\"thumb\">" +
-                    "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
-                    "</div>" +
-                    " <div class=\"info\">" +
-                    "<a href=\"#\">" +
-                    "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
-                    "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
-                    "</a>" +
-                    "</div>" +
-                    "</div>" +
-                    "</form>"
-                );
+            var accessType = "notres";
+            if(getData.length > 10 ){
+                for(var i = showed; i < showed+1; i++){
+                    $("#mother").append(
+                        "<div class=\"col-lg-4 col-md-1\">" +
+                        "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
+                        "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                        "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
+                        "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
+                        "<div class=\"thumb\">" +
+                        "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                        "</div>" +
+                        " <div class=\"info\">" +
+                        "<a href=\"#\">" +
+                        "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
+                        "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                        "</a>" +
+                        "</div>" +
+                        "</div>" +
+                        "</form>"
+                    );
+                }
+                showed++;
+            } else {
+                alert("모든 숙소가 조회되었습니다.");
             }
-            showed++;
+
         }
     </script>
 </footer>

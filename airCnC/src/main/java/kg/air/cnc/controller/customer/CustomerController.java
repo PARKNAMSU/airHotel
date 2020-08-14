@@ -86,14 +86,14 @@ public class CustomerController {
 
 	// 비밀번호 찾기 이메일 전송.
 	@RequestMapping(value = "/sendPassword.do",  method = RequestMethod.POST)
-	public String sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+	@ResponseBody
+	public ModelAndView sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response, ModelAndView mav)throws Exception{
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		int resultCnt = 0; // // 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
 		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
-			out.println("<script>alert('회원가입 인증이 되지 않은 이메일입니다.'); $(\"#customerEmail\").focus();</script>");
-			out.flush();
+			mav.addObject("sendMessage", "fail");
 		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
 			char[] keySet = new char[] { 
 					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -117,13 +117,13 @@ public class CustomerController {
 			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
 			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
 			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
-			out.println("<script>alert('임시 비밀번호를 발송하였습니다.');</script>");
-			out.flush();
+			System.out.println("비밀번호 변경 완료");
+			mav.addObject("sendMessage", "success");
 		} else {
-			out.println("<script>alert('임시 비밀번호 발송 오류'); $(\"#customerEmail\").focus();</script>");
-			out.flush();
+			mav.addObject("sendMessage", "error");
 		}
-		return "forgotpassword";
+		mav.setViewName("forgotpassword");
+		return mav;
 	}
 
 	// 아이디 중복 여부 검사.
@@ -135,25 +135,21 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response, CustomerVO vo)throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception {
 		// 결과값을 node에 보여줌.
 		JsonNode node = kakaoController.getAccessToken(code);
 		// accessToken에 사용자의 로그인한 모든 정보가 들어있음.
 		JsonNode accessToken = node.get("access_token");
-		// 사용자의 정보.
-		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
-		String kid = null;
-		String kemail = null;
-		String kname = null;
-		String kimage = null;
 		// 사용자 정보를 카카오에서 가져오기.
+		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
-		kid = userInfo.path("id").asText();
-		kemail = kakaoAccount.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kimage = properties.path("profile_image").asText();
+		String kid = userInfo.path("id").asText();
+		String kemail = kakaoAccount.path("email").asText();
+		String kname = properties.path("nickname").asText();
+		String kimage = properties.path("profile_image").asText();
+		
+		// DB에 사용자 정보를 넣기 전 VO 세팅.
 		vo.setCustomer_id(kemail);
 		vo.setCustomer_password("none");
 		vo.setCustomer_name(kname);
@@ -168,19 +164,29 @@ public class CustomerController {
 			vo.setCustomer_image("none");
 		}
 		vo.setCustomer_key("kakao");
-		service.register(vo);
-		session.setAttribute("login_session", kemail);
-		session.setAttribute("social_type", "kakao");
-		mav.setViewName("index");
-		return mav;
+		
+		// 로그인 하기 전 id와 email이 DB에 있는지 확인. 있으면 1, 없으면 0이 리턴.
+		int idCheckResult = service.idCheck(vo);
+		int emailCheckResult = service.createEmailCheck(kid);
+		
+		if (idCheckResult == 1 && emailCheckResult == 1) {
+			session.setAttribute("login_session", kemail);
+			session.setAttribute("social_type", "kakao");
+			mav.setViewName("index");
+			return mav;
+		}else {
+			service.register(vo);
+			session.setAttribute("login_session", kemail);
+			session.setAttribute("social_type", "kakao");
+			mav.setViewName("index");
+			return mav;
+		}
 	}
 
 	// 네이버 로그인 성공시 callback메서드 호출.
 	@RequestMapping(value = "/naverlogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session)throws IOException, ParseException{
-		ModelAndView mav = new ModelAndView(); 
-		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state); 
-
+	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception, IOException, ParseException{
+		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state);
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
 		apiResult = naverController.getUserProfile(oauthToken); 
 
@@ -192,16 +198,39 @@ public class CustomerController {
 		} catch (ParseException e) {
 			e.printStackTrace(); 
 		} 
-		JSONObject jsonobj = (JSONObject) obj; 
+		JSONObject jsonobj = (JSONObject)obj; 
 
 		// 데이터 파싱.
 		JSONObject response = (JSONObject) jsonobj.get("response"); 
-		String naver_name = (String) response.get("name"); 
-		String naver_email = (String) response.get("email");
-		session.setAttribute("login_session", naver_email);
-		session.setAttribute("social_type", "naver");
-		mav.setViewName("index"); 
-		return mav;
+		String naverId = (String) response.get("id");
+		String naverName = (String) response.get("name"); 
+		String naverEmail = (String) response.get("email");
+		String naverProfileImage = (String) response.get("profile_image");
+		
+		// DB에 네이버 사용자 정보를 저장하기 위한 VO 세팅.
+		vo.setCustomer_id(naverEmail);
+		vo.setCustomer_password("none");
+		vo.setCustomer_name(naverName);
+		vo.setCustomer_email(naverId);
+		vo.setCustomer_image(naverProfileImage);
+		vo.setCustomer_phone("none");
+		vo.setCustomer_key("naver");
+		
+		int idCheckResult = service.idCheck(vo);
+		int emailCheckResult = service.createEmailCheck(naverId);
+		
+		if (idCheckResult == 1 && emailCheckResult == 1) {
+			session.setAttribute("login_session", naverEmail);
+			session.setAttribute("social_type", "naver");
+			mav.setViewName("index"); 
+			return mav;
+		}else {
+			service.register(vo);
+			session.setAttribute("login_session", naverEmail);
+			session.setAttribute("social_type", "naver");
+			mav.setViewName("index"); 
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)
@@ -289,7 +318,7 @@ public class CustomerController {
 
 	// 로그인 처리.
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
-	public String loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+	public ModelAndView loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response, ModelAndView mav)throws Exception{
 
 		String returnURL = "";
 		if (session.getAttribute("login_session") != null) {
@@ -302,43 +331,40 @@ public class CustomerController {
 		CustomerVO customerDbVO = service.customerCheck(inputId);
 		if (customerDbVO == null) {
 			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
-			out.flush();
-			return "login";
-		}
-		String dbPassword = customerDbVO.getCustomer_password();
-		String inputPassword = customerVO.getCustomer_password();
-
-		// 인증 진행.
-		if (!passwordEncoder.matches(inputPassword, dbPassword)) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
-			out.flush();
-			return "login";
+			mav.addObject("sendMessage", "idFail");
+			mav.setViewName("login");
 		}else {
-			boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
-			System.out.println("비밀번호 일치 결과 : " + passwordResult);
-			// 로그인이 성공하면 CustomerVO객체를 반환.
-			CustomerVO vo = service.login(customerVO);
-			if (vo != null) { // 로그인 성공.
-				session.setAttribute("login_session", vo.getCustomer_id());
-				returnURL = "index";
-				if (customerVO.isUseCookie()) {
-					Cookie cookie = new Cookie("loginCookie", session.getId());
-					cookie.setPath("/");
-					int amount = 60 * 60 * 24 * 7;
-					cookie.setMaxAge(amount);
-					response.addCookie(cookie);
-					Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
-					service.keepLogin(vo.getCustomer_id(), session.getId(), sessionLimit);
-				}
+			String dbPassword = customerDbVO.getCustomer_password();
+			String inputPassword = customerVO.getCustomer_password();
+
+			// 인증 진행.
+			if (!passwordEncoder.matches(inputPassword, dbPassword)) {
+				response.setContentType("text/html; charset=UTF-8");
+				mav.addObject("sendMessage", "pwFail");
+				mav.setViewName("login");
 			}else {
-				returnURL = "login";
+				boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
+				System.out.println("비밀번호 일치 결과 : " + passwordResult);
+				// 로그인이 성공하면 CustomerVO객체를 반환.
+				CustomerVO vo = service.login(customerVO);
+				if (vo != null) { // 로그인 성공.
+					session.setAttribute("login_session", vo.getCustomer_id());
+					mav.setViewName("index");
+					if (customerVO.isUseCookie()) {
+						Cookie cookie = new Cookie("loginCookie", session.getId());
+						cookie.setPath("/");
+						int amount = 60 * 60 * 24 * 7;
+						cookie.setMaxAge(amount);
+						response.addCookie(cookie);
+						Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+						service.keepLogin(vo.getCustomer_id(), session.getId(), sessionLimit);
+					}
+				}else {
+					mav.setViewName("login");
+				}
 			}
-			return returnURL;
 		}
+		return mav;
 	}
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})

@@ -29,9 +29,13 @@ public class PaymentController {
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
         session = httpServletRequest.getSession();
-        ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house");
+        ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house_detail");
         reservationHouseDetailVO.setHouse_price_default(12345);
         String id = (String)session.getAttribute("login_session");
+        if(id == null){
+            mav.setViewName("login");
+            return mav;
+        }
         ArrayList<String> restrictList = reservationHouseDetailVO.getRestricList();
         ArrayList<String> convinList = reservationHouseDetailVO.getConvinList();;
         int totalDay = paymentService.calculatePay(httpServletRequest.getParameter("checkin"), httpServletRequest.getParameter("checkout"));
@@ -54,12 +58,14 @@ public class PaymentController {
         String customer_id = (String) session.getAttribute("login_session");
         System.out.println("session에서 받아온 customer_id : " + customer_id);
         CustomerVO customerVO = paymentService.getCustomerInfo(customer_id); // 커스터머 정보 추출
-        ReservationHouseDetailVO houseInfo = (ReservationHouseDetailVO) session.getAttribute("house");
+        ReservationHouseDetailVO houseInfo = (ReservationHouseDetailVO) session.getAttribute("house_detail");
+        System.out.println("request에서 받아온 쿠폰 정보 : "+httpServletRequest.getParameter("cuponNum"));
         mav.addObject("customerInfo", customerVO);
         mav.addObject("totalPrice", price);
         mav.addObject("house", houseInfo);
         mav.addObject("checkin",  httpServletRequest.getParameter("checkin"));
         mav.addObject("checkout", httpServletRequest.getParameter("checkout"));
+        mav.addObject("cuponNum", httpServletRequest.getParameter("cuponNum"));
         mav.setViewName("paymentfinal");
         return mav;
     }
@@ -67,7 +73,8 @@ public class PaymentController {
     @RequestMapping(value = "paymentcomplete.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     @ResponseBody
     public ModelAndView paycomplete(ModelAndView mav,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody HashMap<String, Object> request) {
-        paymentService.insertReservation(request);
+    	paymentService.insertReservation(request);
+        cuponService.useCupon((String)request.get("cuponNum"));
         /* 거래내역 조회 token 가져오기
         imp_uid = 거래고유 번호
         JSONObject json = new JSONObject();
