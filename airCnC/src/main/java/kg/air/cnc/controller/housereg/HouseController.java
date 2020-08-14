@@ -286,22 +286,22 @@ public class HouseController {
 	public String update_guestcomfortablework(@ModelAttribute("house") House_InfoVO house, Model model) {
 		if(house.getHouse_default_livingroom_type_0or1().equals("false")) {house.setHouse_default_livingroom_type("false");} 
 		else {house.setHouse_default_livingroom_type("true");}
-		if(house.getHouse_default_kitchen_0or1().equals("false")) {house.setHouse_default_kitchen("false");} 
+		if(house.getHouse_default_kitchen_0or1()==null) {house.setHouse_default_kitchen("false");} 
 		else {house.setHouse_default_kitchen("true");}
-		if(house.getHouse_default_laundry_washer_0or1().equals("false")) {house.setHouse_default_laundry_washer("false");} 
+		if(house.getHouse_default_laundry_washer_0or1()==null) {house.setHouse_default_laundry_washer("false");} 
 		else {house.setHouse_default_laundry_washer("true");}
-		if(house.getHouse_default_laundry_dryer_0or1().equals("false")) {house.setHouse_default_laundry_dryer("false");} 
+		if(house.getHouse_default_laundry_dryer_0or1()==null) {house.setHouse_default_laundry_dryer("false");} 
 		else {house.setHouse_default_laundry_dryer("true");}
-		if(house.getHouse_default_parking_0or1().equals("false")) {house.setHouse_default_parking("false");} 
+		if(house.getHouse_default_parking_0or1()==null) {house.setHouse_default_parking("false");} 
 		else {house.setHouse_default_parking("true");}
-		if(house.getHouse_default_gym_0or1().equals("false")) {house.setHouse_default_gym("false");} 
+		if(house.getHouse_default_gym_0or1()==null) {house.setHouse_default_gym("false");} 
 		else {house.setHouse_default_gym("true");}
-		if(house.getHouse_default_pool_0or1().equals("false")) {house.setHouse_default_pool("false");} 
+		if(house.getHouse_default_pool_0or1()==null) {house.setHouse_default_pool("false");} 
 		else {house.setHouse_default_pool("true");}
-		System.out.println("수정 중 livingroom_type111 : " + house.getHouse_default_livingroom_type_0or1());
+		System.out.println("수정 중 livingroom_type왜왜왜 : " + house.getHouse_default_livingroom_type_0or1());
 		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_livingroom_type());
 		
-		System.out.println("수정 중 pool111 : " + house.getHouse_default_pool_0or1());
+		System.out.println("수정 중 pool왜왜왜 : " + house.getHouse_default_pool_0or1());
 		System.out.println("수정 중 pool : " + house.getHouse_default_pool());
 		houseService.updateHouse_guestcomfortable(house);
 		System.out.println("6guestcomfortable 수정완료");
