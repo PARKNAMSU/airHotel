@@ -11,32 +11,12 @@
 </head>
 <body>
 <!-- header-start -->
-<header class="menudiv1" style="position: sticky;">
-    <div class="menudiv2-1">
-        <img alt="" src="${pageContext.request.contextPath}/resources/image/trip/logo2.png" />
+<header style="color: #ff5a5f;">
+    <div class="headermenu">
+        <span><i class="fas fa-user-slash" style="font-size: 35px; float: left;"></i></span>
+        <label for="" style="font-size: 40px; background-color: black; color: #ff5a5f;">신고관련 페이지</label>
     </div>
-    <div class="menudiv2-2" style="margin-left:56%">
-        <div class="menudiv3-1" id="div1" >
-            <ul id="menuItems" >
-                <c:catch>
-                    <c:choose>
-                        <c:when test="${admin_session eq null}">
-                            <script>history.go(-1);</script>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo" style="color:white;">신고관리</a></li>
-                            <li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo" style="color:white;">통계</a></li>
-                            <li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo" style="color:white;">호스트관리</a></li>
-                            <li class="item"><a href="http://localhost:8080/cnc/logPage.mdo" style="color:white;">로그관리</a></li>
-                            <li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo" style="color:white;">쿠폰관리</a></li>
-                            <li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" style="color:white;">게시판관리</a></li>
-                            <li class="item"><a href="/cnc/logout.mdo" style="color:white;">로그아웃</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:catch>
-            </ul>
-        </div>
-    </div>
+
 </header>
 <!-- header-end -->
 
