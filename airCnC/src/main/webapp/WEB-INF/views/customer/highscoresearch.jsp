@@ -157,11 +157,13 @@
             });
         }
         function getMoreData() {
+            var accessType = "notres";
             for(var i = showed; i < showed+1; i++){
                 $("#mother").append(
                     "<div class=\"col-lg-4 col-md-1\">" +
-                    "<form id=\"houseInfo\" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse()\">" +
-                    "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                    "<form id=" + getData[i].house_seq + " name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse(" + getData[i].house_seq + ")\">" +
+                    "<input type=\"hidden\" name=\"house_seq\" value=" + getData[i].house_seq + ">" +
+                    "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                     "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                     "<div class=\"thumb\">" +
                     "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +

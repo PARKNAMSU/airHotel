@@ -32,6 +32,10 @@ public class PaymentController {
         ReservationHouseDetailVO reservationHouseDetailVO =  (ReservationHouseDetailVO)session.getAttribute("house");
         reservationHouseDetailVO.setHouse_price_default(12345);
         String id = (String)session.getAttribute("login_session");
+        if(id == null){
+            mav.setViewName("login");
+            return mav;
+        }
         ArrayList<String> restrictList = reservationHouseDetailVO.getRestricList();
         ArrayList<String> convinList = reservationHouseDetailVO.getConvinList();;
         int totalDay = paymentService.calculatePay(httpServletRequest.getParameter("checkin"), httpServletRequest.getParameter("checkout"));
