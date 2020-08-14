@@ -92,7 +92,7 @@
 						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
-						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
 					<c:choose>
 						<c:when test="${social_type ne null }">
