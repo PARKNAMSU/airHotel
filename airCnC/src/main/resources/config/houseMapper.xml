@@ -276,4 +276,71 @@
 		]]>
 	</update>
 	
+	<update id="updateHouse_bathcount">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_bathroom_amount = #{house_bathroom_amount},
+			house_bathroom_type = #{house_bathroom_type}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	<update id="updateHouse_location">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_location = #{house_location},
+			house_location_postnum = #{house_location_postnum},
+			house_location_fulladdress = #{house_location_fulladdress},
+			house_location_detailaddress = #{house_location_detailaddress},
+			house_xlocation = #{house_xlocation},
+			house_ylocation = #{house_ylocation},
+			house_location_sido = #{house_location_sido},
+			house_location_gugun = #{house_location_gugun}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	<update id="updateHouse_defaultoption">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_defaultsetting = #{house_defaultsetting},
+			house_default_tv = #{house_default_tv},
+			house_default_wifi = #{house_default_wifi},
+			house_default_heater = #{house_default_heater},
+			house_default_cooler = #{house_default_cooler},
+			house_default_iron = #{house_default_iron},
+			house_default_fireditecter = #{house_default_fireditecter},
+			house_default_coditecter = #{house_default_coditecter},
+			house_default_aidkit = #{house_default_aidkit},
+			house_default_firesofwa = #{house_default_firesofwa},
+			house_default_bedrock = #{house_default_bedrock}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	<update id="updateHouse_guestcomfortable">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_default_livingroom_type = #{house_default_livingroom_type},
+			house_default_kitchen = #{house_default_kitchen},
+			house_default_laundry_washer = #{house_default_laundry_washer},
+			house_default_laundry_dryer = #{house_default_laundry_dryer},
+			house_default_parking = #{house_default_parking},
+			house_default_gym = #{house_default_gym},
+			house_default_pool = #{house_default_pool}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
 </mapper>
