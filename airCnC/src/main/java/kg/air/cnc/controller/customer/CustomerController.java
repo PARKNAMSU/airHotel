@@ -86,14 +86,14 @@ public class CustomerController {
 
 	// 비밀번호 찾기 이메일 전송.
 	@RequestMapping(value = "/sendPassword.do",  method = RequestMethod.POST)
-	public String sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+	@ResponseBody
+	public ModelAndView sendPassword(@RequestParam String customer_email, CustomerVO customerVO, HttpServletResponse response, ModelAndView mav)throws Exception{
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		int resultCnt = 0; // // 0 : 회원가입하지 않은 이메일, 1 : 회원가입이 되어 있는 이메일.
 		resultCnt = service.createEmailCheck(customer_email); // 이메일 존재 유무 체크. 
 		if (resultCnt == 0) { // 회원가입한 이메일이 아닌 경우. 이메일이 DB에 존재하지 않을 때.
-			out.println("<script>alert('회원가입 인증이 되지 않은 이메일입니다.'); $(\"#customerEmail\").focus();</script>");
-			out.flush();
+			mav.addObject("sendMessage", "fail");
 		}else if(resultCnt == 1) { // 회원가입한 이메일 계정일 경우.
 			char[] keySet = new char[] { 
 					'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -117,13 +117,13 @@ public class CustomerController {
 			String newPassword = passwordEncoder.encode(newPwd); // 임시 비밀번호 암호화.
 			customerVO.setCustomer_password(newPassword); // vo의 비밀번호에 임시 비밀번호로 세팅.
 			service.changePassword(customerVO); // 비밀번호를 임시 비밀번호로 변경해놓기.
-			out.println("<script>alert('임시 비밀번호를 발송하였습니다.');</script>");
-			out.flush();
+			System.out.println("비밀번호 변경 완료");
+			mav.addObject("sendMessage", "success");
 		} else {
-			out.println("<script>alert('임시 비밀번호 발송 오류'); $(\"#customerEmail\").focus();</script>");
-			out.flush();
+			mav.addObject("sendMessage", "error");
 		}
-		return "forgotpassword";
+		mav.setViewName("forgotpassword");
+		return mav;
 	}
 
 	// 아이디 중복 여부 검사.
@@ -289,7 +289,7 @@ public class CustomerController {
 
 	// 로그인 처리.
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
-	public String loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response)throws Exception{
+	public ModelAndView loginProcess(HttpSession session, CustomerVO customerVO, HttpServletResponse response, ModelAndView mav)throws Exception{
 
 		String returnURL = "";
 		if (session.getAttribute("login_session") != null) {
@@ -302,43 +302,40 @@ public class CustomerController {
 		CustomerVO customerDbVO = service.customerCheck(inputId);
 		if (customerDbVO == null) {
 			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('아이디가 존재하지 않습니다.');</script>");
-			out.flush();
-			return "login";
-		}
-		String dbPassword = customerDbVO.getCustomer_password();
-		String inputPassword = customerVO.getCustomer_password();
-
-		// 인증 진행.
-		if (!passwordEncoder.matches(inputPassword, dbPassword)) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
-			out.flush();
-			return "login";
+			mav.addObject("sendMessage", "idFail");
+			mav.setViewName("login");
 		}else {
-			boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
-			System.out.println("비밀번호 일치 결과 : " + passwordResult);
-			// 로그인이 성공하면 CustomerVO객체를 반환.
-			CustomerVO vo = service.login(customerVO);
-			if (vo != null) { // 로그인 성공.
-				session.setAttribute("login_session", vo.getCustomer_id());
-				returnURL = "index";
-				if (customerVO.isUseCookie()) {
-					Cookie cookie = new Cookie("loginCookie", session.getId());
-					cookie.setPath("/");
-					int amount = 60 * 60 * 24 * 7;
-					cookie.setMaxAge(amount);
-					response.addCookie(cookie);
-					Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
-					service.keepLogin(vo.getCustomer_id(), session.getId(), sessionLimit);
-				}
+			String dbPassword = customerDbVO.getCustomer_password();
+			String inputPassword = customerVO.getCustomer_password();
+
+			// 인증 진행.
+			if (!passwordEncoder.matches(inputPassword, dbPassword)) {
+				response.setContentType("text/html; charset=UTF-8");
+				mav.addObject("sendMessage", "pwFail");
+				mav.setViewName("login");
 			}else {
-				returnURL = "login";
+				boolean passwordResult = passwordEncoder.matches(inputPassword, dbPassword);
+				System.out.println("비밀번호 일치 결과 : " + passwordResult);
+				// 로그인이 성공하면 CustomerVO객체를 반환.
+				CustomerVO vo = service.login(customerVO);
+				if (vo != null) { // 로그인 성공.
+					session.setAttribute("login_session", vo.getCustomer_id());
+					mav.setViewName("index");
+					if (customerVO.isUseCookie()) {
+						Cookie cookie = new Cookie("loginCookie", session.getId());
+						cookie.setPath("/");
+						int amount = 60 * 60 * 24 * 7;
+						cookie.setMaxAge(amount);
+						response.addCookie(cookie);
+						Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+						service.keepLogin(vo.getCustomer_id(), session.getId(), sessionLimit);
+					}
+				}else {
+					mav.setViewName("login");
+				}
 			}
-			return returnURL;
 		}
+		return mav;
 	}
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})

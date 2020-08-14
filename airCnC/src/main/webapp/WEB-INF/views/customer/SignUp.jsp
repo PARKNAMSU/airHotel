@@ -61,7 +61,6 @@
 						$("#idCheckBtn").attr("value", "Y");
 						idCheck = true;
 						alert("사용 가능한 아이디입니다.");
-						idCheck = true;
 					}
 				}
 			});

@@ -34,14 +34,14 @@
 <body>
 	<!-- header-start -->
 	<c:if test="${login_session eq null }">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">		
+		<header class="menudiv1">
+			<div class="menudiv2-1">
+				<a href="/cnc/indexView.do"><img alt=""
+					src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			</div>
+			<div class="menudiv2-2">
+				<div class="menudiv3-1" id="div1">
+					<ul id="menuItems">
 						<li class="item">
 							<p>
 								<a href="/cnc/registerView.do">회원가입</a>
@@ -57,20 +57,20 @@
 								<a href="/cnc/selectBoardList.do">공지사항</a>
 							</p>
 						</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</header>
+		</header>
 	</c:if>
 	<c:if test="${login_session ne null }">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">	
+		<header class="menudiv1">
+			<div class="menudiv2-1">
+				<a href="/cnc/indexView.do"><img alt=""
+					src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			</div>
+			<div class="menudiv2-2">
+				<div class="menudiv3-1" id="div1">
+					<ul id="menuItems">
 						<li class="item">
 							<p>
 								<a href="/cnc/selectBoardList.do">공지사항</a>
@@ -78,12 +78,14 @@
 						</li>
 						<li class="item"><a href="myHouse.do">호스트</a></li>
 						<li class="item">
-								<p><a href="/cnc/logout.do">로그아웃</a></p>
+							<p>
+								<a href="/cnc/logout.do">로그아웃</a>
+							</p>
 						</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</header>
+		</header>
 	</c:if>
 	<form action="/cnc/loginProcess.do" method="post">
 		<div class="container">
@@ -103,7 +105,8 @@
 									</a>
 								</div>
 								<div id="kakao_id_login" style="text-align: center">
-									<a href="${kakaoUrl}" id="kakao-login-btn"> <img width="200"
+									<a href="${kakaoUrl}" id="kakao-login-btn"> <img
+										width="200"
 										src="${pageContext.request.contextPath}/resources/images/kakao_login.png" />
 									</a>
 								</div>
@@ -116,6 +119,14 @@
 										name="customer_password" placeholder="&nbsp;&nbsp;비밀번호"
 										required />
 								</div>
+								<div id="message">
+									<c:if test="${sendMessage eq 'idFail'}">
+										<p style="color: red; font-size: 25px;">아이디가 존재하지 않습니다.</p>
+									</c:if>
+									<c:if test="${sendMessage eq 'pwFail'}">
+										<p style="color: red; font-size: 25px;">비밀번호가 일치하지 않습니다.</p>
+									</c:if>
+								</div>
 								<div class="idsave" style="padding-top: 25px; font-size: 25px;">
 									<input type="checkbox" id="remember_id"
 										name="remember_customerId" /><label for="idsave">아이디
@@ -123,8 +134,8 @@
 								</div>
 
 								<div class="a5">
-									<a class="bb9" style="font-size: 15px;" href="/cnc/forgotPasswordView.do">비밀번호가 생각나지
-										않으세요?</a>
+									<a class="bb9" style="font-size: 15px;"
+										href="/cnc/forgotPasswordView.do">비밀번호가 생각나지 않으세요?</a>
 								</div>
 								<div>
 									<button id="loginBtn" name="loginBtn">로그인</button>
