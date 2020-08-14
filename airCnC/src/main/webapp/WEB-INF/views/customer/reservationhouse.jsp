@@ -332,8 +332,12 @@
 	</div>
 	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>
+<<<<<<< HEAD
 		<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div><br>
 		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="openFindMap('${house.house_name}',${house.fhouse_xlocation},${house.fhouse_ylocation})">길찾기</button>
+=======
+		<div id="map" ></div>
+>>>>>>> branch 'master' of git@github.com:PARKNAMUS/airHotel.git
 	</div>
 
 	<footer>
@@ -625,6 +629,7 @@ function openFindMap(house_name,xlocation,ylocation){
 	var url = "https://map.kakao.com/link/to/"+house_name+","+xlocation+","+ylocation;
 	openWin = window.open(url,"roadview","width=1200, height=800, resizable = no, scrollbars = no")
 }
+
 </script>
 
 </html>

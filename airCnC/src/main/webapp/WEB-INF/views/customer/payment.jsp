@@ -70,6 +70,7 @@
 												var getData = [];
 												var justOne = 0;
 												var finalPrice = '${totalPrice}';
+												var num = document.getElementById("cuponNum");
 												window.onload = function() {
 													$.ajax({
 														type:"GET",
@@ -86,7 +87,7 @@
 												var getCupon = function() {
 													if(justOne>=1) return;
 													let flag = false;
-													var num = document.getElementById("cuponNum");
+													num = document.getElementById("cuponNum");
 													for(var idx=0; idx<getData.length; idx++){
 														if(getData[idx].cupon_number===num.value){
 															justOne++;
@@ -117,6 +118,7 @@
                                 var input = document.createElement("input");
                                 var input2 = document.createElement("input");
                                 var input3 = document.createElement("input");
+                                var input4 = document.createElement("input");
                                 input.setAttribute("type", "hidden");
                                 input.setAttribute("name", "totalPrice");
 								input.setAttribute("value", finalPrice);
@@ -126,12 +128,14 @@
 								input3.setAttribute("type", "hidden");
 								input3.setAttribute("name", "checkout");
 								input3.setAttribute("value", checkout);
-
+								input4.setAttribute("type", "hidden");
+								input4.setAttribute("name", "cuponNum");
+								input4.setAttribute("value", num.value);
 
                                 form.appendChild(input);
                                 form.appendChild(input2);
                                 form.appendChild(input3);
-
+								form.appendChild(input4);
 
                                 document.body.appendChild(form);
                                 form.action = "paymentfinal.do";

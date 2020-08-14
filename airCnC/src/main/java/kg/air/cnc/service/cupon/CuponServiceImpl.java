@@ -25,12 +25,11 @@ public class CuponServiceImpl implements CuponService {
 			cuponDAO.checkRate(info);
 		}
 	}
-	/*
+
 	@Override
 	public void useCupon(String cuponNumber) {
 		cuponDAO.useCupon(cuponNumber);
 	}
-	*/
 	
 	@Override
 	public List<CuponVO> getCuponList(String id) {
