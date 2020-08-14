@@ -22,7 +22,8 @@
             if ( rsp.success ) {
                 var info = {"imp_uid": rsp.imp_uid, "paid_amount": rsp.paid_amount, "apply_num": rsp.apply_num,
                     "buyer_name": '${customerInfo.customer_name}', "paid_at": rsp.paid_at, "host_id": '${house.host_id}',
-                    "check_in": '${checkin}', "check_out": '${checkout}', "house_seq":'${house.house_seq}', "customer_id": '${customerInfo.customer_id}'};
+                    "check_in": '${checkin}', "check_out": '${checkout}', "house_seq":'${house.house_seq}',
+                    "customer_id": '${customerInfo.customer_id}', "cuponNum": '${cuponNum}'};
                 jQuery.ajax({
                     url: "http://localhost:8090/cnc/paymentcomplete.do",
                     method : "POST",

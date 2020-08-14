@@ -14,11 +14,11 @@ public class CuponDAOImpl {
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	/*
+	
 	public void useCupon(String cuponNumber) {
-		mybatis.delete("cuponDAO.makeCupon", cuponNumber);
+		mybatis.delete("cuponDAO.useCupon", cuponNumber);
 	}
-	*/
+	
 	public void checkRate(Map<String, String> info) {
 		mybatis.insert("cuponDAO.checkRate", info);
 	}
