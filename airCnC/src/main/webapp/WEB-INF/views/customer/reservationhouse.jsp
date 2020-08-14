@@ -35,7 +35,7 @@
     .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
     .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-    .info .link {color: #5085BB;}
+    .info .link {color: #5085BB;}    
 </style>
 <title>Insert title here</title>
 </head>
@@ -332,7 +332,12 @@
 	</div>
 	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>
+<<<<<<< HEAD
+		<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div><br>
+		<button class="btn btn-outline-danger" style="font-size:30px;" onclick="openFindMap('${house.house_name}',${house.fhouse_xlocation},${house.fhouse_ylocation})">길찾기</button>
+=======
 		<div id="map" ></div>
+>>>>>>> branch 'master' of git@github.com:PARKNAMUS/airHotel.git
 	</div>
 
 	<footer>
@@ -346,7 +351,7 @@
 <script type="text/javascript">
 
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var mposition = new kakao.maps.LatLng(37.570988,126.992540)
+var mposition = new kakao.maps.LatLng('${house.fhouse_xlocation}','${house.fhouse_ylocation}')
 var options = { //지도를 생성할 때 필요한 기본 옵션
 	center: mposition, //지도의 중심좌표.
 	level: 3 //지도의 레벨(확대, 축소 정도)
@@ -407,6 +412,7 @@ var deleteHouse = function(house){
 	     });	
 	}
 }
+
 var cancelReservation = function(res){
 	var result = confirm("정말로 취소하시겠습니까?\n※삭제 요청시 10일이내에 취소하지 않을 시 삭제됩니다")
 	if(result){
@@ -619,6 +625,11 @@ function openHouseModify(house_seq){
     document.body.appendChild(form);
     form.submit();
 }
+function openFindMap(house_name,xlocation,ylocation){
+	var url = "https://map.kakao.com/link/to/"+house_name+","+xlocation+","+ylocation;
+	openWin = window.open(url,"roadview","width=1200, height=800, resizable = no, scrollbars = no")
+}
+
 </script>
 
 </html>

@@ -183,7 +183,7 @@ svg {
   width: 89%;
   height: 45px;
   font-size: 18px;
-  padding: 8px;	
+  padding: 8px;
 }
 .checks {
   position: relative;
@@ -539,21 +539,21 @@ svg {
   transition: 1s;
 }
 .popular_destination_area .single_destination1:before {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100 
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100
   background: -moz-linear-gradient(
     top,
     rgba(4, 14, 39, 0) 0%,
     rgba(4, 14, 39, 0.7) 100%
   );
   */
-  /* FF3.6-15 
+  /* FF3.6-15
   background: -webkit-linear-gradient(
     top,
     rgba(4, 14, 39, 0) 0%,
     rgba(4, 14, 39, 0.7) 100%
   );
   */
-  /* Chrome10-25,Safari5.1-6 
+  /* Chrome10-25,Safari5.1-6
   background: linear-gradient(
     to bottom,
     rgba(4, 14, 39, 0) 0%,
@@ -657,21 +657,21 @@ svg {
   transition: 0.3s;
 }
 .popular_destination_area .single_destination2:before {
-  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100 
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100
   background: -moz-linear-gradient(
     top,
     rgba(4, 14, 39, 0) 0%,
     rgba(4, 14, 39, 0.7) 100%
   );
   */
-  /* FF3.6-15 
+  /* FF3.6-15
   background: -webkit-linear-gradient(
     top,
     rgba(4, 14, 39, 0) 0%,
     rgba(4, 14, 39, 0.7) 100%
   );
   */
-  /* Chrome10-25,Safari5.1-6 
+  /* Chrome10-25,Safari5.1-6
   background: linear-gradient(
     to bottom,
     rgba(4, 14, 39, 0) 0%,
@@ -800,7 +800,7 @@ svg {
 }
 .srcachlocation label {
   width: 90%;
-  font: size 14px;
+  font-size: 14px;
   columns: #ff5a5f;
 }
 
