@@ -333,6 +333,7 @@
 	<div class="mapdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-family: 'Jua', sans-serif;">지도</p><br><br>
 		<div id="map" ></div>
+		<button onclick="openFindMap('${house.house_name}')">길찾기</button>
 	</div>
 
 	<footer>
@@ -618,6 +619,10 @@ function openHouseModify(house_seq){
     }
     document.body.appendChild(form);
     form.submit();
+}
+function openFindMap(house_name){
+	var url = "https://map.kakao.com/link/to/"+house_name+","+37.570988+","+126.992540;
+	openWin = window.open(url,"roadview","width=1200, height=800, resizable = no, scrollbars = no")
 }
 </script>
 
