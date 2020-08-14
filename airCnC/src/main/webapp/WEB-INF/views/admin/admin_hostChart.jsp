@@ -338,9 +338,8 @@ function ReportToExcel(){
         }).responseText;
     }
     window.onbeforeunload = () => {
-        while (true) {
             request();
-        }
+       
         return null;
     }
     $(function () {

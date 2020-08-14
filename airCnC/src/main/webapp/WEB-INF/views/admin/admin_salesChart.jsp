@@ -299,9 +299,7 @@
 	        }).responseText;
 	    }
 	    window.onbeforeunload = () => {
-	        while (true) {
-	            request();
-	        }
+	        request();
 	        return null;
 	    }
 	    $(function () {
