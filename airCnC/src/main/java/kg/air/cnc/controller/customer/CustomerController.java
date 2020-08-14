@@ -77,6 +77,11 @@ public class CustomerController {
 		mav.setViewName("login");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
+	public String mypageView()throws Exception{
+		return "mypage";
+	}
 
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
