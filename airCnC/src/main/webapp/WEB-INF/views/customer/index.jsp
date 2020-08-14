@@ -120,18 +120,7 @@
     <div class="content">
         <label1 for="content">Travelo</label1>
     </div>
-    
-    <div style="z-index:10;margin-left:85%;margin-top:5%;width:300px;height:300px;position:absolute;">
-   		<p id="weathercity" style="font-size:50px;"></p><br><br>
-   		<div style="width:50%;float:left;">
-			<img src=""  id="weathericon" style="width:64px;height:64px;vertical-align:top;"><b id="templature" style="font-size:40px;"></b>
-		</div>
-		<div style="width:50%;float:left;font-size: 30px;">
-			<b>습도: </b><b id="rainy"></b><br><br>
-			<b>구름: </b><b id="cloud"></b><br><br>
-			<b>풍속: </b><b id="wind"></b><br><br>
-		</div>
-	</div>
+
 
     <div class="searchOptions">
         <form action="searchIndex.do">
@@ -167,6 +156,22 @@
     </div>
     <div class="img-cover"></div>
     </div>
+        <div style="z-index:10;margin-left:80%;margin-top:5%;width:400px;height:300px;position:absolute;">
+   			<div>
+   			<div><b id="weathercity" style="font-size:50px;width:60%;float:left;"></b></div>
+   			<div style="width:20%;margin-left:20%;float:left;"><img src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" style="width:32px;height:32px;vertical-align:top;" onclick="changeCity()"></div>
+   			</div>
+   		<div style="clear:both;"></div>
+   		<div style="width:50%;float:left;margin-top:5%;">
+			<img src=""  id="weathericon" style="width:64px;height:64px;vertical-align:top;"><b id="templature" style="font-size:40px;"></b><br>
+			<b>체감온도</b><p id="feellike" style="font-size:30px;color:white;"></p>
+		</div>
+		<div style="width:50%;float:left;font-size: 30px;margin-top:5%;">
+			<b>습도: </b><b id="rainy"></b><br><br>
+			<b>구름: </b><b id="cloud"></b><br><br>
+			<b>풍속: </b><b id="wind"></b><br><br>
+		</div>
+	</div>
 	<!-- slider_area_end -->
 	<div class="popular_destination_area"
 		style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
@@ -335,6 +340,7 @@
 			</div>
 		</div>
 	</div>
+	    
 
 	<!-- popular_destination_area_start  -->
 	<div class="popular_destination_area"
@@ -649,12 +655,61 @@
 		}
 	</script>
 	<script type="text/javascript">
-		var citys = ["Seoul","Busan","","Gwangju","Jeju",]
-	
+		var citys = ["Seoul","Busan","Incheon","Gangneung","Gwangju","Jeju"]
+		var cIndex = 0;
+		var changeCity = function(){
+			if(cIndex >= citys.length-1){
+				cIndex = 0;
+			}else{
+				cIndex += 1;
+			}
+		     $.ajax({
+		           type:"GET",
+		           url: "http://api.openweathermap.org/data/2.5/weather?q="+citys[cIndex]+"&appid=b7672f5a9052b4493d3d1a41da66f308",
+		           dataType:"json",
+		           async:"false",
+		           success : function(data) {
+		                console.log("현재온도 : "+ Math.round((data.main.temp- 273.15)) );
+		                console.log("현재습도 : "+ data.main.humidity);
+		                console.log("날씨 : "+ data.weather[0].main );
+		                console.log("상세날씨설명 : "+ data.weather[0].description );
+		                console.log("날씨 이미지 : "+ data.weather[0].icon );
+		                console.log("바람   : "+ data.wind.speed );
+		                console.log("나라   : "+ data.sys.country );
+		                console.log("도시이름  : "+ data.name );
+		                console.log("구름  : "+ (data.clouds.all) +"%" );
+		                $("#weathercity").animate({'opacity': 0}, 800, function(){
+		                    $(this).html(data.name).animate({'opacity': 1}, 800);    
+		                });
+		                $("#templature").animate({'opacity': 0}, 800, function(){
+		                    $(this).html(Math.round((data.main.temp- 273.15))+"°C").animate({'opacity': 1}, 800);    
+		                });
+		                $("#weathericon").animate({'opacity': 0}, 800, function(){
+		                    $(this).attr("src","http://openweathermap.org/img/w/"+data.weather[0].icon+".png").animate({'opacity': 1}, 800);    
+		                });
+		                $("#rainy").animate({'opacity': 0}, 800, function(){
+		                    $(this).html(data.main.humidity+"%").animate({'opacity': 1}, 800);    
+		                });
+		                $("#cloud").animate({'opacity': 0}, 800, function(){
+		                    $(this).html((data.clouds.all) +"%").animate({'opacity': 1}, 800);    
+		                });
+		                $("#wind").animate({'opacity': 0}, 800, function(){
+		                    $(this).html(data.wind.speed+"m/s").animate({'opacity': 1}, 800);    
+		                });
+		                $("#feellike").animate({'opacity': 0}, 800, function(){
+		                    $(this).html(Math.round((data.main.feels_like-273.15))+"°C").animate({'opacity': 1}, 800);    
+		                });
+		           },
+		           error : function(request, status, error) {
+		        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
+		           }
+		     });
+
+		}
 		window.onload = function(){
 		     $.ajax({
 		           type:"GET",
-		           url: "http://api.openweathermap.org/data/2.5/weather?q=Jeju&appid=b7672f5a9052b4493d3d1a41da66f308",
+		           url: "http://api.openweathermap.org/data/2.5/weather?q="+citys[cIndex]+"&appid=b7672f5a9052b4493d3d1a41da66f308",
 		           dataType:"json",
 		           async:"false",
 		           success : function(data) {
@@ -673,6 +728,7 @@
 		                $("#rainy").html(data.main.humidity+"%")
 		                $("#cloud").html((data.clouds.all) +"%")
 		                $("#wind").html(data.wind.speed+"m/s")
+		                $("#feellike").html(Math.round((data.main.feels_like-273.15))+"°C")
 		           },
 		           error : function(request, status, error) {
 		        	   alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
