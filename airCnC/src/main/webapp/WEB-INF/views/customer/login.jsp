@@ -100,13 +100,13 @@
 									src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
 									charset="utf-8"></script>
 								<div id="naver_id_login" style="text-align: center;">
-									<a href="${naverUrl}"> <img width="500px"
+									<a href="${naverUrl}"> <img width="200"
 										src="${pageContext.request.contextPath}/resources/images/naver_login.png" />
 									</a>
 								</div>
 								<div id="kakao_id_login" style="text-align: center">
 									<a href="${kakaoUrl}" id="kakao-login-btn"> <img
-										width="500px"
+										width="200"
 										src="${pageContext.request.contextPath}/resources/images/kakao_login.png" />
 									</a>
 								</div>

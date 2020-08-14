@@ -62,7 +62,7 @@ body {
 		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
-						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
