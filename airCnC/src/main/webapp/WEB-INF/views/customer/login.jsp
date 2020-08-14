@@ -110,6 +110,9 @@
 										src="${pageContext.request.contextPath}/resources/images/kakao_login.png" />
 									</a>
 								</div>
+								<div style="margin-top: 5px;">
+						            <div class="my__join__line1">또는</div>
+						        </div>
 								<div class="a3">
 									<input class="bb6" type="text" id="customerId"
 										name="customer_id" placeholder="&nbsp;&nbsp;아이디" required />
