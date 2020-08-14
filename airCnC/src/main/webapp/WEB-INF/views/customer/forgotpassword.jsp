@@ -32,6 +32,17 @@ $(document).on("click","#sendPasswordBtn",function() {
 		$("#customerEmail").focus();
 		return false;
 	}
+	$.ajax({
+		type : "post",
+		url : "sendPassword.do",
+		data : $("#sendEmail").serialize(),
+		success : function(data) {
+			console.log(data);
+		},
+		error : function(data) {
+			alert("인증번호 발송에 실패하였습니다.");
+		}
+	});
 });
 </script>
 </head>
@@ -75,30 +86,44 @@ $(document).on("click","#sendPasswordBtn",function() {
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">	
-						<li class="item">
-							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
-							</p>
-						</li>
-						<li class="item"><a href="myHouse.do">호스트</a></li>
-						<li class="item">
-								<p><a href="/cnc/logout.do">로그아웃</a></p>
-						</li>
+					<li class="item">
+						<p>
+							<a href="/cnc/selectBoardList.do">공지사항</a>
+						</p>
+					</li>
+					<li class="item"><a href="myHouse.do">호스트</a></li>
+					<li class="item">
+						<p><a href="/cnc/logout.do">로그아웃</a></p>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</header>
 	</c:if>
 	<!-- header-end -->
-	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="passwordForm" method="POST">
-		<div class="container" style="padding-top: 12.5%;">
+	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="sendEmail" method="POST">
+		<div class="container" style="padding-top: 10%;">
 			<div class="pwtitle">
 				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br/> 
 				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
 			</div>
+			<div style="padding-top: 10%;"></div>
 			<div class="emailbox">
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
+			<div style="padding-top: 1%;"></div>
+			<div id="message">
+				<c:if test="${sendMessage eq 'success'}">
+					<p style="color: blue; font-size: 25px;">임시 비밀번호를 발송해드렸습니다.<br>로그인하여 비밀번호를 변경해주세요.</p>
+				</c:if>
+				<c:if test="${sendMessage eq 'fail'}">
+					<p style="color: red; font-size: 25px;">회원가입 되어 있지 않은 비밀번호입니다.</p>
+				</c:if>
+				<c:if test="${sendMessage eq 'error'}">
+					<p style="color: red; font-size: 25px;">임시 비밀번호 발송 오류.</p>
+				</c:if>
+			</div>
+			<div style="padding-top: 1%;"></div>
 			<button id="sendPasswordBtn">비밀번호 재설정</button>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
