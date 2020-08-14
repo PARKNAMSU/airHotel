@@ -58,6 +58,7 @@ public class ReservationDetailController {
 				vo.setAccessType((String) redirectMap.get("accessType"));
 			}
 		}
+		System.out.println(vo.getHouse_seq());
 		ReservationHouseDetailVO house = null;
 		if (vo.getHouse_seq() > 0) {
 			house = reservationService.getReservationHouse(vo);
