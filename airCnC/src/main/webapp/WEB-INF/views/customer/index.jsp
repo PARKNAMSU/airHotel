@@ -4,33 +4,33 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-	<meta charset="utf-8">
-	<title>메인 홈페이지</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon"
-		  href="${pageContext.request.contextPath}/images/favicon.png">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/menu.css?version=123">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/reset.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/footer.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/hostregister.css">
-	<link rel="stylesheet" type="text/css"
-		  href="${pageContext.request.contextPath}/resources/css/index.css">
-	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-		  rel="stylesheet">
-	<link rel="stylesheet"
-		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<meta charset="utf-8">
+<title>메인 홈페이지</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/images/favicon.png">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/menu.css?version=123">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/reset.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/footer.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hostregister.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/index.css">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <!-- header-start -->
@@ -72,14 +72,14 @@
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1" style="float:left;width:70%;">
-				<ul id="menuItems">
-					<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
-					<li class="item">
-						<p>
-							<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
-						</p>
-					</li>
-					<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+				<ul id="menuItems">	
+						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
 			<div style="width:50px;height:50px;margin-left:5%;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
@@ -87,15 +87,15 @@
 			</div>
 		</div>
 		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
-			<ul>
-				<li><br></li>
-				<li style="margin-bottom:20px;"><a href="">내정보</a></li>
-				<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
-				<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
-				<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
-				<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
-				<c:choose>
-					<c:when test="${social_type ne null }">
+					<ul>
+						<li><br></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null }">
 						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
