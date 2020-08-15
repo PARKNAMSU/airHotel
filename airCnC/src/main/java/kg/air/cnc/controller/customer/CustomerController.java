@@ -147,25 +147,21 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, HttpServletRequest request, HttpServletResponse response, CustomerVO vo)throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception {
 		// 결과값을 node에 보여줌.
 		JsonNode node = kakaoController.getAccessToken(code);
 		// accessToken에 사용자의 로그인한 모든 정보가 들어있음.
 		JsonNode accessToken = node.get("access_token");
-		// 사용자의 정보.
-		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
-		String kid = null;
-		String kemail = null;
-		String kname = null;
-		String kimage = null;
 		// 사용자 정보를 카카오에서 가져오기.
+		JsonNode userInfo = kakaoController.getKakaoUserInfo(accessToken);
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakaoAccount = userInfo.path("kakao_account");
-		kid = userInfo.path("id").asText();
-		kemail = kakaoAccount.path("email").asText();
-		kname = properties.path("nickname").asText();
-		kimage = properties.path("profile_image").asText();
+		String kid = userInfo.path("id").asText();
+		String kemail = kakaoAccount.path("email").asText();
+		String kname = properties.path("nickname").asText();
+		String kimage = properties.path("profile_image").asText();
+		
+		// DB에 사용자 정보를 넣기 전 VO 세팅.
 		vo.setCustomer_id(kemail);
 		vo.setCustomer_password("none");
 		vo.setCustomer_name(kname);
@@ -180,19 +176,29 @@ public class CustomerController {
 			vo.setCustomer_image("none");
 		}
 		vo.setCustomer_key("kakao");
-		service.register(vo);
-		session.setAttribute("login_session", kemail);
-		session.setAttribute("social_type", "kakao");
-		mav.setViewName("index");
-		return mav;
+		
+		// 로그인 하기 전 id와 email이 DB에 있는지 확인. 있으면 1, 없으면 0이 리턴.
+		int idCheckResult = service.idCheck(vo);
+		int emailCheckResult = service.createEmailCheck(kid);
+		
+		if (idCheckResult == 1 && emailCheckResult == 1) {
+			session.setAttribute("login_session", kemail);
+			session.setAttribute("social_type", "kakao");
+			mav.setViewName("index");
+			return mav;
+		}else {
+			service.register(vo);
+			session.setAttribute("login_session", kemail);
+			session.setAttribute("social_type", "kakao");
+			mav.setViewName("index");
+			return mav;
+		}
 	}
 
 	// 네이버 로그인 성공시 callback메서드 호출.
 	@RequestMapping(value = "/naverlogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session)throws IOException, ParseException{
-		ModelAndView mav = new ModelAndView(); 
-		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state); 
-
+	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception, IOException, ParseException{
+		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state);
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
 		apiResult = naverController.getUserProfile(oauthToken); 
 
@@ -204,16 +210,39 @@ public class CustomerController {
 		} catch (ParseException e) {
 			e.printStackTrace(); 
 		} 
-		JSONObject jsonobj = (JSONObject) obj; 
+		JSONObject jsonobj = (JSONObject)obj; 
 
 		// 데이터 파싱.
 		JSONObject response = (JSONObject) jsonobj.get("response"); 
-		String naver_name = (String) response.get("name"); 
-		String naver_email = (String) response.get("email");
-		session.setAttribute("login_session", naver_email);
-		session.setAttribute("social_type", "naver");
-		mav.setViewName("index"); 
-		return mav;
+		String naverId = (String) response.get("id");
+		String naverName = (String) response.get("name"); 
+		String naverEmail = (String) response.get("email");
+		String naverProfileImage = (String) response.get("profile_image");
+		
+		// DB에 네이버 사용자 정보를 저장하기 위한 VO 세팅.
+		vo.setCustomer_id(naverEmail);
+		vo.setCustomer_password("none");
+		vo.setCustomer_name(naverName);
+		vo.setCustomer_email(naverId);
+		vo.setCustomer_image(naverProfileImage);
+		vo.setCustomer_phone("none");
+		vo.setCustomer_key("naver");
+		
+		int idCheckResult = service.idCheck(vo);
+		int emailCheckResult = service.createEmailCheck(naverId);
+		
+		if (idCheckResult == 1 && emailCheckResult == 1) {
+			session.setAttribute("login_session", naverEmail);
+			session.setAttribute("social_type", "naver");
+			mav.setViewName("index"); 
+			return mav;
+		}else {
+			service.register(vo);
+			session.setAttribute("login_session", naverEmail);
+			session.setAttribute("social_type", "naver");
+			mav.setViewName("index"); 
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)

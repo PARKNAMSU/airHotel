@@ -77,6 +77,7 @@ $(document).on("click", "#emailAuthBtn", function() {
 
 // 회원정보 수정 버튼.
 $(document).on("click","#customerInfoUpdateBtn",function() {
+	var customerEmail = ${customerEmail};
 	var getData;
 	// var validate = true;
 	var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
@@ -109,6 +110,10 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 		alert("이름이 잘못 되었습니다.");
 		$("#customerName").focus();
 		return false;
+	} else if ($("#customerEmail").val() == customerEmail){
+		emailSendCheck = true;
+		emailAuthCheck = true;
+		blacklistEmailCheck = true;
 	} else if (!$("#customerEmail").val()) {
 		alert("이메일을 입력하세요.");
 		$("#customerEmail").focus();
@@ -125,11 +130,11 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 		alert("정보 수정이 불가한 이메일 계정입니다.");
 		$("#customerEmail").focus();
 		return false;
-	}  else if (!$("#customerPassword").val()) {
+	} else if (!$("#customerPassword").val()) {
 		alert("비밀번호를 입력하세요.");
 		$("#customerPassword").focus();
 		return false;
-	}else if (!$("#customerPasswordConfirm").val()) {
+	} else if (!$("#customerPasswordConfirm").val()) {
 		alert("비밀번호 확인을 해주세요.");
 		$("#customerPasswordConfirm").focus();
 		return false;
