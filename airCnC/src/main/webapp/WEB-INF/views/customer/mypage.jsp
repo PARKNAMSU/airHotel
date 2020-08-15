@@ -298,13 +298,13 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 					<span> <input class="iid" type="text" id="customerEmail" name="customer_email"
 						value="${customerEmail}" required>
 					</span>
-					<button type="button" class="emailSendBtn">인증번호 발송</button>
+					<button type="button" id="emailSendBtn" class="emailSendBtn">인증번호 발송</button>
 				</div>
 				<div class="input_email" style="margin-bottom: auto;">
 					<span> <input class="iid" type="text" id="customerKey" name="customer_key"
 						placeholder="&nbsp;&nbsp;인증번호 입력" required>
 					</span>
-					<button type="button" class="emailAuthBtn">이메일 인증</button>
+					<button type="button" id="emailAuthBtn" class="emailAuthBtn">이메일 인증</button>
 				</div>
 				<br>
 			</div>
