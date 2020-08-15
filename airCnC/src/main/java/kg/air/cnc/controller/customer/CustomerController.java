@@ -77,6 +77,18 @@ public class CustomerController {
 		mav.setViewName("login");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/mypage.do")
+	public ModelAndView mypageView(HttpSession session, CustomerVO customerVO, ModelAndView mav)throws Exception{
+		String sessionId = (String)session.getAttribute("login_session");
+		customerVO = service.getCustomerInfo(sessionId);	
+		mav.addObject("customerName", customerVO.getCustomer_name());
+		mav.addObject("customerPhone", customerVO.getCustomer_phone());
+		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerImage", customerVO.getCustomer_image());
+		mav.setViewName("mypage");
+		return mav;
+	}
 
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
@@ -337,6 +349,25 @@ public class CustomerController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
+	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav)throws Exception{
+		if (vo.getCustomer_image().equals("") || vo.getCustomer_image().equals("none")) {
+			vo.setCustomer_image("none");
+		}
+		String newPassword = vo.getCustomer_password();
+		String newPwd = passwordEncoder.encode(newPassword);
+		vo.setCustomer_password(newPwd);
+		
+		int result = service.customerInfoUpdate(vo);
+		if (result == 1) {
+			mav.addObject("success");
+		}else {
+			mav.addObject("fail");
+		}
+		return mav;
+	}
+	
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
@@ -362,5 +393,5 @@ public class CustomerController {
 		JsonNode jsonToken = kakaoController.Logout(session.getAttribute("login_session").toString());
 		session.invalidate();
 		return "index";
-	}
+	}	
 }

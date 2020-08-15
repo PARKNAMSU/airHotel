@@ -58,4 +58,12 @@
 	<select id="blacklistEmailCheck" resultType="int" parameterType="kg.air.cnc.vo.CustomerVO">
 		SELECT COUNT(black_email) FROM blacklist WHERE black_email = #{customer_email}
 	</select>
+	
+	<select id="getCustomerInfo" resultType="kg.air.cnc.vo.CustomerVO" parameterType="String">
+		SELECT * FROM customer WHERE customer_id = #{customer_id}
+	</select>
+	
+	<update id="customerInfoUpdate">
+		UPDATE customer SET customer_password = #{customer_password}, customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
+	</update>
 </mapper>

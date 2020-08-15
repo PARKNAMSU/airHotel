@@ -323,8 +323,7 @@
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호
 						발송</button>
 					<br> <span> <input class="iauth" type="text"
-						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호"
-						required>
+						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호" required>
 					</span> <br> <input id="emailAuthBtn" type="button"
 						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"
 						value="이메일 인증">
