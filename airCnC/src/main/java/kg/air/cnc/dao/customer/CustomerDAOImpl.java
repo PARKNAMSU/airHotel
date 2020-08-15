@@ -68,4 +68,14 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int blacklistEmailCheck(CustomerVO vo) throws Exception {
 		return session.selectOne("customer.blacklistEmailCheck", vo);
 	}
+
+	@Override
+	public CustomerVO getCustomerInfo(String customerId) throws Exception {
+		return session.selectOne("customer.getCustomerInfo", customerId);
+	}
+
+	@Override
+	public int customerInfoUpdate(CustomerVO vo) throws Exception {
+		return session.update("customer.customerInfoUpdate", vo);
+	}
 }
