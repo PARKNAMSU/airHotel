@@ -502,6 +502,17 @@ var dates = [];
 	        error : function(request, status, error) {
 	        	alert("code : " + request.status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
 	        }
+		}),
+		$.ajax({
+			type:"POST",
+			url:"getHousePhoto.do",
+			dataType:"json",
+			data:{
+				house_seq: ${house_seq}
+			},
+			success:function(data){
+				console.log(data.house_photourl_list[0]);
+			}
 		})
 	
 	})

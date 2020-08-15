@@ -74,5 +74,7 @@ public class ReservationDAO implements ReservationDAOImpl{
 	public List<ReservationHouseDetailVO> getFavoriteHouse(Map<String, Object> seqMap){
 		return sqlSessionTemplate.selectList("ReservationDAO.getMyFavoriteHouse",seqMap);
 	}
-	
+	public ReservationHouseDetailVO getHousePhoto(int house_seq) {
+		return sqlSessionTemplate.selectOne("ReservationDAO.getHousePhoto",house_seq);
+	}
 }

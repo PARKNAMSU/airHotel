@@ -40,6 +40,7 @@ public class ReservationHouseDetailVO {
 	private String house_desc4;
 	private String house_desc5;
 	private String house_photourl;
+	private ArrayList<String> house_photourl_list;
 	private String house_name;
 	private String house_condition_childok;
 	private String house_condition_babyok;
@@ -86,7 +87,13 @@ public class ReservationHouseDetailVO {
     private ArrayList<Integer> favoriteHouse_list;
     private String favorite_state;
     
-    public String getCheck_in() {
+    public ArrayList<String> getHouse_photourl_list() {
+		return house_photourl_list;
+	}
+	public void setHouse_photourl_list(ArrayList<String> house_photourl_list) {
+		this.house_photourl_list = house_photourl_list;
+	}
+	public String getCheck_in() {
 		return check_in;
 	}
 	public void setCheck_in(String check_in) {

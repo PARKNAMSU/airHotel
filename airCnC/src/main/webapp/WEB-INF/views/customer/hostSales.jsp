@@ -148,7 +148,7 @@
 	<div style="clear:both;"></div>
 	<div class="temp" ></div>
 	<div style="width:100%;border: solid;">
-	<div class="sales" style="font-family: 'Jua', sans-serif;">
+	<div class="sales" style="font-family: 'Jua', sans-serif;float:none;margin-left: 23.5%;">
 		<p style="font-size:30px;color:black;">매출 현황</p>
 		<div id="salesArea">
 			<table class="table table-striped" id="salesTable">
@@ -233,7 +233,7 @@
 			<button id="reportPDF" class="btn btn-outline-danger" style="font-size:30px;margin-top:10px;">보고서 다운로드(PDF)</button>
 	</div>
 	
-	<div class="chart" style="margin-bottom:5%;margin-left: 23.5%;font-family: 'Jua', sans-serif;">
+	<div class="chart" style="margin-bottom:5%;margin-left: 23.5%;font-family: 'Jua', sans-serif;float:none;">
 		<p style="font-size:30px;color:black;">매출 그래프</p>
 		<div id="salesChart"></div>
 		<c:if test = "${salesList != null }">
