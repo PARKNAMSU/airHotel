@@ -98,42 +98,48 @@
       <div class="form">
         <img src="${pageContext.request.contextPath}/resources/images/guestfacilities1.png" style="margin-top: 35px;">
         <div class="guestcomfor1" ><h3 style="font-size: 50px; font-weight: bold; padding-top: 35px;">게스트가 어떤 공간을 쓸수 있나요?</h3>
-        	<input type="hidden" id="cb11" name="house_default_livingroom_type_0or1" >
+        	<input type="hidden" id="cb1" name="house_default_livingroom_type_0or1" >
             <input type="checkbox" id="cb1" name="house_default_livingroom_type_0or1" value="true"
             	<c:if test="${detail.house_default_livingroom_type ne 'false' }">checked</c:if>/>
         	<label for="guestcomfor1"style="font-size: 30px; font-weight: bold;   padding-top: 15px;">단독 사용하는 거실</label>
     	</div>
     	<div class="guestcomfor2">
+    		<input type="hidden" id="cb2" name="house_default_kitchen_0or1" >
     		<input type="checkbox" id="cb2" name="house_default_kitchen_0or1" value="true"
             	<c:if test="${detail.house_default_kitchen ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor2" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">주방</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor3">
+	    	<input type="hidden" id="cb3" name="house_default_laundry_washer_0or1" >
 	    	<input type="checkbox" id="cb3" name="house_default_laundry_washer_0or1" value="true"
             	<c:if test="${detail.house_default_laundry_washer ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor3" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">세탁공간-세탁기</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor4">
+	    	<input type="hidden" id="cb4" name="house_default_laundry_dryer_0or1" >
 	    	<input type="checkbox" id="cb4" name="house_default_laundry_dryer_0or1" value="true"
             	<c:if test="${detail.house_default_laundry_dryer ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor4" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">세탁공간-건조기</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor5">
+	    	<input type="hidden" id="cb5" name="house_default_parking_0or1" >
 	    	<input type="checkbox" id="cb5" name="house_default_parking_0or1" value="true"
             	<c:if test="${detail.house_default_parking ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor5" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">주차</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor6">
+	    	<input type="hidden" id="cb6" name="house_default_gym_0or1" >
 	    	<input type="checkbox" id="cb6" name="house_default_gym_0or1" value="true"
             	<c:if test="${detail.house_default_gym ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor6" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">헬스장</label></br>
 	    </div>
 	    
 	    <div class="guestcomfor7">
+	    	<input type="hidden" id="cb7" name="house_default_pool_0or1" >
 	    	<input type="checkbox" id="cb7" name="house_default_pool_0or1" value="true"
             	<c:if test="${detail.house_default_pool ne 'false' }">checked</c:if>/>
 	        <label for="guestcomfor7" style="font-size: 30px; font-weight: bold;   padding-top: 15px;">수영장</label></br>

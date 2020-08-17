@@ -77,11 +77,11 @@ input[type="submit"] {
 				<li><a href="/cnc/update_4locationopen.do">숙소 위치</a></li>
 				<li><a href="/cnc/update_5defaultoptionopen.do">숙소옵션 및 안전시설</a></li>
 				<li><a href="/cnc/update_6guestcomfortableopen.do">숙소내 편의시설</a></li>
-				<a href=""><li>숙소 설명</li></a>
-				<a href=""><li>숙소 사진</li></a>
-				<a href=""><li>숙소 제목</li></a>
-				<a href=""><li>사용요금 및 시간</li></a>
-				<a href=""><li>테마 및 주의사항</li></a>
+				<li><a href="/cnc/update_7guesttextareaopen.do">숙소 설명</a></li>
+				<li><a href="/cnc/update_8hosthouseimgopen.do">숙소 사진</a></li>
+				<li><a href="/cnc/update_9hosttitleopen.do">숙소 제목</a></li>
+				<li><a href="/cnc/update_10chargeopen.do">사용요금 및 시간</a></li>
+				<li><a href="/cnc/update_11restrictthemeopen.do">테마 및 주의사항</a></li>
 			</ul>
 		</div>
 		<input type="submit" value="확인" style="margin-left: 85%;" />

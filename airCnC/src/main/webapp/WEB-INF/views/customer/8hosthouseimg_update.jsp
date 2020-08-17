@@ -29,7 +29,7 @@
 		
 		function PrevSubmit() {
 			var f = document.hostpic;
-			f.action = "<c:url value='/6guestcomfortable.do' />";
+			f.action = "<c:url value='/1newhouse.do' />";
 			f.submit();
 		}
 	
@@ -53,7 +53,7 @@
     <!-- header-end -->
     
    
-    <form action="/cnc/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
+    <form action="/cnc/update_8hosthouseimgwork.do" name="hostpic" method="POST" enctype="multipart/form-data">
 	<div class="container">
 	
     <div class="hostpic1">
@@ -65,17 +65,17 @@
         
         <div id="image_container" style="text-align: center;"></div>
         <div class="filebox">
-			<p>이전 선택한 파일 : ${house.house_photourl }</p>
-			<img src="../../../../../airCnC_repo/airhotel/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/airCnC/upload/1-22.PNG">
-			<img src="C:/Users/11/Desktop/airCnC_repo/airhotel/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/airCnC/upload/1-22.PNG">
+			<p>이전 선택한 메인사진 : ${detail.house_photourl }</p>
 			<input type="file" name="house_photo" id="house_photo" />
-            <label for="image" style="color: black;">첨부할 사진을 선택하세요</label>
+            <label for="image" style="color: black;">수정할 메인사진을 선택하세요</label>
+            <hr>
+            
         </div>
     </div>
     
 	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
 		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>뒤로가기</button></a>
-		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>다음</button></a>
+		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>수정하기</button></a>
     </div>
     </div>	
 	</form>

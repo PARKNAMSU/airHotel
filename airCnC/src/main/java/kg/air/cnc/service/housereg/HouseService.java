@@ -18,4 +18,10 @@ public interface HouseService {
 	public void updateHouse_location(House_InfoVO vo);//세부정보 받아온 detail이용해서 location 수정
 	public void updateHouse_defaultoption(House_InfoVO vo);//세부정보 받아온 detail이용해서 defaultoption 수정
 	public void updateHouse_guestcomfortable(House_InfoVO vo);//세부정보 받아온 detail이용해서 guestcomfortable 수정
+	public void updateHouse_guesttextarea(House_InfoVO vo);//세부정보 받아온 detail이용해서 guesttextarea 수정
+	public void updateHouse_hosthouseimg(House_InfoVO vo);//세부정보 받아온 detail이용해서 hosthouseimg 수정
+	public void updateHouse_hosttitle(House_InfoVO vo);//세부정보 받아온 detail이용해서 hosttitle 수정
+	public void updateHouse_charge(House_InfoVO vo);//세부정보 받아온 detail이용해서 charge 수정
+	public void updateHouse_restricttheme(House_InfoVO vo);//세부정보 받아온 detail이용해서 restricttheme 수정
+	
 }

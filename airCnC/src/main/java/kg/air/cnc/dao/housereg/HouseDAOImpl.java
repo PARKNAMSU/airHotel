@@ -67,6 +67,31 @@ public class HouseDAOImpl implements HouseDAO {
 		sqlSessionTemplate.update("product.updateHouse_guestcomfortable", vo);
 	}
 
+	@Override
+	public void updateHouse_guesttextarea(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_guesttextarea", vo);
+	}
+
+	@Override
+	public void updateHouse_hosttitle(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_hosttitle", vo);
+	}
+
+	@Override
+	public void updateHouse_charge(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_charge", vo);
+	}
+
+	@Override
+	public void updateHouse_restricttheme(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_restricttheme", vo);
+	}
+
+	@Override
+	public void updateHouse_hosthouseimg(House_InfoVO vo) {
+		sqlSessionTemplate.update("product.updateHouse_hosthouseimg", vo);
+	}
+
 	
 
 }
