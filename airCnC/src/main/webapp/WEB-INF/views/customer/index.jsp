@@ -591,14 +591,6 @@
 </script>
 
 <script>
-	window.onload = function () {
-		let minlim = new Date().toISOString().substring(0, 10);
-		document.getElementById('checkIn').value = minlim;
-		document.getElementById('checkIn').min = minlim;
-	};
-</script>
-
-<script>
 	var peopleCheck = function() {
 		let peo = document.getElementById("people");
 		if(peo.value<1) {
@@ -619,13 +611,6 @@
 	}
 </script>
 
-<script>
-	window.onload = function () {
-		var loc = document.getElementById("first");
-		loc.selected = true;
-		chgOptions();
-	}
-</script>
 <script type="text/javascript">
 	var citys = ["Seoul","Busan","Incheon","Gangneung","Gwangju","Jeju"]
 	var cIndex = 0;
@@ -678,6 +663,12 @@
 		});
 	}
 	window.onload = function(){
+		var loc = document.getElementById("first");
+		loc.selected = true;
+		chgOptions();
+		var minlim = new Date().toISOString().substring(0, 10);
+		document.getElementById('checkIn').value = minlim;
+		document.getElementById('checkIn').min = minlim;
 		$.ajax({
 			type:"GET",
 			url: "http://api.openweathermap.org/data/2.5/weather?q="+citys[cIndex]+"&appid=b7672f5a9052b4493d3d1a41da66f308",
