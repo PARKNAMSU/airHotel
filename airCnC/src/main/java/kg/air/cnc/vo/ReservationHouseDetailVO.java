@@ -74,6 +74,9 @@ public class ReservationHouseDetailVO {
     private String reservation_status_text;
 	private int reservation_seq;
 	private int reservation_status;
+	private int reservation_price;
+	private String reservation_customer_id;
+	private String check_in_day;
 	private String house_person;
 	private String check_in;
 	private String check_out;
@@ -86,8 +89,40 @@ public class ReservationHouseDetailVO {
     private String favoriteHouse_String;
     private ArrayList<Integer> favoriteHouse_list;
     private String favorite_state;
+    private String customer_name;
+    private String customer_phone;
     
-    public ArrayList<String> getHouse_photourl_list() {
+	public String getCheck_in_day() {
+		return check_in_day;
+	}
+	public void setCheck_in_day(String check_in_day) {
+		this.check_in_day = check_in_day;
+	}
+	public String getReservation_customer_id() {
+		return reservation_customer_id;
+	}
+	public void setReservation_customer_id(String reservation_customer_id) {
+		this.reservation_customer_id = reservation_customer_id;
+	}
+    public int getReservation_price() {
+		return reservation_price;
+	}
+	public void setReservation_price(int reservation_price) {
+		this.reservation_price = reservation_price;
+	}
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+	public String getCustomer_phone() {
+		return customer_phone;
+	}
+	public void setCustomer_phone(String customer_phone) {
+		this.customer_phone = customer_phone;
+	}
+	public ArrayList<String> getHouse_photourl_list() {
 		return house_photourl_list;
 	}
 	public void setHouse_photourl_list(ArrayList<String> house_photourl_list) {
