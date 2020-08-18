@@ -301,7 +301,7 @@ span.next_btn {
 }
 .pagination li a:hover,
 .pagination li a.active {
-    color: #fff;
+    color: #000000;
     background-color: #ee575d;
 }
 .pagination li:first-child a {

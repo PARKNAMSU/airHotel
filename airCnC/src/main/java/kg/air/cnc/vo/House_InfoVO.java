@@ -77,7 +77,17 @@ public class House_InfoVO {
 	private String house_location_fulladdress;
 	private String house_location_detailaddress;
 	private Date house_stop_end_date;
-
+	
+	//상세사진 추가
+	private MultipartFile house_photo_detail1;
+	private MultipartFile house_photo_detail2;
+	private MultipartFile house_photo_detail3;
+	private MultipartFile house_photo_detail4;
+	private String house_photourl_detail1;
+	private String house_photourl_detail2;
+	private String house_photourl_detail3;
+	private String house_photourl_detail4;
+	
 	// 숙소등록 필요한 vo 요소들
 	private String newhouse;
 	private String house_location_sido;
@@ -1044,6 +1054,70 @@ public class House_InfoVO {
 
 	public void setHouse_restrict_beast_0or1(String house_restrict_beast_0or1) {
 		this.house_restrict_beast_0or1 = house_restrict_beast_0or1;
+	}
+
+	public String getHouse_photourl_detail1() {
+		return house_photourl_detail1;
+	}
+
+	public void setHouse_photourl_detail1(String house_photourl_detail1) {
+		this.house_photourl_detail1 = house_photourl_detail1;
+	}
+
+	public String getHouse_photourl_detail2() {
+		return house_photourl_detail2;
+	}
+
+	public void setHouse_photourl_detail2(String house_photourl_detail2) {
+		this.house_photourl_detail2 = house_photourl_detail2;
+	}
+
+	public String getHouse_photourl_detail3() {
+		return house_photourl_detail3;
+	}
+
+	public void setHouse_photourl_detail3(String house_photourl_detail3) {
+		this.house_photourl_detail3 = house_photourl_detail3;
+	}
+
+	public String getHouse_photourl_detail4() {
+		return house_photourl_detail4;
+	}
+
+	public void setHouse_photourl_detail4(String house_photourl_detail4) {
+		this.house_photourl_detail4 = house_photourl_detail4;
+	}
+
+	public MultipartFile getHouse_photo_detail1() {
+		return house_photo_detail1;
+	}
+
+	public void setHouse_photo_detail1(MultipartFile house_photo_detail1) {
+		this.house_photo_detail1 = house_photo_detail1;
+	}
+
+	public MultipartFile getHouse_photo_detail2() {
+		return house_photo_detail2;
+	}
+
+	public void setHouse_photo_detail2(MultipartFile house_photo_detail2) {
+		this.house_photo_detail2 = house_photo_detail2;
+	}
+
+	public MultipartFile getHouse_photo_detail3() {
+		return house_photo_detail3;
+	}
+
+	public void setHouse_photo_detail3(MultipartFile house_photo_detail3) {
+		this.house_photo_detail3 = house_photo_detail3;
+	}
+
+	public MultipartFile getHouse_photo_detail4() {
+		return house_photo_detail4;
+	}
+
+	public void setHouse_photo_detail4(MultipartFile house_photo_detail4) {
+		this.house_photo_detail4 = house_photo_detail4;
 	}
 
 }

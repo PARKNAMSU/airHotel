@@ -253,7 +253,11 @@
 		house_restrict_cctv,
 		house_restrict_weapon,
 		house_restrict_beast,
-		house_host_id
+		house_host_id,
+		house_photourl_detail1,
+		house_photourl_detail2,
+		house_photourl_detail3,
+		house_photourl_detail4
 	from 
 		house_info
 	where 
@@ -417,7 +421,11 @@
 		UPDATE 
 			house_info 
 		SET
-			house_photourl = #{house_photourl}
+			house_photourl = #{house_photourl},
+			house_photourl_detail1 = #{house_photourl_detail1},
+			house_photourl_detail2 = #{house_photourl_detail2},
+			house_photourl_detail3 = #{house_photourl_detail3},
+			house_photourl_detail4 = #{house_photourl_detail4}
 		WHERE 
 			house_seq=#{house_seq}
 		]]>

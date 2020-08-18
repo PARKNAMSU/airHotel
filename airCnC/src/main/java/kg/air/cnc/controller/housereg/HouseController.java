@@ -401,25 +401,52 @@ public class HouseController {
 	public String update_hosthouseimgwork(@ModelAttribute("house") House_InfoVO house, Model model,
 			MultipartHttpServletRequest mtfRequest) {
 		MultipartFile uploadFile = house.getHouse_photo();
-		String file = uploadFile.getOriginalFilename();
-		System.out.println("file :" + file);
-		if(!uploadFile.isEmpty()) {
+		MultipartFile uploadFile_detail1 = house.getHouse_photo_detail1();
+		MultipartFile uploadFile_detail2 = house.getHouse_photo_detail2();
+		MultipartFile uploadFile_detail3 = house.getHouse_photo_detail3();
+		MultipartFile uploadFile_detail4 = house.getHouse_photo_detail4();
+		if(!uploadFile.isEmpty() || !uploadFile_detail1.isEmpty() || !uploadFile_detail2.isEmpty()
+				|| !uploadFile_detail3.isEmpty() || !uploadFile_detail4.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
-			//String path = "c:\\EclipsePractice\\aaa\\";
+			String fileName_detail1 = uploadFile_detail1.getOriginalFilename();
+			if(uploadFile_detail1.isEmpty()) {fileName_detail1 = "noimage.png";}
+//			if(fileName_detail1.length()<1) fileName_detail1 = "noimage.png";
+			String fileName_detail2 = uploadFile_detail2.getOriginalFilename();
+			if(uploadFile_detail2.isEmpty()) fileName_detail2 = "noimage.png";
+			String fileName_detail3 = uploadFile_detail3.getOriginalFilename();
+			if(uploadFile_detail3.isEmpty()) fileName_detail3 = "noimage.png";
+			String fileName_detail4 = uploadFile_detail4.getOriginalFilename();
+			if(uploadFile_detail4.isEmpty()) fileName_detail4 = "noimage.png";
+
 			System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/upload/"));
 			String path = mtfRequest.getSession().getServletContext().getRealPath("/upload/");
-			System.out.println("수정으로 사진첨부한 파일 이름 : " + fileName);
+			System.out.println("수정으로 사진첨부한 파일 이름 : " + fileName + ", " + fileName_detail1 
+					+ ", " + fileName_detail2 + ", " + fileName_detail3 + ", " + fileName_detail4);
 			try {
 				new File(path).mkdirs();
 				uploadFile.transferTo(new File(path + house.getHouse_host_id() + "_" + fileName));
+				if(!fileName_detail1.equals("noimage.png")) uploadFile_detail1.transferTo(new File(path + house.getHouse_host_id() + "_" + fileName_detail1));
+				if(!fileName_detail2.equals("noimage.png")) uploadFile_detail2.transferTo(new File(path + house.getHouse_host_id() + "_" + fileName_detail2));
+				if(!fileName_detail3.equals("noimage.png")) uploadFile_detail3.transferTo(new File(path + house.getHouse_host_id() + "_" + fileName_detail3));
+				if(!fileName_detail4.equals("noimage.png")) uploadFile_detail4.transferTo(new File(path + house.getHouse_host_id() + "_" + fileName_detail4));
 			} catch (IllegalStateException e) {
 				System.err.println("같은 이름의 파일 있거나 되돌아가서임");
 			} catch (IOException e) {
 				System.err.println("사진파일을 첨부하지 않았음");
 			}
-			house.setHouse_photourl(fileName);
+			house.setHouse_photourl(house.getHouse_host_id() + "_" + fileName);
+			if(fileName_detail1.equals("noimage.png")) {house.setHouse_photourl_detail1("noimage.png");}
+			else {house.setHouse_photourl_detail1(house.getHouse_host_id() + "_" + fileName_detail1);}
+			if(fileName_detail2.equals("noimage.png")) {house.setHouse_photourl_detail2("noimage.png");}
+			else {house.setHouse_photourl_detail2(house.getHouse_host_id() + "_" + fileName_detail2);}
+			if(fileName_detail3.equals("noimage.png")) {house.setHouse_photourl_detail3("noimage.png");}
+			else {house.setHouse_photourl_detail3(house.getHouse_host_id() + "_" + fileName_detail3);}
+			if(fileName_detail4.equals("noimage.png")) {house.setHouse_photourl_detail4("noimage.png");}
+			else {house.setHouse_photourl_detail4(house.getHouse_host_id() + "_" + fileName_detail4);}
+			
 			houseService.updateHouse_hosthouseimg(house);
 			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
+			System.out.println("houseVO안의 url_detail1 : " + house.getHouse_photourl_detail1());
 		}
 		return "forward:/1newhouse.do";
 	}//수정동작
