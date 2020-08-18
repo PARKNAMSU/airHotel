@@ -45,7 +45,7 @@ body {
 }
 
 #sidediv {
-    width: 300px;
+    width: 400px;
     padding-left: 3%;
     padding-top: 5%;
     padding-bottom: 3%;
@@ -55,6 +55,7 @@ body {
 }
 #sidemenu {
     list-style: none;
+    font-size: 25px;
 }
 
 #topmenu {
@@ -184,7 +185,7 @@ input[type="button"]:hover {
 td {
     color: black;
     font-weight: bold;
-    font-size: 3px;
+    font-size: 20px;
 }
 #admin_singo_main {
     margin-left: 10%;

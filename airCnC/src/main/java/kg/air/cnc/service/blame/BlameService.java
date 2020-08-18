@@ -20,5 +20,6 @@ public interface BlameService  {
     void addBlackList(String id);
     void suspendHost(String host_id, String suspend_day);
     void suspendCustomer(String customer_id, String suspend_day);
+    int[] getBlameSize();
 
 }

@@ -20,8 +20,9 @@ public class BlameController {
 
     @RequestMapping(value = "/blamelist.mdo", method = RequestMethod.GET)  // 신고당한 아이디 - 신고당한횟수
     public ModelAndView getBlameList(ModelAndView mav){
+        mav.addObject("blameCount",blameService.getBlameSize());
         mav.addObject("blamelist", blameService.getBlameList());
-        mav.setViewName("blamelist");
+        mav.setViewName("blacklist/blamelist");
         return mav;
     }
 
@@ -29,7 +30,7 @@ public class BlameController {
     public ModelAndView getBlameInfo(HttpServletRequest request, ModelAndView mav){
         String target_member_id = request.getParameter("target_member_id");
         mav.addObject("blameinfo", blameService.getBlameInfo(target_member_id));
-        mav.setViewName("blameinfo");
+        mav.setViewName("blacklist/blameinfo");
         return mav;
     }
 
@@ -43,13 +44,13 @@ public class BlameController {
             //host 인 경우
              HostVO hostVO = blameService.getHostBlameInfo(target_member_id);
              mav.addObject("blameHostJudgeInfo", hostVO);
-             mav.setViewName("blamejudge");
+             mav.setViewName("blacklist/blamejudge");
             return mav;
         } else if(blame_type ==1) {
             //Customer 인 경우
             CustomerVO customerVO = blameService.getCustomerBlameJudgeInfo(target_member_id);
             mav.addObject("blameCustomerJudgeInfo", customerVO);
-            mav.setViewName("blamejudge");
+            mav.setViewName("blacklist/blamejudge");
             return mav;
         } else {
             return null;

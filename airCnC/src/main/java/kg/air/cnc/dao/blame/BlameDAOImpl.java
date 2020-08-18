@@ -153,4 +153,12 @@ public class BlameDAOImpl implements BlameDAO{
     public void setCustomerStatusStop(CustomerVO customer) {
         sqlSession.update("kg.air.cnc.dao.blame.BlameDAO.setCustomerStatusStop", customer);
     }
+
+    @Override
+    public int[] getBlameSize() {
+        int[] sizeArr = new int[2];
+        sizeArr[0] = sqlSession.selectOne("kg.air.cnc.dao.blame.BlameDAO.getHostBlameSize");
+        sizeArr[1] = sqlSession.selectOne("kg.air.cnc.dao.blame.BlameDAO.getCustomerBlameSize");
+        return sizeArr;
+    }
 }
