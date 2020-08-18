@@ -122,7 +122,7 @@
 	<div class="searchOptions">
 		<form action="searchIndex.do">
 			<div class="srcachlocation" style="vertical-align: middle;">
-				&nbsp;<label for="srcachlocation">지역 전체</label>
+				&nbsp;
 				<select id="select_type" name="location" style="border: none;">
 					<option id="first">지역 전체</option>
 					<option id="seo">서울</option>
