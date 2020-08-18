@@ -314,4 +314,41 @@
 	]]>
 	</select>
 	
+	<select id="notPopular" resultType="kg.air.cnc.vo.House_InfoVO">
+	<![CDATA[	
+		SELECT *
+		FROM house_info
+		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation WHERE reservation_regdate+30>=sysdate)
+        AND house_seq NOT IN (SELECT popular_house_seq FROM popular)
+	]]>
+	</select>
+	
+	<insert id="savePopular" parameterType="kg.air.cnc.vo.House_InfoVO">
+		INSERT INTO popular
+		VALUES (#{house_seq}, #{house_price_default}, #{house_price_max})
+	</insert>
+	
+	<update id="updateMin" parameterType="kg.air.cnc.vo.House_InfoVO">
+		UPDATE house_info
+		SET house_price_default=#{house_price_max}, house_price_max=#{house_price_default}
+		WHERE house_seq = #{house_seq}
+	</update>
+	
+	<select id="getDefaultPrices" parameterType="String" resultType="kg.air.cnc.vo.PopularVO">
+		SELECT *
+		FROM popular
+		WHERE popular_house_seq=#{seq}
+	</select>
+	
+	<update id="updateBack" parameterType="kg.air.cnc.vo.PopularVO">
+		UPDATE house_info
+		SET house_price_default=#{house_price_default}, house_price_max=#{house_price_max}
+		WHERE house_seq=#{popular_house_seq}
+	</update>
+	
+	<delete id="deletePopular" parameterType="String">
+		DELETE FROM popular
+		WHERE popular_house_seq=#{seq}
+	</delete>
+	
 </mapper>

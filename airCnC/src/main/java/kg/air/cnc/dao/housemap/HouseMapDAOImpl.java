@@ -131,11 +131,15 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 	}
 	
 	public void savePopular(List<House_InfoVO> vo) {
-		mybatis.insert("houseMap.savePopular", vo);
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.insert("houseMap.savePopular", vo.get(i));
+		}
 	}
 	
 	public void updateMin(List<House_InfoVO> vo) {
-		mybatis.update("houseMap.updateMin", vo);
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.update("houseMap.updateMin", vo.get(i));
+		}
 	}
 	
 	public PopularVO getDefaultPrices(String seq) {

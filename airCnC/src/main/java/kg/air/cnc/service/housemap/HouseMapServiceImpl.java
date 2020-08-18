@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.housemap.HouseMapDAOImpl;
@@ -19,6 +20,7 @@ public class HouseMapServiceImpl implements HouseMapService{
 	@Override
 	public List<House_InfoVO> getHouseList(String location) {
 		List<House_InfoVO> tmp = houseMapDAO.getHouseList(location);
+		this.updateMin();
 		System.out.println(tmp.toString());
 		System.out.println(tmp.size());
 		return tmp;
@@ -123,17 +125,24 @@ public class HouseMapServiceImpl implements HouseMapService{
 			return houseMapDAO.searchIndexPrice(info);
 		}
 	}
-
+	
+	//@Scheduled(cron="0 0 1 * * ?")
 	public void updateMin() {
 		List<House_InfoVO> list = houseMapDAO.notPopular(); //예약이 없는 house가지고 온다.
+		System.out.println(list.size());
 		houseMapDAO.savePopular(list); //popular TB에 저장
 		houseMapDAO.updateMin(list); //교환해서 저장
 	}
 
 	public void updateBack(String seq) {
+		System.out.println("도착");
 		PopularVO vo = houseMapDAO.getDefaultPrices(seq); //popular TB에서 저장된 가격 가져오기
-		houseMapDAO.updateBack(vo); //해당 house가격 원래대로 돌려놓기
-		houseMapDAO.deletePopular(seq); //popular TB에서 삭제
+		System.out.println("해당 숙소의 vo: " +vo.toString());
+		if(vo!=null) {
+			System.out.println("인기 없는 숙소였다.");
+			houseMapDAO.updateBack(vo); //해당 house가격 원래대로 돌려놓기
+			houseMapDAO.deletePopular(seq); //popular TB에서 삭제
+		}
 	}
 
 }
