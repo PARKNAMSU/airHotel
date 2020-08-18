@@ -17,8 +17,9 @@ public class BlackListController {
 
     @RequestMapping(value = "/blacklist.mdo", method = RequestMethod.GET) // 블랙리스트 전체를 보여주는 메소드
     public ModelAndView getBlackList(ModelAndView mav){
+        mav.addObject("blackListCount", blackListService.getBlackListCount());
         mav.addObject("blacklist", blackListService.getBlackList());
-        mav.setViewName("blame/blacklist");
+        mav.setViewName("blacklist");
         return mav;
     }
 
@@ -26,7 +27,7 @@ public class BlackListController {
     public ModelAndView getBlackSearchId(HttpServletRequest httpServletRequest, ModelAndView mav){
             String searchEmail = httpServletRequest.getParameter("blackSearchEmail");
             mav.addObject("blacklist",blackListService.getSearchBlackId(searchEmail));
-            mav.setViewName("blame/blacklistsearch");
+            mav.setViewName("blacklistsearch");
             return mav;
     }
 

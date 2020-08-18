@@ -77,7 +77,7 @@ public class PaymentController {
     @RequestMapping(value = "paymentcomplete.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     @ResponseBody
     public ModelAndView paycomplete(ModelAndView mav,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody HashMap<String, Object> request) {
-    	paymentService.insertReservation(request);
+        paymentService.insertReservation(request);
         cuponService.useCupon((String)request.get("cuponNum"));
         mav.setViewName("index");
         /* 거래내역 조회 token 가져오기

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service("blackListService")
 public class BlackListServiceImpl implements BlackListService {
@@ -27,4 +28,8 @@ public class BlackListServiceImpl implements BlackListService {
         blackListDAO.deleteBlackList(blackEmail);
     }
 
+    @Override
+    public int[] getBlackListCount() {
+        return blackListDAO.getBlackListCount();
+    }
 }
