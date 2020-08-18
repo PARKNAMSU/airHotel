@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@charset "UTF-8";
 body,
 label,
 select,
@@ -8,18 +7,7 @@ button {
   font-family: "Jua", sans-serif;
   margin: 0px;
 }
-.emailSendBtn{
-  width: 72%;
-  height: auto;
-  font-size: 25px;
-  margin-bottom: 10px;
-}
-.emailAuthBtn{
-  width: 72%;
-  height: auto;
-  font-size: 25px;
-  margin-bottom: 10px;
-}
+
 .headdiv {
   float: left;
   margin-top: 10%;
@@ -117,6 +105,9 @@ button {
   margin-top: 7%;
   margin-left: 10%;
 }
+.iid {
+  margin-bottom: 10px;
+}
 .rightform {
   float: right;
   text-align: center;
@@ -130,14 +121,25 @@ button {
   top: 90%;
 }
 .idbtn {
-  width: 70%;
+  width: 20%;
   height: auto;
-  font-size: 25px;
+  font-size: 10px;
   margin-bottom: 10px;
 }
 .iid {
   width: 65%;
   height: 45px;
   font-size: 18px;
-  margin-bottom: 10px;
+}
+.itel {
+  width: 89%;
+  height: 45px;
+  font-size: 18px;
+}
+.iauth {
+  margin-top: 18px;
+  width: 89%;
+  height: 45px;
+  font-size: 18px;
+  padding: 8px;
 }

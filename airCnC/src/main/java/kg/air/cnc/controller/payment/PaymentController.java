@@ -1,6 +1,8 @@
 package kg.air.cnc.controller.payment;
 
 import java.util.ArrayList;
+
+import kg.air.cnc.controller.reservation.MyReservationController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ public class PaymentController {
     PaymentService paymentService;
     @Autowired
     CuponServiceImpl cuponService;
+    @Autowired
+    MyReservationController myReservationController;
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
@@ -75,6 +79,7 @@ public class PaymentController {
     public ModelAndView paycomplete(ModelAndView mav,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody HashMap<String, Object> request) {
     	paymentService.insertReservation(request);
         cuponService.useCupon((String)request.get("cuponNum"));
+        mav.setViewName("index");
         /* 거래내역 조회 token 가져오기
         imp_uid = 거래고유 번호
         JSONObject json = new JSONObject();

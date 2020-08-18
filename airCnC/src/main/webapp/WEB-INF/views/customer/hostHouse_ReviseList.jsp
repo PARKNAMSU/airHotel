@@ -73,10 +73,11 @@ input[type="submit"] {
 		<div class="hoststep">
 			<ul>
 				<li><a href="/cnc/update_2housedetailopen.do">인원 및 침실</a></li>
-				<li><a href="/cnc/update_3bathcountopen.do">욕실 및 공용여부</a></li>
-				<li><a href="/cnc/update_4locationopen.do">숙소 위치</a></li>
-				<li><a href="/cnc/update_5defaultoptionopen.do">숙소옵션 및 안전시설</a></li>
-				<li><a href="/cnc/update_6guestcomfortableopen.do">숙소내 편의시설</a></li>
+				<a href=""><li>욕실 및 공용여부</li></a>
+				<a href=""><li>숙소 위치</li></a>
+				<a href=""><li>숙소 사진</li></a>
+				<a href=""><li>숙소옵션 및 안전시설</li></a>
+				<a href=""><li>숙소내 편의시설</li></a>
 				<a href=""><li>숙소 설명</li></a>
 				<a href=""><li>숙소 사진</li></a>
 				<a href=""><li>숙소 제목</li></a>

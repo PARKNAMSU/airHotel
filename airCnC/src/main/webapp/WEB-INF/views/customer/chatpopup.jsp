@@ -121,13 +121,13 @@
 	</div>
 	<div style="clear:both;"></div>
 	<div id="submitdiv">
-		<form action="insertMessage.do" method="post" class="form-inline">
+		<form action="insertMessage.do" method="post" id="messageForm" class="form-inline">
 			<input type="text" name="message_content" style="width:570px;height:50px;"class="form-control" id="message_content">
 			<input type="hidden" name="message_type" value="nomal">
 			<input type="hidden" name="message_from_id" value="${login_session}">
 			<input type="hidden" name="message_to_id" value="${toId}">
 			<c:if test="${toId eq 'admin'}"><input type="submit" value="전송" class="btn btn-danger" style="font-size:30px;" disabled="disabled"></c:if>
-			<c:if test="${toId != 'admin'}"><input type="submit" value="전송" class="btn btn-danger" style="font-size:30px;"></c:if>
+			<c:if test="${toId != 'admin'}"><input type="button" onclick="messageSubmit()" value="전송" class="btn btn-danger" style="font-size:30px;"></c:if>
 		</form>
 	</div>
 	<div style="margin-left:15%;margin-top:5%;">
@@ -140,5 +140,12 @@
 			scrollTop:$("#firstChat").offset().top,
 			duration:400});
 	})
+	var messageSubmit = function(){
+		if(document.getElementById("message_content").value == "" ||document.getElementById("message_content").value == null ){
+			alert("메세지를 입력해 주세요")
+		}else{
+			document.getElementById("messageForm").submit()
+		}
+	}
 </script>
 </html>

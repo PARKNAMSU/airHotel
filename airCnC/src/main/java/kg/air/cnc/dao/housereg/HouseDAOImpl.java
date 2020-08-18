@@ -47,26 +47,6 @@ public class HouseDAOImpl implements HouseDAO {
 		return sqlSessionTemplate.selectOne("product.detailHouse", house_seq);
 	}//세부정보 받아온 detail이용해서 housedetail 수정
 
-	@Override
-	public void updateHouse_bathcount(House_InfoVO vo) {
-		sqlSessionTemplate.update("product.updateHouse_bathcount", vo);
-	}
-
-	@Override
-	public void updateHouse_location(House_InfoVO vo) {
-		sqlSessionTemplate.update("product.updateHouse_location", vo);
-	}
-
-	@Override
-	public void updateHouse_defaultoption(House_InfoVO vo) {
-		sqlSessionTemplate.update("product.updateHouse_defaultoption", vo);
-	}
-
-	@Override
-	public void updateHouse_guestcomfortable(House_InfoVO vo) {
-		sqlSessionTemplate.update("product.updateHouse_guestcomfortable", vo);
-	}
-
 	
 
 }

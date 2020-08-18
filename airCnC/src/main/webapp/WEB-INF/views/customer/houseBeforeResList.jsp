@@ -28,7 +28,9 @@
 		<div style="margin-top:10%;margin-left:0%;">
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a><br><br>
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
+				<b style="margin-left:43%;" onclick="openBlame('${login_session}','${item.reservation_customer_id}')">신고</b>
+				<br><br>
 				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
 				<b>예약날짜: ${item.reservation_regdate }</b><br><br>
 				<b>체크인 시간:${item.reservation_check_in }</b>&nbsp;&nbsp;<b>체크아웃 시간:${item.reservation_check_out }</b>
@@ -39,4 +41,11 @@
 		<div style="clear: both;"></div>
 	</div>
 </body>
+<script type="text/javascript">
+var openBlame = function(id,target){
+	var url = "blameCustomerPage.do?blame_member_id="+id+"&blame_target_member_id="+target
+	 window.open(url ,"blameForm",
+     "toolbar=no, width=660, height=370, directories=no, status=no,scrollorbars=no, resizable=no");
+}
+</script>
 </html>

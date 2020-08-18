@@ -98,7 +98,7 @@
 	    
         <div class="locationbutton">
           <a href="#" onclick="PrevSubmit();" style="float: left;"><button>< 뒤로가기</button></a>
-          <a href="#" onclick="guestcomfortableSubmit();" style="float: right;"><button>다음</button></a>
+          <a href="#" onclick="defaultoptionSubmit();" style="float: right;"><button>다음</button></a>
         </div>
       </div>
     </div>

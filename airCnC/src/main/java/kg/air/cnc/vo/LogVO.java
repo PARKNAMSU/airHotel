@@ -12,6 +12,16 @@ public class LogVO {
 	private String startDate;
 	@JsonIgnore
 	private String endDate;
+	
+	public LogVO() {}
+	
+	public LogVO(String log_id, String log_content, String log_type) {
+		super();
+		this.log_id = log_id;
+		this.log_content = log_content;
+		this.log_type = log_type;
+	}
+
 	public int getLog_seq() {
 		return log_seq;
 	}

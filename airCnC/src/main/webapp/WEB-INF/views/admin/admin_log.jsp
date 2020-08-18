@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -356,26 +356,6 @@ function ReportToExcel(){
 			location.href = "deleteLog.mdo?log_id="+$("#log_id").val()+"&log_type="+getData[0].log_type+"&startDate="+getData[0].log_regdate+"&endDate="+getData[getData.length-1].log_regdate
 		}
 	}
-    function request() {
-        return $.ajax({
-            type: "GET",
-            url: "resetLogin.mdo",
-            async: true
-        }).responseText;
-    }
-    window.onbeforeunload = () => {
-            request();
-        
-        return null;
-    }
-    $(function () {
-        $("a").not('#lnkLogOut').click(function () {
-            window.onbeforeunload = null;
-        });
-        $(".btn").click(function () {
-            window.onbeforeunload = null;
-    	});
-    });
 </script>
 
 </html>

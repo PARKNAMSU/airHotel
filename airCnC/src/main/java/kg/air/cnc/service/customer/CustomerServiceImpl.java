@@ -63,4 +63,14 @@ public class CustomerServiceImpl implements CustomerService{
 	public int blacklistEmailCheck(CustomerVO vo) throws Exception {
 		return dao.blacklistEmailCheck(vo);
 	}
+
+	@Override
+	public CustomerVO getCustomerInfo(String customerId) throws Exception {
+		return dao.getCustomerInfo(customerId);
+	}
+
+	@Override
+	public int customerInfoUpdate(CustomerVO vo) throws Exception {
+		return dao.customerInfoUpdate(vo);
+	}
 }

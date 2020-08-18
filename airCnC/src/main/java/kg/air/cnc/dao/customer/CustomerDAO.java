@@ -25,4 +25,10 @@ public interface CustomerDAO {
 	
 	// 블랙리스트 확인.
 	public int blacklistEmailCheck(CustomerVO vo)throws Exception;
+	
+	// 사용자 정보 가져오기.
+	public CustomerVO getCustomerInfo(String customerId)throws Exception;
+	
+	// 사용자 정보 수정.
+	public int customerInfoUpdate(CustomerVO vo)throws Exception;
 }
