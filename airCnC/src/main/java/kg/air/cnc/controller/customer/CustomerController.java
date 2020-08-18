@@ -68,6 +68,19 @@ public class CustomerController {
 	public String registerView() throws Exception{
 		return "SignUp";
 	}
+	
+	@RequestMapping(value = "/hostRegisterView.do", method = RequestMethod.GET)
+	public ModelAndView hostRegisterView(HttpSession session,CustomerVO customerVO, ModelAndView mav) throws Exception{
+		String sessionId = (String)session.getAttribute("login_session");
+		customerVO = service.getCustomerInfo(sessionId);	
+		mav.addObject("customerPassword",customerVO.getCustomer_password());
+		mav.addObject("customerName", customerVO.getCustomer_name());
+		mav.addObject("customerPhone", customerVO.getCustomer_phone());
+		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerImage", customerVO.getCustomer_image());
+		mav.setViewName("hostRegister");
+		return mav;
+	}
 
 	@RequestMapping(value = "/loginView.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView loginView(ModelAndView mav, HttpSession session)throws Exception{
@@ -86,6 +99,7 @@ public class CustomerController {
 		mav.addObject("customerName", customerVO.getCustomer_name());
 		mav.addObject("customerPhone", customerVO.getCustomer_phone());
 		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerImage", customerVO.getCustomer_image());
 		mav.addObject("customerImage", customerVO.getCustomer_image());
 		mav.setViewName("mypage");
 		return mav;

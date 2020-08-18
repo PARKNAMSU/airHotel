@@ -88,6 +88,7 @@
 					<ul>
 						<li><br></li>
 						<li style="margin-bottom:20px;"><a href="mypage.do">내 정보</a></li>
+						<li style="margin-bottom:20px;"><a href="hostRegisterView.do">호스트 신청</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
