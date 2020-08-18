@@ -136,8 +136,27 @@ button {
   margin-bottom: 10px;
 }
 .iid {
-  width: 65%;
+  width: 95%;
   height: 45px;
   font-size: 18px;
   margin-bottom: 10px;
 }
+.currentPassword{
+  width: 95%;
+  height: 45px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.newPassword{
+  width: 95%;
+  height: 45px;
+  font-size: 18px;
+  margin-bottom: 10px;	
+}
+.confirmPassword{
+  width: 95%;
+  height: 45px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+

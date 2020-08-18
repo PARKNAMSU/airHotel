@@ -64,6 +64,18 @@
 	</select>
 	
 	<update id="customerInfoUpdate">
-		UPDATE customer SET customer_password = #{customer_password}, customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
+		UPDATE customer SET customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
 	</update>
+	
+	<update id="modifyPassword">
+		UPDATE customer SET customer_password = #{customer_password} WHERE customer_id = #{customer_id}
+	</update>
+	
+	<select id="passwordCheck" resultType="String" parameterType="String">
+		SELECT customer_password FROM customer WHERE customer_id = #{customer_id}
+	</select>
+	
+	<delete id="customerWithdrawal">
+		DELETE FROM customer WHERE customer_id = #{customer_id}
+	</delete>
 </mapper>
