@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Repository("blackListDao")
 public class BlackListDAOImpl implements BlackListDAO{
@@ -32,7 +33,12 @@ public class BlackListDAOImpl implements BlackListDAO{
         sqlSession.delete("kg.air.cnc.dao.blacklist.BlackListDAO.deleteBlackList", blackEmail);
     }
 
-    /*public BlackUserVO getSearchBlackUser(){
-        sqlSession.selectOne("select")
-    }*/
+    @Override
+    public int[] getBlackListCount() {
+        int countArr[] = new int [3];
+        countArr[0] = sqlSession.selectOne("kg.air.cnc.dao.blacklist.BlackListDAO.getWeeklyAddedBlackList");
+        countArr[1] = sqlSession.selectOne("kg.air.cnc.dao.blacklist.BlackListDAO.getMonthlyAddedBlackList");
+        countArr[2] = sqlSession.selectOne("kg.air.cnc.dao.blacklist.BlackListDAO.getTotalBlackList");
+        return countArr;
+    }
 }

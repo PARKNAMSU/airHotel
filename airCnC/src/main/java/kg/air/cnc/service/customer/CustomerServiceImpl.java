@@ -73,4 +73,19 @@ public class CustomerServiceImpl implements CustomerService{
 	public int customerInfoUpdate(CustomerVO vo) throws Exception {
 		return dao.customerInfoUpdate(vo);
 	}
+
+	@Override
+	public int modifyPassword(CustomerVO customerVO) throws Exception {
+		return dao.modifyPassword(customerVO);
+	}
+
+	@Override
+	public String passwordCheck(String customer_id) throws Exception {
+		return dao.passwordCheck(customer_id);
+	}
+
+	@Override
+	public void customerWithdrawal(String customer_id) throws Exception {
+		dao.customerWithdrawal(customer_id);
+	}
 }

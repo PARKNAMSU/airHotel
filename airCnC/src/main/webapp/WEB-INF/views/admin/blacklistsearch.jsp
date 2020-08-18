@@ -10,6 +10,7 @@
     <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>관리자 삭제 파일</title>
 </head>
+
 <style>
     .menu a {
         cursor: pointer;
@@ -19,6 +20,7 @@
         display: none;
     }
 </style>
+
 <body>
 
 <!-- header-start -->
@@ -58,21 +60,6 @@
 </header>
 <!-- header-end -->
 
-
-<!-- slider_area_start -->
-<div class="chartcount" style="text-align: center; margin-top: 150px;">
-    <p id="counter1" style="float: left; width: 33%;"></p>
-    <p id="counter2" style="float: left; width: 33%;"></p>
-    <p id="counter3" style="float: left; width: 33%;"></p>
-</div>
-<div class="charttitle" style="text-align: center;">
-    <label style="float: left; width: 33%;">하루동안 접수된 신고 횟수</label>
-    <label style="float: left; width: 33%;">한달동안 접수된 신고 횟수</label>
-    <label style="float: left; width: 33%;">어제까지 누적된 접수된 신고 횟수</label>
-</div>
-<br/>
-
-<!-- 사이드 메뉴 -->
 <div class="total_container">
     <div id="sidediv">
         <ul id="sidemenu">
@@ -82,59 +69,24 @@
     </div>
     <!-- 블랙리스트 테이블 -->
     <c:set var="blacklist" value="${blacklist}"/>
-    <div style="color: black;" class="table-responsive">
-        <form class="blacklist-id-search-form" action="/cnc/blacklistSearchEmail.mdo" method="get">
-            검색할 이메일 :
-            <input type="text" name="blackSearchEmail"/>
-            <input type="submit" value="검색"/>
+    <div style="color: black" class="table-responsive">
+        <form class="blacklist-id-search-form" action="blacklistSearchEmail.mdo" method="get">
+            검색할 이메일 : <input type="text" name="blackSearchEmail">
+            <input type="submit" value="검색">
         </form>
-        <table style="color: black;" class="table">
-            <c:forEach var="item" items="${blacklist}" begin="0" end="${blacklist.size()}" step="1">
-                <tr>
-                    <td>${item.black_email}</td>
-                </tr>
-            </c:forEach>
+        <input type="button" value="목록가기" onclick="location.href='/cnc/blacklist.mdo'">
+        <table style="color: black" class="table">
+            <tr>
+                <td>아이디 : ${blacklist.black_id}</td>
+                <td>블랙당한 날짜 : ${blacklist.regdate}</td>
+                <td>블랙당한 이메일 : ${blacklist.black_email}</td>
+                <td> <input type="submit" value="블랙해제" onclick="location.href='/cnc/blacklistRelease.mdo?blackEmail=${blacklist.black_email}'"></td>
+            </tr>
         </table>
     </div>
 </div>
+
 </body>
-
-
-<script>
-    function numberCounter(target_frame, target_number) {
-        this.count = 0;
-        this.diff = 0;
-        this.target_count = parseInt(target_number);
-        this.target_frame = document.getElementById(target_frame);
-        this.timer = null;
-        this.counter();
-    }
-
-    numberCounter.prototype.counter = function () {
-        var self = this;
-        this.diff = this.target_count - this.count;
-
-        if (this.diff > 0) {
-            self.count += Math.ceil(this.diff / 5);
-        }
-
-        this.target_frame.innerHTML = this.count
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        if (this.count < this.target_count) {
-            this.timer = setTimeout(function () {
-                self.counter();
-            }, 20);
-        } else {
-            clearTimeout(this.timer);
-        }
-    };
-
-    new numberCounter("counter1", 67);
-    new numberCounter("counter2", 135);
-    new numberCounter("counter3", 21988);
-</script>
 
 
 <script>

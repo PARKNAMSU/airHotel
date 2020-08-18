@@ -135,12 +135,10 @@
 				return false;
 			}
 		}
-		if ($("#customerPhone").val()) {
-			if (!phoneChecked.test($("#customerPhone").val())) {
-				alert("전화번호가 잘못 되었습니다.");
-				$("#customerPhone").focus();
-				return false;
-			}
+		if (!phoneChecked.test($("#customerPhone").val())) {
+			alert("전화번호가 잘못 되었습니다.");
+			$("#customerPhone").focus();
+			return false;
 		}
 		if (!$("#customerId").val()) {
 			alert("아이디를 입력 하세요.");
