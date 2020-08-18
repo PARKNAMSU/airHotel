@@ -26,7 +26,7 @@ public interface CustomerService {
 	// 이전에 로그인한 적이 있는지, 유효시간이 넘지 않은 세션을 가지고 있는지 확인하는 메서드.
 	public CustomerVO checkCustomerWithSessionKey(String session_id)throws Exception;
 	
-	// 비밀번호 변경.
+	// 비밀번호 재설정.
 	public int changePassword(CustomerVO customerVO)throws Exception;
 	
 	// 블랙리스트 확인.
@@ -37,6 +37,15 @@ public interface CustomerService {
 	
 	// 사용자 정보 수정.
 	public int customerInfoUpdate(CustomerVO vo)throws Exception;
+	
+	// 비밀번호 변경.
+	public int modifyPassword(CustomerVO customerVO)throws Exception;
+	
+	// 비밀번호 확인.
+	public String passwordCheck(String customer_id)throws Exception;
+	
+	// 회원 탈퇴.
+	public void customerWithdrawal(String customer_id)throws Exception;
 }
 
 
