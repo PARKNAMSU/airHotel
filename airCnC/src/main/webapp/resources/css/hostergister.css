@@ -811,15 +811,18 @@ a:hover {
     color: #ff4a52;
 }
 button {
-    color: white;
-    display: inline-block;
-    width: auto;
-    height: auto;
-    background-color: #ff5a5f;
-    border-radius: 5px;
-    font-size: 17px;
-    text-decoration: none;
-    padding: 8px;
-    border: none;
-    font-size: 30px;
+  color: white;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #ff5a5f;
+  border-radius: 5px;
+  font-size: 17px;
+  text-decoration: none;
+  padding: px;
+  border: none;
+}
+.goodtext,
+label {
+  color: black;
 }

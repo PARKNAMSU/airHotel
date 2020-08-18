@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.housemap.HouseMapDAOImpl;
 import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PopularVO;
 
 @Service
 public class HouseMapServiceImpl implements HouseMapService{
@@ -121,6 +122,18 @@ public class HouseMapServiceImpl implements HouseMapService{
 			System.out.println("큰 지역만 선택함");
 			return houseMapDAO.searchIndexPrice(info);
 		}
+	}
+
+	public void updateMin() {
+		List<House_InfoVO> list = houseMapDAO.notPopular(); //예약이 없는 house가지고 온다.
+		houseMapDAO.savePopular(list); //popular TB에 저장
+		houseMapDAO.updateMin(list); //교환해서 저장
+	}
+
+	public void updateBack(String seq) {
+		PopularVO vo = houseMapDAO.getDefaultPrices(seq); //popular TB에서 저장된 가격 가져오기
+		houseMapDAO.updateBack(vo); //해당 house가격 원래대로 돌려놓기
+		houseMapDAO.deletePopular(seq); //popular TB에서 삭제
 	}
 
 }
