@@ -342,7 +342,7 @@
 	
 	<update id="updateBack" parameterType="kg.air.cnc.vo.PopularVO">
 		UPDATE house_info
-		SET house_price_default=#{house_price_default}, house_price_max=#{house_price_max}
+		SET house_price_default=#{popular_price_default}, house_price_max=#{popular_price_max}
 		WHERE house_seq=#{popular_house_seq}
 	</update>
 	

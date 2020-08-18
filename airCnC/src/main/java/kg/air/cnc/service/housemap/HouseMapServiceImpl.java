@@ -20,7 +20,6 @@ public class HouseMapServiceImpl implements HouseMapService{
 	@Override
 	public List<House_InfoVO> getHouseList(String location) {
 		List<House_InfoVO> tmp = houseMapDAO.getHouseList(location);
-		this.updateMin();
 		System.out.println(tmp.toString());
 		System.out.println(tmp.size());
 		return tmp;
@@ -126,7 +125,7 @@ public class HouseMapServiceImpl implements HouseMapService{
 		}
 	}
 	
-	//@Scheduled(cron="0 0 1 * * ?")
+	@Scheduled(cron="0 0 1 * * ?")
 	public void updateMin() {
 		List<House_InfoVO> list = houseMapDAO.notPopular(); //예약이 없는 house가지고 온다.
 		System.out.println(list.size());
