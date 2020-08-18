@@ -32,8 +32,18 @@ public class MyHouseController {
 	ReservationService reservationService;
 	
 	@RequestMapping("myHouse.do")
-	public String hostHouseList(HttpSession session) {
-		return "hostHouseList";
+	public ModelAndView hostHouseList(HttpSession session,ModelAndView mav) {
+		if(session.getAttribute("login_session")!=null) {
+			mav.setViewName("hostHouseList");
+			List<ReservationHouseDetailVO> resListThisWeek = myHouseService.getReservationListThisWeek((String)session.getAttribute("login_session"));
+			if(resListThisWeek.size()>0) {
+				mav.addObject("resList",resListThisWeek);
+			}
+		}else {
+			mav.setViewName("Redirect:loginView.do");
+		}
+		
+		return mav;
 	}
 	@RequestMapping(value = "myHouseList.do", produces = "application/text; charset=utf8")
 	@ResponseBody

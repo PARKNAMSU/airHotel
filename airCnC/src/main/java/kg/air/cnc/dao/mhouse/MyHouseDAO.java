@@ -102,4 +102,7 @@ public class MyHouseDAO {
 	public void rollbackDeleteHouse(int seq) {
 		sqlSessionTemplate.update("HostHouseManageVO.RollbackDeleteHouse",seq);
 	}
+	public List<ReservationHouseDetailVO> getReservationListThisWeek(String id){
+		return sqlSessionTemplate.selectList("HostHouseManageVO.getReservationListThisWeek",id);
+	}
 }

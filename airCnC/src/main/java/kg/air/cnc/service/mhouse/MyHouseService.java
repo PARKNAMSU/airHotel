@@ -94,4 +94,14 @@ public class MyHouseService {
 	public void rollbackDeleteHouse(int seq) {
 		myHouseDAO.rollbackDeleteHouse(seq);
 	}
+	public List<ReservationHouseDetailVO> getReservationListThisWeek(String id){
+		List<ReservationHouseDetailVO> resList = myHouseDAO.getReservationListThisWeek(id);
+		for(ReservationHouseDetailVO vo:resList) {
+			String name = vo.getHouse_name();
+			if(name.length() >8) {
+				vo.setHouse_name(name.substring(0,6)+"...");
+			}
+		}
+		return resList;
+	}
 }
