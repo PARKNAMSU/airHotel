@@ -10,16 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kg.air.cnc.service.comments.CommentsService;
 import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.vo.MessageVO;
+import kg.air.cnc.vo.MyCommentsVO;
 
 @Controller
 public class MessageController {
 	@Autowired
 	MessageService messageService;
-
+	@Autowired
+	CommentsService commentsService;
 	/*메세지 보내기*/
 	@RequestMapping(value="/insertMessage.do")
 	public ModelAndView insertMessageController(MessageVO vo,ModelAndView mav) {
@@ -33,7 +40,6 @@ public class MessageController {
 	public ModelAndView chatController(HttpSession session, ModelAndView mav) {
 		String id = (String)session.getAttribute("login_session");
 		List<MessageVO> messageList = messageService.getChatList(id);
-		System.out.println("msize"+messageList.size());
 		mav.addObject("messageList",messageList);
 		mav.setViewName("chat");
 		return mav;
@@ -58,6 +64,27 @@ public class MessageController {
 			mav.setViewName("messagepopup");
 		}
 		return mav;
+	}
+	@RequestMapping("goToCommentsList.do")
+	public String commentsList() {
+		return "mycomments";
+	}
+	/*내숙소에 대한 코멘트 */
+	@RequestMapping(value = "getCommentsForMe.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String getCommentsForMe(HttpSession session) throws JsonProcessingException {
+		List<MyCommentsVO> list = commentsService.getCommentsForMe((String)session.getAttribute("login_session"));
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		return jsonStr;
+	}
+	@RequestMapping(value = "getMyComments.do",produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String getMyComments(HttpSession session, ModelAndView mav) throws JsonProcessingException {
+		List<MyCommentsVO> list = commentsService.getMyComments((String)session.getAttribute("login_session"));
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		return jsonStr;
 	}
 
 }
