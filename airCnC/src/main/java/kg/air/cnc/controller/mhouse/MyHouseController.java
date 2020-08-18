@@ -14,7 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kg.air.cnc.controller.reservation.ReservationDetailController;
 import kg.air.cnc.service.mhouse.MyHouseService;
+import kg.air.cnc.service.reservation.ReservationService;
+import kg.air.cnc.vo.BlameVO;
 import kg.air.cnc.vo.Host_sales_chartVO;
 import kg.air.cnc.vo.HouseReservationMemberVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
@@ -25,6 +28,8 @@ public class MyHouseController {
 	
 	@Autowired
 	MyHouseService myHouseService;
+	@Autowired
+	ReservationService reservationService;
 	
 	@RequestMapping("myHouse.do")
 	public String hostHouseList(HttpSession session) {
@@ -106,4 +111,11 @@ public class MyHouseController {
 		}
 		return mav;
 	}
+	@RequestMapping("blameCustomerPage.do")
+	public ModelAndView goToInsertBlame(BlameVO vo,ModelAndView mav) {
+		mav.addObject("blameVO",vo);
+		mav.setViewName("blameCustomerpopup");
+		return mav;
+	}
+	
 }

@@ -116,18 +116,30 @@ public class HouseController {
 		logger.info(house.toString());
 		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
 		return "3bathcount";
-	}//상세보기
+	}
 	@RequestMapping(value = "/update_2housedetailopen.do")
 	public String update_2housedetailopen(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println("2housedetail 수정 페이지로 이동");
 		return "2housedetail_update";
-	}//수정이동
+	}
+	
 	@RequestMapping(value = "/update_2housedetailwork.do")
 	public String update_2housedetailwork(@ModelAttribute("house") House_InfoVO house, Model model) {
 		houseService.updateHouse_housedetail(house);
 		System.out.println("2housedetail 수정완료");
 		return "forward:/1newhouse.do";
-	}//수정동작
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -138,23 +150,7 @@ public class HouseController {
 		logger.info(house.toString());
 		System.out.println("bathcount : " + house.getHouse_bathroom_type());
 		return "4location";
-	}//상세보기
-	@RequestMapping(value = "/update_3bathcountopen.do")
-	public String update_bathcountopen(@ModelAttribute("house") House_InfoVO house, Model model) {
-		System.out.println("3bathcount 수정 페이지로 이동");
-		return "3bathcount_update";
-	}//수정이동
-	@RequestMapping(value = "/update_3bathcountwork.do")
-	public String update_3bathcountwork(@ModelAttribute("house") House_InfoVO house, Model model) {
-		System.out.println("욕실수 : " + house.getHouse_bathroom_amount());
-		System.out.println("공용여부 : " + house.getHouse_bathroom_type());
-		houseService.updateHouse_bathcount(house);
-		System.out.println("3bathcount 수정완료");
-		return "forward:/1newhouse.do";
-	}//수정동작
-	
-	
-	
+	}
 	
 	@RequestMapping(value = "/4location.do")
 	public String location(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -165,25 +161,7 @@ public class HouseController {
 		System.out.println("location : " + house.getHouse_location());
 		System.out.println("location : " + house.getHouse_location_fulladdress());
 		return "5defaultoption";
-	}//상세보기
-	@RequestMapping(value = "/update_4locationopen.do")
-	public String update_locationopen(@ModelAttribute("house") House_InfoVO house, Model model) {
-		System.out.println("4location 수정 페이지로 이동");
-		return "4location_update";
-	}//수정이동
-	@RequestMapping(value = "/update_4locationwork.do")
-	public String update_locationwork(@ModelAttribute("house") House_InfoVO house, Model model) {
-		System.out.println("sido : " + house.getHouse_location_sido());
-		System.out.println("sigun : " + house.getHouse_location_gugun());
-		System.out.println("location_x : " + house.getHouse_xlocation());
-		System.out.println("location : " + house.getHouse_location());
-		System.out.println("location : " + house.getHouse_location_fulladdress());
-		houseService.updateHouse_location(house);
-		System.out.println("4location 수정완료");
-		return "forward:/1newhouse.do";
-	}//수정동작
-	
-
+	}
 	
 	@RequestMapping(value = "/5defaultoption.do")
 	public String defaultoption(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -210,50 +188,10 @@ public class HouseController {
 		else {house.setHouse_default_firesofwa("true");}
 		if(house.getHouse_default_bedrock_0or1()==null) {house.setHouse_default_bedrock("false");} 
 		else {house.setHouse_default_bedrock("true");}
-		System.out.println("등록 중 defaultsetting : " + house.getHouse_defaultsetting());
-		System.out.println("등록 중 default_bedrock : " + house.getHouse_default_bedrock());
+		System.out.println("defaultsetting : " + house.getHouse_defaultsetting());
+		System.out.println("default_bedrock : " + house.getHouse_default_bedrock());
 		return "6guestcomfortable";
-	}//상세보기
-	@RequestMapping(value = "/update_5defaultoptionopen.do")
-	public String update_defaultoptionopen(@ModelAttribute("house") House_InfoVO house, Model model) {
-		System.out.println("5defaultoption 수정 페이지로 이동");
-		return "5defaultoption_update";
-	}//수정이동
-	@RequestMapping(value = "/update_5defaultoptionwork.do")
-	public String update_defaultoptionwork(@ModelAttribute("house") House_InfoVO house, Model model) {
-		if(house.getHouse_defaultsetting_0or1().equals("false")) {house.setHouse_defaultsetting("false");} 
-		else {house.setHouse_defaultsetting("true");}
-		if(house.getHouse_default_tv_0or1().equals("false")) {house.setHouse_default_tv("false");} 
-		else {house.setHouse_default_tv("true");}
-		if(house.getHouse_default_wifi_0or1().equals("false")) {house.setHouse_default_wifi("false");} 
-		else {house.setHouse_default_wifi("true");}
-		if(house.getHouse_default_heater_0or1().equals("false")) {house.setHouse_default_heater("false");} 
-		else {house.setHouse_default_heater("true");}
-		if(house.getHouse_default_cooler_0or1().equals("false")) {house.setHouse_default_cooler("false");} 
-		else {house.setHouse_default_cooler("true");}
-		if(house.getHouse_default_iron_0or1().equals("false")) {house.setHouse_default_iron("false");} 
-		else {house.setHouse_default_iron("true");}
-		if(house.getHouse_default_fireditecter_0or1().equals("false")) {house.setHouse_default_fireditecter("false");} 
-		else {house.setHouse_default_fireditecter("true");}
-		if(house.getHouse_default_coditecter_0or1().equals("false")) {house.setHouse_default_coditecter("false");} 
-		else {house.setHouse_default_coditecter("true");}
-		if(house.getHouse_default_aidkit_0or1().equals("false")) {house.setHouse_default_aidkit("false");} 
-		else {house.setHouse_default_aidkit("true");}
-		if(house.getHouse_default_firesofwa_0or1().equals("false")) {house.setHouse_default_firesofwa("false");} 
-		else {house.setHouse_default_firesofwa("true");}
-		if(house.getHouse_default_bedrock_0or1().equals("false")) {house.setHouse_default_bedrock("false");} 
-		else {house.setHouse_default_bedrock("true");}
-		System.out.println("수정 중 defaultsetting : " + house.getHouse_defaultsetting());
-		System.out.println("수정 중 default_bedrock : " + house.getHouse_default_bedrock());
-		houseService.updateHouse_defaultoption(house);
-		System.out.println("5defaultoption 수정완료");
-		return "forward:/1newhouse.do";
-	}//수정동작
-	
-	
-	
-	
-	
+	}
 	
 	@RequestMapping(value = "/6guestcomfortable.do")
 	public String guestcomfortable(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -272,6 +210,7 @@ public class HouseController {
 		else {house.setHouse_default_gym("true");}
 		if(house.getHouse_default_pool_0or1()==null) {house.setHouse_default_pool("false");} 
 		else {house.setHouse_default_pool("true");}
+
 		System.out.println("등록 중 livingroom_type : " + house.getHouse_default_livingroom_type());
 		System.out.println("등록 중 pool : " + house.getHouse_default_pool());
 		return "7guesttextarea";
@@ -300,17 +239,10 @@ public class HouseController {
 		System.out.println("수정 중 livingroom_type왜왜왜 : " + house.getHouse_default_livingroom_type_0or1());
 		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_livingroom_type());
 		
-		System.out.println("수정 중 pool왜왜왜 : " + house.getHouse_default_pool_0or1());
-		System.out.println("수정 중 pool : " + house.getHouse_default_pool());
-		houseService.updateHouse_guestcomfortable(house);
-		System.out.println("6guestcomfortable 수정완료");
-		return "forward:/1newhouse.do";
+		System.out.println("livingroom_type : " + house.getHouse_default_livingroom_type());
+		System.out.println("pool : " + house.getHouse_default_pool());
+		return "7guesttextarea";
 	}
-	
-	
-	
-	
-	
 	
 	@RequestMapping(value = "/7guesttextarea.do")
 	public String guesttextarea(@ModelAttribute("house") House_InfoVO house, Model model) {

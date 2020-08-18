@@ -53,7 +53,7 @@ public class HouseServiceImpl implements HouseService {
 		House_InfoVO houseVO = houseDao.detailHouse(house_seq);
 		return houseVO;
 	}
-
+	
 	@Override
 	public void updateHouse_bathcount(House_InfoVO vo) {
 		houseDao.updateHouse_bathcount(vo);

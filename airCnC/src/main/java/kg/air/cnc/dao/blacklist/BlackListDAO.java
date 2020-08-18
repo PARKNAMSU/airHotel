@@ -9,8 +9,8 @@ public interface BlackListDAO {
 
     ArrayList<BlackUserVO>getBlackList();
 
-    BlackUserVO getBlackSearchId(String searchId);
+    BlackUserVO getBlackSearchId(String blackSearchEmail);
 
-    void deleteBlackList(String blackId);
+    void deleteBlackList(String blackEmail);
 
 }

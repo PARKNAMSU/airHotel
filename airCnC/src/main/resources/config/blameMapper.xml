@@ -109,4 +109,12 @@
         SELECT * FROM customer WHERE customer_id = #{id}
     </select>
 
+    <select id="getHostBlameSize" resultType="int">
+        SELECT COUNT(*) FROM blame WHERE blame_type = 0
+    </select>
+
+    <select id="getCustomerBlameSize" resultType="int">
+        SELECT COUNT(*) FROM blame WHERE blame_type = 1
+    </select>
+
 </mapper>

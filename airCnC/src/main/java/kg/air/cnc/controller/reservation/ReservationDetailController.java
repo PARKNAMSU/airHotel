@@ -1,5 +1,6 @@
 package kg.air.cnc.controller.reservation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -185,6 +186,15 @@ public class ReservationDetailController {
 				.getResForSpecHouse((Integer) session.getAttribute("house_seq"));
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(list);
+		return jsonStr;
+	}
+	@RequestMapping(value = "getHousePhoto.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String getHousePhoto(ReservationHouseDetailVO vo) throws JsonProcessingException {
+		ArrayList<String> house_list= reservationService.getHousePhoto(vo.getHouse_seq());
+		vo.setHouse_photourl_list(house_list);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(vo);
 		return jsonStr;
 	}
 }

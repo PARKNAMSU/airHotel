@@ -11,6 +11,8 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jQuery Excel -->
@@ -23,6 +25,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
 <script src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -290,25 +293,5 @@
 		        chart.draw(data, options);
 		      }
 		}
-		
-	    function request() {
-	        return $.ajax({
-	            type: "GET",
-	            url: "resetLogin.mdo",
-	            async: true
-	        }).responseText;
-	    }
-	    window.onbeforeunload = () => {
-	        request();
-	        return null;
-	    }
-	    $(function () {
-	        $("a").not('#lnkLogOut').click(function () {
-	            window.onbeforeunload = null;
-	        });
-	        $(".btn").click(function () {
-	            window.onbeforeunload = null;
-	    	});
-	    });
 </script>
 </html>

@@ -9,11 +9,11 @@
     </select>
 
     <select id="getBlackSearchId" resultType="kg.air.cnc.vo.BlackUserVO">
-        SELECT * FROM blacklist WHERE black_id = #{searchId}
+        SELECT * FROM blacklist WHERE black_email = #{blackSearchEmail}
     </select>
 
     <delete id="deleteBlackList">
-        DELETE FROM blacklist WHERE black_id = #{blackId}
+        DELETE FROM blacklist WHERE black_email = #{blackEmail}
     </delete>
 
 </mapper>

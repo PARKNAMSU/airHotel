@@ -25,7 +25,7 @@
                     "check_in": '${checkin}', "check_out": '${checkout}', "house_seq":'${house.house_seq}',
                     "customer_id": '${customerInfo.customer_id}', "cuponNum": '${cuponNum}'};
                 jQuery.ajax({
-                    url: "http://localhost:8090/cnc/paymentcomplete.do",
+                    url: "http://localhost:8080/cnc/paymentcomplete.do",
                     method : "POST",
                     headers : {"Content-Type":"application/json"},
                     dataType : 'json',
@@ -33,13 +33,13 @@
                 }).done(function (data) {
                     //가맹점 서버 결제 API 성공시 로직
                 })
-                //todo reservation table 저장 처리
-
+                alert("성공적으로 결제되었습니다.");
+                location.href="reservationPage.do";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
+                alert(msg);
             }
-            alert(msg);
         });
     </script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

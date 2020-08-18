@@ -23,13 +23,13 @@ public class BlackListDAOImpl implements BlackListDAO{
         return null;
     }
 
-    public BlackUserVO getBlackSearchId(String searchId) {
-        BlackUserVO blackUserVO = sqlSession.selectOne("kg.air.cnc.dao.blacklist.BlackListDAO.getBlackSearchId", searchId);
+    public BlackUserVO getBlackSearchId(String blackSearchEmail) {
+        BlackUserVO blackUserVO = sqlSession.selectOne("kg.air.cnc.dao.blacklist.BlackListDAO.getBlackSearchId", blackSearchEmail);
         return blackUserVO;
     }
 
-    public void deleteBlackList(String blackId) {
-        sqlSession.delete("kg.air.cnc.dao.blacklist.BlackListDAO.deleteBlackList", blackId);
+    public void deleteBlackList(String blackEmail) {
+        sqlSession.delete("kg.air.cnc.dao.blacklist.BlackListDAO.deleteBlackList", blackEmail);
     }
 
     /*public BlackUserVO getSearchBlackUser(){

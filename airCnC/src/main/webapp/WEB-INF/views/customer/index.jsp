@@ -66,8 +66,7 @@
 <c:if test="${login_session ne null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-											 src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1" style="float:left;width:70%;">
@@ -88,7 +87,7 @@
 		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
-						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="mypage.do">내 정보</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
@@ -592,14 +591,6 @@
 </script>
 
 <script>
-	window.onload = function () {
-		let minlim = new Date().toISOString().substring(0, 10);
-		document.getElementById('checkIn').value = minlim;
-		document.getElementById('checkIn').min = minlim;
-	};
-</script>
-
-<script>
 	var peopleCheck = function() {
 		let peo = document.getElementById("people");
 		if(peo.value<1) {
@@ -620,13 +611,6 @@
 	}
 </script>
 
-<script>
-	window.onload = function () {
-		var loc = document.getElementById("first");
-		loc.selected = true;
-		chgOptions();
-	}
-</script>
 <script type="text/javascript">
 	var citys = ["Seoul","Busan","Incheon","Gangneung","Gwangju","Jeju"]
 	var cIndex = 0;
@@ -679,6 +663,12 @@
 		});
 	}
 	window.onload = function(){
+		var loc = document.getElementById("first");
+		loc.selected = true;
+		chgOptions();
+		var minlim = new Date().toISOString().substring(0, 10);
+		document.getElementById('checkIn').value = minlim;
+		document.getElementById('checkIn').min = minlim;
 		$.ajax({
 			type:"GET",
 			url: "http://api.openweathermap.org/data/2.5/weather?q="+citys[cIndex]+"&appid=b7672f5a9052b4493d3d1a41da66f308",

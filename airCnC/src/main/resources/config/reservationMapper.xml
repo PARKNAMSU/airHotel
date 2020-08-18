@@ -48,4 +48,7 @@
 		 #{arr}
 		</foreach>
 	</select>
+	<select id="getHousePhoto" parameterType="Integer" resultType="kg.air.cnc.vo.ReservationHouseDetailVO">
+		SELECT house_photourl FROM house_info WHERE house_seq = #{house_seq}
+	</select>
 </mapper>

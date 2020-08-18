@@ -23,5 +23,5 @@ public interface HouseDAO {
 	public void updateHouse_hosttitle(House_InfoVO vo);//세부정보 받아온 detail이용해서 hosttitle 수정
 	public void updateHouse_charge(House_InfoVO vo);//세부정보 받아온 detail이용해서 charge 수정
 	public void updateHouse_restricttheme(House_InfoVO vo);//세부정보 받아온 detail이용해서 restricttheme 수정
-	
+
 }

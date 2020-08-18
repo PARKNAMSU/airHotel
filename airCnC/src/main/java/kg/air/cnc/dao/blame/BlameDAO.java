@@ -34,6 +34,6 @@ public interface BlameDAO {
     CustomerVO getCustomerVO(String id);
     void setHostStatusStop(HostVO host); //  호스트의 host_status 를 1 (정지상태) 로 변경하고, host_stop_end_date 설정
     void setCustomerStatusStop(CustomerVO customer);  // 커스터머의  customer_status 를 1 (정지상태) 로 변경하고, customer_stop_end_date 설정
-
+    int[] getBlameSize();
 
 }
