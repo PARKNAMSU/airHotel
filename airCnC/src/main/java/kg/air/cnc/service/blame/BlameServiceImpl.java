@@ -198,4 +198,9 @@ public class BlameServiceImpl implements BlameService {
         blameDAO.addBlackList(addBlackMap);
         blameDAO.deleteBlame(deleteBlameMap);
     }
+
+    @Override
+    public int[] getBlameSize() {
+        return blameDAO.getBlameSize();
+    }
 }

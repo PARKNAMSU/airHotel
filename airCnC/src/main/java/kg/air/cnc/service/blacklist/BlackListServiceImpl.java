@@ -19,12 +19,12 @@ public class BlackListServiceImpl implements BlackListService {
         return blackUserList;
     }
 
-    public BlackUserVO getSearchBlackId(String searchId) {
-        return blackListDAO.getBlackSearchId(searchId);
+    public BlackUserVO getSearchBlackId(String blackSearchEmail) {
+        return blackListDAO.getBlackSearchId(blackSearchEmail);
     }
 
-    public void deleteBlackList(String blackId) {
-        blackListDAO.deleteBlackList(blackId);
+    public void deleteBlackList(String blackEmail) {
+        blackListDAO.deleteBlackList(blackEmail);
     }
 
 }

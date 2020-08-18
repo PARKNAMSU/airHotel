@@ -18,22 +18,22 @@ public class BlackListController {
     @RequestMapping(value = "/blacklist.mdo", method = RequestMethod.GET) // 블랙리스트 전체를 보여주는 메소드
     public ModelAndView getBlackList(ModelAndView mav){
         mav.addObject("blacklist", blackListService.getBlackList());
-        mav.setViewName("blacklist");
+        mav.setViewName("blame/blacklist");
         return mav;
     }
 
-    @RequestMapping(value = "/blacklistSearchId.mdo", method = RequestMethod.GET) // 검색한 블랙리스트 보여주는 메소드
+    @RequestMapping(value = "/blacklistSearchEmail.mdo", method = RequestMethod.GET) // 검색한 블랙리스트 보여주는 메소드
     public ModelAndView getBlackSearchId(HttpServletRequest httpServletRequest, ModelAndView mav){
-            String searchId = httpServletRequest.getParameter("blackSearchId");
-            mav.addObject("blacklist",blackListService.getSearchBlackId(searchId));
-            mav.setViewName("blacklistsearch");
+            String searchEmail = httpServletRequest.getParameter("blackSearchEmail");
+            mav.addObject("blacklist",blackListService.getSearchBlackId(searchEmail));
+            mav.setViewName("blame/blacklistsearch");
             return mav;
     }
 
     @RequestMapping(value = "/blacklistRelease.mdo", method = RequestMethod.GET) // 블랙리스트 해제 메소드
     public ModelAndView deleteBlackList(HttpServletRequest httpServletRequest, ModelAndView mav){
-            String blackId = httpServletRequest.getParameter("id");
-            blackListService.deleteBlackList(blackId);
+            String blackEmail = httpServletRequest.getParameter("blackEmail");
+            blackListService.deleteBlackList(blackEmail);
             mav.setViewName("redirect:/blacklist.mdo");
             return mav;
     }
