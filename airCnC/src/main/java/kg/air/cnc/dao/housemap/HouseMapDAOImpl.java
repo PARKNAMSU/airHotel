@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PopularVO;
 
 @Repository
 public class HouseMapDAOImpl implements HouseMapDAO {
@@ -35,12 +36,12 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 	}
 
 	@Override 
-	public List<Map<String, Integer>> getPrice(String location) { //Ã¹ °Ë»ö¿¡¼­ ½ÇÇàµÇ´Â°Í
+	public List<Map<String, Integer>> getPrice(String location) { //Ã¹ ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´Â°ï¿½
 		return mybatis.selectList("houseMap.getPrice", location);
 	}
 
 	@Override
-	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//¼¼ºÎ°Ë»ö¿¡¼­ ½ÇÇàµÇ´Â°Í
+	public List<Map<String, Integer>> getPrice(Map<String, String> info) {//ï¿½ï¿½ï¿½Î°Ë»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´Â°ï¿½
 		return mybatis.selectList("houseMap.getDetailPrice", info);
 	}
 	
@@ -125,4 +126,31 @@ public class HouseMapDAOImpl implements HouseMapDAO {
 		return mybatis.selectList("houseMap.searchIndexWithBothPrice", info);
 	}
 
+	public List<House_InfoVO> notPopular() {
+		return mybatis.selectList("houseMap.notPopular");
+	}
+	
+	public void savePopular(List<House_InfoVO> vo) {
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.insert("houseMap.savePopular", vo.get(i));
+		}
+	}
+	
+	public void updateMin(List<House_InfoVO> vo) {
+		for(int i=0; i<vo.size(); i++) {
+			mybatis.update("houseMap.updateMin", vo.get(i));
+		}
+	}
+	
+	public PopularVO getDefaultPrices(String seq) {
+		return mybatis.selectOne("houseMap.getDefaultPrices", seq);
+	}
+	
+	public void updateBack(PopularVO vo) {
+		mybatis.update("houseMap.updateBack", vo);
+	}
+	
+	public void deletePopular(String seq) {
+		mybatis.delete("houseMap.deletePopular", seq);
+	}
 }

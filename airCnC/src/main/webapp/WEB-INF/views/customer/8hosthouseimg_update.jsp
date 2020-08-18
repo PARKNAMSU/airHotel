@@ -29,7 +29,7 @@
 		
 		function PrevSubmit() {
 			var f = document.hostpic;
-			f.action = "<c:url value='/6guestcomfortable.do' />";
+			f.action = "<c:url value='/1newhouse.do' />";
 			f.submit();
 		}
 	
@@ -53,7 +53,7 @@
     <!-- header-end -->
     
    
-    <form action="/cnc/8hosthouseimg.do" name="hostpic" method="POST" enctype="multipart/form-data">
+    <form action="/cnc/update_8hosthouseimgwork.do" name="hostpic" method="POST" enctype="multipart/form-data">
 	<div class="container">
 	
     <div class="hostpic1">
@@ -66,17 +66,37 @@
         <div id="image_container" style="text-align: center;"></div>
         <div class="filebox">
         	<hr>
-			<p>이전 선택한 파일 : ${house.house_photourl }</p>
-			<img alt="이미지" src="/upload_img/${house.house_photourl }" style="width:200px; height: 200px;" />
-			<hr>
+			<p>이전 선택한 메인사진 : ${detail.house_photourl }</p>
+			<img alt="${detail.house_photourl}" src="/upload_img/${detail.house_photourl}" style="width:200px; height: 200px;" />
 			<input type="file" name="house_photo" id="house_photo" />
-            <label for="image" style="color: black;">첨부할 사진을 선택하세요</label>
+            <label for="image" style="color: black;">수정할 메인사진을 선택하세요</label>
+            <hr>
+            <p>이전 선택한 상세사진1 : ${detail.house_photourl_detail1 }</p>
+            <img alt="${detail.house_photourl_detail1}" src="/upload_img/${detail.house_photourl_detail1}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail1" id="house_photo_detail1" />
+            <label for="image" style="color: black;">수정할 상세사진1을 선택하세요</label>
+            <hr>
+            <p>이전 선택한 상세사진2 : ${detail.house_photourl_detail2 }</p>
+            <img alt="${detail.house_photourl_detail2}" src="/upload_img/${detail.house_photourl_detail2}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail2" id="house_photo_detail2" />
+            <label for="image" style="color: black;">수정할 상세사진2을 선택하세요</label>
+            <hr>
+            <p>이전 선택한 상세사진3 : ${detail.house_photourl_detail3 }</p>
+            <img alt="${detail.house_photourl_detail3}" src="/upload_img/${detail.house_photourl_detail3}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail3" id="house_photo_detail3" />
+            <label for="image" style="color: black;">수정할 상세사진3을 선택하세요</label>
+            <hr>
+            <p>이전 선택한 상세사진4 : ${detail.house_photourl_detail4 }</p>
+            <img alt="${detail.house_photourl_detail4}" src="/upload_img/${detail.house_photourl_detail4}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail4" id="house_photo_detail4" />
+            <label for="image" style="color: black;">수정할상세사진4을 선택하세요</label>
+            <hr>
         </div>
     </div>
     
 	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
 		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>뒤로가기</button></a>
-		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>다음</button></a>
+		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>수정하기</button></a>
     </div>
     </div>	
 	</form>

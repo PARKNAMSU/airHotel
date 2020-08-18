@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,6 +95,16 @@ public class CustomerController {
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
+	}
+	
+	@RequestMapping(value = "/passwordChangeView.do", method = RequestMethod.GET)
+	public String passwordChangeView()throws Exception{
+		return "passwordChange";
+	}
+	
+	@RequestMapping(value = "/customerWithdrawalView.do", method = RequestMethod.GET)
+	public String customerWithdrawalView()throws Exception{
+		return "customerWithdrawal";
 	}
 
 	// 비밀번호 찾기 이메일 전송.
@@ -380,23 +391,91 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
-	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav)throws Exception{
-		if (vo.getCustomer_image().equals("") || vo.getCustomer_image().equals("none")) {
-			vo.setCustomer_image("none");
-		}
-		String newPassword = vo.getCustomer_password();
-		String newPwd = passwordEncoder.encode(newPassword);
-		vo.setCustomer_password(newPwd);
+	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session)throws Exception{
+		String customer_email = vo.getCustomer_email();
 		
-		int result = service.customerInfoUpdate(vo);
-		if (result == 1) {
-			mav.addObject("success");
+		// 블랙리스트에 존재하는 이메일인지 확인.
+		if (service.createEmailCheck(customer_email) == 1 && service.blacklistEmailCheck(vo) == 0) {
+			if (vo.getCustomer_image().equals("") || vo.getCustomer_image().equals("none")) {
+				vo.setCustomer_image("none");
+			}
+			int result = service.customerInfoUpdate(vo);
+			if (result == 1) {
+				String sessionId = (String)session.getAttribute("login_session");
+				CustomerVO customerVO = new CustomerVO();
+				customerVO = service.getCustomerInfo(sessionId);	
+				mav.addObject("customerName", customerVO.getCustomer_name());
+				mav.addObject("customerPhone", customerVO.getCustomer_phone());
+				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerImage", customerVO.getCustomer_image());
+				mav.addObject("resultMessage", "회원 정보가 수정되었습니다.");
+			}else {
+				String sessionId = (String)session.getAttribute("login_session");
+				CustomerVO customerVO = new CustomerVO();
+				customerVO = service.getCustomerInfo(sessionId);	
+				mav.addObject("customerName", customerVO.getCustomer_name());
+				mav.addObject("customerPhone", customerVO.getCustomer_phone());
+				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerImage", customerVO.getCustomer_image());
+				mav.addObject("resultMessage","회원 정보 수정에 실패하였습니다.");
+			}
 		}else {
-			mav.addObject("fail");
+			String sessionId = (String)session.getAttribute("login_session");
+			CustomerVO customerVO = new CustomerVO();
+			customerVO = service.getCustomerInfo(sessionId);	
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerImage", customerVO.getCustomer_image());
+			mav.addObject("resultMessage","사용할 수 없는 이메일입니다.");
 		}
+		mav.setViewName("mypage");
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/checkPassword.do", method = RequestMethod.POST)
+	public int checkPassword(String customer_password, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		String dbPassword = service.passwordCheck(customerId);
+		String inputPassword = customer_password;
+		if (!passwordEncoder.matches(inputPassword, dbPassword)){
+			return 0;
+		}else {
+			return 1;
+		}
+	}
+		
+	@RequestMapping(value = "/modifyPassword.do", method = RequestMethod.POST)
+	public String modifyPassword(CustomerVO customerVO, HttpSession session)throws Exception{
+		String newPassword = customerVO.getCustomer_password();
+		String newPwd = passwordEncoder.encode(newPassword);
+		customerVO.setCustomer_password(newPwd);
+		customerVO.setCustomer_id((String)session.getAttribute("login_session"));
+		service.modifyPassword(customerVO);
+		return "passwordChange";
+	}
+	
+	@RequestMapping(value = "/passwordCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int passwordCheck(CustomerVO customerVO, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		String dbPassword = service.passwordCheck(customerId);
+		String inputPassword = customerVO.getCustomer_password();
+		if (!passwordEncoder.matches(inputPassword, dbPassword)){
+			return 0;
+		}else {
+			return 1;
+		}
+	}
+	
+	@RequestMapping(value = "/customerWithdrawal.do", method = RequestMethod.POST)
+	public String customerWithdrawal(CustomerVO vo, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		service.customerWithdrawal(customerId);
+		session.invalidate();
+		return "index";
+	}
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{

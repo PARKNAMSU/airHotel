@@ -26,7 +26,23 @@
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+#weekbox::-webkit-scrollbar {
+  width: 15px;
+}
+#weekbox::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+#weekbox::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #bebebe;
+}
+#weekbox::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -96,13 +112,13 @@
     </div>
     <!-- slider_area_end -->
 	<div style="clear:both;"></div>
-	
+
 	<div class="maindiv" id="main" style="margin-left:20%;margin-top:2%;font-family: 'Jua', sans-serif;">
 		<div >
 			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:60%;" onclick="hostSales()">매출 통계보기</button>&nbsp;&nbsp;
 			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="location.href='hostregisterindex.do'">숙소 등록하기</button>
 		</div>
-		<h1 style="margin-top:5%;margin-bottom:5%;margin-left:35%;font-size:40px;color:red;">내 숙소 목록</h1>
+		<h1 style="margin-top:5%;margin-bottom:5%;margin-left:35%;font-size:40px;color:red;font-family:'Jua', sans-serif;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
 		</div>
@@ -133,7 +149,22 @@
 		</div>
 	</div>
 	<div style="clear:both;"></div>
-
+	<c:if test="${resList != null }">
+		<div style="margin-bottom:10%;margin-left:22%;">
+			<div><h1 style="color:red;font-family:'Jua', sans-serif;">이번주 예약목록</h1></div>
+			<div id="weekbox" style="width:65%;height:500px;box-shadow:3px 3px 3px 3px gray;overflow: scroll;border-radius: 15px 15px 15px 15px">
+				<c:forEach items="${resList}" var="item">
+					<div style="margin-right:3%;margin-top:3%;font-size:20px;">
+						<div style="margin-left:60%;"><b style="font-size:30px;">${item.check_in_day}</b></div>
+						<b style="font-size:30px;">${item.house_name}&nbsp;&nbsp;&nbsp;${item.reservation_price }￦</b><br><hr>
+						<b>고객이름: ${item.customer_name}(${item.reservation_customer_id})</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>고객 전화번호: ${item.customer_phone }</b><br>
+						<b>체크인: ${item.reservation_check_in }</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>체크아웃: ${item.reservation_check_out }</b><br>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</c:if>
+	<div style="clear:both;"></div>
 	<footer>
 		<%@ include file="../html/footer.jsp" %>
 	</footer>

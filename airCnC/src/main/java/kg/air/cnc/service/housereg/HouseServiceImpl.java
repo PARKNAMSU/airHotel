@@ -53,5 +53,50 @@ public class HouseServiceImpl implements HouseService {
 		House_InfoVO houseVO = houseDao.detailHouse(house_seq);
 		return houseVO;
 	}
+	
+	@Override
+	public void updateHouse_bathcount(House_InfoVO vo) {
+		houseDao.updateHouse_bathcount(vo);
+	}
+
+	@Override
+	public void updateHouse_location(House_InfoVO vo) {
+		houseDao.updateHouse_location(vo);
+	}
+
+	@Override
+	public void updateHouse_defaultoption(House_InfoVO vo) {
+		houseDao.updateHouse_defaultoption(vo);
+	}
+
+	@Override
+	public void updateHouse_guestcomfortable(House_InfoVO vo) {
+		houseDao.updateHouse_guestcomfortable(vo);
+	}
+
+	@Override
+	public void updateHouse_guesttextarea(House_InfoVO vo) {
+		houseDao.updateHouse_guesttextarea(vo);
+	}
+
+	@Override
+	public void updateHouse_hosttitle(House_InfoVO vo) {
+		houseDao.updateHouse_hosttitle(vo);
+	}
+
+	@Override
+	public void updateHouse_charge(House_InfoVO vo) {
+		houseDao.updateHouse_charge(vo);
+	}
+
+	@Override
+	public void updateHouse_restricttheme(House_InfoVO vo) {
+		houseDao.updateHouse_restricttheme(vo);
+	}
+
+	@Override
+	public void updateHouse_hosthouseimg(House_InfoVO vo) {
+		houseDao.updateHouse_hosthouseimg(vo);
+	}
 
 }

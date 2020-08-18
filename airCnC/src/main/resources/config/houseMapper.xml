@@ -253,7 +253,11 @@
 		house_restrict_cctv,
 		house_restrict_weapon,
 		house_restrict_beast,
-		house_host_id
+		house_host_id,
+		house_photourl_detail1,
+		house_photourl_detail2,
+		house_photourl_detail3,
+		house_photourl_detail4
 	from 
 		house_info
 	where 
@@ -343,4 +347,89 @@
 			house_seq=#{house_seq}
 		]]>
 	</update>
+	
+	<update id="updateHouse_guesttextarea">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_desc1 = #{house_desc1},
+			house_desc2 = #{house_desc2},
+			house_desc3 = #{house_desc3},
+			house_desc4 = #{house_desc4},
+			house_desc5 = #{house_desc5}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	
+	<update id="updateHouse_hosttitle">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_name = #{house_name}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	<update id="updateHouse_charge">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_price_default = #{house_price_default},
+			house_price_max = #{house_price_max},
+			house_checkin_time = #{house_checkin_time},
+			house_checkout_time = #{house_checkout_time}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+	
+	<update id="updateHouse_restricttheme">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_theme_bbq = #{house_theme_bbq},
+			house_theme_pet = #{house_theme_pet},
+			house_theme_party = #{house_theme_party},
+			house_theme_pool = #{house_theme_pool},
+			house_theme_farm = #{house_theme_farm},
+			house_condition_childok = #{house_condition_childok},
+			house_condition_babyok = #{house_condition_babyok},
+			house_condition_smokeok = #{house_condition_smokeok},
+			house_restrict_stairs = #{house_restrict_stairs},
+			house_restrict_noise = #{house_restrict_noise},
+			house_restrict_pet = #{house_restrict_pet},
+			house_restrict_cantpark = #{house_restrict_cantpark},
+			house_restrict_commonspace = #{house_restrict_commonspace},
+			house_restrict_facility = #{house_restrict_facility},
+			house_restrict_cctv = #{house_restrict_cctv},
+			house_restrict_weapon = #{house_restrict_weapon},
+			house_restrict_beast = #{house_restrict_beast}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>
+
+	<update id="updateHouse_hosthouseimg">
+		<![CDATA[
+		UPDATE 
+			house_info 
+		SET
+			house_photourl = #{house_photourl},
+			house_photourl_detail1 = #{house_photourl_detail1},
+			house_photourl_detail2 = #{house_photourl_detail2},
+			house_photourl_detail3 = #{house_photourl_detail3},
+			house_photourl_detail4 = #{house_photourl_detail4}
+		WHERE 
+			house_seq=#{house_seq}
+		]]>
+	</update>	
+	
+	
 </mapper>

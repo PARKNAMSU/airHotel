@@ -25,7 +25,7 @@
                     "check_in": '${checkin}', "check_out": '${checkout}', "house_seq":'${house.house_seq}',
                     "customer_id": '${customerInfo.customer_id}', "cuponNum": '${cuponNum}'};
                 jQuery.ajax({
-                    url: "http://localhost:8090/cnc/paymentcomplete.do",
+                    url: "http://localhost:8080/cnc/paymentcomplete.do",
                     method : "POST",
                     headers : {"Content-Type":"application/json"},
                     dataType : 'json',

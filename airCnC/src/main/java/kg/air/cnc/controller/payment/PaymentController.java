@@ -1,24 +1,26 @@
 package kg.air.cnc.controller.payment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import kg.air.cnc.controller.reservation.MyReservationController;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kg.air.cnc.vo.CustomerVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import kg.air.cnc.controller.reservation.MyReservationController;
 import kg.air.cnc.service.cupon.CuponServiceImpl;
+import kg.air.cnc.service.housemap.HouseMapServiceImpl;
 import kg.air.cnc.service.payment.PaymentService;
+import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
-import java.util.HashMap;
 
 @Controller
 public class PaymentController {
@@ -29,6 +31,8 @@ public class PaymentController {
     CuponServiceImpl cuponService;
     @Autowired
     MyReservationController myReservationController;
+    @Autowired
+    HouseMapServiceImpl houseService;
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.POST)
     public ModelAndView reservationConfirm(HttpSession session, HttpServletRequest httpServletRequest, ModelAndView mav){
@@ -79,6 +83,7 @@ public class PaymentController {
     public ModelAndView paycomplete(ModelAndView mav,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody HashMap<String, Object> request) {
         paymentService.insertReservation(request);
         cuponService.useCupon((String)request.get("cuponNum"));
+        houseService.updateBack((String)request.get("house_seq"));
         mav.setViewName("index");
         /* 거래내역 조회 token 가져오기
         imp_uid = 거래고유 번호

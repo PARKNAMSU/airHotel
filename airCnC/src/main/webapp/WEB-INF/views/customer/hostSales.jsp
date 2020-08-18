@@ -358,7 +358,7 @@ var list = "${salesList}"
 				var a = 0;
 		        var data = google.visualization.arrayToDataTable([
 		          ['Task', 'Each House'],
-		          	<c:if test="${salesList2 != null}">
+		          	<c:if test="${salesList2.size() >0}">
 				      <c:forEach begin="0" end="${salesList2.get(0).house_seq_list.size()-2}" var="i" >
 		        		['No.${salesList2.get(0).house_seq_list.get(i)}',${salesList2.get(0).sumSalesEachHouse.get(salesList2.get(0).house_seq_list.get(i))}],
 		        	</c:forEach>

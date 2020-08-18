@@ -31,4 +31,13 @@ public interface CustomerDAO {
 	
 	// 사용자 정보 수정.
 	public int customerInfoUpdate(CustomerVO vo)throws Exception;
+
+	// 비밀번호 변경.
+	public int modifyPassword(CustomerVO customerVO)throws Exception;
+	
+	// 비밀번호 확인.
+	public String passwordCheck(String customer_id)throws Exception;
+	
+	// 회원 탈퇴.
+	public void customerWithdrawal(String customer_id)throws Exception;
 }

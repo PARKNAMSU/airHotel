@@ -78,4 +78,19 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public int customerInfoUpdate(CustomerVO vo) throws Exception {
 		return session.update("customer.customerInfoUpdate", vo);
 	}
+
+	@Override
+	public int modifyPassword(CustomerVO customerVO) throws Exception {
+		return session.update("customer.modifyPassword", customerVO);
+	}
+
+	@Override
+	public String passwordCheck(String customer_id) throws Exception {
+		return session.selectOne("customer.passwordCheck", customer_id);
+	}
+
+	@Override
+	public void customerWithdrawal(String customer_id) throws Exception {
+		session.delete("customer.customerWithdrawal", customer_id);
+	}
 }
