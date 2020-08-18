@@ -39,6 +39,7 @@
 			</c:forEach>
 		</div>
 		<div style="clear: both;"></div>
+		<button class="btn btn-outline-danger" style="font-size:30px;margin-top:5%;margin-left:3%" onclick="self.close()">닫기</button>
 	</div>
 </body>
 <script type="text/javascript">

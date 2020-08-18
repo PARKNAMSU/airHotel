@@ -91,4 +91,22 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="kg.air"></context:component-scan>
 	<task:annotation-driven></task:annotation-driven>
+	
+	<!-- Transction 설정 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+		<tx:advice id="txAdvice" transaction-manager="txManager">
+			<tx:attributes>
+				<tx:method name="get*" read-only="true" />
+				<tx:method name="*" />
+			</tx:attributes>
+		</tx:advice>
+		<aop:config>
+			<aop:pointcut
+				expression="execution(* kg.air.cnc.controller..*(..))" id="txPointcut" />
+			<aop:advisor advice-ref="txAdvice"
+				pointcut-ref="txPointcut" />
+		</aop:config>
 </beans>
