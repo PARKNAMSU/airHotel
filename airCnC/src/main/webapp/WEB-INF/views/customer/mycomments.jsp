@@ -96,7 +96,7 @@
     	<hr><br>
     	<div id="commentsMain">
     		<div id="commentsHead" style="font-size:30px;border:1px solid; background-color:gray;padding:2%;">
-    			<b>지난후기</b>
+    			<b id="headtext">내게 작성된 후기</b>
     		</div>
     		<div id="commentsBody" style="border:1px solid;"></div>
     	</div><br>
@@ -128,6 +128,7 @@
 			url:"getMyComments.do",
 			dataType:"json",
 			success:function(data){
+				$("#headtext").html("내가 작성한 후기");
 				$("#commentsBody").empty();
 				getData = data;
 				for(var i=0;i<getData.length;i++){
@@ -144,6 +145,7 @@
 			url:"getCommentsForMe.do",
 			dataType:"json",
 			success:function(data){
+				$("#headtext").html("내게 작성된 후기");
 				$("#commentsBody").empty();
 				getData = data;
 				for(var i=0;i<getData.length;i++){
