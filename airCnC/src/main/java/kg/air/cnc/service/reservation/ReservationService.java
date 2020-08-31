@@ -59,8 +59,10 @@ public class ReservationService implements ReservationServiceImpl {
 		ArrayList<String> convinList = new ArrayList<String>();
 		Utils utils = new Utils();
 			try {
-				house.setFhouse_xlocation(Float.valueOf(house.getHouse_xlocation()));
-				house.setFhouse_ylocation(Float.valueOf(house.getHouse_ylocation()));
+				if(house.getHouse_xlocation()!= null) {
+					house.setFhouse_xlocation(Float.valueOf(house.getHouse_xlocation()));
+					house.setFhouse_ylocation(Float.valueOf(house.getHouse_ylocation()));
+				}
 			} catch (Exception e) {e.printStackTrace();}
 		if(!utils.stringNullCheck(house.getHouse_name())) {
 			if(house.getHouse_default_aidkit().trim().equals("true")) convinList.add("구급상자");
