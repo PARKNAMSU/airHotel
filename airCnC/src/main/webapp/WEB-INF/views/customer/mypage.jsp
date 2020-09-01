@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,7 +170,7 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 				style="font-family: 'Jua', sans-serif;">쿠폰함</a></li>
 		</ul>
 	</div>
-	<form action="/cnc/customerInfoUpdate.do" method="post" id="regForm">
+	<form action="/cnc/customerInfoUpdate.do" method="post" id="regForm" enctype="multipart/form-data">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">내 정보 수정</h3>
@@ -202,16 +203,33 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 				<br>
 				<br>
 				<h4>등록했던 프로필 사진을 확인 또는 수정할수 있습니다.</h4>
-				<div id="image_container" style="text-align: center;">${customerImage}</div>
-				<br>
-				<div class="filebox" style="padding-top: 250px;">
-					<label for="image" style="font-size: 25px;">수정할 사진을 선택하세요</label><input
-						type="file" class="multi" id="image" name="customer_image" accept="image/*" maxlength="2"
-						onchange="setThumbnail(event);"/>
+				<div id="image_container" style="text-align: center;">
+					<c:if test="${fdata.value.customer_image eq 'profile.png'}">
+						<img width="200" height="250" id="img" name="customer_image" src="${pageContext.request.contextPath}/resources/images/profile.png"/>
+					</c:if>
+					<c:if test="${fdata.value.customer_image ne 'profile.png'}">
+						<img width="200" height="250" id="img" name="customer_image" src="/cnc/display.do?name=${customerImage}"/>
+					</c:if>
+				</div>
+				<br>	
+				<div class="filebox">
+					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
+					<input type="file" class="multi" id="image" name="customer_photo" accept="image/*" max="1" onchange="readURL(this);"/>
 				</div>
 			</div>
 		</div>
 		<button class="mypagebtn" id="customerInfoUpdateBtn" style="margin-top: 5%;">개인정보 수정</button>
 	</form>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </html>
