@@ -88,6 +88,17 @@
 	
 	<bean id="naverController" class="kg.air.cnc.common.NaverController"></bean>
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="52428800" /> <!-- 5MB -->
+	</bean>
+
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="C://Temp/profile"/>
+	</bean>
+
+	<mvc:resources mapping="/image/**" location="file:///C:/Temp/profile/"></mvc:resources>
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="kg.air"></context:component-scan>
 	<task:annotation-driven></task:annotation-driven>
@@ -106,7 +117,6 @@
 		<aop:config>
 			<aop:pointcut
 				expression="execution(* kg.air.cnc.controller..*(..))" id="txPointcut" />
-			<aop:advisor advice-ref="txAdvice"
-				pointcut-ref="txPointcut" />
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 		</aop:config>
 </beans>

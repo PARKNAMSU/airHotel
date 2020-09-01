@@ -1,5 +1,6 @@
 package kg.air.cnc.service.customer;
 
+import java.io.File;
 import java.util.Date;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
