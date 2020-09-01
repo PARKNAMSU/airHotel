@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.HostVO;
-import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PagingVO;
 import kg.air.cnc.vo.ReservationVO;
 
 @Repository
@@ -17,10 +17,13 @@ public class RemoveHostDAOImpl implements RemoveHostDAO {
 	private SqlSessionTemplate mybatis;
 	
 	@Override
-	public List<HostVO> getRemoveHostList() {
-		return mybatis.selectList("RemoveHostDAO.getRemoveHostList");
+	public List<HostVO> getRemoveHostList(PagingVO page) {
+		return mybatis.selectList("RemoveHostDAO.getRemoveHostList",page);
 	}
-
+	
+	public int hostCnt() {
+		return mybatis.selectOne("RemoveHostDAO.hostCnt");
+	}
 
 	@Override
 	public List<ReservationVO> checkReservation(HostVO vo) {

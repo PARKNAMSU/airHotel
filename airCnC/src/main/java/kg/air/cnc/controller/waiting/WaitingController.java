@@ -1,13 +1,15 @@
 package kg.air.cnc.controller.waiting;
 
-import kg.air.cnc.vo.House_InfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kg.air.cnc.service.waiting.RegisterWaitingServiceImpl;
 import kg.air.cnc.service.waiting.RemoveWaitingServiceImpl;
+import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PagingVO;
 
 @Controller
 public class WaitingController {
@@ -19,8 +21,20 @@ public class WaitingController {
 
 	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRegisterWaitingList.mdo")
-	public ModelAndView getHouseWaitingList(ModelAndView mav) {
-		mav.addObject("waitingList", registerWaiting.getWaitingList());
+	public ModelAndView getHouseWaitingList(ModelAndView mav, PagingVO vo, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		int total = registerWaiting.waitingCnt();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "4";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		mav.addObject("paging",vo);
+		mav.addObject("waitingList", registerWaiting.getWaitingList(vo));
 		mav.setViewName("getRegisterHouseList"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
@@ -51,8 +65,20 @@ public class WaitingController {
 	
 	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRemoveWaitingList.mdo")
-	public ModelAndView getRemoveWaitingList(ModelAndView mav) {
-		mav.addObject("waitingList", removeWaiting.getWaitingList());
+	public ModelAndView getRemoveWaitingList(PagingVO vo, ModelAndView mav, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		int total = removeWaiting.waitingCnt();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "4";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		mav.addObject("paging",vo);
+		mav.addObject("waitingList", removeWaiting.getWaitingList(vo));
 		mav.setViewName("getRemoveHouseList"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}

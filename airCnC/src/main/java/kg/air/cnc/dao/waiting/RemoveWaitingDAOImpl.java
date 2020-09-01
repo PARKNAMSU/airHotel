@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PagingVO;
 import kg.air.cnc.vo.RemoveWaitingVO;
 
 @Repository
@@ -18,8 +19,12 @@ public class RemoveWaitingDAOImpl {
 		return mybatis.selectOne("waitingDAO.getHouse", vo);
 	}
 	
-	public List<House_InfoVO> getRemoveWaitingList() {
-		return mybatis.selectList("waitingDAO.getRemoveWaitingList");
+	public List<House_InfoVO> getRemoveWaitingList(PagingVO vo) {
+		return mybatis.selectList("waitingDAO.getRemoveWaitingList", vo);
+	}
+	
+	public int waitingCnt() {
+		return mybatis.selectOne("waitingDAO.RemoveWaitingCnt");
 	}
 	
 	public void updateDate (House_InfoVO vo){

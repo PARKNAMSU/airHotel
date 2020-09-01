@@ -65,18 +65,37 @@
         <br>
         <c:forEach items="${waitingList}" var="house">
         <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}" style="clear : left">
-        	<div class="houseList">
-            <img src="../images/face.png" alt="숙소 이미지" class="littleImg">
-		    ${house.house_name }<br>
+        <div>
+	    	<img src="../images/face.png" alt="숙소 이미지" class="littleImg">
+			${house.house_name }<br>
 		         숙소 소개<br>
 		    ${house.house_location_fulladdress}<br>
 		    ${house.house_star }<br>					
 		    ${house.house_price_default }<br>
-        	</div>
+        </div>
         </a>
         <hr>
         </c:forEach>
     </div>
+    <div style="display: block; text-align: center; color: black; padding-right :10%; margin-top : 20px;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="getRegisterWaitingList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+		&nbsp;
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="getRegisterWaitingList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="getRegisterWaitingList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
     <footer>
         <hr>
         <div class="admin_footer">

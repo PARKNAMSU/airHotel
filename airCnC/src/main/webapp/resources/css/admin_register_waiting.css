@@ -66,10 +66,8 @@
     margin-right: 3%;
 }
 
-
 div hr{
-    float: left;
-    width: 79%;
+    overflow : hidden;
 }
 
  footer {
@@ -82,10 +80,6 @@ div hr{
      text-align: center;
      padding-right: 4%;
 }
-
- .hostList li {
-     margin-bottom: 1%;
- }
 
  .removeBtn {
      right : 5%;

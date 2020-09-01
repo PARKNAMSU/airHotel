@@ -61,14 +61,45 @@
 		</ul>
     </div>
     <!-- <form action="deleteHost.mdo"> -->
-    <div class="hostList">
-    <h3>호스트 삭제</h3>
+    <h3 style="text-align: center;">호스트 삭제</h3>
+    <div style="float: right; margin-right : 20%;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5명씩 보기</option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10명씩 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15명씩 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20명씩 보기</option>
+		</select>
+	</div> <!-- 옵션선택 끝 -->
+	<div class="hostList">
         <ul>
         	<c:forEach items="${hostList}" var="host">
-            	<li><a href="deleteHost.mdo?host_id=${host.host_id}">${host.host_id}</a></li>
+            	<li style="font-size : 25px;"><a href="deleteHost.mdo?host_id=${host.host_id}">${host.host_id}</a></li>
         	</c:forEach>
         </ul>
     </div>
+    <div style="display: block; text-align: center; color: black; padding-right :5%; margin-top : 20px;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="getRemoveHostList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+		&nbsp;
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="getRemoveHostList.mdo?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="getRemoveHostList.mdo?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
     <!-- 
         <div style="text-align: center;">
         <input type="submit" class="btn btn" value="삭제">
@@ -86,5 +117,12 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="getRemoveHostList.mdo?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+	</script>
 </body>
 </html>
