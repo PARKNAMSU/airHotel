@@ -135,15 +135,9 @@
 				return false;
 			}
 		}
-		if (!phoneChecked.test($("#customerPhone").val())) {
-			alert("전화번호가 잘못 되었습니다.");
-			$("#customerPhone").focus();
-			return false;
-		}
 		if (!$("#customerId").val()) {
 			alert("아이디를 입력 하세요.");
 			$("#customerId").focus();
-			//validate = false;
 			return false;
 		} else if (idCheck == false) {
 			alert("아이디 중복체크를 해주세요.");
@@ -151,6 +145,17 @@
 			return false;
 		} else if (!idChecked.test($("#customerId").val())) {
 			alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
+			return false;
+		} else if (!$("#customerPassword").val()) {
+			alert("비밀번호를 입력하세요.");
+			$("#customerPassword").focus();
+			return false;
+		} else if ($("#customerPassword").val().length > 16 || $("#customerPassword").val().length < 8) {
+			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
+			return false;
+		} else if (!phoneChecked.test($("#customerPhone").val())) {
+			alert("전화번호가 잘못 되었습니다.");
+			$("#customerPhone").focus();
 			return false;
 		} else if (!$("#customerName").val()) {
 			alert("이름을 입력 하세요.");
@@ -175,14 +180,6 @@
 		} else if (blacklistEmailCheck == false) {
 			alert("회원가입 불가한 이메일 계정입니다.");
 			$("#customerEmail").focus();
-			return false;
-		}  else if (!$("#customerPassword").val()) {
-			alert("비밀번호를 입력하세요.");
-			$("#customerPassword").focus();
-			return false;
-		} else if ($("#customerPassword").val().length > 16
-				|| $("#customerPassword").val().length < 8) {
-			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
 			return false;
 		} else {
 			getData = "complate";
@@ -243,7 +240,7 @@
 		</div>
 	</header>
 	</c:if>
-	<c:if test="${login_session ne null }">
+	<c:if test="${login_session ne null}">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -266,7 +263,7 @@
 		</div>
 	</header>
 	</c:if>
-	<form action="/cnc/registerCheck.do" method="post" id="regForm">
+	<form action="/cnc/registerCheck.do" method="post" id="regForm" enctype="multipart/form-data">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">회원가입</h3>
@@ -306,13 +303,16 @@
 					사진 추가</h3>
 				<br> <br>
 				<h4>프로필 사진을 요청하는 호스트도 있지만, 이 경우에도 예약이 확정된 후에만 게스트의 사진을 볼수 있습니다.</h4>
-				<div id="image_container" style="text-align: center;"></div>
+				<div style="padding-top: 5%;"></div>
+				<div id="image_container" style="text-align: center;">
+					<img width="200" height="250" id="img" name="customer_image" src="${pageContext.request.contextPath}/resources/images/profile.png">
+				</div>
 				<br>
 				<div class="filebox">
-					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label><input
-						type="file" class="multi" id="image" accept="image/*"
-						maxlength="2" onchange="setThumbnail(event);" name="customer_image" />
+					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
+					<input type="file" class="multi" id="image" name="customer_photo" accept="image/*" max="1" onchange="readURL(this);"/>
 				</div>
+				
 				<div class="input_email">
 					<span> <input class="iemail" type="email" id="customerEmail"
 						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소" required>
@@ -335,4 +335,15 @@
 	</form>
 	<div style="margin-bottom: 5%"></div>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </html>

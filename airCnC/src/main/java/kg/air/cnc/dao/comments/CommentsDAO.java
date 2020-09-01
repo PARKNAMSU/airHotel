@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.MyCommentsVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Repository
@@ -32,6 +33,12 @@ public class CommentsDAO implements CommentsDAOImpl{
 	public void updateComments(CommentsVO vo) {
 		sqlSessionTemplate.update("CommentsDAO.updateComments",vo);
 		
+	}
+	public List<MyCommentsVO> getCommentsForMe(String id){
+		return sqlSessionTemplate.selectList("CommentsDAO.getCommentsForMe",id);
+	}
+	public List<MyCommentsVO> getMyComments(String id){
+		return sqlSessionTemplate.selectList("CommentsDAO.getMyComments",id);
 	}
 
 

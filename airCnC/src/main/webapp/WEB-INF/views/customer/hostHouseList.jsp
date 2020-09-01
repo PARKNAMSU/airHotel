@@ -154,7 +154,7 @@
 			<div><h1 style="color:red;font-family:'Jua', sans-serif;">이번주 예약목록</h1></div>
 			<div id="weekbox" style="width:65%;height:500px;box-shadow:3px 3px 3px 3px gray;overflow: scroll;border-radius: 15px 15px 15px 15px">
 				<c:forEach items="${resList}" var="item">
-					<div style="margin-right:3%;margin-top:3%;font-size:20px;">
+					<div style="margin-right:3%;margin-top:3%;font-size:20px;padding:3%;">
 						<div style="margin-left:60%;"><b style="font-size:30px;">${item.check_in_day}</b></div>
 						<b style="font-size:30px;">${item.house_name}&nbsp;&nbsp;&nbsp;${item.reservation_price }￦</b><br><hr>
 						<b>고객이름: ${item.customer_name}(${item.reservation_customer_id})</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>고객 전화번호: ${item.customer_phone }</b><br>

@@ -40,4 +40,5 @@ public interface CustomerDAO {
 	
 	// 회원 탈퇴.
 	public void customerWithdrawal(String customer_id)throws Exception;
+	
 }

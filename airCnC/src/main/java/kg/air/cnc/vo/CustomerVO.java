@@ -2,14 +2,16 @@ package kg.air.cnc.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CustomerVO {
 	private String customer_id;
 	private String customer_password;
 	private String customer_name;
 	private String customer_email;
 	private String customer_type;
-	private String customer_image;
-	private String customer_phone;
+	private String customer_image; // 데이터베이스 테이블의 컬럼값을 주고받기 위한 변수.
+	private String customer_phone; 
 	private int customer_blame_warn;
 	private int customer_blame_stop;
 	private Date customer_regdate;
@@ -20,6 +22,8 @@ public class CustomerVO {
 	private int customer_status;
 	private String favorite_house; 
 	private boolean useCookie;
+	private MultipartFile customer_photo; // 폼에서 전송되는 파일을 받기 위한 변수.
+	
 	public String getCustomer_id() {
 		return customer_id;
 	}
@@ -121,5 +125,11 @@ public class CustomerVO {
 	}
 	public void setUseCookie(boolean useCookie) {
 		this.useCookie = useCookie;
+	}
+	public MultipartFile getCustomer_photo() {
+		return customer_photo;
+	}
+	public void setCustomer_photo(MultipartFile customer_photo) {
+		this.customer_photo = customer_photo;
 	}
 }

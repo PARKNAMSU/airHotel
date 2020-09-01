@@ -2,7 +2,6 @@ package kg.air.cnc.vo;
 
 import java.util.Date;
 
-
 public class HostVO {
     private String host_id;
     private String host_name;
@@ -16,6 +15,7 @@ public class HostVO {
     private int host_blame_stop;
     private Date host_stop_end_date;
     private int host_status;
+    private String host_account_name;
 
     public String getHost_id() {
         return host_id;
@@ -113,22 +113,20 @@ public class HostVO {
     public void setHost_status(int host_status) {
         this.host_status = host_status;
     }
+    public String getHost_account_name() {
+		return host_account_name;
+	}
+	public void setHost_account_name(String host_account_name) {
+		this.host_account_name = host_account_name;
+	}
 
-    @Override
-    public String toString() {
-        return "HostVO{" +
-                "host_id='" + host_id + '\'' +
-                ", host_name='" + host_name + '\'' +
-                ", host_password='" + host_password + '\'' +
-                ", host_email='" + host_email + '\'' +
-                ", host_image='" + host_image + '\'' +
-                ", host_phone='" + host_phone + '\'' +
-                ", host_account='" + host_account + '\'' +
-                ", host_regdate=" + host_regdate +
-                ", host_blame_warn=" + host_blame_warn +
-                ", host_blame_stop=" + host_blame_stop +
-                ", host_stop_end_date=" + host_stop_end_date +
-                ", host_status=" + host_status +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "HostVO [host_id=" + host_id + ", host_name=" + host_name + ", host_password=" + host_password
+				+ ", host_email=" + host_email + ", host_image=" + host_image + ", host_phone=" + host_phone
+				+ ", host_account=" + host_account + ", host_regdate=" + host_regdate + ", host_blame_warn="
+				+ host_blame_warn + ", host_blame_stop=" + host_blame_stop + ", host_stop_end_date="
+				+ host_stop_end_date + ", host_status=" + host_status + ", host_account_name=" + host_account_name
+				+ "]";
+	}	
 }
