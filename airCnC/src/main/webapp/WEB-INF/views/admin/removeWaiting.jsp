@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <title>Insert title here</title>
 </head>
 <body>

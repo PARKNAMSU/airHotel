@@ -22,6 +22,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <style type="text/css">
 #salesArea{
 	width:1200px;

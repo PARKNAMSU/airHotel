@@ -43,7 +43,7 @@
 	src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
-	
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 

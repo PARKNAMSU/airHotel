@@ -48,6 +48,7 @@
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
