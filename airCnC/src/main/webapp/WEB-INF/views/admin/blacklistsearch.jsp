@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/admin_singo_complete.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
     <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
     <title>관리자 삭제 파일</title>
 </head>
 
