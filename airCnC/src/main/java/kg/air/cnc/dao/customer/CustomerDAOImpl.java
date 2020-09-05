@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO{
@@ -92,5 +93,15 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public void customerWithdrawal(String customer_id) throws Exception {
 		session.delete("customer.customerWithdrawal", customer_id);
+	}
+
+	@Override
+	public int hostRegister(HostVO vo) throws Exception {
+		return session.insert("customer.hostRegister", vo);
+	}
+
+	@Override
+	public void changeCustomerType(CustomerVO customerVO) throws Exception {
+		session.update("customer.changeCustomerType", customerVO);
 	}
 }

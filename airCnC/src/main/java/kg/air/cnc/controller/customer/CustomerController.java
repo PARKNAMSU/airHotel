@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -47,6 +46,7 @@ import kg.air.cnc.service.customer.CustomerService;
 import kg.air.cnc.service.mail.MailService;
 import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 import kg.air.cnc.vo.MessageVO;
 
 @Controller
@@ -95,11 +95,15 @@ public class CustomerController {
 	public ModelAndView hostRegisterView(HttpSession session,CustomerVO customerVO, ModelAndView mav) throws Exception{
 		String sessionId = (String)session.getAttribute("login_session");
 		customerVO = service.getCustomerInfo(sessionId);	
-		mav.addObject("customerPassword",customerVO.getCustomer_password());
+		String filePath = customerVO.getCustomer_image();
+		Map<String, String> fdata = new HashMap<String, String>();
+		File file = new File(uploadPath + filePath);
+		fdata.put("filePath", filePath);
+		mav.addObject("customerPassword", customerVO.getCustomer_password());
 		mav.addObject("customerName", customerVO.getCustomer_name());
 		mav.addObject("customerPhone", customerVO.getCustomer_phone());
 		mav.addObject("customerEmail", customerVO.getCustomer_email());
-		mav.addObject("customerImage", customerVO.getCustomer_image());
+		mav.addObject("customerImage", filePath);
 		mav.setViewName("hostRegister");
 		return mav;
 	}
@@ -411,11 +415,6 @@ public class CustomerController {
 		}
 		return "login";		
 	}
-	
-//	// 호스트 신청 처리.
-//	@RequestMapping(value = "/hostRegister.do", method = RequestMethod.POST)
-//	public String hostRegister(HostVO hostVO, HttpServletRequest request, )throws Exception{
-//	}
 
 	// 로그인 처리.
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
@@ -471,7 +470,6 @@ public class CustomerController {
 	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
 	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session,  MultipartFile multipartFile)throws Exception{
 		String customer_email = vo.getCustomer_email();
-		
 		// 블랙리스트에 존재하는 이메일인지 확인.
 		if (service.createEmailCheck(customer_email) == 1 && service.blacklistEmailCheck(vo) == 0) {
 			multipartFile = vo.getCustomer_photo();
@@ -534,6 +532,29 @@ public class CustomerController {
 		return mav;
 	}
 	
+	// 호스트 신청 처리.
+	@RequestMapping(value = "/hostRegister.do", method = RequestMethod.POST)
+	public ModelAndView hostRegister(HostVO hostVO, CustomerVO customerVO, HttpSession session, HttpServletRequest request, ModelAndView mav, MultipartFile multipartFile)throws Exception{
+			String sessionId = (String)session.getAttribute("login_session");
+			customerVO = service.getCustomerInfo(sessionId);	
+			String filePath = customerVO.getCustomer_image();
+			multipartFile = hostVO.getHost_photo();
+			if (multipartFile != null && multipartFile.isEmpty() == false) {
+				String originalName = multipartFile.getOriginalFilename();
+				String path = uploadFileUtils.uploadFile(uploadPath, originalName, multipartFile.getBytes());
+				hostVO.setHost_image(path);
+			}else {
+				hostVO.setHost_image(filePath);
+			}
+			int result = service.hostRegister(hostVO);
+			if (result == 1) {
+				customerVO.setCustomer_type("host");
+				service.changeCustomerType(customerVO);
+			}
+		mav.setViewName("index");
+		return mav;
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/checkPassword.do", method = RequestMethod.POST)
 	public int checkPassword(String customer_password, HttpSession session)throws Exception{

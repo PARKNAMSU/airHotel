@@ -2,6 +2,7 @@ package kg.air.cnc.service.customer;
 
 import java.util.Date;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 
 public interface CustomerService {
 	
@@ -46,6 +47,12 @@ public interface CustomerService {
 	
 	// 회원 탈퇴.
 	public void customerWithdrawal(String customer_id)throws Exception;
+	
+	// 호스트 신청.
+	public int hostRegister(HostVO vo)throws Exception;
+
+	// 사용자 등급 변경
+	public void changeCustomerType(CustomerVO customerVO)throws Exception;
 }
 
 
