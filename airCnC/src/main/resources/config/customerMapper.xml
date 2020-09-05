@@ -22,7 +22,10 @@
 			DEFAULT,
 			DEFAULT, 
 			DEFAULT,
-			DEFAULT)
+			DEFAULT,
+			#{customer_refund_account},
+			#{customer_refund_bank}
+			)
 	</insert>
 	
 	<select id="idCheck" resultType="int">
