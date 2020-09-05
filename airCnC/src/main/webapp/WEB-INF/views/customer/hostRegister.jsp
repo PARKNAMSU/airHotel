@@ -89,34 +89,13 @@
 			alert("계좌번호를 입력하세요.");
 			$("#hostAccount").focus();
 			return false;
-		} else if ($("#hostPassword").val().length > 16 || $("#hostPassword").val().length < 8) {
-			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
-			return false;
 		} else {
 			getData = "complate";
-			alert("회원가입이 완료되었습니다.");
+			alert("호스트 신청이 완료되었습니다.");
 		}
 		if (getData == "complate") {
 			document.getElementById("regForm").submit();
 		}
-		/*
-		$.ajax({
-			type:"post",
-			url:"registerCheck.do",
-			data:$("#regForm").serialize(),
-			success:function(data){
-				
-				if(getData=="complate"){
-					alert("회원가입이 완료되었습니다.");
-				}else if(getData == "false"){
-					alert("회원가입이 실패하였습니다.")
-				}	
-			},
-			error:function(data){
-				alert("에러가 발생했습니다.");
-			}
-		});
-		 */
 	});
 </script>
 </head>
@@ -167,56 +146,64 @@
 		</div>
 	</header>
 	</c:if>
-	<form action="/cnc/hostRegister.do" method="post" id="regForm" name="regForm">
+	<form action="/cnc/hostRegister.do" method="post" id="regForm" name="regForm" enctype="multipart/form-data">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
 				<h2 style="padding-top: 30px; font-size: 40px; font-weight: bold;">호스트 신청</h2>
 				<br><br>
 				<h5 style="font-size: 25px; font-weight: bold;">아이디</h5>
 				<div class="input_id">
-					<span> <input class="bb6" type="text" name="host_id"
-						id="hostId" value="${login_session}">
+					<span>
+						<input class="bb6" type="text" id="hostId" name="host_id" value="${login_session}" readonly="readonly">
 					</span>
 				</div>
 				<div style="padding-top: 5%;"></div>
 				<div class="input_password">
 				<h5 style="font-size: 25px; font-weight: bold;">비밀번호</h5>
-					<span> <input class="ipassword" type="password"
-						id="hostPassword" name="host_password"
-						value="${customerPassword}">
+					<span>
+						<input class="ipassword" type="password"id="hostPassword" name="host_password" value="${customerPassword}" readonly="readonly">
 					</span>
 				</div>
 				<div style="padding-top: 5%;"></div>
 				<div class="input_phone">
 				<h5 style="font-size: 25px; font-weight: bold;">연락처</h5>
-					<span><input class="itel" type="tel" id="hostPhone" name="host_phone" maxlength="13" value="${customerPhone}"></span>
+					<span>
+						<input class="itel" type="tel" id="hostPhone" name="host_phone" maxlength="13" value="${customerPhone}" readonly="readonly">
+					</span>
 				</div>
 				<div style="padding-top: 5%;"></div>
 				<div class="input_name">
 				<h5 style="font-size: 25px; font-weight: bold;">이름</h5>
-					<span> <input class="iname" type="text" name="host_name"
-						id="hostName" value="${customerName}">
+					<span>
+						<input class="iname" type="text" id="hostName" name="host_name" value="${customerName}" readonly="readonly">
 					</span>
 				</div>
 				<div style="padding-top: 5%;"></div>
 				<div class="input_email">
 				<h5 style="font-size: 25px; font-weight: bold;">이메일</h5>
-					<span><input class="iemail" type="email" id="hostEmail" name="host_email" value="${customerEmail}">
-					</span><br>
+					<span>
+						<input class="iemail" type="email" id="hostEmail" name="host_email" value="${customerEmail}" readonly="readonly">
+					</span>
+					<br>
 				</div>
 			</div>
 			<div class="rightform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">프로필 사진 추가</h3>
 				<br><br>
-				<h4>프로필 사진을 요청하는 게스트도 있지만, 기본적으로 호스트의 사진을 볼수 있습니다.</h4>
+				<h4>프로필 사진을 요청하는 게스트도 있지만,기본적으로 호스트의 사진을 볼수 있습니다.</h4>
 				<div style="padding-top: 5%;"></div>
 				<div id="image_container" style="text-align: center;">
-					<img width="200" height="300" alt="이미지 준비중" id="img" name="host_image" src="${pageContext.request.contextPath}/resources/images/profile.png">
+					<c:if test="${fdata.value.customer_image eq 'profile.png'}">
+						<img width="200" height="250" id="img" name="host_image" src="${pageContext.request.contextPath}/resources/images/profile.png"/>
+					</c:if>
+					<c:if test="${fdata.value.customer_image ne 'profile.png'}">
+						<img width="200" height="250" id="img" name="host_image" src="/cnc/display.do?name=${customerImage}"/>
+					</c:if>
 				</div>
-				<br>
+				<br>	
 				<div class="filebox">
 					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
-					<input type="file" class="multi" id="image" name="imgFile" accept="image/*" max="1" onchange="readURL(this);"/>
+					<input type="file" class="multi" id="image" name="host_photo" accept="image/*" max="1" onchange="readURL(this);"/>
 				</div>
 				<div class="input_account">
 					<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">계좌번호 등록</h3>

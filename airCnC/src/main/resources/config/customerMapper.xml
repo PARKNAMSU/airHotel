@@ -78,4 +78,27 @@
 	<delete id="customerWithdrawal">
 		DELETE FROM customer WHERE customer_id = #{customer_id}
 	</delete>
+
+	<insert id="hostRegister" parameterType="kg.air.cnc.vo.HostVO">
+		INSERT INTO host
+		VALUES(
+			#{host_id}, 
+			#{host_name}, 
+			#{host_password}, 
+			#{host_email}, 
+			#{host_image}, 
+			#{host_phone},
+			#{host_account},
+			SYSDATE, 
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			#{host_account_name}
+			)
+	</insert>
+	
+	<update id="changeCustomerType">
+		UPDATE customer SET customer_type = #{customer_type} WHERE customer_id = #{customer_id}
+	</update>
 </mapper>

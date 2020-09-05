@@ -3,6 +3,7 @@ package kg.air.cnc.dao.customer;
 import java.util.Date;
 
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 
 public interface CustomerDAO {
 
@@ -39,6 +40,12 @@ public interface CustomerDAO {
 	public String passwordCheck(String customer_id)throws Exception;
 	
 	// 회원 탈퇴.
-	public void customerWithdrawal(String customer_id)throws Exception;
+	public void customerWithdrawal(String customer_id)throws Exception; 
+	
+	// 호스트 등록.
+	public int hostRegister(HostVO vo)throws Exception;
+	
+	// 사용자 등급 변경.
+	public void changeCustomerType(CustomerVO customerVO)throws Exception;
 	
 }
