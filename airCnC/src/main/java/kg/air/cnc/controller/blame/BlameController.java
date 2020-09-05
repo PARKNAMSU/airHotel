@@ -5,6 +5,7 @@ import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,7 @@ public class BlameController {
         mav.setViewName("blameinfo");
         return mav;
     }
+
 
     @RequestMapping(value = "/blamejudge.mdo", method = RequestMethod.GET) // 신고당한 아이디 처리 페이지
     public ModelAndView judgeBlameTarget(HttpServletRequest request, HttpSession session, ModelAndView mav){

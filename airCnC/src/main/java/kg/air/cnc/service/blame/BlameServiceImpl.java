@@ -5,6 +5,7 @@ import kg.air.cnc.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kg.air.cnc.vo.HostVO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -72,6 +73,7 @@ public class BlameServiceImpl implements BlameService {
         blameDAO.increaseHostBlameWarn(target_member_id);
     }
 
+    @Transactional
     @Override // 호스트 정지
     public void suspendHost(String host_id, String suspend_day) {
         int suspend_date = Integer.parseInt(suspend_day);
@@ -105,7 +107,6 @@ public class BlameServiceImpl implements BlameService {
         //해당 host 의 host_blame_stop 증가
         blameDAO.increaseHostBlameStop(host_id);
 
-        // todo 정지기간이 끝나면 어떻게 처리하지?
         HostVO host = new HostVO();
         host.setHost_id(host_id);
         host.setHost_status(1);
@@ -115,6 +116,7 @@ public class BlameServiceImpl implements BlameService {
 
     }
 
+    @Transactional
     @Override // 커스터머 정지
     public void suspendCustomer(String customer_id, String suspend_day) {
         int suspend_date = Integer.parseInt(suspend_day);
@@ -149,6 +151,7 @@ public class BlameServiceImpl implements BlameService {
 
     }
 
+    @Transactional
     @Override // 블랙리스트 추가
     public void addBlackList(String id) {
         HostVO host = blameDAO.checkHost(id);
@@ -170,12 +173,6 @@ public class BlameServiceImpl implements BlameService {
             for (House_InfoVO house : houseList) {
                 blameDAO.deleteHouse(house.getHouse_host_id());
             }
-            /*
-            for(int i = 0 ; i < houseList.size(); i++){
-                 blameDAO.deleteHouse(houseList.get(i).getHouse_host_id());
-            }
-            */
-
             blameDAO.deleteHost(id);
 
             deleteBlameMap.put("target_member_id", id);
