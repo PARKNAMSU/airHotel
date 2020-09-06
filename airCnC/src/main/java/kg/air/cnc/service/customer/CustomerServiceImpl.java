@@ -98,4 +98,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public void changeCustomerType(CustomerVO customerVO) throws Exception {
 		dao.changeCustomerType(customerVO);
 	}
+
+	@Override
+	public void hostInfoUpdate(HostVO hostVO) throws Exception {
+		dao.hostInfoUpdate(hostVO);
+	}
 }

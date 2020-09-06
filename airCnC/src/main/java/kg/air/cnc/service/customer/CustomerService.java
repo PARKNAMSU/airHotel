@@ -53,6 +53,9 @@ public interface CustomerService {
 
 	// 사용자 등급 변경
 	public void changeCustomerType(CustomerVO customerVO)throws Exception;
+	
+	// 호스트 정보 수정.
+	public void hostInfoUpdate(HostVO hostVO)throws Exception;
 }
 
 

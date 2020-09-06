@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 
@@ -103,5 +105,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public void changeCustomerType(CustomerVO customerVO) throws Exception {
 		session.update("customer.changeCustomerType", customerVO);
+	}
+
+	@Override
+	public void hostInfoUpdate(HostVO hostVO) throws Exception {
+		session.update("customer.hostInfoUpdate", hostVO);
 	}
 }

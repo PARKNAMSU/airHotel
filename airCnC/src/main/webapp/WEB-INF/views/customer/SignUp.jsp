@@ -332,7 +332,7 @@
 					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
 					<input type="file" class="multi" id="image" name="customer_photo" accept="image/*" max="1" onchange="readURL(this);"/>
 				</div>
-				
+			
 				<div class="input_email">
 					<span> <input class="iemail" type="email" id="customerEmail"
 						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소">

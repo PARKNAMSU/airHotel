@@ -210,6 +210,7 @@
 					<div style="padding-top: 5%;"></div>
 					<span>
 						<select name="host_account_name" class="hostAccountName" style="width:450px;height:45px;">
+					       <option value="${customerBank}" selected="selected">${customerBank}</option>
 					       <option value=''>-은행을 선택하세요-</option>
 					       <option value="카카오뱅크">카카오뱅크</option>
 					       <option value="케이뱅크">케이뱅크</option>
@@ -233,7 +234,7 @@
 					    </select>
 					</span>
 					<br>
-					<span><input class="iauth" type="text" id="hostAccount" name="host_account" placeholder="&nbsp;&nbsp;계좌번호 입력 ('-'제외)" maxlength="14"></span> 
+					<span><input class="iauth" type="text" id="hostAccount" name="host_account" value="${customerAccount}" maxlength="14"></span> 
 				</div>
 				<br>
 			</div>
