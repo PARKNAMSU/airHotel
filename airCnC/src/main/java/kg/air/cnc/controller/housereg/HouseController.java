@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -79,39 +80,70 @@ public class HouseController {
 		house.setHouse_host_id(hostId);
 		System.out.println(house.getHouse_host_id());
 		
-		house.setHouse_host_id("IMSIhostID");
-		house.setHouse_seq(26);
+		//house.setHouse_host_id("IMSIhostID");
+		//house.setHouse_seq(26);
 		System.out.println("호스트 아이디 : " + house.getHouse_host_id());
 		System.out.println("수정하려는 집 pk : " + house.getHouse_seq());
 		return "1newhouse";
 	}
 	
-//	@RequestMapping(value = "/house_revise.do")
-//	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
-//			, Model model) {
-//		String host_house_seq = (String) session.getAttribute("house_seq");
-//		int house_seq = Integer.parseInt(host_house_seq);
-//		house.setHouse_seq(house_seq);
-//		model.addAttribute("detail", houseService.detailHouse(house_seq));
-//		return "hostHouse_ReviseList";
+	@RequestMapping(value = "/house_revise.do")
+	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
+			, Model model) {
+		String host_house_seq = (String) session.getAttribute("house_seq");
+		int house_seq = Integer.parseInt(host_house_seq);
+		house.setHouse_seq(house_seq);
+		model.addAttribute("detail", houseService.detailHouse(house_seq));
+		return "hostHouse_ReviseList";
+	}
+	
+//	@RequestMapping(value = "/listhouse.do", method = RequestMethod.GET)
+//	public String listHouse(Model model, SessionStatus sessionStatus) throws Exception {
+//		List<House_InfoVO> list = houseService.listHouse();
+//		model.addAttribute("list", list);
+//		sessionStatus.setComplete();
+//		return "totalhouseList";
 //	}
 	
-	@RequestMapping(value = "/1newhouse.do")//여기는 등록만 하도록 됨
+	@RequestMapping(value = "/1newhouse.do")
 	public String newhouse(@ModelAttribute("house") House_InfoVO house, Model model) {
 		System.out.println("newhouse : " + house.getNewhouse());
 		if(house.getNewhouse().equals("new1")) {
 			return "2housedetail";
 			
 		} else if(house.getNewhouse().equals("new2")) {
-			int house_seq = house.getHouse_seq();
-			model.addAttribute("detail", houseService.detailHouse(house_seq));
-			return "hostHouse_ReviseList";
+//			int house_seq = house.getHouse_seq();
+//			model.addAttribute("detail", houseService.detailHouse(house_seq));
+//			return "hostHouse_ReviseList";
+			String hostId = house.getHouse_host_id();
+			System.out.println(hostId);
+			List<House_InfoVO> list = houseService.listHouse(house);
+			model.addAttribute("list", list);
+			return "123totalhouse";
 		}
 		//숙소 등록중, 등록했던 숙소는 new2, new3로 조건부여
 		return null;
 	}
 	
-	@RequestMapping(value = "/2housedetail.do")
+	
+//	@RequestMapping(value = "/revisehouse.do", method = RequestMethod.GET)//123totalhouse에서 집 선택하여 seq, 받아서 수정리스트로
+//	public String listHouse(@ModelAttribute("house") House_InfoVO house, Model model) throws Exception {
+//		int houseSeq = house.getHouse_seq();
+//		System.out.println("집 순번" + houseSeq);
+//		model.addAttribute("detail", houseService.detailHouse(houseSeq));
+//		return "hostHouse_ReviseList";
+//	}
+	@RequestMapping(value = "/revisehouse/{house_seq}.do", method = RequestMethod.GET)//123totalhouse에서 집 선택하여 seq, 받아서 수정리스트로
+	public String listHouse(@PathVariable("house_seq") int house_seq, @ModelAttribute("house") House_InfoVO house, Model model) throws Exception {
+		
+		house.setHouse_seq(house_seq);
+		System.out.println("수정하는 집 순번 : " + house.getHouse_seq());
+		model.addAttribute("detail", houseService.detailHouse(house_seq));
+		return "hostHouse_ReviseList";
+	}
+	
+	
+	@RequestMapping(value = "/2housedetail.do")// 1newhouse에서 시작하여 등록 시작
 	public String housedetail(@ModelAttribute("house") House_InfoVO house, Model model) {
 		logger.info(house.toString());
 		System.out.println("housedetail : " + house.getHouse_bedroom_amount());
@@ -127,19 +159,8 @@ public class HouseController {
 	public String update_2housedetailwork(@ModelAttribute("house") House_InfoVO house, Model model) {
 		houseService.updateHouse_housedetail(house);
 		System.out.println("2housedetail 수정완료");
-		return "forward:/1newhouse.do";
+		return "forward:/revisehouse.do";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -150,7 +171,23 @@ public class HouseController {
 		logger.info(house.toString());
 		System.out.println("bathcount : " + house.getHouse_bathroom_type());
 		return "4location";
-	}
+	}//상세보기
+	@RequestMapping(value = "/update_3bathcountopen.do")
+	public String update_bathcountopen(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("3bathcount 수정 페이지로 이동");
+		return "3bathcount_update";
+	}//수정이동
+	@RequestMapping(value = "/update_3bathcountwork.do")
+	public String update_3bathcountwork(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("욕실수 : " + house.getHouse_bathroom_amount());
+		System.out.println("공용여부 : " + house.getHouse_bathroom_type());
+		houseService.updateHouse_bathcount(house);
+		System.out.println("3bathcount 수정완료");
+		return "forward:/1newhouse.do";
+	}//수정동작
+	
+	
+	
 	
 	@RequestMapping(value = "/4location.do")
 	public String location(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -161,7 +198,26 @@ public class HouseController {
 		System.out.println("location : " + house.getHouse_location());
 		System.out.println("location : " + house.getHouse_location_fulladdress());
 		return "5defaultoption";
-	}
+	}//상세보기
+	@RequestMapping(value = "/update_4locationopen.do")
+	public String update_locationopen(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("4location 수정 페이지로 이동");
+		return "4location_update";
+	}//수정이동
+	@RequestMapping(value = "/update_4locationwork.do")
+	public String update_locationwork(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("sido : " + house.getHouse_location_sido());
+		System.out.println("sigun : " + house.getHouse_location_gugun());
+		System.out.println("location_x : " + house.getHouse_xlocation());
+		System.out.println("location : " + house.getHouse_location());
+		System.out.println("location : " + house.getHouse_location_fulladdress());
+		houseService.updateHouse_location(house);
+		System.out.println("4location 수정완료");
+		return "forward:/1newhouse.do";
+	}//수정동작
+	
+	
+	
 	
 	@RequestMapping(value = "/5defaultoption.do")
 	public String defaultoption(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -188,10 +244,47 @@ public class HouseController {
 		else {house.setHouse_default_firesofwa("true");}
 		if(house.getHouse_default_bedrock_0or1()==null) {house.setHouse_default_bedrock("false");} 
 		else {house.setHouse_default_bedrock("true");}
-		System.out.println("defaultsetting : " + house.getHouse_defaultsetting());
-		System.out.println("default_bedrock : " + house.getHouse_default_bedrock());
+		System.out.println("등록 중 defaultsetting : " + house.getHouse_defaultsetting());
+		System.out.println("등록 중 default_bedrock : " + house.getHouse_default_bedrock());
 		return "6guestcomfortable";
-	}
+	}//상세보기
+	@RequestMapping(value = "/update_5defaultoptionopen.do")
+	public String update_defaultoptionopen(@ModelAttribute("house") House_InfoVO house, Model model) {
+		System.out.println("5defaultoption 수정 페이지로 이동");
+		return "5defaultoption_update";
+	}//수정이동
+	@RequestMapping(value = "/update_5defaultoptionwork.do")
+	public String update_defaultoptionwork(@ModelAttribute("house") House_InfoVO house, Model model) {
+		if(house.getHouse_defaultsetting_0or1().equals("false")) {house.setHouse_defaultsetting("false");} 
+		else {house.setHouse_defaultsetting("true");}
+		if(house.getHouse_default_tv_0or1().equals("false")) {house.setHouse_default_tv("false");} 
+		else {house.setHouse_default_tv("true");}
+		if(house.getHouse_default_wifi_0or1().equals("false")) {house.setHouse_default_wifi("false");} 
+		else {house.setHouse_default_wifi("true");}
+		if(house.getHouse_default_heater_0or1().equals("false")) {house.setHouse_default_heater("false");} 
+		else {house.setHouse_default_heater("true");}
+		if(house.getHouse_default_cooler_0or1().equals("false")) {house.setHouse_default_cooler("false");} 
+		else {house.setHouse_default_cooler("true");}
+		if(house.getHouse_default_iron_0or1().equals("false")) {house.setHouse_default_iron("false");} 
+		else {house.setHouse_default_iron("true");}
+		if(house.getHouse_default_fireditecter_0or1().equals("false")) {house.setHouse_default_fireditecter("false");} 
+		else {house.setHouse_default_fireditecter("true");}
+		if(house.getHouse_default_coditecter_0or1().equals("false")) {house.setHouse_default_coditecter("false");} 
+		else {house.setHouse_default_coditecter("true");}
+		if(house.getHouse_default_aidkit_0or1().equals("false")) {house.setHouse_default_aidkit("false");} 
+		else {house.setHouse_default_aidkit("true");}
+		if(house.getHouse_default_firesofwa_0or1().equals("false")) {house.setHouse_default_firesofwa("false");} 
+		else {house.setHouse_default_firesofwa("true");}
+		if(house.getHouse_default_bedrock_0or1().equals("false")) {house.setHouse_default_bedrock("false");} 
+		else {house.setHouse_default_bedrock("true");}
+		System.out.println("수정 중 defaultsetting : " + house.getHouse_defaultsetting());
+		System.out.println("수정 중 default_bedrock : " + house.getHouse_default_bedrock());
+		houseService.updateHouse_defaultoption(house);
+		System.out.println("5defaultoption 수정완료");
+		return "forward:/1newhouse.do";
+	}//수정동작
+	
+	
 	
 	@RequestMapping(value = "/6guestcomfortable.do")
 	public String guestcomfortable(@ModelAttribute("house") House_InfoVO house, Model model) {
@@ -293,7 +386,7 @@ public class HouseController {
 			} catch (IOException e) {
 				System.err.println("사진파일을 첨부하지 않았음");
 			}
-			house.setHouse_photourl(fileName);
+			house.setHouse_photourl(house.getHouse_host_id() + "_" + fileName);
 			System.out.println("houseVO안의 url : " + house.getHouse_photourl());
 		}
 //		List<MultipartFile> fileList = mtfRequest.getFiles("house_photo");

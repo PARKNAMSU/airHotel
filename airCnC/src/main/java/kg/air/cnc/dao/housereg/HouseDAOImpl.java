@@ -33,8 +33,8 @@ public class HouseDAOImpl implements HouseDAO {
 	}//집등록
 
 	@Override
-	public List<House_InfoVO> listHouse() {
-		return sqlSessionTemplate.selectList("product.listHouse");
+	public List<House_InfoVO> listHouse(House_InfoVO vo) {
+		return sqlSessionTemplate.selectList("product.listHouse", vo);
 	}//자신이 등록한 집을 조회해서 리스트화 하여 거기서 radio 누르면 수정할 seq 받을수 있도록. 일단 안씀
 	
 	@Override

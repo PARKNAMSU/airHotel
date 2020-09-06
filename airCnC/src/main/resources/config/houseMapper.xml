@@ -178,7 +178,7 @@
 	<select id="listHouse" resultType="kg.air.cnc.vo.House_InfoVO" >
     <![CDATA[
         SELECT
-        	house_seq, house_name, house_regdate
+        	house_seq, house_name, house_regdate, house_price_default, house_photourl
         FROM
             house_info
         WHERE

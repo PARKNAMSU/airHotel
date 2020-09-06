@@ -39,7 +39,7 @@
 		
 		function PrevSubmit() {
 			var f = document.hostchoose1;
-			f.action = "<c:url value='/index.do' />";
+			f.action = "<c:url value='/hostregisterindex.do' />";
 			f.submit();
 		}
 
