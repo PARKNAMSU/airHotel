@@ -359,7 +359,7 @@
 	</update>
 	
 	<select id="getDefaultPrices" parameterType="String" resultType="kg.air.cnc.vo.PopularVO">
-		SELECT *
+		SELECT nvl(popular_house_seq, 0) as popular_house_seq, popular_price_default, popular_price_max
 		FROM popular
 		WHERE popular_house_seq=#{seq}
 	</select>
