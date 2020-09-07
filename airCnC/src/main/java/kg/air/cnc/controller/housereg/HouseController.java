@@ -87,10 +87,9 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/house_revise.do")
-	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
+	public String revisePage(House_InfoVO house, HttpSession session
 			, Model model) {
-		String host_house_seq = (String) session.getAttribute("house_seq");
-		int house_seq = Integer.parseInt(host_house_seq);
+		int house_seq = house.getHouse_seq();
 		house.setHouse_seq(house_seq);
 		model.addAttribute("detail", houseService.detailHouse(house_seq));
 		return "hostHouse_ReviseList";

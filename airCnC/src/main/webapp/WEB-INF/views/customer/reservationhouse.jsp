@@ -615,7 +615,7 @@ function filterNumber(event) {
 function openHouseModify(house_seq){
 	var form = document.createElement("form");
 	var input = new Array()
-	var names = ["house"]
+	var names = ["house_seq"]
 	var values = [house_seq]
     form.action = "house_revise.do";
     form.method = "post";
