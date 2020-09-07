@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>호스트 신청</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
@@ -35,6 +37,67 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript">
+	// 호스트 신청 버튼.
+	$(document).on("click","#reg_submit",function() {
+		var getData;
+		var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
+		var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
+		var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
+		var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/; // 전화번호 유효성 검사.
+
+		if ($("#hostEmail").val()) {
+			if (!regExp.test($("#hostEmail").val())) {
+				alert("이메일 주소가 유효하지 않습니다");
+				$("#hostEmail").focus();
+				return false;
+			}
+		}
+		if (!phoneChecked.test($("#hostPhone").val())) {
+			alert("전화번호가 잘못 되었습니다.");
+			$("#hostPhone").focus();
+			return false;
+		}
+		if (!$("#hostId").val()) {
+			alert("아이디를 입력 하세요.");
+			$("#hostId").focus();
+			return false;
+		} else if (!idChecked.test($("#hostId").val())) {
+			alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
+			$("#hostId").focus();
+			return false;
+		} else if (!$("#hostName").val()) {
+			alert("이름을 입력 하세요.");
+			$("#hostName").focus();
+			return false;
+		} else if (!hanChecked.test($("#hostName").val())) {
+			alert("이름이 잘못 되었습니다.");
+			$("#hostName").focus();
+			return false;
+		} else if (!$("#hostEmail").val()) {
+			alert("이메일을 입력하세요.");
+			$("#hostEmail").focus();
+			return false;
+		} else if (!$("#hostPassword").val()) {
+			alert("비밀번호를 입력하세요.");
+			$("#hostPassword").focus();
+			return false;
+		} else if(!document.regForm.host_account_name.value == "-은행을 선택하세요-" || document.regForm.host_account_name.value == ""){ 
+			alert("은행을 선택하세요.");
+			return false;
+		} else if(!$("#hostAccount").val()){
+			alert("계좌번호를 입력하세요.");
+			$("#hostAccount").focus();
+			return false;
+		} else {
+			getData = "complate";
+			alert("호스트 신청이 완료되었습니다.");
+		}
+		if (getData == "complate") {
+			document.getElementById("regForm").submit();
+		}
+	});
+</script>
 </head>
 <body>
 	<!-- header-start -->
@@ -70,94 +133,126 @@
 	<c:if test="${login_session ne null }">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
 				<ul id="menuItems">	
-					<li class="item">
-							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
-							</p>
-						</li>
-						<li class="item"><a href="myHouse.do">호스트</a></li>
-						<li class="item">
-								<p><a href="/cnc/logout.do">로그아웃</a></p>
-					</li>
+					<li class="item"><p><a href="/cnc/selectBoardList.do">공지사항</a></p></li>
+					<li class="item"><a href="myHouse.do">호스트</a></li>
+					<li class="item"><p><a href="/cnc/logout.do">로그아웃</a></p></li>
 				</ul>
 			</div>
 		</div>
 	</header>
 	</c:if>
-	<form action="/cnc/registerCheck.do" method="post" id="regForm">
+	<form action="/cnc/hostRegister.do" method="post" id="regForm" name="regForm" enctype="multipart/form-data">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
-				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">회원가입</h3>
-				<br> <br>
+				<h2 style="padding-top: 30px; font-size: 40px; font-weight: bold;">호스트 신청</h2>
+				<br><br>
+				<h5 style="font-size: 25px; font-weight: bold;">아이디</h5>
 				<div class="input_id">
-					<span> <input class="bb6" type="text" name="customer_id"
-						id="customerId" placeholder="&nbsp;&nbsp;아이디 입력" required>
+					<span>
+						<input class="bb6" type="text" id="hostId" name="host_id" value="${login_session}" readonly="readonly">
 					</span>
-					<button type="button" class="idCheckBtn" id="idCheckBtn" value="N">중복확인</button>
 				</div>
+				<div style="padding-top: 5%;"></div>
 				<div class="input_password">
-					<span> <input class="ipassword" type="password"
-						id="customerPassword" name="customer_password"
-						placeholder="&nbsp;&nbsp;비밀번호 설정" required>
+				<h5 style="font-size: 25px; font-weight: bold;">비밀번호</h5>
+					<span>
+						<input class="ipassword" type="password"id="hostPassword" name="host_password" value="${customerPassword}" readonly="readonly">
 					</span>
 				</div>
+				<div style="padding-top: 5%;"></div>
 				<div class="input_phone">
-					<span><input class="itel" type="tel" id="customerPhone"
-						placeholder="&nbsp;&nbsp;전화번호(예:010-0000-0000)"
-						name="customer_phone" maxlength="13" required> </span>
-				</div>
-				<div class="input_name">
-					<span> <input class="iname" type="text" name="customer_name"
-						id="customerName" placeholder="&nbsp;&nbsp;이름(예:홍길동)" required>
+				<h5 style="font-size: 25px; font-weight: bold;">연락처</h5>
+					<span>
+						<input class="itel" type="tel" id="hostPhone" name="host_phone" maxlength="13" value="${customerPhone}" readonly="readonly">
 					</span>
 				</div>
-
-				<div style="padding-top: 30px;">
-					<div class="loginMove" style="text-align: center; color: black;">
-						이미 에어비앤비 계정이 있나요? <a class="my__login__link"
-							href="/cnc/loginView.do">로그인</a>
-					</div>
+				<div style="padding-top: 5%;"></div>
+				<div class="input_name">
+				<h5 style="font-size: 25px; font-weight: bold;">이름</h5>
+					<span>
+						<input class="iname" type="text" id="hostName" name="host_name" value="${customerName}" readonly="readonly">
+					</span>
+				</div>
+				<div style="padding-top: 5%;"></div>
+				<div class="input_email">
+				<h5 style="font-size: 25px; font-weight: bold;">이메일</h5>
+					<span>
+						<input class="iemail" type="email" id="hostEmail" name="host_email" value="${customerEmail}" readonly="readonly">
+					</span>
+					<br>
 				</div>
 			</div>
 			<div class="rightform">
-				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">프로필
-					사진 추가</h3>
-				<br> <br>
-				<h4>프로필 사진을 요청하는 호스트도 있지만, 이 경우에도 예약이 확정된 후에만 게스트의 사진을 볼수 있습니다.</h4>
-				<div id="image_container" style="text-align: center;"></div>
-				<br>
-				<div class="filebox">
-					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label><input
-						type="file" class="multi" id="image" accept="image/*"
-						maxlength="2" onchange="setThumbnail(event);" name="customer_image" />
+				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">프로필 사진 추가</h3>
+				<br><br>
+				<h4>프로필 사진을 요청하는 게스트도 있지만,기본적으로 호스트의 사진을 볼수 있습니다.</h4>
+				<div style="padding-top: 5%;"></div>
+				<div id="image_container" style="text-align: center;">
+					<c:if test="${fdata.value.customer_image eq 'profile.png'}">
+						<img width="200" height="250" id="img" name="host_image" src="${pageContext.request.contextPath}/resources/images/profile.png"/>
+					</c:if>
+					<c:if test="${fdata.value.customer_image ne 'profile.png'}">
+						<img width="200" height="250" id="img" name="host_image" src="/cnc/display.do?name=${customerImage}"/>
+					</c:if>
 				</div>
-				<div class="input_email">
-					<span> <input class="iemail" type="email" id="customerEmail"
-						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소" required>
-					</span> <br>
-					<button id="emailBtn"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호
-						발송</button>
-					<br> <span> <input class="iauth" type="text"
-						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호"
-						required>
-					</span> <br> <input id="emailAuthBtn" type="button"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"
-						value="이메일 인증">
+				<br>	
+				<div class="filebox">
+					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
+					<input type="file" class="multi" id="image" name="host_photo" accept="image/*" max="1" onchange="readURL(this);"/>
+				</div>
+				<div class="input_account">
+					<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">계좌번호 등록</h3>
+					<div style="padding-top: 5%;"></div>
+					<span>
+						<select name="host_account_name" class="hostAccountName" style="width:450px;height:45px;">
+					       <option value=''>-은행을 선택하세요-</option>
+					       <option value="카카오뱅크">카카오뱅크</option>
+					       <option value="케이뱅크">케이뱅크</option>
+					       <option value='기업은행'>기업은행</option>
+					       <option value="KDB산업은행">KDB산업은행</option>
+					       <option value='국민은행'>국민은행</option>
+					       <option value='우리은행'>우리은행</option>
+					       <option value='SC제일은행'>SC제일은행</option>
+					       <option value='한국시티은행'>한국시티은행</option>
+					       <option value='하나은행'>하나은행</option>
+					       <option value='신한은행'>신한은행</option>
+					       <option value='NH농협은행'>NH농협은행</option>
+					       <option value='SH수협은행'>SH수협은행</option>					       
+					       <option value='대구은행'>대구은행</option>
+					       <option value='부산은행'>부산은행</option>
+					       <option value='광주은행'>광주은행</option>
+					       <option value='제주은행'>제주은행</option>
+					       <option value='전북은행'>전북은행</option>
+					       <option value='경남은행'>경남은행</option>			       
+					       <option value='새마을금고'>새마을금고</option>
+					    </select>
+					</span>
+					<br>
+					<span><input class="iauth" type="text" id="hostAccount" name="host_account" placeholder="&nbsp;&nbsp;계좌번호 입력 ('-'제외)" maxlength="14"></span> 
 				</div>
 				<br>
 			</div>
 		</div>
 		<div class="register1">
-			<button id="reg_submit">가입하기</button>
+			<button id="reg_submit">호스트 신청하기</button>
 		</div>
 	</form>
 	<div style="margin-bottom: 5%"></div>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </html>

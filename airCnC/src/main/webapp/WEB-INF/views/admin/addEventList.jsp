@@ -30,7 +30,7 @@
 		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css">
 	<link rel="stylesheet" 
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
+	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	 <style>
 		#main-menu li:nth-child(2)>a {
 		border-left: 1px solid #ee575d;

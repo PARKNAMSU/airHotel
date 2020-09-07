@@ -66,8 +66,11 @@
 	<![CDATA[
 		SELECT *
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_default_wifi=#{wifi}
 		AND house_condition_petok=#{pet}
 		AND house_price_default>=#{minPrice}
@@ -87,8 +90,11 @@
 	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) 
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_default_wifi=#{wifi}
 		AND house_condition_petok=#{pet}
 		AND house_price_default>=#{minPrice}
@@ -150,8 +156,11 @@
 	<![CDATA[
 		SELECT *
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_default_wifi=#{wifi}
 		AND house_condition_petok=#{pet}
 		AND house_price_default>=#{minPrice}
@@ -172,8 +181,11 @@
 	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_default_wifi=#{wifi}
 		AND house_condition_petok=#{pet}
 		AND house_price_default>=#{minPrice}
@@ -232,8 +244,11 @@
 	<![CDATA[
 		SELECT *
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_location=#{location}
 		AND house_status=0
 	]]>
@@ -243,8 +258,11 @@
 	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_location=#{location}
 		AND house_status=0
 	]]>
@@ -276,8 +294,11 @@
 	<![CDATA[
 		SELECT *
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_location=#{location}
 		AND house_status=0
 		AND house_location_gugun=#{detail}
@@ -288,8 +309,11 @@
 	<![CDATA[
 		SELECT NVL(MIN(house_price_default),0) AS minp, NVL(MAX(house_price_default),9999999) AS maxp
 		FROM house_info
-		WHERE house_seq NOT IN (SELECT reservation_house_seq FROM reservation 
-		WHERE (reservation_check_in between #{checkIn} AND #{checkOut}) OR (reservation_check_out between #{checkIn} AND #{checkOut}))
+		WHERE house_seq NOT IN
+		(SELECT reservation_house_seq FROM reservation 
+		WHERE (reservation_check_in between #{checkIn} AND #{checkOut})
+		OR (reservation_check_out between #{checkIn} AND #{checkOut})
+		OR (reservation_check_in<#{checkIn} AND reservation_check_out>#{checkOut}))
 		AND house_location=#{location}
 		AND house_status=0
 		AND house_location_gugun=#{detail}

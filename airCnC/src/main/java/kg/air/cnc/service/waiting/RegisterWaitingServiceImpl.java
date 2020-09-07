@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.waiting.RegisterWaitingDAOImpl;
 import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PagingVO;
 
 @Service
 public class RegisterWaitingServiceImpl {
@@ -18,8 +19,12 @@ public class RegisterWaitingServiceImpl {
 		return houseWaitingDAO.getHouse(vo);
 	}
 
-	public List<House_InfoVO> getWaitingList() {
-		return houseWaitingDAO.getRegisterWaitingList();
+	public List<House_InfoVO> getWaitingList(PagingVO vo) {
+		return houseWaitingDAO.getRegisterWaitingList(vo);
+	}
+	
+	public int waitingCnt() {
+		return houseWaitingDAO.waitingCnt();
 	}
 	
 	public void registerHouse(House_InfoVO vo) {

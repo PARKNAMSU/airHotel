@@ -15,5 +15,16 @@
     <delete id="deleteBlackList">
         DELETE FROM blacklist WHERE black_email = #{blackEmail}
     </delete>
+    
+    <select id="getWeeklyAddedBlackList" resultType="int">
+        SELECT COUNT (*) FROM blacklist WHERE regdate >= TO_CHAR(SYSDATE-7, 'YYYYMMDD')
+    </select>
 
+    <select id="getMonthlyAddedBlackList" resultType="int">
+        SELECT COUNT (*) FROM blacklist WHERE regdate BETWEEN TO_DATE(ADD_MONTHS(sysdate, -1)) AND sysdate
+    </select>
+
+    <select id="getTotalBlackList" resultType="int">
+        SELECT COUNT(*) FROM blacklist
+    </select>
 </mapper>

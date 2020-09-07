@@ -1,48 +1,71 @@
 package kg.air.cnc.controller.customer;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import kg.air.cnc.common.KakaoController;
+import kg.air.cnc.common.MediaUtils;
 import kg.air.cnc.common.NaverController;
+import kg.air.cnc.common.uploadFileUtils;
 import kg.air.cnc.service.customer.CustomerService;
 import kg.air.cnc.service.mail.MailService;
 import kg.air.cnc.service.message.MessageService;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 import kg.air.cnc.vo.MessageVO;
 
 @Controller
 public class CustomerController {
 
+	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	
 	private NaverController naverController;
 	private KakaoController kakaoController = new KakaoController();
 	private String apiResult = null;
+	
+	@Resource(name = "uploadPath") 
+	private String uploadPath;
 
 	@Autowired
 	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
 	}
-
+	
 	@Autowired
 	MessageService messageService;
 
@@ -64,8 +87,25 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/registerView.do", method = RequestMethod.GET)
-	public String registerView() throws Exception{
+	public String registerView(MultipartFile multipartFile, Model model) throws Exception{
 		return "SignUp";
+	}
+	
+	@RequestMapping(value = "/hostRegisterView.do", method = RequestMethod.GET)
+	public ModelAndView hostRegisterView(HttpSession session,CustomerVO customerVO, ModelAndView mav) throws Exception{
+		String sessionId = (String)session.getAttribute("login_session");
+		customerVO = service.getCustomerInfo(sessionId);	
+		String filePath = customerVO.getCustomer_image();
+		Map<String, String> fdata = new HashMap<String, String>();
+		File file = new File(uploadPath + filePath);
+		fdata.put("filePath", filePath);
+		mav.addObject("customerPassword", customerVO.getCustomer_password());
+		mav.addObject("customerName", customerVO.getCustomer_name());
+		mav.addObject("customerPhone", customerVO.getCustomer_phone());
+		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerImage", filePath);
+		mav.setViewName("hostRegister");
+		return mav;
 	}
 
 	@RequestMapping(value = "/loginView.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -79,21 +119,65 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/mypage.do")
-	public ModelAndView mypageView(HttpSession session, CustomerVO customerVO, ModelAndView mav)throws Exception{
+	public ModelAndView mypageView(HttpSession session, CustomerVO customerVO, ModelAndView mav, HttpServletResponse response)throws Exception{
 		String sessionId = (String)session.getAttribute("login_session");
-		customerVO = service.getCustomerInfo(sessionId);	
+		System.out.println("세션 아이디 : " + sessionId);
+		customerVO = service.getCustomerInfo(sessionId);
+		System.out.println("db에 저장된 이미지 : " + customerVO.getCustomer_image());
+		String filePath = customerVO.getCustomer_image();
+		Map<String, String> fdata = new HashMap<String, String>();
+		File file = new File(uploadPath + filePath);
+		fdata.put("filePath", filePath);
 		mav.addObject("customerName", customerVO.getCustomer_name());
 		mav.addObject("customerPhone", customerVO.getCustomer_phone());
 		mav.addObject("customerEmail", customerVO.getCustomer_email());
-		mav.addObject("customerImage", customerVO.getCustomer_image());
+		mav.addObject("customerImage", filePath);
 		mav.setViewName("mypage");
+		mav.addObject("fdata", fdata);
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/display.do", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> displayFile(@RequestParam("name")String fileName)throws Exception{
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		logger.info("File Name : " + fileName);
+		try {
+			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			HttpHeaders headers = new HttpHeaders();
+			in = new FileInputStream(uploadPath + fileName);
+			if (mType != null) {
+				headers.setContentType(mType);
+			}else {
+				fileName = fileName.substring(fileName.indexOf("_") + 1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+			}
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		return entity;
+	}
+	
 	// 비밀번호 찾기.
 	@RequestMapping(value = "/forgotPasswordView.do", method = RequestMethod.GET)
 	public String forgotPasswordView()throws Exception{
 		return "forgotpassword";
+	}
+	
+	@RequestMapping(value = "/passwordChangeView.do", method = RequestMethod.GET)
+	public String passwordChangeView()throws Exception{
+		return "passwordChange";
+	}
+	
+	@RequestMapping(value = "/customerWithdrawalView.do", method = RequestMethod.GET)
+	public String customerWithdrawalView()throws Exception{
+		return "customerWithdrawal";
 	}
 
 	// 비밀번호 찾기 이메일 전송.
@@ -300,12 +384,16 @@ public class CustomerController {
 
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
-	public String regist(CustomerVO vo)throws Exception{
-		MessageVO messageVO = new MessageVO();
-		// 회원가입 시 프로필 사진을 등록안했을때 none처리.
-		if (vo.getCustomer_image().equals("")) {
-			vo.setCustomer_image("none");
+	public String regist(CustomerVO vo, MultipartFile multipartFile)throws Exception{
+		multipartFile = vo.getCustomer_photo();
+		if (multipartFile != null && multipartFile.isEmpty() == false) {
+			String originalName = multipartFile.getOriginalFilename();
+			String path = uploadFileUtils.uploadFile(uploadPath, originalName, multipartFile.getBytes());
+			vo.setCustomer_image(path);
+		}else {
+			vo.setCustomer_image("profile.png");
 		}
+		MessageVO messageVO = new MessageVO();
 		int result = service.blacklistEmailCheck(vo);
 		try {
 			if (result == 1) {
@@ -325,7 +413,7 @@ public class CustomerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "login";
+		return "login";		
 	}
 
 	// 로그인 처리.
@@ -380,23 +468,136 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
-	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav)throws Exception{
-		if (vo.getCustomer_image().equals("") || vo.getCustomer_image().equals("none")) {
-			vo.setCustomer_image("none");
-		}
-		String newPassword = vo.getCustomer_password();
-		String newPwd = passwordEncoder.encode(newPassword);
-		vo.setCustomer_password(newPwd);
-		
-		int result = service.customerInfoUpdate(vo);
-		if (result == 1) {
-			mav.addObject("success");
+	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session,  MultipartFile multipartFile)throws Exception{
+		String customer_email = vo.getCustomer_email();
+		// 블랙리스트에 존재하는 이메일인지 확인.
+		if (service.createEmailCheck(customer_email) == 1 && service.blacklistEmailCheck(vo) == 0) {
+			multipartFile = vo.getCustomer_photo();
+			if (multipartFile != null && multipartFile.isEmpty() == false) {
+				String originalName = multipartFile.getOriginalFilename();
+				String path = uploadFileUtils.uploadFile(uploadPath, originalName, multipartFile.getBytes());
+				vo.setCustomer_image(path);
+			}else {
+				vo.setCustomer_image("profile.png");
+			}
+			int result = service.customerInfoUpdate(vo);
+			if (result == 1) {
+				String sessionId = (String)session.getAttribute("login_session");
+				CustomerVO customerVO = new CustomerVO();
+				customerVO = service.getCustomerInfo(sessionId);	
+				String filePath = customerVO.getCustomer_image();
+				Map<String, String> fdata = new HashMap<String, String>();
+				File file = new File(uploadPath + filePath);
+				fdata.put("filePath", filePath);
+				mav.addObject("customerName", customerVO.getCustomer_name());
+				mav.addObject("customerPhone", customerVO.getCustomer_phone());
+				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerImage", filePath);
+				mav.setViewName("mypage");
+				mav.addObject("fdata", fdata);
+				mav.addObject("resultMessage", "회원 정보가 수정되었습니다.");
+			}else {
+				String sessionId = (String)session.getAttribute("login_session");
+				CustomerVO customerVO = new CustomerVO();
+				customerVO = service.getCustomerInfo(sessionId);	
+				String filePath = customerVO.getCustomer_image();
+				Map<String, String> fdata = new HashMap<String, String>();
+				File file = new File(uploadPath + filePath);
+				fdata.put("filePath", filePath);
+				mav.addObject("customerName", customerVO.getCustomer_name());
+				mav.addObject("customerPhone", customerVO.getCustomer_phone());
+				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerImage", filePath);
+				mav.setViewName("mypage");
+				mav.addObject("fdata", fdata);
+				mav.addObject("resultMessage","회원 정보 수정에 실패하였습니다.");
+			}
 		}else {
-			mav.addObject("fail");
+			String sessionId = (String)session.getAttribute("login_session");
+			CustomerVO customerVO = new CustomerVO();
+			customerVO = service.getCustomerInfo(sessionId);	
+			String filePath = customerVO.getCustomer_image();
+			Map<String, String> fdata = new HashMap<String, String>();
+			File file = new File(uploadPath + filePath);
+			fdata.put("filePath", filePath);
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerImage", filePath);
+			mav.setViewName("mypage");
+			mav.addObject("fdata", fdata);
+			mav.addObject("resultMessage","사용할 수 없는 이메일입니다.");
 		}
+		mav.setViewName("mypage");
 		return mav;
 	}
 	
+	// 호스트 신청 처리.
+	@RequestMapping(value = "/hostRegister.do", method = RequestMethod.POST)
+	public ModelAndView hostRegister(HostVO hostVO, CustomerVO customerVO, HttpSession session, HttpServletRequest request, ModelAndView mav, MultipartFile multipartFile)throws Exception{
+			String sessionId = (String)session.getAttribute("login_session");
+			customerVO = service.getCustomerInfo(sessionId);	
+			String filePath = customerVO.getCustomer_image();
+			multipartFile = hostVO.getHost_photo();
+			if (multipartFile != null && multipartFile.isEmpty() == false) {
+				String originalName = multipartFile.getOriginalFilename();
+				String path = uploadFileUtils.uploadFile(uploadPath, originalName, multipartFile.getBytes());
+				hostVO.setHost_image(path);
+			}else {
+				hostVO.setHost_image(filePath);
+			}
+			int result = service.hostRegister(hostVO);
+			if (result == 1) {
+				customerVO.setCustomer_type("host");
+				service.changeCustomerType(customerVO);
+			}
+		mav.setViewName("index");
+		return mav;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/checkPassword.do", method = RequestMethod.POST)
+	public int checkPassword(String customer_password, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		String dbPassword = service.passwordCheck(customerId);
+		String inputPassword = customer_password;
+		if (!passwordEncoder.matches(inputPassword, dbPassword)){
+			return 0;
+		}else {
+			return 1;
+		}
+	}
+		
+	@RequestMapping(value = "/modifyPassword.do", method = RequestMethod.POST)
+	public String modifyPassword(CustomerVO customerVO, HttpSession session)throws Exception{
+		String newPassword = customerVO.getCustomer_password();
+		String newPwd = passwordEncoder.encode(newPassword);
+		customerVO.setCustomer_password(newPwd);
+		customerVO.setCustomer_id((String)session.getAttribute("login_session"));
+		service.modifyPassword(customerVO);
+		return "passwordChange";
+	}
+	
+	@RequestMapping(value = "/passwordCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int passwordCheck(CustomerVO customerVO, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		String dbPassword = service.passwordCheck(customerId);
+		String inputPassword = customerVO.getCustomer_password();
+		if (!passwordEncoder.matches(inputPassword, dbPassword)){
+			return 0;
+		}else {
+			return 1;
+		}
+	}
+	
+	@RequestMapping(value = "/customerWithdrawal.do", method = RequestMethod.POST)
+	public String customerWithdrawal(CustomerVO vo, HttpSession session)throws Exception{
+		String customerId = (String)session.getAttribute("login_session");
+		service.customerWithdrawal(customerId);
+		session.invalidate();
+		return "index";
+	}
 
 	@RequestMapping(value = "/logout.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{

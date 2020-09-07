@@ -5,6 +5,7 @@ import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ public class BlameController {
     public ModelAndView getBlameList(ModelAndView mav){
         mav.addObject("blameCount",blameService.getBlameSize());
         mav.addObject("blamelist", blameService.getBlameList());
-        mav.setViewName("blacklist/blamelist");
+        mav.setViewName("blamelist");
         return mav;
     }
 
@@ -30,9 +31,10 @@ public class BlameController {
     public ModelAndView getBlameInfo(HttpServletRequest request, ModelAndView mav){
         String target_member_id = request.getParameter("target_member_id");
         mav.addObject("blameinfo", blameService.getBlameInfo(target_member_id));
-        mav.setViewName("blacklist/blameinfo");
+        mav.setViewName("blameinfo");
         return mav;
     }
+
 
     @RequestMapping(value = "/blamejudge.mdo", method = RequestMethod.GET) // 신고당한 아이디 처리 페이지
     public ModelAndView judgeBlameTarget(HttpServletRequest request, HttpSession session, ModelAndView mav){
@@ -44,13 +46,13 @@ public class BlameController {
             //host 인 경우
              HostVO hostVO = blameService.getHostBlameInfo(target_member_id);
              mav.addObject("blameHostJudgeInfo", hostVO);
-             mav.setViewName("blacklist/blamejudge");
+             mav.setViewName("blamejudge");
             return mav;
         } else if(blame_type ==1) {
             //Customer 인 경우
             CustomerVO customerVO = blameService.getCustomerBlameJudgeInfo(target_member_id);
             mav.addObject("blameCustomerJudgeInfo", customerVO);
-            mav.setViewName("blacklist/blamejudge");
+            mav.setViewName("blamejudge");
             return mav;
         } else {
             return null;

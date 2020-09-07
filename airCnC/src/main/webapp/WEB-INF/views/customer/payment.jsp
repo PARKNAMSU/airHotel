@@ -95,13 +95,13 @@
 															finalPrice = Math.ceil(${totalPrice}*((100-getData[idx].cupon_discount_rate)/100)-getData[idx].cupon_discount_money);
 															if(finalPrice<0) finalPrice = 0;
 															price.innerText = finalPrice;
-															console.log("쿠폰이 적용되었습니다.");
+															alert("쿠폰이 적용되었습니다.");
 															flag = true;
 															num.disabled = true;
 															break;
 														}
 													}
-													if(flag==false) console.log("해당 쿠폰이 없습니다.");
+													if(flag==false) alert("해당 쿠폰이 없습니다.");
 												}
 											</script>
 										</div>

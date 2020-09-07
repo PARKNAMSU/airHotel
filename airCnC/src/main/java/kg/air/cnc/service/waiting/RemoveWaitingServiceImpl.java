@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.waiting.RemoveWaitingDAOImpl;
 import kg.air.cnc.vo.House_InfoVO;
+import kg.air.cnc.vo.PagingVO;
 import kg.air.cnc.vo.RemoveWaitingVO;
 
 @Service
@@ -20,8 +21,12 @@ public class RemoveWaitingServiceImpl {
 		return removeWaitingDAO.getHouse(vo);
 	}
 
-	public List<House_InfoVO> getWaitingList() {
-		return removeWaitingDAO.getRemoveWaitingList();
+	public List<House_InfoVO> getWaitingList(PagingVO vo) {
+		return removeWaitingDAO.getRemoveWaitingList(vo);
+	}
+	
+	public int waitingCnt() {
+		return removeWaitingDAO.waitingCnt();
 	}
 	
 	public void updateDate(House_InfoVO vo) {

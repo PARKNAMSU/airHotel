@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kg.air.cnc.dao.comments.CommentsDAO;
 import kg.air.cnc.vo.CommentsVO;
 import kg.air.cnc.vo.HouseVO;
+import kg.air.cnc.vo.MyCommentsVO;
 import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Service
@@ -45,6 +46,22 @@ public class CommentsService implements CommentsServiceImpl{
 	public void updateComments(CommentsVO vo) {
 		commentsDAO.updateComments(vo);
 		
+	}
+	public List<MyCommentsVO> getCommentsForMe(String id){
+		List<MyCommentsVO> list = commentsDAO.getCommentsForMe(id);
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getHouse_name().length()>8)
+			list.get(i).setHouse_name(list.get(i).getHouse_name().substring(0,6)+"...");
+		}
+		return list;
+	}
+	public List<MyCommentsVO> getMyComments(String id){
+		List<MyCommentsVO> list = commentsDAO.getMyComments(id);
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getHouse_name().length()>8)
+			list.get(i).setHouse_name(list.get(i).getHouse_name().substring(0,6)+"...");
+		}
+		return list;
 	}
 
 }

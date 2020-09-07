@@ -4,8 +4,20 @@
 
 <mapper namespace="RemoveHostDAO">
 
-	<select id="getRemoveHostList" parameterType="kg.air.cnc.vo.HostVO" resultType="kg.air.cnc.vo.HostVO">
-		SELECT *
+	<select id="getRemoveHostList" parameterType="kg.air.cnc.vo.PagingVO" resultType="kg.air.cnc.vo.HostVO">
+		SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM host
+						) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="hostCnt" resultType="int">
+		SELECT count(*)
 		FROM host
 	</select>
 	

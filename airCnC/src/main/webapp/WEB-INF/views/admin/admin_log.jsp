@@ -14,14 +14,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -42,7 +43,7 @@
 	src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
-	
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 

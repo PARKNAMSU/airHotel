@@ -88,6 +88,7 @@
 					<ul>
 						<li><br></li>
 						<li style="margin-bottom:20px;"><a href="mypage.do">내 정보</a></li>
+						<li style="margin-bottom:20px;"><a href="hostRegisterView.do">호스트 신청</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
@@ -122,7 +123,7 @@
 	<div class="searchOptions">
 		<form action="searchIndex.do">
 			<div class="srcachlocation" style="vertical-align: middle;">
-				&nbsp;<label for="srcachlocation">지역 전체</label>
+				&nbsp;
 				<select id="select_type" name="location" style="border: none;">
 					<option id="first">지역 전체</option>
 					<option id="seo">서울</option>

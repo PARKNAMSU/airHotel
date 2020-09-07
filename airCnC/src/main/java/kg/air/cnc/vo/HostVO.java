@@ -2,6 +2,7 @@ package kg.air.cnc.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class HostVO {
     private String host_id;
@@ -16,6 +17,8 @@ public class HostVO {
     private int host_blame_stop;
     private Date host_stop_end_date;
     private int host_status;
+    private String host_account_name;
+    private MultipartFile host_photo;
 
     public String getHost_id() {
         return host_id;
@@ -113,22 +116,35 @@ public class HostVO {
     public void setHost_status(int host_status) {
         this.host_status = host_status;
     }
+    public String getHost_account_name() {
+		return host_account_name;
+	}
+	public void setHost_account_name(String host_account_name) {
+		this.host_account_name = host_account_name;
+	}
+	public MultipartFile getHost_photo() {
+		return host_photo;
+	}
 
-    @Override
-    public String toString() {
-        return "HostVO{" +
-                "host_id='" + host_id + '\'' +
-                ", host_name='" + host_name + '\'' +
-                ", host_password='" + host_password + '\'' +
-                ", host_email='" + host_email + '\'' +
-                ", host_image='" + host_image + '\'' +
-                ", host_phone='" + host_phone + '\'' +
-                ", host_account='" + host_account + '\'' +
-                ", host_regdate=" + host_regdate +
-                ", host_blame_warn=" + host_blame_warn +
-                ", host_blame_stop=" + host_blame_stop +
-                ", host_stop_end_date=" + host_stop_end_date +
-                ", host_status=" + host_status +
-                '}';
-    }
+	public void setHost_photo(MultipartFile host_photo) {
+		this.host_photo = host_photo;
+	}
+
+	@Override
+	public String toString() {
+		return "HostVO [host_id=" + host_id + ", host_name=" + host_name + ", host_password=" + host_password
+				+ ", host_email=" + host_email + ", host_image=" + host_image + ", host_phone=" + host_phone
+				+ ", host_account=" + host_account + ", host_regdate=" + host_regdate + ", host_blame_warn="
+				+ host_blame_warn + ", host_blame_stop=" + host_blame_stop + ", host_stop_end_date="
+				+ host_stop_end_date + ", host_status=" + host_status + ", host_account_name=" + host_account_name
+				+ ", host_photo=" + host_photo + ", getHost_id()=" + getHost_id() + ", getHost_name()=" + getHost_name()
+				+ ", getHost_password()=" + getHost_password() + ", getHost_email()=" + getHost_email()
+				+ ", getHost_image()=" + getHost_image() + ", getHost_phone()=" + getHost_phone()
+				+ ", getHost_account()=" + getHost_account() + ", getHost_regdate()=" + getHost_regdate()
+				+ ", getHost_blame_warn()=" + getHost_blame_warn() + ", getHost_blame_stop()=" + getHost_blame_stop()
+				+ ", getHost_stop_end_date()=" + getHost_stop_end_date() + ", getHost_status()=" + getHost_status()
+				+ ", getHost_account_name()=" + getHost_account_name() + ", getHost_photo()=" + getHost_photo()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
 }

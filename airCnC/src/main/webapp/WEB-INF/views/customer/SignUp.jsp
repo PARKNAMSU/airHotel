@@ -76,7 +76,8 @@
 			$.ajax({
 				type : "post",
 				url : "createEmailCheck.do",
-				data : {"customer_email" : $("#customerEmail").val()},
+				async: false,
+				data : $("#regForm").serialize(),
 				success : function(data) {
 					if (data == "blacklist") {
 						alert("회원가입할 수 없는 이메일 계정입니다.");
@@ -104,6 +105,7 @@
 			$.ajax({
 				type : "post",
 				url : "emailAuth.do",
+				async: false,
 				data : {
 					"customer_key" : $("#customerKey").val()
 				},
@@ -122,30 +124,14 @@
 	// 회원가입 버튼.
 	$(document).on("click","#reg_submit",function() {
 		var getData;
-		// var validate = true;
 		var regExp = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; // email 유효성검사
 		var hanChecked = /^[가-힝a-zA-Z]{2,15}$/; // 한글 유효성검사(2자리 이상 15자리 이하)
 		var idChecked = /^[0-9a-zA-Z]{5,15}$/; // 아이디 유효성검사(5자리 이상 15자리 이하)
 		var phoneChecked = /^\d{3}-\d{3,4}-\d{4}$/; // 전화번호 유효성 검사.
 
-		if ($("#customerEmail").val()) {
-			if (!regExp.test($("#customerEmail").val())) {
-				alert("이메일 주소가 유효하지 않습니다");
-				$("#customerEmail").focus();
-				return false;
-			}
-		}
-		if ($("#customerPhone").val()) {
-			if (!phoneChecked.test($("#customerPhone").val())) {
-				alert("전화번호가 잘못 되었습니다.");
-				$("#customerPhone").focus();
-				return false;
-			}
-		}
 		if (!$("#customerId").val()) {
 			alert("아이디를 입력 하세요.");
 			$("#customerId").focus();
-			//validate = false;
 			return false;
 		} else if (idCheck == false) {
 			alert("아이디 중복체크를 해주세요.");
@@ -153,6 +139,21 @@
 			return false;
 		} else if (!idChecked.test($("#customerId").val())) {
 			alert("아이디는 5자 ~ 15자리 사이로 만들어주세요.");
+			return false;
+		} else if (!$("#customerPassword").val()) {
+			alert("비밀번호를 입력하세요.");
+			$("#customerPassword").focus();
+			return false;
+		} else if ($("#customerPassword").val().length > 16 || $("#customerPassword").val().length < 8) {
+			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
+			return false;
+		} else if (!$("#customerPhone").val()) {
+			alert("전화번호를 입력하세요.");
+			$("#customerPhone").focus();
+			return false;
+		} else if (!phoneChecked.test($("#customerPhone").val())) {
+			alert("전화번호가 잘못 되었습니다.");
+			$("#customerPhone").focus();
 			return false;
 		} else if (!$("#customerName").val()) {
 			alert("이름을 입력 하세요.");
@@ -162,8 +163,19 @@
 			alert("이름이 잘못 되었습니다.");
 			$("#customerName").focus();
 			return false;
+		} else if(!document.regForm.customer_refund_bank.value == "-은행을 선택하세요-" || document.regForm.customer_refund_bank.value == ""){ 
+			alert("은행을 선택하세요.");
+			return false;
+		} else if(!$("#customerRefundAccount").val()){
+			alert("계좌번호를 입력하세요.");
+			$("#customerRefundAccount").focus();
+			return false;
 		} else if (!$("#customerEmail").val()) {
 			alert("이메일을 입력하세요.");
+			$("#customerEmail").focus();
+			return false;
+		} else if (!regExp.test($("#customerEmail").val())) {
+			alert("이메일 주소가 유효하지 않습니다");
 			$("#customerEmail").focus();
 			return false;
 		} else if (emailSendCheck == false) {
@@ -178,14 +190,6 @@
 			alert("회원가입 불가한 이메일 계정입니다.");
 			$("#customerEmail").focus();
 			return false;
-		}  else if (!$("#customerPassword").val()) {
-			alert("비밀번호를 입력하세요.");
-			$("#customerPassword").focus();
-			return false;
-		} else if ($("#customerPassword").val().length > 16
-				|| $("#customerPassword").val().length < 8) {
-			alert("비밀번호는 8 ~ 16 자리로 입력해주세요.");
-			return false;
 		} else {
 			getData = "complate";
 			alert("회원가입이 완료되었습니다.");
@@ -193,24 +197,6 @@
 		if (getData == "complate") {
 			document.getElementById("regForm").submit();
 		}
-		/*
-		$.ajax({
-			type:"post",
-			url:"registerCheck.do",
-			data:$("#regForm").serialize(),
-			success:function(data){
-				
-				if(getData=="complate"){
-					alert("회원가입이 완료되었습니다.");
-				}else if(getData == "false"){
-					alert("회원가입이 실패하였습니다.")
-				}	
-			},
-			error:function(data){
-				alert("에러가 발생했습니다.");
-			}
-		});
-		 */
 	});
 </script>
 </head>
@@ -245,7 +231,7 @@
 		</div>
 	</header>
 	</c:if>
-	<c:if test="${login_session ne null }">
+	<c:if test="${login_session ne null}">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
@@ -268,34 +254,63 @@
 		</div>
 	</header>
 	</c:if>
-	<form action="/cnc/registerCheck.do" method="post" id="regForm">
+	<form action="/cnc/registerCheck.do" method="post" id="regForm" name="regForm" enctype="multipart/form-data">
 		<div class="loginform" style="text-align: center;">
 			<div class="leftform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">회원가입</h3>
 				<br> <br>
 				<div class="input_id">
 					<span> <input class="bb6" type="text" name="customer_id"
-						id="customerId" placeholder="&nbsp;&nbsp;아이디 입력" required>
+						id="customerId" placeholder="&nbsp;&nbsp;아이디 입력">
 					</span>
 					<button type="button" class="idCheckBtn" id="idCheckBtn" value="N">중복확인</button>
 				</div>
 				<div class="input_password">
 					<span> <input class="ipassword" type="password"
 						id="customerPassword" name="customer_password"
-						placeholder="&nbsp;&nbsp;비밀번호 설정" required>
+						placeholder="&nbsp;&nbsp;비밀번호 설정">
 					</span>
 				</div>
 				<div class="input_phone">
 					<span><input class="itel" type="tel" id="customerPhone"
 						placeholder="&nbsp;&nbsp;전화번호(예:010-0000-0000)"
-						name="customer_phone" maxlength="13" required> </span>
+						name="customer_phone" maxlength="13"></span>
 				</div>
 				<div class="input_name">
 					<span> <input class="iname" type="text" name="customer_name"
-						id="customerName" placeholder="&nbsp;&nbsp;이름(예:홍길동)" required>
+						id="customerName" placeholder="&nbsp;&nbsp;이름(예:홍길동)">
 					</span>
 				</div>
-
+				<div class="input_account">
+					<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">환불 계좌번호 등록</h3>
+					<div style="padding-top: 5%;"></div>
+					<span>
+						<select name="customer_refund_bank" class="customerRefundBank" style="width:89%; height:45px;">
+					       <option value=''>-은행을 선택하세요-</option>
+					       <option value="카카오뱅크">카카오뱅크</option>
+					       <option value="케이뱅크">케이뱅크</option>
+					       <option value='기업은행'>기업은행</option>
+					       <option value="KDB산업은행">KDB산업은행</option>
+					       <option value='국민은행'>국민은행</option>
+					       <option value='우리은행'>우리은행</option>
+					       <option value='SC제일은행'>SC제일은행</option>
+					       <option value='한국시티은행'>한국시티은행</option>
+					       <option value='하나은행'>하나은행</option>
+					       <option value='신한은행'>신한은행</option>
+					       <option value='NH농협은행'>NH농협은행</option>
+					       <option value='SH수협은행'>SH수협은행</option>					       
+					       <option value='대구은행'>대구은행</option>
+					       <option value='부산은행'>부산은행</option>
+					       <option value='광주은행'>광주은행</option>
+					       <option value='제주은행'>제주은행</option>
+					       <option value='전북은행'>전북은행</option>
+					       <option value='경남은행'>경남은행</option>			       
+					       <option value='새마을금고'>새마을금고</option>
+					    </select>
+					</span>
+					<br>
+					<span><input class="iauth" type="text" id="customerRefundAccount" name="customer_refund_account" placeholder="&nbsp;&nbsp;계좌번호 입력 ('-'제외)" maxlength="14"></span> 
+				</div>
 				<div style="padding-top: 30px;">
 					<div class="loginMove" style="text-align: center; color: black;">
 						이미 에어비앤비 계정이 있나요? <a class="my__login__link"
@@ -308,25 +323,25 @@
 					사진 추가</h3>
 				<br> <br>
 				<h4>프로필 사진을 요청하는 호스트도 있지만, 이 경우에도 예약이 확정된 후에만 게스트의 사진을 볼수 있습니다.</h4>
-				<div id="image_container" style="text-align: center;"></div>
+				<div style="padding-top: 5%;"></div>
+				<div id="image_container" style="text-align: center;">
+					<img width="200" height="250" id="img" name="customer_image" src="${pageContext.request.contextPath}/resources/images/profile.png">
+				</div>
 				<br>
 				<div class="filebox">
-					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label><input
-						type="file" class="multi" id="image" accept="image/*"
-						maxlength="2" onchange="setThumbnail(event);" name="customer_image" />
+					<label for="image" style="font-size: 25px;">첨부할 사진을 선택하세요</label>
+					<input type="file" class="multi" id="image" name="customer_photo" accept="image/*" max="1" onchange="readURL(this);"/>
 				</div>
+				
 				<div class="input_email">
 					<span> <input class="iemail" type="email" id="customerEmail"
-						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소" required>
+						name="customer_email" placeholder="&nbsp;&nbsp;이메일 주소">
 					</span> <br>
-					<button id="emailBtn"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%;">인증번호
-						발송</button>
+					<input type="button" id="emailBtn" value="인증번호 발송" style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"/>
 					<br> <span> <input class="iauth" type="text"
-						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호" required>
-					</span> <br> <input id="emailAuthBtn" type="button"
-						style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;"
-						value="이메일 인증">
+						id="customerKey" name="customer_key" placeholder="&nbsp;&nbsp;인증번호">
+					</span> <br> 
+					<input id="emailAuthBtn" type="button" style="padding-top: 10px; font-size: 25px; font-weight: bold; width: 89%; color: white; display: inline-block; width: 89%; height: auto; background-color: #ff5a5f; border-radius: 5px; font-weight: 300; font-size: 30px; text-decoration: none; padding: 8px; border: none; margin-top: 18px; margin-bottom: 25px; text-align: center;" value="이메일 인증">
 				</div>
 				<br>
 			</div>
@@ -337,4 +352,15 @@
 	</form>
 	<div style="margin-bottom: 5%"></div>
 </body>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 </html>

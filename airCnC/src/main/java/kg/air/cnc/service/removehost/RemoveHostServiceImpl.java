@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kg.air.cnc.dao.removehost.RemoveHostDAOImpl;
 import kg.air.cnc.vo.HostVO;
+import kg.air.cnc.vo.PagingVO;
 import kg.air.cnc.vo.ReservationVO;
 
 @Service
@@ -16,10 +17,14 @@ public class RemoveHostServiceImpl implements RemoveHostService {
 	private RemoveHostDAOImpl removeHostDAO;
 
 	@Override
-	public List<HostVO> getRemoveHostList() {
-		return removeHostDAO.getRemoveHostList();
+	public List<HostVO> getRemoveHostList(PagingVO page) {
+		return removeHostDAO.getRemoveHostList(page);
 	}
 
+	public int hostCnt() {
+		return removeHostDAO.hostCnt();
+	}
+	
 	@Override
 	public List<ReservationVO> checkReservation(HostVO vo) {
 		//System.out.println("RemoveHostServiceImpl(vo.host_id) = "+vo.getHost_id());

@@ -48,11 +48,14 @@ public class PaymentServiceImpl implements PaymentService {
         String host_id = (String)request.get("host_id");
         int house_seq = Integer.parseInt((String)request.get("house_seq"));
         int paid_amount = (int)request.get("paid_amount");
+        String customer_refund_account = (String)request.get("customer_refund_account");
+        String cusomter_refund_bank = (String)request.get("customer_refund_bank");
         ReservationVO reservationVO = new ReservationVO();
         reservationVO.setReservation_customer_id(customer_id);
         reservationVO.setReservation_host_id(host_id);
         reservationVO.setReservation_house_seq(house_seq);
         reservationVO.setReservation_price(paid_amount);
+
         String form = (String)request.get("check_in");
         String form2 = (String)request.get("check_out");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -76,6 +79,8 @@ public class PaymentServiceImpl implements PaymentService {
         }
         reservationVO.setReservation_check_in(check_in);
         reservationVO.setReservation_check_out(check_out);
+        reservationVO.setReservation_bank(cusomter_refund_bank);
+        reservationVO.setReservation_account(customer_refund_account);
         reservationVO.setReservation_period(period);
         reservationVO.setReservation_regdate(regDate);
         reservationVO.setCard_apply_num((String)request.get("apply_num"));

@@ -22,7 +22,10 @@
 			DEFAULT,
 			DEFAULT, 
 			DEFAULT,
-			DEFAULT)
+			DEFAULT,
+			#{customer_refund_account},
+			#{customer_refund_bank}
+			)
 	</insert>
 	
 	<select id="idCheck" resultType="int">
@@ -64,6 +67,41 @@
 	</select>
 	
 	<update id="customerInfoUpdate">
-		UPDATE customer SET customer_password = #{customer_password}, customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
+		UPDATE customer SET customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
+	</update>
+	
+	<update id="modifyPassword">
+		UPDATE customer SET customer_password = #{customer_password} WHERE customer_id = #{customer_id}
+	</update>
+	
+	<select id="passwordCheck" resultType="String" parameterType="String">
+		SELECT customer_password FROM customer WHERE customer_id = #{customer_id}
+	</select>
+	
+	<delete id="customerWithdrawal">
+		DELETE FROM customer WHERE customer_id = #{customer_id}
+	</delete>
+
+	<insert id="hostRegister" parameterType="kg.air.cnc.vo.HostVO">
+		INSERT INTO host
+		VALUES(
+			#{host_id}, 
+			#{host_name}, 
+			#{host_password}, 
+			#{host_email}, 
+			#{host_image}, 
+			#{host_phone},
+			#{host_account},
+			SYSDATE, 
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			#{host_account_name}
+			)
+	</insert>
+	
+	<update id="changeCustomerType">
+		UPDATE customer SET customer_type = #{customer_type} WHERE customer_id = #{customer_id}
 	</update>
 </mapper>

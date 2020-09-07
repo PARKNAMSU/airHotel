@@ -65,7 +65,7 @@ body {
 						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
-						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
 						<li style="margin-bottom:20px;"><a href="">회원탈퇴</a></li>
 						<li ><br></li>
@@ -113,6 +113,7 @@ body {
 	
 	<div class="headdiv">
 		<h1 style="font-size:40px;margin-left:3%;font-family: 'Jua', sans-serif;">나의 채팅</h1>
+		<div style="margin-left:50%;"><button class="btn btn-danger" style="font-size:20px;" onclick="location.href='goToCommentsList.do'">후기 / 추천 보기</button></div>
 	</div>
 	<div class="chatdiv">
 		<div id="chatbox">

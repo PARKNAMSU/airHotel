@@ -267,7 +267,10 @@
 			let minLim = new Date().toISOString().substring(0, 10);
 			<!--document.getElementById('checkIn').value = minLim;-->
 			document.getElementById('checkIn').min = minLim;
-			if('${checkIn}'==="") document.getElementById('checkIn').value = minLim;
+			if('${checkInDate}'==="") {
+				console.log("체크인 날짜를 설정하지 않았다.");
+				document.getElementById('checkIn').value = minLim;
+			}
 			if('${person}'==="") document.getElementById('people').value = 1;
 		};
 	</script>

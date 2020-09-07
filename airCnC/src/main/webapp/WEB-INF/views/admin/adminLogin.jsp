@@ -15,6 +15,7 @@
 <title>관리자 로그인</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/adminLogin.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#btnLogin").click(function(){

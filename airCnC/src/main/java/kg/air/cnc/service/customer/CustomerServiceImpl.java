@@ -3,9 +3,9 @@ package kg.air.cnc.service.customer;
 import java.util.Date;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-
 import kg.air.cnc.dao.customer.CustomerDAO;
 import kg.air.cnc.vo.CustomerVO;
+import kg.air.cnc.vo.HostVO;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -72,5 +72,30 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public int customerInfoUpdate(CustomerVO vo) throws Exception {
 		return dao.customerInfoUpdate(vo);
+	}
+
+	@Override
+	public int modifyPassword(CustomerVO customerVO) throws Exception {
+		return dao.modifyPassword(customerVO);
+	}
+
+	@Override
+	public String passwordCheck(String customer_id) throws Exception {
+		return dao.passwordCheck(customer_id);
+	}
+
+	@Override
+	public void customerWithdrawal(String customer_id) throws Exception {
+		dao.customerWithdrawal(customer_id);
+	}
+
+	@Override
+	public int hostRegister(HostVO vo) throws Exception {
+		return dao.hostRegister(vo);
+	}
+
+	@Override
+	public void changeCustomerType(CustomerVO customerVO) throws Exception {
+		dao.changeCustomerType(customerVO);
 	}
 }

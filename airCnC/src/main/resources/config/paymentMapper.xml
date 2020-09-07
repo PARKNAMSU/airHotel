@@ -11,7 +11,7 @@
     <insert id="insertReservation" parameterType="kg.air.cnc.vo.ReservationVO">
         INSERT INTO reservation VALUES(reservation_seq.nextval, #{reservation_host_id},
         #{reservation_customer_id}, 0, #{reservation_house_seq}, 0, #{reservation_price}, #{reservation_check_in},
-         #{reservation_check_out}, #{reservation_period}, '1234', '종하은행', #{reservation_regdate}, #{card_apply_num}, #{imp_uid})
+         #{reservation_check_out}, #{reservation_period}, #{reservation_bank}, #{reservation_account}, #{reservation_regdate}, #{card_apply_num}, #{imp_uid})
     </insert>
 
 </mapper>

@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	
+	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	<style>
 	
 		
