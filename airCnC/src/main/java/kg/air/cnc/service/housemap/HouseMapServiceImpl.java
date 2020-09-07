@@ -136,8 +136,7 @@ public class HouseMapServiceImpl implements HouseMapService{
 	public void updateBack(String seq) {
 		System.out.println("도착");
 		PopularVO vo = houseMapDAO.getDefaultPrices(seq); //popular TB에서 저장된 가격 가져오기
-		System.out.println("해당 숙소의 vo: " +vo.toString());
-		if(vo.getPopular_house_seq()!=0) {
+		if(vo!=null) {
 			System.out.println("인기 없는 숙소였다.");
 			houseMapDAO.updateBack(vo); //해당 house가격 원래대로 돌려놓기
 			houseMapDAO.deletePopular(seq); //popular TB에서 삭제
