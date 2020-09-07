@@ -103,6 +103,8 @@ public class CustomerController {
 		mav.addObject("customerName", customerVO.getCustomer_name());
 		mav.addObject("customerPhone", customerVO.getCustomer_phone());
 		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 		mav.addObject("customerImage", filePath);
 		mav.setViewName("hostRegister");
 		return mav;
@@ -131,6 +133,8 @@ public class CustomerController {
 		mav.addObject("customerName", customerVO.getCustomer_name());
 		mav.addObject("customerPhone", customerVO.getCustomer_phone());
 		mav.addObject("customerEmail", customerVO.getCustomer_email());
+		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 		mav.addObject("customerImage", filePath);
 		mav.setViewName("mypage");
 		mav.addObject("fdata", fdata);
@@ -468,21 +472,34 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
-	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session,  MultipartFile multipartFile)throws Exception{
-		String customer_email = vo.getCustomer_email();
+	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session, MultipartFile multipartFile)throws Exception{
+		String customer_email = vo.getCustomer_email(); // 사용자가 입력한 이메일을 가져온다.
 		// 블랙리스트에 존재하는 이메일인지 확인.
 		if (service.createEmailCheck(customer_email) == 1 && service.blacklistEmailCheck(vo) == 0) {
+			String sessionId = (String)session.getAttribute("login_session");
+			CustomerVO cvo = service.getCustomerInfo(sessionId); // 먼저 세션아이디를 이용해 디비에서 사용자 정보를 가져온다.
+			String dbImage = cvo.getCustomer_image(); // 디비에 있는 사용자 프로필 이미지 주소를 가져온다.
 			multipartFile = vo.getCustomer_photo();
-			if (multipartFile != null && multipartFile.isEmpty() == false) {
+			if (multipartFile != null && multipartFile.isEmpty() == false) { // 새로 첨부한 사진 파일이 있다면,
 				String originalName = multipartFile.getOriginalFilename();
 				String path = uploadFileUtils.uploadFile(uploadPath, originalName, multipartFile.getBytes());
 				vo.setCustomer_image(path);
-			}else {
-				vo.setCustomer_image("profile.png");
+			}else { // 기존의 사진 파일을 그대로 저장하는 거면,
+				vo.setCustomer_image(dbImage);
 			}
 			int result = service.customerInfoUpdate(vo);
 			if (result == 1) {
-				String sessionId = (String)session.getAttribute("login_session");
+				if (cvo.getCustomer_type().equals("host")) {
+					HostVO hostVO = new HostVO();
+					hostVO.setHost_id(sessionId);
+					hostVO.setHost_name(vo.getCustomer_name());
+					hostVO.setHost_phone(vo.getCustomer_phone());
+					hostVO.setHost_email(vo.getCustomer_email());
+					hostVO.setHost_account_name(vo.getCustomer_refund_bank());
+					hostVO.setHost_account(vo.getCustomer_refund_account());
+					hostVO.setHost_image(vo.getCustomer_image());
+					service.hostInfoUpdate(hostVO);
+				}
 				CustomerVO customerVO = new CustomerVO();
 				customerVO = service.getCustomerInfo(sessionId);	
 				String filePath = customerVO.getCustomer_image();
@@ -492,12 +509,13 @@ public class CustomerController {
 				mav.addObject("customerName", customerVO.getCustomer_name());
 				mav.addObject("customerPhone", customerVO.getCustomer_phone());
 				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+				mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 				mav.addObject("customerImage", filePath);
 				mav.setViewName("mypage");
 				mav.addObject("fdata", fdata);
 				mav.addObject("resultMessage", "회원 정보가 수정되었습니다.");
 			}else {
-				String sessionId = (String)session.getAttribute("login_session");
 				CustomerVO customerVO = new CustomerVO();
 				customerVO = service.getCustomerInfo(sessionId);	
 				String filePath = customerVO.getCustomer_image();
@@ -507,6 +525,8 @@ public class CustomerController {
 				mav.addObject("customerName", customerVO.getCustomer_name());
 				mav.addObject("customerPhone", customerVO.getCustomer_phone());
 				mav.addObject("customerEmail", customerVO.getCustomer_email());
+				mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+				mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 				mav.addObject("customerImage", filePath);
 				mav.setViewName("mypage");
 				mav.addObject("fdata", fdata);
@@ -523,6 +543,8 @@ public class CustomerController {
 			mav.addObject("customerName", customerVO.getCustomer_name());
 			mav.addObject("customerPhone", customerVO.getCustomer_phone());
 			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 			mav.addObject("customerImage", filePath);
 			mav.setViewName("mypage");
 			mav.addObject("fdata", fdata);
@@ -575,6 +597,14 @@ public class CustomerController {
 		customerVO.setCustomer_password(newPwd);
 		customerVO.setCustomer_id((String)session.getAttribute("login_session"));
 		service.modifyPassword(customerVO);
+		String sessionId = (String)session.getAttribute("login_session");
+		CustomerVO vo = service.getCustomerInfo(sessionId);
+		if(vo.getCustomer_type().equals("host")) {
+			HostVO hostVO = new HostVO();
+			hostVO.setHost_id(sessionId);
+			hostVO.setHost_password(newPwd);
+			service.hostModifyPassword(hostVO);
+		}
 		return "passwordChange";
 	}
 	
@@ -594,6 +624,11 @@ public class CustomerController {
 	@RequestMapping(value = "/customerWithdrawal.do", method = RequestMethod.POST)
 	public String customerWithdrawal(CustomerVO vo, HttpSession session)throws Exception{
 		String customerId = (String)session.getAttribute("login_session");
+		String hostId = (String)session.getAttribute("login_session");
+		CustomerVO customerVO = service.getCustomerInfo(customerId);
+		if (customerVO.getCustomer_type().equals("host")) {
+			service.hostWithdrawal(hostId);
+		}
 		service.customerWithdrawal(customerId);
 		session.invalidate();
 		return "index";

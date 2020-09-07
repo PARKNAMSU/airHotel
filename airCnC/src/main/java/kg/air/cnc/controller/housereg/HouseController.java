@@ -88,14 +88,14 @@ public class HouseController {
 	}
 	
 	@RequestMapping(value = "/house_revise.do")
-	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
-			, Model model) {
-		String host_house_seq = (String) session.getAttribute("house_seq");
-		int house_seq = Integer.parseInt(host_house_seq);
-		house.setHouse_seq(house_seq);
-		model.addAttribute("detail", houseService.detailHouse(house_seq));
-		return "hostHouse_ReviseList";
-	}
+//	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
+//			, Model model) {
+//		String host_house_seq = (String) session.getAttribute("house_seq");
+//		int house_seq = Integer.parseInt(host_house_seq);
+//		house.setHouse_seq(house_seq);
+//		model.addAttribute("detail", houseService.detailHouse(house_seq));
+//		return "hostHouse_ReviseList";
+//	}
 	
 //	@RequestMapping(value = "/listhouse.do", method = RequestMethod.GET)
 //	public String listHouse(Model model, SessionStatus sessionStatus) throws Exception {
@@ -104,6 +104,13 @@ public class HouseController {
 //		sessionStatus.setComplete();
 //		return "totalhouseList";
 //	}
+	public String revisePage(House_InfoVO house, HttpSession session
+			, Model model) {
+		int house_seq = house.getHouse_seq();
+		house.setHouse_seq(house_seq);
+		model.addAttribute("detail", houseService.detailHouse(house_seq));
+		return "hostHouse_ReviseList";
+	}
 	
 	@RequestMapping(value = "/1newhouse.do")
 	public String newhouse(@ModelAttribute("house") House_InfoVO house, Model model) {

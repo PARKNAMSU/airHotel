@@ -59,7 +59,14 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 		alert("전화번호가 잘못 되었습니다.");
 		$("#customerPhone").focus();
 		return false;
-	}
+	} else if(!document.regForm.customer_refund_bank.value == "-은행을 선택하세요-" || document.regForm.customer_refund_bank.value == ""){ 
+		alert("은행을 선택하세요.");
+		return false;
+	} else if(!$("#customerRefundAccount").val()){
+		alert("계좌번호를 입력하세요.");
+		$("#customerRefundAccount").focus();
+		return false;
+	} 
 });
 </script>
 <script>
@@ -197,6 +204,39 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 					</span>
 				</div>
 				<br>
+				<div class="input_account">
+					<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">환불 계좌번호 등록</h3>
+					<h3 style="font-size: 15px; font-weight: bold;">호스트일 경우 본인의 계좌번호입니다</h3>
+					<div style="padding-top: 5%;"></div>
+					<span>
+						<select name="customer_refund_bank" class="customerRefundBank" style="width:113%; height:50px;">
+					       <option value="${customerBank}" selected="selected">${customerBank}</option>
+					       <option value=''>-은행을 선택하세요-</option>
+					       <option value="카카오뱅크">카카오뱅크</option>
+					       <option value="케이뱅크">케이뱅크</option>
+					       <option value='기업은행'>기업은행</option>
+					       <option value="KDB산업은행">KDB산업은행</option>
+					       <option value='국민은행'>국민은행</option>
+					       <option value='우리은행'>우리은행</option>
+					       <option value='SC제일은행'>SC제일은행</option>
+					       <option value='한국시티은행'>한국시티은행</option>
+					       <option value='하나은행'>하나은행</option>
+					       <option value='신한은행'>신한은행</option>
+					       <option value='NH농협은행'>NH농협은행</option>
+					       <option value='SH수협은행'>SH수협은행</option>					       
+					       <option value='대구은행'>대구은행</option>
+					       <option value='부산은행'>부산은행</option>
+					       <option value='광주은행'>광주은행</option>
+					       <option value='제주은행'>제주은행</option>
+					       <option value='전북은행'>전북은행</option>
+					       <option value='경남은행'>경남은행</option>			       
+					       <option value='새마을금고'>새마을금고</option>
+					    </select>
+					</span>
+					<br>
+					<div style="padding-top: 5%;"></div>
+					<span><input class="iid" type="text" id="customerRefundAccount" name="customer_refund_account" value="${customerAccount}" maxlength="14"></span> 
+				</div>
 			</div>
 			<div class="rightform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">프로필 사진 확인 및 수정</h3>
@@ -204,10 +244,10 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 				<br>
 				<h4>등록했던 프로필 사진을 확인 또는 수정할수 있습니다.</h4>
 				<div id="image_container" style="text-align: center;">
-					<c:if test="${fdata.value.customer_image eq 'profile.png'}">
+					<c:if test="${customerImage eq 'profile.png'}">
 						<img width="200" height="250" id="img" name="customer_image" src="${pageContext.request.contextPath}/resources/images/profile.png"/>
 					</c:if>
-					<c:if test="${fdata.value.customer_image ne 'profile.png'}">
+					<c:if test="${customerImage ne 'profile.png'}">
 						<img width="200" height="250" id="img" name="customer_image" src="/cnc/display.do?name=${customerImage}"/>
 					</c:if>
 				</div>

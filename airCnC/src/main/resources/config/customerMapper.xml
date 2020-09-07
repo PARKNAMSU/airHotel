@@ -67,7 +67,7 @@
 	</select>
 	
 	<update id="customerInfoUpdate">
-		UPDATE customer SET customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image} WHERE customer_id = #{customer_id}
+		UPDATE customer SET customer_name = #{customer_name}, customer_phone = #{customer_phone}, customer_email = #{customer_email}, customer_image = #{customer_image}, customer_refund_account = #{customer_refund_account}, customer_refund_bank = #{customer_refund_bank} WHERE customer_id = #{customer_id}
 	</update>
 	
 	<update id="modifyPassword">
@@ -104,4 +104,16 @@
 	<update id="changeCustomerType">
 		UPDATE customer SET customer_type = #{customer_type} WHERE customer_id = #{customer_id}
 	</update>
+	
+	<update id="hostInfoUpdate">
+		UPDATE host SET host_name = #{host_name}, host_email = #{host_email}, host_image = #{host_image}, host_phone = #{host_phone}, host_account = #{host_account}, host_account_name = #{host_account_name} WHERE host_id = #{host_id}
+	</update>
+	
+	<update id="hostModifyPassword">
+		UPDATE host SET host_password = #{host_password} WHERE host_id = #{host_id}
+	</update>
+	
+	<delete id="hostWithdrawal">
+		DELETE FROM host WHERE host_id = #{host_id}
+	</delete>
 </mapper>
