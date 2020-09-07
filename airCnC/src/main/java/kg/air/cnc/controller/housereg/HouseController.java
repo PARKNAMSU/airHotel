@@ -86,15 +86,14 @@ public class HouseController {
 		return "1newhouse";
 	}
 	
-//	@RequestMapping(value = "/house_revise.do")
-//	public String revisePage(@ModelAttribute("house") House_InfoVO house, HttpSession session
-//			, Model model) {
-//		String host_house_seq = (String) session.getAttribute("house_seq");
-//		int house_seq = Integer.parseInt(host_house_seq);
-//		house.setHouse_seq(house_seq);
-//		model.addAttribute("detail", houseService.detailHouse(house_seq));
-//		return "hostHouse_ReviseList";
-//	}
+	@RequestMapping(value = "/house_revise.do")
+	public String revisePage(House_InfoVO house, HttpSession session
+			, Model model) {
+		int house_seq = house.getHouse_seq();
+		house.setHouse_seq(house_seq);
+		model.addAttribute("detail", houseService.detailHouse(house_seq));
+		return "hostHouse_ReviseList";
+	}
 	
 	@RequestMapping(value = "/1newhouse.do")//여기는 등록만 하도록 됨
 	public String newhouse(@ModelAttribute("house") House_InfoVO house, Model model) {
