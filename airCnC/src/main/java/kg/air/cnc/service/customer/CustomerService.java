@@ -56,6 +56,12 @@ public interface CustomerService {
 	
 	// 호스트 정보 수정.
 	public void hostInfoUpdate(HostVO hostVO)throws Exception;
+	
+	// 호스트 비밀번호 변경.
+	public void hostModifyPassword(HostVO hostVO)throws Exception;
+	
+	// 호스트 탈퇴.
+	public void hostWithdrawal(String host_id)throws Exception;
 }
 
 

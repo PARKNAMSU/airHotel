@@ -111,4 +111,14 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public void hostInfoUpdate(HostVO hostVO) throws Exception {
 		session.update("customer.hostInfoUpdate", hostVO);
 	}
+
+	@Override
+	public void hostModifyPassword(HostVO hostVO) throws Exception {
+		session.update("customer.hostModifyPassword", hostVO);
+	}
+
+	@Override
+	public void hostWithdrawal(String host_id) throws Exception {
+		session.delete("customer.hostWithdrawal", host_id);
+	}
 }

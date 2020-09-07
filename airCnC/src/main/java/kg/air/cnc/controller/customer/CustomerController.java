@@ -489,15 +489,17 @@ public class CustomerController {
 			}
 			int result = service.customerInfoUpdate(vo);
 			if (result == 1) {
-				HostVO hostVO = new HostVO();
-				hostVO.setHost_id(sessionId);
-				hostVO.setHost_name(vo.getCustomer_name());
-				hostVO.setHost_phone(vo.getCustomer_phone());
-				hostVO.setHost_email(vo.getCustomer_email());
-				hostVO.setHost_account_name(vo.getCustomer_refund_bank());
-				hostVO.setHost_account(vo.getCustomer_refund_account());
-				hostVO.setHost_image(vo.getCustomer_image());
-				service.hostInfoUpdate(hostVO);
+				if (cvo.getCustomer_type().equals("host")) {
+					HostVO hostVO = new HostVO();
+					hostVO.setHost_id(sessionId);
+					hostVO.setHost_name(vo.getCustomer_name());
+					hostVO.setHost_phone(vo.getCustomer_phone());
+					hostVO.setHost_email(vo.getCustomer_email());
+					hostVO.setHost_account_name(vo.getCustomer_refund_bank());
+					hostVO.setHost_account(vo.getCustomer_refund_account());
+					hostVO.setHost_image(vo.getCustomer_image());
+					service.hostInfoUpdate(hostVO);
+				}
 				CustomerVO customerVO = new CustomerVO();
 				customerVO = service.getCustomerInfo(sessionId);	
 				String filePath = customerVO.getCustomer_image();
@@ -595,6 +597,14 @@ public class CustomerController {
 		customerVO.setCustomer_password(newPwd);
 		customerVO.setCustomer_id((String)session.getAttribute("login_session"));
 		service.modifyPassword(customerVO);
+		String sessionId = (String)session.getAttribute("login_session");
+		CustomerVO vo = service.getCustomerInfo(sessionId);
+		if(vo.getCustomer_type().equals("host")) {
+			HostVO hostVO = new HostVO();
+			hostVO.setHost_id(sessionId);
+			hostVO.setHost_password(newPwd);
+			service.hostModifyPassword(hostVO);
+		}
 		return "passwordChange";
 	}
 	
@@ -614,6 +624,11 @@ public class CustomerController {
 	@RequestMapping(value = "/customerWithdrawal.do", method = RequestMethod.POST)
 	public String customerWithdrawal(CustomerVO vo, HttpSession session)throws Exception{
 		String customerId = (String)session.getAttribute("login_session");
+		String hostId = (String)session.getAttribute("login_session");
+		CustomerVO customerVO = service.getCustomerInfo(customerId);
+		if (customerVO.getCustomer_type().equals("host")) {
+			service.hostWithdrawal(hostId);
+		}
 		service.customerWithdrawal(customerId);
 		session.invalidate();
 		return "index";

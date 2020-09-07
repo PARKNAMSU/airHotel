@@ -103,4 +103,14 @@ public class CustomerServiceImpl implements CustomerService{
 	public void hostInfoUpdate(HostVO hostVO) throws Exception {
 		dao.hostInfoUpdate(hostVO);
 	}
+
+	@Override
+	public void hostModifyPassword(HostVO hostVO) throws Exception {
+		dao.hostModifyPassword(hostVO);
+	}
+
+	@Override
+	public void hostWithdrawal(String host_id) throws Exception {
+		dao.hostWithdrawal(host_id);
+	}
 }
