@@ -53,7 +53,7 @@
 				success: function(data){
 					if(data == 0){
 						alert("패스워드가 틀렸습니다.");
-						return;
+						return false;
 					}else if(data == 1){
 						// 탈퇴.
 						var result = confirm('정말 탈퇴 하시겠습니까?');

@@ -4,6 +4,7 @@ public class AdminVO {
 	private String admin_id;
 	private String admin_password;
 	private int admin_login_status;
+	
 	public int getAdmin_login_status() {
 		return admin_login_status;
 	}

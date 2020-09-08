@@ -68,15 +68,6 @@
 	</bean>
 	<bean id="mailService" class="kg.air.cnc.service.mail.MailServiceImpl"/>
 	
-	<!-- 사용자 입터셉터 -->
-	<bean id="authenticationInterceptor" class="kg.air.cnc.common.interceptor.AuthenticationInterceptor"></bean>
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path=""/>
-			<ref bean="authenticationInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
-	
 	<!-- 관리자 인터셉터 -->
 	<bean id="adminInterceptor" class="kg.air.cnc.common.interceptor.AdminInterceptor"></bean>
 	<mvc:interceptors>
