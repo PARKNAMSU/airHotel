@@ -72,8 +72,13 @@
 						<c:otherwise>
 						<div class="chatline" id="firstChat">
 							<div  id="imgdiv" onclick="">
-								<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
-								</div>
+								<c:if test="${messageList.get(i).message_from_img ne null }">
+									<img alt="" src="/cnc/display.do?name=${messageList.get(i).message_from_img}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
+								</c:if>
+								<c:if test="${messageList.get(i).message_from_img eq null }">
+									<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
+								</c:if>
+							</div>
 							<div id="namediv">
 							
 								<c:if test="${toId eq 'admin'}"><p>admin</p></c:if>
@@ -102,7 +107,12 @@
 					<c:otherwise>
 					<div class="chatline">
 						<div  id="imgdiv" onclick="">
-							<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
+								<c:if test="${messageList.get(i).message_from_img ne null }">
+									<img alt="" src="/cnc/display.do?name=${messageList.get(i).message_from_img}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
+								</c:if>
+								<c:if test="${messageList.get(i).message_from_img eq null }">
+									<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
+								</c:if>
 							</div>
 						<div id="namediv">
 							<p>${messageList.get(i).message_from_name}</p><!-- db에서 받아온 이름 -->
