@@ -248,41 +248,38 @@ public class CustomerController {
 		String kemail = kakaoAccount.path("email").asText();
 		String kname = properties.path("nickname").asText();
 		String kimage = properties.path("profile_image").asText();
-		
-		// DB에 사용자 정보를 넣기 전 VO 세팅.
+	
+		// 일단 이메일을 아이디로 저장하고, DB에 존재하는지부터 확인한다.
 		vo.setCustomer_id(kemail);
-		vo.setCustomer_password("none");
-		vo.setCustomer_name(kname);
-		if (kemail.substring(0, 3).trim().equals("010")) {
-			vo.setCustomer_phone(kemail);
-		}else {
-			vo.setCustomer_phone("none");
-		}
-		vo.setCustomer_email(kid);
-		vo.setCustomer_image(kimage);
-		if (vo.getCustomer_image().equals("")) {
-			vo.setCustomer_image("none");
-		}
-		vo.setCustomer_key("kakao");
 		
 		// 로그인 하기 전 id와 email이 DB에 있는지 확인. 있으면 1, 없으면 0이 리턴.
 		int idCheckResult = service.idCheck(vo);
 		int emailCheckResult = service.createEmailCheck(kid);
 		
-		if (idCheckResult == 1 && emailCheckResult == 1) {
-			session.setAttribute("login_session", kemail);
-			session.setAttribute("social_type", "kakao");
-			mav.setViewName("index");
-			return mav;
-		}else {
-			service.register(vo);
-			session.setAttribute("login_session", kemail);
-			session.setAttribute("social_type", "kakao");
-			mav.setViewName("index");
-			return mav;
+		if (idCheckResult == 0 || emailCheckResult == 0) {
+			vo.setCustomer_password("none");
+			String inputPass = vo.getCustomer_password();
+			String pwd = passwordEncoder.encode(inputPass);
+			vo.setCustomer_password(pwd);
+			vo.setCustomer_name(kname);
+			if (kemail.substring(0, 3).trim().equals("010")) {
+				vo.setCustomer_phone(kemail);
+			}else {
+				vo.setCustomer_phone("none");
+			}
+			vo.setCustomer_email(kid);
+			vo.setCustomer_image(kimage);
+			vo.setCustomer_image("profile.png");
+			vo.setCustomer_key("kakao");
+			vo.setCustomer_refund_bank("none");
+			vo.setCustomer_refund_account("none");
 		}
+		session.setAttribute("login_session", vo.getCustomer_id());
+		session.setAttribute("kakao_login_session", vo.getCustomer_id());
+		mav.setViewName("index");
+		return mav;
 	}
-
+	
 	// 네이버 로그인 성공시 callback메서드 호출.
 	@RequestMapping(value = "/naverlogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception, IOException, ParseException{
@@ -306,31 +303,28 @@ public class CustomerController {
 		String naverName = (String) response.get("name"); 
 		String naverEmail = (String) response.get("email");
 		String naverProfileImage = (String) response.get("profile_image");
-		
 		// DB에 네이버 사용자 정보를 저장하기 위한 VO 세팅.
 		vo.setCustomer_id(naverEmail);
-		vo.setCustomer_password("none");
-		vo.setCustomer_name(naverName);
-		vo.setCustomer_email(naverId);
-		vo.setCustomer_image(naverProfileImage);
-		vo.setCustomer_phone("none");
-		vo.setCustomer_key("naver");
-		
 		int idCheckResult = service.idCheck(vo);
 		int emailCheckResult = service.createEmailCheck(naverId);
-		
-		if (idCheckResult == 1 && emailCheckResult == 1) {
-			session.setAttribute("login_session", naverEmail);
-			session.setAttribute("social_type", "naver");
-			mav.setViewName("index"); 
-			return mav;
-		}else {
-			service.register(vo);
-			session.setAttribute("login_session", naverEmail);
-			session.setAttribute("social_type", "naver");
-			mav.setViewName("index"); 
-			return mav;
+		if (idCheckResult == 0 || emailCheckResult == 0) {
+			vo.setCustomer_password("none");
+			String inputPass = vo.getCustomer_password();
+			String pwd = passwordEncoder.encode(inputPass);
+			vo.setCustomer_password(pwd);
+			vo.setCustomer_name(naverName);
+			vo.setCustomer_email(naverId);
+			vo.setCustomer_image("profile.png");
+			vo.setCustomer_phone("none");
+			vo.setCustomer_key("naver");
+			vo.setCustomer_refund_bank("none");
+			vo.setCustomer_refund_account("none");
+			service.register(vo);			
 		}
+		session.setAttribute("login_session", vo.getCustomer_id());
+		session.setAttribute("naver_login_session", vo.getCustomer_id());
+		mav.setViewName("index"); 
+		return mav;
 	}
 
 	@RequestMapping(value = "/createEmailCheck.do", method = RequestMethod.POST)
@@ -454,15 +448,6 @@ public class CustomerController {
 				if (vo != null) { // 로그인 성공.
 					session.setAttribute("login_session", vo.getCustomer_id());
 					mav.setViewName("index");
-					if (customerVO.isUseCookie()) {
-						Cookie cookie = new Cookie("loginCookie", session.getId());
-						cookie.setPath("/");
-						int amount = 60 * 60 * 24 * 7;
-						cookie.setMaxAge(amount);
-						response.addCookie(cookie);
-						Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
-						service.keepLogin(vo.getCustomer_id(), session.getId(), sessionLimit);
-					}
 				}else {
 					mav.setViewName("login");
 				}
@@ -641,14 +626,6 @@ public class CustomerController {
 		if (obj != null) {
 			session.removeAttribute("login_session");
 			session.invalidate();
-			Cookie loginCookie  = WebUtils.getCookie(request, "loginCookie");
-			if (loginCookie != null) {
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(0);
-				response.addCookie(loginCookie);
-				Date date = new Date(System.currentTimeMillis());
-				service.keepLogin(obj, session.getId(), date);
-			}
 		}
 		return "index";
 	}

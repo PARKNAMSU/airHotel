@@ -16,12 +16,9 @@ public class CustomerVO {
 	private int customer_blame_stop;
 	private Date customer_regdate;
 	private String customer_key;
-	private String session_id;
-	private Date session_limit;
 	private Date customer_stop_end_date;
 	private int customer_status;
 	private String favorite_house;
-	private boolean useCookie;
 	private MultipartFile customer_photo; // 폼에서 전송되는 파일을 받기 위한 변수.
 	private String customer_refund_account;
 	private String customer_refund_bank;
@@ -93,18 +90,6 @@ public class CustomerVO {
 	public void setCustomer_key(String customer_key) {
 		this.customer_key = customer_key;
 	}
-	public String getSession_id() {
-		return session_id;
-	}
-	public void setSession_id(String session_id) {
-		this.session_id = session_id;
-	}
-	public Date getSession_limit() {
-		return session_limit;
-	}
-	public void setSession_limit(Date session_limit) {
-		this.session_limit = session_limit;
-	}
 	public Date getCustomer_stop_end_date() {
 		return customer_stop_end_date;
 	}
@@ -123,20 +108,14 @@ public class CustomerVO {
 	public void setFavorite_house(String favorite_house) {
 		this.favorite_house = favorite_house;
 	}
-	public boolean isUseCookie() {
-		return useCookie;
-	}
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
-	}
 	public MultipartFile getCustomer_photo() {
 		return customer_photo;
 	}
 	public void setCustomer_photo(MultipartFile customer_photo) {
 		this.customer_photo = customer_photo;
 	}
-    public String getCustomer_refund_account() { return customer_refund_account; }
-    public void setCustomer_refund_account(String customer_refund_account) { this.customer_refund_account = customer_refund_account; }
-    public String getCustomer_refund_bank() { return customer_refund_bank; }
-    public void setCustomer_refund_bank(String customer_refund_bank) { this.customer_refund_bank = customer_refund_bank; }
+	public String getCustomer_refund_account() { return customer_refund_account; }
+	public void setCustomer_refund_account(String customer_refund_account) { this.customer_refund_account = customer_refund_account; }
+	public String getCustomer_refund_bank() { return customer_refund_bank; }
+	public void setCustomer_refund_bank(String customer_refund_bank) { this.customer_refund_bank = customer_refund_bank; }
 }
