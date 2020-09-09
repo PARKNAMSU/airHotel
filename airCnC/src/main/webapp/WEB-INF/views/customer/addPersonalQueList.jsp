@@ -32,7 +32,7 @@
 		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<style>
 	#main-menu li:nth-child(4)>a {
 		border-left: 1px solid #ee575d;
@@ -91,7 +91,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>contact</h3>
-                        <p>관리자-약관정책등록 화면이에요</p>
+                        <p>1대1 문의 화면이에요</p>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
 	<div class="container">
 	<!-- 좌측 목차 -->
     <nav role="navigation" style="float: left; width: 30%;" class="center_event">
-	  <ul id="main-menu">
+	 <ul id="main-menu">
 	    <li><a href="/cnc/selectBoardList.do">공지사항</a></li>
 	    <li><a href="/cnc/selectEventList.do">이벤트</a></li>
 	    <li><a href="/cnc/selectPolicyList.do">약관정책</a></li>
@@ -110,7 +110,7 @@
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
 	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/selectCommonQueList.do" aria-label="subemnu">자주묻는질문</a></li>
 	      </ul>
 	    </li>
 	   </ul>

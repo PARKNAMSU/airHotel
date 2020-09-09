@@ -125,8 +125,8 @@
     <c:url value="/update_4locationwork.do" var="actionUrl" />
 	<form action="/cnc/update_4locationwork.do" name="llocation" method="GET">	
 			<img src="${pageContext.request.contextPath}/resources/images/diretion.jpg">
-			<div class="locationtitle" style="font-size: 25px; font-weight: bold;">숙소의 위치를 알려주세요</div>
-			<div class="locationtitle1" style="font-size: 15px; font-weight: bold;">정확한 숙소 주소는 게스트가 예약을 완료한 후에만 공개됩니다.</div>
+			<div class="locationtitle" style="font-size: 25px; font-weight: bold; color: black;">숙소의 위치를 알려주세요</div>
+			<div class="locationtitle1" style="font-size: 15px; font-weight: bold; color: black;">정확한 숙소 주소는 게스트가 예약을 완료한 후에만 공개됩니다.</div>
 			<div class="locationtitle2" style="padding-top: 20px; padding-bottom: 20px;" >
 				<label for="locationtitle3">지역</label>
 				<select id="locationtitle4" name="house_location">

@@ -31,6 +31,11 @@
 		f.submit();
 	}
 	</script>
+	<style>
+	span {
+	color : black;
+	}
+	</style>
 </head>
 <body>
 	<!--resiterform-->

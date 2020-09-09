@@ -76,6 +76,7 @@ public class HouseController {
 
 	@RequestMapping(value = "/hostregisterindex.do")
 	public String mainPage(@ModelAttribute("house") House_InfoVO house, Model model, HttpSession session) {
+		
 		String hostId = (String)session.getAttribute("login_session");
 		house.setHouse_host_id(hostId);
 		System.out.println(house.getHouse_host_id());
@@ -166,7 +167,7 @@ public class HouseController {
 	public String update_2housedetailwork(@ModelAttribute("house") House_InfoVO house, Model model) {
 		houseService.updateHouse_housedetail(house);
 		System.out.println("2housedetail 수정완료");
-		return "forward:/revisehouse.do";
+		return "forward:/1newhouse.do";
 	}
 	
 	
@@ -338,10 +339,21 @@ public class HouseController {
 		else {house.setHouse_default_pool("true");}
 		System.out.println("수정 중 livingroom_type왜왜왜 : " + house.getHouse_default_livingroom_type_0or1());
 		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_livingroom_type());
-		
-		System.out.println("livingroom_type : " + house.getHouse_default_livingroom_type());
-		System.out.println("pool : " + house.getHouse_default_pool());
-		return "7guesttextarea";
+		System.out.println("수정 중 house_default_kitchen_0or1 : " + house.getHouse_default_kitchen_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_kitchen());
+		System.out.println("수정 중 house_default_laundry_washer_0or1 : " + house.getHouse_default_laundry_washer_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_laundry_washer());
+		System.out.println("수정 중 house_default_laundry_dryer_0or1 : " + house.getHouse_default_laundry_dryer_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_laundry_dryer());
+		System.out.println("수정 중 house_default_parking_0or1 : " + house.getHouse_default_parking_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_parking());
+		System.out.println("수정 중 house_default_gym_0or1 : " + house.getHouse_default_gym_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_gym());
+		System.out.println("수정 중 house_default_pool_0or1 : " + house.getHouse_default_pool_0or1());
+		System.out.println("수정 중 livingroom_type : " + house.getHouse_default_pool());
+		houseService.updateHouse_guestcomfortable(house);
+		System.out.println("6guestcomfortable 수정완료");
+		return "forward:/1newhouse.do";
 	}
 	
 	@RequestMapping(value = "/7guesttextarea.do")
@@ -437,6 +449,7 @@ public class HouseController {
 		MultipartFile uploadFile_detail2 = house.getHouse_photo_detail2();
 		MultipartFile uploadFile_detail3 = house.getHouse_photo_detail3();
 		MultipartFile uploadFile_detail4 = house.getHouse_photo_detail4();
+		
 		if(!uploadFile.isEmpty() || !uploadFile_detail1.isEmpty() || !uploadFile_detail2.isEmpty()
 				|| !uploadFile_detail3.isEmpty() || !uploadFile_detail4.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();

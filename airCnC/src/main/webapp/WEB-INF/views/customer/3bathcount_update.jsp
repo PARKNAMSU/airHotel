@@ -66,10 +66,10 @@
     <div class="form">
     <form action="/cnc/update_3bathcountwork.do" name="bathcount" method="GET">	
         <img src="${pageContext.request.contextPath}/resources/images/shawer.png" style="margin-bottom: 35px;" />
-        <div class="bathtitle" style="font-size: 30px; font-weight: bold; padding-bottom: 15px;">
+        <div class="bathtitle" style="font-size: 30px; font-weight: bold; padding-bottom: 15px; color: black;">
         	욕실 수</div>
-        <div class="bathcounttitle" style="padding-bottom: 15px;">
-        	 샤워실 또는 욕조가 없는 경우 0.5개로 간주합니다.</div>
+        <div class="bathcounttitle" style="padding-bottom: 15px; color: black;">
+        	 샤워실 또는 욕조가 없는 경우 0개로 간주합니다.</div>
         <div class="bathcount1" style="padding-bottom: 15px;">
             <label for="bathcount2">욕실</label>
             <c:set var="bathroom_amount" value="${detail.house_bathroom_amount}" />

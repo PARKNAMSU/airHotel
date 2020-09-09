@@ -104,13 +104,13 @@
             <h4 style="font-size: 25px;">게스트에게 숙소에 대해 설명해주세요.</h4></br>
             <h4>숙소가 위치한 지역에 대해 알려주세요. 분위기, 주변의 카페, 독특한 명소와 도보 거리에 있는 생활편의시설 등 동네를 특별하게 만드는 장소를 소개해주세요.</h4>
             <textarea id="guest3" name="house_desc4" rows="10" cols="75" placeholder="500자 이내로 작성하세요." maxlength="500">
-            	${detail.house_desc1 }</textarea>
+            	${detail.house_desc4 }</textarea>
                         
         <div class="guesttextarea"><h3 style="padding-top: 35px; font-size: 45px;">교통편</h3></div></br>
             <h4 style="font-size: 25px;">게스트에게 숙소에 대해 설명해주세요.</h4></br>
             <h4>근처의 대중교통 수단, 운전 정보, 편리한 도보 경로 등 도시와 동네를 돌아다니는 방법을 알려주세요.</h4>
             <textarea id="guesttextarea" name="house_desc5" rows="10" cols="75" placeholder="500자 이내로 작성하세요." maxlength="500">
-            	${detail.house_desc1 }</textarea>
+            	${detail.house_desc5 }</textarea>
 		</div>
               
       	

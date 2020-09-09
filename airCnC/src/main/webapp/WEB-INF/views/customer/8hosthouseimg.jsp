@@ -23,7 +23,14 @@
 	<script type="text/javascript">
 		function hosthouseimgSubmit() {
 			var f = document.hostpic;
+			
+			
+			if(!f.house_photo.value){
+				alert('메인 사진은 반드시 선택하셔야합니다.');
+				return;
+			}
 			f.submit();
+			
 		}
 		
 		
