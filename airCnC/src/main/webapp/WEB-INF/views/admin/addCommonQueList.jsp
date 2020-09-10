@@ -32,6 +32,7 @@
 		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	<style>
 	#main-menu li:nth-child(4)>a {
@@ -92,7 +93,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>contact</h3>
-                        <p>관리자-자주묻는질문 등록 화면이에요</p>
+                        <p>자주묻는질문관리 등록</p>
                     </div>
                 </div>
             </div>
