@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/menu.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=124">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=126">
 <!-- Latest compiled JavaScript -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -123,32 +123,32 @@
 
 	<div class="maindiv" id="main" style="margin-left:20%;margin-top:2%;font-family: 'Jua', sans-serif;">
 		<div >
-			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:60%;" onclick="hostSales()">매출 통계보기</button>&nbsp;&nbsp;
+			<button class="btn btn-outline-danger" style="font-size:20px;margin-left:50%;" onclick="hostSales()">매출 통계보기</button>&nbsp;&nbsp;
 			<button class="btn btn-outline-danger" style="font-size:20px;" onclick="location.href='hostregisterindex.do'">숙소 등록하기</button>
 		</div>
 		<h1 style="margin-top:5%;margin-bottom:5%;margin-left:35%;font-size:40px;color:red;font-family:'Jua', sans-serif;">내 숙소 목록</h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
+		<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
 		</div>
-		<div class="subdiv" id="imgdiv1" onclick="" >
+		<div class="subdiv" id="imgdiv1" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1"></div>
 		</div>
-		<div class="subdiv" id="imgdiv2" onclick="" >
+		<div class="subdiv" id="imgdiv2" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img  alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
 			</div>
 			<div class="textdiv" id="td2" ></div>
 		</div>
-		<div class="subdiv" id="imgdiv3" onclick="">
+		<div class="subdiv" id="imgdiv3" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img " alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
 			</div>
 			<div class="textdiv" id="td3" ></div>
 		</div>
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
+		<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
 	<div style="display:none;font-family: 'Jua', sans-serif;border:solid;" id="noneDiv" >
 		<div style="width:50%;font-size:50px;margin-top:10%;margin-bottom:10%;margin-left:42%;" >			

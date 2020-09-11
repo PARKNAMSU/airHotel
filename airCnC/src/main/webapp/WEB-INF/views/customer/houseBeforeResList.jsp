@@ -28,14 +28,19 @@
 		<div style="margin-top:10%;margin-left:0%;">
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
-				<c:if test="${item.customer_image ne null || item.customer_image ne ''}">
-					<img alt="" src="/cnc/display.do?name=${item.customer_image}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
-				</c:if>
-				<c:if test="${item.customer_image eq null || item.customer_image eq '' }">
+				<c:choose>
+					<c:when test="${item.customer_image == 'none'}">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
+					</c:when>
+					<c:otherwise>
+						<img alt="" src="/cnc/display.do?name=${item.customer_image}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
+					</c:otherwise>
+				</c:choose>
+				<c:if test="${item.customer_image eq null || item.customer_image eq '' }">
+					
 				</c:if> 
 				<a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
-				<b style="margin-left:43%;" onclick="openBlame('${login_session}','${item.reservation_customer_id}')">신고</b>
+				<b style="margin-left:43%;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" onclick="openBlame('${login_session}','${item.reservation_customer_id}')">신고</b>
 				<br><br>
 				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
 				<b>예약날짜: ${item.reservation_regdate }</b><br><br>

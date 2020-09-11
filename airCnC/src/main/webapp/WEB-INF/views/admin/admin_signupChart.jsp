@@ -4,82 +4,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menuTest.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/admin_salesChart.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_salesChart.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sideMenu.css?version=123">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hostregister.css">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<!-- jQuery library -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 
-
+<!-- jQuery Excel -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
 <!-- Popper JS -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
+
 
 <!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
-
-<!-- pdf,excel -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/javascript/html2canvas.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/javascript/bluebird.min.js"></script>
-
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
 <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<header class="menudiv1" style="position: sticky;">
-		<div class="menudiv2-1">
-			<img alt="" src="${pageContext.request.contextPath}/resources/image/trip/logo2.png" />
-		</div>
-		<div class="menudiv2-2" style="margin-left:56%">
-			<div class="menudiv3-1" id="div1" >
-				<ul id="menuItems" >
-					<c:catch>
-						<c:choose>
-							<c:when test="${admin_session eq null}">
-								<script>history.go(-1);</script>
-							</c:when>
-							<c:otherwise>
-								<li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo" style="color:white;">신고관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo" style="color:white;">통계</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo" style="color:white;">호스트관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo" style="color:white;">로그관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/makeCuponView.mdo" style="color:white;">쿠폰관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" style="color:white;">게시판관리</a></li>
-								<li class="item"><a href="/cnc/logout.mdo" style="color:white;">로그아웃</a></li>	
-							</c:otherwise>
-						</c:choose>
-					</c:catch>
-				</ul>
-			</div>
-		</div>
-	</header>
+	<header class="logo" style="position: sticky;">
+      <span>
+        <a href="/cnc/indexView.do">
+          <i
+            class="fas fa-signal"
+            style="font-size: 35px; float: left; color: #ff5a5f;"
+          ></i>
+        </a>
+      </span>
+      <label for="" class="loglabel">Sales Chart </label>
+      <div class="menudiv3-1" id="div1">
+        <ul id="menuItems">
+          <c:catch>
+            <c:choose>
+              <c:when test="${admin_session eq null}">
+                <script>
+                  history.go(-1);
+                </script>
+              </c:when>
+              <c:otherwise>
+                <li class="item1">
+                  <a href="blamelist.mdo">신고관리</a>
+                </li>
+                <li class="item1">
+                  <a href="salesChart.mdo">통계</a>
+                </li>
+                <li class="item1">
+                  <a href="getRegisterWaitingList.mdo"
+                    >호스트관리</a
+                  >
+                </li>
+                <li class="item1">
+                  <a href="logPage.mdo">로그관리</a>
+                </li>
+                <li class="item1">
+                  <a href="makeCupon.mdo">쿠폰관리</a>
+                </li>
+                <li class="item1">
+                  <a href="goNoticeListAdmin.mdo"
+                    >게시판관리</a
+                  >
+                </li>
+                <li class="item1">
+                  <a href="logout.mdo">로그아웃</a>
+                </li>
+              </c:otherwise>
+            </c:choose>
+          </c:catch>
+        </ul>
+        <a class="logbars" href="#"><i class="fas fa-bars"></i></a>
+      </div>
+    </header>
 	<div style="clear: both;"></div>
 	<!-- slider_area_start -->
 	<div class="slider_area">

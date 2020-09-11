@@ -109,10 +109,10 @@
 				<c:if test="${item.customer_image ne null }">
 					<img alt="" src="/cnc/display.do?name=${item.customer_image}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
 				</c:if>
-				<c:if test="${item.customer_image eq null }">
+				<c:if test="${item.customer_image == 'none' }">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
-				</c:if> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
-				<b style="margin-left:43%;" onclick="openBlame('${login_session}','${item.reservation_customer_id}')" >신고</b>
+				</c:if> <a onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
+				<b style="margin-left:43%;" onclick="openBlame('${login_session}','${item.reservation_customer_id}')" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" >신고</b>
 				<br><br>
 				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
 				<b>예약날짜: ${item.reservation_regdate }</b><br><br>

@@ -113,7 +113,7 @@ body {
 	</div>
 	<div class="chatdiv">
 		<div id="chatbox">
-			<div id="chatelement" onclick="openChat('message.do?message_to_id=admin')" >
+			<div id="chatelement" onclick="openChat('message.do?message_to_id=admin')" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 				<div  id="imgdiv" >
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"><!-- db에서 받아온 이미지 -->
 				</div>
@@ -128,12 +128,12 @@ body {
 			</div>
 			<hr>
 			<c:forEach items="${messageList }" var="list">
-			<div id="chatelement" onclick="openChat('message.do?message_to_id=${list.message_to_id}')">
+			<div id="chatelement" onclick="openChat('message.do?message_to_id=${list.message_to_id}')" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 				<div  id="imgdiv" >
-					<c:if test="${list.message_to_img != null }">
+					<c:if test="${list.message_to_img != 'none' }">
 					<img alt="" src="/cnc/display.do?name=${list.message_to_img}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
 					</c:if>
-					<c:if test="${list.message_to_img == null }">
+					<c:if test="${list.message_to_img == 'none' }">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
 					</c:if>
 				</div>
