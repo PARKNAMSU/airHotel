@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	<style>
 	#main-menu li:nth-child(4)>a {
@@ -53,7 +54,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>notice</h3>
-                        <p>관리자-자주묻는질문은 여기에요</p>
+                        <p>자주묻는질문 관리</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +94,7 @@
 						<li class="first">
 							<p class="date"><fmt:formatDate value="${commonq.commonq_regdate }" pattern="yyyy-MM-dd"/></p>
 							<h3>글번호 : ${commonq.commonq_idx }번 / 분류 : ${commonq.commonq_type }</h3>
-							<p><a href='<c:url value='/detailCommonQue/${commonq.commonq_idx }.mdo${paging.makeQueryPage(commonq.commonq_idx, paging.cri.page) }'/>'>${commonq.commonq_title }</a></p>
+							<p><a href='<c:url value='/detailCommonQue/${commonq.commonq_idx }.mdo${paging.makeQueryPage(commonq.commonq_idx, paging.cri.page) }'/>'  style="color: black;">${commonq.commonq_title }</a></p>
 						</li>         
 
 				</c:forEach>

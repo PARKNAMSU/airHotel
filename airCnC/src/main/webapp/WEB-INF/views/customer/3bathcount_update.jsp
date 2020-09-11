@@ -30,6 +30,10 @@
 				alert("욕실의 공용,개인 여부를 알려주세요.");
 				return;
 			}
+			if(f.house_bathroom_amount.value == 0) {
+				alert("욕실 수는 최소 1개 이상이어야합니다.");
+				return;
+			}
 			f.submit();
 		}
 		
@@ -40,7 +44,6 @@
 			f.submit();
 		}
 	
-		
 	</script>
 </head>
 <body>
@@ -61,9 +64,7 @@
     <!-- header-end -->
     <div class="container" style="align-content: center;">
     <div class="form">
-    <c:url value="/3bathcount.do" var="actionUrl" />
-	<form:form id="3bathcount" name="bathcount" modelAttribute="house" method="GET" action="${actionUrl}">
-    	
+    <form action="/cnc/update_3bathcountwork.do" name="bathcount" method="GET">	
         <img src="${pageContext.request.contextPath}/resources/images/shawer.png" style="margin-bottom: 35px;" />
         <div class="bathtitle" style="font-size: 30px; font-weight: bold; padding-bottom: 15px; color: black;">
         	욕실 수</div>
@@ -71,26 +72,28 @@
         	 샤워실 또는 욕조가 없는 경우 0개로 간주합니다.</div>
         <div class="bathcount1" style="padding-bottom: 15px;">
             <label for="bathcount2">욕실</label>
-            <c:set var="bathroom_amount" value="${house_bathroom_amount}" />
+            <c:set var="bathroom_amount" value="${detail.house_bathroom_amount}" />
             <button type="button" onclick="javascript:this.form.amount5.value++;">+</button>
-            <form:input type="text" id="amount5" value="${bathroom_amount}" readonly="readonly" path="house_bathroom_amount" />
+            <input type="text" id="amount5" value="${bathroom_amount}" readonly="readonly" name="house_bathroom_amount" />
             <button type="button" onclick="javascript:this.form.amount5.value--;">-</button>
         </div>
-        
+       
         <div class="bathcount3" style="padding-bottom: 15px;">
             <label for="guestbad">게스트가 단독으로 사용하는 욕실인가요?</label><br /><br />
-            <form:radiobutton id="radio1" path="house_bathroom_type" value="true" /><label> 예 </label><br /><br />
-            <form:radiobutton id="radio2" path="house_bathroom_type" value="false" /><label> 아니오 </label>
+            <input type="radio" id="radio1" name="house_bathroom_type" value="true" checked="checked"
+            	<c:if test="${detail.house_bathroom_type eq 'true'}">checked="checked"</c:if>/><label> 예 </label>
+            <br><br/>
+            <input type="radio" id="radio2" name="house_bathroom_type" value="false" 
+            	<c:if test="${detail.house_bathroom_type eq 'false'}">checked="checked"</c:if>/><label> 아니오 </label>
         </div>
           
-       
-      
-	</form:form>
+
+    </form>
    		<div class="bathcontrol" style="padding-bottom: 15px;">
         	<a href="#" onclick="PrevSubmit();" style="float : inherit;">
 			<button>뒤로가기</button></a>&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="bathcountSubmit();" style="float: inherit;">
-			<button>다음</button></a>
+			<button>수정하기</button></a>
         </div>
 	</div>
     </div>

@@ -1,17 +1,20 @@
 @charset "UTF-8";
-#headdiv{
-	margin-top:5%;
-	margin-left:42%;
+body {
+  margin: 0px;
 }
-#chatdiv{
-	width:650px;
-	height:750px;
+#headdiv {
+  margin-top: 5%;
+  margin-left: 42%;
+}
+#chatdiv {
+  width: 650px;
+  height: 750px;
 
-	margin-left:15%;
-	overflow:scroll; 
-	overflow-x:hidden;
-	border-radius: 15px 15px 15px 15px;
-	box-shadow: 2px 2px 2px 2px gray;
+  margin-left: 15%;
+  overflow: scroll;
+  overflow-x: hidden;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 4px 4px 4px 4px #09dcdc;
 }
 #chatdiv::-webkit-scrollbar {
   width: 15px;
@@ -21,52 +24,51 @@
 }
 #chatdiv::-webkit-scrollbar-thumb {
   border-radius: 5px;
-  background-color: #bebebe;
+  background-color: #09dcdc;
 }
 #chatdiv::-webkit-scrollbar-button {
   width: 0;
   height: 0;
 }
-#dateline{
-	width:100%;
-	margin-top:20px;
-	text-align: center;
-	
+#dateline {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
 }
-#infoline{
-		width:90%;
-		margin-left:5%;
-		margin-top:5%;
-		text-align: center;
-		background: #c8c8c8;
-		height: 3%;
-		border-radius: 15px 15px 15px 15px;
+#infoline {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+  text-align: center;
+  background: #09dcdc;
+  height: 3%;
+  border-radius: 15px 15px 15px 15px;
 }
-.chatline{
-		width:100%;
-		margin-top: 5%;
+.chatline {
+  width: 100%;
+  margin-top: 5%;
 
-		height:15%;
+  height: 15%;
 }
-#imgdiv{
-	float:left;
-	margin-left: 5%;
+#imgdiv {
+  float: left;
+  margin-left: 5%;
 }
-#namediv{
-	float:left;
-	margin-left: 3%;
+#namediv {
+  float: left;
+  margin-left: 3%;
 }
-#textdiv{
-	float:left;
-	margin-left: 8%;
-	font-weight: bold;
+#textdiv {
+  float: left;
+  margin-left: 8%;
+  font-weight: bold;
 }
-#submitdiv{
-	margin-left: 15%;
-	margin-top: 0.5%;
+#submitdiv {
+  margin-left: 15%;
+  margin-top: 0.5%;
 }
-#message{
-	height: 55px;
-	width: 560px;
-	border-radius: 15px 15px 15px 15px;
+#message {
+  height: 55px;
+  width: 560px;
+  border-radius: 15px 15px 15px 15px;
 }

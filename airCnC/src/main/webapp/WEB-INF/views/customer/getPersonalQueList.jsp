@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<style>
 	#main-menu li:nth-child(4)>a {
 		border-left: 1px solid #ee575d;
@@ -54,7 +54,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>contact</h3>
-                        <p>1대1문의는 여기에요</p>
+                        <p>나의 질문</p>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
 	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/selectCommonQueList.do" aria-label="subemnu">자주묻는질문</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -95,7 +95,7 @@
 				<c:forEach items="${personalqList }" var="personalq">
 					<tr>
 						<td>${personalq.personalq_idx }</td>
-						<td id="longtitle"><a href="#1" name="trigger">${personalq.personalq_title }</a></td>
+						<td id="longtitle"><a href="#1" name="trigger" style="color: black;">${personalq.personalq_title }</a></td>
 						<td><fmt:formatDate value="${personalq.personalq_regdate }" pattern="yyyy-MM-dd"/></td>
 					</tr>
 					<tr name="article" class="hide">

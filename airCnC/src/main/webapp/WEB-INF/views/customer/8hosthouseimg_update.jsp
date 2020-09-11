@@ -20,11 +20,20 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script type="text/javascript" src="../js/hostregister.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 		function hosthouseimgSubmit() {
+			
 			var f = document.hostpic;
+			
+			if(!f.house_photo.value){
+				alert('메인 사진은 반드시 선택하셔야합니다.');
+				return;
+			}
 			f.submit();
+			
 		}
+		
 		
 		
 		function PrevSubmit() {
@@ -52,9 +61,9 @@
     </header>
     <!-- header-end -->
     
-   
+  	<div class="container">
     <form action="/cnc/update_8hosthouseimgwork.do" name="hostpic" method="POST" enctype="multipart/form-data">
-	<div class="container">
+	
 	
     <div class="hostpic1">
     	<img src="${pageContext.request.contextPath}/resources/images/sleep1.jpg" alt="">
@@ -93,13 +102,13 @@
             <hr>
         </div>
     </div>
-    
+    </form>
 	<div class="control" style="padding-bottom: 25px; padding-top: 25px;">
 		<a href="#" onclick="PrevSubmit();" style="float: left;"><button>뒤로가기</button></a>
 		<a href="#" onclick="hosthouseimgSubmit();" style="float: right;"><button>수정하기</button></a>
     </div>
     </div>	
-	</form>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
