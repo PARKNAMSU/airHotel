@@ -35,13 +35,6 @@ $(function(){
 </script>
 </head>
 <body>
-	<!-- header-start -->
-	<header class="menudiv1" style="position: sticky;">
-		<div class="menudiv2-1">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
-		</div>
-	</header>
-	<!-- header-end -->
 	<form name="loginForm" action="adminLogin.mdo" method="post" id="loginForm"> 
 	<div class="container" style="text-align: center;">
 		<img src="${pageContext.request.contextPath}/resources/images/admin/adminregister.jpg" alt="" />
@@ -62,7 +55,7 @@ $(function(){
 					아이디 또는 비밀번호가 일치하지 않습니다.
 				</div>
 			</c:if>
-			<button type="button" class="button" id="btnLogin" name="btnLogin">로그인</button>
+			<button type="button" class="button" id="btnLogin" name="btnLogin" style="font-size: 1.5em">로그인</button>
 		</div>
 	</div>
 	</form>
