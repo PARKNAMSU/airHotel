@@ -187,7 +187,15 @@
 	<div id="introdiv" style="font-family: 'Jua', sans-serif;">
 		<p style="font-size:40px;" style="font-family: 'Jua', sans-serif;">${house.house_location } ${house.house_location_sido } ${house.house_location_gugun }<br>${house.house_location_postnum }</p><br><br>
 		<div id="hostname">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">${house.host_name }</b><br><br>
+			<c:choose>
+			<c:when test="${house.host_image == null || house.host_image == '' }">
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;border-radius:70%">
+			</c:when>
+			<c:otherwise>
+			<img alt="" src="/cnc/display.do?name=${house.host_image}" style="width:64px;height:64px;border-radius:70%">
+			</c:otherwise>
+			</c:choose>
+			<b style="font-size:20px;">${house.host_name }</b><br><br>
 			<p style="font-family: 'Jua', sans-serif;">회원가입일: ${house.host_regdate }</p>
 		</div><br>
 		<div id="hostcondition">
@@ -314,7 +322,8 @@
 		<div id="commantdiv">
 			<c:forEach items="${commentsList}" var="item" varStatus="i">
 			<div class="commantform">
-				<img alt="64x64" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;"><b style="font-size:20px;">${item.comments_name }</b>&nbsp;&nbsp;<c:forEach begin="1" end="${item.comments_rate}" step="1"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg"></c:forEach>
+				<img alt="64x64" src="${pageContext.request.contextPath}/resources/images/reservationhouse/human.png" style="width:64px;height:64px;">
+				<b style="font-size:20px;">${item.comments_name }</b>&nbsp;&nbsp;<c:forEach begin="1" end="${item.comments_rate}" step="1"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" class="headimg"></c:forEach>
 				<c:if test="${item.comments_id eq login_session }">
 				<input type="hidden" id="hidseq${i.index}" value="${item.comments_seq }">
 				<input type="hidden" id="hidhouse${i.index}" value="${house.house_seq }">
