@@ -23,19 +23,17 @@
   margin-left: 75%;
   padding-top: 20px;
 }
-.menudiv3-1 {
-  float: none;
-}
+
 #menuItems {
   list-style: none;
 }
-.item1 {
+.item {
   float: left;
   text-align: center;
   font-size: 20px;
   margin-top: 10px;
 }
-.item1,
+.item,
 a {
   font-size: 25px;
   padding-left: 8px;
