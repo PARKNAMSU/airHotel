@@ -1,53 +1,65 @@
 @charset "UTF-8";
- a:link { color: red; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
- a:hover { color: blue; text-decoration: underline;}
-.top_first{
-	margin-top:10%;
-	width: 65%;
-	float: left;
+body {
+  font-family: "Jua", sans-serif;
 }
-.maindiv{
-	float:left;
-	font-size: 22px;
-	width: 20%;
-	margin-right: 3%;
+a:link {
+  color: red;
+  text-decoration: none;
 }
-.maintext{
-
-	
+a:visited {
+  color: black;
+  text-decoration: none;
 }
-.top_second{
-	width: 65%;
-	margin-top:3%;
-	float: left;
+a:hover {
+  color: blue;
+  text-decoration: underline;
 }
-.subdiv{
-	align-content:center;
-	align-items:center;
-	width: 20%;
-	margin-right: 3%;
-	float:left;
-	font-size:22px;
+.top_first {
+  margin-top: 10%;
+  width: 65%;
+  float: left;
 }
-.day_temp{
-	width: 20%;
-	margin-right: 3%;
-	float:left;
+.maindiv {
+  float: left;
+  font-size: 22px;
+  width: 20%;
+  margin-right: 3%;
 }
-.sales,.chart{
-	float:left;
-	margin-top:5%;
-	width: 65%;
+.maintext {
 }
-#salesArea,#salesChart{
-	width:1200px;
-	height:800px;
-	margin-top:3%;
-	overflow:scroll; 
-	overflow-x:hidden;
-	align-self:center;
-	box-shadow: 2px 2px 2px 2px gray;
+.top_second {
+  width: 65%;
+  margin-top: 3%;
+  float: left;
+}
+.subdiv {
+  align-content: center;
+  align-items: center;
+  width: 20%;
+  margin-right: 3%;
+  float: left;
+  font-size: 22px;
+}
+.day_temp {
+  width: 20%;
+  margin-right: 3%;
+  float: left;
+}
+.sales,
+.chart {
+  float: left;
+  margin-top: 5%;
+  width: 65%;
+}
+#salesArea,
+#salesChart {
+  width: auto;
+  height: 800px;
+  margin-top: 3%;
+  overflow: scroll;
+  overflow-x: hidden;
+  align-self: center;
+  box-shadow: 2px 2px 2px 2px gray;
 }
 #salesArea::-webkit-scrollbar {
   width: 15px;
@@ -77,17 +89,18 @@
   width: 0;
   height: 0;
 }
-.chart{
-	
+.chart {
 }
-#chartArea{
-	
+#menuItems .item1 {
+  color: white;
 }
-.temp{
-	float:left;width:505px;height:1000px;
+.temp {
+  float: left;
+  width: 505px;
+  height: 1000px;
 }
-@media(max-width:700px){
-	.temp{
-		height:0px;
-	}
+@media (max-width: 700px) {
+  .temp {
+    height: 0px;
+  }
 }

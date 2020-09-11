@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kg.air.cnc.service.reservation.ReservationService;
 import kg.air.cnc.service.waiting.RegisterWaitingServiceImpl;
 import kg.air.cnc.service.waiting.RemoveWaitingServiceImpl;
 import kg.air.cnc.vo.House_InfoVO;
 import kg.air.cnc.vo.PagingVO;
+import kg.air.cnc.vo.ReservationHouseDetailVO;
 
 @Controller
 public class WaitingController {
@@ -18,6 +20,8 @@ public class WaitingController {
 	RegisterWaitingServiceImpl registerWaiting;
 	@Autowired
 	RemoveWaitingServiceImpl removeWaiting;
+	@Autowired
+	ReservationService reservationService;
 
 	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙占� 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRegisterWaitingList.mdo")
@@ -41,8 +45,13 @@ public class WaitingController {
 
 	// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRegisterHouse.mdo")
-	public ModelAndView getRegisterHouse(House_InfoVO vo, ModelAndView mav) {
-		mav.addObject("registerHouse", registerWaiting.getHouse(vo));
+	public ModelAndView getRegisterHouse(ReservationHouseDetailVO vo, ModelAndView mav) {
+		ReservationHouseDetailVO house = null;
+		System.out.println(vo.getHouse_seq());
+		house = reservationService.getReservationHouse(vo);
+		System.out.println(house.toString());
+		mav.addObject("house", house);
+		//mav.addObject("registerHouse", registerWaiting.getHouse(vo));
 		mav.setViewName("waiting"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}
@@ -85,8 +94,12 @@ public class WaitingController {
 
 	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/getRemoveHouse.mdo")
-	public ModelAndView getRemoveHouse(House_InfoVO vo, ModelAndView mav) {
-		mav.addObject("removeHouse", removeWaiting.getHouse(vo));
+	public ModelAndView getRemoveHouse(ReservationHouseDetailVO vo, ModelAndView mav) {
+		ReservationHouseDetailVO house = null;
+		house = reservationService.getReservationHouse(vo);
+		//mav.addObject("removeHouse", removeWaiting.getHouse(vo));
+		System.out.println(house.toString());
+		mav.addObject("house", house);
 		mav.setViewName("removeWaiting"); // 占쏙옙占쌩울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占식울옙 占쏙옙占쏙옙 占쏙옙 占쏙옙 占쏙옙占쏙옙
 		return mav;
 	}

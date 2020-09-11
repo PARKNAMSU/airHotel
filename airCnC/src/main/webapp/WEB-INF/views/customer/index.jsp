@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/test.css">
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -190,9 +192,9 @@
               <figure class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="img16" />
                 <figcaption>
-                    <h2>부산여행</h2>
+                    <h2>경남여행</h2>
                   <p>부산광역시는 대한민국 동남부 해안에 위치한 광역시이다.</p>
-                  <a href="reservation_map.html"></a>
+                  <a href="getHouseList.do?location=경남"></a>
                 </figcaption>
               </figure>
               <figure class="effect-bubba">
@@ -200,7 +202,7 @@
                 <figcaption>
                     <h2>대구여행</h2>
                   <p>대구광역시는 대한민국 동남부 내륙에 있는 광역시이다.</p>
-                  <a href="reservation_map.html"></a>
+                  <a href="getHouseList.do?location=경북"></a>
                 </figcaption>
               </figure>
               <figure class="effect-bubba">
