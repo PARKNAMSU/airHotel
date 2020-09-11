@@ -33,12 +33,6 @@
   color: gray;
   z-index: 2;
 }
-
-@media screen and (max-width: 768px) {
-  .img-cover {
-    background-image: url(../images/main/mainview.gif);
-  }
-  .mainview .content {
-    display: none;
-  }
+.minisearch {
+  display: none;
 }
