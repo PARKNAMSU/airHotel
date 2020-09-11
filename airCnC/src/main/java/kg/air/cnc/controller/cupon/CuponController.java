@@ -31,6 +31,7 @@ public class CuponController {
 		System.out.println(info.toString());
 		if(info.get("rate").equals("") && info.get("money").equals("")) System.out.println("아무것도 없습니다.");
 		else cuponService.makeCupon(info);
+		mav.addObject("session", id);
 		mav.setViewName("makeCupon");
 		return mav;
 	}

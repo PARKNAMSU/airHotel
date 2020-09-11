@@ -10,12 +10,21 @@
 <body>
 	<div id="sidediv">
 		<ul id="sidemenu">
-			<li class="menu"><span id="topmenu" style="font-family: 'Jua', sans-serif;">내정보 관리</span></li>
-			<li class="menu"><a href="reservationPage.do" style="font-family: 'Jua', sans-serif;" >예약내역</a></li>
-			<li class="menu"><a href="myFavoriteHouse.do" style="font-family: 'Jua', sans-serif;">저장한 숙소</a></li>
-			<li class="menu"><a href="getCuponList.do" style="font-family: 'Jua', sans-serif;">내 쿠폰함</a></li>
-			<li class="menu"><a href="chat.do" style="font-family: 'Jua', sans-serif;">메세지</a></li>		
-			<li class="menu"><a href="#" style="font-family: 'Jua', sans-serif;">회원탈퇴</a></li>
+			<li class="menu"><span id="topmenu"
+				style="font-family: 'Jua', sans-serif;"><a href="mypage.do">내정보 관리</a></span>
+			</li>
+			<li class="menu"><a href="passwordChangeView.do"
+				style="font-family: 'Jua', sans-serif;">비밀번호 변경</a></li>
+			<li class="menu"><a href="reservationPage.do"
+				style="font-family: 'Jua', sans-serif;">예약내역</a></li>
+			<li class="menu"><a href="myFavoriteHouse.do"
+				style="font-family: 'Jua', sans-serif;">저장한 숙소</a></li>
+			<li class="menu"><a href="chat.do"
+				style="font-family: 'Jua', sans-serif;">메세지</a></li>
+			<li class="menu"><a href="customerWithdrawalView.do"
+				style="font-family: 'Jua', sans-serif;">회원탈퇴</a></li>
+			<li class="menu"><a href="getCuponList.do"
+				style="font-family: 'Jua', sans-serif;">쿠폰함</a></li>
 		</ul>
 	</div>
 </body>

@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
 import kg.air.cnc.vo.CustomerVO;
 import kg.air.cnc.vo.HostVO;
 
@@ -42,22 +40,6 @@ public class CustomerDAOImpl implements CustomerDAO{
 	@Override
 	public CustomerVO login(CustomerVO customerVO) throws Exception {
 		return session.selectOne("customer.login", customerVO);
-	}
-
-	// 로그인 유지 처리.
-	@Override
-	public void keepLogin(String customer_id, String session_id, Date session_limit)throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("customerId", customer_id);
-		map.put("sessionId", session_id);
-		map.put("sessionLimit", session_limit);
-		session.update("customer.keepLogin", map);
-	}
-
-	// 세션키 검증.
-	@Override
-	public CustomerVO checkCustomerWithSessionKey(String session_id)throws Exception {
-		return session.selectOne("customer.checkCustomerWithSessionKey", session_id);
 	}
 
 	// 비밀번호 변경.

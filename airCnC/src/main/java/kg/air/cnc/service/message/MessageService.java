@@ -1,5 +1,7 @@
 package kg.air.cnc.service.message;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,23 @@ public class MessageService implements MessageServiceImpl{
 	@Override
 	public List<MessageVO> getChatList(String id) {
 		List<MessageVO> list = messageDAO.getChatList(id);
+		Map<String,String> idList = new HashMap<String, String>();
+		for(int i=0 ; i<list.size(); i++) {
+			idList.put(list.get(i).getMessage_to_id(), list.get(i).getMessage_to_id());
+		}
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getMessage_to_id().equals(id)) {
+				if(!idList.containsKey(list.get(i).getMessage_from_id())) {
+					Map<String, String> map = new HashMap<String, String>();
+					map.put("from_id",list.get(i).getMessage_from_id());
+					map.put("to_id",id);
+					list.remove(i);
+					list.add(i,messageDAO.getChatListSec(map));
+				}else {
+					list.remove(i);
+				}
+			}
+		}
 		return list;
 	}
 
