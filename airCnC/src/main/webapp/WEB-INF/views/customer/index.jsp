@@ -26,6 +26,8 @@
 	href="${pageContext.request.contextPath}/resources/css/hostregister.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/index.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/effect.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet"
@@ -35,33 +37,32 @@
 <body>
 <!-- header-start -->
 <c:if test="${login_session eq null }">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<li class="item">
-						<p>
-							<a href="/cnc/registerView.do">회원가입</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="/cnc/loginView.do">로그인</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="/cnc/selectBoardList.do">공지사항</a>
-						</p>
-					</li>
-
-				</ul>
-			</div>
-		</div>
-	</header>
+	<header style="padding: 20px; background: rgb(025, 025, 025);">
+    <a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/logo111.png"/></a>
+    <div class="menudiv3-1" id="div1" style="padding-top: 13px;">
+        <ul id="menuItems">
+        <li class="item"> 
+            <a
+            href="/cnc/registerView.do"
+            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+            ><li class="item">회원가입</li></a>
+            <a
+            href="/cnc/loginView.do"
+            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+            ><li class="item">로그인</li></a>
+            <a
+            href=""
+            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+            ><li class="item">공지사항</li></a>
+        </li>
+        </ul>
+        <a
+        href=""
+        onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+        class="headerbtn"
+        ><i class="fas fa-bars"></i></a>
+    </div>
+</header>
 </c:if>
 <c:if test="${login_session ne null }">
 	<header class="menudiv1">
@@ -116,10 +117,6 @@
 </c:if>
 <!-- slider_area_start -->
 <div class="mainview">
-	<div class="content">
-		<label1 for="content">Travelo</label1>
-	</div>
-
 	<div class="searchOptions">
 		<form action="searchIndex.do">
 			<div class="srcachlocation" style="vertical-align: middle;">
@@ -171,178 +168,97 @@
 	</div>
 </div>
 <!-- slider_area_end -->
-<div class="popular_destination_area"
-	 style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-6">
-				<div class="section_title text-center mb_70">
-					<h3 style="color: white;">당신은 어디로 떠나고 싶나요?</h3>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=서울"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								서울 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=경기"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								경기 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=강원"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								강원 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=충북"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								충북 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=충남"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								충남 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=전북"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								전북 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=전남"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								전남 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=경북"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								경북 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-1">
-				<div class="single_trip">
-					<div class="single_destination">
-						<div class="thumb">
-							<a href="getHouseList.do?location=경남"> <img
-									src="${pageContext.request.contextPath}/resources/images/destination/busan.png"
-									alt="">
-							</a>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								경남 <a href="reservation_map.html">떠나자!</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="popular_destination_area" style="background-image: url(${pageContext.request.contextPath}/resources/images/main/sea/sea41.gif");>
+        <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="section_title text-center mb_70">
+                  <h3>당신은 어디로 떠나고 싶나요?</h3>
+                </div>
+              </div>
+            </div>
+            <div class="grid">
+              <figure class="effect-bubba">
+                    <img src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg" alt="img02"/>           
+                <figcaption>
+                  <h2>서울여행</h2>
+                  <p>서울은 현재 대한민국의 수도입니다.</p>
+                  <a href="getHouseList.do?location=서울"></a>
+                </figcaption>
+              </figure>
+            
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="img16" />
+                <figcaption>
+                    <h2>부산여행</h2>
+                  <p>부산광역시는 대한민국 동남부 해안에 위치한 광역시이다.</p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg" alt="img02" />
+                <figcaption>
+                    <h2>대구여행</h2>
+                  <p>대구광역시는 대한민국 동남부 내륙에 있는 광역시이다.</p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png" alt="img16" />
+                <figcaption>
+                    <h2>대전여행</h2>
+                  <p>대전광역시는 대한민국의 중앙부에 있는 광역시이다.</p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="img02" />
+                <figcaption>
+                    <h2>강릉여행</h2>
+                  <p>강릉시는 대한민국 강원도 동해안 중부에 있는 시이다. </p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg" alt="img16" />
+                <figcaption>
+                    <h2>광주여행</h2>
+                  <p>광주광역시는 대한민국의 서남부에 있는 광역시이다. </p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg" alt="img02" />
+                <figcaption>
+                    <h2>인천여행</h2>
+                  <p>인천광역시는 대한민국 서해안에 있는 광역시이다. </p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg" alt="img16" />
+                <figcaption>
+                    <h2>제천여행</h2>
+                  <p>제천시는 대한민국 충청북도 북동부의 시이다.</p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+              <figure class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg" alt="img16" />
+                <figcaption>
+                    <h2>울산여행</h2>
+                  <p>울산광역시는 대한민국 남동부 해안에 있는 광역시이다.</p>
+                  <a href="reservation_map.html"></a>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+    </div>
 
 
 <!-- popular_destination_area_start  -->
 <div class="popular_destination_area"
-	 style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
+	 style="background-image: url(${pageContext.request.contextPath}/resources/images/main/sea/sea6.gif);">
 	<div class=" container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6">
@@ -452,85 +368,65 @@
 	</div>
 </div>
 <!-- popular_destination_area_end  -->
-<div class="popular_destination_area"
-	 style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg); text-align: center;">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-6">
-				<div class="section_title text-center mb_70">
-					<h3 style="color: white;">지원 호스팅</h3>
-				</div>
-			</div>
-		</div>
-		<div class="row1">
-			<div class="col-lg-4 col-md-1">
-				<div class="save1" style="float: left; margin-left: 400px;">
-					<div class="single_destination2">
-						<div class="thumb" style="margin-top: 30px;">
-							<img
-									src="${pageContext.request.contextPath}/resources/images/good.jpg"
-									alt=""><i class="fas fa-hand-holding-medical"
-											  style="font-size: 60px; float: right;"></i>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								구호 인력 호스팅<a href="travel_destination.html">지원</a>
-							</p>
-						</div>
-					</div>
-					<div class="goodtext">
-						<label class="goodtext" for="">코로나19와 맞서 싸우는 보건의료 인력, 긴급
-							구호 요원, 응급 구조 요원 등 10만 명에게 임시 숙소를 제공하는 '구호 인력을 위한 숙소' 프로그램에 에어비앤비
-							호스트 여러분의 참여를 부탁드립니다. 이는 감염 노출 위험이 있는 구호 인력에게 병원과 가까우면서도 가족과 떨어져
-							안전하게 머물 수 있는 숙소를 제공하기 위한 것입니다. </label>
-					</div>
-				</div>
-				<div class="save2" style="float: left;"
-					 style="float: left; margin-left: 350px;">
-					<div class="single_destination2">
-						<div class="thumb" style="margin-top: 30px;">
-							<img
-									src="${pageContext.request.contextPath}/resources/images/sad.PNG"
-									alt=""><i class="fas fa-child"
-											  style="font-size: 60px; float: right;"></i>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								아이를 위한 호스팅<a href="travel_destination.html">지원</a>
-							</p>
-						</div>
-					</div>
-					<div class="goodtext">
-						<label class="goodtext" for="">현재 한국에는 전국적으로 200여개의
-							‘고아원’이 존재한다. 현재 약 2만명의 ‘고아’가 존재하고 매년 4천명의 아동이 시설에 들어온다. 숫자 속에 숨은
-							구체적인 사람을 봐야 한다. 삶의 안정도, 사람에 대한 신뢰도, 미래에 대한 꿈도 갖기 어려운 공간에서 다양한
-							인권침해의 위험에 노출되어 있다. </label>
-					</div>
-				</div>
-				<div class="save1" style="float: left; margin-left: 400px;">
-					<div class="single_destination2">
-						<div class="thumb" style="margin-top: 30px;">
-							<img
-									src="${pageContext.request.contextPath}/resources/images/oldsad.jpg"
-									alt=""><i class="fas fa-blind"
-											  style="font-size: 60px; float: right;"></i>
-						</div>
-						<div class="content">
-							<p class="d-flex align-items-center">
-								노인를 위한 호스팅<a href="travel_destination.html">지원</a>
-							</p>
-						</div>
-					</div>
-					<div class="goodtext">
-						<label class="goodtext" for="">노년층의 우울증과 자살을 막으려면 정부가
-							주도하는 예방사업만으로는 한계가 있을 수밖에 없다. 결국 노인 자살률을 떨어뜨리려면 좀더 근본적으로는 이웃의 따뜻한
-							관심과 배려가 필수라는 지적이다. </label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="popular_destination_area"  style="background-image: url(${pageContext.request.contextPath}/resources/images/corona/corona31.jpg); text-align: center;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3 style="color: white;">코로나 예방 수칙</h3>
+                    </div>
+                </div>                            
+            </div>
+            <div class="row1">
+                <div class="col-lg-4 col-md-1">
+                    <div class="save1" style="float: left; margin-left: 400px;">
+                        <div class="single_destination2">
+                            <div class="thumb1"  style="margin-top: 30px;">
+                                <img src="${pageContext.request.contextPath}/resources/images/corona/corona5.png" alt=""><i class="fas fa-hand-holding-medical" style="font-size: 60px; float: right;"></i>
+                            </div>
+                            <div class="content">
+                                <p class="d-flex align-items-center">보건복지부 예방 수칙<a href="travel_destination.html">확인하기</a></p>
+                            </div>
+                        </div>
+                        <div class="goodtext">
+                            <label class="goodtext" for="">코로나바이러스감염증(코로나19)은 새롭게 발견된 코로나바이러스로 인해 발생하는 감염 질환입니다.
+                                코로나19에 감염되면 대부분 경증에서 중증 수준의 증상을 보이며 특별한 치료 없이도 질환으로부터 회복합니다.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="save2" style="float: left;" style="float: left; margin-left: 350px;">
+                        <div class="single_destination2">
+                            <div class="thumb1" style="margin-top: 30px;">
+                                <img src="${pageContext.request.contextPath}/resources/images/corona/corona61.png" alt=""><i class="fas fa-child" style="font-size: 60px; float: right; color: black;"></i>
+                            </div>
+                            <div class="content" >
+                                <p class="d-flex align-items-center" style="color: black;">서울시 코로나 심리지원단<a href="http://covid19seoulmind.org/">응원하기</a></p>
+                            </div>
+                        </div>
+                        <div class="goodtext">
+                            <label class="goodtext" for="">서울시는 covid19가 지역 사회 감염으로 진행됨에 따라 발생할 수 있는 여러 심리적 어려움을 예방 및 최소화하기 위해 심리지원단을 운영합니다.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="save1" style="float: left; margin-left: 400px;" >
+                        <div class="single_destination2">
+                            <div class="thumb1" style="margin-top: 30px;">
+                                <img src="${pageContext.request.contextPath}/resources/images/corona/corona8.png" alt=""><i class="fas fa-blind" style="font-size: 60px; float: right;"></i>
+                            </div>
+                            <div class="content">
+                                <p class="d-flex align-items-center">해외입국시 확인사항<a href="travel_destination.html">확인</a></p>
+                            </div>
+                        </div>
+                        <div class="goodtext">
+                            <label class="goodtext" for="">최근 해외입국자 중 확진환자 발생사례가 증가하고 있습니다. 지역사회 감염병 확산방지를 위하여 해외에서 입국 
+                                예정인 가족이 있을 경우 사전에 보건소로 신고해 주시고 무증상자도 입국 즉시 코로나19 검체검사 및 입국일로부터 14일간 자가격리를 실시하여야 합니다.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <footer class="first" id="bottom"
 		style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
 	<div class="second">
