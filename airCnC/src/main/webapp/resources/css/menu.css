@@ -1,17 +1,12 @@
 @charset "UTF-8";
-
 .menudiv1 {
   background: rgb(025, 025, 025);
-  height: 100px;
-  width: 100%;
   position: sticky;
-  z-index: 100;
   text-align: center;
+  z-index: 100;
 }
 .menudiv2-1 {
   float: left;
-  margin-top: 1%;
-  margin-left: 1%;
 }
 .menudiv2-1 label {
   font-size: 15px;
@@ -19,28 +14,17 @@
   color: #ff5a5f;
 }
 .menudiv2-2 {
-  overflow: hidden;
   margin-left: 75%;
-  padding-top: 20px;
 }
-.menudiv3-1 {
-  float: none;
-}
+
 #menuItems {
   list-style: none;
 }
-.item1 {
+.item {
   float: left;
-  text-align: center;
   font-size: 20px;
-  margin-top: 10px;
+  margin-left: 40px;
 }
-.item1,
-a {
-  font-size: 25px;
-  padding-left: 8px;
-}
-
 .menudiv3-2 {
   margin-left: 100px;
   float: left;
@@ -50,10 +34,12 @@ a {
   height: 60px;
   width: 60px;
 }
-.a:hover {
-  color: #ff5a5f;
-<<<<<<< HEAD
+.logo1 {
+  background: rgb(025, 025, 025);
+  text-align: center;
+  z-index: 100;
 }
-=======
+.logolist {
+  float: right;
+  vertical-align: middle;
 }
->>>>>>> refs/heads/master
