@@ -48,7 +48,7 @@ body {
 button {
   color: white;
   display: inline-block;
-  width: 89%;
+  width: auto;
   height: auto;
   background-color: #ff5a5f;
   border-radius: 5px;

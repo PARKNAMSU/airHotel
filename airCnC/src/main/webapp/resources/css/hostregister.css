@@ -3,15 +3,11 @@ body {
   font-family: "Jua", sans-serif;
 }
 .form {
-  padding-top: 150px;
-  padding-bottom: 120px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   align-content: center;
 }
-@media (max-width: 767px) {
-  .form {
-    padding: 60px 0;
-  }
-}
+
 .form .hostimage img {
   width: 50px;
   height: 50px;
@@ -178,13 +174,6 @@ svg {
   font-size: 18px;
   padding: 8px;
 }
-.iauth{
-  margin-top: 18px;
-  width: 89%;
-  height: 45px;
-  font-size: 18px;
-  padding: 8px;	
-}
 .checks {
   position: relative;
   margin: 30px 0px 10px 0px;
@@ -272,6 +261,7 @@ svg {
 .my__login__link {
   color: #008489;
   text-decoration: none;
+  font-size: 30px;
   font-weight: bold;
   margin-left: 10px;
 }
@@ -526,6 +516,7 @@ svg {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 /* 지역별 박스 각도 변경 */
 .popular_destination_area .single_destination1 {
   position: relative;
@@ -655,6 +646,7 @@ svg {
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  z-index: 2;
 }
 .popular_destination_area .single_destination2:before {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100 
@@ -764,10 +756,17 @@ svg {
   color: #fff;
 }
 .goodtext {
-  width: 325px;
-  margin-left: 5%;
+  font-size: 18px;
   text-align: center;
   word-break: keep-all;
+}
+.goodtext,
+label {
+  color: black;
+}
+.content,
+p {
+  color: black;
 }
 .content1 {
   margin-top: 5%;
@@ -775,7 +774,7 @@ svg {
   text-align: center;
 }
 .popular_destination_area .goodtext:hover {
-  color: #ff4a52;
+  color: purple;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -790,4 +789,123 @@ svg {
   width: 60%;
   padding: 10px;
 }
+header {
+  padding: 20px;
+  background: rgb(025, 025, 025);
+}
 
+.thumb1 {
+  padding-right: 40px;
+}
+p {
+  font-family: "Jua", sans-serif;
+}
+.menudiv3-1 {
+  float: right;
+  display: flex;
+}
+
+a:hover {
+  color: #ff4a52;
+}
+button {
+  color: white;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: #ff5a5f;
+  border-radius: 5px;
+  font-size: 17px;
+  text-decoration: none;
+  padding: 8px;
+  border: none;
+  font-size: 30px;
+}
+
+.logo {
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 25px;
+  background-color: #09dcdc;
+}
+label {
+  color: #046b6b;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #046b6b;
+}
+input[type="checkbox"]:checked + label {
+  color: #ff5a5f;
+}
+input[type="checkbox"]:checked + p {
+  color: #ff5a5f;
+}
+input[type="checkbox"] {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  border: 3px solid brown;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked {
+  background-color: #ff5a5f;
+}
+.srcachlocation {
+  text-transform: uppercase;
+  position: relative;
+  height: auto;
+  width: 100%;
+  background: #fff;
+  border-radius: 32px;
+}
+.srcachlocation label {
+  width: 90%;
+  font: size 14px;
+  columns: #ff5a5f;
+}
+
+.btn12 {
+  margin-top: 6px;
+  height: 40px;
+  top: 0;
+  right: 0;
+  font-size: 15px;
+  color: #fff;
+  text-align: center;
+  background: #ff5a5f;
+  border-radius: 32px;
+}
+/*
+.popular_destination_area {
+  padding-top: 140px;
+  padding-bottom: 120px;
+  background-color: white;
+  transition: all ease 0.5s;
+}
+.popular_destination_area:hover {
+  transform: rotate(15deg);
+}
+*/
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media screen and (max-width: 900px) {
+}
