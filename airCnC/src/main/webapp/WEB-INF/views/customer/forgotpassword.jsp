@@ -117,12 +117,13 @@ $(document).on("click","#sendPasswordBtn",function() {
 	</c:if>
 	<!-- header-end -->
 	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="sendEmail" method="POST">
-		<div class="container1" style="padding-top: 12.5%;">
+		<div class="container1" style="padding-top: 5%;">
 			<div class="pwtitle">
-				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br/> 
+				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br>
+				<div style="padding-top: 1%;"></div> 
 				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
 			</div>
-			<div style="padding-top: 10%;"></div>
+			<div style="padding-top: 5%;"></div>
 			<div class="emailbox">
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
@@ -139,7 +140,7 @@ $(document).on("click","#sendPasswordBtn",function() {
 				</c:if>
 			</div>
 			<div style="padding-top: 1%;"></div>
-			<button id="sendPasswordBtn" style="width: auto;">비밀번호 재설정</button>
+			<button id="sendPasswordBtn" style="width: 34%;">비밀번호 재설정</button>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
 			</div>

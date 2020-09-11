@@ -250,7 +250,7 @@
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG"/></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
@@ -362,7 +362,7 @@
 			</div>
 		</div>
 		<div class="register1">
-			<button id="reg_submit">가입하기</button>
+			<button id="reg_submit" style="width: 200%">가입하기</button>
 		</div>
 	</form>
 	<div style="margin-bottom: 5%"></div>
