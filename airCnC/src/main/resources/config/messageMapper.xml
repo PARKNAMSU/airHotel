@@ -13,8 +13,15 @@
 		values(#{message_seq},#{message_from_id},#{message_to_id},#{message_content},#{message_type})
 	</insert>
 	<select id="getChatList" resultType="kg.air.cnc.vo.MessageVO" parameterType="String">
-		<![CDATA[SELECT message_to_id, c.customer_name as message_to_name, c.customer_image as message_to_img from message m JOIN customer c 
-		ON m.message_to_id = customer_id WHERE message_from_id =#{value} GROUP BY m.message_to_id, c.customer_image, c.customer_name]]>
+		<![CDATA[SELECT message_to_id, message_from_id, c.customer_name as message_to_name, c.customer_image as message_to_img from message m JOIN customer c 
+		ON m.message_to_id = customer_id WHERE (message_from_id =#{value} or message_to_id =#{value}) and (message_from_id != 'admin' and message_to_id != 'admin') GROUP BY m.message_to_id, message_from_id,c.customer_image, c.customer_name]]>
+	</select>
+	<select id="getChatSec" resultType="kg.air.cnc.vo.MessageVO" parameterType="hashmap">
+		<![CDATA[SELECT message_from_id as message_to_id, c.customer_name as message_to_name, c.customer_image as message_to_img from message m JOIN customer c 
+		ON m.message_from_id = customer_id WHERE message_to_id =#{to_id} and message_from_id=#{from_id} GROUP BY m.message_from_id,message_to_id, c.customer_image, c.customer_name]]>
+	</select>
+	<select id="checkNotMessage" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(message_from_id) WHERE message_from_id = #{from_id} AND message_to_id = #{to_id}
 	</select>
 	<select id="getMessageList" resultType="kg.air.cnc.vo.MessageVO" parameterType="hashmap">
 		select message_seq,message_from_id,message_to_id,message_type,message_content,message_regdate,c1.customer_name as message_from_name, c2.customer_name as message_to_name

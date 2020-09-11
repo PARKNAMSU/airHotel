@@ -28,7 +28,7 @@
 					<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo">통계</a></li>
 					<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a></li>
 					<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a></li>
+					<li class="item"><a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a></li>
 					<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a></li>
 					<li class="item"><a href="/cnc/logout.mdo">로그아웃</a></li>	
                 </ul>

@@ -18,8 +18,6 @@
 			DEFAULT,
 			SYSDATE,
 			#{customer_key},
-			DEFAULT,
-			DEFAULT,
 			DEFAULT, 
 			DEFAULT,
 			DEFAULT,
@@ -42,16 +40,6 @@
 	
 	<select id="login" resultType="kg.air.cnc.vo.CustomerVO" parameterType="String">
 		SELECT customer_id FROM customer WHERE customer_id = #{customer_id}
-	</select>
-	
-	<update id="keepLogin">
-		UPDATE customer SET session_id = #{session_id}, session_limit = #{session_limit} WHERE customer_id = #{customer_id}
-	</update>
-	
-	<select id="checkCustomerWithSessionKey" resultType="kg.air.cnc.vo.CustomerVO">
-		<![CDATA[
-			SELECT customer_id, customer_password, customer_name, customer_email, customer_type, customer_image, customer_phone, customer_blame_warn, customer_blame_stop, customer_regdate, customer_key, session_id, session_limit, customer_stop_end_date, customer_status FROM customer WHERE session_id = #{session_id} AND session_limit > sysdate
-		]]>
 	</select>
 	
 	<update id="changePassword">

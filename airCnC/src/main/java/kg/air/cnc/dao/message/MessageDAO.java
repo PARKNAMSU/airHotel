@@ -23,7 +23,15 @@ public class MessageDAO implements MessageDAOImpl{
 	public List<MessageVO> getChatList(String id) {
 		return sqlSessionTemplate.selectList("MessageDAO.getChatList",id);
 	}
-
+	
+	@Override
+	public MessageVO getChatListSec(Map<String, String> map) {
+		return sqlSessionTemplate.selectOne("MessageDAO.getChatSec",map);
+	}
+	@Override
+	public int checkNotMessage(Map<String, String> map) {
+		return sqlSessionTemplate.selectOne("MessageDAO.checkNotMessage",map);
+	}
 	@Override
 	public List<MessageVO> getMessageList(Map<String, String> map) {
 		return sqlSessionTemplate.selectList("MessageDAO.getMessageList",map);

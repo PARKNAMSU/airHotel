@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
       rel="stylesheet"
     />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/chat.css" />
 
@@ -30,62 +32,72 @@
     <title>Insert title here</title>
   </head>
   <body>
-    <header style="color: #ff5a5f;">
-      <span
-        ><i
-          class="fas fa-images"
-          style="font-size: 35px; padding-left: 20px; float: left;"
-        ></i
-      ></span>
-      <label
-        for=""
-        style="font-size: 40px; background-color: black; color: #ff5a5f;"
-        >쿠폰함</label
-      >
+    <c:if test="${login_session == null }">
+		<script type="text/javascript">location.href ='loginView.do'</script>
+	</c:if>
+	<header class="menudiv1">
+		<div class="menudiv2-1">
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+		</div>
+		<div class="menudiv2-2">
+			<div class="menudiv3-1" id="div1" style="float:left;">
+				<ul id="menuItems">	
+						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
+						<li class="item">
+							<p>
+								<a href="/cnc/selectBoardList.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >공지사항</a>
+							</p>
+						</li>
+						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
+				</ul>
+			</div>
+			<div style="width:50px;height:50px;margin-left:35px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+			</div>
+		</div>
+		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+					<ul>
+						<li><br></li>
+						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
+						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
+						<li ><br></li>
+					</ul>
+		</div>
     </header>
 
     <!-- slider_area_start -->
-
+	<div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_2">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12 col-md-12">
+                            <div class="slider_text text-center">
+                                <h3>My Cupon</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- slider_area_end -->
     <div style="clear: both;"></div>
-
-    <div id="sidediv">
-      <ul id="sidemenu">
-        <li class="menu">
-          <span id="topmenu" style="font-family: 'Jua', sans-serif;"
-            >내정보 관리</span
-          >
-        </li>
-        <li class="menu">
-          <a href="reservationPage.do" style="font-family: 'Jua', sans-serif;"
-            >예약내역</a
-          >
-        </li>
-        <li class="menu">
-          <a href="myFavoriteHouse.do" style="font-family: 'Jua', sans-serif;"
-            >저장한 숙소</a
-          >
-        </li>
-        <li class="menu">
-          <a href="chat.do" style="font-family: 'Jua', sans-serif;">메세지</a>
-        </li>
-        <li class="menu">
-          <a href="#" style="font-family: 'Jua', sans-serif;">회원탈퇴</a>
-        </li>
-        <li class="menu">
-          <a href="#" style="font-family: 'Jua', sans-serif;">쿠폰함</a>
-        </li>
-      </ul>
-    </div>
+	<%@include file="../html/sideMenu.jsp" %>
     <div class="coupon">
       <div class="coupontitle">
-        <label for="">쿠폰관리</label>
+        <label for="" style="font-size:50px; color:black;">쿠폰관리</label>
       </div>
     </div>
     <div class="couponimage" style="margin-top: 50px;">
       <img src="/Mainwork2/images/partyroom.jpg" alt="" />
     </div>
-    <ol>
+    <ol style="color:black;">
     <c:forEach items="${cuponList}" var="cupon">
     	<c:set var="dis" value="${cupon.cupon_discount_money }"/>
     	<li>쿠폰 번호: ${cupon.cupon_number },

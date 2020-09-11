@@ -49,13 +49,21 @@
 		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 						<li><br></li>
-						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="passwordChangeView.do">비밀번호 변경</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
-						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null}">
+						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
 						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
-						<li ><br></li>
+					</c:otherwise>
+				</c:choose>
+				<li ><br></li>
 					</ul>
 		</div>
 	</header>

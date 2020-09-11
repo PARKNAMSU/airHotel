@@ -66,7 +66,7 @@
 								<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo" style="color:white;">통계</a></li>
 								<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo" style="color:white;">호스트관리</a></li>
 								<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo" style="color:white;">로그관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/makeCupon.mdo" style="color:white;">쿠폰관리</a></li>
+								<li class="item"><a href="http://localhost:8080/cnc/makeCuponView.mdo" style="color:white;">쿠폰관리</a></li>
 								<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" style="color:white;">게시판관리</a></li>
 								<li class="item"><a href="/cnc/logout.mdo" style="color:white;">로그아웃</a></li>	
 							</c:otherwise>

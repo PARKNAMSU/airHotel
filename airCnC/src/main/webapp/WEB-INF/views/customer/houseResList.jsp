@@ -54,14 +54,22 @@
 		</div>
 		<div id="mydiv" style="display:none;margin-left:88%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
-						<li><br></li>
-						<li style="margin-bottom:20px;"><a href="">내정보</a></li>
+					<li><br></li>
+						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
+						<li style="margin-bottom:20px;"><a href="passwordChangeView.do">비밀번호 변경</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
 						<li style="margin-bottom:20px;"><a href="myFavoriteHouse.do">저장한 숙소</a></li>
-						<li style="margin-bottom:20px;"><a href="">쿠폰함</a></li>
+						<li style="margin-bottom:20px;"><a href="getCuponList.do">쿠폰함</a></li>
 						<li style="margin-bottom:20px;"><a href="chat.do">메세지</a></li>
+					<c:choose>
+						<c:when test="${social_type ne null}">
+						<li style="margin-bottom:20px;"><a href="kakaologout.do">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
 						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
-						<li ><br></li>
+						</c:otherwise>
+					</c:choose>
+					<li ><br></li>
 					</ul>
 		</div>
 	</header>
@@ -98,7 +106,12 @@
 		<div style="margin-top: 10%;margin-left:0%;">
 			<c:forEach items="${resList }" var="item">
 			<div style="margin-bottom:5%;float:left;font-size:20px;margin-left:5%;">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;"> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
+				<c:if test="${item.customer_image ne null }">
+					<img alt="" src="/cnc/display.do?name=${item.customer_image}" style="width:64px;height:64px;border-radius:70%;"><!-- db에서 받아온 이미지 -->
+				</c:if>
+				<c:if test="${item.customer_image eq null }">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="width:64px;height:64px;border-radius:70%;">
+				</c:if> <a onclick="openChat('${item.reservation_customer_id}')">${item.customer_name }(${item.reservation_customer_id})</a>
 				<b style="margin-left:43%;" onclick="openBlame('${login_session}','${item.reservation_customer_id}')" >신고</b>
 				<br><br>
 				<b>전화번호: ${item.customer_phone }</b>&nbsp;&nbsp;<b>이메일: </b><a href="mailto:${item.customer_email}" style="display:initial;">${item.customer_email }</a><br><br>
