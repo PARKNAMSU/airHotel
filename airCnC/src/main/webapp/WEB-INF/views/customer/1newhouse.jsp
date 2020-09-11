@@ -65,6 +65,8 @@
 		</div>
 	</form:form>	
 	<!--registerform end-->
+	<input type="button" value="뒤로" class="submitbtn"  
+     onclick="location.href='/cnc/myHouse.do'"/>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
