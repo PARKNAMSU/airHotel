@@ -33,7 +33,7 @@
                     data : JSON.stringify(info)
                 }).done(function (data) {
                     //가맹점 서버 결제 API 성공시 로직
-                })
+                });
                 alert("성공적으로 결제되었습니다.");
                 location.href="reservationPage.do";
             } else {
