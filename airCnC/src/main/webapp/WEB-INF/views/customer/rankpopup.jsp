@@ -35,11 +35,11 @@
 	<h1 style="text-align:center;color:red;">별점 선택</h1>
 	<div></div>
 	<div class="stars">
-	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star1">
-	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star2">
-	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star3">
-	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star4">
-	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star5">
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star1" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star2" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star3" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star4" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
+	<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/nostar.png" id="star5" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 	</div><br><br>
 	<form>
 		<input type="hidden" value="0" id="comments_rate">

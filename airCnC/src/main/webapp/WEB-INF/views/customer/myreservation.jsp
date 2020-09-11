@@ -12,12 +12,21 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/menu.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=123">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=126">
 <!-- Latest compiled JavaScript -->
-
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -100,29 +109,29 @@
 		<div style="margin-bottom:5%;margin-left:55%;">
 			<span style="font-size:30px;color:black;">예약하신 숙소가 없으십니까?</span><br><br><button class="btn btn-outline-danger" style="font-size:30px;" onclick="location.href='http://localhost:8080/cnc/themesearchhighscore.do'">숙소 예약하러 가기</button>
 		</div>
-		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()">예약 내역</a> | <a onclick="getResBefore()" id="before">이전 예약</a></h1>
+		<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;"><a id="after" onclick="getRes()" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">예약 내역</a> | <a onclick="getResBefore()" id="before" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">이전 예약</a></h1>
 		<div style="width:50px;height:50px;float:left;margin-top:9%;">
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1">
+		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri.png" class="tri" id="tri1" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 		</div>
-		<div class="subdiv" id="imgdiv1" onclick="">
+		<div class="subdiv" id="imgdiv1" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1"></div>
 		</div>
-		<div class="subdiv" id="imgdiv2" onclick="">
+		<div class="subdiv" id="imgdiv2" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
 			</div>
 			<div class="textdiv" id="td2"></div>
 		</div>
-		<div class="subdiv" id="imgdiv3" onclick="">
+		<div class="subdiv" id="imgdiv3" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
 			</div>
 			<div class="textdiv" id="td3"></div>
 		</div>
-		<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
+		<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/tri2.png" class="tri" style="margin-left: 2%;" id="tri2">
 	</div>
 	
 	<div style="clear:both;"></div>

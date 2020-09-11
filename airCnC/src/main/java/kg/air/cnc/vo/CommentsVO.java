@@ -9,10 +9,18 @@ public class CommentsVO {
 	private String comments_name;
 	private String comments_house_seq;
 	private String comments_content;
+	private String comments_image;
 	private int comments_rate;
 	private Date comments_regdate;
 	private String comments_date;
 	private float comments_average;
+	
+	public String getComments_image() {
+		return comments_image;
+	}
+	public void setComments_image(String comments_image) {
+		this.comments_image = comments_image;
+	}
 	public float getComments_average() {
 		return comments_average;
 	}

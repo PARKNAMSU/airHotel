@@ -4,18 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/myreservation.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/menu.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=123">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myreservation.css?version=126">
 <!-- Latest compiled JavaScript -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -98,10 +109,10 @@
 	
 	<div class="maindiv" id="main">
 	<h1 style="margin-bottom:5%;margin-left:25%;font-size:40px;color:red;">내가 좋아하는  숙소</h1>
-	<c:forEach items="${favoriteList }" var="item">
-		<div class="subdiv" id="imgdiv1" onclick="goToHouse(${item.house_seq},'notres')" style="color:black;margin-top:5%;">
+	<c:forEach items="${favoriteList }" var="item" varStatus="i">
+		<div class="subdiv" id="imgdiv1${i.index+1 }" onclick="goToHouse(${item.house_seq},'notres')" style="color:black;margin-top:5%;">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
+				<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1" style="word-break:break-all;padding:30px;">${item.house_name }</div>
 		</div>

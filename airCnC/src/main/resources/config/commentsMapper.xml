@@ -13,7 +13,8 @@
 	</insert>
 
 	<select id="getComments" parameterType="kg.air.cnc.vo.ReservationHouseDetailVO" resultType="kg.air.cnc.vo.CommentsVO">
-		SELECT comments_seq, comments_id, comments_content, c.customer_name as comments_name, comments_rate, comments_regdate FROM comments
+		SELECT comments_seq, comments_id, comments_content, c.customer_name as comments_name, comments_rate, comments_regdate, 
+		(select customer_image from customer where customer_id = comments_id) as comments_image FROM comments
 		JOIN customer c ON comments_id = customer_id WHERE comments_house_seq = #{house_seq}  ORDER BY comments_seq DESC
 	</select>
 	<select id="getCommentsForMe" parameterType="String" resultType="kg.air.cnc.vo.MyCommentsVO" >

@@ -14,24 +14,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menuTest.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hostregister.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
-
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
 <!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-
+<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 <!-- pdf,excel -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/javascript/jquery.table2excel.js"></script>
@@ -49,33 +47,58 @@
 
 </head>
 <body>
-	<header class="menudiv1" style="position: sticky;">
-		<div class="menudiv2-1">
-			<img alt="" src="${pageContext.request.contextPath}/resources/image/trip/logo2.png" />
-		</div>
-		<div class="menudiv2-2" style="margin-left:56%">
-			<div class="menudiv3-1" id="div1" >
-				<ul id="menuItems" >
-					<c:catch>
-						<c:choose>
-							<c:when test="${admin_session eq null}">
-								<script>history.go(-1);</script>
-							</c:when>
-							<c:otherwise>
-								<li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo" style="color:white;">신고관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo" style="color:white;">통계</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo" style="color:white;">호스트관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo" style="color:white;">로그관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/makeCuponView.mdo" style="color:white;">쿠폰관리</a></li>
-								<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" style="color:white;">게시판관리</a></li>
-								<li class="item"><a href="/cnc/logout.mdo" style="color:white;">로그아웃</a></li>	
-							</c:otherwise>
-						</c:choose>
-					</c:catch>
-				</ul>
-			</div>
-		</div>
-	</header>
+	<header class="logo" style="position: sticky;height:110px;">
+      <span>
+        <a href="/cnc/indexView.do">
+          <i
+            class="fas fa-signal"
+            style="font-size: 35px; float: left; color: #ff5a5f;"
+          ></i>
+        </a>
+      </span>
+      <label for="" class="loglabel">Sales Chart </label>
+      <div class="menudiv3-1" id="div1">
+        <ul id="menuItems">
+          <c:catch>
+            <c:choose>
+              <c:when test="${admin_session eq null}">
+                <script>
+                  history.go(-1);
+                </script>
+              </c:when>
+              <c:otherwise>
+                <li class="item1">
+                  <a href="blamelist.mdo" style="color:black;">신고관리</a>
+                </li>
+                <li class="item1">
+                  <a href="salesChart.mdo" style="color:black;">통계</a>
+                </li>
+                <li class="item1">
+                  <a href="getRegisterWaitingList.mdo"
+                   style="color:black;" >호스트관리</a
+                  >
+                </li>
+                <li class="item1">
+                  <a href="logPage.mdo" style="color:black;">로그관리</a>
+                </li>
+                <li class="item1">
+                  <a href="makeCupon.mdo" style="color:black;">쿠폰관리</a>
+                </li>
+                <li class="item1">
+                  <a href="goNoticeListAdmin.mdo"
+                   style="color:black;" >게시판관리</a
+                  >
+                </li>
+                <li class="item1">
+                  <a href="logout.mdo" style="color:black;" >로그아웃</a>
+                </li>
+              </c:otherwise>
+            </c:choose>
+          </c:catch>
+        </ul>
+        <a class="logbars" href="#"><i class="fas fa-bars"></i></a>
+      </div>
+    </header>
 	<div style="clear:both;"></div>
     <!-- slider_area_start -->
     <div class="slider_area">
@@ -182,7 +205,19 @@ $(document).ready(function() {
 			$("#tr"+i).remove()
 		}
 		instanceNum = this.value
-		
+		if(allElement%10 == 0){
+			allArea = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
+		}else{
+			allArea = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
+		}
+		area = 1;
+		loadLog(1);
+		$("#prev").css('display','none')
+		var a=1;
+		for(var i=area ;i<area+5;i++){
+			$("#page"+a).html(a+(5*(area-1)));
+			a = a+1
+		}	
 		for(var i=1;i<=instanceNum; i++){
 			var innerHtml = "";
 			innerHtml += '<tr id="tr'+i+'"><td id="seq'+i+'"></td><td id="name'+i+'"></td><td id="state'+i+'"></td><td id="type'+i+'"></td><td id="date'+i+'"></td></tr>'
@@ -247,7 +282,6 @@ if(allElement%10 == 0){
 	allArea = Math.floor(allElement/(instanceNum*areaToPageNum));//5는 나중에 사용자 설정으로 변경(한페이에서의 row 수,한 에어리어의 페이지 수)
 }else{
 	allArea = Math.floor(allElement/(instanceNum*areaToPageNum)) +1;
-	alert(allArea);
 }
 if(allArea <= 1){
 	$("#next").css('display','none');
