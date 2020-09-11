@@ -68,12 +68,12 @@
 </c:if>
 <c:if test="${login_session ne null }">
 	<header class="menudiv1">
-		<div class="menudiv2-1">
+		<div class="menudiv2-1" style="margin:0 0 10px;">
 			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
-		<div class="menudiv2-2">
+		<div class="menudiv2-2" style="padding:0 0 4px;">
 			<div class="menudiv3-1" id="div1" style="float:left;width:70%;">
-				<ul id="menuItems">	
+				<ul id="menuItems" style="padding:12px;">	
 						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">
 							<p>
@@ -83,7 +83,7 @@
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:5%;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:5%;margin-top:10px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
 			</div>
 		</div>
