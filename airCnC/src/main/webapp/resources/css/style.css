@@ -26,9 +26,7 @@
 /* Large Mobile :480px. */
 /* line 6, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
 body {
-  font-family: "Rubik", sans-serif;
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Jua", sans-serif;
 }
 
 /* line 13, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
@@ -82,8 +80,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Rubik", sans-serif;
-  color: #001d38;
+
 }
 
 /* line 44, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
@@ -93,7 +90,7 @@ h3 a,
 h4 a,
 h5 a,
 h6 a {
-  color: inherit;
+
 }
 
 /* line 53, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
@@ -114,7 +111,7 @@ p {
   line-height: 28px;
   color: #7a838b;
   margin-bottom: 0px;
-  font-family: "Rubik", sans-serif;
+
 }
 
 /* line 69, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
