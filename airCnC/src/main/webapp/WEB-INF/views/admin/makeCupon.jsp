@@ -6,10 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/sideMenu.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/chat.css" />
 	<link href="${pageContext.request.contextPath}/resources/css/hostdtail1.css"/>
@@ -19,8 +16,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="${pageContext.request.contextPath}/resources/css/hostdetail1.css"
-    />
+      href="${pageContext.request.contextPath}/resources/css/hostdetail1.css"/>
     <!-- Latest compiled and minified CSS -->
 
     <!-- jQuery library -->
