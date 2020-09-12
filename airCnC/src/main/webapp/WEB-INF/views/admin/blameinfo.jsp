@@ -82,14 +82,14 @@
             ${blame_target_member_id}
             <c:forEach var="item" items="${blameinfo}" begin="0" end="${blameinfo.size()}" step="1">
                 <tr>
-                    <td>${item.blame_member_id}</td>
-                    <td>${item.blame_content}</td>
+                    <td><a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}">${item.blame_member_id}</a></td>
+                    <td><a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}">${item.blame_content}</a></td>
                     <td><c:set var="blame_type" value="${item.blame_type}"/>
                         <c:if test="${blame_type eq 0}">
-                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="HOST"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="호스트 관련 신고"/></a>
                         </c:if>
                         <c:if test="${blame_type eq 1}">
-                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="CUSTOMER"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="일반사용자 관련 신고"/></a>
                         </c:if>
                     </td>
                 </tr>
