@@ -226,7 +226,7 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 					<h3 style="font-size: 15px; font-weight: bold;">호스트일 경우 본인의 계좌번호입니다</h3>
 					<div style="padding-top: 5%;"></div>
 					<span>
-						<select name="customer_refund_bank" class="customerRefundBank" style="width:113%; height:50px;">
+						<select name="customer_refund_bank" class="customerRefundBank" style="width:103%; height:50px;">
 					       <option value="${customerBank}" selected="selected">${customerBank}</option>
 					       <option value=''>-은행을 선택하세요-</option>
 					       <option value="카카오뱅크">카카오뱅크</option>
