@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwfint.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostregister.css" />
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 <link
     rel="stylesheet"
@@ -117,7 +118,7 @@ $(document).on("click","#sendPasswordBtn",function() {
 	</c:if>
 	<!-- header-end -->
 	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="sendEmail" method="POST">
-		<div class="container1" style="padding-top: 5%;">
+		<div class="container1" style="padding-top: 5%; text-align: center;">
 			<div class="pwtitle">
 				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br>
 				<div style="padding-top: 1%;"></div> 
@@ -140,7 +141,8 @@ $(document).on("click","#sendPasswordBtn",function() {
 				</c:if>
 			</div>
 			<div style="padding-top: 1%;"></div>
-			<button id="sendPasswordBtn" style="width: 34%;">비밀번호 재설정</button>
+			<button id="sendPasswordBtn" style="width: 19%;">비밀번호 재설정</button>
+			<div style="padding-top: 1%;"></div>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
 			</div>
