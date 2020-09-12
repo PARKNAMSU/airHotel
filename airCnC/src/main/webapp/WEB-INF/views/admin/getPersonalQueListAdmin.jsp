@@ -9,60 +9,74 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>1대1문의-관리자 페이지</title>
-	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
-	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
-	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/css/admin/admin_singo_complete.css">
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
+	<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
+    </head>
 	<style>
 	
 		
 	#main-menu li:nth-child(4)>a {
 		border-left: 1px solid #ee575d;
 	}
+	.menu a {
+        cursor: pointer;
+    }
+
+    .menu .hide {
+        display: none;
+    }
 
 	 </style>
-</head>
+
 <body>
-	<header class="menudiv1">
-        <div class="menudiv2-1">
-            <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png">
-        </div>
-        <div class="menudiv2-2">
-            <div class="menudiv3-1" id="div1">
-                <ul id="menuItems">
-                    <li class="item">호스트</li>
-                    <!-- 히든으로 리스트 -->
-                    <li class="item">로그인</li>
+	<!-- header-start -->
+<header style="color: #ff5a5f;">
+    <div class="headermenu">
+        <span><i class="fas fa-user-slash" style="font-size: 35px; float: left;"></i></span>
+        <label for="" style="font-size: 40px; background-color: black; color: #ff5a5f;">자기관리로 바꿈</label>
+        <ul>
+            <li class="menu" style="list-style: none;">
+                <label for="" style="font-size: 40px;">메뉴</label>
+                <ul class="hide" style="list-style: none; padding-top: 25px; float: initial; padding-right: 20px;">
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/salesChart.mdo">통계</a>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a>
+                    </li>
+                    <li class="item">
+                        <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a>
+                    </li>
+                    <li class="item">
+                        <a href="/cnc/logout.mdo" style="color: white;">로그아웃</a>
+                    </li>
                 </ul>
-            </div>
-        </div>
-    </header>
-    
-    <div class="bradcam_area bradcam_bg_5">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>notice</h3>
-                        <p>1대1문의 관리</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
+</header>
+<!-- header-end -->
+    
     
     <div class="container">
     
@@ -85,6 +99,8 @@
 				<h2>1대1문의 관리</h2>
 				<hr>
 				<span class="byline">전체 1대1문의를 관리합니다.</span><br><br>
+				<button id="gonjibtn" type="button" onclick="">
+				질문의 제목을 눌러주세요</button>
 			</div>
 			
 		<ul class="style1">
@@ -159,4 +175,52 @@
 		</div>
 	</footer>
 </body>
+<script>
+    function numberCounter(target_frame, target_number) {
+        this.count = 0;
+        this.diff = 0;
+        this.target_count = parseInt(target_number);
+        this.target_frame = document.getElementById(target_frame);
+        this.timer = null;
+        this.counter();
+    }
+
+    numberCounter.prototype.counter = function () {
+        var self = this;
+        this.diff = this.target_count - this.count;
+
+        if (this.diff > 0) {
+            self.count += Math.ceil(this.diff / 5);
+        }
+
+        this.target_frame.innerHTML = this.count
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if (this.count < this.target_count) {
+            this.timer = setTimeout(function () {
+                self.counter();
+            }, 20);
+        } else {
+            clearTimeout(this.timer);
+        }
+    };
+
+    new numberCounter("counter1", ${blameCount[0]+blameCount[1]});
+    new numberCounter("counter2", ${blameCount[0]});
+    new numberCounter("counter3", ${blameCount[1]});
+    </script>
+
+    <script>
+    jQuery(document).ready(function () {
+        jQuery(".menu>label").click(function () {
+            var submenu = jQuery(this).next("ul");
+            if (submenu.is(":visible")) {
+                submenu.slideUp();
+            } else {
+                submenu.slideDown();
+            }
+        });
+    });
+</script>
 </html>
