@@ -51,7 +51,7 @@
           ></i>
         </a>
       </span>
-      <label for="" class="loglabel">Sales Chart </label>
+      <label for="" class="loglabel">Reservation Chart </label>
       <div class="menudiv3-1" id="div1">
         <ul id="menuItems">
           <c:catch>
@@ -103,7 +103,7 @@
 					<div class="row align-items-center">
 						<div class="col-xl-12 col-md-12">
 							<div class="slider_text text-center">
-								<h3>Host Reservation Chart</h3>
+								<h3>Reservation Chart</h3>
 								<p>Pixel perfect design with awesome contents</p>
 							</div>
 						</div>

@@ -85,25 +85,7 @@
 		})
 	</script>
 	<div style="clear:both;"></div>
-	 <!-- slider_area_start -->
-    <div class="slider_area">
-        <div class="slider_active owl-carousel">
-            <div class="single_slider  d-flex align-items-center slider_bg_2">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-12 col-md-12">
-                            <div class="slider_text text-center">
-                                <h3>My Favorite House</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
 
-    </div>
-    <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	<%@include file="../html/sideMenu.jsp" %>
 	

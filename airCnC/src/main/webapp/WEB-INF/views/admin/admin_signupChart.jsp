@@ -51,7 +51,7 @@
           ></i>
         </a>
       </span>
-      <label for="" class="loglabel">Sales Chart </label>
+      <label for="" class="loglabel">SignUp Chart </label>
       <div class="menudiv3-1" id="div1">
         <ul id="menuItems">
           <c:catch>
