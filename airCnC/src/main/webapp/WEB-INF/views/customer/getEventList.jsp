@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<style>
 	#main-menu li:nth-child(2)>a {
 		border-left: 1px solid #ee575d;
@@ -53,7 +53,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>Event</h3>
-                        <p>이벤트는 여기에요</p>
+                        <p>이벤트 목록</p>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
 	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/selectCommonQueList.do" aria-label="subemnu">자주묻는질문</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -87,8 +87,8 @@
 					<c:when test="${!empty eventList}">
 						<c:forEach items="${eventList }" var="event">
 							<li id="event_li">
-			 				<b>${event.event_title }</b><br><br>
-			 				<span>기간 : ${event.event_start } ~ ${event.event_end }</span><br><br>
+			 				<b style="color: black;">${event.event_title }</b><br><br>
+			 				<span style="color: black;">기간 : ${event.event_start } ~ ${event.event_end }</span><br><br>
 			 				
 			 				<a href='<c:url value='/partiEvent/${event.event_idx}.do${paging.makeQueryPage(event.event_idx, paging.cri.page) }'/>'>
 			 					<img id="image1" src="${pageContext.request.contextPath}/resources/images/여기어때2.png">

@@ -32,7 +32,7 @@
 		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<style>
 	.title {
 		margin-bottom: 3em;
@@ -103,7 +103,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>Event</h3>
-                        <p>사용자-이벤트상세 화면이에요</p>
+                        <p>이벤트 상세</p>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goaddPersonalQue.do" aria-label="subemnu">1대1 문의</a></li>
 	        <li><a href="/cnc/selectPersonalQueList.do" aria-label="subemnu">나의 질문</a></li>
-	        <li><a href="#" aria-label="subemnu">안내</a></li>
+	        <li><a href="/cnc/selectCommonQueList.do" aria-label="subemnu">자주묻는질문</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -144,8 +144,7 @@
 							<img id=imageEventDetail src="${pageContext.request.contextPath}/resources/images/여기어때3.jpg">
           					
 							<input type="hidden" name="idx" value="${detail.event_idx }">
-          					<a href="#" onclick="TakeSubmit();" id="takeBtn" class="submitbtn"><button>쿠폰발급받기</button></a>
-          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로가기</button></a>
+          					<a href="#" onclick="ListSubmit();" id="listBtn" ><button>뒤로가기</button></a>
           					
                 </form>
 			</li>

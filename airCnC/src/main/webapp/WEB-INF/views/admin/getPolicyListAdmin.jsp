@@ -53,7 +53,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>policy</h3>
-                        <p>관리자-약관정책은 여기에요</p>
+                        <p>약관정책 관리</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
-	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
+	        <li><a href="/cnc/goCommonQueListAdmin.mdo" aria-label="subemnu">자주묻는질문 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -92,7 +92,7 @@
 						<li class="first">
 							<p class="date"><fmt:formatDate value="${policy.policy_regdate }" pattern="yyyy-MM-dd"/></p>
 							<h3>글번호 : ${policy.policy_idx }번</h3>
-							<p><a href='<c:url value='/detailPolicy/${policy.policy_idx }.mdo${paging.makeQueryPage(policy.policy_idx, paging.cri.page) }'/>'>${policy.policy_title }</a></p>
+							<p><a href='<c:url value='/detailPolicy/${policy.policy_idx }.mdo${paging.makeQueryPage(policy.policy_idx, paging.cri.page) }'/>' style="color: black;">${policy.policy_title }</a></p>
 						</li>         
 
 				</c:forEach>

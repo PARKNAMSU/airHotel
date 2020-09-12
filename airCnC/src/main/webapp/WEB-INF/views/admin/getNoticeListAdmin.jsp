@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	<style>
 	#main-menu li:nth-child(1)>a {
@@ -53,7 +54,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>notice</h3>
-                        <p>관리자-공지사항은 여기에요</p>
+                        <p>공지사항 관리</p>
                     </div>
                 </div>
             </div>
@@ -71,7 +72,7 @@
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
-	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
+	        <li><a href="/cnc/goCommonQueListAdmin.mdo" aria-label="subemnu">자주묻는질문 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>

@@ -16,6 +16,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostregister.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostdetail1.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mypage.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -79,41 +84,53 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 </head>
 <body>
 <c:if test="${login_session eq null}">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-					<li class="item">
-						<p>
-							<a href="/cnc/registerView.do">회원가입</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="/cnc/loginView.do">로그인</a>
-						</p>
-					</li>
-					<li class="item">
-						<p>
-							<a href="/cnc/selectBoardList.do">공지사항</a>
-						</p>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</header>
+	<header class="logo">
+        <span>
+          <a href="/cnc/indexView.do">
+            <i
+              class="fas fa-registered"
+              style="
+                font-size: 35px;
+                padding-left: 20px;
+                float: left;
+                color: #ff5a5f;
+              "
+            ></i>
+          </a>
+        </span>
+        <label for="fas fa-question" style="font-size: 40px;"
+          >회원가입
+        </label>
+        <div class="menudiv3-1" id="div1">
+          <ul id="menuItems">
+            <li class="item">
+              <p>
+                <a href="/cnc/registerView.do">회원가입</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/loginView.do">로그인</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/selectBoardList.do">공지사항</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </header>
 </c:if>
 <c:if test="${login_session ne null}">
 <div id="saveOK" class="alert alert-warning hidden" role="alert"></div>
 	<header class="menudiv1">
 		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+			<a href="/cnc/indexView.do"><img alt=""
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1" style="float:left;width:70%;">
+			<div class="menudiv3-1" id="div1" style="float:left;">
 				<ul id="menuItems">	
 						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">
@@ -124,13 +141,13 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:5%;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:25px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
 			</div>
 		</div>
-		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+		<div id="mydiv" style="display:none;margin-left:85%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
-						<li><br></li>
+					<li><br></li>
 						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
 						<li style="margin-bottom:20px;"><a href="passwordChangeView.do">비밀번호 변경</a></li>
 						<li style="margin-bottom:20px;"><a href="reservationPage.do">예약한 숙소</a></li>
@@ -143,10 +160,10 @@ $(document).on("click","#customerInfoUpdateBtn",function() {
 					</c:when>
 					<c:otherwise>
 						<li style="margin-bottom:20px;"><a href="logout.do">로그아웃</a></li>
-					</c:otherwise>
-				</c:choose>
-				<li ><br></li>
-			</ul>
+						</c:otherwise>
+					</c:choose>
+					<li ><br></li>
+					</ul>
 		</div>
 	</header>
 	<script type="text/javascript">

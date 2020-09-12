@@ -72,32 +72,21 @@ input[type="submit"] {
 		<h4>숙소를 등록한 후 언제든 숙소를 수정할 수 있습니다.</h4>
 		<div class="hoststep">
 			<ul>
-				<li><a href="/cnc/update_2housedetailopen.do">인원 및 침실</a></li>
-<<<<<<< HEAD
-				<li><a href="/cnc/update_3bathcountopen.do">욕실 및 공용여부</a></li>
-				<li><a href="/cnc/update_4locationopen.do">숙소 위치</a></li>
-				<li><a href="/cnc/update_5defaultoptionopen.do">숙소옵션 및 안전시설</a></li>
-				<li><a href="/cnc/update_6guestcomfortableopen.do">숙소내 편의시설</a></li>
-				<li><a href="/cnc/update_7guesttextareaopen.do">숙소 설명</a></li>
-				<li><a href="/cnc/update_8hosthouseimgopen.do">숙소 사진</a></li>
-				<li><a href="/cnc/update_9hosttitleopen.do">숙소 제목</a></li>
-				<li><a href="/cnc/update_10chargeopen.do">사용요금 및 시간</a></li>
-				<li><a href="/cnc/update_11restrictthemeopen.do">테마 및 주의사항</a></li>
-=======
-				<a href=""><li>욕실 및 공용여부</li></a>
-				<a href=""><li>숙소 위치</li></a>
-				<a href=""><li>숙소 사진</li></a>
-				<a href=""><li>숙소옵션 및 안전시설</li></a>
-				<a href=""><li>숙소내 편의시설</li></a>
-				<a href=""><li>숙소 설명</li></a>
-				<a href=""><li>숙소 사진</li></a>
-				<a href=""><li>숙소 제목</li></a>
-				<a href=""><li>사용요금 및 시간</li></a>
-				<a href=""><li>테마 및 주의사항</li></a>
->>>>>>> refs/heads/master
+				<a href="/cnc/update_2housedetailopen.do"><li>인원 및 침실</li></a>
+				<a href="/cnc/update_3bathcountopen.do"><li>욕실 및 공용여부</li></a>
+				<a href="/cnc/update_4locationopen.do"><li>숙소 위치</li></a>
+				<a href="/cnc/update_5defaultoptionopen.do"><li>숙소옵션 및 안전시설</li></a>
+				<a href="/cnc/update_6guestcomfortableopen.do"><li>숙소내 편의시설</li></a>
+				<a href="/cnc/update_7guesttextareaopen.do"><li>숙소 설명</li></a>
+				<a href="/cnc/update_8hosthouseimgopen.do"><li>숙소 사진</li></a>
+				<a href="/cnc/update_9hosttitleopen.do"><li>숙소 제목</li></a>
+				<a href="/cnc/update_10chargeopen.do"><li>사용요금 및 시간</li></a>
+				<a href="/cnc/update_11restrictthemeopen.do"><li>테마 및 주의사항</li></a>
 			</ul>
 		</div>
 		<input type="submit" value="확인" style="margin-left: 85%;" />
+		<input type="button" value="뒤로" class="submitbtn"  
+     		onclick="location.href='/cnc/1newhouse.do'"/>
 	</div>
 
 </body>

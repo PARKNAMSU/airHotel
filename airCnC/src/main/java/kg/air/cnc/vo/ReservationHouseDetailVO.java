@@ -611,6 +611,52 @@ public class ReservationHouseDetailVO {
 	public void setHost_regdate(Date host_regdate) {
 		this.host_regdate = host_regdate;
 	}
+	@Override
+	public String toString() {
+		return "ReservationHouseDetailVO [house_seq=" + house_seq + ", house_maxperson=" + house_maxperson
+				+ ", house_bed_amount=" + house_bed_amount + ", house_bed_type_single=" + house_bed_type_single
+				+ ", house_bed_type_double=" + house_bed_type_double + ", house_bed_type_queen=" + house_bed_type_queen
+				+ ", house_bathroom_amount=" + house_bathroom_amount + ", house_location=" + house_location
+				+ ", house_location_sido=" + house_location_sido + ", house_location_gugun=" + house_location_gugun
+				+ ", house_location_postnum=" + house_location_postnum + ", house_defaultsetting="
+				+ house_defaultsetting + ", house_default_tv=" + house_default_tv + ", house_default_wifi="
+				+ house_default_wifi + ", house_default_heater=" + house_default_heater + ", house_default_cooler="
+				+ house_default_cooler + ", house_default_iron=" + house_default_iron + ", house_default_fireditecter="
+				+ house_default_fireditecter + ", house_default_coditecter=" + house_default_coditecter
+				+ ", house_default_aidkit=" + house_default_aidkit + ", house_default_firesofwa="
+				+ house_default_firesofwa + ", house_default_bedrock=" + house_default_bedrock
+				+ ", house_default_livingroom_type=" + house_default_livingroom_type + ", house_default_kitchen="
+				+ house_default_kitchen + ", house_default_laundry_washer=" + house_default_laundry_washer
+				+ ", house_default_laundry_dryer=" + house_default_laundry_dryer + ", house_default_parking="
+				+ house_default_parking + ", house_default_gym=" + house_default_gym + ", house_default_pool="
+				+ house_default_pool + ", house_desc1=" + house_desc1 + ", house_desc2=" + house_desc2
+				+ ", house_desc3=" + house_desc3 + ", house_desc4=" + house_desc4 + ", house_desc5=" + house_desc5
+				+ ", house_photourl=" + house_photourl + ", house_photourl_list=" + house_photourl_list
+				+ ", house_name=" + house_name + ", house_condition_childok=" + house_condition_childok
+				+ ", house_condition_babyok=" + house_condition_babyok + ", house_condition_smokeok="
+				+ house_condition_smokeok + ", house_condition_partyok=" + house_condition_partyok
+				+ ", house_condition_petok=" + house_condition_petok + ", house_restrict_stairs="
+				+ house_restrict_stairs + ", house_restrict_noise=" + house_restrict_noise + ", house_restrict_pet="
+				+ house_restrict_pet + ", house_restrict_cantpark=" + house_restrict_cantpark
+				+ ", house_restrict_commonspace=" + house_restrict_commonspace + ", house_restrict_facility="
+				+ house_restrict_facility + ", house_restrict_cctv=" + house_restrict_cctv + ", house_restrict_weapon="
+				+ house_restrict_weapon + ", house_restrict_beast=" + house_restrict_beast + ", house_xlocation="
+				+ house_xlocation + ", house_ylocation=" + house_ylocation + ", fhouse_xlocation=" + fhouse_xlocation
+				+ ", fhouse_ylocation=" + fhouse_ylocation + ", house_price_default=" + house_price_default
+				+ ", house_price_max=" + house_price_max + ", house_checkin_time=" + house_checkin_time
+				+ ", house_checkout_time=" + house_checkout_time + ", house_status=" + house_status
+				+ ", house_status_text=" + house_status_text + ", host_id=" + host_id + ", host_name=" + host_name
+				+ ", host_image=" + host_image + ", host_phone=" + host_phone + ", host_regdate=" + host_regdate
+				+ ", reservation_status_text=" + reservation_status_text + ", reservation_seq=" + reservation_seq
+				+ ", reservation_status=" + reservation_status + ", reservation_price=" + reservation_price
+				+ ", reservation_customer_id=" + reservation_customer_id + ", check_in_day=" + check_in_day
+				+ ", house_person=" + house_person + ", check_in=" + check_in + ", check_out=" + check_out
+				+ ", reservation_check_in=" + reservation_check_in + ", reservation_check_out=" + reservation_check_out
+				+ ", convinList=" + convinList + ", restricList=" + restricList + ", conditionList=" + conditionList
+				+ ", accessType=" + accessType + ", favoriteHouse_String=" + favoriteHouse_String
+				+ ", favoriteHouse_list=" + favoriteHouse_list + ", favorite_state=" + favorite_state
+				+ ", customer_name=" + customer_name + ", customer_phone=" + customer_phone + "]";
+	}
     
 	
 }

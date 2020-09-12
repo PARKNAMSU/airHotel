@@ -24,6 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
 	<style>
 	
@@ -56,7 +57,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>notice</h3>
-                        <p>관리자-1대1문의는 여기에요</p>
+                        <p>1대1문의 관리</p>
                     </div>
                 </div>
             </div>
@@ -74,7 +75,7 @@
 	    <li><a href="#">고객센터</a>
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
-	        <li><a href="안내.html" aria-label="subemnu">안내 관리</a></li>
+	        <li><a href="/cnc/goCommonQueListAdmin.mdo" aria-label="subemnu">자주묻는질문 관리</a></li>
 	      </ul>
 	    </li>
 	   </ul>
@@ -95,7 +96,7 @@
 							<p class="date"><fmt:formatDate value="${personalq.personalq_regdate }" pattern="yyyy-MM-dd"/></p>
 							<h3>글번호 : ${personalq.personalq_idx }번 / 분류 : ${personalq.personalq_type }</h3>
 							<p><a href='<c:url value='/detailPersonalQue/${personalq.personalq_idx }.mdo
-							${paging.makeQueryPage(personalq.personalq_idx, paging.cri.page) }'/>'>${personalq.personalq_title }</a></p>
+							${paging.makeQueryPage(personalq.personalq_idx, paging.cri.page) }'/>' style="color: black;">${personalq.personalq_title }</a></p>
 						</li>         
 
 				</c:forEach>

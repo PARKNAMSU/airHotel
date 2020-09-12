@@ -23,7 +23,14 @@
 	<script type="text/javascript">
 		function hosthouseimgSubmit() {
 			var f = document.hostpic;
+			
+			
+			if(!f.house_photo.value){
+				alert('메인 사진은 반드시 선택하셔야합니다.');
+				return;
+			}
 			f.submit();
+			
 		}
 		
 		
@@ -67,7 +74,8 @@
         <div class="filebox">
         	<hr>
 			<p>이전 선택한 파일 : ${house.house_photourl }</p>
-			<img alt="이미지" src="/upload_img/${house.house_photourl }" style="width:200px; height: 200px;" />
+			<img alt="${house.house_photourl}" src="/upload_img/${house.house_photourl}" style="width:200px; height: 200px;" />
+			
 			<hr>
 			<input type="file" name="house_photo" id="house_photo" />
             <label for="image" style="color: black;">첨부할 사진을 선택하세요</label>

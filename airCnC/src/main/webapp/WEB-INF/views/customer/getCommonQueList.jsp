@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<style>
 	#main-menu li:nth-child(4)>a {
 		border-left: 1px solid #ee575d;
@@ -123,7 +123,7 @@
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
                         <h3>Contact</h3>
-                        <p>자주묻는질문은 여기에요</p>
+                        <p>자주묻는질문</p>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
 				<c:forEach items="${commonqList }" var="commonq">
 					<tr>
 						<td>${commonq.commonq_type }</td>
-						<td id="longtitle"><a href="#1" name="trigger">${commonq.commonq_title }</a></td>
+						<td id="longtitle"><a href="#1" name="trigger"style="color: black;">${commonq.commonq_title }</a></td>
 						<td><fmt:formatDate value="${commonq.commonq_regdate }" pattern="yyyy-MM-dd"/></td>
 					</tr>
 					<tr name="article" class="hide">

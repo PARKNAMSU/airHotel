@@ -14,7 +14,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/pwfint.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -49,33 +54,43 @@ $(document).on("click","#sendPasswordBtn",function() {
 <body>
 	<!-- header-start -->
 	<c:if test="${login_session eq null }">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">		
-						<li class="item">
-							<p>
-								<a href="/cnc/registerView.do">회원가입</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/loginView.do">로그인</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
-							</p>
-						</li>
-				</ul>
-			</div>
-		</div>
-	</header>
+	<header class="logo">
+        <span>
+          <a href="/cnc/indexView.do">
+            <i
+              class="fas fa-registered"
+              style="
+                font-size: 35px;
+                padding-left: 20px;
+                float: left;
+                color: #ff5a5f;
+              "
+            ></i>
+          </a>
+        </span>
+        <label for="fas fa-question" style="font-size: 40px;"
+          >회원가입
+        </label>
+        <div class="menudiv3-1" id="div1">
+          <ul id="menuItems">
+            <li class="item">
+              <p>
+                <a href="/cnc/registerView.do">회원가입</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/loginView.do">로그인</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/selectBoardList.do">공지사항</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </header>
 	</c:if>
 	<c:if test="${login_session ne null }">
 	<header class="menudiv1">
@@ -102,12 +117,13 @@ $(document).on("click","#sendPasswordBtn",function() {
 	</c:if>
 	<!-- header-end -->
 	<form action="/cnc/sendPassword.do" accept-charset="utf-8" id="sendEmail" method="POST">
-		<div class="container" style="padding-top: 10%;">
+		<div class="container1" style="padding-top: 5%;">
 			<div class="pwtitle">
-				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br/> 
+				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br>
+				<div style="padding-top: 1%;"></div> 
 				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
 			</div>
-			<div style="padding-top: 10%;"></div>
+			<div style="padding-top: 5%;"></div>
 			<div class="emailbox">
 				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
 			</div>
@@ -124,7 +140,7 @@ $(document).on("click","#sendPasswordBtn",function() {
 				</c:if>
 			</div>
 			<div style="padding-top: 1%;"></div>
-			<button id="sendPasswordBtn">비밀번호 재설정</button>
+			<button id="sendPasswordBtn" style="width: 34%;">비밀번호 재설정</button>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>
 			</div>

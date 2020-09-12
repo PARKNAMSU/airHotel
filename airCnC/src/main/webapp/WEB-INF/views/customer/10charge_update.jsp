@@ -69,8 +69,8 @@
         <input type="text" name="house_price_default_parInt" numberonly placeholder="숫자만 입력해 주세요" maxlength="30"style="width: 150px;"
         	value="${detail.house_price_default}"><br></br>
         	
-        <h4 style="font-size: 25px;">최고요금</h4>
-        <h4>인기 있는 지역 축제가 개최되는 등의 이유로 수요가 높아지면 요금을 1박당 최대 얼마까지 부과하시겠어요?</h4>
+        <h4 style="font-size: 25px;">최저 요금</h4>
+        <h4>수요가 낮아지면 요금을 1박당 최저 얼마까지 인하하시겠어요?</h4>
         <input type="image" src="${pageContext.request.contextPath}/resources/images/won.png" style="width: 35px; height: 20px;">
         <input type="text" name="house_price_max_parInt" numberonly placeholder="숫자만 입력해 주세요" maxlength="30" style="width: 150px;"
         	value="${detail.house_price_max }"><br></br>

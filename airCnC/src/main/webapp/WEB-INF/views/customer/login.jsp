@@ -23,8 +23,13 @@
 	href="${pageContext.request.contextPath}/resources/css/footer.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -90,33 +95,43 @@ function getCookie(cookieName) {
 <body>
 	<!-- header-start -->
 	<c:if test="${login_session eq null }">
-		<header class="menudiv1">
-			<div class="menudiv2-1">
-				<a href="/cnc/indexView.do"><img alt=""
-					src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-			</div>
-			<div class="menudiv2-2">
-				<div class="menudiv3-1" id="div1">
-					<ul id="menuItems">
-						<li class="item">
-							<p>
-								<a href="/cnc/registerView.do">회원가입</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/loginView.do">로그인</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
-							</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+		<header class="logo">
+        <span>
+          <a href="/cnc/indexView.do">
+            <i
+              class="fas fa-registered"
+              style="
+                font-size: 35px;
+                padding-left: 20px;
+                float: left;
+                color: #ff5a5f;
+              "
+            ></i>
+          </a>
+        </span>
+        <label for="fas fa-question" style="font-size: 40px;"
+          >회원가입
+        </label>
+        <div class="menudiv3-1" id="div1">
+          <ul id="menuItems">
+            <li class="item">
+              <p>
+                <a href="/cnc/registerView.do">회원가입</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/loginView.do">로그인</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/selectBoardList.do">공지사항</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </header>
 	</c:if>
 	<c:if test="${login_session ne null }">
 		<header class="menudiv1">
@@ -144,9 +159,8 @@ function getCookie(cookieName) {
 		</header>
 	</c:if>
 	<form action="/cnc/loginProcess.do" method="post">
-		<div class="container">
-			<img
-				src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
+		<div class="container1" style="text-align: center; margin-top: 20px;">
+			<img src="${pageContext.request.contextPath}/resources/images/guestperson1.png">
 			<div id="light1" class="white_content" style="text-align: center;">
 				<div class="allScreen" id="my__all__login">
 					<div class="my__login" style="display: inline-block;">
@@ -187,8 +201,8 @@ function getCookie(cookieName) {
 									</c:if>
 								</div>
 								<div class="checkbox-container" style="font-size: 25px;">
-										<input type="checkbox" id="idSaveCheck">
-										<label for="idSaveCheck">아이디 저장하기</label>
+									<input type="checkbox" id="idSaveCheck">
+									<label for="idSaveCheck">아이디 저장하기</label>
 								</div>
 
 								<div class="a5">

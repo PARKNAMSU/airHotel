@@ -1,42 +1,92 @@
 @charset "UTF-8";
-#sidediv{
-	width:400px;
-	margin-top: 20%;
-	margin-left:8%;
-	float: left;
+#sidediv {
+  width: 400px;
+  margin-top: 20%;
+  margin-left: 8%;
+  float: left;
 }
-#sidemenu{
-	list-style: none;
-		
+#sidemenu {
+  list-style: none;
 }
-.menu{
-	margin-bottom: 40px;
-	font-size: 30px;
+.menu {
+  margin-bottom: 40px;
+  font-size: 30px;
 }
-#topmenu{
-	color: red;
+#topmenu {
+  color: red;
 }
-@media(max-width:700px){
-#sidediv{
-	width:400px;
-	margin-left:10%;
-	margin-top: 28%;
-	float: left;
+@media (max-width: 700px) {
+  #sidediv {
+    width: 400px;
+    margin-left: 10%;
+    margin-top: 28%;
+    float: left;
+  }
+  #sidemenu {
+    list-style: none;
+  }
+  .menu {
+    margin-bottom: 40px;
+    font-size: 30px;
+    float: left;
+    margin-left: 5%;
+  }
+  #topmenu {
+    color: red;
+  }
 }
-#sidemenu{
-	list-style: none;
-		
+a:link {
+  color: #ff5a5f;
+  text-decoration: none;
 }
-.menu{
-	margin-bottom: 40px;
-	font-size: 30px;
-	float: left;
-	margin-left:5%;
+a:visited {
+  color: black;
+  text-decoration: none;
 }
-#topmenu{
-	color: red;
-}	
+a:hover {
+  color: blue;
+  text-decoration: underline;
 }
- a:link { color: red; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
- a:hover { color: blue; text-decoration: underline;}
+@media screen and (max-width: 1498px) {
+  #sidediv {
+    display: none;
+  }
+  .top_first {
+    width: 100%;
+    margin: 3%;
+  }
+  .top_second {
+    width: 100%;
+    margin: 3%;
+  }
+  .temp {
+    display: none;
+  }
+  .sales,
+  .chart {
+    width: 100%;
+  }
+  #salesArea,
+  #salesChart {
+    width: 90%;
+    margin: 3%;
+  }
+  .chart {
+    width: 100%;
+  }
+  .coupon,
+  .couponimage {
+    margin-left: 15%;
+  }
+}
+@media screen and (max-width: 922px) {
+  .top_first {
+    flex-wrap: wrap;
+  }
+  .maindiv {
+    flex-direction: column;
+  }
+  .top_second {
+    flex-direction: column;
+  }
+}

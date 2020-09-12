@@ -30,8 +30,13 @@
 	href="${pageContext.request.contextPath}/resources/css/hostregister.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/signup.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -202,40 +207,50 @@
 </head>
 <body>
 	<!-- header-start -->
-	<c:if test="${login_session eq null }">
-	<header class="menudiv1">
-		<div class="menudiv2-1">
-			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
-		</div>
-		<div class="menudiv2-2">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">		
-						<li class="item">
-							<p>
-								<a href="/cnc/registerView.do">회원가입</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/loginView.do">로그인</a>
-							</p>
-						</li>
-						<li class="item">
-							<p>
-								<a href="/cnc/selectBoardList.do">공지사항</a>
-							</p>
-						</li>
-				</ul>
-			</div>
-		</div>
-	</header>
+	<c:if test="${login_session eq null}">
+	<header class="logo">
+        <span>
+          <a href="/cnc/indexView.do">
+            <i
+              class="fas fa-registered"
+              style="
+                font-size: 35px;
+                padding-left: 20px;
+                float: left;
+                color: #ff5a5f;
+              "
+            ></i>
+          </a>
+        </span>
+        <label for="fas fa-question" style="font-size: 40px;"
+          >회원가입
+        </label>
+        <div class="menudiv3-1" id="div1">
+          <ul id="menuItems">
+            <li class="item">
+              <p>
+                <a href="/cnc/registerView.do">회원가입</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/loginView.do">로그인</a>
+              </p>
+            </li>
+            <li class="item">
+              <p>
+                <a href="/cnc/selectBoardList.do">공지사항</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </header>
 	</c:if>
 	<c:if test="${login_session ne null}">
 	<header class="menudiv1">
 		<div class="menudiv2-1">
 			<a href="/cnc/indexView.do"><img alt=""
-				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
+				src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG"/></a>
 		</div>
 		<div class="menudiv2-2">
 			<div class="menudiv3-1" id="div1">
@@ -255,7 +270,7 @@
 	</header>
 	</c:if>
 	<form action="/cnc/registerCheck.do" method="post" id="regForm" name="regForm" enctype="multipart/form-data">
-		<div class="loginform" style="text-align: center;">
+		<div class="loginform" style="text-align: center; padding-bottom: 50px">
 			<div class="leftform">
 				<h3 style="padding-top: 35px; font-size: 25px; font-weight: bold;">회원가입</h3>
 				<br> <br>
@@ -347,7 +362,7 @@
 			</div>
 		</div>
 		<div class="register1">
-			<button id="reg_submit">가입하기</button>
+			<button id="reg_submit" style="width: 200%">가입하기</button>
 		</div>
 	</form>
 	<div style="margin-bottom: 5%"></div>

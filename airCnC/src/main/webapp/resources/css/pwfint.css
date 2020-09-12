@@ -4,7 +4,7 @@ body {
   font-family: "Jua", sans-serif;
   text-align: center;
 }
-label {
+label1 {
   color: #ff5a5f;
   display: inline-block;
   width: 370px;
@@ -18,7 +18,7 @@ label {
 }
 input {
   background: black;
-  width: 500px;
+  width: 370px;
   height: 38px;
   line-height: 38px;
   border: 0;
@@ -35,7 +35,7 @@ input {
 button {
   color: white;
   display: inline-block;
-  width: 50%;
+  width: 89%;
   height: auto;
   background-color: #ff5a5f;
   border-radius: 5px;
