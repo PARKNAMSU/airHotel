@@ -26,7 +26,7 @@
 /* Large Mobile :480px. */
 /* line 6, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
 body {
-  
+
 }
 
 /* line 13, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
@@ -274,27 +274,27 @@ h3 {
   content: "";
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5db2ff+0,7db9e8+100&1+24,0+96 */
   background: -moz-linear-gradient(
-    left,
-    #5db2ff 0%,
-    #65b4f9 24%,
-    rgba(124, 185, 233, 0) 96%,
-    rgba(125, 185, 232, 0) 100%
+          left,
+          #5db2ff 0%,
+          #65b4f9 24%,
+          rgba(124, 185, 233, 0) 96%,
+          rgba(125, 185, 232, 0) 100%
   );
   /* FF3.6-15 */
   background: -webkit-linear-gradient(
-    left,
-    #5db2ff 0%,
-    #65b4f9 24%,
-    rgba(124, 185, 233, 0) 96%,
-    rgba(125, 185, 232, 0) 100%
+          left,
+          #5db2ff 0%,
+          #65b4f9 24%,
+          rgba(124, 185, 233, 0) 96%,
+          rgba(125, 185, 232, 0) 100%
   );
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
-    to right,
-    #5db2ff 0%,
-    #65b4f9 24%,
-    rgba(124, 185, 233, 0) 96%,
-    rgba(125, 185, 232, 0) 100%
+          to right,
+          #5db2ff 0%,
+          #65b4f9 24%,
+          rgba(124, 185, 233, 0) 96%,
+          rgba(125, 185, 232, 0) 100%
   );
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5db2ff', endColorstr='#007db9e8',GradientType=1 );
@@ -2705,7 +2705,7 @@ h3 {
   padding-bottom: 120px;
 
 }
- 
+
 @media (max-width: 767px) {
   .popular_destination_area {
     padding-top: 60px;
@@ -2730,21 +2730,21 @@ h3 {
 .popular_destination_area .single_destination:before {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#040e27+0,040e27+100&0+0,0.7+100 */
   background: -moz-linear-gradient(
-    top,
-    rgba(4, 14, 39, 0) 0%,
-    rgba(4, 14, 39, 0.7) 100%
+          top,
+          rgba(4, 14, 39, 0) 0%,
+          rgba(4, 14, 39, 0.7) 100%
   );
   /* FF3.6-15 */
   background: -webkit-linear-gradient(
-    top,
-    rgba(4, 14, 39, 0) 0%,
-    rgba(4, 14, 39, 0.7) 100%
+          top,
+          rgba(4, 14, 39, 0) 0%,
+          rgba(4, 14, 39, 0.7) 100%
   );
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
-    to bottom,
-    rgba(4, 14, 39, 0) 0%,
-    rgba(4, 14, 39, 0.7) 100%
+          to bottom,
+          rgba(4, 14, 39, 0) 0%,
+          rgba(4, 14, 39, 0.7) 100%
   );
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00040e27', endColorstr='#b3040e27',GradientType=0 );
@@ -3353,9 +3353,9 @@ h3 {
 .filter_result_wrap .range_slider_wrap .ui-button,
 .filter_result_wrap .range_slider_wrap html .ui-button.ui-state-disabled:hover,
 .filter_result_wrap
-  .range_slider_wrap
-  html
-  .ui-button.ui-state-disabled:active {
+.range_slider_wrap
+html
+.ui-button.ui-state-disabled:active {
   border: 2px solid #ff4a52;
   background: #fff;
   font-weight: normal;
@@ -4684,7 +4684,7 @@ h6 {
 /* line 798, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .primary-checkbox input:checked + label {
   background: url(../img/elements/primary-check.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -4727,7 +4727,7 @@ h6 {
 /* line 835, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .confirm-checkbox input:checked + label {
   background: url(../img/elements/success-check.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -4776,7 +4776,7 @@ h6 {
 /* line 876, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .disabled-checkbox input:checked + label {
   background: url(../img/elements/disabled-check.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -4819,7 +4819,7 @@ h6 {
 /* line 913, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .primary-radio input:checked + label {
   background: url(../img/elements/primary-radio.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -4862,7 +4862,7 @@ h6 {
 /* line 950, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .confirm-radio input:checked + label {
   background: url(../img/elements/success-radio.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -4911,7 +4911,7 @@ h6 {
 /* line 991, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_elements.scss */
 .disabled-radio input:checked + label {
   background: url(../img/elements/disabled-radio.png) no-repeat center
-    center/cover;
+  center/cover;
   border: none;
 }
 
@@ -6731,3 +6731,4 @@ h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+

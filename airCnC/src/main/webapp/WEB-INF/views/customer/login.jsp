@@ -30,11 +30,24 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
     />
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript">
+$(document).on("click","#loginBtn",function() {
+	if (!$("#customerId").val()) {
+		alert("아이디를 입력하세요.");
+		$("#customerId").focus();
+		return false;
+	}else if (!$("#customerPassword").val()) {
+		alert("비밀번호를 입력하세요.");
+		$("#customerPassword").focus();
+		return false;
+	}
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var customerInputId = getCookie("customerInputId"); // 저장된 쿠키값 가져오기.
@@ -109,8 +122,7 @@ function getCookie(cookieName) {
             ></i>
           </a>
         </span>
-        <label for="fas fa-question" style="font-size: 40px;"
-          >회원가입
+        <label for="fas fa-question" style="font-size: 40px;">로그인
         </label>
         <div class="menudiv3-1" id="div1">
           <ul id="menuItems">
@@ -185,12 +197,11 @@ function getCookie(cookieName) {
 						        </div>
 								<div class="a3">
 									<input class="bb6" type="text" id="customerId"
-										name="customer_id" placeholder="&nbsp;&nbsp;아이디" required/>
+										name="customer_id" placeholder="&nbsp;&nbsp;아이디"/>
 								</div>
 								<div class="a3">
 									<input class="bb6" type="password" id="customerPassword"
-										name="customer_password" placeholder="&nbsp;&nbsp;비밀번호"
-										required/>
+										name="customer_password" placeholder="&nbsp;&nbsp;비밀번호"/>
 								</div>
 								<div id="message">
 									<c:if test="${sendMessage eq 'idFail'}">
@@ -210,7 +221,7 @@ function getCookie(cookieName) {
 										href="/cnc/forgotPasswordView.do">비밀번호가 생각나지 않으세요?</a>
 								</div>
 								<div>
-									<button id="loginBtn" name="loginBtn">로그인</button>
+									<button id="loginBtn">로그인</button>
 								</div>
 							</div>
 						</div>
