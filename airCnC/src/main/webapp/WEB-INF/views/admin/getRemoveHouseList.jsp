@@ -26,7 +26,7 @@
           ></i
         ></span>
         <label for="fas fa-question" style="font-size: 40px;"
-          >숙소삭제(관리자)</label
+          >숙소삭제관리(관리자)</label
         >
         <div
           style="
@@ -98,7 +98,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>AirBnB</h3>
+                                <h3 style="margin-left:70%;">Remove House</h3>
                             </div>
                         </div>
                     </div>
