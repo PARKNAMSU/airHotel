@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin/admin_singo_complete.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hostregister.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
     <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
@@ -23,10 +25,10 @@
 <body>
 
 <!-- header-start -->
-<header style="color: #ff5a5f;">
+<header class="logo" style="position: sticky;">
     <div class="headermenu">
         <span><i class="fas fa-user-slash" style="font-size: 35px; float: left;"></i></span>
-        <label for="" style="font-size: 40px; background-color: black; color: #ff5a5f;">블랙리스트 페이지</label>
+        <label for class="loglabel">블랙리스트 페이지</label>
         <ul>
             <li class="menu" style="list-style: none;">
                 <label for="" style="font-size: 40px;">메뉴</label>

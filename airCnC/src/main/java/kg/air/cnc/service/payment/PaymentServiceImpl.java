@@ -49,7 +49,7 @@ public class PaymentServiceImpl implements PaymentService {
         int house_seq = Integer.parseInt((String)request.get("house_seq"));
         int paid_amount = (int)request.get("paid_amount");
         String customer_refund_account = (String)request.get("customer_refund_account");
-        String cusomter_refund_bank = (String)request.get("customer_refund_bank");
+        String customer_refund_bank = (String)request.get("customer_refund_bank");
         ReservationVO reservationVO = new ReservationVO();
         reservationVO.setReservation_customer_id(customer_id);
         reservationVO.setReservation_host_id(host_id);
@@ -79,7 +79,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
         reservationVO.setReservation_check_in(check_in);
         reservationVO.setReservation_check_out(check_out);
-        reservationVO.setReservation_bank(cusomter_refund_bank);
+        reservationVO.setReservation_bank(customer_refund_bank);
         reservationVO.setReservation_account(customer_refund_account);
         reservationVO.setReservation_period(period);
         reservationVO.setReservation_regdate(regDate);

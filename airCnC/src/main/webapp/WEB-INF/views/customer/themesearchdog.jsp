@@ -86,15 +86,15 @@
         <div class="slideshow-container">
 
             <div class="mySlides fade">
-                <img src="${pageContext.request.contextPath}/resources/images/doghotel.jpg" style="width:100%">
+                <img src="${pageContext.request.contextPath}/resources/images/theme_search/theme_dog1.jpg" style="width:100%">
             </div>
 
             <div class="mySlides fade">
-                <img src="${pageContext.request.contextPath}/resources/images/dog.jpg" style="width:100%">
+                <img src="${pageContext.request.contextPath}/resources/images/theme_search/theme_dog4.jpg" style="width:100%">
             </div>
 
             <div class="mySlides fade">
-                <img src="${pageContext.request.contextPath}/resources/images/doghotel2.jpg" style="width:100%">
+                <img src="${pageContext.request.contextPath}/resources/images/theme_search/theme_dog3.jpg" style="width:100%">
             </div>
 
         </div>

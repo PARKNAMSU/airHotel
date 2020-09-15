@@ -18,6 +18,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	811cfc852fdf2dfcea71594f0a24a256"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/resources/css/menu.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reservationhouse.css?version=123">
@@ -43,40 +44,76 @@
 </head>
 <body>
 	<!-- header-start -->
-	<header style="color: #ff5a5f;">
-    <div class="headermenu">
-        <span><i class="fas fa-user-slash" style="font-size: 35px; float: left;"></i></span>
-        <label for="" style="font-size: 40px; background-color: black; color: #ff5a5f;">쿠폰 페이지</label>
+    <header class="logo">
+      <span style="color: #ff5a5f;"
+        ><i
+          class="fas fa-question"
+          style="font-size: 35px; padding-left: 20px; float: left;"
+        ></i
+      ></span>
+      <label for="fas fa-question" style="font-size: 40px;"
+        >숙소 등록(관리자)</label
+      >
+      <div
+        style="
+          width: 35px;
+          height: 35px;
+          margin-left: 15px;
+          border-radius: 30px 30px 30px 30px;
+          float: right;
+          background-color: white;
+          margin-right: 50px;
+          overflow: hidden;
+        "
+        id="myinfo"
+      >
+        <img
+          alt=""
+          src="/0813/images/chat/my1.jpg"
+          style="max-width: 120%; max-height: 120%;"
+        />
+      </div>
+      <div
+        id="mydiv"
+        style="
+          display: none;
+          margin-top: 20px;
+          margin-left: 85%;
+          width: 200px;
+          background-color: #000000;
+          font-size: 20px;
+          border-radius: 15px 15px 15px 15px;
+          font-family: 'Jua', sans-serif;
+          z-index: 100;
+        "
+      >
         <ul>
-            <li class="menu" style="list-style: none;">
-                <label for="" style="font-size: 40px;">메뉴</label>
-                <ul class="hide" style="list-style: none; padding-top: 25px; float: initial; padding-right: 20px;">
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a>
-                    </li>
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/salesChart.mdo">통계</a>
-                    </li>
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a>
-                    </li>
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
-                    </li>
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a>
-                    </li>
-                    <li class="item">
-                        <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a>
-                    </li>
-                    <li class="item">
-                        <a href="/cnc/logout.mdo" style="color: white;">로그아웃</a>
-                    </li>
-                </ul>
-            </li>
+          <li>
+            <a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/cnc/salesChart.mdo">통계</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo"
+              >호스트관리</a
+            >
+          </li>
+          <li>
+            <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a>
+          </li>
+          <li>
+            <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo"
+              >게시판관리</a
+            >
+          </li>
+          <li><a href="/cnc/logout.mdo">로그아웃</a></li>
         </ul>
-    </div>
-	</header>
+      </div>
+    </header>
 	<!-- header-end -->
 	<br><br><br><br>
 	<div class="headdiv" style="font-family: 'Jua', sans-serif;">
@@ -176,9 +213,9 @@
 		</div><br><br><br><br>
 		<hr>
 	</div>
-	<div class="buttondiv" style="font-family: 'Jua', sans-serif;">
-		<a href="registerHouse.mdo?house_seq=${house.house_seq}"><input type="button" value="등록" /></a>
-		<a href="cancelRegister.mdo?house_seq=${house.house_seq}"><input type="button" value="취소" /></a>
+	<div class="buttondiv" style="font-family: 'Jua', sans-serif; float:left;">
+		<a href="registerHouse.mdo?house_seq=${house.house_seq}"><input type="button" value="등록" class="btn btn-outline-danger" style="font-size:30px;"/></a>
+		<a href="cancelRegister.mdo?house_seq=${house.house_seq}"><input type="button" value="취소" class="btn btn-outline-danger" style="font-size:30px;"/></a>
 	</div>
 	<div style="clear:both;"></div>
 	<br><br>
