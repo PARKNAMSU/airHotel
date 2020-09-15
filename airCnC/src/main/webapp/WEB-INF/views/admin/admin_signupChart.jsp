@@ -250,7 +250,8 @@
 		<%@ include file="../html/footer.jsp"%>
 	</footer>
 </body>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
 <script type="text/javascript">
 $(function(){
 	$("#yearsCondition1").change(function() {
