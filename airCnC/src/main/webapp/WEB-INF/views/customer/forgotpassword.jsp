@@ -122,11 +122,11 @@ $(document).on("click","#sendPasswordBtn",function() {
 			<div class="pwtitle">
 				<label for="" style="font-size: 38px;">비밀번호를 잊으셨나요?</label><br>
 				<div style="padding-top: 1%;"></div> 
-				<label for="">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
+				<label for="" style="font-size: 20px;">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</label>
 			</div>
 			<div style="padding-top: 5%;"></div>
 			<div class="emailbox">
-				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일" />
+				<input id="customerEmail" name="customer_email" type="text" placeholder="이메일"/>
 			</div>
 			<div style="padding-top: 1%;"></div>
 			<div id="message">
@@ -137,11 +137,11 @@ $(document).on("click","#sendPasswordBtn",function() {
 					<p style="color: red; font-size: 25px;">회원가입 되어 있지 않은 비밀번호입니다.</p>
 				</c:if>
 				<c:if test="${sendMessage eq 'error'}">
-					<p style="color: red; font-size: 25px;">임시 비밀번호 발송 오류.</p>
+					<p style="color: red; font-size: 25px;">임시 비밀번호 발송 오류</p>
 				</c:if>
 			</div>
 			<div style="padding-top: 1%;"></div>
-			<button id="sendPasswordBtn" style="width: 19%;">비밀번호 재설정</button>
+			<button id="sendPasswordBtn" style="width: 22%;">임시 비밀번호 발송</button>
 			<div style="padding-top: 1%;"></div>
 			<div class="moveLoginForm">
 				<a href="/cnc/loginView.do" style="color: black; font-size: 35px">로그인하러 가기</a>

@@ -97,7 +97,6 @@ article,
 aside,
 details,
 figcaption,
-figure,
 footer,
 header,
 hgroup,
@@ -127,4 +126,8 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+figure {
+  display: inline-block;
 }
