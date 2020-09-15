@@ -58,11 +58,6 @@
             ><li class="item">공지사항</li></a>
         </li>
         </ul>
-        <a
-        href=""
-        onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
-        class="headerbtn"
-        ><i class="fas fa-bars"></i></a>
     </div>
 </header>
 </c:if>
