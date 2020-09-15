@@ -22,14 +22,10 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/footer.css" />
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-    />
+	href="${pageContext.request.contextPath}/resources/css/login.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"/>
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -193,7 +189,7 @@ function getCookie(cookieName) {
 									</a>
 								</div>
 								<div style="margin-top: 5px;">
-						            <div class="my__join__line1">또는</div>
+						            <div class="my__join__line1" style="font-size: 25px;">OR</div>
 						        </div>
 								<div class="a3">
 									<input class="bb6" type="text" id="customerId"
@@ -211,17 +207,21 @@ function getCookie(cookieName) {
 										<p style="color: red; font-size: 25px;">비밀번호가 일치하지 않습니다.</p>
 									</c:if>
 								</div>
-								<div class="checkbox-container" style="font-size: 25px;">
-									<input type="checkbox" id="idSaveCheck">
-									<label for="idSaveCheck">아이디 저장하기</label>
-								</div>
-
-								<div class="a5">
-									<a class="bb9" style="font-size: 15px;"
-										href="/cnc/forgotPasswordView.do">비밀번호가 생각나지 않으세요?</a>
+								<div class="row omb_row-sm-offset-3">
+									<div class="checkbox-container" style="font-size: 25px; margin-left: 6%;">
+										<input type="checkbox" id="idSaveCheck">
+										<label for="idSaveCheck">아이디 저장하기</label>
+									</div>
 								</div>
 								<div>
 									<button id="loginBtn">로그인</button>
+								</div>
+								<div class="a5" style="text-align: center;">
+									<a class="bb9" style="font-size: 25px; margin-right: 6%;" href="/cnc/forgotPasswordView.do">비밀번호를 잊으셨나요?</a>
+								</div>
+								<div class="a5" style="text-align: center;">
+									<a class="bb9" style="font-size: 25px;"
+										href="registerView.do">AirCnC 계정이 없으세요? 회원가입</a>
 								</div>
 							</div>
 						</div>
