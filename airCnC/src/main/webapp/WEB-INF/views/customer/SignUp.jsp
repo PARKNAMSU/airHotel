@@ -278,7 +278,7 @@
 					<span> <input class="bb6" type="text" name="customer_id"
 						id="customerId" placeholder="&nbsp;&nbsp;아이디 입력">
 					</span>
-					<button type="button" class="idCheckBtn" id="idCheckBtn" value="N">중복확인</button>
+					<button type="button" class="idCheckBtn" id="idCheckBtn" value="N" style="width: 89%;">중복확인</button>
 				</div>
 				<div class="input_password">
 					<span> <input class="ipassword" type="password"

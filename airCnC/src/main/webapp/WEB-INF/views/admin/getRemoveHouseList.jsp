@@ -12,29 +12,82 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
     <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
     <title>관리자 삭제 대기 파일</title>
 </head>
 <body>
      <!-- header-start -->
-     <header class="menudiv1" style="position : static">
-		<div class="menudiv2-1" >
-		<img alt="" src="../images/logo2.png">
-		</div>
-		<div class="menudiv2-2" style="overflow : hidden">
-			<div class="menudiv3-1" id="div1">
-				<ul id="menuItems">
-                    <li class="item" ><a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/salesChart.mdo">통계</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a></li>
-					<li class="item"><a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo">게시판관리</a></li>
-					<li class="item"><a href="/cnc/logout.mdo">로그아웃</a></li>	
-                </ul>
-            </div>
+     <header class="logo">
+        <span style="color: #ff5a5f;"
+          ><i
+            class="fas fa-question"
+            style="font-size: 35px; padding-left: 20px; float: left;"
+          ></i
+        ></span>
+        <label for="fas fa-question" style="font-size: 40px;"
+          >숙소삭제관리(관리자)</label
+        >
+        <div
+          style="
+            width: 35px;
+            height: 35px;
+            margin-left: 15px;
+            border-radius: 30px 30px 30px 30px;
+            float: right;
+            background-color: white;
+            margin-right: 50px;
+            overflow: hidden;
+          "
+          id="myinfo"
+        >
+          <img
+            alt=""
+            src="/0813/images/chat/my1.jpg"
+            style="max-width: 120%; max-height: 120%;"
+          />
         </div>
-    </header>
+        <div
+          id="mydiv"
+          style="
+            display: none;
+            margin-top: 20px;
+            margin-left: 85%;
+            width: 200px;
+            background-color: #000000;
+            font-size: 20px;
+            border-radius: 15px 15px 15px 15px;
+            font-family: 'Jua', sans-serif;
+            z-index: 100;
+          "
+        >
+          <ul>
+            <li>
+              <a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a>
+            </li>
+            <li>
+              <a href="http://localhost:8080/cnc/salesChart.mdo">통계</a>
+            </li>
+            <li>
+              <a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo"
+                >호스트관리</a
+              >
+            </li>
+            <li>
+              <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
+            </li>
+            <li>
+              <a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a>
+            </li>
+            <li>
+              <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo"
+                >게시판관리</a
+              >
+            </li>
+            <li><a href="/cnc/logout.mdo">로그아웃</a></li>
+          </ul>
+        </div>
+      </header>
     <!-- header-end -->
 
     <!-- slider_area_start -->
@@ -45,7 +98,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-12 col-md-12">
                             <div class="slider_text text-center">
-                                <h3>AirBnB</h3>
+                                <h3 style="margin-left:70%;">Remove House</h3>
                             </div>
                         </div>
                     </div>

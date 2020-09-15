@@ -61,7 +61,7 @@
 </c:if>
 <c:if test="${login_session ne null }">
 	<header class="menudiv1">
-		<div class="menudiv2-1">
+		<div class="menudiv2-1" style="margin:0 0 10px;">
 			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2">

@@ -76,8 +76,7 @@ a:hover {
 }
 
 div hr {
-  float: left;
-  width: 79%;
+  overflow : hidden;
 }
 
 footer {

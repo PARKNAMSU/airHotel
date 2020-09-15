@@ -60,7 +60,7 @@
 <div class="popular_destination_area" style="text-align: center;">
     <div class="container">
         <div class="theme_image">
-            <img src="${pageContext.request.contextPath}/resources/images/theme_search/dog.jpg"
+            <img src="${pageContext.request.contextPath}/resources/images/theme_search/theme_bbq1.jpg"
                  style="border-radius: 20px;"/>
         </div>
         <div class="row justify-content-center">

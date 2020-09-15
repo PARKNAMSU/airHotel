@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/resources/css/admin/admin_singo_complete.css">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hostregister.css">
     <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
     <title>관리자 삭제 파일</title>
@@ -24,10 +26,10 @@
 <body>
 
 <!-- header-start -->
-<header style="color: #ff5a5f;">
+<header class="logo" style="position: sticky;">
     <div class="headermenu">
         <span><i class="fas fa-user-slash" style="font-size: 35px; float: left;"></i></span>
-        <label for="" style="font-size: 40px; background-color: black; color: #ff5a5f;">블랙리스트 페이지</label>
+        <label for class="loglabel">신고내역 페이지</label>
         <ul>
             <li class="menu" style="list-style: none;">
                 <label for="" style="font-size: 40px;">메뉴</label>
@@ -80,14 +82,14 @@
             ${blame_target_member_id}
             <c:forEach var="item" items="${blameinfo}" begin="0" end="${blameinfo.size()}" step="1">
                 <tr>
-                    <td>${item.blame_member_id}</td>
-                    <td>${item.blame_content}</td>
+                    <td><a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}">${item.blame_member_id}</a></td>
+                    <td><a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}">${item.blame_content}</a></td>
                     <td><c:set var="blame_type" value="${item.blame_type}"/>
                         <c:if test="${blame_type eq 0}">
-                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="HOST"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="호스트 관련 신고"/></a>
                         </c:if>
                         <c:if test="${blame_type eq 1}">
-                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="CUSTOMER"/></a>
+                            <a href="/cnc/blamejudge.mdo?target_member_id=${blame_target_member_id}&blame_type=${blame_type}"><c:out value="일반사용자 관련 신고"/></a>
                         </c:if>
                     </td>
                 </tr>
