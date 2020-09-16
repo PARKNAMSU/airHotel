@@ -115,12 +115,13 @@
 			<li class="menu"><a href="getRemoveHostList.mdo">호스트 삭제</a></li>
 		</ul>
     </div>
-    <div class="container" style="margin-top : 3%">
+    <div style="margin-top : 3%">
         <h3>숙소 삭제 관리</h3>
         <br>
         <c:forEach items="${waitingList}" var="house">
-        <a href="getRemoveHouse.mdo?house_seq=${house.house_seq}">
-        <div class="houseList">
+        <div class="house_info_list">
+        <a href="getRemoveHouse.mdo?house_seq=${house.house_seq}" style="clear : right">
+        <div style="width:100%;">
             <img src="../images/face.png" alt="숙소 이미지" class="littleImg">
             ${house.house_name}<br>
                           숙소 소개<br>
@@ -129,6 +130,7 @@
            ${house.house_price_default}<br>
         </div>
         </a>
+        </div>
         <hr>
         </c:forEach>
     </div>
