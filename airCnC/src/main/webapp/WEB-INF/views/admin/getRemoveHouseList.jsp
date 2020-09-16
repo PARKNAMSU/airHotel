@@ -77,7 +77,7 @@
               <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
             </li>
             <li>
-              <a href="http://localhost:8080/cnc/makeCupon.mdo">쿠폰관리</a>
+              <a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a>
             </li>
             <li>
               <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo"

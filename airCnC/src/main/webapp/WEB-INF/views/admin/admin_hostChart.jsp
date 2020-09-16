@@ -76,7 +76,7 @@
                   <a href="logPage.mdo">로그관리</a>
                 </li>
                 <li class="item1">
-                  <a href="makeCupon.mdo">쿠폰관리</a>
+                  <a href="makeCuponView.mdo">쿠폰관리</a>
                 </li>
                 <li class="item1">
                   <a href="goNoticeListAdmin.mdo"
