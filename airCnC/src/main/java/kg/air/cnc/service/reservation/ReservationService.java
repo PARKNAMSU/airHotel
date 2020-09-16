@@ -36,6 +36,7 @@ public class ReservationService implements ReservationServiceImpl {
 			if(list.get(i).getReservation_status() == 1) {
 				list.get(i).setReservation_status_text("예약상태: 취소대기");
 			}
+			
 		}
 		return list;
 	}
@@ -186,25 +187,16 @@ public class ReservationService implements ReservationServiceImpl {
 		List<Integer> numList = new ArrayList<Integer>();
 		for(int i=0; i<fav_list.length;i++) {
 			numList.add(Integer.parseInt(fav_list[i]));
+
 		}
 		Map<String, Object> seqMap = new HashMap<String, Object>();
 		seqMap.put("seqArray", numList);
-		return reservationDAO.getFavoriteHouse(seqMap);
+		List<ReservationHouseDetailVO> list = reservationDAO.getFavoriteHouse(seqMap);
+		return list;
 	}
-	public ArrayList<String> getHousePhoto(int house_seq) {
+	public String [] getHousePhoto(int house_seq) {
 		System.out.println(reservationDAO.getHousePhoto(house_seq).getHouse_photourl());
 		String [] house_photo = reservationDAO.getHousePhoto(house_seq).getHouse_photourl().split("_");
-		ArrayList<String > temp_list = new ArrayList<String>();
-		for(int i=0;i<house_photo.length;i++) {
-			if(house_photo[i].length() >1) {
-				temp_list.add(house_photo[i]);
-			}
-		}
-		if(temp_list.size()<4) {
-			for(int i=temp_list.size();i<4;i++) {
-				temp_list.add("none");
-			}
-		}
-		return temp_list;
+		return house_photo;
 	}
 }

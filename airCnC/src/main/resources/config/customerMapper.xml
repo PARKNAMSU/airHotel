@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="login" resultType="kg.air.cnc.vo.CustomerVO" parameterType="String">
-		SELECT customer_id FROM customer WHERE customer_id = #{customer_id}
+		SELECT customer_id, customer_image FROM customer WHERE customer_id = #{customer_id}
 	</select>
 	
 	<update id="changePassword">

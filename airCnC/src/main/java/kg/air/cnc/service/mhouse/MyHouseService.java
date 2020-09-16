@@ -45,6 +45,7 @@ public class MyHouseService {
 	}
 	public List<HouseReservationMemberVO> getHouseResList(ReservationHouseDetailVO vo){
 		List<HouseReservationMemberVO> list = myHouseDAO.getHouseResList(vo);
+
 		return list;
 	}
 	public List<HouseReservationMemberVO> getHouseBeforeResList(ReservationHouseDetailVO vo){

@@ -53,10 +53,18 @@ body {
 				</ul>
 			</div>
 			<div style="width:50px;height:50px;margin-left:25px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+				<c:choose>
+					<c:when test="${my_image == null }">
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="max-width:120%;max-height:120%;">
+					</c:when>
+					<c:otherwise>
+						<img alt="" src="/cnc/display.do?name=${my_image }" style="max-width:120%;max-height:120%;">
+					</c:otherwise>
+				</c:choose>
+				
 			</div>
 		</div>
-		<div id="mydiv" style="display:none;margin-left:85%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
+		<div id="mydiv" style="display:none;margin-left:83%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
 					<ul>
 					<li><br></li>
 						<li style="margin-bottom:20px;"><a href="mypage.do">내정보</a></li>
@@ -84,25 +92,7 @@ body {
 			})
 		})
 	</script>
-	 <!-- slider_area_start -->
-    <div class="slider_area">
-        <div class="slider_active owl-carousel">
-            <div class="single_slider  d-flex align-items-center slider_bg_2">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-xl-12 col-md-12">
-                            <div class="slider_text text-center">
-                                <h3>Chatting</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
 
-    </div>
-    <!-- slider_area_end -->
 	<div style="clear:both;"></div>
 	
 	<%@include file="../html/sideMenu.jsp" %>
