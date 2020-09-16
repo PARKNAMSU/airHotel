@@ -27,7 +27,7 @@ public class ThemeController {
         String theme_type = httpServletRequest.getParameter("theme_type");
         mav.addObject("themeList", themeService.getThemeHouseList(theme_type));
         //todo theme 에 따라 jsp 분기
-        if(theme_type.equals("house_condition_petok")){ //반려견과 함께
+        if(theme_type.equals("house_theme_pet")){ //반려견과 함께
             mav.setViewName("themesearchdog");
         } else if (theme_type.equals("house_theme_bbq")){ //바비큐와 함께
             mav.setViewName("themesearchbbq");

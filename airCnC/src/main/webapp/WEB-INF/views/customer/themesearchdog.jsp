@@ -137,7 +137,7 @@
             type: "GET",
             url: "getMoreThemeHouse.do",
             dataType: "json",
-            data: {theme_type: "house_condition_petok"},
+            data: {theme_type: "house_theme_pet"},
             success: function (data) {
                 getData = data;
                 var max = getData.length;

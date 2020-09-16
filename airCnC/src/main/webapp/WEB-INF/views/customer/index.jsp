@@ -257,7 +257,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
 				<div class="single_destination1"
-					 onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_condition_petok'">
+					 onclick="location.href='themesearch.do?theme_type=house_theme_pet'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/dog.png"
@@ -273,7 +273,7 @@
 			</div>
 			<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
 				<div class="single_destination1"
-					 onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_bbq'">
+					 onclick="location.href='themesearch.do?theme_type=house_theme_bbq'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/bbq1.jpg"
@@ -290,7 +290,7 @@
 			</div>
 			<div class="col-lg-4 col-md-1" style="padding-bottom: 15px;">
 				<div class="single_destination1"
-					 onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_party'">
+					 onclick="location.href='themesearch.do?theme_type=house_theme_party'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/party1.jpg"
@@ -307,7 +307,7 @@
 			</div>
 			<div class="col-lg-4 col-md-1">
 				<div class="single_destination1"
-					 onclick="location.href='http://localhost:8090/cnc/themesearchhighscore.do'">
+					 onclick="location.href='themesearchhighscore.do'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/star.png"
@@ -322,7 +322,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-1">
-				<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_pool'">
+				<div class="single_destination1" onclick="location.href='themesearch.do?theme_type=house_theme_pool'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/familywater.jpg"
@@ -337,7 +337,7 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-1">
-				<div class="single_destination1" onclick="location.href='http://localhost:8090/cnc/themesearch.do?theme_type=house_theme_farm'">
+				<div class="single_destination1" onclick="location.href='themesearch.do?theme_type=house_theme_farm'">
 					<div class="thumb">
 						<img
 								src="${pageContext.request.contextPath}/resources/images/ground.jpg"
