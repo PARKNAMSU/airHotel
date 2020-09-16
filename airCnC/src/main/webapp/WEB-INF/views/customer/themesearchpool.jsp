@@ -143,8 +143,8 @@
                             "</div>" +
                             " <div class=\"info\">" +
                             "<a href=\"#\">" +
-                            "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
-                            "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                            "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                            "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
                             "</a>" +
                             "</div>" +
                             "</div>" +
@@ -173,8 +173,8 @@
                         "</div>" +
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
-                        "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
-                        "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                        "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                        "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
                         "</a>" +
                         "</div>" +
                         "</div>" +

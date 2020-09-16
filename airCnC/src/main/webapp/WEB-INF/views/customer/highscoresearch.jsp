@@ -137,12 +137,13 @@
                             "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
-                            "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                            "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
                             "</div>" +
                             " <div class=\"info\">" +
                             "<a href=\"#\">" +
-                            "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
-                            "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                            "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                            "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
+                            "<p id=\"stars\">"+"평점 : " +getData[i].house_star+"</p>" +
                             "</a>" +
                             "</div>" +
                             "</div>" +
@@ -166,12 +167,13 @@
                     "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                     "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                     "<div class=\"thumb\">" +
-                    "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                    "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
                     "</div>" +
                     " <div class=\"info\">" +
                     "<a href=\"#\">" +
-                    "<p id=\"location\">"+getData[i].house_location+ i +"번 째"+"</p>" +
-                    "<p id=\"pricae\">"+getData[i].house_price_default+"</p>" +
+                    "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                    "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
+                    "<p id=\"stars\">"+"평점 : " +getData[i].house_star+"</p>" +
                     "</a>" +
                     "</div>" +
                     "</div>" +
