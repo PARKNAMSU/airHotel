@@ -83,10 +83,12 @@
         <!-- max upload size in bytes -->
         <property name="maxUploadSize" value="52428800" /> <!-- 5MB -->
 	</bean>
-
+	
+	<!--  
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg value="C://Temp/profile"/>
 	</bean>
+	-->
 
 	<mvc:resources mapping="/image/**" location="file:///C:/Temp/profile/"></mvc:resources>
 	

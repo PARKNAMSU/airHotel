@@ -80,11 +80,11 @@
 			</div>
 			<div style="width:50px;height:50px;margin-left:1px;margin-top:10px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<c:choose>
-					<c:when test="${my_image == null }">
-						<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/human.png" style="max-width:120%;max-height:120%;">
+					<c:when test="${my_image eq 'profile.png'}">
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/profile.png" style="max-width:120%;max-height:120%;">
 					</c:when>
 					<c:otherwise>
-						<img alt="" src="/cnc/display.do?name=${my_image }" style="max-width:120%;max-height:120%;">
+						<img alt="" src="/cnc/display.do?name=${my_image}" style="max-width:120%;max-height:120%;">
 					</c:otherwise>
 				</c:choose>
 			</div>
