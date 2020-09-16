@@ -82,7 +82,7 @@
                   <a href="logPage.mdo" style="color:black;">로그관리</a>
                 </li>
                 <li class="item1">
-                  <a href="makeCupon.mdo" style="color:black;">쿠폰관리</a>
+                  <a href="makeCuponView.mdo" style="color:black;">쿠폰관리</a>
                 </li>
                 <li class="item1">
                   <a href="goNoticeListAdmin.mdo"

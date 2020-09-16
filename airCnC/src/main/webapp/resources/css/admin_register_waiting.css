@@ -71,8 +71,13 @@ a:hover {
 .littleImg {
   width: 120px;
   height: 120px;
-  float: left;
   margin-right: 3%;
+  float: left;
+}
+
+.house_info_list {
+  display: inline-block;
+  width: 50%;
 }
 
 div hr {
