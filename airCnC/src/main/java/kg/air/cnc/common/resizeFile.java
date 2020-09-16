@@ -10,8 +10,8 @@ public class resizeFile {
 
 	public static String reszieFiles(String uploadPath, String path, String fileName, String mainPosition ) {
 		String imgFormat = "jpg";                       
-		int newWidth = 600;                               
-		int newHeight = 400;                            
+//		int newWidth = 600;                               
+//		int newHeight = 400;                            
 		int imageWidth;
 		int imageHeight;
 		double ratio;
