@@ -6,12 +6,12 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 import javax.imageio.ImageIO;
-import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
 public class uploadFileUtils {
+	
 	private static final Logger logger = LoggerFactory.getLogger(uploadFileUtils.class);
 
 	// 필요한 것 세가지 : uploadPath, originalName, byte[](file data)
@@ -33,14 +33,14 @@ public class uploadFileUtils {
 		//logger.info("uploadname : " + uploadedFileName.substring(uploadPath.length()).replace(File.separatorChar, '/'));
 		return uploadedFileName;
 	}
-	// making folder
+
 	private static String calcPath(String uploadPath) {
 		Calendar cal = Calendar.getInstance(); // 현재 날짜 정보
 		String yearPath = File.separator + cal.get(Calendar.YEAR); // \ + 년도
 		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
 		// monthPaths
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		// 총 3개의 폴더 외곽 을 생성
+		// 총 3개의 폴더 외곽을 생성
 		makeDir(uploadPath, yearPath, monthPath, datePath);
 		//logger.info("month" + monthPath);
 		//logger.info(datePath); // 최종 경로
@@ -61,15 +61,16 @@ public class uploadFileUtils {
 		}
 	}
 
-	private static String makeThumnail(String uploadPath, String path, String fileName) throws Exception{
-		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName)); // 경로상에 있는 파일을 읽어온단
-		BufferedImage destImg = Scalr.resize(sourceImg, 400, 600); // 이미지 압축인데 사이즈 지정해줌, 과연 될지?
-		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;  // thumbnail 이름엔 s_가 붙는다.
-		//logger.info("thum :" + thumbnailName);
-		File newFile = new File(thumbnailName);  // thunmbnail 경로로 새 파일 작성
-		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-		// format을 뽑는 애인듯
-		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
-		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
-	}
+	// 썸네일 화질 구려서 안씀.
+//	private static String makeThumnail(String uploadPath, String path, String fileName) throws Exception{
+//		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName)); // 경로상에 있는 파일을 읽어온단
+//		BufferedImage destImg = Scalr.resize(sourceImg, 400, 600); // 이미지 압축인데 사이즈 지정해줌, 과연 될지?
+//		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;  // thumbnail 이름엔 s_가 붙는다.
+//		//logger.info("thum :" + thumbnailName);
+//		File newFile = new File(thumbnailName);  // thunmbnail 경로로 새 파일 작성
+//		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+//		// format을 뽑는 애인듯
+//		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+//		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
+//	}
 }
