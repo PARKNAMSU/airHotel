@@ -150,7 +150,7 @@ $(document).on("click","#sendPasswordBtn",function() {
 								<i class="fa fa-lock fa-4x"></i>
 							</h3>
 							<h2 class="text-center">비밀번호를 잊으셨나요?</h2>
-							<p>계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</p>
+							<p style="font-size: 18px;">계정으로 사용하는 이메일 주소를 입력하시면, 임시 비밀번호를 전송해 드립니다.</p>
 							<div class="panel-body">
 								<form id="sendEmail" action="/cnc/sendPassword.do" class="form"
 									method="post">
