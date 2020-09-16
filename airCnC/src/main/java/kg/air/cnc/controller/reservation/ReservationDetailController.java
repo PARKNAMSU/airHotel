@@ -191,7 +191,7 @@ public class ReservationDetailController {
 	@RequestMapping(value = "getHousePhoto.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String getHousePhoto(ReservationHouseDetailVO vo) throws JsonProcessingException {
-		ArrayList<String> house_list= reservationService.getHousePhoto(vo.getHouse_seq());
+		String [] house_list= reservationService.getHousePhoto(vo.getHouse_seq());
 		vo.setHouse_photourl_list(house_list);
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonStr = mapper.writeValueAsString(vo);

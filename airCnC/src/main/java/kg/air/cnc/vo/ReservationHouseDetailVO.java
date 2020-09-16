@@ -40,7 +40,7 @@ public class ReservationHouseDetailVO {
 	private String house_desc4;
 	private String house_desc5;
 	private String house_photourl;
-	private ArrayList<String> house_photourl_list;
+	private String [] house_photourl_list;
 	private String house_name;
 	private String house_condition_childok;
 	private String house_condition_babyok;
@@ -91,7 +91,41 @@ public class ReservationHouseDetailVO {
     private String favorite_state;
     private String customer_name;
     private String customer_phone;
+    private String house_photourl_detail1;
+    private String house_photourl_detail2;
+    private String house_photourl_detail3;
+    private String house_photourl_detail4;
     
+	public String getHouse_photourl_detail1() {
+		return house_photourl_detail1;
+	}
+	public void setHouse_photourl_detail1(String house_photourl_detail1) {
+		this.house_photourl_detail1 = house_photourl_detail1;
+	}
+	public String getHouse_photourl_detail2() {
+		return house_photourl_detail2;
+	}
+	public void setHouse_photourl_detail2(String house_photourl_detail2) {
+		this.house_photourl_detail2 = house_photourl_detail2;
+	}
+	public String getHouse_photourl_detail3() {
+		return house_photourl_detail3;
+	}
+	public void setHouse_photourl_detail3(String house_photourl_detail3) {
+		this.house_photourl_detail3 = house_photourl_detail3;
+	}
+	public String getHouse_photourl_detail4() {
+		return house_photourl_detail4;
+	}
+	public void setHouse_photourl_detail4(String house_photourl_detail4) {
+		this.house_photourl_detail4 = house_photourl_detail4;
+	}
+	public String[] getHouse_photourl_list() {
+		return house_photourl_list;
+	}
+	public void setHouse_photourl_list(String[] house_photourl_list) {
+		this.house_photourl_list = house_photourl_list;
+	}
 	public String getCheck_in_day() {
 		return check_in_day;
 	}
@@ -122,12 +156,7 @@ public class ReservationHouseDetailVO {
 	public void setCustomer_phone(String customer_phone) {
 		this.customer_phone = customer_phone;
 	}
-	public ArrayList<String> getHouse_photourl_list() {
-		return house_photourl_list;
-	}
-	public void setHouse_photourl_list(ArrayList<String> house_photourl_list) {
-		this.house_photourl_list = house_photourl_list;
-	}
+
 	public String getCheck_in() {
 		return check_in;
 	}

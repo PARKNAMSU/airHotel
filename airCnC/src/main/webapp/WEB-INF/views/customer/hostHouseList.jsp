@@ -139,19 +139,19 @@
 		</div>
 		<div class="subdiv" id="imgdiv1" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
+				<img alt="" src="" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1"></div>
 		</div>
 		<div class="subdiv" id="imgdiv2" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img  alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
+				<img  alt="" src="" id="img2" class="imgs">
 			</div>
 			<div class="textdiv" id="td2" ></div>
 		</div>
 		<div class="subdiv" id="imgdiv3" onclick="" style="margin-bottom:50px;" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img " alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
+				<img " alt="" src="" id="img3" class="imgs">
 			</div>
 			<div class="textdiv" id="td3" ></div>
 		</div>
@@ -201,7 +201,8 @@
 						for(var i=1;i<=instanceNum;i++){
 							if(getData[i-1] != null){
 								$("#imgdiv"+i).attr("onclick","goToResHouse("+(getData[i-1].house_seq)+","+(getData[i-1].house_status)+",'"+type+"')")
-								//$("img"+i).attr("src","") 나중에 추가
+								$("#img"+i).attr("src","/upload_img/"+getData[i-1].house_photourl)	
+								console.log(getData[i-1].house_photourl)
 								$("#td"+i).html('<p style="font-size:20px;color:black;">'+getData[i-1].house_name+'</p><hr><p>숙소번호: no.'+getData[i-1].house_seq+'</p><p>숙소상태: '+getData[i-1].house_status_text+'</p>')
 							}else{
 								$("#imgdiv"+i).css("display","none")
@@ -235,9 +236,9 @@
 			for(var i=a;i<a+instanceNum;i++){
 				if(getData[i] != null){
 					$("#imgdiv"+b).attr("onclick","goToResHouse("+getData[i].house_seq+","+getData[i].house_status+",'"+type+"')")
-					//$("img"+b).attr("src","") 나중에 추가
+					$("#img"+b).attr("src","display.do?name="+getData[i].house_photourl)	
+
 					$("#td"+b).html('<p style="font-size:20px;color:black;">'+getData[i].house_name+'</p><hr><p>숙소번호: no.'+getData[i].house_seq+'</p><p>숙소상태: '+getData[i].house_status_text+'</p>')
-					console.log(i)
 				}else{
 					$("#imgdiv"+b).css("display","none");
 				}
@@ -256,7 +257,10 @@
 			for(var i=1; i<=3;i++){
 				$("#imgdiv"+i).css("display","initial");
 				$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[a].house_seq+","+getData[a].house_status+",'"+type+"')")
-				//$("img"+b).attr("src","") 나중에 추가
+				
+					$("#img"+b).attr("src","display.do?name="+getData[a].house_photourl)	
+					console.log(getData[a].house_photourl)
+				
 				$("#td"+i).html('<p style="font-size:20px;color:black;">'+getData[a].house_name+'</p><hr><p>숙소번호: no.'+getData[a].house_seq+'</p><p>숙소상태: '+getData[a].house_status_text+'</p>')
 				a++;
 			}
