@@ -157,8 +157,15 @@
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:25px;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+			<div style="width:50px;height:50px;margin-left:1px;margin-top:10px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+				<c:choose>
+					<c:when test="${my_image eq 'profile.png'}">
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/profile.png" style="max-width:120%;max-height:120%;">
+					</c:when>
+					<c:otherwise>
+						<img alt="" src="/cnc/display.do?name=${my_image}" style="max-width:120%;max-height:120%;">
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<div id="mydiv" style="display:none;margin-left:85%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >

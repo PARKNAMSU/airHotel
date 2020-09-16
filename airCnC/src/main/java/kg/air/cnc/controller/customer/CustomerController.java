@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,9 +54,9 @@ public class CustomerController {
 	private KakaoController kakaoController = new KakaoController();
 	private String apiResult = null;
 	
-	@Resource(name = "uploadPath") 
-	private String uploadPath;
-
+//	@Resource(name = "uploadPath") 
+//	private String uploadPath;
+	
 	@Autowired
 	private void setNaverController(NaverController naverController) {
 		this.naverController = naverController;
@@ -89,7 +88,8 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/hostRegisterView.do", method = RequestMethod.GET)
-	public ModelAndView hostRegisterView(HttpSession session,CustomerVO customerVO, ModelAndView mav) throws Exception{
+	public ModelAndView hostRegisterView(HttpSession session,CustomerVO customerVO, ModelAndView mav, HttpServletRequest request) throws Exception{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 		String sessionId = (String)session.getAttribute("login_session");
 		customerVO = service.getCustomerInfo(sessionId);	
 		String filePath = customerVO.getCustomer_image();
@@ -103,6 +103,7 @@ public class CustomerController {
 		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
 		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 		mav.addObject("customerImage", filePath);
+		session.setAttribute("my_image", filePath);
 		mav.setViewName("hostRegister");
 		return mav;
 	}
@@ -118,7 +119,8 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/mypage.do")
-	public ModelAndView mypageView(HttpSession session, CustomerVO customerVO, ModelAndView mav, HttpServletResponse response)throws Exception{
+	public ModelAndView mypageView(HttpSession session, CustomerVO customerVO, ModelAndView mav, HttpServletResponse response, HttpServletRequest request)throws Exception{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 		String sessionId = (String)session.getAttribute("login_session");
 		System.out.println("세션 아이디 : " + sessionId);
 		customerVO = service.getCustomerInfo(sessionId);
@@ -133,13 +135,15 @@ public class CustomerController {
 		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
 		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 		mav.addObject("customerImage", filePath);
+		session.setAttribute("my_image", filePath);
 		mav.setViewName("mypage");
 		mav.addObject("fdata", fdata);
 		return mav;
 	}
 	
 	@RequestMapping(value = "/display.do", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> displayFile(@RequestParam("name")String fileName)throws Exception{
+	public ResponseEntity<byte[]> displayFile(@RequestParam("name")String fileName, HttpServletRequest request)throws Exception{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;
 		logger.info("File Name : " + fileName);
@@ -379,7 +383,8 @@ public class CustomerController {
 
 	// 회원가입 컨트롤러.
 	@RequestMapping(value = "/registerCheck.do", method = RequestMethod.POST)
-	public String regist(CustomerVO vo, MultipartFile multipartFile)throws Exception{
+	public String regist(CustomerVO vo, MultipartFile multipartFile, HttpServletRequest request)throws Exception{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 		multipartFile = vo.getCustomer_photo();
 		if (multipartFile != null && multipartFile.isEmpty() == false) {
 			String originalName = multipartFile.getOriginalFilename();
@@ -444,7 +449,9 @@ public class CustomerController {
 				CustomerVO vo = service.login(customerVO);
 				if (vo != null) { // 로그인 성공.
 					session.setAttribute("login_session", vo.getCustomer_id());
-					if(vo.getCustomer_image() != null) {
+					if(vo.getCustomer_image().equals("profile.png")) {
+						session.setAttribute("my_image", "profile.png");
+					}else{	
 						session.setAttribute("my_image", vo.getCustomer_image());
 					}
 					mav.setViewName("index");
@@ -457,7 +464,8 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerInfoUpdate.do", method = RequestMethod.POST)
-	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session, MultipartFile multipartFile)throws Exception{
+	public ModelAndView customerInfoUpdate(CustomerVO vo, ModelAndView mav, HttpSession session, MultipartFile multipartFile, HttpServletRequest request)throws Exception{
+		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 		String customer_email = vo.getCustomer_email(); // 사용자가 입력한 이메일을 가져온다.
 		// 블랙리스트에 존재하는 이메일인지 확인.
 		if (service.createEmailCheck(customer_email) == 1 && service.blacklistEmailCheck(vo) == 0) {
@@ -497,6 +505,7 @@ public class CustomerController {
 				mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
 				mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 				mav.addObject("customerImage", filePath);
+				session.setAttribute("my_image", filePath);
 				mav.setViewName("mypage");
 				mav.addObject("fdata", fdata);
 				mav.addObject("resultMessage", "회원 정보가 수정되었습니다.");
@@ -513,6 +522,7 @@ public class CustomerController {
 				mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
 				mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 				mav.addObject("customerImage", filePath);
+				session.setAttribute("my_image", filePath);
 				mav.setViewName("mypage");
 				mav.addObject("fdata", fdata);
 				mav.addObject("resultMessage","회원 정보 수정에 실패하였습니다.");
@@ -531,6 +541,7 @@ public class CustomerController {
 			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
 			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
 			mav.addObject("customerImage", filePath);
+			session.setAttribute("my_image", filePath);
 			mav.setViewName("mypage");
 			mav.addObject("fdata", fdata);
 			mav.addObject("resultMessage","사용할 수 없는 이메일입니다.");
@@ -542,6 +553,7 @@ public class CustomerController {
 	// 호스트 신청 처리.
 	@RequestMapping(value = "/hostRegister.do", method = RequestMethod.POST)
 	public ModelAndView hostRegister(HostVO hostVO, CustomerVO customerVO, HttpSession session, HttpServletRequest request, ModelAndView mav, MultipartFile multipartFile)throws Exception{
+			String uploadPath = request.getSession().getServletContext().getRealPath("/resources/images/profile/");
 			String sessionId = (String)session.getAttribute("login_session");
 			customerVO = service.getCustomerInfo(sessionId);	
 			String filePath = customerVO.getCustomer_image();
