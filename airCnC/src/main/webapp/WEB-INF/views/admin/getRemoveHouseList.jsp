@@ -122,7 +122,7 @@
         <div class="house_info_list">
         <a href="getRemoveHouse.mdo?house_seq=${house.house_seq}" style="clear : right">
         <div style="width:100%;">
-            <img src="../images/face.png" alt="숙소 이미지" class="littleImg">
+            <img src="display.do?name=${item.house_photourl }" alt="숙소 이미지" class="littleImg">
             ${house.house_name}<br>
                           숙소 소개<br>
       		${house.house_location_fulladdress}<br>

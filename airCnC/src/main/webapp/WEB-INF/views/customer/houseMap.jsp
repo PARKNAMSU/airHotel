@@ -77,7 +77,14 @@
 				</ul>
 			</div>
 			<div style="width:50px;height:50px;margin-left:5%;margin-top:12px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/chat/my1.jpg" style="max-width:120%;max-height:120%;">
+				<c:choose>
+					<c:when test="${my_image eq 'profile.png'}">
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/profile.png" style="max-width:120%;max-height:120%;">
+					</c:when>
+					<c:otherwise>
+						<img alt="" src="/cnc/display.do?name=${my_image}" style="max-width:120%;max-height:120%;">
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<div id="mydiv" style="display:none;margin-left:90%;z-index:100;width:200px;background-color:#d2d2d2;font-size:20px;border-radius: 15px 15px 15px 15px;font-family: 'Jua', sans-serif;" >
@@ -209,13 +216,12 @@
 				<input type="hidden" name="check_in" value="">
 				<input type="hidden" name="check_out" value="">
 				<input type="hidden" name="house_person" value="">
-					<div class="houseList" style="color: black" onclick="sub(${house.house_seq})">
-						<img src="${pageContext.request.contextPath}/resources/images/face.png" alt="숙소 이미지" class="littleImg">
-							${house.house_seq }<br>
-							${house.house_name }<br> 
+					<div class="houseList" style="color: black; position:relative;" onclick="sub(${house.house_seq})">
+						<img src="/cnc/display.do?name=${house.house_photourl }" alt="숙소 이미지" class="littleImg">
+							<p style="font-size: 20px;color:black;">${house.house_name }</p><br> 
 							${house.house_location }<br>
-							별점<br>
-							가격
+							별점<br><br><br>
+							<p style="position:absolute; bottom:5px; right:10px;">${house.house_price_default }원</p>
 					</div>
 				</form>
 					<br>
@@ -435,7 +441,13 @@
 			document.getElementById("checkOut").min = maxLim.value;
 		}
 	</script>
-
+	<script type="text/javascript">
+		$(function(){
+			$("#myinfo").click(function(){
+				$("#mydiv").fadeToggle("slow");
+			})
+		})
+	</script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
