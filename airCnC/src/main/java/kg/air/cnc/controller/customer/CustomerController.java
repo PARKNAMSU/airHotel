@@ -444,6 +444,9 @@ public class CustomerController {
 				CustomerVO vo = service.login(customerVO);
 				if (vo != null) { // 로그인 성공.
 					session.setAttribute("login_session", vo.getCustomer_id());
+					if(vo.getCustomer_image() != null) {
+						session.setAttribute("my_image", vo.getCustomer_image());
+					}
 					mav.setViewName("index");
 				}else {
 					mav.setViewName("login");
