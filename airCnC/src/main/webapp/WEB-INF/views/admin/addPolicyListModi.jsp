@@ -11,26 +11,34 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/style.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/menu.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/reset.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/SUHWAN.css"/>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hostregister.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin_log.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/style.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/menu.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/reset.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/footer.css">
-	
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/SUHWAN.css">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css">
-	
+	<script type="text/javascript">
+      $(function () {
+        $(".logbars").click(function () {
+          $("#menuItems").fadeToggle("slow");
+        });
+      });
+    </script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script src="${pageContext.request.contextPath}/resources/javascript/processWithforceStop.js"></script>
@@ -61,46 +69,63 @@
 	</script>
 </head>
 <body>
-<header class="menudiv1" style="position : static">
-  <div class="menudiv2-1" >
-  <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png">
-  </div>
-  <div class="menudiv2-2" style="overflow : hidden">
-    <div class="menudiv3-1" id="div1">
-      <ul id="menuItems">
-                  <li class="item">계정관리</li>
-                  <li class="item">통계</li>
-                  <li class="item">숙소관리</li>
-                  <li class="item">로그관리</li>
-        <li class="item">로그인</li>
-              </ul>
-          </div>
+	<header class="logo" style="position: sticky;">
+     <label for="" class="loglabel">약관정책 수정(관리자)</label>
+      <span>
+        <a href="/cnc/indexView.do">
+          <i
+            class="fas fa-question"
+            style="font-size: 35px; float: left; color: #ff5a5f;"
+          ></i>
+        </a>
+      </span>
+      
+      <div class="menudiv3-1" id="div1">
+        <ul id="menuItems">
+          <c:catch>
+            <c:choose>
+              <c:when test="${admin_session eq null}">
+                <script>
+                  history.go(-1);
+                </script>
+              </c:when>
+              <c:otherwise>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/blamelist.mdo">신고관리</a>
+                </li>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/salesChart.mdo">통계</a>
+                </li>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/getRegisterWaitingList.mdo">호스트관리</a>
+                </li>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/logPage.mdo">로그관리</a>
+                </li>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/makeCuponView.mdo">쿠폰관리</a>
+                </li>
+                <li class="item1">
+                  <a href="http://localhost:8080/cnc/goNoticeListAdmin.mdo" >게시판관리</a>
+                </li>
+                <li class="item1">
+                  <a href="/cnc/logout.mdo">로그아웃</a>
+                </li>
+              </c:otherwise>
+            </c:choose>
+          </c:catch>
+        </ul>
+        <a class="logbars" href="#">메뉴<i class="fas fa-bars"></i></a>
       </div>
-  </header>
-	<!--/ header-start -->
-	 <!-- bradcam_area  -->
-     <div class="bradcam_area bradcam_bg_5">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="bradcam_text text-center">
-                        <h3>contact</h3>
-                        <p>약관정책관리 수정</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ bradcam_area  -->
-
+    </header>
 	<div class="container">
 	<!-- 좌측 목차 -->
-    <nav role="navigation" style="float: left; width: 30%;" class="center_event">
+    <nav role="navigation" style="float: left; width: 30%; margin-top: 20%;" class="center_event">
 	  <ul id="main-menu">
 	    <li><a href="/cnc/goNoticeListAdmin.mdo">공지사항 관리</a></li>
 	    <li><a href="/cnc/goEventListAdmin.mdo">이벤트 관리</a></li>
 	    <li><a href="/cnc/goPolicyListAdmin.mdo">약관정책 관리</a></li>
-	    <li><a href="#">고객센터</a>
+	    <li><a href="/cnc/goPersonalQueListAdmin.mdo">고객센터</a>
 	      <ul id="sub-menu">
 	        <li><a href="/cnc/goPersonalQueListAdmin.mdo" aria-label="subemnu">1대1 문의 관리</a></li>
 	        <li><a href="/cnc/goCommonQueListAdmin.mdo" aria-label="subemnu">자주묻는질문 관리</a></li>
@@ -114,7 +139,7 @@
 
 	<div style="float: left; width: 60%; " id="featured">
 	<div class="title">
-					<h2>약관정책 관리</h2>
+					<h2 style="color: black;">약관정책 관리</h2>
 					<hr>
 					<span class="byline">약관정책을 수정합니다.</span><br><br>
 				</div>
@@ -130,36 +155,15 @@
           					onblur="if(this.value == '') { this.value = '새로운 공지의 내용을 입력하세요.'; }">${detail.policy_content }</textarea>
 
 							<input type="hidden" name="policy_idx" value="${detail.policy_idx }">
-          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" class="submitbtn"><button>수정이라구</button></a>
-          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" class="submitbtn"><button>삭제라구</button></a>
-          					<a href="#" onclick="ListSubmit();" id="listBtn" class="submitbtn"><button>뒤로라구</button></a>
+          					<a href="#" onclick="UpdateSubmit();" id="updateBtn" ><button>수정이라구</button></a>
+          					<a href="#" onclick="DeleteSubmit();" id="deleteBtn" ><button>삭제라구</button></a>
+          					<a href="#" onclick="ListSubmit();" id="listBtn" ><button>뒤로라구</button></a>
           					
                 </form>
 			</li>
 		</ul>
 	</div>
 	</div>
-
-
-	<div id="footer"></div>
-     <footer class="first" id="bottom" >
-		<div class="second">
-			회사소개  | 이용약관 | 개인정보처리방침 |사업자 정보확인 | 여기어때 마케팅센터 | 액티비티 호스트센터 | HOTEL 여기어때 |콘텐츠산업진흥법에의한 표시<br>
-			<br>
-			고객행복센터 1670-6250 오전 9시 - 새벽 3시, 점심시간: 오후 12시 - 오후 1시<br><br>
-			(주) 여기어때컴퍼니<br><br>
-			주소 : 서울특별시 강남구 봉은사로 479, 479타워 11층<br>
-			대표이사 : 박남수 | 사업자등록번호: 742-86-00224<br>
-			통신판매번호 : 2017-서울강남-01779 | 관광사업자 등록번호: 제1026-24호<br>
-			전화번호 : 1670-6250<br>
-			전자우편주소 : skatn7979@gmail.com<br>
-			Copyright GC COMPANY Corp. All rights reserved.<br>
-			<hr id="bline">
-			<img src="../images/face.png" id="blogo">
-			<img src="../images/insta.png" id="blogo">
-		</div>
-	</footer>
-
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"

@@ -51,7 +51,7 @@
           ></i>
         </a>
       </span>
-      <label for="" class="loglabel">Sales Chart </label>
+      <label for="" class="loglabel">SignUp Chart </label>
       <div class="menudiv3-1" id="div1">
         <ul id="menuItems">
           <c:catch>
@@ -77,7 +77,7 @@
                   <a href="logPage.mdo">로그관리</a>
                 </li>
                 <li class="item1">
-                  <a href="makeCupon.mdo">쿠폰관리</a>
+                  <a href="makeCuponView.mdo">쿠폰관리</a>
                 </li>
                 <li class="item1">
                   <a href="goNoticeListAdmin.mdo"
@@ -250,7 +250,8 @@
 		<%@ include file="../html/footer.jsp"%>
 	</footer>
 </body>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/javascript/admin_salesChart.js?version=123"></script>
 <script type="text/javascript">
 $(function(){
 	$("#yearsCondition1").change(function() {

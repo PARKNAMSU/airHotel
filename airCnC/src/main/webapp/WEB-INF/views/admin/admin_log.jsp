@@ -56,7 +56,7 @@
           ></i>
         </a>
       </span>
-      <label for="" class="loglabel">Sales Chart </label>
+      <label for="" class="loglabel">Log </label>
       <div class="menudiv3-1" id="div1">
         <ul id="menuItems">
           <c:catch>
@@ -82,7 +82,7 @@
                   <a href="logPage.mdo" style="color:black;">로그관리</a>
                 </li>
                 <li class="item1">
-                  <a href="makeCupon.mdo" style="color:black;">쿠폰관리</a>
+                  <a href="makeCuponView.mdo" style="color:black;">쿠폰관리</a>
                 </li>
                 <li class="item1">
                   <a href="goNoticeListAdmin.mdo"
@@ -144,7 +144,7 @@
 			<input type="hidden" value="" id="allElement">
 			<div class="maindiv">
 				<table class="table table-striped" id="logtable">
-					<tr class="table-danger" id="tr0">
+					<tr class="table-danger" id="tr0" id="tr${i}" style="color:black;">
 						<th>번호</th>
 						<th>아이디</th>
 						<th>내용</th>
@@ -152,7 +152,7 @@
 						<th>날짜</th>
 					</tr>
 					<c:forEach begin="1" end="5" var="i">
-					<tr id="tr${i}">
+					<tr id="tr${i}" style="color:black;">
 						<td id="seq${i}"></td>
 						<td id="name${i}"></td>
 						<td id="state${i}"></td>
@@ -164,11 +164,11 @@
 			</div>
 			<div style="margin-bottom: 10%;width:500px;margin-left: 40%;margin-top: 5%;">
 			<div style="float:left;box-shadow: 2px 2px 2px 2px gray;border-radius: 15px 15px 15px 15px;padding:10px;">
-				<a onclick="clickPrev()" id="prev" class="page" style="font-size:20px;color:black;">prev</a>
+				<a onclick="clickPrev()" onmouseover="$(this).css('color','red')" onmouseout="$(this).css('color','black')" id="prev" class="page" style="font-size:20px;color:black;">prev</a>
 					<c:forEach begin="1" end="5" var="i">
-						<a class="page" id="page${i}" onclick="loadLog(${i})" style="font-size:20px;color:black;margin-left:10px">${i}</a>
+						<a class="page" id="page${i}" onclick="loadLog(${i})" onmouseover="$(this).css('color','red')" onmouseout="$(this).css('color','black')" style="font-size:20px;color:black;margin-left:10px">${i}</a>
 					</c:forEach>		
-				<a onclick="clickNext()" id="next" class="page" style="font-size:20px;color:black;">next</a>
+				<a onclick="clickNext()" onmouseover="$(this).css('color','red')" onmouseout="$(this).css('color','black')" id="next" class="page" style="font-size:20px;color:black;">next</a>
 			</div>
 			<select id="instanceNum" style="width:200px;margin-left:90%;"onchange="" class="form-control form-control-lg">
 				<option value="5">5</option>
@@ -220,7 +220,7 @@ $(document).ready(function() {
 		}	
 		for(var i=1;i<=instanceNum; i++){
 			var innerHtml = "";
-			innerHtml += '<tr id="tr'+i+'"><td id="seq'+i+'"></td><td id="name'+i+'"></td><td id="state'+i+'"></td><td id="type'+i+'"></td><td id="date'+i+'"></td></tr>'
+			innerHtml += '<tr id="tr'+i+'" style="color:black;"><td id="seq'+i+'"></td><td id="name'+i+'"></td><td id="state'+i+'"></td><td id="type'+i+'"></td><td id="date'+i+'"></td></tr>'
 			$("#logtable > tbody:last").append(innerHtml);
 		}
 		loadLog(page);
