@@ -181,7 +181,7 @@
 	<br><br><br><br>
 	<div class="imgdiv" style="font-family: 'Jua', sans-serif;">
 		<div class="mainimg">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/house1.png" id="mainimg1">
+			<img alt="" src="display.do?name=${house.house_photourl}" id="mainimg1">
 		</div>
 		<div class="subimgs">
 			<div class="subimg" style="margin-bottom:1%;"><img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/house1.png" class="img" id="img1"></div>
@@ -206,8 +206,15 @@
 			<p style="font-family: 'Jua', sans-serif;">회원가입일: ${house.host_regdate }</p>
 		</div><br>
 		<div id="hostcondition">
-						<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" style="width:25px;height:25px;"><b>후기 ${commentsList.size() }개</b>&nbsp;
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/medal.png" style="width:25px;height:25px;"><b>슈퍼호스트</b><!-- 슈퍼호스트일 경우에만 -->
+			<c:choose>
+				<c:when test="${commentsList == null }">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" style="width:25px;height:25px;"><b>후기 0개</b>&nbsp;
+				</c:when>
+				<c:otherwise>
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/reservationhouse/star.png" style="width:25px;height:25px;"><b>후기 ${commentsList.size() }개</b>&nbsp;
+				</c:otherwise>
+			</c:choose>
+				
 		</div><br>
 		<div id="hostintro" style="	line-height: 23px;width:50%;float:left;"> 
 			<p style="font-family: 'Jua', sans-serif;">숙소소개<br>${house.house_desc1 }<br>${house.house_desc2}<br><br>주변 관광지<br>${house.house_desc4 }<br><br>숙소근처 교통<br>${house.house_desc5}</p>
@@ -390,7 +397,7 @@ var content = '<div class="wrap">' +
 '        </div>' + 
 '        <div class="body">' + 
 '            <div class="img">' +
-'                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+'                <img src="display.do?name=${house.house_photourl}" width="73" height="70">' +
 '           </div>' + 
 '            <div class="desc">' + 
 '                <div class="ellipsis">'+'${house.house_location }' +'${house.house_location_sido }' +'${house.house_location_gugun }'+'</div>' + 

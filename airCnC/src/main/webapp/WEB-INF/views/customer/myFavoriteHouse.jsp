@@ -101,7 +101,7 @@
 	<c:forEach items="${favoriteList }" var="item" varStatus="i">
 		<div class="subdiv" id="imgdiv1${i.index+1 }" onclick="goToHouse(${item.house_seq},'notres')" style="color:black;margin-top:5%;">
 			<div class="imgdiv" >
-				<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
+				<img onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)" alt="" src="display.do?name=${item.house_photourl }" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1" style="word-break:break-all;padding:30px;">${item.house_name }</div>
 		</div>

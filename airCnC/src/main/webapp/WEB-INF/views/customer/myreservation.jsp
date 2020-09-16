@@ -105,19 +105,19 @@
 		</div>
 		<div class="subdiv" id="imgdiv1" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img1" class="imgs">
+				<img alt="" src="" id="img1" class="imgs">
 			</div>
 			<div class="textdiv" id="td1"></div>
 		</div>
 		<div class="subdiv" id="imgdiv2" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img2" class="imgs">
+				<img alt="" src="" id="img2" class="imgs">
 			</div>
 			<div class="textdiv" id="td2"></div>
 		</div>
 		<div class="subdiv" id="imgdiv3" onclick="" onmouseover="$(this).css('opacity',0.5)" onmouseout="$(this).css('opacity',1)">
 			<div class="imgdiv" >
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/myreservation/house1.png" id="img3" class="imgs">
+				<img alt="" src="" id="img3" class="imgs">
 			</div>
 			<div class="textdiv" id="td3"></div>
 		</div>
@@ -145,7 +145,7 @@
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
 							$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"',"+getData[i-1].reservation_status+")")
-							//$("img"+i).attr("src","") 나중에 추가
+							$("img"+i).attr("src","display.do?name="+getData[i-1].house_photourl) 
 							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>'+getData[i-1].reservation_status_text+'</p>')
 						}else{
 							$("#imgdiv"+i).css("display","none")
@@ -175,7 +175,7 @@
 			for(var i=a;i<a+instanceNum;i++){
 				if(getData[i] != null){
 					
-					//$("img"+b).attr("src","") 나중에 추가
+					$("img"+b).attr("src","display.do?name="+getData[i].house_photourl)
 					if(type = "nowres"){
 						$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i].house_seq)+","+(getData[i].reservation_seq)+",'"+type+"',"+getData[i].reservation_status+")")
 						$("#td"+i).html('<p>'+getData[i].house_name+'</p><br><hr><p>'+getData[i].reservation_status_text+'</p>')
@@ -201,7 +201,7 @@
 			for(var i=1; i<=3;i++){
 				$("#imgdiv"+i).css("display","initial");
 				
-				//$("img"+b).attr("src","") 나중에 추가
+				$("img"+b).attr("src","display.do?name="+getData[a].house_photourl) 
 				if(type == "nowres"){
 					$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[a].house_seq)+","+(getData[a].reservation_seq)+",'"+type+"',"+getData[a].reservation_status+")")
 					$("#td"+i).html('<p>'+getData[a].house_name+'</p><br><hr><p>'+getData[a].reservation_status_text+'</p>')
@@ -236,7 +236,7 @@
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
 							$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"',"+getData[i-1].reservation_status+")")
-									//$("img"+i).attr("src","") 나중에 추가
+							$("img"+i).attr("src","display.do?name="+getData[i-1].house_photourl)
 							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>'+getData[i-1].reservation_status_text+'</p>')
 							
 						}else{
@@ -272,7 +272,7 @@
 						for(var i=1;i<=instanceNum;i++){
 							if(getData[i-1] != null){
 								$("#imgdiv"+i).attr("onclick","goToResHouse("+getData[i-1].house_seq+","+getData[i-1].reservation_seq+",'"+type+"')")
-								//$("img"+i).attr("src","") 나중에 추가
+								$("img"+i).attr("src","display.do?name="+getData[i-1].house_photourl)
 								$("#td"+i).html('<p>'+getData[i-1].house_name+'</p>')
 							}else{
 								$("#imgdiv"+i).css("display","none")
