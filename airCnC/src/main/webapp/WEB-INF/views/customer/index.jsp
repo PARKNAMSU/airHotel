@@ -68,7 +68,7 @@
 			<a href="/cnc/indexView.do"><img alt="" src="${pageContext.request.contextPath}/resources/images/main/mainlogoblack.PNG" /></a>
 		</div>
 		<div class="menudiv2-2" style="padding:0 0 4px;">
-			<div class="menudiv3-1" id="div1" style="float:left;width:70%;">
+			<div class="menudiv3-1" id="div1" style="float:left;">
 				<ul id="menuItems" style="padding:12px;">
 						<li class="item"><p><a href="/cnc/indexView.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;">메인페이지</a></p></li>
 						<li class="item">

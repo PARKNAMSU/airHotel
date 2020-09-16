@@ -130,7 +130,7 @@
 						<li class="item"><p><a href="myHouse.do" style="color:white;font-family:'Jua', sans-serif;font-size:20px;" >호스트</a></p></li>
 				</ul>
 			</div>
-			<div style="width:50px;height:50px;margin-left:1px;margin-top:10px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
+			<div style="width:50px;height:50px;margin-left:15px;margin-top:24px;border-radius: 30px 30px 30px 30px;float:left;background-color:white;overflow:hidden;" id="myinfo">
 				<c:choose>
 					<c:when test="${my_image eq 'profile.png'}">
 						<img alt="" src="${pageContext.request.contextPath}/resources/images/profile.png" style="max-width:120%;max-height:120%;">
