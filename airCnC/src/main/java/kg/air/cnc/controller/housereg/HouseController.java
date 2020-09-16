@@ -394,7 +394,7 @@ public class HouseController {
 		if(!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			//String path = "c:\\EclipsePractice\\aaa\\";
-			System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/upload/"));
+			System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/resources/images/profile/"));
 			String path = mtfRequest.getSession().getServletContext().getRealPath("/upload/");
 			System.out.println("사진첨부한 파일 이름 : " + fileName);
 			try {
