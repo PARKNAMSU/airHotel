@@ -119,20 +119,22 @@
         <h3>숙소 등록 관리</h3>
         <br>
         <c:forEach items="${waitingList}" var="house">
-        <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}" style="clear : left">
+         <div class="house_info_list">
+        <a href="getRegisterHouse.mdo?house_seq=${house.house_seq}" style="clear : right">
         <div style="width:100%;">
 	    	<img src="../images/face.png" alt="숙소 이미지" class="littleImg">
 			${house.house_name }<br>
-		         숙소 소개<br>
+            숙소 소개<br>
 		    ${house.house_location_fulladdress}<br>
-		    ${house.house_star }<br>					
+		    ${house.house_star }<br>
 		    ${house.house_price_default }<br>
         </div>
         </a>
+         </div>
         <hr>
         </c:forEach>
     </div>
-    <div style="display: block; text-align: center; color: black; padding-right :10%; margin-top : 20px;">		
+    <div style="display: block; text-align: center; color: black; padding-right :10%; margin-top : 20px;">
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getRegisterWaitingList.mdo?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
