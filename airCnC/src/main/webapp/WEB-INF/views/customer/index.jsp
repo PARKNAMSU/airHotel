@@ -179,65 +179,55 @@
                     <img src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg" alt="img02"/>           
                 <figcaption>
                   <h2>서울여행</h2>
-                  <p>서울은 현재 대한민국의 수도입니다.</p>
                 </figcaption>
               </figure>
-            
-              <figure onclick="location.href='getHouseList.do?location=경남'" class="effect-bubba">
-                <img  src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="img16" />
+              <figure onclick="location.href='getHouseList.do?location=경기'" class="effect-bubba">
+                    <img src="${pageContext.request.contextPath}/resources/images/destination/seoul.jpg" alt="img02"/>           
                 <figcaption>
-                    <h2>경남여행</h2>
-                  <p>부산광역시는 대한민국 동남부 해안에 위치한 광역시이다.</p>
+                  <h2>경기도 여행</h2>
+                </figcaption>
+              </figure>
+            <figure onclick="location.href='getHouseList.do?location=강원'" class="effect-bubba">
+                <img src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="img02" />
+                <figcaption>
+                    <h2>강원도 여행</h2>
                 </figcaption>
               </figure>
               <figure onclick="location.href='getHouseList.do?location=경북'" class="effect-bubba">
+                <img  src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="img16" />
+                <figcaption>
+                    <h2>경남여행</h2>
+                </figcaption>
+              </figure>
+              <figure onclick="location.href='getHouseList.do?location=경남'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg" alt="img02" />
                 <figcaption>
-                    <h2>대구여행</h2>
-                  <p>대구광역시는 대한민국 동남부 내륙에 있는 광역시이다.</p>
+                    <h2>경북여행</h2>
                 </figcaption>
               </figure>
               <figure onclick="location.href='getHouseList.do?location=전북'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png" alt="img16" />
                 <figcaption>
                     <h2>전북여행</h2>
-                  <p>전북은 대한민국의 중앙부에 있는 광역시이다.</p>
                   <a href=""></a>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=강원'" class="effect-bubba">
-                <img src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="img02" />
-                <figcaption>
-                    <h2>강원여행</h2>
-                  <p>강릉시는 대한민국 강원도 동해안 중부에 있는 시이다. </p>
-                </figcaption>
-              </figure>
-              <figure onclick="location.href='getHouseList.do?location=광주'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=전남'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg" alt="img16" />
                 <figcaption>
-                    <h2>광주여행</h2>
-                  <p>광주광역시는 대한민국의 서남부에 있는 광역시이다. </p>
+                    <h2>전남여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=인천'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=충북'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg" alt="img02" />
                 <figcaption>
-                    <h2>인천여행</h2>
-                  <p>인천광역시는 대한민국 서해안에 있는 광역시이다. </p>
+                    <h2>충북여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=제천'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=충남'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg" alt="img16" />
                 <figcaption>
-                    <h2>제천여행</h2>
-                  <p>제천시는 대한민국 충청북도 북동부의 시이다.</p>
-                </figcaption>
-              </figure>
-              <figure onclick="location.href='getHouseList.do?location=울산'" class="effect-bubba">
-                <img src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg" alt="img16" />
-                <figcaption>
-                    <h2>울산여행</h2>
-                  <p>울산광역시는 대한민국 남동부 해안에 있는 광역시이다.</p>
+                    <h2>충남여행</h2>
                 </figcaption>
               </figure>
             </div>
