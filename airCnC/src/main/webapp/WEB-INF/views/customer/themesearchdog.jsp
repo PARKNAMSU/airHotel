@@ -150,7 +150,7 @@
                         "<input type=\"hidden\" name=\"accessType\" value=" + accessType + ">" +
                         "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                         "<div class=\"thumb\">" +
-                        "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
+                        "<img src=\"/cnc/display.do?name="+getData[i].house_photourl+"\" alt=''/> " +
                         "</div>" +
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
@@ -184,7 +184,7 @@
                     "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                     "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                     "<div class=\"thumb\">" +
-                    "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
+                    "<img src=\"/cnc/display.do?name="+getData[i].house_photourl+"\" alt=''/> " +
                     "</div>" +
                     " <div class=\"info\">" +
                     "<a href=\"#\">" +

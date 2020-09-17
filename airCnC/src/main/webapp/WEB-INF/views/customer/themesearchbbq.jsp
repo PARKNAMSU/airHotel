@@ -138,7 +138,7 @@
                             "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
-                            "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
+                            "<img src=\"/cnc/display.do?name="+getData[i].house_photourl+"\" alt=''/> " +
                             "</div>" +
                             " <div class=\"info\">" +
                             "<a href=\"#\">" +
@@ -161,6 +161,7 @@
             var accessType = "notres";
             if(getData.length > 10 ){
                 for(var i = showed; i < showed+1; i++){
+                    var housePhoto = getData[i].house_photourl;
                     $("#mother").append(
                         "<div class=\"col-lg-4 col-md-1\">" +
                         "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
@@ -168,7 +169,7 @@
                         "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                         "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                         "<div class=\"thumb\">" +
-                        "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
+                        "<img src=\"/cnc/display.do?name="+getData[i].house_photourl+"\" alt=''/> " +
                         "</div>" +
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
