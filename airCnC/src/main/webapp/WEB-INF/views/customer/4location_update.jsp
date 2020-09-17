@@ -7,18 +7,46 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
-	<title>Travelo</title>
+	<title>AirBnb</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="${pageContext.request.contextPath}/images/favicon.png">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/test.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/menu.css?version=123"><!--  -->
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/reset.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/footer.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/hostregister.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/index.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/effect.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
+	
+    
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/SUHWAN2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
+    />
+    
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/location.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	
@@ -103,23 +131,7 @@
 
 </head>
 <body>
- <!-- header-start -->
-    <header class="menudiv1">
-      <div class="menudiv2-1">
-        <label for="menudiv2-1">위치 및 지도</label>
-        <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
-      </div>
-      <div class="menudiv2-2">
-        <div class="menudiv3-1" id="div1">
-          <img
-            alt="http://www.naver.com"
-            src="${pageContext.request.contextPath}/resources/images/menubar.png"
-            id="menubar"
-          />
-        </div>
-      </div>
-    </header>
-    <!-- header-end -->
+ 
     <div class="container" style="align-content: center;">
 	<div class="form">
     <c:url value="/update_4locationwork.do" var="actionUrl" />

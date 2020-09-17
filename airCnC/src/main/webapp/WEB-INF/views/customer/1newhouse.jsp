@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge" />
-	<title>Travelo</title>
+	<title>AirBnb</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
@@ -155,11 +155,12 @@
 						<span class="up">등록한 숙소</span> 
 						<img src="${pageContext.request.contextPath}/resources/images/host/house1.png" />
 					</div>
-					<div class="newhost">
-					<input type="button" value="다음" class="submitbtn"  
-     				onclick="newHouseSubmit();"/>
-					<input type="button" value="뒤로" class="submitbtn"  
+					<div>
+					<input type="button" value="뒤로" class="submitbtn" 
 				    onclick="location.href='/cnc/myHouse.do'"/>
+					<input type="button" value="다음" class="submitbtn"  style="float : right;"  
+     				onclick="newHouseSubmit();"/>
+					
 				    </div>
 				</div>
 				
