@@ -72,7 +72,7 @@
 							<td>${list.house_name }</td>
 							<td>
 							<a href='<c:url value='/revisehouse/${list.house_seq}.do'/>'>
-								<img alt="${list.house_photourl}" src="/upload_img/${list.house_photourl}" style="width:100px; height: 100px;" />
+								<img alt="${list.house_photourl}" src="display.do?name=${list.house_photourl}" style="width:100px; height: 100px;" />
 							</a>
 							</td>
 							<td>

@@ -11,13 +11,38 @@
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
-	<link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="${pageContext.request.contextPath}/images/favicon.png">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/test.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/menu.css?version=123"><!--  -->
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/reset.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/footer.css">
 	
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style.css" />
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/hostregister.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/index.css">
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/effect.css">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/menu.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
+    />
 	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
 	<script type="text/javascript" src="../js/hostregister.js"></script>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -45,21 +70,7 @@
 	</script>
 </head>
 <body>
-	<!-- header-start -->
-    <header class="menudiv1">
-      <div class="menudiv2-1">
-        <label for="menudiv2-1">편의시설</label>
-        <img alt="" src="${pageContext.request.contextPath}/resources/images/logo2.png" />
-      </div>
-      <div class="menudiv2-2">
-        <div class="menudiv3-1" id="div1">
-          <img alt="http://www.naver.com"
-            src="${pageContext.request.contextPath}/resources/images/menubar.png"
-            id="menubar"/>
-        </div>
-      </div>
-    </header>
-    <!-- header-end -->
+	
     
   	<div class="container">
     <form action="/cnc/update_8hosthouseimgwork.do" name="hostpic" method="POST" enctype="multipart/form-data">
@@ -76,28 +87,29 @@
         <div class="filebox">
         	<hr>
 			<p>이전 선택한 메인사진 : ${detail.house_photourl }</p>
-			<img alt="${detail.house_photourl}" src="/upload_img/${detail.house_photourl}" style="width:200px; height: 200px;" />
-			<input type="file" name="house_photo" id="house_photo" />
+			<img alt="${detail.house_photourl}" src="display.do?name=${detail.house_photourl}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo" id="house_photo" style=" width:80px; height:50px;" />
+			
             <label for="image" style="color: black;">수정할 메인사진을 선택하세요</label>
             <hr>
             <p>이전 선택한 상세사진1 : ${detail.house_photourl_detail1 }</p>
-            <img alt="${detail.house_photourl_detail1}" src="/upload_img/${detail.house_photourl_detail1}" style="width:200px; height: 200px;" />
-			<input type="file" name="house_photo_detail1" id="house_photo_detail1" />
+            <img alt="${detail.house_photourl_detail1}" src="display.do?name=${detail.house_photourl_detail1}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail1" id="house_photo_detail1" style=" width:80px; height:50px;"/>
             <label for="image" style="color: black;">수정할 상세사진1을 선택하세요</label>
             <hr>
             <p>이전 선택한 상세사진2 : ${detail.house_photourl_detail2 }</p>
-            <img alt="${detail.house_photourl_detail2}" src="/upload_img/${detail.house_photourl_detail2}" style="width:200px; height: 200px;" />
-			<input type="file" name="house_photo_detail2" id="house_photo_detail2" />
+            <img alt="${detail.house_photourl_detail2}" src="display.do?name=${detail.house_photourl_detail2}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail2" id="house_photo_detail2" style=" width:80px; height:50px;"/>
             <label for="image" style="color: black;">수정할 상세사진2을 선택하세요</label>
             <hr>
             <p>이전 선택한 상세사진3 : ${detail.house_photourl_detail3 }</p>
-            <img alt="${detail.house_photourl_detail3}" src="/upload_img/${detail.house_photourl_detail3}" style="width:200px; height: 200px;" />
-			<input type="file" name="house_photo_detail3" id="house_photo_detail3" />
+            <img alt="${detail.house_photourl_detail3}" src="display.do?name=${detail.house_photourl_detail3}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail3" id="house_photo_detail3" style=" width:80px; height:50px;"/>
             <label for="image" style="color: black;">수정할 상세사진3을 선택하세요</label>
             <hr>
             <p>이전 선택한 상세사진4 : ${detail.house_photourl_detail4 }</p>
-            <img alt="${detail.house_photourl_detail4}" src="/upload_img/${detail.house_photourl_detail4}" style="width:200px; height: 200px;" />
-			<input type="file" name="house_photo_detail4" id="house_photo_detail4" />
+            <img alt="${detail.house_photourl_detail4}" src="display.do?name=${detail.house_photourl_detail4}" style="width:200px; height: 200px;" />
+			<input type="file" name="house_photo_detail4" id="house_photo_detail4" style=" width:80px; height:50px;"/>
             <label for="image" style="color: black;">수정할상세사진4을 선택하세요</label>
             <hr>
         </div>

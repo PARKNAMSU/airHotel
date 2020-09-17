@@ -463,8 +463,8 @@ public class HouseController {
 			String fileName_detail4 = uploadFile_detail4.getOriginalFilename();
 			if(uploadFile_detail4.isEmpty()) fileName_detail4 = "noimage.png";
 
-			System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/upload/"));
-			String path = mtfRequest.getSession().getServletContext().getRealPath("/upload/");
+			System.out.println("리얼패스 : " + mtfRequest.getSession().getServletContext().getRealPath("/resources/images/profile/"));
+			String path = mtfRequest.getSession().getServletContext().getRealPath("/resources/images/profile/");
 			System.out.println("수정으로 사진첨부한 파일 이름 : " + fileName + ", " + fileName_detail1 
 					+ ", " + fileName_detail2 + ", " + fileName_detail3 + ", " + fileName_detail4);
 			try {
