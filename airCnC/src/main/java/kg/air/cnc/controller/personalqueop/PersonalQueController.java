@@ -2,6 +2,8 @@ package kg.air.cnc.controller.personalqueop;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kg.air.cnc.service.personalqueop.PersonalQueService;
+import kg.air.cnc.vo.House_InfoVO;
 import kg.air.cnc.vo.PageMaker;
 import kg.air.cnc.vo.PagingCriteria;
 import kg.air.cnc.vo.PersonalQueVO;
@@ -26,15 +29,22 @@ public class PersonalQueController {
 		return new PersonalQueVO();
 	}
 	
+	
 	@RequestMapping("/selectPersonalQueList.do")// 유저의 자신의 질문 리스트
-	public String openPersonalQueList(PagingCriteria cri, Model model) {
-	        
-	    PageMaker pageMaker = new PageMaker();
-	    pageMaker.setCri(cri);
-	    pageMaker.setTotalCount(personalqService.countPersonalQueListTotal());
-	    List<PersonalQueVO> personalqList = personalqService.selectPersonalQueList(cri);
-	    model.addAttribute("personalqList", personalqList);
-	    model.addAttribute("paging", pageMaker);
+	public String openPersonalQueList(Model model,
+			@ModelAttribute("personalq") PersonalQueVO personalq, HttpSession session) {
+	    String personalq_writer = (String)session.getAttribute("login_session");
+	    personalq.setPersonalq_writer(personalq_writer);
+	    System.out.println("11 : " + personalq.getPersonalq_writer());
+		List<PersonalQueVO> personalqList = personalqService.selectPersonalQueList(personalq);
+		System.out.println("22 : " + personalq.getPersonalq_writer());
+		model.addAttribute("personalqList", personalqList);
+//	    PageMaker pageMaker = new PageMaker();
+//	    pageMaker.setCri(cri);
+//	    pageMaker.setTotalCount(personalqService.countPersonalQueListTotal());
+//	    List<PersonalQueVO> personalqList = personalqService.selectPersonalQueList(cri);
+//	    model.addAttribute("personalqList", personalqList);
+//	    model.addAttribute("paging", pageMaker);
 	  
 	    return "getPersonalQueList"; //jsp파일 1
 	}

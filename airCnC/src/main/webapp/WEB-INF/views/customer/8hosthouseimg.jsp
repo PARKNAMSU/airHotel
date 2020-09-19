@@ -165,7 +165,7 @@
 			<img alt="이전에 선택한 파일이 없습니다." src="display.do?name=${house.house_photourl}" style="color : black; width:200px; height: 200px;" />
 			
 			<hr>
-			<input type="file" name="house_photo" id="house_photo" style=" width:80px; height:50px;" />
+			<input type="file" name="house_photo" id="house_photo" style="width:180px; height:50px; color:black;" />
         </div>
     </div>
     

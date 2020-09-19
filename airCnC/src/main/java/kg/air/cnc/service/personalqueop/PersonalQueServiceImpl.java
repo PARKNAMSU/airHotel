@@ -14,8 +14,8 @@ public class PersonalQueServiceImpl implements PersonalQueService {
 	private PersonalQueDAO personalqDAO;
 	
 	@Override
-	public List<PersonalQueVO> selectPersonalQueList(PagingCriteria cri) {
-		return personalqDAO.selectPersonalQueList(cri);
+	public List<PersonalQueVO> selectPersonalQueList(PersonalQueVO vo) {
+		return personalqDAO.selectPersonalQueList(vo);
 	}
 
 	@Override

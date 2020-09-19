@@ -14,9 +14,9 @@ public class PersonalQueDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public List<PersonalQueVO> selectPersonalQueList(PagingCriteria cri) {
+	public List<PersonalQueVO> selectPersonalQueList(PersonalQueVO vo) {
 		System.out.println("===> Mybatis로 selectPersonalQueList() 기능 처리");
-		return mybatis.selectList("personalqMapper.selectPersonalQueList",cri);
+		return mybatis.selectList("personalqMapper.selectPersonalQueList");
 	}//유저가 자기 아이디꺼 불러올 메소드
 
 	public int countPersonalQueList(){
