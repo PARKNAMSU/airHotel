@@ -13,7 +13,7 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + 'customer_id${customerInfo.customer_id}' + 'house_seq${house.house_seq}time' + new Date().getTime(),
             name : '에어씨엔씨',
-            amount : 1000,
+            amount : '${totalPrice}',
             buyer_email : '${customerInfo.customer_email}',
             buyer_name : '${customerInfo.customer_name}',
             buyer_tel : '${customerInfo.customer_phone}}',

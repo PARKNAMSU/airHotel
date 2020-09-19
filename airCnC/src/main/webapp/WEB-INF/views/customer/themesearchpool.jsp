@@ -169,7 +169,7 @@
                         "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                         "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                         "<div class=\"thumb\">" +
-                        "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                        "<img src=\"${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg\" alt=''/> " +
                         "</div>" +
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
