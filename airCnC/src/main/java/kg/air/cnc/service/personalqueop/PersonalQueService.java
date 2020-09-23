@@ -6,7 +6,7 @@ import kg.air.cnc.vo.PagingCriteria;
 import kg.air.cnc.vo.PersonalQueVO;
 
 public interface PersonalQueService {
-	List<PersonalQueVO> selectPersonalQueList(PagingCriteria cri);
+	public List<PersonalQueVO> selectPersonalQueList(PersonalQueVO vo);
 	int countPersonalQueListTotal();
 	int insertPersonalQue(PersonalQueVO vo);
 	List<PersonalQueVO> getPersonalQueListAdmin(PagingCriteria cri);

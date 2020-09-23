@@ -7,14 +7,13 @@
 	<select id="selectPersonalQueList" resultType="kg.air.cnc.vo.PersonalQueVO" >
     <![CDATA[
         SELECT
-            *
+       		personalq_idx, personalq_title, personalq_regdate, personalq_content, personalq_answer
         FROM
-            (select rownum rnum, personalq_idx, personalq_title, personalq_writer, 
-            personalq_type, personalq_content, personalq_answer, personalq_regdate
-            from (select * from personal_que where personalq_writer='로그인한아이디' 
-            order by personalq_idx desc))
+            personal_que
         WHERE
-        	rnum >= #{pageStart} and rnum <= (#{pageStart}+#{perPageNum}-1)
+        	personalq_writer='skatn7979'
+            
+        order by personalq_idx desc
 
     ]]>
 	</select>
@@ -30,7 +29,7 @@
 	<insert id="insertPersonalQue" parameterType="kg.air.cnc.vo.PersonalQueVO">
 		<![CDATA[
 		INSERT INTO personal_que(personalq_idx, personalq_title, personalq_writer, personalq_type,  personalq_content)
-		VALUES((select nvl(max(personalq_idx), 0)+1 from personal_que), #{personalq_title}, '22로그인한아이디',
+		VALUES((select nvl(max(personalq_idx), 0)+1 from personal_que), #{personalq_title}, #{personalq_writer},
 		#{personalq_type}, #{personalq_content})
 		]]>
 	</insert>
