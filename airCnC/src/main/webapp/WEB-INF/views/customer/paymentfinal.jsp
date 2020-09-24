@@ -8,6 +8,7 @@
         var IMP = window.IMP;
         IMP.init('imp33045769');
 
+
         IMP.request_pay({ //param
             pg : 'inicis', // version 1.1.0부터 지원.
             pay_method : 'card',
@@ -26,7 +27,7 @@
                     "customer_id": '${customerInfo.customer_id}', "cuponNum": '${cuponNum}', "customer_refund_account" : '${customerInfo.customer_refund_account}',
                     "customer_refund_bank": '${customerInfo.customer_refund_bank}'};
                 jQuery.ajax({
-                    url: "http://localhost:8080/cnc/paymentcomplete.do",
+                    url: "/cnc/paymentcomplete.do",
                     method : "POST",
                     headers : {"Content-Type":"application/json"},
                     dataType : 'json',
