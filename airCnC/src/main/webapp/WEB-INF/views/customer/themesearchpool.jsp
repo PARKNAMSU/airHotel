@@ -130,16 +130,15 @@
                     getData = data;
                     var max = getData.length;
                     var accessType = "notres";
-
                     for(var i = 0 ; i < 10 ; i++){
                         $("#mother").append(
                             "<div class=\"col-lg-4 col-md-1\">" +
-                            "<form id="+getData[i].house_seq+" name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse("+getData[i].house_seq+")\">" +
-                            "<input type=\"hidden\" name=\"house_seq\" value="+getData[i].house_seq+">"+
+                            "<form id=" + getData[i].house_seq + " name=\"houseInfo\" method=\"post\" action=\"/cnc/reservationHouse.do\" onclick=\"goReservationHouse(" + getData[i].house_seq + ")\">" +
+                            "<input type=\"hidden\" name=\"house_seq\" value=" + getData[i].house_seq + ">" +
                             "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                             "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                             "<div class=\"thumb\">" +
-                            "<img src='${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg' alt=''/> " +
+                            "<img src=\"/cnc/display.do?name="+getData[i].house_photourl+"\" alt=''/> " +
                             "</div>" +
                             " <div class=\"info\">" +
                             "<a href=\"#\">" +
@@ -169,7 +168,7 @@
                         "<input type=\"hidden\" name=\"accessType\" value="+accessType+">"+
                         "<div class=\"single_destination2\" onclick=\"goReservationHouse()\">" +
                         "<div class=\"thumb\">" +
-                        "<img src=\"${pageContext.request.contextPath}/resources/images/theme_search/jejusample.jpeg\" alt=''/> " +
+                        "<img src=\"/cnc/display.do?name ="+getData[i].house_photourl+"\" alt=''/> " +
                         "</div>" +
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
@@ -185,8 +184,8 @@
             } else {
                 alert("모든 숙소가 조회되었습니다.");
             }
-
         }
+    </script>
     </script>
 </footer>
 <!-- footer-end -->
