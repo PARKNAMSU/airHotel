@@ -186,7 +186,6 @@
             }
         }
     </script>
-    </script>
 </footer>
 <!-- footer-end -->
 </body>
