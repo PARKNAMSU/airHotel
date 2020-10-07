@@ -143,6 +143,7 @@
                             " <div class=\"info\">" +
                             "<a href=\"#\">" +
                             "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                            "<p id=\"name\">"+"숙소이름 : " +getData[i].house_name+"</p>" +
                             "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
                             "</a>" +
                             "</div>" +
@@ -173,6 +174,7 @@
                         " <div class=\"info\">" +
                         "<a href=\"#\">" +
                         "<p id=\"location\">"+"["+(i+1)+"] 지역 : "+getData[i].house_location+"</p>" +
+                        "<p id=\"name\">"+"숙소이름 : " +getData[i].house_name+"</p>" +
                         "<p id=\"price\">"+"1박 가격 : " +getData[i].house_price_default+"</p>" +
                         "</a>" +
                         "</div>" +

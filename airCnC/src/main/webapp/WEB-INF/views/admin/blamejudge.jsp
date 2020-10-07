@@ -122,6 +122,19 @@
     </div>
 </div>
 
+<script>
+    jQuery(document).ready(function () {
+        jQuery(".menu>label").click(function () {
+            var submenu = jQuery(this).next("ul");
+            if (submenu.is(":visible")) {
+                submenu.slideUp();
+            } else {
+                submenu.slideDown();
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

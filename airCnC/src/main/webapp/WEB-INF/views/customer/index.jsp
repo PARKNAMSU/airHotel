@@ -190,52 +190,52 @@
                 </figcaption>
               </figure>
 
-              <figure onclick="location.href='getHouseList.do?location=경기'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=경기도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/busan.png" alt="img16" />
                 <figcaption>
                     <h2>경기도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=강원'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=강원도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/daegu.jpg" alt="img02" />
                 <figcaption>
                     <h2>강원도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=충북'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=충청도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/deajeun.png" alt="img16" />
                 <figcaption>
                     <h2>충청북도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=충남'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=충청도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/gangrung.png" alt="img02" />
                 <figcaption>
                     <h2>충청남도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=경북'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=경상도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/gwangju.jpg" alt="img16" />
                 <figcaption>
                     <h2>경상북도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=경남'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=경상도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/incheon.jpg" alt="img02" />
                 <figcaption>
                     <h2>경상남도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=전북'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=전라도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/jeacheon.jpg" alt="img16" />
                 <figcaption>
                     <h2>전라북도 여행</h2>
                 </figcaption>
               </figure>
-              <figure onclick="location.href='getHouseList.do?location=전남'" class="effect-bubba">
+              <figure onclick="location.href='getHouseList.do?location=제주도'" class="effect-bubba">
                 <img src="${pageContext.request.contextPath}/resources/images/destination/ulsan.jpg" alt="img16" />
                 <figcaption>
-                    <h2>전라남도 여행</h2>
+                    <h2>제주도 여행</h2>
                 </figcaption>
               </figure>
             </div>
