@@ -142,11 +142,13 @@
 				<select id="locationtitle4" name="house_location">
 					<option value="0" <c:if test="${detail.house_location == '0'}">selected</c:if>>지역선택</option>
 					<option value="서울" <c:if test="${detail.house_location == '서울'}">selected</c:if>>서울</option>
-					<option value="강원도" <c:if test="${detail.house_location == '강원도'}">selected</c:if>>강원도</option>
 					<option value="경기도" <c:if test="${detail.house_location == '경기도'}">selected</c:if>>경기도</option>
+					<option value="강원도" <c:if test="${detail.house_location == '강원도'}">selected</c:if>>강원도</option>
 					<option value="충청도" <c:if test="${detail.house_location == '충청도'}">selected</c:if>>충청도</option>
-					<option value="전라도" <c:if test="${detail.house_location == '전라도'}">selected</c:if>>전라도</option>
-					<option value="경상도" <c:if test="${detail.house_location == '경상도'}">selected</c:if>>경상도</option>
+					<option value="경상북도" <c:if test="${detail.house_location == '경상북도'}">selected</c:if>>경상북도</option>
+					<option value="경상남도" <c:if test="${detail.house_location == '경상남도'}">selected</c:if>>경상남도</option>
+					<option value="전라북도" <c:if test="${detail.house_location == '전라북도'}">selected</c:if>>전라북도</option>
+					<option value="전라남도" <c:if test="${detail.house_location == '전라남도'}">selected</c:if>>전라남도</option>
 					<option value="제주도" <c:if test="${detail.house_location == '제주도'}">selected</c:if>>제주도</option>
 				</select>
 			</div>

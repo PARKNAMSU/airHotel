@@ -230,11 +230,13 @@
 				<form:select name="locationtitle4" path="house_location">
 					<form:option value="0">지역선택</form:option>
 					<form:option value="서울">서울</form:option>
-					<form:option value="강원도">강원도</form:option>
 					<form:option value="경기도">경기도</form:option>
+					<form:option value="강원도">강원도</form:option>
 					<form:option value="충청도">충청도</form:option>
-					<form:option value="전라도">전라도</form:option>
-					<form:option value="경상도">경상도</form:option>
+					<form:option value="경상북도">경상북도</form:option>
+					<form:option value="경상남도">경상남도</form:option>
+					<form:option value="전라북도">전라북도</form:option>
+					<form:option value="전라남도">전라남도</form:option>
 					<form:option value="제주도">제주도</form:option>
 				</form:select>
 			</div>
