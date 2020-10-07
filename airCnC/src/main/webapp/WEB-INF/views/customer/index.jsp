@@ -129,14 +129,14 @@
 				<select id="select_type" name="location" style="border: none;">
 					<option id="first">지역 전체</option>
 					<option id="seo">서울</option>
-					<option id="gye">경기</option>
-					<option id="gw">강원</option>
-					<option id="cb">충북</option>
-					<option id="cn">충남</option>
-					<option id="gb">경북</option>
-					<option id="gn">경남</option>
-					<option id="jb">전북</option>
-					<option id="jn">전남</option>
+					<option id="gye">경기도</option>
+					<option id="gw">강원도</option>
+					<option id="cb">충청도</option>
+					<option id="cn">경상북도</option>
+					<option id="gb">경상남도</option>
+					<option id="gn">전라북도</option>
+					<option id="jb">전라남도</option>
+					<option id="jn">제주도</option>
 				</select>
 				<select id="select_menu" name="detail" style="border: none;">
 					<option>지역 선택</option>
@@ -450,12 +450,12 @@
 	var f_seoul = [ "서울지역 선택", "강남구", "강서구", "노원구" ];
 	var f_gyeonggi = [ "경기지역 선택", "성남시", "수원시", "광주시" ];
 	var f_gangwon = [ "강원지역 선택", "강릉시", "속초시", "양양시" ];
-	var f_cb = [ "충북지역 선택", "청주시", "충주시", "제천시" ];
-	var f_cn = [ "충남지역 선택", "보령시", "공주시", "천안시" ];
-	var f_gb = [ "경북지역 선택", "포항시", "안동시", "경주시" ];
-	var f_gn = [ "경남지역 선택", "창원시", "통영시", "거제시" ];
-	var f_jb = [ "전북지역 선택", "전주시", "익산시", "군산시" ];
-	var f_jn = [ "전남지역 선택", "여수시", "순천시", "목포시" ];
+	var f_cb = [ "충청지역 선택", "청주시", "충주시", "보령시" ];
+	var f_cn = [ "경북지역 선택", "포항시", "안동시", "경주시" ];
+	var f_gb = [ "경남지역 선택", "창원시", "통영시", "거제시" ];
+	var f_gn = [ "전북지역 선택", "전주시", "익산시", "군산시" ];
+	var f_jb = [ "전남지역 선택", "여수시", "순천시", "목포시" ];
+	var f_jn = [ "제주지역 선택", "제주시", "서귀포시"];
 	var foods = [ f_base, f_seoul, f_gyeonggi, f_gangwon, f_cb, f_cn, f_gb, f_gn, f_jb, f_jn ];
 	function createTag(index) {
 		var result = "";
