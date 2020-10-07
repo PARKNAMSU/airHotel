@@ -145,7 +145,7 @@
 					for(var i=1;i<=instanceNum;i++){
 						if(getData[i-1] != null){
 							$("#imgdiv"+i).attr("onclick","goToResHouseNow("+(getData[i-1].house_seq)+","+(getData[i-1].reservation_seq)+",'"+type+"',"+getData[i-1].reservation_status+")")
-							$("img"+i).attr("src","/cnc/display.do?name ="+getData[i-1].house_photourl)
+							$("#img"+i).attr("src","display.do?name="+getData[i-1].house_photourl)
 							$("#td"+i).html('<p>'+getData[i-1].house_name+'</p><br><hr><p>'+getData[i-1].reservation_status_text+'</p>')
 						}else{
 							$("#imgdiv"+i).css("display","none")
