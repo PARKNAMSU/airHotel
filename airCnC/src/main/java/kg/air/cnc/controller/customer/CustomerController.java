@@ -126,19 +126,31 @@ public class CustomerController {
 		customerVO = service.getCustomerInfo(sessionId);
 		System.out.println("db에 저장된 이미지 : " + customerVO.getCustomer_image());
 		String filePath = customerVO.getCustomer_image();
-		Map<String, String> fdata = new HashMap<String, String>();
-		File file = new File(uploadPath + filePath);
-		fdata.put("filePath", filePath);
-		mav.addObject("customerName", customerVO.getCustomer_name());
-		mav.addObject("customerPhone", customerVO.getCustomer_phone());
-		mav.addObject("customerEmail", customerVO.getCustomer_email());
-		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
-		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
-		mav.addObject("customerImage", filePath);
-		session.setAttribute("my_image", filePath);
-		mav.setViewName("mypage");
-		mav.addObject("fdata", fdata);
-		return mav;
+		if (filePath.equals("profile.png")) {
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
+			mav.addObject("customerImage", filePath);
+			session.setAttribute("my_image", filePath);
+			mav.setViewName("mypage");
+			return mav;
+		}else {
+			Map<String, String> fdata = new HashMap<String, String>();
+			File file = new File(uploadPath + filePath);
+			fdata.put("filePath", filePath);
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
+			mav.addObject("customerImage", filePath);
+			session.setAttribute("my_image", filePath);
+			mav.setViewName("mypage");
+			mav.addObject("fdata", fdata);
+			return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/display.do", method = RequestMethod.GET)
@@ -303,7 +315,8 @@ public class CustomerController {
 		String naverId = (String) response.get("id");
 		String naverName = (String) response.get("name"); 
 		String naverEmail = (String) response.get("email");
-		String naverProfileImage = (String) response.get("profile_image");
+//		String naverProfileImage = (String) response.get("profile_image");
+		
 		// DB에 네이버 사용자 정보를 저장하기 위한 VO 세팅.
 		vo.setCustomer_id(naverEmail);
 		int idCheckResult = service.idCheck(vo);
