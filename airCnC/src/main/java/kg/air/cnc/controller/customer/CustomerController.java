@@ -2,6 +2,7 @@ package kg.air.cnc.controller.customer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -163,7 +164,9 @@ public class CustomerController {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(uploadPath + fileName);
+			try {
+				in = new FileInputStream(uploadPath + fileName);
+			} catch (FileNotFoundException e) {}
 			if (mType != null) {
 				headers.setContentType(mType);
 			}else {
@@ -171,12 +174,16 @@ public class CustomerController {
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
 			}
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			try {
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			} catch (NullPointerException e) {}
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
-			in.close();
+			try {
+				in.close();				
+			} catch (NullPointerException e2) {}
 		}
 		return entity;
 	}
@@ -281,8 +288,12 @@ public class CustomerController {
 				vo.setCustomer_phone("none");
 			}
 			vo.setCustomer_email(kid);
+			if (kimage == null || kimage == "") {
+				vo.setCustomer_image("profile.png");
+			}else {
+				vo.setCustomer_image(kimage);				
+			}
 			vo.setCustomer_image(kimage);
-			vo.setCustomer_image("profile.png");
 			vo.setCustomer_key("kakao");
 			vo.setCustomer_refund_bank("none");
 			vo.setCustomer_refund_account("none");
