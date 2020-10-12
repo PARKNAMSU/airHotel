@@ -86,7 +86,7 @@
 
         <div class="btn" style="padding-top: 15px;">
             <button class="btn1" type="submit" style="float: right;">
-                <a href="http://localhost:8090/cnc/indexView.do">뒤로가기</a>
+                <a href="/cnc/indexView.do">뒤로가기</a>
             </button>
         </div>
     </div>
