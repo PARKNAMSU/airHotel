@@ -109,8 +109,8 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/loginView.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView loginView(ModelAndView mav, HttpSession session)throws Exception{
-		String naverUrl = naverController.getAuthorizationUrl(session);
+	public ModelAndView loginView(ModelAndView mav, HttpSession session, HttpServletRequest request)throws Exception{
+		String naverUrl = naverController.getAuthorizationUrl(session, request);
 		String kakaoUrl = kakaoController.getAuthorizationUrl(session);
 		mav.addObject("naverUrl", naverUrl);
 		mav.addObject("kakaoUrl", kakaoUrl);
@@ -283,10 +283,10 @@ public class CustomerController {
 	
 	// 네이버 로그인 성공시 callback메서드 호출.
 	@RequestMapping(value = "/naverlogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception, IOException, ParseException{
-		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state);
+	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session, CustomerVO vo, ModelAndView mav, HttpServletRequest httpServletRequest)throws Exception, IOException, ParseException{
+		OAuth2AccessToken oauthToken = naverController.getAccessToken(session, code, state, httpServletRequest);
 		// 로그인한 사용자의 모든 정보가 JSON 타입으로 저장되어 있음.
-		apiResult = naverController.getUserProfile(oauthToken); 
+		apiResult = naverController.getUserProfile(oauthToken, httpServletRequest);
 
 		// 내가 원하는 정보만 JSON타입에서 String타입으로 바꿔 가져오기.
 		JSONParser parser = new JSONParser(); 
