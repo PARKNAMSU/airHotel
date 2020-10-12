@@ -111,7 +111,7 @@ public class CustomerController {
 	@RequestMapping(value = "/loginView.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView loginView(ModelAndView mav, HttpSession session, HttpServletRequest request)throws Exception{
 		String naverUrl = naverController.getAuthorizationUrl(session, request);
-		String kakaoUrl = kakaoController.getAuthorizationUrl(session);
+		String kakaoUrl = kakaoController.getAuthorizationUrl(session, request);
 		mav.addObject("naverUrl", naverUrl);
 		mav.addObject("kakaoUrl", kakaoUrl);
 		mav.setViewName("login");
@@ -236,9 +236,9 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/kakaologin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, CustomerVO vo, ModelAndView mav)throws Exception {
+	public ModelAndView kakaoLogin(@RequestParam("code")String code, HttpSession session, CustomerVO vo, ModelAndView mav, HttpServletRequest httpServletRequest)throws Exception {
 		// 결과값을 node에 보여줌.
-		JsonNode node = kakaoController.getAccessToken(code);
+		JsonNode node = kakaoController.getAccessToken(code, httpServletRequest);
 		// accessToken에 사용자의 로그인한 모든 정보가 들어있음.
 		JsonNode accessToken = node.get("access_token");
 		// 사용자 정보를 카카오에서 가져오기.
