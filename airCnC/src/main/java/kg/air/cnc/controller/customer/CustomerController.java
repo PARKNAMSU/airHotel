@@ -2,6 +2,7 @@ package kg.air.cnc.controller.customer;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -112,7 +113,7 @@ public class CustomerController {
 	public ModelAndView loginView(ModelAndView mav, HttpSession session, HttpServletRequest request)throws Exception{
 		String naverUrl = naverController.getAuthorizationUrl(session, request);
 		String kakaoUrl = kakaoController.getAuthorizationUrl(session, request);
-		session.setAttribute("my_image", "profile.png");
+		session.setAttribute("my_image", "profile.png"); 
 		mav.addObject("naverUrl", naverUrl);
 		mav.addObject("kakaoUrl", kakaoUrl);
 		mav.setViewName("login");
@@ -127,19 +128,31 @@ public class CustomerController {
 		customerVO = service.getCustomerInfo(sessionId);
 		System.out.println("db에 저장된 이미지 : " + customerVO.getCustomer_image());
 		String filePath = customerVO.getCustomer_image();
-		Map<String, String> fdata = new HashMap<String, String>();
-		File file = new File(uploadPath + filePath);
-		fdata.put("filePath", filePath);
-		mav.addObject("customerName", customerVO.getCustomer_name());
-		mav.addObject("customerPhone", customerVO.getCustomer_phone());
-		mav.addObject("customerEmail", customerVO.getCustomer_email());
-		mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
-		mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
-		mav.addObject("customerImage", filePath);
-		session.setAttribute("my_image", filePath);
-		mav.setViewName("mypage");
-		mav.addObject("fdata", fdata);
-		return mav;
+		if (filePath.equals("profile.png")) {
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
+			mav.addObject("customerImage", filePath);
+			session.setAttribute("my_image", filePath);
+			mav.setViewName("mypage");
+			return mav;
+		}else {
+			Map<String, String> fdata = new HashMap<String, String>();
+			File file = new File(uploadPath + filePath);
+			fdata.put("filePath", filePath);
+			mav.addObject("customerName", customerVO.getCustomer_name());
+			mav.addObject("customerPhone", customerVO.getCustomer_phone());
+			mav.addObject("customerEmail", customerVO.getCustomer_email());
+			mav.addObject("customerBank", customerVO.getCustomer_refund_bank());
+			mav.addObject("customerAccount", customerVO.getCustomer_refund_account());
+			mav.addObject("customerImage", filePath);
+			session.setAttribute("my_image", filePath);
+			mav.setViewName("mypage");
+			mav.addObject("fdata", fdata);
+			return mav;
+		}
 	}
 	
 	@RequestMapping(value = "/display.do", method = RequestMethod.GET)
@@ -152,7 +165,9 @@ public class CustomerController {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			HttpHeaders headers = new HttpHeaders();
-
+			try {
+				in = new FileInputStream(uploadPath + fileName);
+			} catch (FileNotFoundException e) {}
 			in = new FileInputStream(uploadPath + fileName);
 			if (mType != null) {
 				headers.setContentType(mType);
@@ -161,12 +176,16 @@ public class CustomerController {
 				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 				headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
 			}
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			try {
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			} catch (NullPointerException e) {}
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
-			in.close();
+			try {
+				in.close();				
+			} catch (NullPointerException e2) {}
 		}
 		return entity;
 	}
@@ -271,8 +290,12 @@ public class CustomerController {
 				vo.setCustomer_phone("none");
 			}
 			vo.setCustomer_email(kid);
+			if (kimage == null || kimage == "") {
+				vo.setCustomer_image("profile.png");
+			}else {
+				vo.setCustomer_image(kimage);				
+			}
 			vo.setCustomer_image(kimage);
-			vo.setCustomer_image("profile.png");
 			vo.setCustomer_key("kakao");
 			vo.setCustomer_refund_bank("none");
 			vo.setCustomer_refund_account("none");
@@ -305,7 +328,8 @@ public class CustomerController {
 		String naverId = (String) response.get("id");
 		String naverName = (String) response.get("name"); 
 		String naverEmail = (String) response.get("email");
-		String naverProfileImage = (String) response.get("profile_image");
+//		String naverProfileImage = (String) response.get("profile_image");
+		
 		// DB에 네이버 사용자 정보를 저장하기 위한 VO 세팅.
 		vo.setCustomer_id(naverEmail);
 		int idCheckResult = service.idCheck(vo);
