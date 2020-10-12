@@ -112,6 +112,7 @@ public class CustomerController {
 	public ModelAndView loginView(ModelAndView mav, HttpSession session, HttpServletRequest request)throws Exception{
 		String naverUrl = naverController.getAuthorizationUrl(session, request);
 		String kakaoUrl = kakaoController.getAuthorizationUrl(session, request);
+		session.setAttribute("my_image", "profile.png");
 		mav.addObject("naverUrl", naverUrl);
 		mav.addObject("kakaoUrl", kakaoUrl);
 		mav.setViewName("login");
@@ -151,6 +152,7 @@ public class CustomerController {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			HttpHeaders headers = new HttpHeaders();
+
 			in = new FileInputStream(uploadPath + fileName);
 			if (mType != null) {
 				headers.setContentType(mType);
