@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,6 +81,7 @@ public class PaymentController {
 
     @RequestMapping(value = "paymentcomplete.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
     @ResponseBody
+    @Transactional
     public ModelAndView paycomplete(ModelAndView mav,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody HashMap<String, Object> request) {
         paymentService.insertReservation(request);
         cuponService.useCupon((String)request.get("cuponNum"));

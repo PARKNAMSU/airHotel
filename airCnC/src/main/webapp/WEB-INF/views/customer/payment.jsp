@@ -200,7 +200,7 @@
 								var input4 = document.createElement("input");
 								input.setAttribute("type", "hidden");
 								input.setAttribute("name", "totalPrice");
-								input.setAttribute("value", finalPrice);
+								input.setAttribute("value", 1000);
 								input2.setAttribute("type", "hidden");
 								input2.setAttribute("name", "checkin");
 								input2.setAttribute("value", checkin);

@@ -418,12 +418,12 @@
 		style="background-image: url(${pageContext.request.contextPath}/resources/images/main/blackback.jpg);">
 	<div class="second">
 		회사소개 | 이용약관 | 개인정보처리방침 |사업자 정보확인 | 여기어때 마케팅센터 | 액티비티 호스트센터 | HOTEL
-		여기어때 |콘텐츠산업진흥법에의한 표시<br> <br> 고객행복센터 1670-6250 오전 9시 - 새벽
+		AIRCNC |콘텐츠산업진흥법에의한 표시<br> <br> 고객행복센터 1234-1234 오전 9시 - 새벽
 		3시, 점심시간: 오후 12시 - 오후 1시<br> <br> (주) 여기어때컴퍼니<br> <br>
-		주소 : 서울특별시 강남구 봉은사로 479, 479타워 11층<br> 대표이사 : 박남수 | 사업자등록번호:
-		742-86-00224<br> 통신판매번호 : 2017-서울강남-01779 | 관광사업자 등록번호:
-		제1026-24호<br> 전화번호 : 1670-6250<br> 전자우편주소 :
-		skatn7979@gmail.com<br> Copyright GC COMPANY Corp. All rights
+		주소 : 서울특별시 강남구 봉은사로 111, 111타워 11층<br> 대표이사 : Jaden | 사업자등록번호:
+		111-11-12345<br> 통신판매번호 : 2017-서울강남-00000 | 관광사업자 등록번호:
+		제1026-24호<br> 전화번호 : 1234-1234<br> 전자우편주소 :
+		jonghaha7@gmail.com<br> Copyright GC COMPANY Corp. All rights
 		reserved.<br>
 		<hr id="bline">
 		<img

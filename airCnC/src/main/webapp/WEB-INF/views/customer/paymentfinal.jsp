@@ -21,7 +21,7 @@
             m_redirect_url : 'https://www.yourdomain.com/payments/complete'
         }, function(rsp) { //callback
             if ( rsp.success ) {
-                var info = {"imp_uid": rsp.imp_uid, "paid_amount": rsp.paid_amount, "apply_num": rsp.apply_num,
+                var info = {"imp_uid": rsp.imp_uid, "paid_amount": 1000, "apply_num": rsp.apply_num,
                     "buyer_name": '${customerInfo.customer_name}', "paid_at": rsp.paid_at, "host_id": '${house.host_id}',
                     "check_in": '${checkin}', "check_out": '${checkout}', "house_seq":'${house.house_seq}',
                     "customer_id": '${customerInfo.customer_id}', "cuponNum": '${cuponNum}', "customer_refund_account" : '${customerInfo.customer_refund_account}',
